@@ -1,0 +1,13 @@
+caption: Create a new tiddler
+created: 20161231161334344
+creator: yuzijie
+modified: 20211208213227072
+modifier: yuzijie
+tags: $:/tags/TextEditor/Snippet customized
+title: $:/custom/snippet/new
+type: text/vnd.tiddlywiki
+
+<$macrocall $name="new" class="tc-btn-invisible"
+  name="按钮显示" title="标题" tags="标签"
+  text="""正文""" fields="""caption=''"""
+/>

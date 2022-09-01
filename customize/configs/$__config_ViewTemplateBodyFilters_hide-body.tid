@@ -1,0 +1,7 @@
+modified: 20220226150244479
+modifier: yuzijie
+tags: $:/tags/ViewTemplateBodyFilter customized
+title: $:/config/ViewTemplateBodyFilters/hide-body
+type: text/vnd.tiddlywiki
+
+[field:hide-body[yes]] [type[application/x-tiddler-dictionary]] +[limit[1]then[$:/core/ui/ViewTemplate/body/blank]]

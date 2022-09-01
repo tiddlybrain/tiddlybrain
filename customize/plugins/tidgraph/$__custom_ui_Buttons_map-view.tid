@@ -1,0 +1,23 @@
+caption: Open map view
+created: 20211218171320264
+creator: yuzijie
+description: Open popup modal to display snippet hierarchy map
+list-after: $:/custom/ui/Buttons/open-in-sidebar
+modified: 20220412183552327
+modifier: yuzijie
+tags: $:/tags/ViewToolbar customized
+title: $:/custom/ui/Buttons/map-view
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$list filter="[tag[Snippet]belongs.to<currentTiddler>limit[1]]" variable="NONE">
+<$button tooltip="Open map view" aria-label="open map view" class=<<tv-config-toolbar-class>>>
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/map-modal" mTitle={{!!title}}/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/globe}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="map view"/></span>
+</$list>
+</$button>
+</$list>

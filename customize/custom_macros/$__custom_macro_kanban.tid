@@ -1,0 +1,45 @@
+created: 20220327115620302
+creator: yuzijie
+modified: 20220428140735988
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/kanban
+type: text/vnd.tiddlywiki
+
+\define kanban-link() <div><$link tooltip=<<currentTiddler>>><$transclude field=kanban><$transclude field=caption><$view field=title/></$transclude></$transclude></$link></div>
+
+\define kanban(filter:"[tag<currentTiddler>]", columns, status:"status", total, waiting-lane:"yes", actions)
+<div class="macro-table kanban"><table style="table-layout:fixed;"><tbody>
+<tr>
+<$list filter="[subfilter<__filter__>!has[$status$]] [subfilter<__filter__>get[$status$]!enlist<__columns__>] +[limit[1]]" variable="NONE">
+<$reveal default="$waiting-lane$" type="match" text="yes" tag="th">
+Waiting Lane <span style="color:#ccc;"><$count filter="[subfilter<__filter__>!has[$status$]] [subfilter<__filter__>get[$status$]!enlist<__columns__>]"/></span>
+</$reveal>
+</$list>
+<$list filter="$columns$" variable="col">
+<$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> $field="$status$" $value=<<col>>/>$actions$""" tag="th">
+<<col>> <span style="color:#ccc;"><$count filter="[subfilter<__filter__>$status$<col>]"/></span>
+</$droppable>
+</$list>
+</tr>
+<tr>
+<$list filter="[subfilter<__filter__>!has[$status$]] [subfilter<__filter__>get[$status$]!enlist<__columns__>] +[limit[1]]" variable="NONE">
+<$reveal default="$waiting-lane$" type="match" text="yes" tag="td">
+<$list filter=<<__filter__>>><$list filter="[all[current]!has[$status$]] [all[current]get[$status$]!enlist<__columns__>]" variable="NONE"><<kanban-link>></$list></$list>
+</$reveal>
+</$list>
+<$list filter="$columns$" variable="key">
+<$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> $field="$status$" $value=<<key>>/>$actions$""" tag="td">
+<$list filter="[subfilter<__filter__>$status$<key>]"><<kanban-link>></$list>
+</$droppable>
+</$list>
+</tr>
+<$list filter="[[$total$]!is[blank]]" variable="NONE"><tr>
+<$list filter="[subfilter<__filter__>!has[$status$]] [subfilter<__filter__>get[$status$]!enlist<__columns__>] +[limit[1]]" variable="NONE"><td>$total$</td></$list>
+<$list filter="$columns$" variable="key"><td>$total$</td></$list>
+</tr></$list>
+</tbody></table></div>
+\end
+
+; 看板 Kanban
+: `<<kanban filter:"Tidder 筛选器" columns:"看板的列 (filter)" status:"看板状态字段, 默认是 status" total:"表格最后一行的内容, 通常用作总结计算" waiting-lane:"是否显示等待区">>` <<display content:"""通过定义 kanban-link macro, 可以修改 Kanban 链接的显示内容""" mode:"tips" waiting-lane:"是否显示等待区" actions:"额外的 Droppable Actions">>

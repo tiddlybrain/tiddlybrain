@@ -1,0 +1,12 @@
+caption: {{$:/core/images/export-button}} {{$:/language/Buttons/ExportTiddler/Caption}}
+description: {{$:/language/Buttons/ExportTiddler/Hint}}
+modified: 20220204085241962
+modifier: yuzijie
+tags: $:/tags/ViewToolbar customized
+title: $:/core/ui/Buttons/export-tiddler
+type: text/vnd.tiddlywiki
+
+\define makeExportFilter()
+[[$(currentTiddler)$]] [[$(currentTiddler)$]getAllSnippets[]]
+\end
+<$macrocall $name="exportButton" exportFilter=<<makeExportFilter>> lingoBase="$:/language/Buttons/ExportTiddler/" baseFilename=<<currentTiddler>>/>

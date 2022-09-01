@@ -1,0 +1,57 @@
+created: 20220625191032461
+creator: yuzijie
+modified: 20220626222656618
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/flashcards
+type: text/vnd.tiddlywiki
+
+\define flashcard-state() $:/state/flashcard/$(currentTiddler)$
+\define flashcard-popup-state() $:/state/flashcard/popup/$(currentTiddler)$
+\define flashcard-border-style() border-top: 6px solid $(color)$;
+
+\define flashcard-level()
+<div class="tc-card-buttons">
+<$button class="tc-btn-invisible"><$action-setfield side-a={{!!side-a}} side-b={{!!side-b}}/><$action-sendmessage $message="tm-edit-tiddler"/>✒️</$button>
+<$set name="level" filter="[all[current]get[level]addprefix[Level ]]" select="0" emptyValue="Level 0">
+<$button class="tc-btn-invisible" popup=<<flashcard-popup-state>>><<level>></$button>
+</$set>
+<$reveal state=<<flashcard-popup-state>> type="popup" animate="yes" class="tc-drop-down" style="min-width:initial;color:#666;padding:10px 15px;">
+<div><$tiddler tiddler={{!!belongs.to}}><$transclude tiddler={{!!belongs.to}} field="caption"/></$tiddler></div>
+<div><$transclude tiddler={{!!belongs.to}} field="caption"/></div><div>{{!!note}}</div>
+</$reveal>
+</div>
+\end
+
+\define flashcard-buttons()
+<div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1">
+<$set name="level" filter="[all[current]get[level]addprefix[Level ]]" select="0" emptyValue="Level 0">
+<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙁<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level="1"/></$button>
+<$macrocall $name="l" title={{!!title}} text=<<level>> style="margin:0 10px;"/>
+<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙂<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level=<<up>>/></$button>
+</$set>
+</$set></div>
+\end
+
+\define flashcard()
+<$set name="A" filter="[all[current]has[side-a]]" value={{!!side-a}} emptyValue={{!!caption}}>
+<$set name="B" filter="[all[current]has[side-b]]" value={{!!side-b}} emptyValue={{!!description}}>
+<$set name="X" filter="[{!!default}!match[B]]" value=<<A>> emptyValue=<<B>>>
+<$set name="O" filter="[{!!default}match[B]]" value=<<A>> emptyValue=<<B>>>
+<$set name="color" filter="[all[current]get[belongs.to]colorize[]]" emptyValue="#29B6F6" select="0">
+<div class="tc-card" style=<<flashcard-border-style>>><div class="tc-card-content">
+<$button class="tc-btn-invisible" dragTiddler=<<currentTiddler>>>
+<$list filter="[<flashcard-state>is[tiddler]]" emptyMessage="""<$action-setfield $tiddler=<<flashcard-state>> text="show"/><<X>>""" variable="NONE">
+<$action-deletetiddler $tiddler=<<flashcard-state>>/><<O>>
+</$list>
+</$button>
+<$list filter="[<flashcard-state>is[tiddler]]" variable="NONE" emptyMessage=<<flashcard-level>>><<flashcard-buttons>></$list>
+</div></div>
+\end
+
+; 1. 显示 Flashcard 卡片的级别
+: `<<flashcard-level>>`
+; 2. 显示 Flashcard 卡片的按钮
+: `<<flashcard-buttons>>`
+; 3. 单个 Flashcard 卡片
+: `<<flashcard>>`

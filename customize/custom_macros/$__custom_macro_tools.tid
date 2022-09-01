@@ -1,0 +1,193 @@
+created: 20190928115034446
+creator: yuzijie
+modified: 20220901090352580
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/tools
+type: text/vnd.tiddlywiki
+
+\define tree-opener(tiddler, prefix, separator:"/", state-prefix:"$:/state/tree/")
+<$list filter="[<__tiddler__>removeprefix<__prefix__>split<__separator__>butlast[]join<__separator__>]" variable="new-branch">
+<$set name="target" filter="[<__prefix__>addsuffix<new-branch>]" select="0">
+<$action-setfield $tiddler={{{ [<target>addprefix<__state-prefix__>addsuffix[/]] }}} text="show"/>
+<$macrocall $name="tree-opener" tiddler=<<target>> prefix=<<__prefix__>> separator=<<__separator__>> state-prefix=<<__state-prefix__>>/>
+</$set>
+</$list>
+\end
+
+\define diff-title(source, dest) <$diff-text source={{$source$}} dest={{$dest$}}/>
+
+\define source-compare()
+<div class="source-compare">
+<$select tiddler="$:/temp/diff" field="A">
+<$list filter="[tag<currentTiddler>]"><option value=<<currentTiddler>>><$view field="caption"/></option></$list>
+<option value=""></option>
+</$select>
+<$select tiddler="$:/temp/diff" field="B">
+<$list filter="[tag<currentTiddler>]"><option value=<<currentTiddler>>><$view field="caption"/></option></$list>
+<option value=""></option>
+</$select>
+</div>
+
+<$list filter="[[$:/temp/diff]has[A]has[B]]">
+<$macrocall $name="diff-title" source={{$:/temp/diff!!A}} dest={{$:/temp/diff!!B}}/>
+</$list>
+\end
+
+\define code(content, language, copy:"yes")
+<div class="code-macro">
+<$set name="lang" filter="[<__language__>is[blank]]" value=<<language>> emptyValue=<<__language__>>><$codeblock code=<<__content__>> language=<<lang>>/></$set>
+<$reveal default=<<__copy__>> type="match" text="yes"><$macrocall $name="copy-to-clipboard" src=<<__content__>>/></$reveal>
+</div>
+\end
+
+\define collapse(title, tags)
+<$set name="state" value=<<qualify "$:/state/collapse/$title$">>>
+<$reveal type="nomatch" state=<<state>> text="open" tag="div">
+<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="[<__title__>] $tags$"/><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
+<$button set=<<state>> setTo="open" dragTiddler="$title$" class="tc-btn-invisible collapse-close" tooltip=<<__title__>>>
+<$tiddler tiddler="$title$">{{$:/core/images/right-arrow}}
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+</$tiddler>
+</$button>
+</$droppable>
+</$reveal>
+<$reveal type="match" state=<<state>> text="open" tag="div">
+<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="[<__title__>] $tags$"/><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
+<$button dragTiddler="$title$" class="tc-btn-invisible collapse-open" tooltip=<<__title__>>><$action-deletetiddler $tiddler=<<state>>/>
+<$tiddler tiddler="$title$">{{$:/core/images/down-arrow}}
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+</$tiddler>
+</$button>
+<div style="padding-left:0.8em;">
+<$list filter="[[$title$]!type[application/x-tiddler-dictionary]]" emptyMessage="<<data-table>>"><$transclude tiddler="$title$" mode="block"/></$list>
+</div>
+</$droppable>
+</$reveal>
+</$set>
+\end
+
+\define tree-prefix-builder(separator:"/") $(currentTiddler)$$separator$
+
+\define display(content, mode:"code", state:"$:/state/display", language)
+<$list filter="[<__mode__>match[code]]" variable="NONE" emptyMessage="<span class=<<__mode__>>><<__content__>></span>">
+<$set name="highlight" filter="[<__state__>text[yes]]" value="highlight" emptyValue="">
+<$set name="lang" filter="[<__language__>is[blank]]" value=<<language>> emptyValue=<<__language__>>>
+<span class=<<highlight>>><$codeblock code=<<__content__>> language=<<lang>>/></span>
+</$set>
+</$set>
+</$list>
+\end
+
+\define shortcut-linked()
+<li class="toc-item">
+<$button to=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink">
+<$transclude field=caption><$view field=title/></$transclude>
+</$button>
+</li>
+\end
+
+\define shortcut-unlinked(sort)
+<li class="toc-item">
+<$button class="tc-btn-invisible unlink"><$transclude field=caption><$view field=title/></$transclude></$button>
+<$macrocall $name="shortcut" root=<<currentTiddler>> sort=<<__sort__>>/>
+</li>
+\end
+
+\define shortcut(root:"Index", sort:"!sort[order]")
+<ol class="tc-toc toc-selective-expandable"><$list filter="[<__root__>taggingOrPrefixed[]!has[draft.of]$sort$] -[<__root__>]">
+<$list filter="[all[current]toc-link[no]]" variable="NONE" emptyMessage=<<shortcut-linked>>>
+<$macrocall $name="shortcut-unlinked" sort=<<__sort__>>/>
+</$list>
+</$list></ol>
+\end
+
+\define open-in-sidebar(close:"yes")
+<$list filter="[<__close__>match[yes]]" variable="NONE">
+<$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>
+</$list>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<$action-setfield $tiddler="$:/config/index-tree" text="$(currentTiddler)$"/>
+<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[[$(currentTiddler)$]] +[putfirst[]]"/>
+\end
+
+\define format-date(date, template:"YYYY-0MM-0DD") <$set name="output" filter="[[$date$]format:date[$template$]]" select="0"><<output>></$set>
+
+\define timeline-title() <<icons>> @@color:#333;<$view field=title/>@@ <$transclude field="caption"/>
+
+\define branch-caption(levels, separator:"/", separator2:" - ") <$set name="newTitle" filter="[all[current]split<__separator__>butfirst<__levels__>join<__separator2__>]" select="0"><<newTitle>></$set>
+
+\define copy-image() <$image source="$(currentTiddler)$" width="" height="" tooltip="$(currentTiddler)$"/>
+
+\define modal-actions()
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$action-navigate/>" variable="NONE">
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE">
+<$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/></$list>
+<$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
+</$list>
+<$list filter="[[$(modal)$]!match[yes]]" variable="NONE">
+<$list filter="[<direct-open>!match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
+<$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/></$list>
+</$list>
+</$list>
+</$list>
+\end
+
+\define subtitle()
+<$list filter="[all[current]has[date]]"><<verification-notice>> verified on <$list filter="[all[current]days:date[]]" emptyMessage="""<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible" style="color:#9accb0;font-variant:small-caps;font-variant-numeric:oldstyle-nums;"><$action-setfield $field="last-date" $value={{!!date}}/><$view field="date" format="date" template="YYYY-0MM-0DD"/> <$macrocall $name="days-passed" start={{!!date}}/></$button>""">@@color:#9accb0;today@@</$list>,</$list> modified on <$view field="modified" format="date" template="YYYY-0MM-0DD"/><$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}} class="normal-weight"/></$list>
+\end
+
+\define relationships(name, filter, direct-open:"yes")
+<$list filter="$filter$ +[limit[1]]" variable="NONE"><$set name="state" value="$:/state/relationships/$(currentTiddler)$/$name$">
+<$reveal type="match" state=<<state>> text="close" tag="div" style="padding-top:1em;">
+<$button set=<<state>> setTo="open" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$'' (<$count filter="$filter$"/>)</$button>
+</$reveal>
+<$reveal type="nomatch" state=<<state>> text="close" tag="div" style="padding-top:1em;">
+<$button set=<<state>> setTo="close" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$''</$button>
+<$set name="direct-open" value="$direct-open$"><<sort-by-belongs filter:"$filter$" title:"$name$">></$set>
+</$reveal>
+</$set></$list>
+\end
+
+\define verification-notice() <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">@@color:red;Verification Required!@@</$list></$list>
+
+\define tiddler-close(tiddler)
+<$list filter="[[$(modal)$]!match[yes]]">
+<$list filter="[{$:/HistoryList!!current-tiddler}match<__tiddler__>]">
+<$macrocall $name="tiddler-open" tiddler={{{ [<__tiddler__>next[$:/StoryList]] :else[<__tiddler__>previous[$:/StoryList]] }}}/>
+</$list>
+<$action-sendmessage $message="tm-close-tiddler" $param=<<__tiddler__>>/>
+</$list>
+\end
+
+\define tiddler-open(tiddler)
+<$action-navigate $to=<<__tiddler__>>/>
+<$list filter="[<__tiddler__>addprefix[$:/state/folded/]is[tiddler]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
+<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<__tiddler__>] +[putfirst[]]"/>
+\end
+
+# ''将树形结构进行展开''<$macrocall $name="code" content="""<<tree-opener tiddler:"branch tiddler" prefix:"同 tree 的 prefix" separator:"/" state-prefix:"$:/state/tree/">>"""/>
+# ''解决 diff-text widget 不能接受 tiddler title 作为参数的缺陷''<$macrocall $name="code" content="""<<diff-title source:"source title" dest:"destination title">>"""/>
+# ''比较两个不同的代码之间的区别''<$macrocall $name="code" content="""<<source-compare>>"""/>
+# ''显示源代码, 并且可以一键复制''<$macrocall $name="code" content="""<<code content:"源代码" language:"编程语言">>"""/>
+# ''生成一个 Collapse 组件''<$macrocall $name="code" content="""<<collapse title:"tiddler title" tags:"额外添加的 tags">>"""/>
+# ''用父 Tiddler 的名字组成 tree 的 prefix''<$macrocall $name="code" content="""<<tree-prefix-builder separator:"/">>"""/>
+# ''使用各种模式来展示内容''<$macrocall $name="code" content="""<<display content:"要展示的内容" mode:"tips/code" state:"name of state tiddler, e.g. $:/state/display/XXX" language:"编程语言">>"""/>
+# ''点击后, 在 Sidebar 打开该链接''<$macrocall $name="code" content="""<<shortcut-linked>>"""/>
+# ''toc-link 是 no 的 Tiddler, 列出其下 tiddlers''<$macrocall $name="code" content="""<<shortcut-unlinked sort:"排序 sort[order]">>"""/>
+# ''在搜索框的下拉菜单里显示 TOC''<$macrocall $name="code" content="""<<shortcut root:"Index" sort:"排序 sort[order]">>"""/>
+# ''把 Tiddler 添加到 Sidebar 的动作''<$macrocall $name="code" content="""<<open-in-sidebar close:"是否关闭 tiddler">>"""/>
+# ''将日期转换成指定的格式''<$macrocall $name="code" content="""<<format-date date:"20200102" template:"YYYY-0MM-0DD">>"""/>
+# ''修改 timeline macro 的 tidder links 的样式''<$macrocall $name="code" content="""<<timeline-title>>"""/>
+# ''为 Branch Tiddler 自动生成 Caption''<$macrocall $name="code" content="""<<branch-caption levels:"从某级之后开始计算标题" separator:"原分隔符", separator2:"新分隔符">>"""/>
+# ''点击链接以后弹出 Modal 的动作''<$macrocall $name="code" content="""<<modal-actions>>"""/>
+# ''Subtitle 的时间显示''<$macrocall $name="code" content="""<<subtitle>>"""/>
+# ''展示 Tiddler 之间的关联关系''<$macrocall $name="code" content="""<<relationships name:"关系名称" filter:"关系对应的 Filter" direct-open:"是否直接打开">>"""/>
+# ''检查通知''<$macrocall $name="code" content="""<<verification-notice>>"""/>
+# ''关闭 Tiddler 的同时, 修改 HistoryList 里面的 current-tiddler''<$macrocall $name="code" content="""<<tiddler-close tiddler:"关闭的 tiddler">>"""/>
+# ''打开 Tiddler 的同时, unfold tiddler''<$macrocall $name="code" content="""<<tiddler-open tiddler:"打开的 tiddler">>"""/>

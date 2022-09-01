@@ -1,0 +1,117 @@
+created: 20191013140545554
+creator: yuzijie
+modified: 20220901101432567
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/table
+type: text/vnd.tiddlywiki
+
+\define cell-value-normal() <$list filter="[<value>splitregexp[;;\s*]!is[blank]]" variable="datum"><$list filter="[field:title<datum>]" emptyMessage=<<datum>>><$macrocall $name="l" title={{!!title}} class="normal-weight"/></$list><br></$list>
+
+\define cell-value()
+<$list filter="[<current>get[celltpl]is[tiddler]]" emptyMessage=<<cell-value-normal>> variable="tpl">
+<$list filter="[<tpl>type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude tiddler=<<tpl>>/>" variable="tpl">
+<$list filter="[<tpl>getindex<key>]" emptyMessage=<<cell-value-normal>> variable="cell"><<cell>></$list>
+</$list>
+</$list>
+\end
+
+\define table-sort-option() $:/state/table/$(current)$/$(tableTitle)$
+\define table-subfilter() [index:$(property)$[$(index-value)$]]
+
+\define table(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"default", sort-order:"sortan[]")
+<$set name="current" value=<<currentTiddler>>><$set name="is-data-table" value="no">
+<div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
+<tr>
+<th>&#9733;</th>
+<$reveal default="$rheader$" type="nomatch" text="" tag="th">$rheader$</$reveal>
+<$list filter="$cfilter$" variable="property"><th>
+<$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property>> &#8645;</$button></$list>
+</th></$list>
+</tr>
+<$set name="cfilter" filter="$cfilter$"><$set name="rheader" value="$rheader$">
+<$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$rheader$">></$list>""">
+<$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
+<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]$sort-order$]" variable="index-value">
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$">></$list>
+</$list>
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$">></$list>
+</$tiddler></$set>
+</$list>
+</$set></$set>
+</$set></tbody></table></div>
+</$set></$set>
+\end
+
+\define table-row(rheader)
+<$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="background:#fff3c9;" emptyValue=""><tr style=<<style>>>
+<$set name="fdate" filter="[{!!date}format:date[YYYY-0MM-0DD]]">
+<td><div class="table-links">
+<$reveal default="$rheader$" type="match" text="">
+<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<fdate>> class="tc-btn-invisible links" style="fill:#5778d8;">
+<$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>{{$:/core/images/open-window}}
+</$button>
+</$reveal>
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+<$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
+<<links>> $(widget)$
+</div></td>
+<$reveal default="$rheader$" type="nomatch" text="" tag="td">
+<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<fdate>> class="tc-btn-invisible tc-tiddlylink">
+<$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>{{!!title}}
+</$button>
+</$reveal>
+</$set>
+<$set name="current" value={{!!title}}><$list filter="$(cfilter)$" variable="key">
+<td><$set name="value" tiddler=<<current>> index=<<key>>><$macrocall $name="cell-value"/></$set></td>
+</$list></$set>
+</tr></$set>
+\end
+
+\define new-tags-builder(tag) [[$(current)$]] [[$tag$]]
+\define table-edit-new-action(template, tag, fields) <$action-setfield $tiddler=<<unusedtitle "$template$">> date=<<now YYYY0MM0DD>> tags=<<new-tags-builder "$tag$">> type="application/x-tiddler-dictionary" $fields$/>
+
+\define tableE(cfilter, ffilter, rfilter:"[tag<currentTiddler>]", title:"default", fields, tag, sort-order:"sortan[]")
+<$set name="current" value=<<currentTiddler>>>
+<h2><$button class="tc-btn-invisible"><$macrocall $name="table-edit-new-action" template={{$:/config/defaultTemplate}} tag="$tag$" fields="$fields$"/>Add New Row</$button></h2>
+<div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
+<tr>
+<th>Title</th><$list filter="$ffilter$"><th><<currentTiddler>></th></$list>
+<$list filter="$cfilter$" variable="property"><th>
+<$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property>> &#8645;</$button></$list>
+</th></$list>
+</tr>
+<$set name="cfilter" filter="$cfilter$"><$set name="ffilter" filter="$ffilter$">
+<$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row-edit>></$list>""">
+<$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
+<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]$sort-order$]" variable="index-value">
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row-edit>></$list>
+</$list>
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row-edit>></$list>
+</$tiddler></$set>
+</$list>
+</$set></$set>
+</$set></tbody></table></div>
+</$set>
+\end
+
+\define table-row-edit()
+<tr>
+<td><$link/></td>
+<$list filter="$(ffilter)$" variable="field"><td><$edit-text field=<<field>> tag="input"/></td></$list>
+<$list filter="$(cfilter)$" variable="key"><td>
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]"><$edit-text index=<<key>> tag="input"/></$list>
+</td></$list>
+</tr>
+\end
+
+; 1. 显示单元格内容, 环境变量: `current` - data Tiddler, `key` - data index, `value` - data value
+: `<<cell-value>>`
+; 2. 把 Data-Dictionary 用 Table 的形式展示出来, 每个 Tiddler 相当于一行
+: `<<table cfilter:"[[A]] [[B]] [[C]] 输入键值" rfilter:"[tag<currentTiddler>] 行标题过滤" rheader:"Name of Row header" title:"表格 ID" sort-order:"排序顺序">>`
+; 3. 展示 Table 的行
+: `<<table-row rheader:"Name of Row header">>`
+; 4. 使用 table 形式编辑 Data tiddlers 的值
+: `<<tableE cfilter:"输入键值" ffilter:"输入字段值" rfilter:"[tag<currentTiddler>] 行标题过滤" title:"表格 ID" fields:"新建词条的时候自定义的字段" tag:"给新 Tiddler 添加额外的 tag" sort-order:"排序顺序">>`
+; 5. tableE 的行
+: `<<table-row-edit>>`

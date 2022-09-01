@@ -1,0 +1,83 @@
+created: 20190110073141540
+creator: yuzijie
+modified: 20220901101506880
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/record
+type: text/vnd.tiddlywiki
+
+\define record-item-no-caption()
+<$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><div><$transclude mode="block"/></div></$list>
+<cite style="font-style:normal;text-align:right;">
+<span style="font-size:small;">
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$button message="tm-edit-tiddler" class="tc-btn-invisible" style="color:#aaa;">
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+<$view field="start" format="date" template="YYYY-0MM-0DD"><$view field="date" format="date" template="YYYY-0MM-0DD"/></$view>
+<$list filter="[all[current]!has[date]!has[start]]"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$list>
+</$button>
+<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink"><$transclude field="title"/>
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+</$button>
+</span>
+<<links>>
+</cite>
+\end
+
+\define record(filter:"[tag<currentTiddler>!sort[date]]")
+<$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
+<$set name="border-color" filter="[all[current]get[color]addprefix[border-left-color:]]" emptyValue="" select="0">
+<blockquote class="tc-quote record" style=<<border-color>>><$list filter="[all[current]has[caption]]" emptyMessage=<<record-item-no-caption>>>
+<$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!type[text/plain]!is[image]then[yes]] -[[$(direct-open)$]match[yes]] -[[$(modal)$]match[yes]]" value="single-line-record" emptyValue="">
+<div class=<<class>>>
+<span class="left">
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+</span>
+<span class="middle"><$list filter="[<class>!match[single-line-record]]" variable="NONE" emptyMessage=<<record-popup>>>
+<$button tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible"><<modal-actions>>
+{{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
+<$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
+</$button>
+</$list></span>
+<span class="right"><<links>>
+<$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#aaa;">
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+<$view field="start" format="date" template="YYYY-0MM-0DD"><$view field="date" format="date" template="YYYY-0MM-0DD"/></$view>
+<$list filter="[all[current]!has[date]!has[start]]"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$list>
+</$button>
+</span>
+</div>
+</$set>
+</$list></blockquote>
+</$set>
+</$list></$set>
+\end
+
+\define record-popup-actions() <$list filter="[<modifier>match[ctrl]]" variable="NONE"><$action-navigate/><$action-popup $state="$:/state/popup/$(currentTiddler)$"/></$list>
+
+\define record-popup()
+<$button actions=<<record-popup-actions>> popup=<<qualify "$:/state/popup/$(currentTiddler)$">> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink normal-weight">
+{{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
+</$button>
+<$reveal type="popup" state=<<qualify "$:/state/popup/$(currentTiddler)$">>><div class="record-drop-down tc-popup-keep">
+<div class="record-copy"><$button message="tm-copy-to-clipboard" param={{!!title}}>Copy title</$button> <$button message="tm-copy-to-clipboard" param={{!!caption}}>Copy caption</$button></div>
+<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible record-title">
+{{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+</$button><hr style="margin:0;"><<external-links>>
+<div class="record-content">
+<$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
+</div>
+</div></$reveal>
+\end
+
+; 1. 没有 caption 情况下, record 条目内容的显示
+: `<<record-item-no-caption>>`
+; 2. 使用列表方式显示 Tiddlers
+: `<<record filter:"[tag<currentTiddler>!sort[date]]">>`
+; 3. 用 Popup 显示 record 条目的内容
+: `<<record-popup>>`

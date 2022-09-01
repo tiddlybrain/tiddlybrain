@@ -1,0 +1,20 @@
+created: 20210516172453585
+creator: yuzijie
+footer: <$list filter="[<mTitle>has[date]]"><<verification-notice>> Verified on <$list filter="[all[current]days:date[]]" emptyMessage="""<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible" style="color:green;"><$action-setfield $field="last-date" $value={{!!date}}/><$view field="date" format="date" template="YYYY-0MM-0DD"/> <$macrocall $name="days-passed" start={{!!date}}/></$button>""">@@color:green;Today@@</$list></$list>&nbsp;&nbsp;&nbsp;<$list filter="[<mTitle>!is[missing]]"><$button message="tm-close-tiddler"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button> <$button><<open-in-sidebar>>SIDEBAR</$button> <$list filter="[{$:/status/IsReadOnly}!match[yes]]"><$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/><$action-setfield $tiddler="$:/state/sidebar" text="no"/>EDIT</$button></$list></$list> <$button message="tm-close-tiddler">CLOSE</$button>
+modified: 20220901081323472
+modifier: yuzijie
+subtitle: <$list filter="[<mTitle>!is[missing]]"><$transclude field="caption"><$view field="title"/></$transclude><$list filter="[all[current]has[note]]"> @@color:green;[{{!!note}}]@@</$list><$list filter="[all[current]has[status]]"> <$button class="tc-btn-invisible" style="color:red;"><$action-deletefield $field="status"/>[{{!!status}}]</$button></$list><$list filter="[all[current]has[description]]"> @@color:#999;- {{!!description}}@@</$list><div style="float:right;font-size:smaller;"><$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>>{{$:/core/images/copy-clipboard}} <<mTitle>></$button></div></$list>
+tags: customized
+title: $:/custom/template/normal-modal
+type: text/vnd.tiddlywiki
+
+<$tiddler tiddler=<<mTitle>>><div style="margin-top:15px;"><$let modal="yes"><<external-links>></$let></div></$tiddler>
+<div class="tc-tiddler-body"><$set name="modal" value="yes"><$list filter="[<mTitle>is[tiddler]]" emptyMessage=<<mTitle>>>
+<$list filter="[<mTitle>!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude tiddler=<<mTitle>> mode="block"/></$list>
+<$tiddler tiddler=<<mTitle>>>
+<$list filter="[all[current]!search:title:literal[/]]"><<relationships name:"Twins" direct-open:"no" filter:"[!is[system]!is[current]has[caption]!has[draft.of]!search:title:literal[/]caption{!!caption}!search:caption:regexp[^{{|^<<|^<\$]] -[all[current]tags[]] -[all[current]tagging[]]">></$list>
+<<relationships name:"Related Topics" filter:"[all[current]tags[]!search:title:literal[/]] -Snippet -Index -Editor -Comment -Task -BR -Flashcard -Ignore -customized">>
+<<relationships name:"Follow-ups" filter:"[all[current]!search:title:literal[/]tagging[]]">>
+<<relationships name:"Groups" filter:"[all[current]tags[]search:title:literal[/]!is[system]]">>
+</$tiddler>
+</$list></$set></div>

@@ -1,0 +1,10 @@
+caption: Code block widget
+created: 20200413152129406
+creator: yuzijie
+modified: 20211208213226784
+modifier: yuzijie
+tags: $:/tags/TextEditor/Snippet customized
+title: $:/custom/snippet/code-block
+type: text/vnd.tiddlywiki
+
+<$codeblock code='' language=""/>

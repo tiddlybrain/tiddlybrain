@@ -1,0 +1,14 @@
+modified: 20220821123901610
+modifier: yuzijie
+tags: customized
+title: $:/core/ui/ListItemTemplate
+type: text/vnd.tiddlywiki
+
+<div class="tc-menu-list-item">
+<$link to=<<currentTiddler>>><<icons>>
+<$list filter="[all[current]has[caption]]">@@color:#555;{{!!caption}}@@ &middot;</$list>
+<$view field="title"/>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$link>
+</div>

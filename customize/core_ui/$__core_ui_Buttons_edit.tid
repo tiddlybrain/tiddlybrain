@@ -1,0 +1,20 @@
+caption: {{$:/core/images/edit-button}} {{$:/language/Buttons/Edit/Caption}}
+description: {{$:/language/Buttons/Edit/Hint}}
+modified: 20220823141300916
+modifier: yuzijie
+tags: $:/tags/ViewToolbar customized
+title: $:/core/ui/Buttons/edit
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<span><$button message="tm-edit-tiddler" tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-setfield $tiddler="$:/state/sidebar" text="no"/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/edit-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Edit/Caption}}/>
+</span>
+</$list>
+</$button></span>

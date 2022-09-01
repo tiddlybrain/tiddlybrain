@@ -1,0 +1,268 @@
+created: 20160708093003717
+creator: yuzijie
+modified: 20220901150321332
+modifier: yuzijie
+tags: $:/tags/Stylesheet customized
+title: $:/config/style/tools
+type: text/vnd.tiddlywiki
+
+.section {border-bottom: 1px solid #DDD; text-transform: uppercase; font-weight: bold;}
+.select {background: #f5f5f5; padding: 0 10px; line-height: 1.5; border: 0; -webkit-appearance: none;}
+
+.fullwidth {width: 100%;}
+.underline {border: none; border-bottom: 1px solid #ccc;}
+.description {color: #aaa;}
+
+/* For Macro: display */
+.tips, .warning, .danger {display: inline-block; border-radius: 0.25rem; padding: 0.1rem 0.75rem 0.1rem 0.55rem; border: 1px solid #ccc;}
+.tips {color: #31708f; background-color: #d9edf7; border-color: #bce8f1;}
+.tips::before {content: '💡 ';}
+.warning {color: #8a6d3b; background-color: #fcf8e3; border-color: #faebcc;}
+.warning::before {content: '⚠️ ';}
+.danger {color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
+.danger::before {content: '⛔ ';}
+.code-wrap {background-color: #f8f8f8; border: 1px solid #ccc; border-radius: 3px; padding: 1em;}
+.code-wrap pre {border: none; background-color: transparent; margin: 0; padding: 0 !important; line-height: 22px;}
+.code-wrap .highlight pre .hljs {background-color: #ffe5f5;}
+.code-wrap-selector {position: sticky; background: #f1f1f1; top: 1em; padding: 1em; margin-bottom: 0.3em; border-radius: 3px;}
+.code-wrap-selector > label {margin: 0 10px;}
+.code-wrap > p:first-child {margin-top: 0;}
+.code-wrap > p:last-child {margin-bottom: 0;}
+.tc-modal-body .code-wrap-selector {top: -1.1em;}
+
+/* For Macro: img */
+button.img {border: 1px solid #ddd; box-shadow: 0px 0px 2px 1px #f5f5f5;}
+
+/* For Macro: snippet */
+.snippet {white-space: nowrap;}
+button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis;}
+.snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0;}
+.snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table {margin: 10px 20px;}
+.snippet-content > h2, .snippet-content > h3 {margin-left: 20px; margin-right: 20px;}
+.snippet-content > details {margin: 5px 10px;}
+.snippet-content > h3 {font-weight: bold;}
+.snippet-external {margin: 1em 0; line-height: 0;}
+.snippet-external embed, .snippet-external iframe {height: 600px;}
+.snippet-container .macro-table td {white-space: nowrap;}
+.data-value .snippet-accordion .snippet-content, .data-value .snippet-accordion .data-table {font-size: small; line-height: 26px;}
+.data-table .snippet > pre {line-height: 20px;}
+.snippet-accordion {box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 6px 0px; background: white;}
+.snippet-accordion > * {margin-top: 10px;}
+.snippet .data-table {white-space: normal;}
+.snippet button code {white-space: nowrap;}
+.fold-text {font-style: italic; color: #999; font-variant: small-caps;}
+.data-table + .filter-options {padding-top: 0.3em;}
+
+/* For Macro: task-list */
+dl.task-list dd {white-space: nowrap;}
+
+/* For Macro: flashcards */
+.tc-card {width: 225px; height: 180px; display: flex; overflow: auto; background-color: white; border-radius: 7%; box-shadow: 0 8px 17px -8px #A3A5AE; transition: box-shadow 0.3s ease-in-out;}
+.tc-card:hover {box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);}
+.tc-card-content {text-align: center; font-weight: 600; padding: 15px; width: 100%; margin: auto;}
+.tc-card-content > button {transition: color 0.2s ease-in-out;}
+.tc-card:hover .tc-card-content > button {color: #1462ff;}
+.tc-card-buttons {margin-top: 10px;}
+
+/* For Sidebar: Index & Editor */
+input.draft-search {background: transparent; border: none; border-bottom: 1px solid #ccc; line-height: 16px;}
+.tc-sidebar-header .tc-sidebar-lists .tc-drop-down p {margin-top: 1em; margin-bottom: 1em;}
+.tc-sidebar-lists .tc-editor-toolbar button {margin: 0; border: 1px solid #ccc;}
+
+/* For $:/custom/ui/SideBarSegments/open */
+.sidebar-item-hover {display: none;}
+.tc-sidebar-tab-open-item:hover .sidebar-item-hover {display: inline-block;}
+.tc-sidebar-tab-open-item code {white-space: nowrap;}
+
+/* For $:/custom/search/... */
+button.search-tool {display: inline-block; width: auto; font-size: smaller; padding: 0px 6px;}
+
+/* For $:/custom/search/SubtopicSearchResultList */
+.subtopic {display: block; padding: 1px 0 10px 10px;}
+.subtopic button.tc-tag-label, .subtopic-filters button.tc-tag-label {padding: 0.2em 0.7em; margin-right: 1px; color: #888; font-size: smaller; width: auto; border-radius: 1em; display: inline-block;}
+.subtopic-filters {white-space: normal;}
+.subtopic-filters button.tc-tag-label {margin: 0 2px 5px 0;}
+.subtopic-filters button.tc-tag-label:hover {text-decoration: line-through;}
+
+/* For Macro: external-links */
+.external-links {text-align: center; padding: 3px 1em; line-height: 25px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.single-line-record .record-drop-down .external-links button.tc-tiddlylink {width: auto;}
+
+/* For Template Task */
+table.task-info {width: 100%; font-size: small; text-align: center; table-layout: fixed;}
+
+/* For Macro: toc */
+.tc-table-of-contents li {padding-top: 0.5em;}
+.tc-table-of-contents ol ol {padding-left: 1.5em;}
+.tc-table-of-contents li.toc-item button svg {transform: translateY(-1px);}
+.tc-tabbed-table-of-contents .tc-table-of-contents {background: #f0f0f0;}
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a {border-top-color: #f0f0f0; border-left-color: #f0f0f0; border-bottom-color: #f0f0f0;}
+.tc-tabbed-table-of-contents-content .heading {text-align: center; padding: 6px 0;}
+.tc-tabbed-table-of-contents .tc-tabbed-table-of-contents-content {padding-bottom: 1em;}
+
+/* For Checkbox widget */
+label.checkbox {cursor: pointer;}
+label.checkbox input {display: none;}
+label.checkbox input[type=checkbox]:checked + span {color: red;}
+label input[type=checkbox] {vertical-align: baseline;}
+
+/* For Macro: linkIfExists */
+.link-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; margin: 4px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}
+.link-content {color: initial; font-weight: initial; padding: 10px 15px; border-radius: 3px;}
+
+/* For Macro: record */
+blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #b6b6b6; border-style: solid; border-radius: 4px; padding: 2px 12px 3px 12px; margin: 0 0 5px 0; background: #fcfcfc;}
+.single-line-record {display: flex; white-space: nowrap;}
+.single-line-record .left span:last-child {margin-right: 0.3em;}
+.single-line-record .middle {min-width: 0;}
+.single-line-record .middle button.tc-tiddlylink {width: 100%; overflow: hidden; text-overflow: ellipsis;}
+.single-line-record .middle .data-value button.tc-tiddlylink {width: auto; display: inline-block;}
+.single-line-record .middle button code {display: inline-block;}
+.single-line-record .right {margin-left: 0.3em; flex: none;}
+.single-line-record .record-content {white-space: normal;}
+.single-line-record .middle .popup-bottom button.tc-tiddlylink, .single-line-record .middle .record-content button.tc-tiddlylink {width: auto;}
+.snippet-accordion blockquote.record {white-space: nowrap; overflow: hidden;}
+.tc-sidebar-lists blockquote.record .description {display: none;}
+
+/* For Macro: sort-by-tags */
+.categories {display: block; margin-bottom: 1em; background: #d8d8d8; padding: 2px 10px; border: 1px solid #ddd; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); line-height: 1.5em; position: relative;}
+.categories-button {font-variant: small-caps; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); margin-bottom: 0.3em;}
+.categories-clear {position: absolute; top: 3px; right: 10px;}
+.categories-clear button {font-size: small;}
+.sort-by-belongs .macro-table {margin-bottom: 0;}
+
+/* For Macro: record-popup */
+.record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 3px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}
+.record-title {margin: 9px 10px 9px 15px; display: block;}
+.record-content {color: initial; font-weight: initial; display: block; margin: 10px 15px;}
+.record-copy {margin: 5px; position: absolute; right: 0; display: none;}
+.record-drop-down:hover .record-copy {display: block;}
+.popup-bottom {font-size: small; background: #fff3c9; text-align: center; border-radius: 0 0 3px 3px; padding: 3px;}
+
+/* For Macro: tree */
+.tc-tree button {color: #ccc;}
+.tc-tree ol {padding-left: 0.2em;}
+.tc-tree ol ol {padding-left: 1.2em;}
+.tc-sidebar-lists .tc-tree li {padding-top: 0.16em;}
+.tc-sidebar-lists .tc-tree a.link-color {color: #5778d8;}
+.tc-tree a.tree-root {display: block; font-weight: bold; color: #666;}
+.tc-tree span svg, .tc-tree button.links svg {transform: translateY(2px);}
+
+/* For Menubar Plugin */
+.tc-menubar .tc-drop-down {padding: 10px 20px;}
+.tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini .open svg {fill: green;}
+nav.tc-menubar li.tc-menubar-item .tc-menubar-dropdown-arrow svg {width: 1em; height: 0.7em; transform: translateY(-1px);}
+nav.tc-menubar li.tc-menubar-item .tc-menu-list-item svg {fill: #999;}
+nav.tc-menubar .tc-drop-down .tc-table-of-contents button.tc-tiddlylink {color: #666;}
+nav.tc-menubar .tc-drop-down .tc-table-of-contents button.tc-tiddlylink:hover {color: white;}
+nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #aaa; background: transparent; cursor: default;}
+
+/* For Macro: table */
+.macro-table {overflow-x: hidden; margin-top: 1em; margin-bottom: 1em;}
+.macro-table:hover {overflow-x: auto;}
+.macro-table > table {width: 100%; margin: 0; background: white;}
+.macro-table > table th {text-align: left;}
+.macro-table > table th, .macro-table > table td, table.data-table .macro-table > table th, table.data-table .macro-table > table td {padding: 0 9px; white-space: nowrap; border: 1px solid #ddd;}
+.macro-table > table td code {white-space: nowrap;}
+.macro-table > table td input {width: 100%; border: 1px dashed #ccc;}
+table.data-table .macro-table {margin: 0.5em 0; font-size: small; line-height: 26px;}
+.table-links button svg {max-width: none;}
+td span a.tc-tiddlylink-resolves {font-weight: 400;}
+
+/* For Macro: data-table */
+table.data-table {background: white; line-height: 30px; table-layout: fixed; border: none;}
+table.data-table th, table.data-table td {border: none; padding: 4px 10px;}
+table.data-table > tr > th {line-height: 23px; padding-top: 0; padding-bottom: 2px; white-space: nowrap;}
+table.data-table td.data-splitter {padding: 0; font-size: small;}
+table.data-table > tr:last-child > th, table.data-table > tr:last-child > td {border-bottom: 1px solid #ccc;}
+table.data-table > tr > th:last-child, table.data-table > tr > td:last-child {border-right: none;}
+table.data-table > tr > th {text-align: left; color: white; background-color: #ccc; font-variant: all-small-caps; font-weight: 500; text-shadow: 0 1px 1px rgb(150 150 150 / 50%);}
+table.data-table tr th a.tc-tiddlylink {color: white;}
+table.data-table .data-key {font-weight: bold; color: #333;}
+table.data-table .data-key a {font-weight: bold;}
+table.data-table .data-splitter {text-align: center; font-weight: bold; background-color: #eee; color: #555;}
+.data-value code {white-space: break-spaces; font-size: 14px;}
+.tc-sidebar-lists table.data-table td.data-value {color: #333;}
+.snippet-container + br, .tc-menu-list-item + br, .macro-table + br, .no-br + br {display: none;}
+.tc-sidebar-lists .data-table .copy-col {display: none;}
+
+/* For Macro: kanban */
+.kanban table th, .kanban table td {overflow: hidden; height: 1em; vertical-align: top;}
+
+/* For Macro: index-tree */
+.index-tree {margin-bottom: -7px;}
+.index-tree button {padding: 0; margin: 0; background: none; border: none; color: #999; fill: #999;}
+.index-tree-tab {display: inline-block; font-size: 11px; border: 1px solid #ccc; border-radius: 1em; margin: 3px 0 5px 0; padding: 0 8px 1px 8px; background: #efefef;}
+.tc-sidebar-lists .index-tree-view {color: #333; line-height: 22px;}
+.tc-sidebar-lists .index-tree-view p {margin: 16px 0;}
+.tc-sidebar-lists .index-tree-view .snippet-content p {margin: 5px 10px;}
+.tc-sidebar-lists .index-tree-view .tgr-container p {margin: 0;}
+
+/* For Macro: source-compare */
+.source-compare select {width: 40%;}
+
+/* For Macro: l */
+.l embed {height: 600px;}
+.l > details:last-child {margin-bottom: 0;}
+
+/* For Macro: links */
+a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
+button.links svg, a.links svg {transform: translateY(-1px);}
+button.links svg.tc-image-mono-block, a.links svg.tc-image-mono-block, .table-links button.links svg {transform: none;}
+
+/* For Macro: links, modal code viewer */
+.code-viewer {border: 1px solid #cccccc; display: flex;}
+.code-viewer pre {flex: 1 0 62%; margin: 0; border: none; padding: 18px !important; border-radius: 0;}
+.code-viewer pre code {font-size: 1em;}
+.code-viewer textarea {flex: 0 0 38%; border: none; white-space: pre; font-size: 1em; line-height: 20px; padding: 18px 8px 0; height: 2000px !important; border-radius: 0;}
+.code-viewer textarea.edit {flex: 1 0 62%;}
+.code-viewer textarea.heightless {height: unset !important; text-align: right;}
+
+/* For Macro: filter-options */
+.select-filter {vertical-align: bottom; height: 18px; width: 14px; border: none; background: transparent;}
+.select-filter.dark {color: #333; width: initial; font-size: 15px; vertical-align: baseline; border-bottom: 1px solid #ddd; height: 21px;}
+.filter-options {font-variant: small-caps; line-height: 23px;}
+.filter-options .select-filter {font-size: small;}
+
+/* For Macro: code */
+.code-macro > pre {margin: 0;}
+.code-macro button {font-size: small;}
+li .code-macro {margin: 4px 0;}
+
+/* For Macro: collapse */
+button.collapse-open, button.collapse-close {width: 100%; fill: #999; white-space: nowrap; overflow: hidden;}
+button.collapse-open, button.collapse-close {padding: .7em 0 .7em .8em; background: #fcfcfc; border-bottom: 1px solid #ddd; border-radius: 0;}
+button.collapse-close {background: #f4f4f4; font-weight: normal;}
+
+/* For Macro: date-pillar */
+.dp-container {flex-basis: 15%; flex-grow: 0; background-color: white; padding: 8px 5px 10px 5px; border: 1px solid #f4f4f4; white-space: nowrap; overflow: hidden; transition: flex-basis 200ms ease-in-out; line-height: 25px; border-radius: 7px;}
+.dp-title {font-size: 1.05em; font-variant: small-caps; text-align: center;}
+.dp-title button.tc-tiddlylink {color: brown; font-weight: 500; width: 100%;}
+.dp-content {min-height: 2em; font-size: small;}
+.dp-content ol {padding-left: 15px; margin: 0;}
+.dp-container.today .dp-title, .dp-container.today .dp-title button {text-decoration: underline;}
+.dp-container.today:hover {flex-basis: 60%;}
+.dp-container.today:hover .dp-content ol {padding-left: 30px;}
+
+/* For Macro: weekly-plan */
+.dot {border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7;}
+
+/* For Plugin: Details */
+details[open] {border-bottom: 1px solid #eee;}
+details[open] > *:last-child {margin-bottom: 0;}
+details:not([open]) > summary {border-bottom: 1px solid #ccc;}
+details details {background-color: white;}
+details .snippet-container {padding-left: 10px;}
+li > details {margin: 0}
+
+/* For Plugin: Tidgraph */
+.ihm-tgr-node {padding: 0; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);}
+.ihm-tgr-collapse {height: 13px; right: -13px;}
+table.ihm-tgr-table {line-height: 18px; font-size: smaller;}
+table.ihm-tgr-table th, table.ihm-tgr-table td {padding: 0 5px;}
+table.ihm-tgr-table td {overflow-wrap: break-word;}
+table.ihm-tgr-table tr:last-child th, table.ihm-tgr-table tr:last-child td {border-bottom: none;}
+table.ihm-tgr-table tr th:last-child, table.ihm-tgr-table tr td:last-child {border-right: none;}
+.ihm-tgr-node-container-east {margin: 8px 10px;}
+.tgr-style {white-space: nowrap; max-width: 180px; overflow: hidden; background-color: white;}
+.tgr-style code {white-space: nowrap;}

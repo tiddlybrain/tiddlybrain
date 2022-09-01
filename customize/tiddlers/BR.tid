@@ -1,0 +1,47 @@
+caption: @@font-weight:normal;🌿@@ Branches
+created: 20211207121501210
+creator: yuzijie
+modified: 20220830124303537
+modifier: yuzijie
+order: Z1
+tags: customized
+title: BR
+type: text/vnd.tiddlywiki
+
+<$details summary="Add/Delete Branch">
+<div style="border-radius:0.25rem;padding:0.55rem;color:#31708f;background-color:#d9edf7;border:1px solid #bce8f1;">
+<div><$edit-text tiddler="$:/temp/branch" field="path" size="45" placeholder="Input New Branch Name" default="BR/"/></div>
+<div><$edit-text tiddler="$:/temp/branch" field="caption" size="45" placeholder="Input Caption" default="<<branch-caption 1>>"/></div>
+<div><$edit-text tiddler="$:/temp/branch" field="shortcap" size="45" placeholder="Input Short Caption"/></div>
+<div>
+<$radio tiddler="$:/temp/branch" field="note" value="toc"> TOC-LINK-NO</$radio>&nbsp;&nbsp;
+<$radio tiddler="$:/temp/branch" field="note" value="sbt"> SORT-BY-TAGS</$radio>&nbsp;&nbsp;
+</div>
+<$button class="tc-btn-invisible">
+<$list filter="[[$:/temp/branch]get[path]prefix[BR/]!is[tiddler]]" emptyMessage="<$action-deletetiddler $tiddler='$:/temp/branch'/>{{$:/core/images/close-button}}">
+<$action-createtiddler $basetitle={{$:/temp/branch!!path}} tags="BR" caption="<<branch-caption 1>>">
+<$list filter="[[$:/temp/branch]has[caption]]"><$action-setfield $tiddler=<<createTiddler-title>> caption={{$:/temp/branch!!caption}}/></$list>
+<$list filter="[[$:/temp/branch]has[shortcap]]"><$action-setfield $tiddler=<<createTiddler-title>> shortcap={{$:/temp/branch!!shortcap}}/></$list>
+<$list filter="[[$:/temp/branch]note[toc]]"><$action-setfield $tiddler=<<createTiddler-title>> toc-link="no"/></$list>
+<$list filter="[[$:/temp/branch]note[sbt]]"><$action-setfield $tiddler=<<createTiddler-title>> text="<<sort-by-tags>>"/></$list>
+<$macrocall $name="tree-opener" tiddler=<<createTiddler-title>> prefix="BR/"/><$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>{{$:/core/images/new-button}}
+</$list>
+</$button>
+</div>
+<$droppable actions=<<droppable-delete-action>> tag="div"><div class="tc-droppable-placeholder" style="display:inline-block;margin-top:10px;">
+<<display content:"☠️ ''Warning, use with caution!'' Drag the tiddler over to delete it and remove it from all related tag/list fields." mode:"danger">>
+</div></$droppable>
+</$details>
+
+<$reveal type="nomatch" state="$:/temp/menubarsearch" text="">
+<$button style="margin-bottom:12px;"><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>Clear Search Term</$button>
+<$button><$list filter="[prefix[BR/]search:title,caption,shortcap,note,status,keywords{$:/temp/menubarsearch}!sortan[title]]"><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button>
+<$list filter="[prefix[BR/]search:title,caption,shortcap,note,status,keywords{$:/temp/menubarsearch}sortan[title]]" variable="result"><div>
+<$button class="tc-btn-invisible tc-tiddlylink" dragTiddler=<<result>> to=<<result>>>
+<$macrocall $name="tree-opener" tiddler=<<result>> prefix="BR/"/><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>
+<$tiddler tiddler=<<result>>><<icons>> {{!!title}} <$list filter="[all[current]has[note]]">({{!!note}})</$list></$tiddler>
+</$button>
+</div></$list>
+</$reveal>
+<$reveal type="match" state="$:/temp/menubarsearch" text=""><<ref>></$reveal>

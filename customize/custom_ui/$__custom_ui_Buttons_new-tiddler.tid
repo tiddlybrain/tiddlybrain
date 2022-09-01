@@ -1,0 +1,23 @@
+caption: New tiddler
+created: 20201031171839824
+creator: yuzijie
+description: Create a new tiddler
+modified: 20220901082753741
+modifier: yuzijie
+tags: $:/tags/PageControls customized
+title: $:/custom/ui/Buttons/new-tiddler
+type: text/vnd.tiddlywiki
+
+\define input-focus-actions() <$action-sendmessage $message="tm-focus-selector" $param=".new-tiddler-input-box" preventScroll="true"/>
+
+<$droppable actions=<<droppable-clone-action>> tag="span"><span class="tc-droppable-placeholder" style="display:inline-block;">
+<$eventcatcher selector="button" $mouseover=<<input-focus-actions>>>
+<$button popup=<<qualify "$:/state/popup/NewTiddlerWindow">> tooltip="Create a new tiddler" aria-label="Create a new tiddler" class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">{{$:/core/images/new-button}}</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]"><span class="tc-btn-text"><$text text="New tiddler"/></span></$list>
+</$button>
+</$eventcatcher>
+<$reveal type="popup" state=<<qualify "$:/state/popup/NewTiddlerWindow">>><span class="tc-block-dropdown tc-popup-keep" style="padding:0px 17px;font-size:medium;">
+<$transclude tiddler="$:/custom/ui/newTiddler" mode="block"/>
+</span></$reveal>
+</span></$droppable>

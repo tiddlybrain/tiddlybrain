@@ -1,0 +1,24 @@
+caption: 比较
+created: 20200427021411619
+creator: yuzijie
+modified: 20220325142719464
+modifier: yuzijie
+tags: Editor customized
+title: Editor/Compare Tiddlers
+type: text/vnd.tiddlywiki
+
+<div style="line-height:22px;margin-bottom:10px;"><h3><$link to="Editor/Compare Tiddlers">Compare</$link></h3>
+<$droppable actions="<$action-setfield $tiddler='$:/temp/tools/diff/file1' $field='note' $value=<<actionTiddler>>/>" tag="div">
+`File (Red)` <$list filter="[[$:/temp/tools/diff/file1]has[note]]"><$button class="tc-btn-invisible">
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude tiddler={{!!note}} field="caption"/> &times;
+</$button></$list>
+</$droppable>
+<$droppable actions="<$action-setfield $tiddler='$:/temp/tools/diff/file2' $field='note' $value=<<actionTiddler>>/>" tag="div">
+`File (Green)` <$list filter="[[$:/temp/tools/diff/file2]has[note]]"><$button class="tc-btn-invisible">
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude tiddler={{!!note}} field="caption"/> &times;
+</$button></$list>
+</$droppable>
+</div>
+<$list filter="[{$:/temp/tools/diff/file1!!note}has[title]]"><$list filter="[{$:/temp/tools/diff/file2!!note}has[title]]">
+<$macrocall $name="diff-title" source={{$:/temp/tools/diff/file1!!note}} dest={{$:/temp/tools/diff/file2!!note}}/>
+</$list></$list>

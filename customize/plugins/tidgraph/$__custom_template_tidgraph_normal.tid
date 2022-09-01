@@ -1,0 +1,19 @@
+_tgr_node_class_add: tgr-style
+created: 20210701063400695
+creator: yuzijie
+modified: 20220514084557337
+modifier: yuzijie
+tags: customized
+title: $:/custom/template/tidgraph/normal
+type: text/vnd.tiddlywiki
+
+\define node-style() color:#333;padding:4px 8px;background-color:$(bg-color)$;
+\define node-tip(a,b) $a$&#10;$b$
+<$set name="bg-color" filter="[all[current]colorize[]addsuffix[30]]" select="0">
+<$set name="bg-color" filter="[all[current]get[caption]colorize[]addsuffix[50]]" emptyValue=<<bg-color>> select="0">
+<$set name="bg-color" filter="[all[current]get[note]colorize[]addsuffix[30]]" emptyValue=<<bg-color>> select="0">
+<$list filter="[all[current]is[tiddler]]" emptyMessage="<div style=<<node-style>>>{{!!title}}</div>">
+<div style=<<node-style>>><$link tooltip=<<node-tip {{!!caption}} {{!!description}}>>><span style="color:#333;text-decoration:underline;">
+<$transclude field="shortcap"><$transclude field="caption"><$view field="title"/></$transclude></$transclude>
+</span></$link></div>
+</$list>

@@ -1,0 +1,9 @@
+created: 20210904202934068
+creator: yuzijie
+modified: 20211208213417697
+modifier: yuzijie
+tags: customized
+title: $:/custom/template/tab-button
+type: text/vnd.tiddlywiki
+
+<$transclude tiddler=<<currentTab>> field="shortcap"><$transclude tiddler=<<currentTab>> field="caption"><<currentTab>></$transclude></$transclude>

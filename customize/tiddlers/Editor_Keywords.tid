@@ -1,0 +1,22 @@
+caption: 关键词
+created: 20200908201842064
+creator: yuzijie
+modified: 20220820214200399
+modifier: yuzijie
+tags: Editor customized
+title: Editor/Keywords
+type: text/vnd.tiddlywiki
+
+<$button>Regenerate all keywords!
+<$list filter="[has[belongs.to]!tag[Comment]]"><$set name="parents" filter="[{!!belongs.to}getAllParentTitles[]join[, ]]" select="0">
+<$list filter="[{!!keywords}!match<parents>]" variable="NONE"><$action-setfield $timestamp="no" keywords=<<parents>>/></$list>
+</$set></$list>
+</$button>
+
+<hr style="margin-top:16px;">
+
+To be updated:
+
+<$list filter="[has[belongs.to]!tag[Comment]]"><$set name="parents" filter="[{!!belongs.to}getAllParentTitles[]join[, ]]" select="0">
+<$list filter="[{!!keywords}!match<parents>]" variable="NONE"><$transclude field="caption"><$view field="title"/></$transclude><br></$list>
+</$set></$list>

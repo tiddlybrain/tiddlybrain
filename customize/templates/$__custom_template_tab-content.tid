@@ -1,0 +1,11 @@
+created: 20210405111238526
+creator: yuzijie
+modified: 20211208213417723
+modifier: yuzijie
+tags: customized
+title: $:/custom/template/tab-content
+type: text/vnd.tiddlywiki
+
+<$tiddler tiddler=<<currentTab>>>
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude mode=block/>"><<data-table>></$list>
+</$tiddler>

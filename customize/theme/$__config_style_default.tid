@@ -1,0 +1,69 @@
+created: 20161004083139252
+creator: yuzijie
+modified: 20220828205357867
+modifier: yuzijie
+tags: $:/tags/Stylesheet customized
+title: $:/config/style/default
+type: text/vnd.tiddlywiki
+
+h1, h2 {font-weight: 300;}
+
+h1 > .tc-btn-invisible, h2 > .tc-btn-invisible, h3 > .tc-btn-invisible, td > .tc-btn-invisible {text-align: left;}
+
+td > ul, td > ol {margin: 0;}
+
+hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 0.5em 0; padding: 0;}
+
+button {border: 1px solid #ccc; cursor: pointer; text-align: left;}
+
+button.tc-btn-invisible {font-weight: inherit;}
+
+button.normal-weight, a.normal-weight {font-weight: 400;}
+
+button:disabled, button[disabled] {color: #ccc; cursor: not-allowed;}
+
+a.light-color, button.light-color {color: #666;}
+
+a.inline, button.inline {display: inline-block !important; padding: 0 !important;}
+
+input[type="search"] {-webkit-appearance: none;}
+
+dl > dt, dl > dd, dd > ul, dd > ol {margin-top: 6px; margin-bottom: 6px;}
+
+dd > pre {margin: 10px 0;}
+
+pre {padding: 5px 8px 5px !important; overflow-x: auto;}
+
+code {background-color: transparent; border: none; border-radius: 0; padding: 0; font-size: 1.125em;}
+
+pre > code {white-space: pre;}
+
+ol, ul {padding-left: 30px;}
+
+li pre, li table {margin: 3px 0;}
+
+li > blockquote > p, blockquote > div {margin: 5px 0;}
+
+blockquote {border-width: 4px; margin: 0 0 0 15px; border-color: #aaa;}
+
+blockquote cite {margin: 0 0 0.2em 0; display: block;}
+
+textarea {font-family: Menlo, monospace; font-size: 1.05em;}
+
+table td {overflow-wrap: anywhere;}
+
+table tr.oddRow > td {background-color: #fafafa;}
+
+table tr.evenRow > td {background-color: #ffffff;}
+
+iframe {border: 1px solid #ccc;}
+
+embed, iframe {width: 100%;}
+
+select, textarea, input[type=text], input[type=search], input[type=""], input:not([type]) {border: 1px solid #ccc;}
+
+img {max-width: 100%;}
+
+label {display: inline-block;}
+
+button svg, button img, label svg, label img {vertical-align: bottom;}

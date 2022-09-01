@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tiddlywiki ~/tiddlybrain --listen port=8081 gzip=yes

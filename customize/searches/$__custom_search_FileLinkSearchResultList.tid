@@ -1,0 +1,37 @@
+caption: Link/File
+created: 20201226195733046
+creator: yuzijie
+first-search-filter: [!is[system]has[url]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap,url<userInput>sort[title]limit[100]]
+list-after: $:/custom/search/CurrentSearchResultList
+modified: 20220829181344163
+modifier: yuzijie
+second-search-filter: [!is[system]has[path]] [!is[system]has[dir]] +[search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap,path,dir<userInput>sort[title]limit[100]]
+tags: $:/tags/SearchResults customized
+title: $:/custom/search/FileLinkSearchResultList
+type: text/vnd.tiddlywiki
+
+\define searchResultList()
+//<small>Link matches:</small>//
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+//<small>File matches:</small>//
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+\end
+<<searchResultList>>

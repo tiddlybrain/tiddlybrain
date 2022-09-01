@@ -1,0 +1,109 @@
+created: 20200229173911430
+creator: yuzijie
+modified: 20220901082602844
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/actions
+type: text/vnd.tiddlywiki
+
+\define droppable-new-tiddler-action() <$action-sendmessage $message="tm-new-tiddler" $param=<<actionTiddler>> title=<<unusedtitle $(template)$>> date=<<now YYYY0MM0DD>>/>
+
+\define droppable-clone-action()
+<$set name="template" filter="[<actionTiddler>split[ ]first[]]" select="0">
+<$list filter="[<actionTiddler>search:title:literal[/]]" emptyMessage=<<droppable-new-tiddler-action>>>
+<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} date=<<now YYYY0MM0DD>>/>
+</$list>
+</$set>
+\end
+
+\define droppable-TDC-action()
+<$list filter="[<actionTiddler>status[未完待续]]" emptyMessage="<$action-setfield $tiddler=<<actionTiddler>> status=未完待续/>">
+<$action-deletefield $tiddler=<<actionTiddler>> status/>
+</$list>
+\end
+
+\define droppable-index-tree()
+<$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
+<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<actionTiddler>] +[putfirst[]]"/>
+<$action-setfield $tiddler="$:/config/index-tree" text=<<actionTiddler>>/>
+\end
+
+\define droppable-delete-action()
+<$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
+<$action-deletetiddler $tiddler=<<actionTiddler>>/>
+<$list filter="[belongs.to<actionTiddler>]"><$action-setfield $tiddler=<<currentTiddler>> belongs.to="" tags=""/></$list>
+<$list filter="[tag<actionTiddler>]"><$action-listops $tags="-[<actionTiddler>]"/></$list>
+<$list filter="[<actionTiddler>listed[]]"><$action-listops $field="list" $subfilter="-[<actionTiddler>]"/></$list>
+\end
+
+\define droppable-remove-tags-action()
+<$list filter="[<actionTiddler>get[tags]enlist-input[]] -Task -Comment -Snippet -Ignore -customized" variable="theTag">
+<$action-listops $tiddler=<<actionTiddler>> $tags="-[<theTag>]"/>
+</$list>
+\end
+
+\define droppable-remove-snippet-action()
+<$fieldmangler tiddler=<<actionTiddler>>>
+<$action-sendmessage $message="tm-remove-field" $param="belongs.to"/>
+<$action-sendmessage $message="tm-remove-field" $param="note"/>
+<$action-sendmessage $message="tm-remove-tag" $param="Snippet"/>
+</$fieldmangler>
+\end
+
+\define eocd-actions()
+<$list filter="[[$(edit)$]is[tiddler]]">
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+<$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$macrocall $name="tiddler-open" tiddler="$(edit)$"/>
+</$list>
+<$list filter="[[$(open)$]is[tiddler]]"><$macrocall $name="tiddler-open" tiddler="$(open)$"/></$list>
+<$list filter="""[[$(copy)$]!is[blank]]"""><$action-sendmessage $message="tm-copy-to-clipboard" $param="""$(copy)$"""/></$list>
+<$list filter="[[$(delete)$]is[tiddler]]"><$action-deletetiddler $tiddler="$(delete)$"/></$list>
+\end
+
+\define droppable-rename-set-caption-action(template)
+<$tiddler tiddler=<<actionTiddler>>><$set name="date" filter="[all[current]get[created]format:date[YYYY0MM0DD]]" select="0" emptyValue=<<now YYYY0MM0DD>>>
+<$list filter="[all[current]has[text]]" emptyMessage="<$action-sendmessage $message=tm-new-tiddler $param={{!!title}} title=<<unusedtitle $template$>> caption='{{!!text}}' text={{!!title}} date=<<date>>/>">
+<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} title=<<unusedtitle $template$>> caption={{!!title}} date=<<date>>/>
+</$list>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+</$set></$tiddler>
+\end
+
+\define droppable-date-action()
+<$list filter="[<journal-title>is[tiddler]!has:index<actionTiddler>]">
+<$action-setfield $tiddler=<<journal-title>> $index=<<actionTiddler>> $value=""/>
+</$list>
+\end
+
+\define add-to-cell-action(title, index, content)
+<$set name="cell-content" filter="[<__title__>getindex<__index__>splitregexp[;;\s*]!is[blank]] [<__content__>] +[join[;;]]" select="0">
+<$action-setfield $tiddler=<<__title__>> $index=<<__index__>> $value=<<cell-content>>/>
+</$set>
+\end
+
+\define remove-from-cell-action(title, index, content)
+<$set name="cell-content" filter="[<__title__>getindex<__index__>splitregexp[;;\s*]!is[blank]] -[<__content__>] +[join[;;]]" select="0">
+<$action-setfield $tiddler=<<__title__>> $index=<<__index__>> $value=<<cell-content>>/>
+</$set>
+\end
+
+\define droppable-add-or-remove-action(field)
+<$list filter="[all[current]contains:$field$<actionTiddler>]" emptyMessage="<$action-listops $field='$field$' $subfilter='[<actionTiddler>]'/>">
+<$action-listops $field="$field$" $subfilter="-[<actionTiddler>]"/>
+</$list>
+\end
+
+# ''复制 Tiddler 的 action''<$macrocall $name="code" content="""<<droppable-clone-action>>"""/>
+# ''给 Tiddler 添加未完待续的标签''<$macrocall $name="code" content="""<<droppable-TDC-action>>"""/>
+# ''修改 index tree 列表 action''<$macrocall $name="code" content="""<<droppable-index-tree>>"""/>
+# ''删除 Tiddler 的 action''<$macrocall $name="code" content="""<<droppable-delete-action>>"""/>
+# ''删除 Tiddler 的 Tags 的 action''<$macrocall $name="code" content="""<<droppable-remove-tags-action>>"""/>
+# ''将 Snippet 变为普通 tiddler''<$macrocall $name="code" content="""<<droppable-remove-snippet-action>>"""/>
+# ''Edit, Open, Copy, Delete actions''<$macrocall $name="code" content="""<<eocd-actions>>"""/>
+# ''将旧 Tiddler 按照标准重命名''<$macrocall $name="code" content="""<<droppable-rename-set-caption-action template:"新 Tiddler 模板">>"""/>
+# ''修改 Tasks Journal 的 action''<$macrocall $name="code" content="""<<droppable-date-action>>"""/>
+# ''将内容写入表格内, 用 `;;` 分隔''<$macrocall $name="code" content="""<<add-to-cell-action title:"data tiddler 标题" index:"目标键值" content:"填写内容">>"""/>
+# ''将内容从表格内删除''<$macrocall $name="code" content="""<<remove-from-cell-action title:"data tiddler 标题" index:"目标键值" content:"移除内容">>"""/>
+# ''将内容添加(若没有)进字段/从字段中删除(若存在)''<$macrocall $name="code" content="""<<droppable-add-or-remove-action field:"字段名">>"""/>

@@ -1,0 +1,22 @@
+created: 20211217205616836
+creator: yuzijie
+footer: <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/TiddlerInfo/Map"/>CLOSE</$button>
+modified: 20220821135401409
+modifier: yuzijie
+subtitle: <$list filter="[<mTitle>!is[missing]]"><$transclude field="caption"><$view field="title"/></$transclude><$list filter="[all[current]has[note]]">@@color:green; [{{!!note}}]@@</$list><$list filter="[all[current]has[description]]">@@color:#999; - {{!!description}}@@</$list><div style="float:right;font-size:smaller;"><$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>>{{$:/core/images/copy-clipboard}} <<mTitle>></$button></div></$list>
+tags: customized
+title: $:/custom/template/map-modal
+type: text/vnd.tiddlywiki
+
+<div style="margin-top:15px;">
+<$checkbox tiddler="$:/state/TiddlerInfo/Map" field="text" checked="expand" unchecked="collapse" default="collapse"> Expand Mode</$checkbox>&nbsp;
+<$checkbox tiddler="$:/state/TiddlerInfo/Map" field="text" checked="collapse" unchecked="expand" default="expand"> Collapse Mode</$checkbox>
+</div>
+<$set name="start" filter="[<mTitle>is[tiddler]]" value=<<mTitle>> emptyValue=<<currentTiddler>>>
+<$list filter="[[$:/state/TiddlerInfo/Map]text[expand]]">
+<$tidgraph start=<<start>> mode="map[Name Description]" collapseDefault="no" nodetemplate="$:/custom/template/tidgraph/normal" maxdepth="6"/>
+</$list>
+<$list filter="[[$:/state/TiddlerInfo/Map]text[collapse]]">
+<$tidgraph start=<<start>> mode="map[Name Description]" collapseDefault="yes" nodetemplate="$:/custom/template/tidgraph/normal" maxdepth="6"/>
+</$list>
+</$set>

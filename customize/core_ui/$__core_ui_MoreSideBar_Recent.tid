@@ -1,0 +1,33 @@
+caption: {{$:/language/SideBar/Recent/Caption}}
+list-before: $:/core/ui/MoreSideBar/All
+modified: 20220829222647136
+modifier: yuzijie
+tags: $:/tags/MoreSideBar customized
+title: $:/core/ui/MoreSideBar/Recent
+type: text/vnd.tiddlywiki
+
+<h2 style="margin-top:10px;"><$button class="tc-btn-invisible" style="color:#5778d8;">Recently Opened
+<$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]remove[BR]limit[12]]"/>
+</$button></h2>
+<$list filter="[enlist{$:/config/index-tree!!list}]" emptyMessage="No search results"><div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
+<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$action-setfield $tiddler="$:/config/index-tree" text=<<currentTiddler>>/>
+<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<<icons>> <$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+</$button>
+<$button class="tc-btn-invisible"><$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="-[{!!title}]"/>&times;</$button>
+</div></$list>
+
+<h2 style="color:#5778d8;">Recently Closed</h2>
+<$list filter="[recentlyClosed[]!is[missing]]" emptyMessage="No search results"><div class="tc-sidebar-tab-open-item">
+<$link to={{!!title}}><<icons>>
+<$list filter="[all[current]has[caption]]">@@color:#555;{{!!caption}}@@ &middot; </$list><$view field="title"/>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+</$link>
+</div></$list>
+
+<h2 style="color:#5778d8;">Recently Modified</h2>
+<$macrocall $name="timeline" limit="50" format={{$:/language/RecentChanges/DateFormat}}/>

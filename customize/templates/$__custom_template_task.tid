@@ -1,0 +1,40 @@
+created: 20181001195337690
+creator: yuzijie
+list-after: $:/custom/template/top
+modified: 20220829081509828
+modifier: yuzijie
+tags: $:/tags/ViewTemplate customized
+title: $:/custom/template/task
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[Task]]"><$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<div style="position:relative;margin:-1em 0 1em;"><$set name="popup" filter="[all[current]addprefix[$:/temp/popup/]]" select="0">
+<$reveal type="popup" state=<<popup>> position="aboveleft" tag="div" class="tc-menubar">
+<div class="tc-drop-down tc-popup-keep" style="line-height:28px;padding-right:36px;">
+<ol><$list filter="[all[current]unfinishedSteps[]]" variable="step"><li class="tc-menu-list-item"><<step>></li></$list></ol>
+</div>
+</$reveal>
+<table class="task-info"><tbody>
+<tr><th>Start</th><th>Duration</th><th>Progress</th><th>Statistics</th><th>Finish</th></tr>
+<tr>
+<td><$view field="start" format="date" template="YYYY-0MM-0DD">
+<$button set="!!start" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">N.A.</$button>
+</$view></td>
+<td><$macrocall $name="days-passed" start={{!!start}} end={{!!finish}}/></td>
+<td><$text text={{{[all[current]percent[]]}}}/></td>
+<td><$list filter="[all[current]has[finish]]" emptyMessage="<$button class='tc-btn-invisible' popup=<<popup>>><<tasks-today>></$button>">
+<$set name="pattern-goal" value="<<w\s.+>>"><$set name="pattern-deadline" value="<<d\s.+>>"><$set name="pattern-task" value="<<a\s.+>>">
+W <$count filter="[{!!text}matches<pattern-goal>]"/>&nbsp;
+D <$count filter="[{!!text}matches<pattern-deadline>]"/>&nbsp;
+T <$count filter="[{!!text}matches<pattern-task>]"/>
+</$set></$set></$set>
+</$list></td>
+<td><$view field="finish" format="date" template="YYYY-0MM-0DD">
+<$button set="!!finish" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">
+<$list filter="[all[current]has[deadline]]" emptyMessage="N.A."><$macrocall $name="days-left" deadline={{!!deadline}}/></$list>
+</$button>
+</$view></td>
+</tr>
+</tbody></table>
+</$set></div>
+</$reveal></$list>

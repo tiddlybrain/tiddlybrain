@@ -1,0 +1,84 @@
+created: 20210809065454577
+creator: yuzijie
+modified: 20220614003428230
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/toc
+type: text/vnd.tiddlywiki
+
+\define custom-toc-caption()
+<$set name="tv-wikilinks" value="no">
+<$list filter="[[$(direct-open)$]match[yes]]" emptyMessage="<$transclude field=caption><$view field=title/></$transclude>" variable="NONE">
+<$list filter="[all[current]search:title:literal[/]]" emptyMessage="<$transclude field=caption><$view field=title/></$transclude>">
+<$button set="$:/config/index-tree" setTo={{!!title}} class="tc-btn-invisible">
+<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[{!!title}] +[putfirst[]]"/>
+<$transclude field=caption><$view field=title/></$transclude>
+</$button>
+</$list>
+</$list>
+</$set>
+\end
+
+\define custom-toc-linked(sort, itemClassFilter, path)
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item"><li class=<<toc-item-class>>>
+<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+<$list filter="[all[current]taggingOrPrefixed[]$sort$limit[1]]" variable="NONE" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
+<$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
+<$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">{{$:/core/images/right-arrow}}</$button>
+</$reveal>
+<$reveal type="match" stateTitle=<<toc-state>> text="open">
+<$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">{{$:/core/images/down-arrow}}</$button>
+</$reveal>
+</$list>
+<<custom-toc-caption>>
+</$link>
+<$reveal type="match" stateTitle=<<toc-state>> text="open">
+<$macrocall $name="custom-toc" root=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path=<<__path__>>/>
+</$reveal>
+</li></$set>
+</$qualify>
+\end
+
+\define custom-toc-unlinked(sort, itemClassFilter, path)
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item"><li class=<<toc-item-class>>>
+<$list filter="[all[current]taggingOrPrefixed[]$sort$limit[1]]" variable="NONE" emptyMessage="<$button class='tc-btn-invisible' dragTiddler=<<currentTiddler>>>{{$:/core/images/blank}} <$transclude field=caption><$view field=title/></$transclude></$button>">
+<$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
+<$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" dragTiddler=<<currentTiddler>>>
+{{$:/core/images/right-arrow}} <$transclude field=caption><$view field=title/></$transclude>
+</$button>
+</$reveal>
+<$reveal type="match" stateTitle=<<toc-state>> text="open">
+<$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" dragTiddler=<<currentTiddler>>>
+{{$:/core/images/down-arrow}} <$transclude field=caption><$view field=title/></$transclude>
+</$button>
+</$reveal>
+</$list>
+<$reveal type="match" stateTitle=<<toc-state>> text="open">
+<$macrocall $name="custom-toc" root=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path=<<__path__>>/>
+</$reveal>
+</li></$set>
+</$qualify>
+\end
+
+\define custom-toc-empty-message() <$macrocall $name="custom-toc-linked" sort=<<sort>> itemClassFilter=<<itemClassFilter>> path=<<path>>/>
+
+\define custom-toc(root, sort, itemClassFilter, path)
+<$vars sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__root__>] }}}>
+<ol class="tc-toc toc-selective-expandable"><$list filter="[<__root__>taggingOrPrefixed[]!has[draft.of]$sort$] -[<__root__>]">
+<$list filter="[all[current]toc-link[no]]" variable="NONE" emptyMessage=<<custom-toc-empty-message>>>
+<$macrocall $name="custom-toc-unlinked" sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path=<<path>>/>
+</$list>
+</$list></ol>
+</$vars>
+\end
+
+; 自定义的 Table of Contents 目录, 修改自 toc-selective-expandable macro
+: `<<custom-toc root:"根目录 Tiddler" sort:"Tiddler 排序的方法" itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class" path:"目录展开需要的 state tiddler 的部分路径">>`
+; custom-toc 目录, 点击后可以打开 Tiddler
+: `<<custom-toc-linked sort:"Tiddler 排序的方法" itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class" path:"目录展开需要的 state tiddler 的部分路径">>`
+; custom-toc 目录, 点击后无法打开 Tiddler, 而是展开下层目录
+: `<<custom-toc-unlinked sort:"Tiddler 排序的方法" itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class" path:"目录展开需要的 state tiddler 的部分路径">>`
+; custom-toc 的目录名字
+: `<<custom-toc-caption>>`

@@ -1,0 +1,18 @@
+caption: Tiddler
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+created: 20200515004242327
+creator: yuzijie
+description: Set current tiddler variable for enclosed content
+icon: $:/core/icon
+modified: 20211208213143985
+modifier: yuzijie
+tags: $:/tags/EditorToolbar customized
+title: $:/custom/ui/EditorToolbar/tiddler
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix='<$tiddler tiddler="">'
+	suffix='</$tiddler>'
+/>

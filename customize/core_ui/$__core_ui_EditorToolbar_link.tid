@@ -1,0 +1,12 @@
+button-classes: tc-text-editor-toolbar-item-start-group
+caption: {{$:/language/Buttons/Link/Caption}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+description: {{$:/language/Buttons/Link/Hint}}
+dropdown: $:/core/ui/EditorToolbar/link-dropdown
+icon: $:/core/images/link
+modified: 20211205194346730
+modifier: yuzijie
+shortcuts: ((link))
+tags: $:/tags/EditorToolbar customized
+title: $:/core/ui/EditorToolbar/link
+type: text/vnd.tiddlywiki

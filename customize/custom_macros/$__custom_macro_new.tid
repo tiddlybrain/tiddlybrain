@@ -1,0 +1,16 @@
+created: 20161118103029230
+creator: yuzijie
+modified: 20220102191015399
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/new
+type: text/vnd.tiddlywiki
+
+\define new(name,template,class,title,fields,style,actions)
+<$button class="$class$" style="$style$">$name$$actions$
+<$action-sendmessage $message="tm-new-tiddler" $param="$template$" title="$title$" $fields$/>
+</$button>
+\end
+
+; 新建 Tiddler
+: `<<new name:"按钮名称" template:"模板" class:"tc-btn-invisible" title:"标题" fields:"""tags='标签' text='123'""" style:"按钮风格" actions:"其他动作">>`

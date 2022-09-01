@@ -1,0 +1,11 @@
+caption: Journals
+created: 20211225141402428
+creator: yuzijie
+modified: 20220530091457595
+modifier: yuzijie
+order: 4
+tags: Tasks customized
+title: Tasks/Journal
+type: text/vnd.tiddlywiki
+
+<$set name="direct-open" value="yes"><$tiddler tiddler="Tasks/Journal"><<sort-by-tags>></$tiddler></$set>

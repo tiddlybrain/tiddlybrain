@@ -1,0 +1,92 @@
+caption: Search
+custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
+description: Search
+modified: 20220820224221148
+modifier: yuzijie
+tags: $:/tags/MenuBar customized
+title: $:/plugins/tiddlywiki/menubar/items/search
+type: text/vnd.tiddlywiki
+
+\define cancel-search-actions()
+<$set name="userInput" value={{{ [<__storeTitle__>get[text]] }}}>
+<$list filter="[<__tiddler__>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>] $:/temp/subtopic/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>""">
+<$action-setfield $tiddler=<<__tiddler__>> text=<<userInput>>/><$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
+</$list>
+</$set>
+\end
+
+\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
+
+\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
+
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
+
+\define advanced-search-actions()
+<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/menubarsearch/input}}/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/menubarsearch/input}}/>
+<$action-navigate $to="$:/AdvancedSearch"/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
+<$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/>
+<$action-deletetiddler $filter="$:/temp/menubarsearch $:/temp/menubarsearch/input $:/temp/menubarsearch/refresh [<searchListState>] $:/temp/subtopic/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
+\end
+
+\whitespace trim
+<$vars searchTiddler="$:/temp/menubarsearch/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
+<span style="margin: 0 0.8em;" class="menubarsearch">
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<form class="tc-form-inline">
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/menubarsearch" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> 
+		refreshTitle="$:/temp/menubarsearch/refresh" tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" 
+		class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default="" cancelPopups="yes" size="25"
+		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> inputCancelActions=<<cancel-search-actions>> 
+		filterMinLength={{$:/config/Search/MinLength}} configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
+</form>
+</$keyboard>
+</$keyboard>
+<$reveal state=<<searchTiddler>> type="nomatch" text="">
+<$button class="tc-btn-invisible" style="margin-left:7px;">
+<$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/subtopic/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input"/>{{$:/core/images/close-button}}
+</$button>
+<$button class="tc-btn-invisible" style="margin-left:7px;" popup="$:/state/popup/menubar/NewTiddler">
+<$action-setfield $tiddler="$:/temp/newTiddler" text={{$:/temp/menubarsearch/input}}/>{{$:/core/images/new-button}}
+<$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/subtopic/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
+</$button>
+</$reveal>
+<$button to="$:/AdvancedSearch" class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">
+<<advanced-search-actions>>{{$:/core/images/advanced-search-button}}
+</$button>
+<$button class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">
+<$tiddler tiddler="BR"><<open-in-sidebar>></$tiddler>{{$:/core/images/menu-button}}
+</$button>
+</span>
+
+<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/state/popup/menubar-search-dropdown" type="nomatch" text="" default="">
+
+<div class="tc-block-dropdown tc-search-drop-down">
+
+<$list filter="[<searchTiddler>get[text]minlength[1]]" emptyMessage="""<div style="margin:6px 17px 0 17px;"><$transclude tiddler="$:/core/ui/MoreSideBar/Recent" mode="block"/></div>""" variable="ignore">
+
+<$list filter="[<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+
+<$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} userInput={{{ [<searchTiddler>get[text]] }}}>
+
+{{$:/core/ui/SearchResults}}
+
+</$vars>
+
+</$list>
+
+</$list>
+
+</div>
+
+</$reveal>
+
+</$vars>
+
+<$reveal tag="div" type="popup" state="$:/state/popup/menubar/NewTiddler">
+<span class="tc-block-dropdown tc-popup-keep" style="padding:0px 17px;font-size:medium;">
+<$transclude tiddler="$:/custom/ui/newTiddler" mode="block"/>
+</span>
+</$reveal>

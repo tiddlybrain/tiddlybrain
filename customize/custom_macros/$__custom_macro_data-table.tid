@@ -1,0 +1,79 @@
+created: 20220327115933435
+creator: yuzijie
+modified: 20220901101300858
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/data-table
+type: text/vnd.tiddlywiki
+
+\define data-key-cell()
+<td class="data-key">
+<$list filter="[<key>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible" dragFilter="[belongs.to<current>tag[Snippet]note<key>]">
+<<key>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<key>>/>
+</$button>""">
+<$button actions=<<modal-actions>> dragFilter="[belongs.to<current>tag[Snippet]note<key>]" tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
+<$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
+</$button>
+</$list>
+</td>
+\end
+
+\define data-value-cell()
+<$list filter="[<current>getindex<key>] :else[<current>get[celltpl]is[tiddler]]" emptyMessage="""<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<actionTiddler>>/>" tag="td" class="data-value"><div class="tc-droppable-placeholder">drop here</div></$droppable>""">
+<$tiddler tiddler=<<current>>><$list filter="[<value>suffix[;;]]" emptyMessage="""<td class="data-value"><$macrocall $name="cell-value"/></td>""" variable="NONE">
+<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{[<value>addsuffix<actionTiddler>addsuffix[;;]]}}}/>" tag="td" class="data-value"><$macrocall $name="cell-value"/></$droppable>
+</$list></$tiddler>
+</$list>
+\end
+
+\define data-table-column-width() width:$(width)$;
+
+\define data-table(template, filter:"[all[current]indexes[]]", copy:"yes", columns, style)
+<$list filter="[all[current]!has[template]] [all[current]template<__template__>]" emptyMessage="<$transclude tiddler={{!!template}} mode=block/>">
+<table class="data-table" style="width:100%;$style$"><$set name="is-data-table" value="yes">
+<tr>
+<$set name="width" filter="[all[current]get[kw]]" emptyValue="7em" select="0"><th style=<<data-table-column-width>>>
+<$transclude field="key">Key</$transclude> (<$count filter="$filter$ +[!prefix[--]] :except[enlist{!!hide}]"/>)
+</th></$set>
+<$set name="width" filter="[all[current]get[vw]]" emptyValue="auto" select="0"><th style=<<data-table-column-width>>><$transclude field="value">Value</$transclude></th></$set>
+<$list filter="$columns$ [all[current]get[columns]enlist-input[]]"><$set name="width" filter="[all[current]get[vw]]" emptyValue="auto" select="0"><th style=<<data-table-column-width>>>
+<$list filter="[all[current]is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible tc-tiddlylink"><$action-sendmessage $message="tm-new-tiddler" title=<<currentTiddler>> date=<<now 'YYYY0MM0DD'>> caption=<<currentTiddler>> type="application/x-tiddler-dictionary"/><<currentTiddler>></$button>""">
+<$link to=<<currentTiddler>>><$transclude field="value"><$transclude field="caption"><$view field="title"/></$transclude></$transclude></$link>
+</$list>
+</th></$set></$list>
+<$reveal default="$copy$" type="match" text="yes" tag="th" style="width:35px;filter:grayscale(1);" class="copy-col">
+<$droppable actions=<<droppable-add-or-remove-action "columns">>>🏛️</$droppable>
+</$reveal>
+</tr>
+<$set name="current" value=<<currentTiddler>>>
+<$list filter="$filter$ :except[enlist{!!hide}]" variable="key" counter="rowid"><$set name="value" tiddler=<<current>> index=<<key>>>
+<$set name="tr-class" filter="[<rowid>remainder[2]match[0]]" value="evenRow" emptyValue="oddRow"><tr class=<<tr-class>>>
+<$list filter="[<key>prefix[--]]" emptyMessage=<<data-key-cell>> variable="NONE"><$set name="other" filter="[[$copy$]match[yes]]" value="3" emptyValue="2">
+<$set name="colspan" filter="$columns$ [<current>get[columns]enlist-input[]] +[count[]add<other>]" select="0">
+<td class="data-splitter" colspan=<<colspan>>><$transclude index=<<key>>/></td>
+</$set>
+</$set></$list>
+<$list filter="[<key>!prefix[--]]"><<data-value-cell>>
+<$list filter="$columns$ [<current>get[columns]enlist-input[]]" variable="current">
+<$set name="value" tiddler=<<current>> index=<<key>>><<data-value-cell>></$set>
+</$list>
+<$reveal default="$copy$" type="match" text="yes" tag="td" style="text-align:right;" class="copy-col">
+<$set name="value" tiddler=<<current>> index=<<key>>><$set name="parsed-value" filter="[<value>splitregexp[;;\s*]!is[blank]join[ ]]" select="0">
+<$tiddler tiddler=<<current>>><$wikify name="wikified-value" text=<<parsed-value>> mode="inline">
+<$set name="copy-content" filter="[<value>search:title:regexp[<<snippet|<<bl]]" value=<<key>> emptyValue=<<wikified-value>>>
+<$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<copy-content>>>{{$:/core/images/copy-clipboard}}</$button>
+</$set>
+</$wikify></$tiddler>
+</$set></$set>
+</$reveal>
+</$list>
+</tr></$set>
+</$set></$list>
+</$set>
+</$set></table>
+</$list>
+\end
+
+; 用一个表格来显示 Data Tiddlers 的 Key 和 Value, 支持 Template
+: `<<data-table template:"template 名称, 要和所在的 template 名字一致" filter:"选择要显示的字段, 默认: [all[current]indexes[]]" copy:"Copy 列是否出现, 默认 yes" columns:"额外的列" style:"表格样式">>`

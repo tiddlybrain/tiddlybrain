@@ -1,0 +1,10 @@
+caption: Copy to clipboard
+created: 20190103203341343
+creator: yuzijie
+modified: 20211208213226818
+modifier: yuzijie
+tags: $:/tags/TextEditor/Snippet customized
+title: $:/custom/snippet/copy-to-clipboard
+type: text/vnd.tiddlywiki
+
+<<copy-to-clipboard "">>

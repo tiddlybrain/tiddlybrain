@@ -1,0 +1,21 @@
+caption: External
+created: 20220812175101904
+creator: yuzijie
+list-after: $:/custom/search/AllSearchResultList
+modified: 20220812182707209
+modifier: yuzijie
+tags: $:/tags/SearchResults customized
+title: $:/custom/search/ExternalSearchResultList
+type: text/vnd.tiddlywiki
+
+\define search-google() https://www.google.com/search?q=$(search)$
+\define search-google-map() https://www.google.com/maps/search/$(search)$?hl=en&source=opensearch
+\define search-youtube() https://www.youtube.com/results?search_query=$(search)$
+
+//<small>Search on:</small>//
+
+<$set name="search" filter="[[$:/temp/menubarsearch/input]get[text]encodeuri[]]" select="0">
+<a href=<<search-google>> target="_blank" rel="noopener noreferrer" style="display:block;">Google Web Search</a>
+<a href=<<search-google-map>> target="_blank" rel="noopener noreferrer" style="display:block;">Google Map</a>
+<a href=<<search-youtube>> target="_blank" rel="noopener noreferrer" style="display:block;">Youtube</a>
+</$set>

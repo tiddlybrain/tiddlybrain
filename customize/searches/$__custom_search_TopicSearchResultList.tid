@@ -1,0 +1,37 @@
+caption: Topics
+created: 20201226091951349
+creator: yuzijie
+first-search-filter: [field:title<userInput>] [fieldCaseInsensitive:caption<userInput>] [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!search:title:literal[/]] [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[belongs.to]] +[!is[system]!tag[Ignore]!tag[Snippet]!tag[Tasks/Journal]!tag[customized]unique[]limit[100]sort[title]] -[{$:/config/defaultTemplate}]
+list-after: $:/core/ui/DefaultSearchResultList
+modified: 20220829181130724
+modifier: yuzijie
+second-search-filter: [!tag[Ignore]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[belongs.to]tag[Snippet]unique[]limit[100]sort[title]]
+tags: $:/tags/SearchResults customized
+title: $:/custom/search/TopicSearchResultList
+type: text/vnd.tiddlywiki
+
+\define searchResultList()
+//<small>Topic matches:</small>//
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+//<small>Parent Topic matches:</small>//
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+\end
+<<searchResultList>>

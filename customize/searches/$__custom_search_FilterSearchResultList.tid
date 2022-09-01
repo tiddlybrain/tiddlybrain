@@ -1,0 +1,25 @@
+caption: Filter
+created: 20201225184815157
+creator: yuzijie
+first-search-filter: [subfilter<userInput>]
+list-after: $:/custom/search/FileLinkSearchResultList
+modified: 20220829181253389
+modifier: yuzijie
+tags: $:/tags/SearchResults customized
+title: $:/custom/search/FilterSearchResultList
+type: text/vnd.tiddlywiki
+
+\define searchResultList()
+//<small>Filter matches:</small>//
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+\end
+<<searchResultList>>

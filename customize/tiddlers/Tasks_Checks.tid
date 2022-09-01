@@ -1,0 +1,33 @@
+caption: Checks
+created: 20220820230252821
+creator: yuzijie
+modified: 20220901091259302
+modifier: yuzijie
+tags: Tasks customized
+title: Tasks/Checks
+type: text/vnd.tiddlywiki
+
+<$droppable actions="<$action-setfield $tiddler=<<actionTiddler>> interval=1/>" tag="div">
+<div class="tc-droppable-placeholder" style="display:block;">
+<h2 style="margin-bottom:10px;color:#666;font-weight:500;">Verification Required Items</h2>
+<ol><$list filter="[has[interval]sort[date]]">
+<$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
+<$list filter="[all[current]!days:date<interval>]"><li>
+<$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+</li></$list>
+</$set>
+</$list></ol>
+</div>
+</$droppable>
+
+<$details summary="Do not need to be verified">
+<ol><$list filter="[has[interval]sort[date]]">
+<$set name="interval" filter="[all[current]get[interval]negate[]add[1]]" select="0">
+<$list filter="[all[current]days:date<interval>]"><li>
+<$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+</li></$list>
+</$set>
+</$list></ol>
+</$details>

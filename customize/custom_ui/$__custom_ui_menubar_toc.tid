@@ -1,0 +1,12 @@
+caption: Contents
+created: 20220225110917365
+description: Table of Contents
+is-dropdown: yes
+list-before: $:/plugins/tiddlywiki/menubar/items/search
+modified: 20220225111328022
+modifier: yuzijie
+tags: $:/tags/MenuBar customized
+title: $:/custom/ui/menubar/toc
+type: text/vnd.tiddlywiki
+
+<div class="tc-table-of-contents"><<shortcut>></div>

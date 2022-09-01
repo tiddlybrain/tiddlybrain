@@ -1,0 +1,17 @@
+caption: {{$:/language/Buttons/Bold/Caption}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+description: {{$:/language/Buttons/Bold/Hint}}
+icon: $:/core/images/bold
+modified: 20211205194329426
+modifier: yuzijie
+shortcuts: ((bold))
+tags: $:/tags/EditorToolbar customized
+title: $:/core/ui/EditorToolbar/bold
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="''"
+	suffix="''"
+/>

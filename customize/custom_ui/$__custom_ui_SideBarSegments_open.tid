@@ -1,0 +1,82 @@
+created: 20210709074458680
+creator: yuzijie
+modified: 20220901011432352
+modifier: yuzijie
+tags: $:/tags/SideBarSegment customized
+title: $:/custom/ui/SideBarSegments/open
+type: text/vnd.tiddlywiki
+
+\define folded-state() $:/state/folded/$(currentTiddler)$
+\define sidebar-open-actions() <$action-navigate $to=<<actionTiddler>>/><$list filter="[<actionTiddler>addprefix[$:/state/folded/]is[tiddler]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
+
+<div class="tc-sidebar-tab-open sidebar-segments-open" style="font-size:small;margin-top:1.4em;">
+<$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
+<$droppable actions="<<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter='+[insertbefore<actionTiddler>,<currentTiddler>]'/>" tag="div">
+<div class="tc-droppable-placeholder">{{$:/core/images/blank}}</div>
+<div class="tc-sidebar-tab-open-item" style="white-space:nowrap;overflow:hidden;">
+<$set name="current" filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]" value="fill:green;" emptyValue="fill:#aaa;">
+<$button class="tc-btn-invisible" style=<<current>>>
+<$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
+<$list filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]">
+<$macrocall $name="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
+</$list>
+<$list filter="[<folded-state>!text[hide]]" variable="NONE" emptyMessage="""@@fill:brown;<$transclude tiddler="$:/core/images/chevron-right"/>@@""">
+<$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>{{$:/core/images/chevron-left}}
+</$list>
+</$button>
+</$set>
+<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink" tooltip={{!!description}}>
+<$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
+<$let tv-wikilinks="no">
+<$macrocall $name="icons"/>
+<$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot;</$list>
+<$view field="title"/>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+</$let>
+</$button>
+<div class="sidebar-item-hover">&middot;
+<$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar close:"no">>sidebar</$button>
+<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#999;">edit
+<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+</$button></$list>
+</div>
+</div>
+</$droppable>
+</$list>
+<$droppable actions="<<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter='[<actionTiddler>]'/>" tag="div">
+<div class="tc-droppable-placeholder">{{$:/core/images/blank}}</div>
+<$list filter="[recentlyClosed[]!is[missing]!{$:/config/index-tree}limit[1]]">
+<div class="tc-sidebar-tab-open-item" style="white-space:nowrap;overflow:hidden;">
+<$button to=<<currentTiddler>> class="tc-btn-invisible" style="fill:#ccc;">{{$:/core/images/chevron-up}}</$button>
+<$button to=<<currentTiddler>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink" style="color:#bbb;">
+<$let tv-wikilinks="no">
+<$macrocall $name="icons"/>
+<$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot;</$list>
+<$view field="title"/>
+<$list filter="[all[current]has[note]]">@@color:#bbb;[{{!!note}}]@@</$list>
+</$let>
+</$button>
+<div class="sidebar-item-hover">&middot;
+<$button class="tc-btn-invisible" style="color:#bbb;"><<open-in-sidebar close:"no">>sidebar</$button>
+<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#bbb;">edit
+<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+</$button></$list>
+</div>
+</div>
+</$list>
+<div class="tc-sidebar-tab-open-item"><$let tv-config-toolbar-text="yes" tv-config-toolbar-icons="no">
+<$button message="tm-close-all-tiddlers" class="tc-btn-invisible" style="color:#999;">Close all</$button> &middot;
+<$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible" style="color:#999;">Close others</$button> &middot;
+<$button class="tc-btn-invisible" style="color:#999;"><$tiddler tiddler={{$:/HistoryList!!current-tiddler}}><$action-sendmessage $message="tm-fold-other-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/></$tiddler>Fold others</$button> &middot;
+<$macrocall $name="exportButton" exportFilter="[[$:/StoryList]get[list]enlist-input[]]" lingoBase="$:/custom/language/Buttons/ExportTiddler/"/>
+<$list filter="[prefix[$:/state/folded/]text[hide]limit[1]]">&middot;
+<$button class="tc-btn-invisible" dragFilter="[is[system]text[hide]removeprefix[$:/state/folded/]]" style="color:#999;">
+Unfold All (<$count filter="[prefix[$:/state/folded/]text[hide]]"/>)
+<$list filter="[prefix[$:/state/folded/]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
+</$button>
+</$list>
+</$let></div>
+</$droppable>
+</div>

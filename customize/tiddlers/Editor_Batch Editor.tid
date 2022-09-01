@@ -1,0 +1,184 @@
+caption: Batch Editor
+created: 20200425125950200
+creator: yuzijie
+modified: 20220829192843855
+modifier: yuzijie
+tags: Editor customized
+title: Editor/Batch Editor
+type: text/vnd.tiddlywiki
+
+\define prefix-edit-tag() -[[$(current)$]] [[$(newTitle)$]]
+\define batch-edit-tag-filter() [tag[$(actionTiddler)$]]
+
+<style>
+.batch-edit-input {line-height:19px;}
+.batch-edit-select {width:135px;}
+</style>
+
+<$droppable actions="<$action-setfield $tiddler='$:/temp/tools/batch-edit/filter' note=<<batch-edit-tag-filter>>/>" tag="div">
+<$select tiddler="$:/temp/tools/batch-edit/action" field="note" tooltip="Choose Action" class="batch-edit-select">
+<option value=""></option>
+<option value="tm-remove-tag">Remove Tag</option>
+<option value="tm-add-tag">Add Tag</option>
+<option value="change-tag">Change Tag</option>
+<option value="tm-remove-field">Remove Field</option>
+<option value="tm-add-field">Add Field</option>
+<option value="action-change-field">Change Field Name</option>
+<option value="change-prefix">Change Prefix</option>
+<option value="action-setfield">Set Field Value</option>
+<option value="action-set-data">Set key-value</option>
+<option value="action-add-data-list">Add item to Data property</option>
+<option value="action-remove-data-list">Remove item from Data property</option>
+<option value="action-change-index">Change Index Name</option>
+<option value="action-delete">Delete Tiddlers</option>
+<option value="add-tiddler-prefix">Add Tiddlers by Prefix</option>
+</$select>
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]!match[change-prefix]!match[add-tiddler-prefix]] [[$:/temp/tools/batch-edit/filter]has[note]] +[limit[1]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/filter" field="note" tag=input size=25 type=search placeholder="Filter" class="batch-edit-input"/>
+</$list>
+<$list filter="[[$:/temp/tools/batch-edit/filter]has[note]]" emptyMessage="""<$button set="$:/temp/tools/batch-edit/filter!!note" setTo="[enlist{$:/StoryList!!list}]">StoryList</$button>""">
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}><$action-navigate $to=<<currentTiddler>>/></$list>Open All</$button>
+<$button class="tc-btn-invisible tc-tiddlylink"><$action-deletetiddler $tiddler=<<currentTiddler>>/>&times;</$button>
+</$list>
+</$droppable>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[change-prefix]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Old Prefix" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="New Prefix" class="batch-edit-input"/>
+<$list filter="[[$:/temp/tools/batch-edit/param]has[note]] +[[$:/temp/tools/batch-edit/param2]has[note]]">
+<$button><$list filter="[prefix{$:/temp/tools/batch-edit/param!!note}]" variable="current">
+<$set name="newTitle" filter="[<current>removeprefix{$:/temp/tools/batch-edit/param!!note}addprefix{$:/temp/tools/batch-edit/param2!!note}]" select="0">
+<$action-sendmessage $message="tm-new-tiddler" $param=<<current>> title=<<newTitle>>/><$action-deletetiddler $tiddler=<<current>>/>
+<$list filter="[tag<current>]"><$action-listops $tiddler={{!!title}} $field="tags" $subfilter=<<prefix-edit-tag>>/></$list>
+<$list filter="[<current>listed[]]"><$action-listops $tiddler={{!!title}} $field="list" $subfilter=<<prefix-edit-tag>>/></$list>
+</$set>
+</$list>Start!</$button>
+</$list>
+<div>
+<$list filter="[[$:/temp/tools/batch-edit/param]has[note]]">''Old Prefix:''<br>
+<$list filter="[prefix{$:/temp/tools/batch-edit/param!!note}]" emptyMessage="No results<br>"><$macrocall $name="l" title={{!!title}}/><br></$list>
+</$list>
+<$list filter="[[$:/temp/tools/batch-edit/param2]has[note]]">''New Prefix:''<br>
+<$list filter="[prefix{$:/temp/tools/batch-edit/param2!!note}]" emptyMessage="No results"><$macrocall $name="l" title={{!!title}}/><br></$list>
+</$list>
+</div>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[add-tiddler-prefix]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Prefix" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="Suffix Filter" class="batch-edit-input"/><br>
+<$list filter="[[$:/temp/tools/batch-edit/param]has[note]] +[[$:/temp/tools/batch-edit/param2]has[note]]">
+<$button>Start!
+<$set value={{$:/temp/tools/batch-edit/param!!note}} name="prefix"><$set name="template" filter="[<prefix>parentPath[valid]]" select="0">
+<$list filter={{$:/temp/tools/batch-edit/param2!!note}} variable="suffix"><$set name="newTitle" filter="[<prefix>addsuffix<suffix>]" select="0">
+<$action-sendmessage $message="tm-new-tiddler" $param=<<template>> title=<<newTitle>>/>
+</$set></$list>
+</$set></$set>
+</$button>
+</$list>
+<div>
+<$list filter="[[$:/temp/tools/batch-edit/param]has[note]]">
+<$list filter="[prefix{$:/temp/tools/batch-edit/param!!note}]" emptyMessage="No results<br>"><$macrocall $name="l" title={{!!title}}/><br></$list>
+</$list>
+</div>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/filter]has[note]]">
+
+<$list filter="[[$:/temp/tools/batch-edit/action]search:note:regexp[tm-.+-tag]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Tag Name" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}><$fieldmangler tiddler={{!!title}}>
+<$action-sendmessage $message={{$:/temp/tools/batch-edit/action!!note}} $param={{$:/temp/tools/batch-edit/param!!note}}/>
+</$fieldmangler></$list>Start!</$button>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]search:note:regexp[tm-.+-field]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Field Name" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}><$fieldmangler tiddler={{!!title}}>
+<$action-sendmessage $message={{$:/temp/tools/batch-edit/action!!note}} $param={{$:/temp/tools/batch-edit/param!!note}}/>
+</$fieldmangler></$list>Start!</$button>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[change-tag]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Old Tag" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="New Tag" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}><$fieldmangler tiddler={{!!title}}>
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/tools/batch-edit/param2!!note}}/>
+<$action-sendmessage $message="tm-remove-tag" $param={{$:/temp/tools/batch-edit/param!!note}}/>
+</$fieldmangler></$list>Start!</$button>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[action-setfield]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Field Name" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="Field Value" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}>
+<$list filter="[[$:/temp/override]!text[yes]]" emptyMessage="<$action-setfield $field={{$:/temp/tools/batch-edit/param!!note}} $value={{$:/temp/tools/batch-edit/param2!!note}}/>" variable="NONE">
+<$list filter="[all[current]!has{$:/temp/tools/batch-edit/param!!note}]"><$action-setfield $field={{$:/temp/tools/batch-edit/param!!note}} $value={{$:/temp/tools/batch-edit/param2!!note}}/></$list>
+</$list>
+</$list>Start!</$button>
+<p><$checkbox tiddler="$:/temp/override" field="text" checked="yes" unchecked="no" default="no"> Override?</$checkbox></p>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[action-set-data]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Key" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="Value" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}>
+<$list filter="[[$:/temp/override]!text[yes]]" emptyMessage="<$action-setfield $index={{$:/temp/tools/batch-edit/param!!note}} $value={{$:/temp/tools/batch-edit/param2!!note}}/>" variable="NONE">
+<$list filter="[all[current]!has:index{$:/temp/tools/batch-edit/param!!note}]"><$action-setfield $index={{$:/temp/tools/batch-edit/param!!note}} $value={{$:/temp/tools/batch-edit/param2!!note}}/></$list>
+</$list>
+</$list>Start!</$button>
+<p><$checkbox tiddler="$:/temp/override" field="text" checked="yes" unchecked="no" default="no"> Override?</$checkbox></p>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[action-add-data-list]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Key" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="List Item" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}>
+<$action-listops $index={{$:/temp/tools/batch-edit/param!!note}} $subfilter="[[$:/temp/tools/batch-edit/param2]get[note]]"/>
+</$list>Start!</$button>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[action-remove-data-list]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Key" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="List Item" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}>
+<$action-listops $index={{$:/temp/tools/batch-edit/param!!note}} $subfilter="-[[$:/temp/tools/batch-edit/param2]get[note]]"/>
+</$list>Start!</$button>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[action-change-field]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Field Name From" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="Field Name To" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}>
+<$set name="theValue" filter="[all[current]get{$:/temp/tools/batch-edit/param!!note}]" select="0">
+<$action-setfield $field={{$:/temp/tools/batch-edit/param2!!note}} $value=<<theValue>>/>
+</$set>
+<$fieldmangler><$action-sendmessage $message="tm-remove-field" $param={{$:/temp/tools/batch-edit/param!!note}}/></$fieldmangler>
+</$list>Start!</$button>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[action-change-index]]">
+<$edit-text tiddler="$:/temp/tools/batch-edit/param" field="note" tag=input size=25 placeholder="Index Name From" class="batch-edit-input"/>
+<$edit-text tiddler="$:/temp/tools/batch-edit/param2" field="note" tag=input size=25 placeholder="Index Name To" class="batch-edit-input"/><br>
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}>
+<$set name="theValue" filter="[all[current]getindex{$:/temp/tools/batch-edit/param!!note}]" select="0">
+<$action-setfield $index={{$:/temp/tools/batch-edit/param2!!note}} $value=<<theValue>>/>
+</$set>
+</$list>Start!</$button>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]match[action-delete]]">
+<$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+</$list>Start!</$button>
+</$list>
+
+<$list filter="[[$:/temp/tools/batch-edit/action]get[note]!match[change-prefix]!match[add-tiddler-prefix]] [[$:/temp/tools/batch-edit/action]!has[note]]">
+<div><$list filter={{$:/temp/tools/batch-edit/filter!!note}} emptyMessage="No results"><$macrocall $name="l" title={{!!title}}/><br></$list></div>
+</$list>
+
+</$list>
+
+<$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]limit[1]]"><$button>
+<$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]]"><$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>>/></$list>Save All Drafts
+</$button></$list>

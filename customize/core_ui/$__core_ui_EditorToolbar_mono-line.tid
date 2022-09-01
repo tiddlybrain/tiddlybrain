@@ -1,0 +1,17 @@
+caption: {{$:/language/Buttons/MonoLine/Caption}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+description: {{$:/language/Buttons/MonoLine/Hint}}
+icon: $:/core/images/mono-line
+modified: 20211205194359809
+modifier: yuzijie
+shortcuts: ((mono-line))
+tags: $:/tags/EditorToolbar customized
+title: $:/core/ui/EditorToolbar/mono-line
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="`"
+	suffix="`"
+/>

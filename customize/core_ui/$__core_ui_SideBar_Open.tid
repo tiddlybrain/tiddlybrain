@@ -1,0 +1,45 @@
+caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
+is-dropdown: yes
+list-before: $:/custom/ui/menubar/toc
+modified: 20220831184241981
+modifier: yuzijie
+tags: customized $:/tags/MenuBar
+title: $:/core/ui/SideBar/Open
+type: text/vnd.tiddlywiki
+
+\define lingo-base() $:/language/CloseAll/
+
+\define drop-actions()
+<$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
+\end
+
+\define placeholder()
+<div class="tc-droppable-placeholder"/>
+\end
+
+\define droppable-item(button)
+<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>> tag="div">
+<<placeholder>>
+<div><$list filter="[all[current]match{$:/HistoryList!!current-tiddler}]"><span style="position:absolute;">📍</span></$list>$button$</div>
+</$droppable>
+\end
+
+<div class="tc-sidebar-tab-open">
+<$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
+<div class="tc-sidebar-tab-open-item">
+<$macrocall $name="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink" tooltip={{!!description}}>
+<$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
+<$let tv-wikilinks="no"><$macrocall $name="icons"/>
+<$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot;</$list>
+<$view field="title"/>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+</$let>
+</$button>"""/>
+</div>
+</$list>
+<$tiddler tiddler="">
+<div style="margin-bottom:5px;">
+<$macrocall $name="droppable-item" button="""<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button><$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-mini tc-btn-invisible" style="font-variant:all-small-caps;">close others</$button>"""/>
+</div>
+</$tiddler>
+</div>

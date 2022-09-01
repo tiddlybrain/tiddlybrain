@@ -1,0 +1,128 @@
+created: 20200616204510506
+creator: yuzijie
+modified: 20220725112935393
+modifier: yuzijie
+title: $:/Draft
+type: text/vnd.tiddlywiki
+
+```
+drop spring_session_attributes
+
+drop spring_session
+
+update hibernate_sequence set next_val =(select max(id)+1 from revision_info);
+
+
+CREATE TABLE `SPRING_SESSION` (
+  `PRIMARY_ID` char(36) NOT NULL,
+  `SESSION_ID` char(36) NOT NULL,
+  `CREATION_TIME` bigint(20) NOT NULL,
+  `LAST_ACCESS_TIME` bigint(20) NOT NULL,
+  `MAX_INACTIVE_INTERVAL` int(11) NOT NULL,
+  `EXPIRY_TIME` bigint(20) NOT NULL,
+  `PRINCIPAL_NAME` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`PRIMARY_ID`),
+  UNIQUE KEY `SPRING_SESSION_IX1` (`SESSION_ID`),
+  KEY `SPRING_SESSION_IX2` (`EXPIRY_TIME`),
+  KEY `SPRING_SESSION_IX3` (`PRINCIPAL_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE `SPRING_SESSION_ATTRIBUTES` (
+  `SESSION_PRIMARY_ID` char(36) NOT NULL,
+  `ATTRIBUTE_NAME` varchar(200) NOT NULL,
+  `ATTRIBUTE_BYTES` blob NOT NULL,
+  PRIMARY KEY (`SESSION_PRIMARY_ID`,`ATTRIBUTE_NAME`),
+  CONSTRAINT `SPRING_SESSION_ATTRIBUTES_FK` FOREIGN KEY (`SESSION_PRIMARY_ID`) REFERENCES `SPRING_SESSION` (`PRIMARY_ID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+Nginx conf
+
+location / {
+root html;
+index index.html index.htm;
+try_files $uri $uri/ /index.html;
+}
+```
+
+
+
+
+
+<$details summary="今天的任务">
+
+* 理清灵雀提醒的思路
+* 关闭掉今天的任务
+* https://titty-twister.vip/mv-girl/full-hd-jasminej9966-send-you-my-painting-full-ver-jasminej9966-manyvids-001953-butt-plugfingeringpeepublic-outdoorsquirt-18-gb/
+* https://pissrip.net/user/Deadpool69/news/
+* https://porn-models.com/vip-porn/648533-full-hd-jasminej9966-selfie-jasminej9966-manyvids-002334-creamypanty-fetishsquirt-14-gb.html
+* https://vip-pussy.com/index.php?s=JasmineJ9966
+</$details>
+
+
+
+---
+
+* [[Convert Excel Files to PDF in Python|https://blog.aspose.com/2021/04/02/convert-excel-files-to-pdf-in-python/]]
+* [[SvelteKit Crash Course - SSR, API Routes, Stores, Tailwind CSS, and More!|https://www.youtube.com/watch?v=UU7MgYIbtAk]]
+* [[Run Nginx as a service in Windows|https://www.linkedin.com/pulse/run-nginx-service-windows-soumendra-kumar-sahoo]]
+* [[excel_to_pdf.py|https://github.com/mwhit74/excel/blob/master/excel_to_pdf.py]]
+
+---
+
+* [[《人人都要成为管理者：在实践中有法可循》|https://m.360xs.com/book/117815/0/1.html]]
+* [[《销售实战技巧 80 讲：帮你成为金牌销售》|https://m.360xs.com/book/117477/0/1.html]]
+* [[企业公众号视觉排版：如何让版面美观大方 |https://m.360xs.com/book/117496/]]
+* [[如何制定一份有效的工作计划？ |https://www.sohu.com/a/306837724_226213]]
+* [[做好5年晋升计划，你的薪水至少涨三倍|https://www.jianshu.com/p/0158ef840d0b]]
+* [[插坐学院创始人何川：创业团队如何做到人尽其才？ |https://www.sohu.com/a/150516450_256057]]
+* [[带团队8年，我发现升职加薪最快的那批人，都做到了这3点|https://zhuanlan.zhihu.com/p/130226125]]
+* [[插座学院：2020何川升职加薪30天训练营+60天团队管理训练营价值999元-百度云下载|https://www.fjha.net/7065.html]]
+* [[何川《团队管理60天训练营》，价值2999元|https://www.hazsyy.com/post/1276.html]]
+* [[何川老师管理课学习笔记二|https://www.360kuai.com/pc/9d4757b9129a75e5e?cota=4&kuai_so=1&tj_url=so_rec&sign=360_7bc3b157]]
+* [[【何川老师】插座学院体验课笔记1|https://www.douban.com/note/780813019/]]
+* [[何川老师管理课学习笔记|https://www.jianshu.com/p/91dff8996abf]]
+* [[何川老师管理课学习笔记二|https://www.jianshu.com/p/c5a1bd241ca3]]
+* [[冯玉珊：4个月实现晋升涨薪20%，这一路我曾走了9年|https://zhuanlan.zhihu.com/p/364853170]]
+* [[插坐学院何川《职场加薪直播课》课堂笔记|https://zhuanlan.zhihu.com/p/364853170]]
+* [[管理｜每个职场人都需要的三种管理能力：反馈管理、前馈管理、向上管理|https://cloud.tencent.com/developer/article/1131768]]
+* [[你把沟通想得太复杂了|https://www.thepaper.cn/newsDetail_forward_7462678]]
+* [[高手项目经理，都有【闭环】能力|https://zhuanlan.zhihu.com/p/36662234]]
+* [[白话式谈：向上管理和闭环沟通|https://juejin.cn/post/6984333862356647950]]
+* [[插座学院何川管理课程之让个人目标和团队目标持续统一|https://www.youtube.com/watch?v=wek2EZckscA]]
+* [[插座学院, 团队管理 60 天训练营 百度云盘下载|https://www.dedejiaocheng.com/jiaocheng/1823.html]]
+* [[何川 插座学院 答疑 01 我37岁，做行政，想升职加薪该怎么办？|https://www.youtube.com/watch?v=4Rsn1AGJz0E&t=13s]]
+* [[插座学院何川管理课程之区分管理型目标和经营型目标|https://www.youtube.com/watch?v=5Qz4d1VcOhc]]
+* [[插座学院何川管理课程之让个人目标和团队目标持续统一|https://www.youtube.com/watch?v=wek2EZckscA]]
+* [[知乎·读书会：《10 人以下小团队管理手册》, 成为 team leader 了，下一步怎么做呢？|https://www.youtube.com/watch?v=Cv7QhJ3L5VM]]
+
+------
+
+https://www.infoq.cn/article/dySHBpSdERTju_M455ef
+
+
+https://www.boson.com/network-simulator/ccna-200-301-cisco-network-simulator?eid=a6ad3803-8de2-4619-946c-538afb7f555f
+
+https://www.youtube.com/watch?v=8QyFidVcoLM
+
+https://raspberrypi.stackexchange.com/questions/48307/sharing-the-pis-wifi-connection-through-the-ethernet-port
+
+https://raspberrypi.stackexchange.com/questions/83873/how-to-improve-wireless-throughput-on-rpi-3-b-in-ap-mode
+
+!! Other Info
+
+https://docker-curriculum.com/
+
+* pi-hole
+
+电源线要打好标签
+
+造成误码的原因是端口协商不正确
+
+荣磊提供标签的模板, 网线和电源的模板
+
+留学生购车免税
+http://www.360doc.com/content/19/0527/19/40558811_838584755.shtml
+
+10.203.26.133 Raspberry pi (switch 10.203.26.12 - 0/0/6)
+
+oitrmhaphw39 oitrmhaphw04 oitrmhaphw09 oitrmhaphw06 oitrmhaphw07

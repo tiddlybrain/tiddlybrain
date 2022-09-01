@@ -1,0 +1,45 @@
+caption: Current
+created: 20210328220236087
+creator: yuzijie
+first-search-filter: [tag{$:/HistoryList!!current-tiddler}] [prefix{$:/HistoryList!!current-tiddler}] [list{$:/HistoryList!!current-tiddler}] +[search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sort[title]]
+list-after: $:/custom/search/SubtopicSearchResultList
+modified: 20220829181415064
+modifier: yuzijie
+second-search-filter: [{$:/HistoryList!!current-tiddler}search:title:literal[/]tagging[]] [list{$:/HistoryList!!current-tiddler}search:title:literal[/]tagging[]] [{$:/HistoryList!!current-tiddler}] +[getAllSnippets[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sort[title]]
+tags: $:/tags/SearchResults customized
+title: $:/custom/search/CurrentSearchResultList
+type: text/vnd.tiddlywiki
+
+\define searchResultList()
+<div style="margin-bottom:10px;text-align:center;">Search within:
+__<$transclude tiddler={{$:/HistoryList!!current-tiddler}} field="caption"><$view tiddler={{$:/HistoryList!!current-tiddler}} field="title"/></$transclude>__
+</div>
+//<small>Closely related matches:</small>//
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+//<small>Snippet matches:</small>//
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+\end
+
+<$list filter="[{$:/HistoryList!!current-tiddler}is[tiddler]]">
+
+<<searchResultList>>
+
+</$list>

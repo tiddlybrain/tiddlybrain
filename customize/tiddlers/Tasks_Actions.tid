@@ -1,0 +1,94 @@
+caption: Daily Plan
+created: 20211009174453738
+creator: yuzijie
+modified: 20220730235914066
+modifier: yuzijie
+order: 2
+tags: Tasks customized
+title: Tasks/Actions
+type: text/vnd.tiddlywiki
+
+\define kanban-link()
+<$set name="color" filter="[all[current]text[doing]]" value="color:green;" emptyValue=<<color>>>
+<$set name="color" filter="[all[current]text[open]]" value="color:brown;" emptyValue=<<color>>>
+<$set name="color" filter="[all[current]text[waiting]]" value="color:#009dd9;" emptyValue=<<color>>>
+<$set name="color" filter="[all[current]text[deadline]]" value="color:#cd23d8;" emptyValue=<<color>>>
+<$set name="task" filter="[all[current]split[/]nth[3]]" select="0">
+<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
+<$list filter="[all[current]get[caption]!enlist<journal-cell-list>]" variable="NONE"><div>
+<$button class="tc-btn-invisible">''{{!!remark}}''
+<$list filter="[all[current]text[doing]] [all[current]text[waiting]]"><$macrocall $name="days-passed" start={{!!date}}/></$list>
+<$list filter="[all[current]text[open]] [all[current]text[deadline]]"><$macrocall $name="days-left" deadline={{!!date}}/></$list>
+<$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content={{!!caption}}/>
+<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<curDate>]"/>
+</$button>
+<$set name="drag" filter="[all[current]!text[waiting]]" value=<<currentTiddler>> emptyValue="">
+<$button to=<<task>> dragTiddler=<<drag>> tooltip={{!!caption}} class="tc-btn-invisible" style=<<color>>><$transclude field=caption/></$button>
+</$set>
+</div></$list>
+\end
+
+\define task-filter() [all[current]split[/]nth[3]!enlist<tasks>]
+
+\define review-task()
+<$button to=<<task>> class="tc-btn-invisible" style="background-color:$(color)$;">
+@@color:#d300cc;<$transclude tiddler=<<task>> field="title"/>@@ <$transclude tiddler=<<task>> field="caption"/>
+</$button>
+\end
+
+<$set name="curDate" filter="[[$:/temp/plan/date]get[text]else<now YYYY0MM0DD>]" select="0">
+<$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
+<$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
+
+<div style="text-align:center;">
+<$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible">{{$:/core/images/chevron-left}}</$button>
+</$set>
+@@color:#333;<$macrocall $name="format-date" date=<<curDate>> template="ddd"/>@@
+<$edit-text tiddler="$:/temp/plan/date" default=<<now YYYY0MM0DD>> tag="input" size="5"/>
+<$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]" emptyMessage="<$button disabled=yes>Today</$button>">
+<$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
+</$list>
+<$set name="right" filter="[<curDate>nextDay[1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible">{{$:/core/images/chevron-right}}</$button>
+</$set>
+</div>
+
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]contains:plan<curDate>!filter<task-filter>]" columns="Urgent Important Other" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
+
+<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="-[<curDate>]"/>""" tag="div">
+<$details summary="待安排">
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>]">
+<$list filter="[all[current]!has[category]] [all[current]!contains:plan<curDate>!enlist[Urgent Important Other]]" variable="NONE">
+<<kanban-link>>
+</$list>
+</$list>
+</$details>
+</$droppable>
+
+<$list filter="[enlist<tasks>]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
+<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><$button class="tc-btn-invisible tc-tiddlylink">
+<<currentTiddler>><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
+</$button><br></$list>
+</$set>
+</$list></$list>
+
+<h2 style="color:#666;font-weight:500;">复盘
+<$button to=<<journal-title>> class="tc-btn-invisible"><$transclude tiddler=<<journal-title>> field="caption"/></$button>
+</h2>
+
+<table style="width:100%;white-space:nowrap;"><tbody>
+<tr><th>规划任务</th><th>执行情况</th></tr>
+<$list filter="[<journal-title>indexes[]tag[Task]]" variable="task"><tr>
+<td><$set name="color" filter="[<task>get[color]]" emptyValue="transparent" select="0"><<review-task>></$set></td>
+<td><$list filter="[<journal-title>getindex<task>splitregexp[;;\s*]!is[blank]]">
+<$button class="tc-btn-invisible">&times;
+<$macrocall $name="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
+</$button>
+<$set name="style" filter="[[$:/task-state]] [<task>] [<currentTiddler>] +[join[/]is[tiddler]]" value="color:brown;" emptyValue="color:#444;">
+<span style=<<style>>><<currentTiddler>></span>
+</$set><br>
+</$list></td>
+</tr></$list>
+</tbody></table>

@@ -1,0 +1,14 @@
+caption: Select widget
+created: 20190928154824917
+creator: yuzijie
+modified: 20211208213227169
+modifier: yuzijie
+tags: $:/tags/TextEditor/Snippet customized
+title: $:/custom/snippet/select
+type: text/vnd.tiddlywiki
+
+<$select tiddler="" default="">
+<$list filter="">
+<option value=<<currentTiddler>>><$view field='title'/></option>
+</$list>
+</$select>

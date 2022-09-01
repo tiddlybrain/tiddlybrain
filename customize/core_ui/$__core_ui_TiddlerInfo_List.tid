@@ -1,0 +1,22 @@
+caption: {{$:/language/TiddlerInfo/List/Caption}}
+modified: 20220330224310737
+modifier: yuzijie
+tags: $:/tags/TiddlerInfo customized
+title: $:/core/ui/TiddlerInfo/List
+type: text/vnd.tiddlywiki
+
+\define lingo-base() $:/language/TiddlerInfo/
+<$list filter="[all[current]has[list]]" variable="current" emptyMessage=<<lingo List/Empty>>><ul>
+<$list filter="[enlist{!!list}]">
+<$droppable actions="<$action-listops $tiddler=<<current>> $field='list' $subfilter='+[insertbefore<actionTiddler>,<currentTiddler>]'/>" tag="li">
+<div class="tc-droppable-placeholder">{{$:/core/images/blank}}</div>
+<$link tooltip=<<currentTiddler>>><$transclude field="shortcap"><$transclude field="caption"><$view field="title"/></$transclude></$transclude></$link>
+<$button class="tc-btn-invisible" message="tm-edit-tiddler">{{$:/core/images/edit-button}}</$button>
+<$button class="tc-btn-invisible"><$action-listops $tiddler=<<current>> $field="list" $subfilter="-[{!!title}]"/>{{$:/core/images/delete-button}}</$button>
+</$droppable>
+</$list>
+<$droppable actions="<$action-listops $tiddler=<<current>> $field='list' $subfilter='[<actionTiddler>]'/>" tag="div">
+<div class="tc-droppable-placeholder">{{$:/core/images/blank}}</div>
+<div style="height:0.5em;"/>
+</$droppable>
+</ul></$list>

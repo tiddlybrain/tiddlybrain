@@ -1,0 +1,8 @@
+key: ((sidebar-search))
+modified: 20201226124027363
+modifier: yuzijie
+tags: $:/tags/KeyboardShortcut customized
+title: $:/core/ui/KeyboardShortcuts/sidebar-search
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input"/>

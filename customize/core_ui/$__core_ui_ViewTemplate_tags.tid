@@ -1,0 +1,19 @@
+modified: 20220802101556493
+modifier: yuzijie
+tags: $:/tags/ViewTemplate customized
+title: $:/core/ui/ViewTemplate/tags
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<$fieldmangler tiddler={{!!title}}><$droppable actions="<$action-sendmessage $message=tm-add-tag $param=<<actionTiddler>>/>" tag="div">
+<div class="tc-tags-wrapper tc-droppable-placeholder" style="display:block;">
+<$list filter="[all[current]search:title:literal[/]parentPath[valid]]" variable="parent"><span class="tc-tag-list-item"><$vars foregroundColor="#333333" backgroundColor="#ffdede">
+<$button to=<<parent>> message="tm-close-tiddler" param=<<currentTiddler>> class="tc-tag-label tc-btn-invisible" style=<<tag-pill-styles>> tooltip=<<parent>>>
+&larr;&nbsp;<$tiddler tiddler=<<parent>>><$view field="title"/></$tiddler>
+</$button>
+</$vars></span></$list>
+<$list filter="[all[current]tags[]sort[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/>
+</div>
+</$droppable></$fieldmangler>
+</$reveal>
