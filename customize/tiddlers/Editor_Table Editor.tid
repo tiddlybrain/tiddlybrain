@@ -1,22 +1,28 @@
 caption: Table Editor
 created: 20220127101156094
 creator: yuzijie
-modified: 20220826101654471
+modified: 20220903175917529
 modifier: yuzijie
 tags: customized Editor
 title: Editor/Table Editor
 type: text/vnd.tiddlywiki
 
-`rfilter` <$edit-text tiddler="$:/temp/batch-edit" field="rfilter" tag="input" size="50"/><br>
-`cfilter` <$edit-text tiddler="$:/temp/batch-edit" field="cfilter" tag="input" size="50"/><br>
-`ffilter` <$edit-text tiddler="$:/temp/batch-edit" field="ffilter" tag="input" size="50"/>
-
 <$button to="Editor/Table Editor">Open</$button>
-<$button set="$:/temp/batch-edit!!rfilter" setTo="[enlist{$:/StoryList!!list}type[application/x-tiddler-dictionary]]">Add All Open Tiddlers</$button>
-
-<$tiddler tiddler="Snippet">
-<$set name="rfilter" filter="[[$:/temp/batch-edit]has[rfilter]]" value={{$:/temp/batch-edit!!rfilter}} emptyValue="[tag<currentTiddler>!has[belongs.to]]">
+<$set name="rfilter" filter="[[$:/temp/batch-edit]get[rfilter]]" emptyValue="[enlist{$:/StoryList!!list}type[application/x-tiddler-dictionary]]" select="0">
 <$macrocall $name="tableE" cfilter={{$:/temp/batch-edit!!cfilter}} ffilter={{$:/temp/batch-edit!!ffilter}} rfilter=<<rfilter>> fields="text='Name: {{!!caption}}
-Description: ' caption=''"/>
+Description: {{!!description}}' caption='' description=''"/>
 </$set>
-</$tiddler>
+<div class="macro-table"><table style="width:100%;table-layout:fixed;">
+<tr>
+<td style="width:8em;">Rows Filter</td>
+<td><$edit-text tiddler="$:/temp/batch-edit" field="rfilter" tag="input" default="[enlist{$:/StoryList!!list}type[application/x-tiddler-dictionary]]"/></td>
+</tr>
+<tr>
+<td style="width:8em;">Indices Filter</td>
+<td><$edit-text tiddler="$:/temp/batch-edit" field="cfilter" tag="input"/></td>
+</tr>
+<tr>
+<td style="width:8em;">Fields Filter</td>
+<td><$edit-text tiddler="$:/temp/batch-edit" field="ffilter" tag="input"/></td>
+</tr>
+</table></div>
