@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20220901073949114
+modified: 20220906090432423
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -16,13 +16,9 @@ type: text/vnd.tiddlywiki
 <$set name="select-filter-style" filter="[[$:/state/select/$(currentTiddler)$/$title$]has[text]]" value="select-filter dark" emptyValue="select-filter">
 <$select tiddler="$:/state/select/$(currentTiddler)$/$title$" class=<<select-filter-style>> tooltip="Filter Options"><option value="">All</option>
 <$list filter="$filter$ +[tags[]!is[current]sortan[title]] -Snippet"><option value=<<filter-by-tags-value>> style="color:#ebb000;">Tag: {{!!title}}</option></$list>
-<$list filter="$filter$ +[has[status]limit[1]]" variable=NONE>
+<option value="+[!has[status]]" style="color:#ff5a5a;">No Status</option>
 <$list filter="$filter$ +[get[status]each:value[]]"><option value=<<filter-by-status-value>> style="color:#ff5a5a;">Status: {{!!title}}</option></$list>
-<option value="+[!has[status]]" style="color:#ff5a5a;">Without Status</option>
-</$list>
-<$list filter="$filter$ +[has[note]limit[1]]" variable=NONE>
 <$list filter="$filter$ +[get[note]each:value[]]"><option value=<<filter-by-note-value>> style="color:green;">Note: {{!!title}}</option></$list>
-</$list>
 <$list filter="$filter$ +[has[belongs.to]limit[1]]" variable=NONE>
 <option value="+[filter<filter-belongs>]" style="color:#a630f9;">Search Parents</option>
 </$list>
@@ -57,16 +53,39 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define categories(caption:"categories", tags-filter)
-<div class="categories"><div class="categories-button">$caption$</div>
+\define update-tags-button(tag-prefix:"BR/", filter, tag-algorithm)
+<$set name="current" value=<<currentTiddler>>>
+<$list filter="[<__tag-algorithm__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes'>Update</$button>">
+<$button>Update<$list filter=<<__filter__>>>
+<$list filter="[all[current]tags[]prefix<__tag-prefix__>] -[<current>]" variable="tag">
+<$action-listops $field="tags" $subfilter="-[<tag>]" $timestamp="no"/>
+</$list>
+<$list filter="[<__tag-prefix__>removesuffix[/]$tag-algorithm$]" variable="tag">
+<$action-listops $field="tags" $subfilter="[<tag>]" $timestamp="no"/>
+<$list filter="[<tag>is[missing]]"><$set name="tag" filter="[<__tag-prefix__>split[/]first[]]" select="0">
+<$action-createtiddler $basetitle=<<currentTiddler>>>
+<$action-listops $tiddler=<<createTiddler-title>> $field="tags" $subfilter="Ignore [<tag>]"/>
+</$action-createtiddler>
+</$set></$list>
+</$list>
+</$list></$button>
+</$list>
+</$set>
+\end
+
+\define categories(caption:"categories", tags-filter, tag-prefix, filter, tag-algorithm)
+<div class="categories"><div class="categories-caption">$caption$</div>
 <$set name="tags" filter=<<__tags-filter__>>><$macrocall $name="tags-tower"/></$set>
 <$reveal type="nomatch" state="$:/temp/menubarsearch" text="" tag="div" class="categories-clear">
-<$button><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>Clear Search</$button>
 <$button><$set name="search-text" filter="[{$:/temp/menubarsearch}split[ ]butlast[]join[ ]trim[]]" select="0">&#9003;
 <$action-setfield $tiddler="$:/temp/menubarsearch" text=<<search-text>>/>
 <$action-setfield $tiddler="$:/temp/menubarsearch/input" text=<<search-text>>/>
 </$set></$button>
+<$button><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>Clear Search</$button>
 </$reveal>
+<div class="categories-update">
+<$macrocall $name="update-tags-button" tag-prefix=<<__tag-prefix__>> filter=<<__filter__>> tag-algorithm=<<__tag-algorithm__>>/>
+</div>
 </div>
 \end
 
@@ -80,7 +99,7 @@ filter <$macrocall $name="filter-options" title=<<__title__>> filter=<<filter-bu
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]limit[1]]">> variable="NONE">
 <div style="margin-top:1em;">
 <$reveal default="$cfilter$" type="match" text="" tag="div">
-<$macrocall $name="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">>/>
+<$macrocall $name="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">> uid=<<__title__>>/>
 </$reveal>
 <$reveal default="$cfilter$" type="nomatch" text="" tag="div">
 <$macrocall $name="table" rfilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/>
@@ -99,19 +118,21 @@ filter <$macrocall $name="filter-options" title=<<__title__>> filter=<<filter-bu
 <$action-setfield $tiddler=<<belongs-sort-state "$title$">> text="close"/>{{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
+<span style="color:#aaa;font-size:medium;">(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">>/>)</span>
 <$tiddler tiddler=<<sbb>>><<links>>
-<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible" style="font-weight:500;">
+<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible sort-by-belongs-title">
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 <$transclude field="caption"><$view field="title"/></$transclude>
-<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<span style="color:#777;"><$list filter="[<currentTiddler>get[belongs.to]getAllParents[]]" variable="parent">/
+<$tiddler tiddler=<<parent>>><$transclude field="caption"><$view field="title"/></$transclude></$tiddler>
+</$list></span>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$button>
 </$tiddler>
-<span style="color:#ccc;">(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">>/>)</span>
 </div>
 <$reveal type="nomatch" state=<<belongs-sort-state "$title$">> text="close" tag="div" style="margin-top:1em;">
 <$reveal default="$cfilter$" type="match" text="" tag="div">
-<$macrocall $name="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>$sort$]">>/>
+<$macrocall $name="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>$sort$]">> uid=<<__title__>>/>
 </$reveal>
 <$reveal default="$cfilter$" type="nomatch" text="" tag="div">
 <$macrocall $name="table" rfilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/>
@@ -123,29 +144,25 @@ filter <$macrocall $name="filter-options" title=<<__title__>> filter=<<filter-bu
 
 \define sb-sort-state() $:/state/sort/$(currentTiddler)$/$(sb)$
 
-\define sort-by(tags-filter, drop-actions, belongs-filter, sort, cfilter, rheader)
+\define sort-by(tags-filter, belongs-filter, sort, cfilter, rheader)
 <$list filter=<<__tags-filter__>> variable="sb">
 <$reveal type="nomatch" state=<<sb-sort-state>> text="open" tag="div">
-<$droppable actions="""$drop-actions$<$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
 <$button set=<<sb-sort-state>> setTo="open" dragTiddler=<<sb>> class="tc-btn-invisible collapse-close links" tooltip=<<sb>>>{{$:/core/images/right-arrow}}
 <$tiddler tiddler=<<sb>>><$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$tiddler>
-<span style="color:#ccc;">(<$count filter=<<__belongs-filter__>>/>)</span>
+<span style="color:#aaa;">(<$count filter=<<__belongs-filter__>>/>)</span>
 </$button>
-</$droppable>
 </$reveal>
 <$reveal type="match" state=<<sb-sort-state>> text="open" tag="div">
-<$droppable actions="""$drop-actions$<$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
 <$button set=<<sb-sort-state>> setTo="close" dragTiddler=<<sb>> class="tc-btn-invisible collapse-open links" tooltip=<<sb>>>{{$:/core/images/down-arrow}}
 <$tiddler tiddler=<<sb>>><$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$tiddler>
-<span style="color:#ccc;">(<$count filter=<<__belongs-filter__>>/>)</span>
+<span style="color:#aaa;">(<$count filter=<<__belongs-filter__>>/>)</span>
 </$button>
-</$droppable>
 <div style="padding-left:0.8em;margin:1em 0;" class="sort-by-belongs"><$set name="tab" value=<<sb>>>
 <$macrocall $name="sort-by-belongs" filter=<<__belongs-filter__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<sb>>/>
 </$set></div>
@@ -153,46 +170,43 @@ filter <$macrocall $name="filter-options" title=<<__title__>> filter=<<filter-bu
 </$list>
 \end
 
-\define filter-tags(tagfilter) [tags[]] -[[$(currentTiddler)$]] $tagfilter$
+\define filter-tags() [tags[]prefix[$(tag-prefix)$]] -[[$(currentTiddler)$]]
 
-\define sort-by-tags(sort:"sortan[caption]", tagfilter:"+[search:title:literal[/]]", sort-tags:"sortan[title]", cfilter, rheader, tags, item-filter, caption)
-<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="[<currentTiddler>] $tags$"/><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
-<$macrocall $name="categories" caption=<<__caption__>> tags-filter="[tag<currentTiddler>$item-filter$tags[]] -[<currentTiddler>] $tagfilter$"/>
+\define sort-by-tags(tag-prefix:"BR/", sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, caption, tag-algorithm, item-filter)
+<$set name="tag-prefix" filter="[<__tag-prefix__>suffix[/]]" value=<<__tag-prefix__>> emptyValue="$tag-prefix$/">
+<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="[<currentTiddler>]"/><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
+<$macrocall $name="categories" caption=<<__caption__>> tags-filter="[tag<currentTiddler>$item-filter$tags[]prefix<tag-prefix>] -[<currentTiddler>]" tag-prefix=<<tag-prefix>> filter="[tag<currentTiddler>$item-filter$]" tag-algorithm=<<__tag-algorithm__>>/>
 </$droppable>
-<$macrocall $name="sort-by" tags-filter="[tag<currentTiddler>$item-filter$tags[]search:title,caption{$:/temp/menubarsearch}$sort-tags$] -[<currentTiddler>] $tagfilter$" drop-actions="<$action-listops $tiddler=<<actionTiddler>> $tags='[<currentTiddler>] [<sb>] $tags$'/>" belongs-filter="[tag<currentTiddler>tag<sb>$item-filter$]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
-<$list filter="[tag<currentTiddler>$item-filter$!filter<filter-tags '$tagfilter$'>limit[1]]" variable="NONE"><div style="margin-top:1em;">
-<$macrocall $name="sort-by-belongs" filter="[tag<currentTiddler>$item-filter$!filter<filter-tags '$tagfilter$'>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
+<$macrocall $name="sort-by" tags-filter="[tag<currentTiddler>$item-filter$tags[]prefix<tag-prefix>search:title,caption{$:/temp/menubarsearch}$sort-tags$] -[<currentTiddler>]" belongs-filter="[tag<currentTiddler>$item-filter$tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
+<$list filter="[tag<currentTiddler>$item-filter$!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
+<$macrocall $name="sort-by-belongs" filter="[tag<currentTiddler>$item-filter$!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 </div></$list>
-\end
-
-\define sort-by-prefix(prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, tags, item-filter, caption)
-<$set name="ref-title" filter="[<__prefix__>is[blank]]" value="$(currentTiddler)$/" emptyValue=<<__prefix__>>>
-<$macrocall $name="categories" caption=<<__caption__>> tags-filter="[prefix<ref-title>]"/>
-<$macrocall $name="sort-by" tags-filter="[prefix<ref-title>search:title,caption{$:/temp/menubarsearch}$sort-tags$]" drop-actions="<$action-listops $tiddler=<<actionTiddler>> $tags='[<sb>] $tags$'/>" belongs-filter="[tag<sb>$item-filter$]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 </$set>
 \end
 
-\define sort-by-note(note, sort:"sortan[caption]", tagfilter:"+[search:title:literal[/]]", sort-tags:"sortan[title]", cfilter, rheader, tags, item-filter, caption)
-<$macrocall $name="categories" caption=<<__caption__>> tags-filter="[note<__note__>$item-filter$tags[]] -[<currentTiddler>] $tagfilter$"/>
-<$macrocall $name="sort-by" tags-filter="[note<__note__>$item-filter$tags[]search:title,caption{$:/temp/menubarsearch}$sort-tags$] -[<currentTiddler>] $tagfilter$" drop-actions="<$list filter='[<actionTiddler>note<__note__>]'><$action-listops $tags='[<sb>] $tags$'/></$list>" belongs-filter="[note<__note__>tag<sb>$item-filter$]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
-<$list filter="[note<__note__>$item-filter$!filter<filter-tags '$tagfilter$'>limit[1]]" variable="NONE"><div style="margin-top:1em;">
-<$macrocall $name="sort-by-belongs" filter="[note<__note__>$item-filter$!filter<filter-tags '$tagfilter$'>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
+\define sort-by-filter(item-filter:"all[current]", tag-prefix:"BR/", sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, caption, tag-algorithm)
+<$set name="tag-prefix" filter="[<__tag-prefix__>suffix[/]]" value=<<__tag-prefix__>> emptyValue="$tag-prefix$/">
+<$macrocall $name="categories" caption=<<__caption__>> tags-filter="[$item-filter$tags[]prefix<tag-prefix>] -[<currentTiddler>]" tag-prefix=<<tag-prefix>> filter="[$item-filter$]" tag-algorithm=<<__tag-algorithm__>>/>
+<$macrocall $name="sort-by" tags-filter="[$item-filter$tags[]prefix<tag-prefix>search:title,caption{$:/temp/menubarsearch}$sort-tags$] -[<currentTiddler>]" belongs-filter="[$item-filter$tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
+<$list filter="[$item-filter$!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
+<$macrocall $name="sort-by-belongs" filter="[$item-filter$!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 </div></$list>
+</$set>
 \end
 
 ; 1. 用于筛选的 Select
 : `<<filter-options title:"title of the list" filter:"filter of table or records">>`
 ; 2. 从 `/` 处, 将 branch Tiddler 的 title 切开, 并按 level 来分行显示, 像一座塔一样
 : `<<tags-tower start:"0">>`
-; 3. 显示 Tags 筛选框
-: `<<categories caption:"筛选框的标题" tags-filter:"筛选出所有 tags 的 filter">>`
-; 4. 按照 belongs.to 来进行分类展示
+; 3. 更新所有 Tiddlers 的 tags
+: `<<update-tags-button tag-prefix:"tag 的前缀" filter:"筛选出所有 Tiddlers 的 filter" tag-algorithm:"如何生成 tag 的 filter">>`
+; 4. 显示 Tags 筛选框
+: `<<categories caption:"categories 的标题" tags-filter:"筛选出所有 tags 的 filter" tag-prefix:"tag 的前缀" filter:"筛选出所有 Tiddlers 的 filter" tag-algorithm:"如何生成 tag 的 filter">>`
+; 5. 按照 belongs.to 来进行分类展示
 : `<<sort-by-belongs filter:"[tag<currentTiddler>]" sort:"对 record 列表排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" title:"Unique ID">>`
-; 5. 分类显示通用模板
-: `<<sort-by tags-filter:"找到所有的 Tiddlers 的 Tags" drop-actions:"将 Tiddler 拖过去后的动作" belongs-filter:"sort-by-belongs 的 filter" sort:"sort-by-belongs 的 sort" cfilter:"sort-by-belongs 的 cfilter" rheader:"sort-by-belongs 的 rheader">>`
-; 6. 按照 Tags 来进行分类展示
-: `<<sort-by-tags sort:"对 record 列表排序" tagfilter:"对 tags 进行过滤" sort-tags:"对 tags 进行排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" tags:"额外添加的 tags" item-filter:"过滤 tiddlers" caption:"筛选框的标题">>`
-; 7. 按照 Prefix 来进行分类展示
-: `<<sort-by-prefix prefix:"前缀名" sort:"对 record 列表排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" tags:"额外添加的 tags" item-filter:"过滤 tiddlers" caption:"筛选框的标题">>`
-; 8. 按照 Note 来进行分类展示
-: `<<sort-by-note note:"note 字段" sort:"对 record 列表排序" tagfilter:"对 tags 进行过滤" sort-tags:"对 tags 进行排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" tags:"额外添加的 tags" item-filter:"过滤 tiddlers" caption:"筛选框的标题">>`
+; 6. 分类显示通用模板
+: `<<sort-by tags-filter:"找到所有的 Tiddlers 的 Tags" belongs-filter:"sort-by-belongs 的 filter" sort:"sort-by-belongs 的 sort" cfilter:"sort-by-belongs 的 cfilter" rheader:"sort-by-belongs 的 rheader">>`
+; 7. 按照 Tags 来进行分类展示
+: `<<sort-by-tags tag-prefix:"tag 的前缀" sort:"对列表排序" sort-tags:"对 tags 进行排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" caption:"categories 的标题" tag-algorithm:"如何生成 tag 的 filter" item-filter:"对列表进行二次筛选">>`
+; 8. 按照 item-filter 来进行分类展示
+: `<<sort-by-filter item-filter:"对列表进行筛选" tag-prefix:"tag 的前缀" sort:"对列表排序" sort-tags:"对 tags 进行排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" caption:"categories 的标题" tag-algorithm:"如何生成 tag 的 filter">>`
