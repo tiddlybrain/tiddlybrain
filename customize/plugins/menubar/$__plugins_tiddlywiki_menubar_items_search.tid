@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20220820224221148
+modified: 20220903033957837
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -55,9 +55,6 @@ type: text/vnd.tiddlywiki
 </$reveal>
 <$button to="$:/AdvancedSearch" class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">
 <<advanced-search-actions>>{{$:/core/images/advanced-search-button}}
-</$button>
-<$button class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">
-<$tiddler tiddler="BR"><<open-in-sidebar>></$tiddler>{{$:/core/images/menu-button}}
 </$button>
 </span>
 
