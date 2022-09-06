@@ -198,7 +198,7 @@ exports.slash = function(source,operator,options) {
 		case "index":
 			data = options.wiki.extractTiddlerDataItem(currTiddlerTitle,key) || null;
 			if(data === null) {
-				result = "N.A.";
+				result = "Others";
 				source(function(tiddler,title) {
 					results.push(title + "/" + result);
 				});
@@ -222,7 +222,7 @@ exports.slash = function(source,operator,options) {
 		default:
 			data = options.wiki.getTiddler(currTiddlerTitle).getFieldString(key) || null;
 			if(data === null) {
-				result = "N.A.";
+				result = "Others";
 				source(function(tiddler,title) {
 					results.push(title + "/" + result);
 				});
