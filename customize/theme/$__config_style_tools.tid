@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20220901150321332
+modified: 20220904231915102
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -124,11 +124,15 @@ blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #
 .snippet-accordion blockquote.record {white-space: nowrap; overflow: hidden;}
 .tc-sidebar-lists blockquote.record .description {display: none;}
 
+/* For Macro: sort-by-belongs */
+button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; width: 88%; text-overflow: ellipsis; font-size: medium;}
+
 /* For Macro: sort-by-tags */
 .categories {display: block; margin-bottom: 1em; background: #d8d8d8; padding: 2px 10px; border: 1px solid #ddd; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); line-height: 1.5em; position: relative;}
-.categories-button {font-variant: small-caps; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); margin-bottom: 0.3em;}
-.categories-clear {position: absolute; top: 3px; right: 10px;}
-.categories-clear button {font-size: small;}
+.categories-caption {font-variant: small-caps; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); margin-bottom: 0.2em;}
+.categories-clear {position: absolute; top: 3px; right: 70px;}
+.categories-update {position: absolute; top: 3px; right: 10px;}
+.categories-clear button, .categories-update button {font-size: small;}
 .sort-by-belongs .macro-table {margin-bottom: 0;}
 
 /* For Macro: record-popup */
@@ -160,6 +164,7 @@ nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #
 /* For Macro: table */
 .macro-table {overflow-x: hidden; margin-top: 1em; margin-bottom: 1em;}
 .macro-table:hover {overflow-x: auto;}
+.tc-sidebar-lists .macro-table:hover {overflow-x: hidden;}
 .macro-table > table {width: 100%; margin: 0; background: white;}
 .macro-table > table th {text-align: left;}
 .macro-table > table th, .macro-table > table td, table.data-table .macro-table > table th, table.data-table .macro-table > table td {padding: 0 9px; white-space: nowrap; border: 1px solid #ddd;}
@@ -221,7 +226,7 @@ button.links svg.tc-image-mono-block, a.links svg.tc-image-mono-block, .table-li
 /* For Macro: filter-options */
 .select-filter {vertical-align: bottom; height: 18px; width: 14px; border: none; background: transparent;}
 .select-filter.dark {color: #333; width: initial; font-size: 15px; vertical-align: baseline; border-bottom: 1px solid #ddd; height: 21px;}
-.filter-options {font-variant: small-caps; line-height: 23px;}
+.filter-options {font-variant: small-caps; line-height: 23px; margin: -5px 0;}
 .filter-options .select-filter {font-size: small;}
 
 /* For Macro: code */
