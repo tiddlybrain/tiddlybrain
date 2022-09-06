@@ -1,7 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-date: 20220901
-modified: 20220901145637678
+modified: 20220905201751375
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -22,6 +21,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!type[text/plain]]" emptyMessage="<$codeblock code={{!!text}} language={{!!language}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage="<<data-table>>"><$transclude mode="block"/></$list>
 </$list>
+<div style="text-align:right;font-size:small;margin-top:-1em;">^^✱^^<$macrocall $name="l" title=<<currentTiddler>>/></div>
 </$reveal>
 </$tiddler>
 \end
@@ -102,19 +102,22 @@ filter <$macrocall $name="filter-options" title=<<__tag__>> filter="[<__tag__>ta
 </$set></$set>
 \end
 
+\define bl-limit-state-note() $:/state/bl-limit/$(current)$/$(note)$
+
 \define bl-note(note, sort, cfilter, rheader, limit:"10", has-filter)
-<$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$note$'>get[text]]" emptyValue=<<__limit__>> select="0">
-<$set name="f2" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__note__>get[text]]" select="0">
+<$set name="note" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
+<$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state-note>get[text]]" emptyValue=<<__limit__>> select="0">
+<$set name="f2" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<note>get[text]]" select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
-<$set name="bl-qty" filter=<<filter-build "[note<__note__>!is[current]search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$count[]]">> select="0">
+<$set name="bl-qty" filter=<<filter-build "[note<note>!is[current]search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$count[]]">> select="0">
 <$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin-bottom:4px;">
-filter <$macrocall $name="filter-options" title=<<__note__>> filter="[note<__note__>!is[current]search:text,caption,description:regexp,casesensitive<bl-pattern>]"/>
+filter <$macrocall $name="filter-options" title=<<note>> filter="[note<note>!is[current]search:text,caption,description:regexp,casesensitive<bl-pattern>]"/>
 </div></$list>
-<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[note<__note__>!is[current]search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>>/>""" variable="NONE"><$list filter=<<filter-build "[note<__note__>!is[current]search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">>><<bl-item>></$list></$list>
+<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[note<note>!is[current]search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>>/>""" variable="NONE"><$list filter=<<filter-build "[note<note>!is[current]search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">>><<bl-item>></$list></$list>
 <$list filter="[<bl-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item" style="margin-top:-3px;">
 <$button class="tc-btn-invisible fold-text">-- <<limit>> of <<bl-qty>> shown --
-<$list filter="[<bl-limit-state '$note$'>is[missing]]" emptyMessage="<$action-deletetiddler $tiddler=<<bl-limit-state '$note$'>>/>">
-<$action-setfield $tiddler=<<bl-limit-state '$note$'>> text=<<bl-qty>>/>
+<$list filter="[<bl-limit-state-note>is[missing]]" emptyMessage="<$action-deletetiddler $tiddler=<<bl-limit-state-note>>/>">
+<$action-setfield $tiddler=<<bl-limit-state-note>> text=<<bl-qty>>/>
 </$list>
 </$button>
 </div></$list>
@@ -122,6 +125,7 @@ filter <$macrocall $name="filter-options" title=<<__note__>> filter="[note<__not
 </$set>
 </$set>
 </$set></$set>
+</$set>
 \end
 
 ; 1. 一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title

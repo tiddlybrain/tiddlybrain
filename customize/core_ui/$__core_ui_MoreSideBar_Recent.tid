@@ -1,13 +1,13 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
 list-before: $:/core/ui/MoreSideBar/All
-modified: 20220829222647136
+modified: 20220903033212509
 modifier: yuzijie
 tags: $:/tags/MoreSideBar customized
 title: $:/core/ui/MoreSideBar/Recent
 type: text/vnd.tiddlywiki
 
 <h2 style="margin-top:10px;"><$button class="tc-btn-invisible" style="color:#5778d8;">Recently Opened
-<$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]remove[BR]limit[12]]"/>
+<$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]limit[12]]"/>
 </$button></h2>
 <$list filter="[enlist{$:/config/index-tree!!list}]" emptyMessage="No search results"><div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">

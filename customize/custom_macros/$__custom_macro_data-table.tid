@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20220901101300858
+modified: 20220905225748345
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -59,13 +59,9 @@ type: text/vnd.tiddlywiki
 <$set name="value" tiddler=<<current>> index=<<key>>><<data-value-cell>></$set>
 </$list>
 <$reveal default="$copy$" type="match" text="yes" tag="td" style="text-align:right;" class="copy-col">
-<$set name="value" tiddler=<<current>> index=<<key>>><$set name="parsed-value" filter="[<value>splitregexp[;;\s*]!is[blank]join[ ]]" select="0">
-<$tiddler tiddler=<<current>>><$wikify name="wikified-value" text=<<parsed-value>> mode="inline">
-<$set name="copy-content" filter="[<value>search:title:regexp[<<snippet|<<bl]]" value=<<key>> emptyValue=<<wikified-value>>>
-<$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<copy-content>>>{{$:/core/images/copy-clipboard}}</$button>
+<$set name="parsed-value" filter="[<current>getindexParsed<key>splitregexp[\s*;;\s*]!is[blank]join[ ]]" select="0">
+<$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<parsed-value>>>{{$:/core/images/copy-clipboard}}</$button>
 </$set>
-</$wikify></$tiddler>
-</$set></$set>
 </$reveal>
 </$list>
 </tr></$set>

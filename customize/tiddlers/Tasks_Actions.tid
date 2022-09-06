@@ -1,7 +1,7 @@
 caption: Daily Plan
 created: 20211009174453738
 creator: yuzijie
-modified: 20220730235914066
+modified: 20220905225929726
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 <$set name="color" filter="[all[current]text[waiting]]" value="color:#009dd9;" emptyValue=<<color>>>
 <$set name="color" filter="[all[current]text[deadline]]" value="color:#cd23d8;" emptyValue=<<color>>>
 <$set name="task" filter="[all[current]split[/]nth[3]]" select="0">
-<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
+<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[all[current]get[caption]!enlist<journal-cell-list>]" variable="NONE"><div>
 <$button class="tc-btn-invisible">''{{!!remark}}''
 <$list filter="[all[current]text[doing]] [all[current]text[waiting]]"><$macrocall $name="days-passed" start={{!!date}}/></$list>
@@ -67,7 +67,7 @@ type: text/vnd.tiddlywiki
 </$droppable>
 
 <$list filter="[enlist<tasks>]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
-<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
+<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><$button class="tc-btn-invisible tc-tiddlylink">
 <<currentTiddler>><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
 </$button><br></$list>
@@ -82,7 +82,7 @@ type: text/vnd.tiddlywiki
 <tr><th>规划任务</th><th>执行情况</th></tr>
 <$list filter="[<journal-title>indexes[]tag[Task]]" variable="task"><tr>
 <td><$set name="color" filter="[<task>get[color]]" emptyValue="transparent" select="0"><<review-task>></$set></td>
-<td><$list filter="[<journal-title>getindex<task>splitregexp[;;\s*]!is[blank]]">
+<td><$list filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]]">
 <$button class="tc-btn-invisible">&times;
 <$macrocall $name="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
 </$button>
