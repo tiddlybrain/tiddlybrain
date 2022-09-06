@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20220901101506880
+modified: 20220905111045723
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 </cite>
 \end
 
-\define record(filter:"[tag<currentTiddler>!sort[date]]")
+\define record(filter:"[tag<currentTiddler>!sort[date]]", uid)
 <$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
 <$set name="border-color" filter="[all[current]get[color]addprefix[border-left-color:]]" emptyValue="" select="0">
 <blockquote class="tc-quote record" style=<<border-color>>><$list filter="[all[current]has[caption]]" emptyMessage=<<record-item-no-caption>>>
@@ -34,7 +34,7 @@ type: text/vnd.tiddlywiki
 <span class="left">
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 </span>
-<span class="middle"><$list filter="[<class>!match[single-line-record]]" variable="NONE" emptyMessage=<<record-popup>>>
+<span class="middle"><$list filter="[<class>!match[single-line-record]]" variable="NONE" emptyMessage=<<record-popup '$uid$'>>>
 <$button tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible"><<modal-actions>>
 {{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
@@ -55,14 +55,14 @@ type: text/vnd.tiddlywiki
 </$list></$set>
 \end
 
-\define record-popup-actions() <$list filter="[<modifier>match[ctrl]]" variable="NONE"><$action-navigate/><$action-popup $state="$:/state/popup/$(currentTiddler)$"/></$list>
+\define record-popup-actions() <$list filter="[<modifier>match[ctrl]]" variable="NONE"><$action-navigate/><$action-popup $state="$:/state/popup/nopop"/></$list>
 
-\define record-popup()
-<$button actions=<<record-popup-actions>> popup=<<qualify "$:/state/popup/$(currentTiddler)$">> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink normal-weight">
+\define record-popup(uid)
+<$button actions=<<record-popup-actions>> popup="$:/state/popup/$(currentTiddler)$/$uid$" dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink normal-weight">
 {{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
 </$button>
-<$reveal type="popup" state=<<qualify "$:/state/popup/$(currentTiddler)$">>><div class="record-drop-down tc-popup-keep">
+<$reveal type="popup" state="$:/state/popup/$(currentTiddler)$/$uid$"><div class="record-drop-down tc-popup-keep">
 <div class="record-copy"><$button message="tm-copy-to-clipboard" param={{!!title}}>Copy title</$button> <$button message="tm-copy-to-clipboard" param={{!!caption}}>Copy caption</$button></div>
 <$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible record-title">
 {{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
@@ -78,6 +78,6 @@ type: text/vnd.tiddlywiki
 ; 1. 没有 caption 情况下, record 条目内容的显示
 : `<<record-item-no-caption>>`
 ; 2. 使用列表方式显示 Tiddlers
-: `<<record filter:"[tag<currentTiddler>!sort[date]]">>`
+: `<<record filter:"[tag<currentTiddler>!sort[date]]" uid:"和其他 record 进行区分用的 id">>`
 ; 3. 用 Popup 显示 record 条目的内容
-: `<<record-popup>>`
+: `<<record-popup uid:"和其他 record 进行区分用的 id">>`
