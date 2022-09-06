@@ -2,10 +2,9 @@ caption: Snippet
 condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
 created: 20220303150757173
 creator: yuzijie
-date: 20220303
 description: Snippet Macro
 icon: $:/core/images/list
-modified: 20220611145456322
+modified: 20220905190925836
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/snippet
@@ -14,5 +13,5 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="replace-selection"
-	text="<<snippet date:'no' cfilter:''>>"
+	text="<<snippet date:'no' categorized-view:'no'>>"
 />
