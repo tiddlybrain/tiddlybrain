@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220901090352580
+modified: 20220904224403764
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -142,14 +142,25 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[date]]"><<verification-notice>> verified on <$list filter="[all[current]days:date[]]" emptyMessage="""<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible" style="color:#9accb0;font-variant:small-caps;font-variant-numeric:oldstyle-nums;"><$action-setfield $field="last-date" $value={{!!date}}/><$view field="date" format="date" template="YYYY-0MM-0DD"/> <$macrocall $name="days-passed" start={{!!date}}/></$button>""">@@color:#9accb0;today@@</$list>,</$list> modified on <$view field="modified" format="date" template="YYYY-0MM-0DD"/><$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}} class="normal-weight"/></$list>
 \end
 
-\define relationships(name, filter, direct-open:"yes")
+\define relationships(name, filter, direct-open:"yes", mode)
 <$list filter="$filter$ +[limit[1]]" variable="NONE"><$set name="state" value="$:/state/relationships/$(currentTiddler)$/$name$">
 <$reveal type="match" state=<<state>> text="close" tag="div" style="padding-top:1em;">
 <$button set=<<state>> setTo="open" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$'' (<$count filter="$filter$"/>)</$button>
 </$reveal>
 <$reveal type="nomatch" state=<<state>> text="close" tag="div" style="padding-top:1em;">
 <$button set=<<state>> setTo="close" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$''</$button>
-<$set name="direct-open" value="$direct-open$"><<sort-by-belongs filter:"$filter$" title:"$name$">></$set>
+<$set name="direct-open" value="$direct-open$">
+<$list filter="[<__mode__>match[record]]" emptyMessage="""<<sort-by-belongs filter:"$filter$" title:"$name$">>""" variable="NONE">
+<$set name="f2" value={{$:/state/select/$(currentTiddler)$/$name$}}>
+<div class="filter-options">
+filter <$macrocall $name="filter-options" title=<<__name__>> filter=<<filter-build "$filter$ +[!has[draft.of]]">>/>
+</div>
+<div style="margin-top:1em;">
+<$macrocall $name="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[sortan[title]]">>/>
+</div>
+</$set>
+</$list>
+</$set>
 </$reveal>
 </$set></$list>
 \end
@@ -187,7 +198,7 @@ type: text/vnd.tiddlywiki
 # ''为 Branch Tiddler 自动生成 Caption''<$macrocall $name="code" content="""<<branch-caption levels:"从某级之后开始计算标题" separator:"原分隔符", separator2:"新分隔符">>"""/>
 # ''点击链接以后弹出 Modal 的动作''<$macrocall $name="code" content="""<<modal-actions>>"""/>
 # ''Subtitle 的时间显示''<$macrocall $name="code" content="""<<subtitle>>"""/>
-# ''展示 Tiddler 之间的关联关系''<$macrocall $name="code" content="""<<relationships name:"关系名称" filter:"关系对应的 Filter" direct-open:"是否直接打开">>"""/>
+# ''展示 Tiddler 之间的关联关系''<$macrocall $name="code" content="""<<relationships name:"关系名称" filter:"关系对应的 Filter" direct-open:"是否直接打开" mode:"显示模式, 默认 sort-by-belongs, 可选 record 模式">>"""/>
 # ''检查通知''<$macrocall $name="code" content="""<<verification-notice>>"""/>
 # ''关闭 Tiddler 的同时, 修改 HistoryList 里面的 current-tiddler''<$macrocall $name="code" content="""<<tiddler-close tiddler:"关闭的 tiddler">>"""/>
 # ''打开 Tiddler 的同时, unfold tiddler''<$macrocall $name="code" content="""<<tiddler-open tiddler:"打开的 tiddler">>"""/>
