@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220905185700045
+modified: 20220906100721603
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -69,7 +69,7 @@ filter <$macrocall $name="filter-options" title=<<key>> filter="[belongs.to<curr
 </div></$list>
 \end
 
-\define item-filter-string() belongs.to[$(mTitle)$]tag[Snippet]note[$(key)$]
+\define item-filter-string() belongs.to[$(current)$]tag[Snippet]note[$(key)$]
 
 \define snippet-modal(sort, caption, cfilter, rheader, tag-prefix, tag-algorithm)
 <$set name="snippet-qty" filter="[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]$sort$count[]]" select="0">
@@ -79,7 +79,7 @@ filter <$macrocall $name="filter-options" title=<<key>> filter="[belongs.to<curr
 <$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>
 <$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
 </$list>
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/snippet-modal" mTitle=<<currentTiddler>> key=<<key>> tag-prefix=<<tag-prefix>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> tag-algorithm=<<__tag-algorithm__>> snippet-qty=<<snippet-qty>> caption=<<__caption__>>/>
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/snippet-modal" current=<<currentTiddler>> key=<<key>> tag-prefix=<<tag-prefix>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> tag-algorithm=<<__tag-algorithm__>> snippet-qty=<<snippet-qty>> caption=<<__caption__>>/>
 <$list filter="[<__caption__>!is[blank]]" emptyMessage="Total of <<snippet-qty>> items">
 <<__caption__>> <span style="color:#aaa;">(<<snippet-qty>>)</span>
 </$list>

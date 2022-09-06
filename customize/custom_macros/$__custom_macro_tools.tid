@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220904224403764
+modified: 20220906101609797
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -177,9 +177,11 @@ filter <$macrocall $name="filter-options" title=<<__name__>> filter=<<filter-bui
 \end
 
 \define tiddler-open(tiddler)
+<$list filter="[<__tiddler__>is[tiddler]!match{$:/HistoryList!!current-tiddler}]">
 <$action-navigate $to=<<__tiddler__>>/>
 <$list filter="[<__tiddler__>addprefix[$:/state/folded/]is[tiddler]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<__tiddler__>] +[putfirst[]]"/>
+</$list>
 \end
 
 # ''将树形结构进行展开''<$macrocall $name="code" content="""<<tree-opener tiddler:"branch tiddler" prefix:"同 tree 的 prefix" separator:"/" state-prefix:"$:/state/tree/">>"""/>
