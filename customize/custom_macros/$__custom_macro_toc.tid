@@ -1,6 +1,6 @@
 created: 20210809065454577
 creator: yuzijie
-modified: 20220614003428230
+modified: 20220904210948955
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/toc
@@ -8,14 +8,10 @@ type: text/vnd.tiddlywiki
 
 \define custom-toc-caption()
 <$set name="tv-wikilinks" value="no">
-<$list filter="[[$(direct-open)$]match[yes]]" emptyMessage="<$transclude field=caption><$view field=title/></$transclude>" variable="NONE">
-<$list filter="[all[current]search:title:literal[/]]" emptyMessage="<$transclude field=caption><$view field=title/></$transclude>">
-<$button set="$:/config/index-tree" setTo={{!!title}} class="tc-btn-invisible">
-<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[{!!title}] +[putfirst[]]"/>
-<$transclude field=caption><$view field=title/></$transclude>
-</$button>
-</$list>
-</$list>
+<$transclude field=caption>
+<$view field=title/>
+</$transclude>
+<<icons "font-size:smaller;">>
 </$set>
 \end
 
