@@ -1,38 +1,10 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20220906090432423
+modified: 20220906225714724
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
 type: text/vnd.tiddlywiki
-
-\define filter-by-tags-value() +[tag[$(currentTiddler)$]]
-\define filter-by-status-value() +[status[$(currentTiddler)$]]
-\define filter-by-note-value() +[note[$(currentTiddler)$]]
-\define filter-belongs() [get[belongs.to]search:title,caption,text{$:/temp/filter-options!!search}]
-\define filter-build(f1,f3) $f1$ $(f2)$ $f3$
-
-\define filter-options(title, filter)
-<$set name="select-filter-style" filter="[[$:/state/select/$(currentTiddler)$/$title$]has[text]]" value="select-filter dark" emptyValue="select-filter">
-<$select tiddler="$:/state/select/$(currentTiddler)$/$title$" class=<<select-filter-style>> tooltip="Filter Options"><option value="">All</option>
-<$list filter="$filter$ +[tags[]!is[current]sortan[title]] -Snippet"><option value=<<filter-by-tags-value>> style="color:#ebb000;">Tag: {{!!title}}</option></$list>
-<option value="+[!has[status]]" style="color:#ff5a5a;">No Status</option>
-<$list filter="$filter$ +[get[status]each:value[]]"><option value=<<filter-by-status-value>> style="color:#ff5a5a;">Status: {{!!title}}</option></$list>
-<$list filter="$filter$ +[get[note]each:value[]]"><option value=<<filter-by-note-value>> style="color:green;">Note: {{!!title}}</option></$list>
-<$list filter="$filter$ +[has[belongs.to]limit[1]]" variable=NONE>
-<option value="+[filter<filter-belongs>]" style="color:#a630f9;">Search Parents</option>
-</$list>
-<option value="-[!has[path]]">File</option>
-<option value="-[!has[url]]">Link</option>
-</$select>
-<$list filter="[[$:/state/select/$(currentTiddler)$/$title$]search:text:literal[filter-belongs]]">
-<$edit-text tiddler="$:/temp/filter-options" field="search" size="20" class="draft-search" placeholder="Search Here"/>
-<$list filter="[[$:/temp/filter-options]is[tiddler]]">
-<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/filter-options"/>clear</$button>
-</$list>
-</$list>
-</$set>
-\end
 
 \define tower-filter-current() [split[/]nth[$(current)$]]
 
@@ -92,9 +64,9 @@ type: text/vnd.tiddlywiki
 \define belongs-sort-state(title) $:/state/sort/$(currentTiddler)$/$title$/$(sbb)$
 
 \define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default")
-<$set name="f2" value={{$:/state/select/$(currentTiddler)$/$title$}}>
+<$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <div class="filter-options">
-filter <$macrocall $name="filter-options" title=<<__title__>> filter=<<filter-build "$filter$ +[!has[draft.of]]">>/>
+filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">>/>
 </div>
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]limit[1]]">> variable="NONE">
 <div style="margin-top:1em;">
@@ -139,7 +111,7 @@ filter <$macrocall $name="filter-options" title=<<__title__>> filter=<<filter-bu
 </$reveal>
 </$reveal>
 </$list>
-</$set>
+</$vars>
 \end
 
 \define sb-sort-state() $:/state/sort/$(currentTiddler)$/$(sb)$
@@ -194,19 +166,17 @@ filter <$macrocall $name="filter-options" title=<<__title__>> filter=<<filter-bu
 </$set>
 \end
 
-; 1. 用于筛选的 Select
-: `<<filter-options title:"title of the list" filter:"filter of table or records">>`
-; 2. 从 `/` 处, 将 branch Tiddler 的 title 切开, 并按 level 来分行显示, 像一座塔一样
+; 1. 从 `/` 处, 将 branch Tiddler 的 title 切开, 并按 level 来分行显示, 像一座塔一样
 : `<<tags-tower start:"0">>`
-; 3. 更新所有 Tiddlers 的 tags
+; 2. 更新所有 Tiddlers 的 tags
 : `<<update-tags-button tag-prefix:"tag 的前缀" filter:"筛选出所有 Tiddlers 的 filter" tag-algorithm:"如何生成 tag 的 filter">>`
-; 4. 显示 Tags 筛选框
+; 3. 显示 Tags 筛选框
 : `<<categories caption:"categories 的标题" tags-filter:"筛选出所有 tags 的 filter" tag-prefix:"tag 的前缀" filter:"筛选出所有 Tiddlers 的 filter" tag-algorithm:"如何生成 tag 的 filter">>`
-; 5. 按照 belongs.to 来进行分类展示
+; 4. 按照 belongs.to 来进行分类展示
 : `<<sort-by-belongs filter:"[tag<currentTiddler>]" sort:"对 record 列表排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" title:"Unique ID">>`
-; 6. 分类显示通用模板
+; 5. 分类显示通用模板
 : `<<sort-by tags-filter:"找到所有的 Tiddlers 的 Tags" belongs-filter:"sort-by-belongs 的 filter" sort:"sort-by-belongs 的 sort" cfilter:"sort-by-belongs 的 cfilter" rheader:"sort-by-belongs 的 rheader">>`
-; 7. 按照 Tags 来进行分类展示
+; 6. 按照 Tags 来进行分类展示
 : `<<sort-by-tags tag-prefix:"tag 的前缀" sort:"对列表排序" sort-tags:"对 tags 进行排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" caption:"categories 的标题" tag-algorithm:"如何生成 tag 的 filter" item-filter:"对列表进行二次筛选">>`
-; 8. 按照 item-filter 来进行分类展示
+; 7. 按照 item-filter 来进行分类展示
 : `<<sort-by-filter item-filter:"对列表进行筛选" tag-prefix:"tag 的前缀" sort:"对列表排序" sort-tags:"对 tags 进行排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" caption:"categories 的标题" tag-algorithm:"如何生成 tag 的 filter">>`

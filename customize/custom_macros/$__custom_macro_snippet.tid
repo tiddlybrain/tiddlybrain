@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220906100721603
+modified: 20220906235414769
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -29,9 +29,9 @@ type: text/vnd.tiddlywiki
 \define snippet-limit-state() $:/state/snippet-limit/$(current)$/$(key)$
 \define snippet-accordion-state() $:/state/snippet-accordion/$(current)$/$(currentTiddler)$
 
-\define snippet-content(date, sort, limit, caption, cfilter, rheader, no-drop, has-filter)
-<$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin-bottom:4px;">
-filter <$macrocall $name="filter-options" title=<<key>> filter="[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]$sort$]"/>
+\define snippet-content(date, sort, limit, caption, cfilter, rheader, no-drop)
+<$list filter="[<snippet-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
+filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">>/>
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>>/>""" variable="NONE">
 <$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]">@@color:red;Drop Tiddler Here@@</$list>"""><div class="snippet">
@@ -79,7 +79,7 @@ filter <$macrocall $name="filter-options" title=<<key>> filter="[belongs.to<curr
 <$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>
 <$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
 </$list>
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/snippet-modal" current=<<currentTiddler>> key=<<key>> tag-prefix=<<tag-prefix>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> tag-algorithm=<<__tag-algorithm__>> snippet-qty=<<snippet-qty>> caption=<<__caption__>>/>
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/category-modal" current=<<currentTiddler>> key=<<key>> tag-prefix=<<tag-prefix>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> tag-algorithm=<<__tag-algorithm__>> snippet-qty=<<snippet-qty>> caption=<<__caption__>>/>
 <$list filter="[<__caption__>!is[blank]]" emptyMessage="Total of <<snippet-qty>> items">
 <<__caption__>> <span style="color:#aaa;">(<<snippet-qty>>)</span>
 </$list>
@@ -88,15 +88,21 @@ filter <$macrocall $name="filter-options" title=<<key>> filter="[belongs.to<curr
 </$set>
 \end
 
-\define snippet(key, date:"no", sort:"sortan[title]", limit:"30", caption, cfilter, rheader, actions, tag, no-drop, has-filter, categorized-view, tag-prefix, tag-algorithm)
+\define snippet(key, date:"no", sort:"sortan[title]", limit:"30", caption, cfilter, rheader, actions, tag, no-drop, categorized-view, tag-prefix, tag-algorithm)
 <$set name="key" filter="[[$key$]is[blank]]" value="$(key)$" emptyValue=<<__key__>>><$set name="current" value=<<currentTiddler>>>
 <$droppable actions=<<snippet-drop-actions """$actions$""" """$tag$""">> tag="div" class="snippet-container">
 <div class="tc-droppable-placeholder" style="display:block;">
 <$list filter="[<__categorized-view__>!match[yes]]" emptyMessage="""<<snippet-modal "$sort$" "$caption$" "$cfilter$" "$rheader$" "$tag-prefix$" "$tag-algorithm$">>""" variable="NONE">
-<$set name="f2" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<key>get[text]]" select="0">
+<$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<key>]" select="0">
+<$set name="f2" filter="[<f>addsuffix[/1]get[text]]" select="0">
+<$set name="f3" filter="[<f>addsuffix[/2]get[text]]" select="0">
+<$set name="f4" filter="[<f>addsuffix[/3]get[text]]" select="0">
 <$set name="snippet-qty" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$count[]]">> select="0">
 <$set name="limit" filter="[<snippet-limit-state>get[text]]" emptyValue=<<__limit__>> select="0">
-<$macrocall $name="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> no-drop=<<__no-drop__>> has-filter=<<__has-filter__>>/>
+<$macrocall $name="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> no-drop=<<__no-drop__>>/>
+</$set>
+</$set>
+</$set>
 </$set>
 </$set>
 </$set>
@@ -108,6 +114,6 @@ filter <$macrocall $name="filter-options" title=<<key>> filter="[belongs.to<curr
 
 # ''按住 Ctrl 并拖到 Snippet 上复制当前 Tiddler''<$macrocall $name="code" content="""<<snippet-drop-ctrl-actions tag:"额外添加的标签">>"""/>
 # ''拖到 Snippet 上发生的动作''<$macrocall $name="code" content="""<<snippet-drop-actions actions:"Tiddler 被放置时的额外动作" tag:"额外添加的标签">>"""/>
-# ''Snippet 的条目''<$macrocall $name="code" content="""<<snippet-content date:"日期 yes/no" sort:"Snippets 排序" limit:"一次最多列出的 Snippets 的数量" caption:"自定义显示条目的内容" cfilter:"如果填写自动切换到 Table 模式" rheader:"如果是 Table 模式可以选填" no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here" has-filter:"是否对 snippets 进行筛选">>"""/>
+# ''Snippet 的条目''<$macrocall $name="code" content="""<<snippet-content date:"日期 yes/no" sort:"Snippets 排序" limit:"一次最多列出的 Snippets 的数量" caption:"自定义显示条目的内容" cfilter:"如果填写自动切换到 Table 模式" rheader:"如果是 Table 模式可以选填" no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here">>"""/>
 # ''在一个 Modal 里面显示所有的 Snippets''<$macrocall $name="code" content="""<<snippet-modal sort:"Snippets 排序" caption:"自定义显示条目的内容" cfilter:"如果填写自动切换到 Table 模式" rheader:"如果是 Table 模式可以选填" tag-prefix:"tag 的前缀" tag-algorithm:"如何生成 tag 的 filter">>"""/>
-# ''创建一个新的 Snippet 或查看已创建的 Snippet''<$macrocall $name="code" content="""<<snippet key:"index key" date:"日期 yes/no" sort:"Snippets 排序" limit:"一次最多列出的 Snippets 的数量" caption:"自定义显示条目的内容" cfilter:"如果填写自动切换到 Table 模式" rheader:"如果是 Table 模式可以选填" actions:"Tiddler 被放置时的额外动作" tag:"Tiddler 被放置时添加额外标签" no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here" has-filter:"是否对 snippets 进行筛选" categorized-view:"分类模式显示" tag-prefix:"tag 的前缀" tag-algorithm:"如何生成 tag 的 filter">>"""/>
+# ''创建一个新的 Snippet 或查看已创建的 Snippet''<$macrocall $name="code" content="""<<snippet key:"index key" date:"日期 yes/no" sort:"Snippets 排序" limit:"一次最多列出的 Snippets 的数量" caption:"自定义显示条目的内容" cfilter:"如果填写自动切换到 Table 模式" rheader:"如果是 Table 模式可以选填" actions:"Tiddler 被放置时的额外动作" tag:"Tiddler 被放置时添加额外标签" no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here" categorized-view:"分类模式显示" tag-prefix:"tag 的前缀" tag-algorithm:"如何生成 tag 的 filter">>"""/>
