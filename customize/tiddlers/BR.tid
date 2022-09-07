@@ -2,15 +2,15 @@ caption: Branches
 created: 20211207121501210
 creator: yuzijie
 list-before: $:/core/ui/MoreSideBar/All
-modified: 20220905100334447
+modified: 20220906185248254
 modifier: yuzijie
 tags: customized $:/tags/MoreSideBar
 title: BR
 type: text/vnd.tiddlywiki
 
-<$vars tag-test="[tagging[]]"><$list filter="[all[tiddlers]prefix[BR/]!filter<tag-test>limit[1]]">
+<$vars filter-test="[taggingOrPrefixed[]]"><$list filter="[all[tiddlers]prefix[BR/]!filter<filter-test>limit[1]]">
 <$button style="margin-bottom:12px;">Clean All Unused Tags!
-<$list filter="[all[tiddlers]prefix[BR/]!filter<tag-test>]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
+<$list filter="[all[tiddlers]prefix[BR/]!filter<filter-test>]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
 </$button>
 </$list></$vars>
 <$reveal type="nomatch" state="$:/temp/menubarsearch" text="">
