@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20220908114818226
+modified: 20220908125046401
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -27,12 +27,16 @@ type: text/vnd.tiddlywiki
 
 \define update-tags-button(tag-prefix:"BR/", filter, tag-algorithm)
 <$list filter="[<__tag-algorithm__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes'>Update</$button>">
-<$button>Update<$list filter=<<__filter__>>>
+<$button>Update
+<$list filter=<<__filter__>>>
 <$list filter="[all[current]tags[]prefix<__tag-prefix__>]" variable="tag">
 <$action-listops $field="tags" $subfilter="-[<tag>]" $timestamp="no"/>
 </$list>
 <$list filter="[<__tag-prefix__>removesuffix[/]$tag-algorithm$]" variable="tag">
 <$action-listops $field="tags" $subfilter="[<tag>]" $timestamp="no"/>
+</$list>
+</$list>
+<$list filter="[<__filter__>tags[]is[missing]]" variable="tag">
 <$set name="caption" filter="[<tag>removeprefix<__tag-prefix__>split[/]reverse[]join[ - ]" select="0">
 <$action-setfield $tiddler=<<tag>> caption=<<caption>> text="<<record>>" $timestamp="no"/>
 </$set>
@@ -40,7 +44,7 @@ type: text/vnd.tiddlywiki
 <$action-listops $tiddler=<<tag>> $field="tags" $subfilter="Ignore [<base-tag>]" $timestamp="no"/>
 </$set>
 </$list>
-</$list></$button>
+</$button>
 </$list>
 \end
 
