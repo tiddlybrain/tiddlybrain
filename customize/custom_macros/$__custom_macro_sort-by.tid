@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20220907230857670
+modified: 20220908000234189
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -26,27 +26,22 @@ type: text/vnd.tiddlywiki
 \end
 
 \define update-tags-button(tag-prefix:"BR/", filter, tag-algorithm)
-<$set name="current" value=<<currentTiddler>>>
 <$list filter="[<__tag-algorithm__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes'>Update</$button>">
 <$button>Update<$list filter=<<__filter__>>>
-<$list filter="[all[current]tags[]prefix<__tag-prefix__>] -[<current>]" variable="tag">
+<$list filter="[all[current]tags[]prefix<__tag-prefix__>]" variable="tag">
 <$action-listops $field="tags" $subfilter="-[<tag>]" $timestamp="no"/>
 </$list>
 <$list filter="[<__tag-prefix__>removesuffix[/]$tag-algorithm$]" variable="tag">
 <$action-listops $field="tags" $subfilter="[<tag>]" $timestamp="no"/>
-<$list filter="[<tag>is[missing]]">
 <$set name="caption" filter="[<tag>removeprefix<__tag-prefix__>]" select="0">
-<$set name="tag" filter="[<__tag-prefix__>split[/]first[]]" select="0">
-<$action-createtiddler $basetitle=<<currentTiddler>> caption=<<caption>>>
-<$action-listops $tiddler=<<createTiddler-title>> $field="tags" $subfilter="Ignore [<tag>]"/>
-</$action-createtiddler>
+<$action-setfield $tiddler=<<tag>> caption=<<caption>> text="<<record>>" $timestamp="no"/>
 </$set>
+<$set name="base-tag" filter="[<__tag-prefix__>split[/]first[]]" select="0">
+<$action-listops $tiddler=<<tag>> $field="tags" $subfilter="Ignore [<base-tag>]" $timestamp="no"/>
 </$set>
-</$list>
 </$list>
 </$list></$button>
 </$list>
-</$set>
 \end
 
 \define categories(caption:"categories", tags-filter, tag-prefix, filter, tag-algorithm)
