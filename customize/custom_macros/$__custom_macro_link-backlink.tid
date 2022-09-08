@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20220908120926191
+modified: 20220908123308057
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -17,9 +17,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__note__>match[yes]]" variable="NONE">
 <$list filter="[all[current]has[note]]">&#32;@@color:green;[{{!!note}}]@@</$list>
 </$list>
-<$list filter="[<__date__>match[yes]]" variable="NONE">&#32;
+<$list filter="[<__date__>match[yes]]" variable="NONE">&#32;<span style="color:#aaa;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
-</$list>
+</span></$list>
 <$list filter="[<__description__>match[yes]]" variable="NONE">
 <$list filter="[all[current]has[description]]">@@color:#aaa;&#32;-&#32;{{!!description}}@@
 </$list>
