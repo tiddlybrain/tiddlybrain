@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220906235414769
+modified: 20220909044136518
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -48,6 +48,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$reveal default="$date$" type="match" text="yes" style="color:#aaa;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
 </$reveal>
+<$list filter="[all[current]!is[system]search:title:literal[/]]">@@font-size:small;🌿@@</$list>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$button>
 </$set>

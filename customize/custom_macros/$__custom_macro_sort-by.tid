@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20220908181604458
+modified: 20220909043823731
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define update-tags-button(tag-prefix:"BR/", filter, tag-algorithm, tag-caption)
+\define update-tags-button(tag-prefix:"BR/", filter, tag-algorithm, tag-caption:"{{!!title}}")
 <$list filter="[<__tag-algorithm__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes'>Update</$button>">
 <$button>Update<$list filter=<<__filter__>>>
 <$list filter="[all[current]tags[]prefix<__tag-prefix__>]" variable="tag">
