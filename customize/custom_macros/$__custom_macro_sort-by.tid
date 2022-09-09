@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20220909043823731
+modified: 20220909053417190
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -34,7 +34,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__tag-prefix__>removesuffix[/]$tag-algorithm$]" variable="tag">
 <$action-listops $field="tags" $subfilter="[<tag>]" $timestamp="no"/>
 <$list filter="[<tag>is[missing]]">
-<$action-setfield caption=<<__tag-caption__>> text="<<record>>" $timestamp="no"/>
+<$action-setfield caption=<<__tag-caption__>> text="<<records>>" $timestamp="no"/>
 <$set name="tag" filter="[<__tag-prefix__>split[/]first[]]" select="0">
 <$action-listops $field="tags" $subfilter="Ignore [<tag>]" $timestamp="no"/>
 </$set>

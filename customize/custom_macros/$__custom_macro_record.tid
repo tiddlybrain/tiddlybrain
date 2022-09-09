@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20220906184505687
+modified: 20220909053311397
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 </cite>
 \end
 
-\define record(filter:"[tag<currentTiddler>!sort[date]]", uid)
+\define record(filter:"[tag<currentTiddler>!sort[date]]", uid:"1")
 <$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
 <$set name="border-color" filter="[all[current]get[color]addprefix[border-left-color:]]" emptyValue="" select="0">
 <blockquote class="tc-quote record" style=<<border-color>>><$list filter="[all[current]has[caption]]" emptyMessage=<<record-item-no-caption>>>
@@ -75,9 +75,22 @@ type: text/vnd.tiddlywiki
 </div></$reveal>
 \end
 
+\define records(filter, title:"records", sort:"sortan[caption]")
+<$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
+<div class="filter-options">
+filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">>/>
+</div>
+<div style="margin-top:1em;">
+<$macrocall $name="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
+</div>
+</$vars>
+\end
+
 ; 1. 没有 caption 情况下, record 条目内容的显示
 : `<<record-item-no-caption>>`
 ; 2. 使用列表方式显示 Tiddlers
 : `<<record filter:"[tag<currentTiddler>!sort[date]]" uid:"和其他 record 进行区分用的 id">>`
 ; 3. 用 Popup 显示 record 条目的内容
 : `<<record-popup uid:"和其他 record 进行区分用的 id">>`
+; 4. 带 filters 的 record
+: `<<records filter:"列表筛选规则" title:"list-filters 的 title" sort:"结果排序">>`
