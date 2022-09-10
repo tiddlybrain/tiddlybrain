@@ -191,7 +191,7 @@ exports.indexreg = function(source,operator,options) {
 };
 
 exports.slash = function(source,operator,options) {
-	var results = [], result, key = operator.operand || "", data;
+	var results = [], result, key = operator.operand || "", data, re = /\s*(?:;;|$)\s*/;
 	var suffixes = operator.suffixes || [], mode = (suffixes[0] || [])[0];
 	var currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
 	if(currTiddlerTitle) switch(mode) {
@@ -203,7 +203,6 @@ exports.slash = function(source,operator,options) {
 					results.push(title + "/" + result);
 				});
 			} else if (data.indexOf(";;") !== -1) {
-				var re = /\s*(?:;;|$)\s*/;
 				data.split(re).forEach(datum => {
 					if (datum !== "") {
 						result = getResult(datum,options,currTiddlerTitle);
@@ -214,9 +213,21 @@ exports.slash = function(source,operator,options) {
 				});
 			} else {
 				result = getResult(data,options,currTiddlerTitle);
-				source(function(tiddler,title) {
-					results.push(title + "/" + result);
-				});
+				if (result.indexOf(";;") !== -1) {
+					data = result;
+					data.split(re).forEach(datum => {
+						if (datum !== "") {
+							result = getResult(datum,options,currTiddlerTitle);
+							source(function(tiddler,title) {
+								results.push(title + "/" + result);
+							});
+						}
+					});
+				} else {
+					source(function(tiddler,title) {
+						results.push(title + "/" + result);
+					});
+				}
 			}
 			break;
 		default:
