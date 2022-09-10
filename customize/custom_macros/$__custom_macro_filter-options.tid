@@ -1,7 +1,7 @@
 created: 20220906205100237
 creator: yuzijie
 date: 20220906
-modified: 20220907011835343
+modified: 20220910145443471
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 \define filter-get-parents()
 Belongs to:
 <$transclude field="caption"><$view field="title"/></$transclude>
-<span style="color:#777;"><$list filter="[<currentTiddler>get[belongs.to]getAllParents[]]">/
+<span style="color:#aaa;"><$list filter="[<currentTiddler>get[parents]enlist-input[]]">/
 <$transclude field="caption"><$view field="title"/></$transclude>
 </$list></span>
 \end
