@@ -1,9 +1,9 @@
-caption: Subtopics (<$count filter="[search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[belongs.to]] +[!is[system]!tag[Ignore]tag[Snippet]unique[]]"/>)
+caption: Subtopics (<$count filter="[search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!is[system]!tag[Ignore]tag[Snippet]]"/>)
 created: 20220310083819974
 creator: yuzijie
-first-search-filter: [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[belongs.to]] +[!is[system]!tag[Ignore]tag[Snippet]unique[]subfilter<subtopic-subfilter>limit[100]sort[belongs.to]]
+first-search-filter: [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!is[system]!tag[Ignore]tag[Snippet]subfilter<subtopic-subfilter>limit[100]sortan[belongs.to]]
 list-after: $:/custom/search/TopicSearchResultList
-modified: 20220829181244500
+modified: 20220910141757925
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/SubtopicSearchResultList
@@ -45,7 +45,7 @@ type: text/vnd.tiddlywiki
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <$let tv-wikilinks="no"><span class="subtopic">
-<$list filter="[all[current]get[belongs.to]getAllParents[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
+<$list filter="[all[current]get[parents]enlist-input[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
 <$button class="tc-btn-invisible tc-tag-label" style="background:#dbedff;"><<keyword>><$action-navigate/>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/CurrentSearchResultList"/>
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/CurrentSearchResultList"/>

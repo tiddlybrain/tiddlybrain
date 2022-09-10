@@ -1,17 +1,17 @@
 caption: Topics
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [field:title<userInput>] [fieldCaseInsensitive:caption<userInput>] [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!search:title:literal[/]] [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[belongs.to]] +[!is[system]!tag[Ignore]!tag[Snippet]!tag[Tasks/Journal]!tag[customized]unique[]limit[100]sort[title]] -[{$:/config/defaultTemplate}]
+first-search-filter: [field:title<userInput>] [fieldCaseInsensitive:caption<userInput>] [!tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!search:title:literal[/]] [tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[parents]enlist-input[]last[]] +[!is[system]!tag[Ignore]!tag[customized]unique[]limit[100]] -[{$:/config/defaultTemplate}]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20220829181130724
+modified: 20220910143609916
 modifier: yuzijie
-second-search-filter: [!tag[Ignore]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[belongs.to]tag[Snippet]unique[]limit[100]sort[title]]
+second-search-filter: [!is[system]!tag[Ignore]!tag[customized]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[belongs.to]tag[Snippet]unique[]limit[100]sortan[title]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
-//<small>Topic matches:</small>//
+//<small>Root Topic matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
