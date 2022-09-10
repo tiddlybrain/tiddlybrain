@@ -1,12 +1,14 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20220905225946579
+modified: 20220910211724867
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
 type: text/vnd.tiddlywiki
 
-\define cell-value-normal() <$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum"><$list filter="[field:title<datum>]" emptyMessage=<<datum>>><$macrocall $name="l" title={{!!title}} class="normal-weight"/></$list><br></$list>
+\define cell-value-iterator() <$wikify name="content" text=<<datum>>><$list filter="[<content>search:title:literal[;;]]" emptyMessage=<<datum>> variable="value"><<cell-value-normal>></$list></$wikify>
+
+\define cell-value-normal() <$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum"><div><$list filter="[field:title<datum>]" emptyMessage=<<cell-value-iterator>>><$macrocall $name="l" title={{!!title}} class="normal-weight"/></$list></div></$list>
 
 \define cell-value()
 <$list filter="[<current>get[celltpl]is[tiddler]]" emptyMessage=<<cell-value-normal>> variable="tpl">
