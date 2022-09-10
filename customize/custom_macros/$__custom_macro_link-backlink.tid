@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20220910165958606
+modified: 20220910173319453
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -71,17 +71,17 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 </$set></$set>
 \end
 
-\define bl(sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<cat-caption>>/>
+\define bl(sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>>/>
 
-\define bl-topic(topic, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<cat-caption>>/>
+\define bl-topic(topic, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>>/>
 
-\define bl-tag(tag, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<cat-caption>>/>
+\define bl-tag(tag, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>>/>
 
 \define bl-note-filter() note[$(note)$]!is[current]
 
 \define bl-note(note, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption)
 <$set name="note" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
-<$macrocall $name="bl-filter" item-filter=<<bl-note-filter>> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<cat-caption>>/>
+<$macrocall $name="bl-filter" item-filter=<<bl-note-filter>> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>>/>
 </$set>
 \end
 
