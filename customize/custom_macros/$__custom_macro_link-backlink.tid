@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20220910150638140
+modified: 20220910165958606
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -50,7 +50,7 @@ type: text/vnd.tiddlywiki
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
-<$list filter="[<__cat-prefix__>is[blank]]" emptyMessage="""<<cat-modal "[$item-filter$]" "$sort$" "$cfilter$" "$rheader$" "$cat-prefix$" "$cat-algorithm$" "$cat-caption$">>""" variable="NONE">
+<$list filter="[<__cat-prefix__>is[blank]]" emptyMessage="""<$macrocall $name="cat-modal" mTitle=<<current>> item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-algorithm="$cat-algorithm$" cat-caption="$cat-caption$" search=<<search>>/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>/>

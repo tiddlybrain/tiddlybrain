@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220910134903218
+modified: 20220910165750755
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -74,13 +74,13 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 
 \define snippet-item-filter() belongs.to[$(current)$]tag[Snippet]note[$(key)$]
 
-\define cat-modal(item-filter, sort, cfilter, rheader, cat-prefix, cat-algorithm, cat-caption)
+\define cat-modal(mTitle, item-filter, sort, cfilter, rheader, cat-prefix, cat-algorithm, cat-caption, search)
 <$set name="qty" filter="[$item-filter$!has[draft.of]$sort$count[]]" select="0">
 <$button dragFilter="[$item-filter$]" class="tc-btn-invisible tc-tiddlylink">
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE">
 <$macrocall $name="tiddler-open" tiddler=<<mTitle>>/><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
 </$list>
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/category-modal" item-filter=<<__item-filter__>> cat-prefix=<<cat-prefix>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-algorithm=<<__cat-algorithm__>> qty=<<qty>> cat-caption=<<__cat-caption__>>/>
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/category-modal" mTitle=<<__mTitle__>> item-filter=<<__item-filter__>> cat-prefix=<<cat-prefix>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-algorithm=<<__cat-algorithm__>> qty=<<qty>> cat-caption=<<__cat-caption__>> search=<<__search__>>/>
 <$list filter="[<__cat-caption__>!is[blank]]" emptyMessage="Total of <<qty>> items"><<__cat-caption__>> <span style="color:#aaa;">(<<qty>>)</span></$list>
 </$button>
 </$set>
@@ -90,7 +90,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$set name="key" filter="[[$key$]is[blank]]" value="$(key)$" emptyValue=<<__key__>>><$set name="current" value=<<currentTiddler>>>
 <$droppable actions=<<snippet-drop-actions """$actions$""" """$tag$""">> tag="div" class="snippet-container">
 <div class="tc-droppable-placeholder" style="display:block;">
-<$list filter="[<__cat-prefix__>is[blank]]" emptyMessage="""<$macrocall $name="cat-modal" item-filter=<<snippet-item-filter>> sort="$sort$" cat-caption="$cat-caption$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-algorithm="$cat-algorithm$"/>""" variable="NONE">
+<$list filter="[<__cat-prefix__>is[blank]]" emptyMessage="""<$macrocall $name="cat-modal" mTitle=<<current>> item-filter=<<snippet-item-filter>> sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-algorithm="$cat-algorithm$" cat-caption="$cat-caption$"/>""" variable="NONE">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<key>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
 <$set name="snippet-qty" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$count[]]">> select="0">
