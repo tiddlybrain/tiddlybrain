@@ -1,16 +1,27 @@
 created: 20220217150254473
 creator: yuzijie
 list-after: $:/core/ui/SideBar/More
-modified: 20220829201627593
+modified: 20220910153443347
 modifier: yuzijie
 tags: customized $:/tags/SideBar
 title: Inbox
 type: text/vnd.tiddlywiki
 
-<<list-links "[all[tiddlers]tags[]is[missing]!is[system]] [untagged[]!is[system]!is[image]]
-[tag[Snippet]get[belongs.to]is[missing]] [tag[Comment]get[belongs.to]is[missing]] [!is[system]get[list]enlist-input[]is[missing]]
--Task -Comment -Snippet -Ignore -customized -[{$:/config/defaultTemplate}]">>
-
-<$list filter="[!is[system]search:title:literal[/]]"><$set name="tag" filter="[all[current]split[/]first[]]" select="0">
-<$list filter="[all[current]!tag<tag>]"><div><$macrocall $name="l" title={{!!title}}/></div></$list>
-</$set></$list>
+<$list filter="[all[tiddlers]tags[]is[missing]!is[system]] [untagged[]!is[system]]
+[tag[Snippet]get[belongs.to]is[missing]] [tag[Comment]get[belongs.to]is[missing]]
+-Task -Comment -Snippet -Ignore -customized -[{$:/config/defaultTemplate}]">
+<div><$button tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</$button></div>
+</$list>
+<$list filter="[!is[system]search:title:literal[/]]">
+<$set name="tag" filter="[all[current]split[/]first[]]" select="0">
+<$list filter="[all[current]!tag<tag>]">
+<div><$button tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</$button></div>
+</$list>
+</$set>
+</$list>
