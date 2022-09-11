@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20220910173319453
+modified: 20220911143414938
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -45,12 +45,12 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"10", note, date, caption, cat-prefix, cat-algorithm, cat-caption)
+\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"10", note, date, caption, cat-prefix, cat-algorithm, cat-caption, tag-caption)
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
-<$list filter="[<__cat-prefix__>is[blank]]" emptyMessage="""<$macrocall $name="cat-modal" mTitle=<<current>> item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-algorithm="$cat-algorithm$" cat-caption="$cat-caption$" search=<<search>>/>""" variable="NONE">
+<$list filter="[<__cat-prefix__>is[blank]]" emptyMessage="""<$macrocall $name="cat-modal" mTitle=<<current>> item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-algorithm="$cat-algorithm$" cat-caption="$cat-caption$" search=<<search>> tag-caption="$tag-caption$"/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>/>
@@ -71,29 +71,29 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 </$set></$set>
 \end
 
-\define bl(sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>>/>
+\define bl(sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption, tag-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>> tag-caption=<<__tag-caption__>>/>
 
-\define bl-topic(topic, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>>/>
+\define bl-topic(topic, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption, tag-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>> tag-caption=<<__tag-caption__>>/>
 
-\define bl-tag(tag, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>>/>
+\define bl-tag(tag, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption, tag-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>> tag-caption=<<__tag-caption__>>/>
 
 \define bl-note-filter() note[$(note)$]!is[current]
 
-\define bl-note(note, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption)
+\define bl-note(note, sort, cfilter, rheader, limit, note, date, caption, cat-prefix, cat-algorithm, cat-caption, tag-caption)
 <$set name="note" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
-<$macrocall $name="bl-filter" item-filter=<<bl-note-filter>> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>>/>
+<$macrocall $name="bl-filter" item-filter=<<bl-note-filter>> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> cat-caption=<<__cat-caption__>> tag-caption=<<__tag-caption__>>/>
 </$set>
 \end
 
 ; 1. 一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title
 : `<<l title:"tiddler title" text:"alternative text" class:"custom class" tr:"(Transclution) 显示 tiddler 内容" icon:"是否显示图标" style:"自定义样式" description:"是否显示 Description" note:"是否显示 note" date:"是否显示 date">>`
 ; 2. 按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers
-: `<<bl-filter item-filter:"所有需要反查的 Tiddlers" uid:"给 bl 一个唯一的 id" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示">>`
+: `<<bl-filter item-filter:"所有需要反查的 Tiddlers" uid:"给 bl 一个唯一的 id" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
 ; 3. 反查指向当前 Tiddler 的所有 Tiddlers
-: `<<bl sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示">>`
+: `<<bl sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
 ; 4. 反查指向当前 Tiddler 且属于某个 topic 的所有 Tiddlers
-: `<<bl-topic topic:"主题" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示">>`
+: `<<bl-topic topic:"主题" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
 ; 5. 反查指向当前 Tiddler 且标记了某个 tag 的所有 Tiddlers
-: `<<bl-tag tag:"标签" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示">>`
+: `<<bl-tag tag:"标签" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
 ; 6. 反查指向当前 Tiddler 且相同 note 的所有 Tiddlers
-: `<<bl-note note:"角色" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示">>`
+: `<<bl-note note:"角色" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`

@@ -1,7 +1,7 @@
 created: 20220905175854426
 creator: yuzijie
 footer: <$button message="tm-close-tiddler">CLOSE</$button>
-modified: 20220910170146713
+modified: 20220911141655686
 modifier: yuzijie
 subtitle: <$list filter="[<cat-caption>!is[blank]]" emptyMessage="Total of <<qty>> items"><<cat-caption>> <span style="color:#aaa;">(<<qty>>)</span></$list>
 tags: customized
@@ -9,5 +9,5 @@ title: $:/custom/template/category-modal
 type: text/vnd.tiddlywiki
 
 <div class="tc-tiddler-body" style="margin-top:1em;"><$set name="modal" value="yes"><$tiddler tiddler=<<mTitle>>>
-<$macrocall $name="sort-by-filter" item-filter=<<item-filter>> cat-prefix=<<cat-prefix>> sort=<<sort>> cfilter=<<cfilter>> rheader=<<rheader>> cat-algorithm=<<cat-algorithm>>/>
+<$macrocall $name="sort-by-filter" item-filter=<<item-filter>> cat-prefix=<<cat-prefix>> sort=<<sort>> cfilter=<<cfilter>> rheader=<<rheader>> cat-algorithm=<<cat-algorithm>> tag-caption=<<tag-caption>>/>
 </$tiddler></$set></div>
