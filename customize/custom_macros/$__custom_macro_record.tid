@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20220909053311397
+modified: 20220911112622455
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -35,7 +35,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 </span>
 <span class="middle"><$list filter="[<class>!match[single-line-record]]" variable="NONE" emptyMessage=<<record-popup '$uid$'>>>
-<$button tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible"><<modal-actions>>
+<$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">
 {{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
