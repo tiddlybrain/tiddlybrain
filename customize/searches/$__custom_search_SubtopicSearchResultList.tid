@@ -3,7 +3,7 @@ created: 20220310083819974
 creator: yuzijie
 first-search-filter: [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!is[system]!tag[Ignore]tag[Snippet]subfilter<subtopic-subfilter>limit[100]sortan[belongs.to]]
 list-after: $:/custom/search/TopicSearchResultList
-modified: 20220910141757925
+modified: 20220911083510849
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/SubtopicSearchResultList
@@ -11,20 +11,19 @@ type: text/vnd.tiddlywiki
 
 \define lb() [
 \define rb() ]
-\define subtopic-filter-keywords() !search:keywords[$(keyword)$]
+\define subtopic-filter() !contains:parents[$(currentTiddler)$]
 
 \define keywords-filters()
 \whitespace trim
-<div class="subtopic-filters">
-<$list filter="$(search-filter)$ +[get[keywords]] :map[split[, ]last[]] +[unique[]]" variable="keyword">
-<$set name="subtopic-filter-chain" filter="[{$:/temp/subtopic/filter}] [<subtopic-filter-keywords>] +[join[]]" select="0">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>>
-<$action-setfield $tiddler="$:/temp/subtopic/filter" text=<<subtopic-filter-chain>>/>
-<$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>"""><$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/></$list>
+<div class="subtopic-filters"><$let tv-wikilinks="no">
+<$list filter="$(search-filter)$ +[get[parents]enlist-input[]!tag[Snippet]unique[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>><$action-navigate/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/CurrentSearchResultList"/>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/CurrentSearchResultList"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
 </$button>
-</$set>
-</$list>
-</div>
+</$wikify></$list>
+</$let></div>
 \end
 
 \define searchResultList()
@@ -38,7 +37,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>"""><$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/></$list>
 </$button></small></$list>
 
+<$list filter="[<link-dropdown>!match[yes]]">
 <$set name="search-filter" value={{{ [<configTiddler>get[first-search-filter]] }}}><<keywords-filters>></$set>
+</$list>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
@@ -46,10 +47,13 @@ type: text/vnd.tiddlywiki
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <$let tv-wikilinks="no"><span class="subtopic">
 <$list filter="[all[current]get[parents]enlist-input[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
-<$button class="tc-btn-invisible tc-tag-label" style="background:#dbedff;"><<keyword>><$action-navigate/>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/CurrentSearchResultList"/>
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/CurrentSearchResultList"/>
-<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>>
+<$set name="subtopic-filter-chain" filter="[{$:/temp/subtopic/filter}] [<subtopic-filter>] +[join[]]" select="0">
+<$action-setfield $tiddler="$:/temp/subtopic/filter" text=<<subtopic-filter-chain>>/>
+</$set>
+<$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>""">
+<$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/>
+</$list>
 </$button>
 </$wikify></$list>
 </span></$let>

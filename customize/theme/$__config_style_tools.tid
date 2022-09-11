@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20220910212413976
+modified: 20220911083748348
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -80,9 +80,9 @@ button.search-tool {display: inline-block; width: auto; font-size: smaller; padd
 /* For $:/custom/search/SubtopicSearchResultList */
 .subtopic {display: block; padding: 1px 0 10px 10px;}
 .subtopic button.tc-tag-label, .subtopic-filters button.tc-tag-label {padding: 0.2em 0.7em; margin-right: 1px; color: #888; font-size: smaller; width: auto; border-radius: 1em; display: inline-block;}
+.subtopic button.tc-tag-label:hover {text-decoration: line-through;}
 .subtopic-filters {white-space: normal;}
 .subtopic-filters button.tc-tag-label {margin: 0 2px 5px 0;}
-.subtopic-filters button.tc-tag-label:hover {text-decoration: line-through;}
 
 /* For Macro: external-links */
 .external-links {text-align: center; padding: 3px 1em; line-height: 25px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
