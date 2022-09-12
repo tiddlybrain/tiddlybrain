@@ -4,12 +4,12 @@ type: application/javascript
 tags: customized
 module-type: filteroperator
 
-1. filter tiddlers by the given key and value, e.g. [!is[system]index:key[value]]
-2. Return value of a given index, value parsed, e.g. [[tiddler]getindexParsed[key]]
-3. Return values of given indexes, value parsed, e.g. [[tiddler]getindexes[keys list]]
-4. Return index names by matching value, e.g. [[tiddler]searchindexes:mainTiddler[value]]
-5. Check the value of a given key that matches the regex pattern
-6. Branch Tiddler Constructor Filter, e.g. [slash:index[a]slash:field[b]]
+1. Filter tiddlers by the given key and value, e.g. [[tiddlers]index:key[value]]
+2. Filter tiddlers by the given key and regex pattern, e.g. [[tiddlers]indexreg:key[regexp]]
+3. Return the value of a given index, value parsed, e.g. [[tiddlers]getindexParsed[key]]
+4. Return the value of a given index, value parsed & joined, e.g. [[tiddlers]getindexJoined[key]]
+5. Branch Tiddler Constructor Filter, e.g. [slash:index[a]slash:field[b]]
+6. Find all tiddler titles inside of a data tiddler content, e.g. [[tiddlers]getAllIndexTitles[]]
 
 \*/
 (function(){
@@ -21,30 +21,40 @@ module-type: filteroperator
 /*
 Helper functions
 */
-var transform = function(data,options,title) {
-	var pattern_render = /<\$.+>|<<.+>>|{{.+}}/;
-	if (pattern_render.test(data)) {
-		return options.wiki.renderText("text/plain","text/vnd.tiddlywiki",data,{
+var getResult = function(data,options,currTiddlerTitle) {
+	if (options.wiki.tiddlerExists(data)) {
+		var content = options.wiki.getTiddler(data).getFieldString("caption") || data;
+		return options.wiki.renderText("text/plain","text/vnd.tiddlywiki",content,{
 			parseAsInline: true,
 			variables: {
-				currentTiddler: title
+				currentTiddler: data
 			},
 			parentWidget: options.widget
 		});
 	} else {
-		return data;
+		return options.wiki.renderText("text/plain","text/vnd.tiddlywiki",data,{
+			parseAsInline: true,
+			variables: {
+				currentTiddler: currTiddlerTitle
+			},
+			parentWidget: options.widget
+		});
 	}
 }
 
-var getResult = function(data,options,currTiddlerTitle) {
-	var result;
-	if (options.wiki.tiddlerExists(data)) {
-		var content = options.wiki.getTiddler(data).getFieldString("caption") || data;
-		result = transform(content,options,data);
-	} else {
-		result = transform(data,options,currTiddlerTitle);
-	}
-	return result;
+var getResults = function(data,options,currTiddlerTitle) {
+	var result, results = [], re = /\s*(?:;;|$)\s*/;
+	data.split(re).forEach(datum => {
+		if (datum !== "") {
+			result = getResult(datum,options,currTiddlerTitle);
+			if(result.indexOf(";;") === -1) {
+				results.push(result);
+			} else {
+				results = results.concat(getResults(result,options,currTiddlerTitle));
+			}
+		}
+	});
+	return results;
 }
 
 /*
@@ -57,7 +67,7 @@ exports.index = function(source,operator,options) {
 		title = tiddler ? tiddler.fields.title : title;
 		if(index) {
 			var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
-			if(flags.indexOf("literal") === -1) data = transform(data,options,title);
+			if(flags.indexOf("literal") === -1) data = getResults(data,options,title).join('');
 			if(invert) {
 				if(data !== value) results.push(title);
 			} else {
@@ -67,90 +77,6 @@ exports.index = function(source,operator,options) {
 			results.push(title);
 		}
 	});
-	return results;
-};
-
-exports.getindexParsed = function(source,operator,options) {
-	var results = [], data, index = operator.operand || ""; 
-	if(index){
-		source(function(tiddler,title) {
-			title = tiddler ? tiddler.fields.title : title;
-			data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
-			if(data) {
-				data = transform(data,options,title);
-				results.push(data);
-			}
-		});
-	}
-	return results;
-};
-
-exports.getindexes = function(source,operator,options) {
-	var results = [], invert = operator.prefix === "!", indexes = [], allowDuplicates = false;
-	var suffixes = operator.suffixes || [], flags = suffixes[0] || [];
-	if(!invert && operator.operand) indexes = $tw.utils.parseStringArray(operator.operand,allowDuplicates);
-	source(function(tiddler,title) {
-		var data, exclude;
-		if(!invert && !operator.operand) {
-			data = options.wiki.getTiddlerDataCached(title);
-			if(data) indexes = Object.keys(data);
-		}
-		if(invert) {
-			data = options.wiki.getTiddlerDataCached(title);
-			if(data) {
-				indexes = Object.keys(data);
-				if(operator.operand) {
-					exclude = $tw.utils.parseStringArray(operator.operand,allowDuplicates);
-					indexes = indexes.filter((index) => {
-						return exclude.indexOf(index) === -1;
-					});
-				}
-			}
-
-		}
-		for (var index of indexes) {
-			var value = options.wiki.extractTiddlerDataItem(tiddler,index);
-			if(value) {
-				if(flags.indexOf("list") !== -1) {
-					var list = $tw.utils.parseStringArray(value, false) || [];
-					results = results.concat(list);
-				} else {
-					value = transform(value,options,title);
-					results.push(value);
-				}
-			}
-		}
-	});
-	return results;
-};
-
-exports.searchindexes = function(source,operator,options) {
-	var results = [], invert = operator.prefix === "!", searchValue = operator.operand || "";
-	var suffixes = operator.suffixes || [], main = (suffixes[0] || [])[0], mainData;
-	if(main && (mainData = options.wiki.getTiddlerDataCached(main))) {
-		var mainIndexes = Object.keys(mainData);
-		source(function(tiddler,title) {
-			var data = options.wiki.getTiddlerDataCached(title);
-			if(data) Object.entries(data).forEach(([index, value]) => {
-				if (invert) {
-					if(value !== searchValue && mainIndexes.indexOf(index) !== -1 && results.indexOf(index) === -1) results.push(index);
-				} else {
-					if(value === searchValue && mainIndexes.indexOf(index) !== -1 && results.indexOf(index) === -1) results.push(index);
-				}
-			});
-		});
-	} else {
-		source(function(tiddler,title) {
-			var data = options.wiki.getTiddlerDataCached(title);
-			if(data) Object.entries(data).forEach(([index, value]) => {
-				if (invert) {
-					if(value !== searchValue && results.indexOf(index) === -1) results.push(index);
-				} else {
-					if(value === searchValue && results.indexOf(index) === -1) results.push(index);
-				}
-			});
-		});
-	}
 	return results;
 };
 
@@ -179,15 +105,46 @@ exports.indexreg = function(source,operator,options) {
 		source(function(tiddler,title) {
 			title = tiddler ? tiddler.fields.title : title;
 			if(index) {
-				var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "", match = false;
-				if(flags.indexOf("transform") !== -1) data = transform(data,options,title);
-				if(regexp.test(data)) match = true;
+				var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "", match;
+				if(flags.indexOf("transform") !== -1) data = getResults(data,options,title).join('');
+				match = regexp.test(data);
 				if(invert) match = !match;
 				if(match) results.push(title);
+			} else {
+				results.push(title);
 			}
 		});
 		return results;
 	}
+};
+
+exports.getindexParsed = function(source,operator,options) {
+	var results = [], data, index = operator.operand || null, s;
+	var suffixes = operator.suffixes || [], separator = (suffixes[0] || [])[0];
+	switch (separator) {
+		case 'comma':
+			s = ',';
+			break;
+		case 'space':
+			s = ' ';
+			break;
+		case 'commaspace':
+			s = ', ';
+			break;
+		default:
+			s = '';
+	}
+	if(index !== null) {
+		source(function(tiddler,title) {
+			title = tiddler ? tiddler.fields.title : title;
+			data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
+			if(data) {
+				data = getResults(data,options,title).join(s);
+				results.push(data);
+			}
+		});
+	}
+	return results;
 };
 
 exports.slash = function(source,operator,options) {
@@ -202,48 +159,50 @@ exports.slash = function(source,operator,options) {
 				source(function(tiddler,title) {
 					results.push(title + "/" + result);
 				});
-			} else if (data.indexOf(";;") !== -1) {
-				data.split(re).forEach(datum => {
-					if (datum !== "") {
-						result = getResult(datum,options,currTiddlerTitle);
-						source(function(tiddler,title) {
-							results.push(title + "/" + result);
-						});
-					}
-				});
 			} else {
-				result = getResult(data,options,currTiddlerTitle);
-				if (result.indexOf(";;") !== -1) {
-					data = result;
-					data.split(re).forEach(datum => {
-						if (datum !== "") {
-							result = getResult(datum,options,currTiddlerTitle);
-							source(function(tiddler,title) {
-								results.push(title + "/" + result);
-							});
-						}
-					});
-				} else {
+				getResults(data,options,currTiddlerTitle).forEach(result => {
 					source(function(tiddler,title) {
 						results.push(title + "/" + result);
 					});
-				}
+				});
 			}
 			break;
 		default:
 			data = options.wiki.getTiddler(currTiddlerTitle).getFieldString(key) || null;
 			if(data === null) {
 				result = "Others";
-				source(function(tiddler,title) {
-					results.push(title + "/" + result);
-				});
 			} else {
 				result = getResult(data,options,currTiddlerTitle);
-				source(function(tiddler,title) {
-					results.push(title + "/" + result);
-				});
 			}
+			source(function(tiddler,title) {
+				results.push(title + "/" + result);
+			});
 	}
+	return results;
+};
+
+exports.getAllIndexTitles = function(source,operator,options) {
+	var results = [], result, data, re = /\s*(?:;;|$)\s*/;
+	source(function(tiddler,title) {
+		if (tiddler) {
+			data = options.wiki.getTiddlerDataCached(title) || [];
+			Object.keys(data).forEach(index => {
+				data[index].split(re).forEach(datum => {
+					if (datum !== "" && options.wiki.tiddlerExists(datum)) {
+						let content = options.wiki.getTiddler(datum).getFieldString("caption") || datum;
+						result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",content,{
+							parseAsInline: true,
+							variables: {
+								currentTiddler: datum
+							},
+							parentWidget: options.widget
+						});
+						results.push(result);
+					}
+				});
+			});
+		}
+	});
 	return results;
 };
 
