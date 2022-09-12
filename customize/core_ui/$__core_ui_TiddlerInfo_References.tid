@@ -1,5 +1,5 @@
 caption: {{$:/language/TiddlerInfo/References/Caption}}
-modified: 20220601143127834
+modified: 20220912185602756
 modifier: yuzijie
 tags: $:/tags/TiddlerInfo customized
 title: $:/core/ui/TiddlerInfo/References
@@ -7,6 +7,18 @@ type: text/vnd.tiddlywiki
 
 \define lingo-base() $:/language/TiddlerInfo/
 
+\define backlink-button()
+\whitespace trim
+<$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;">Suggest Key:&#32;<<key>>
+<$action-setfield $index=<<key>> $value='<<bl-note date:"no">>'/>
+</$button>
+\end
+
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]"><div style="margin-bottom:10px;">
+<$list filter="[all[tiddlers]!is[current]!is[system]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>get[note]unique[]]" variable="key">
+<$list filter="[all[current]!has:index<key>]"><<backlink-button>></$list>
+</$list>
+</div></$list>
 <$list filter="[all[tiddlers]!is[current]!is[system]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sort[title]]" emptyMessage=<<lingo References/Empty>> template="$:/core/ui/ListItemTemplate"/>
 </$set>
