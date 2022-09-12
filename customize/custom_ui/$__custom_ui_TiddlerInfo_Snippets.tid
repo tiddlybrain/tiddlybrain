@@ -2,10 +2,30 @@ caption: Snippets
 created: 20211009085515046
 creator: yuzijie
 list-after: $:/core/ui/TiddlerInfo/Listed
-modified: 20220121115332990
+modified: 20220912183408479
 modifier: yuzijie
 tags: $:/tags/TiddlerInfo customized
 title: $:/custom/ui/TiddlerInfo/Snippets
 type: text/vnd.tiddlywiki
 
+\define snippet-button()
+\whitespace trim
+<$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;">Missing Key:&#32;<<key>>
+<$action-setfield $index=<<key>> $value='<<snippet date:"no">>'/>
+</$button>
+\end
+
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]"><div style="margin-bottom:10px;">
+<$list filter="[tag[Snippet]belongs.to<currentTiddler>get[note]unique[]]" variable="key">
+<$list filter="[all[current]!has:index<key>]"><<snippet-button>></$list>
+</$list>
+</div></$list>
+<$list filter="[all[current]!type[application/x-tiddler-dictionary]]"><div style="margin-bottom:10px;">
+<$list filter="[tag[Snippet]belongs.to<currentTiddler>has:field[note]limit[1]]" variable="NONE"><$button>
+Remove note field for all snippets
+<$list filter="[tag[Snippet]belongs.to<currentTiddler>has:field[note]]"><$fieldmangler>
+<$action-sendmessage $message="tm-remove-field" $param="note"/>
+</$fieldmangler></$list>
+</$button></$list>
+</div></$list>
 <$list filter="[tag[Snippet]belongs.to<currentTiddler>sort[note]]" emptyMessage="No snippets belong to this one" template="$:/core/ui/ListItemTemplate"/>
