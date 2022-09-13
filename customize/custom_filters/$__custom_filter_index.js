@@ -9,7 +9,6 @@ module-type: filteroperator
 3. Return the value of a given index, value parsed, e.g. [[tiddlers]getindexParsed[key]]
 4. Return the value of a given index, value parsed & joined, e.g. [[tiddlers]getindexJoined[key]]
 5. Branch Tiddler Constructor Filter, e.g. [slash:index[a]slash:field[b]]
-6. Find all tiddler titles inside of a data tiddler content, e.g. [[tiddlers]getAllIndexTitles[]]
 
 \*/
 (function(){
@@ -178,31 +177,6 @@ exports.slash = function(source,operator,options) {
 				results.push(title + "/" + result);
 			});
 	}
-	return results;
-};
-
-exports.getAllIndexTitles = function(source,operator,options) {
-	var results = [], result, data, re = /\s*(?:;;|$)\s*/;
-	source(function(tiddler,title) {
-		if (tiddler) {
-			data = options.wiki.getTiddlerDataCached(title) || [];
-			Object.keys(data).forEach(index => {
-				data[index].split(re).forEach(datum => {
-					if (datum !== "" && options.wiki.tiddlerExists(datum)) {
-						let content = options.wiki.getTiddler(datum).getFieldString("caption") || datum;
-						result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",content,{
-							parseAsInline: true,
-							variables: {
-								currentTiddler: datum
-							},
-							parentWidget: options.widget
-						});
-						results.push(result);
-					}
-				});
-			});
-		}
-	});
 	return results;
 };
 
