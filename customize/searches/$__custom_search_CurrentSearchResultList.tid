@@ -1,19 +1,46 @@
 caption: Current
 created: 20210328220236087
 creator: yuzijie
-first-search-filter: [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sortan[title]]
+first-search-filter: [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<current-subfilter>sortan[title]]
 list-after: $:/custom/search/SubtopicSearchResultList
-modified: 20220910150532445
+modified: 20220913224014661
 modifier: yuzijie
-second-search-filter: [tag{$:/HistoryList!!current-tiddler}] [prefix{$:/HistoryList!!current-tiddler}] [list{$:/HistoryList!!current-tiddler}] +[search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sort[title]]
+second-search-filter: [tag{$:/HistoryList!!current-tiddler}] [prefix{$:/HistoryList!!current-tiddler}] [list{$:/HistoryList!!current-tiddler}] +[!is[current]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sort[title]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/CurrentSearchResultList
 type: text/vnd.tiddlywiki
 
+\define note-filter() [note[$(note)$]]
+
+\define note-filters()
+\whitespace trim
+<$list filter="$(search-filter)$ +[get[note]unique[]nth[2]]" variable="NONE">
+<div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[get[note]unique[]sortan[title]]" variable="note">
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<note>>
+<$action-setfield $tiddler="$:/temp/current/filter" text=<<note-filter>> caption=<<note>>/>
+<$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>""">
+<$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/>
+</$list>
+</$button>
+</$list></$let></div>
+</$list>
+\end
+
 \define searchResultList()
+<$set name="current-subfilter" filter="[[$:/temp/current/filter]get[text]]" emptyValue="[is[tiddler]]" select="0">
+
 <div style="margin-bottom:10px;text-align:center;">Search within:
 __<$transclude tiddler={{$:/HistoryList!!current-tiddler}} field="caption"><$view tiddler={{$:/HistoryList!!current-tiddler}} field="title"/></$transclude>__
 </div>
+<$list filter="[[$:/temp/current/filter]!is[tiddler]]">
+<$set name="search-filter" value={{{ [<configTiddler>get[first-search-filter]] }}}><<note-filters>></$set>
+</$list>
+
+<$list filter="[[$:/temp/current/filter]is[tiddler]]"><small><$button class="search-tool">
+<$action-deletetiddler $tiddler="$:/temp/current/filter"/>Clear Note Filter: {{$:/temp/current/filter!!caption}}
+<$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>"""><$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/></$list>
+</$button></small></$list>
+
 //<small>Snippet matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
@@ -36,6 +63,7 @@ __<$transclude tiddler={{$:/HistoryList!!current-tiddler}} field="caption"><$vie
 </$list>
 </$list>
 
+</$set>
 \end
 
 <$list filter="[{$:/HistoryList!!current-tiddler}is[tiddler]]">

@@ -3,7 +3,7 @@ created: 20220310083819974
 creator: yuzijie
 first-search-filter: [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!is[system]!tag[Ignore]tag[Snippet]subfilter<subtopic-subfilter>limit[100]sortan[belongs.to]]
 list-after: $:/custom/search/TopicSearchResultList
-modified: 20220911083510849
+modified: 20220913221019259
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/SubtopicSearchResultList
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 
 \define keywords-filters()
 \whitespace trim
-<div class="subtopic-filters"><$let tv-wikilinks="no">
+<div class="search-filters"><$let tv-wikilinks="no">
 <$list filter="$(search-filter)$ +[get[parents]enlist-input[]!tag[Snippet]unique[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
 <$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>><$action-navigate/>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/CurrentSearchResultList"/>
