@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220913204244777
+modified: 20220914104443735
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -79,7 +79,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE">
 <$macrocall $name="tiddler-open" tiddler=<<mTitle>>/><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
 </$list>
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/category-modal" mTitle=<<__mTitle__>> item-filter=<<__item-filter__>> cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-algorithm=<<__cat-algorithm__>> qty=<<qty>> tag-caption=<<__tag-caption__>> search=<<__search__>>/>
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/category-modal" mTitle=<<__mTitle__>> item-filter=<<__item-filter__>> cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-algorithm=<<__cat-algorithm__>> cat-caption=<<__cat-caption__>> qty=<<qty>> tag-caption=<<__tag-caption__>> search=<<__search__>>/>
 <$list filter="[<__cat-caption__>!is[blank]]" emptyMessage="Total of <<qty>> items"><<__cat-caption__>> <span style="color:#aaa;">(<<qty>>)</span></$list>
 </$button>
 </$set>
