@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20220911083748348
+modified: 20220914004545501
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -65,7 +65,6 @@ dl.task-list dd {white-space: nowrap;}
 .tc-card-buttons {margin-top: 10px;}
 
 /* For Sidebar: Index & Editor */
-input.draft-search {background: transparent; border: none; border-bottom: 1px solid #ccc; line-height: 16px;}
 .tc-sidebar-header .tc-sidebar-lists .tc-drop-down p {margin-top: 1em; margin-bottom: 1em;}
 .tc-sidebar-lists .tc-editor-toolbar button {margin: 0; border: 1px solid #ccc;}
 
@@ -76,13 +75,11 @@ input.draft-search {background: transparent; border: none; border-bottom: 1px so
 
 /* For $:/custom/search/... */
 button.search-tool {display: inline-block; width: auto; font-size: smaller; padding: 0px 6px;}
-
-/* For $:/custom/search/SubtopicSearchResultList */
 .subtopic {display: block; padding: 1px 0 10px 10px;}
-.subtopic button.tc-tag-label, .subtopic-filters button.tc-tag-label {padding: 0.2em 0.7em; margin-right: 1px; color: #888; font-size: smaller; width: auto; border-radius: 1em; display: inline-block;}
+.subtopic button.tc-tag-label, .search-filters button.tc-tag-label {padding: 0.2em 0.7em; margin-right: 1px; color: #888; font-size: smaller; width: auto; border-radius: 1em; display: inline-block;}
 .subtopic button.tc-tag-label:hover {text-decoration: line-through;}
-.subtopic-filters {white-space: normal;}
-.subtopic-filters button.tc-tag-label {margin: 0 2px 5px 0;}
+.search-filters {white-space: normal;}
+.search-filters button.tc-tag-label {margin: 0 2px 5px 0;}
 
 /* For Macro: external-links */
 .external-links {text-align: center; padding: 3px 1em; line-height: 25px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
@@ -129,11 +126,14 @@ button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; width: 88%;
 
 /* For Macro: sort-by-tags */
 .categories {display: block; margin-bottom: 1em; background: #d8d8d8; padding: 2px 10px; border: 1px solid #ddd; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); line-height: 1.5em; position: relative;}
-.categories-caption {font-variant: small-caps; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); margin-bottom: 0.2em;}
 .categories-clear {position: absolute; top: 3px; right: 70px;}
 .categories-update {position: absolute; top: 3px; right: 10px;}
 .categories-clear button, .categories-update button {font-size: small;}
 .sort-by-belongs .macro-table {margin-bottom: 0;}
+.categories-caption {margin-bottom: 0.2em;}
+.categories-caption input {background: transparent; border: none; border-bottom: 1px solid white; width: 60%;}
+.categories-caption button svg {fill: #f5f5f5;}
+.categories-caption button {color: white; font-variant: small-caps; text-shadow: 0 1px 1px rgb(150 150 150 / 50%);}
 
 /* For Macro: record-popup */
 .record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 3px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}
@@ -214,13 +214,14 @@ a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
 button.links svg, a.links svg {transform: translateY(-1px);}
 button.links svg.tc-image-mono-block, a.links svg.tc-image-mono-block, .table-links button.links svg {transform: none;}
 
-/* For Macro: links, modal code viewer */
+/* For Macro: links, modal code viewer, highlight.js */
 .code-viewer {border: 1px solid #cccccc; display: flex;}
-.code-viewer pre {flex: 1 0 62%; margin: 0; border: none; padding: 18px !important; border-radius: 0;}
+.code-viewer pre {flex: 1 0 62%; margin: 0; border: none; border-radius: 0;}
 .code-viewer pre code {font-size: 1em;}
-.code-viewer textarea {flex: 0 0 38%; border: none; white-space: pre; font-size: 1em; line-height: 20px; padding: 18px 8px 0; height: 2000px !important; border-radius: 0;}
+.code-viewer textarea {flex: 0 0 38%; border: none; white-space: pre; font-size: 1em; line-height: 23px; padding: 12px 8px 0; height: 2000px !important; border-radius: 0;}
 .code-viewer textarea.edit {flex: 1 0 62%;}
 .code-viewer textarea.heightless {height: unset !important; text-align: right;}
+pre code.hljs {line-height: 23px; font-size: 14px;}
 
 /* For Macro: filter-options */
 .select-filter {vertical-align: bottom; height: 18px; width: 14px; border: none; background: transparent;}

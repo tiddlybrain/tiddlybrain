@@ -2,7 +2,7 @@ caption: Branches
 created: 20211207121501210
 creator: yuzijie
 list-before: $:/core/ui/MoreSideBar/All
-modified: 20220906185248254
+modified: 20220913233222636
 modifier: yuzijie
 tags: customized $:/tags/MoreSideBar
 title: BR
@@ -15,8 +15,8 @@ type: text/vnd.tiddlywiki
 </$list></$vars>
 <$reveal type="nomatch" state="$:/temp/menubarsearch" text="">
 <$button style="margin-bottom:12px;"><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>Clear Search Term</$button>
-<$button><$list filter="[prefix[BR/]search:title,caption,shortcap,note,status,keywords{$:/temp/menubarsearch}!sortan[title]]"><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button>
-<$list filter="[prefix[BR/]search:title,caption,shortcap,note,status,keywords{$:/temp/menubarsearch}sortan[title]]" variable="result"><div>
+<$button><$list filter="[prefix[BR/]search:title,caption,shortcap,keywords,note,status,description{$:/temp/menubarsearch}!sortan[title]]"><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button>
+<$list filter="[prefix[BR/]search:title,caption,shortcap,keywords,note,status,description{$:/temp/menubarsearch}sortan[title]]" variable="result"><div>
 <$button class="tc-btn-invisible tc-tiddlylink" dragTiddler=<<result>> to=<<result>>>
 <$macrocall $name="tree-opener" tiddler=<<result>> prefix="BR/"/><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>
 <$tiddler tiddler=<<result>>><<icons>> {{!!title}} <$list filter="[all[current]has[note]]">({{!!note}})</$list></$tiddler>
