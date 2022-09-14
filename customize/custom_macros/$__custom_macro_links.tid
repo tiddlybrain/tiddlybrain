@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20220901090022114
+modified: 20220913214204075
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -20,15 +20,15 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]get[dir]]" variable="path"><$set name="path-prefix" value={{$:/config/path-prefix!!path}}>
 <$button class="tc-btn-invisible links" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>{{$:/core/images/folder}}</$button>
 </$set></$list>
-<$list filter="[all[current]type[text/plain]]">
-<$button class="tc-btn-invisible links">{{$:/core/images/mono-block}}
+<$list filter="[all[current]code-body[yes]]"><$set name="code-style" filter="[tag[Comment]belongs.to<currentTiddler>]" value="fill:red;" emptyValue="">
+<$button class="tc-btn-invisible links" style=<<code-style>>>{{$:/core/images/mono-block}}
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mTitle={{!!title}} mContent={{!!text}}/>
 </$button>
-</$list>
+</$set></$list>
 \end
 
 \define modal-edit-code()
-<$list filter="[{$:/temp/code-viewer/edit}match[yes]]" emptyMessage="""<$button set="$:/temp/code-viewer/edit" setTo="yes">Edit Code</$button>"""><$button set="$:/temp/code-viewer/edit" setTo="" message="tm-close-tiddler"><$tiddler tiddler="$(mTitle)$"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mContent={{!!text}} mTitle={{!!title}}/></$tiddler>Read Code</$button></$list>
+<$list filter="[{$:/temp/code-viewer/edit}match[yes]]" emptyMessage="""<$button set="$:/temp/code-viewer/edit" setTo="yes">Edit Code</$button>"""><$button set="$:/temp/code-viewer/edit" setTo="" message="tm-close-tiddler"><$tiddler tiddler="$(mTitle)$"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mContent={{!!text}} mTitle={{!!title}}/></$tiddler>Edit Done</$button></$list>
 \end
 
 \define modal-edit-comment()
@@ -61,8 +61,8 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>Copy Directory Path</$button>
 </div></$list>
 <$list filter="[[$(modal)$]!match[yes]]" variable="NONE">
-<$list filter="[all[current]type[text/plain]!tag[Comment]]"><div class="external-links" style="background:#c9ffee;">
-<$button class="tc-btn-invisible light-color">Show code viewer<$list filter="[belongs.to{!!title}is[tiddler]]">@@color:red; + Comments@@</$list>
+<$list filter="[all[current]code-body[yes]]"><div class="external-links" style="background:#c9ffee;">
+<$button class="tc-btn-invisible light-color"><$list filter="[belongs.to{!!title}tag[Comment]]" emptyMessage="Show code">@@color:red;Show comments@@</$list>
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mContent={{!!text}} mTitle={{!!title}}/>
 </$button> &middot; <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param={{!!text}}>Copy content</$button>
 </div></$list>

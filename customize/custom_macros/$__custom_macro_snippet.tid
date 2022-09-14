@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220913091518761
+modified: 20220913204244777
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -46,7 +46,6 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink snippet-title" tooltip=<<currentTiddler>>>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[<__caption__>!is[blank]]" variable="NONE" emptyMessage="<$transclude field='caption'><$transclude field='text' mode='inline'/></$transclude>"><<__caption__>></$list>
-<$list filter="[tag[Comment]belongs.to{!!title}]">@@color:red;+ Comments@@</$list>
 <$reveal default="$date$" type="match" text="yes" style="color:#aaa;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
 </$reveal>
@@ -55,7 +54,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </$button>
 </$set>
 <$reveal type="match" state=<<snippet-accordion-state>> text="open" tag="div" class="snippet-accordion"><$set name="key" value="">
-<$list filter="[all[current]!type[text/plain]]" emptyMessage="<$codeblock code={{!!text}} language={{!!language}}/>">
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table copy:no>>>
 <$set name="class" filter="[all[current]has[_canonical_uri]] [all[current]is[image]]" value="snippet-external" emptyValue="snippet-content"><div class=<<class>>><$transclude mode="block"/></div></$set>
 </$list>

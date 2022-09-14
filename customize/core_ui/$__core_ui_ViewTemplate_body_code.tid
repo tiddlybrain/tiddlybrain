@@ -1,0 +1,7 @@
+modified: 20220913203402171
+modifier: yuzijie
+tags: customized
+title: $:/core/ui/ViewTemplate/body/code
+type: text/vnd.tiddlywiki
+
+<$codeblock code={{{ [<currentTiddler>get[text]] }}} language={{{ [<currentTiddler>get[language]else[text]] }}}/>

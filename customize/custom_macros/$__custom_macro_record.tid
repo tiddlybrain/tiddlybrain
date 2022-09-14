@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20220911144750307
+modified: 20220913210103828
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 <$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
 <$set name="border-color" filter="[all[current]get[color]addprefix[border-left-color:]]" emptyValue="" select="0">
 <blockquote class="tc-quote record" style=<<border-color>>><$list filter="[all[current]has[caption]]" emptyMessage=<<record-item-no-caption>>>
-<$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!type[text/plain]!is[image]then[yes]] -[[$(direct-open)$]match[yes]] -[[$(modal)$]match[yes]]" value="single-line-record" emptyValue="">
+<$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!code-body[yes]!is[image]then[yes]] -[[$(direct-open)$]match[yes]] -[[$(modal)$]match[yes]]" value="single-line-record" emptyValue="">
 <div class=<<class>>>
 <span class="left">
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>

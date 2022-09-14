@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20220828132657992
+modified: 20220913203221675
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -39,7 +39,7 @@ Description: {{!!description}}" description="" type="application/x-tiddler-dicti
 \end
 
 \define newCodeAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> language="" text="" type="text/plain" description=<<__description__>>/>
+<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> language="" code-body="yes" description=<<__description__>>/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 

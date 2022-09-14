@@ -1,7 +1,7 @@
 created: 20181212172024243
 creator: yuzijie
 list-before: $:/core/ui/SideBar/More
-modified: 20220912150650443
+modified: 20220913202833180
 modifier: yuzijie
 tags: $:/tags/SideBar customized
 title: Editor
@@ -34,8 +34,7 @@ type: text/vnd.tiddlywiki
 <tr><td style="width:100px;padding:6px 7px;">type</td>
 <td colspan="2">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>&nbsp;
-<$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>&nbsp;
-<$radio field="type" value="text/plain"> Plain</$radio>
+<$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
 </td>
 </tr>
 <tr><td style="width:100px;padding:6px 7px;">status</td>
