@@ -1,7 +1,7 @@
 created: 20190202192618583
 creator: yuzijie
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20220905221353224
+modified: 20220914160836870
 modifier: yuzijie
 tags: $:/tags/ViewTemplate customized
 title: $:/custom/template/top
@@ -10,10 +10,7 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
 <$list filter="[all[current]!search:title:literal[/]get[caption]!match[{{!!text}}]]" variable="NONE">
 <h1 style="margin:0;">{{!!caption}}
-<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$list filter="[all[current]has[status]]">
-<$button class="tc-btn-invisible" style="color:red;"><$action-deletefield $field="status"/>[{{!!status}}]</$button>
-</$list>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> <<status-selector>>
 <$list filter="[all[current]has[description]]">@@color:#aaa;display:block;font-size:medium;margin-top:9px;{{!!description}}@@</$list>
 </h1>
 </$list>

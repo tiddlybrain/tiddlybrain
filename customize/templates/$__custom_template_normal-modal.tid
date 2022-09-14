@@ -1,9 +1,9 @@
 created: 20210516172453585
 creator: yuzijie
 footer: <$list filter="[<mTitle>has[date]]"><<verification-notice>> Verified on <$list filter="[all[current]days:date[]]" emptyMessage="""<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible" style="color:green;"><$action-setfield $field="last-date" $value={{!!date}}/><$view field="date" format="date" template="YYYY-0MM-0DD"/> <$macrocall $name="days-passed" start={{!!date}}/></$button>""">@@color:green;Today@@</$list></$list>&nbsp;&nbsp;&nbsp;<$list filter="[<mTitle>!is[missing]]"><$button message="tm-close-tiddler"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button> <$button><<open-in-sidebar>>SIDEBAR</$button> <$list filter="[{$:/status/IsReadOnly}!match[yes]]"><$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/><$action-setfield $tiddler="$:/state/sidebar" text="no"/>EDIT</$button></$list></$list> <$button message="tm-close-tiddler">CLOSE</$button>
-modified: 20220909052608009
+modified: 20220914161307665
 modifier: yuzijie
-subtitle: <$list filter="[<mTitle>!is[missing]]"><$transclude field="caption"><$view field="title"/></$transclude><$list filter="[all[current]has[note]]"> @@color:green;[{{!!note}}]@@</$list><$list filter="[all[current]has[status]]"> <$button class="tc-btn-invisible" style="color:red;"><$action-deletefield $field="status"/>[{{!!status}}]</$button></$list><$list filter="[all[current]has[description]]"> @@color:#999;- {{!!description}}@@</$list><div style="float:right;font-size:smaller;"><$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>>{{$:/core/images/copy-clipboard}} <<mTitle>></$button></div></$list>
+subtitle: <$list filter="[<mTitle>!is[missing]]"><$transclude field="caption"><$view field="title"/></$transclude> <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> <<status-selector>> <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list><div style="float:right;font-size:smaller;"><$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>>{{$:/core/images/copy-clipboard}} <<mTitle>></$button></div></$list>
 tags: customized
 title: $:/custom/template/normal-modal
 type: text/vnd.tiddlywiki

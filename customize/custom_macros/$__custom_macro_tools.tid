@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220913204034544
+modified: 20220914185551426
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -173,11 +173,19 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define selector(filter, caption:"{{!!caption}}")
+\define selector(filter, caption:"{{!!title}}")
 <$list filter="[all[current]type[application/x-tiddler-dictionary]]">
 <$select index=<<key>>><$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list></$select>
 <$list filter="[<value>is[tiddler]]"><$macrocall $name="l" tiddler={{!!title}} text={{$:/core/images/open-window}}/></$list>
 </$list>
+\end
+
+\define status-selector()
+<$list filter="[all[current]get[status-options]] :else[all[current]get[celltpl]get[status-options]]" emptyMessage="""<$list filter="[all[current]has[status]]">
+<$button class="tc-btn-invisible" style="color:red;"><$action-deletefield $field="status"/>[{{!!status}}]</$button>
+</$list>""" variable="options"><span class="status-options">
+[<$select field="status"><option></option><$list filter="[<options>enlist-input[]sortan[title]]"><option>{{!!title}}</option></$list></$select>]
+</span></$list>
 \end
 
 # ''将树形结构进行展开''<$macrocall $name="code" content="""<<tree-opener tiddler:"branch tiddler" prefix:"同 tree 的 prefix" separator:"/" state-prefix:"$:/state/tree/">>"""/>
@@ -201,3 +209,4 @@ type: text/vnd.tiddlywiki
 # ''关闭 Tiddler 的同时, 修改 HistoryList 里面的 current-tiddler''<$macrocall $name="code" content="""<<tiddler-close tiddler:"关闭的 tiddler">>"""/>
 # ''打开 Tiddler 的同时, unfold tiddler''<$macrocall $name="code" content="""<<tiddler-open tiddler:"打开的 tiddler">>"""/>
 # ''从 tiddlers 列表中选择一个, 并赋给另一个 tiddler''<$macrocall $name="code" content="""<<selector filter:"tiddlers 筛选器" caption:"options 显示样式">>"""/>
+# ''从下拉菜单里面选择 status''<$macrocall $name="code" content="""<<status-selector>>"""/>
