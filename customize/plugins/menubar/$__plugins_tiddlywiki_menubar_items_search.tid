@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20220903033957837
+modified: 20220914184742468
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 \define cancel-search-actions()
 <$set name="userInput" value={{{ [<__storeTitle__>get[text]] }}}>
-<$list filter="[<__tiddler__>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>] $:/temp/subtopic/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>""">
+<$list filter="[<__tiddler__>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>] $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>""">
 <$action-setfield $tiddler=<<__tiddler__>> text=<<userInput>>/><$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 </$set>
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/menubarsearch/input}}/>
 <$action-navigate $to="$:/AdvancedSearch"/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
 <$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/>
-<$action-deletetiddler $filter="$:/temp/menubarsearch $:/temp/menubarsearch/input $:/temp/menubarsearch/refresh [<searchListState>] $:/temp/subtopic/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
+<$action-deletetiddler $filter="$:/temp/menubarsearch $:/temp/menubarsearch/input $:/temp/menubarsearch/refresh [<searchListState>] $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
 \end
 
 \whitespace trim
@@ -45,12 +45,12 @@ type: text/vnd.tiddlywiki
 </$keyboard>
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
 <$button class="tc-btn-invisible" style="margin-left:7px;">
-<$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/subtopic/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
+<$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
 <$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input"/>{{$:/core/images/close-button}}
 </$button>
 <$button class="tc-btn-invisible" style="margin-left:7px;" popup="$:/state/popup/menubar/NewTiddler">
 <$action-setfield $tiddler="$:/temp/newTiddler" text={{$:/temp/menubarsearch/input}}/>{{$:/core/images/new-button}}
-<$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/subtopic/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
+<$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
 </$button>
 </$reveal>
 <$button to="$:/AdvancedSearch" class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">
