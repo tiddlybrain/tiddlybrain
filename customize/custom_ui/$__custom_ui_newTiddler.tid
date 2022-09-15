@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20220913203221675
+modified: 20220915074432374
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -20,7 +20,7 @@ Description: {{!!description}}" description="" type="application/x-tiddler-dicti
 ; Steps
 : 
 ; Results
-: <<snippet>>
+: 
 ; Contacts
 : 
 ; Q&A
