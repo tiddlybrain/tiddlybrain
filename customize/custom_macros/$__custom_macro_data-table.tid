@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20220914220227980
+modified: 20220915191748638
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -59,7 +59,7 @@ type: text/vnd.tiddlywiki
 <$set name="value" tiddler=<<current>> index=<<key>>><<data-value-cell>></$set>
 </$list>
 <$reveal default="$copy$" type="match" text="yes" tag="td" style="text-align:right;" class="copy-col">
-<$set name="parsed-value" filter="[<current>getindexParsed:commaspace<key>]" select="0"><$list filter="[<parsed-value>!is[blank]]">
+<$set name="parsed-value" filter="[<current>getindexParsed:commaspace<key>trim[]]" select="0"><$list filter="[<parsed-value>!is[blank]]">
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<parsed-value>>>{{$:/core/images/copy-clipboard}}</$button>
 </$list></$set>
 </$reveal>
