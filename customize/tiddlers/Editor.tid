@@ -1,7 +1,7 @@
 created: 20181212172024243
 creator: yuzijie
 list-before: $:/core/ui/SideBar/More
-modified: 20220916090213794
+modified: 20220916190844779
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -74,7 +74,7 @@ type: text/vnd.tiddlywiki
 </$edit-text></$list>
 </$set>
 <table style="width:100%;margin:0;"><tbody>
-<$list filter="[all[current]fields:exclude[caption description status text type title tags modified list created creator modifier revision bag keywords parents]] shortcap note date path url dir interval order kw" variable="fieldName"><tr>
+<$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents]] shortcap note status date path url dir interval order kw" variable="fieldName"><tr>
 <td style="width:100px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
 <td style="width:10px;"><$list filter="[all[current]has:field<fieldName>]">
 <$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field=<<fieldName>>/>{{$:/core/images/delete-button}}</$button>

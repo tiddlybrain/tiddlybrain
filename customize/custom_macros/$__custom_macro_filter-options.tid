@@ -1,7 +1,7 @@
 created: 20220906205100237
 creator: yuzijie
 date: 20220906
-modified: 20220910145443471
+modified: 20220916191523027
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -9,6 +9,7 @@ type: text/vnd.tiddlywiki
 
 \define filter-by-tags-value() +[tag[$(currentTiddler)$]]
 \define filter-by-status-value() +[status[$(currentTiddler)$]]
+\define filter-by-not-status-value() +[!status[$(currentTiddler)$]]
 \define filter-by-note-value() +[note[$(currentTiddler)$]]
 \define filter-by-belongs-value() +[belongs.to[$(currentTiddler)$]]
 \define filter-build(f1,f5) $f1$ $(f2)$ $(f3)$ $(f4)$ $f5$
@@ -33,7 +34,8 @@ Belongs to:
 </$list>
 <option value="+[!has[status]]" style="color:#ff5a5a;">No Status</option>
 <$list filter="$filter$ +[get[status]each:value[]]">
-<option value=<<filter-by-status-value>> style="color:#ff5a5a;">Status: {{!!title}}</option>
+<option value=<<filter-by-status-value>> style="color:#a33434;">Status: {{!!title}}</option>
+<option value=<<filter-by-not-status-value>> style="color:#ff5a5a;">Not status: {{!!title}}</option>
 </$list>
 <$list filter="$filter$ +[get[note]each:value[]]">
 <option value=<<filter-by-note-value>> style="color:green;">Note: {{!!title}}</option>
