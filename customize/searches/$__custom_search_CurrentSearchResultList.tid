@@ -3,7 +3,7 @@ created: 20210328220236087
 creator: yuzijie
 first-search-filter: [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<current-subfilter>sortan[title]]
 list-after: $:/custom/search/SubtopicSearchResultList
-modified: 20220916132046872
+modified: 20220916133725209
 modifier: yuzijie
 second-search-filter: [tag{$:/HistoryList!!current-tiddler}] [prefix{$:/HistoryList!!current-tiddler}] [list{$:/HistoryList!!current-tiddler}] +[!is[current]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sort[title]]
 tags: $:/tags/SearchResults customized
@@ -27,8 +27,9 @@ type: text/vnd.tiddlywiki
 \end
 
 \define search-result-info()
-<$let tv-wikilinks="no"><div style="padding-left:10px;font-size:x-small;color:#888;background:#dbedff;margin-bottom:5px;">
-<$list filter="[all[current]get[parents]enlist-input[]get[caption]join[ > ]]">{{!!title}}</$list>
+<$let tv-wikilinks="no"><div style="padding-left:10px;font-size:x-small;color:#888;margin-bottom:5px;">
+<$list filter="[all[current]get[parents]enlist-input[]butlast[]]"><$wikify name="keyword" text={{!!caption}} mode="inline"><<keyword>> > </$wikify></$list>
+<$list filter="[all[current]get[parents]enlist-input[]last[]]"><$wikify name="keyword" text={{!!caption}} mode="inline"><<keyword>></$wikify></$list>
 </div></$let>
 \end
 
