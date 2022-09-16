@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20220913210103828
+modified: 20220916104432371
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -8,6 +8,7 @@ type: text/vnd.tiddlywiki
 
 \define record-item-no-caption()
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><div><$transclude mode="block"/></div></$list>
+<$list filter="[all[current]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE"><$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}}/></$list>
 <cite style="font-style:normal;text-align:right;">
 <span style="font-size:small;">
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
@@ -71,6 +72,7 @@ type: text/vnd.tiddlywiki
 <hr style="margin:0;"><<external-links>>
 <div class="record-content">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
+<$list filter="[all[current]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE"><$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}}/></$list>
 </div>
 </div></$reveal>
 \end
