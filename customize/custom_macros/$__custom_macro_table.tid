@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20220917094303952
+modified: 20220917111351058
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -119,6 +119,14 @@ type: text/vnd.tiddlywiki
 </tr>
 \end
 
+\define fill-empty-cell(content)
+<$list filter="[<value>is[blank]]" emptyMessage=<<cell-value-normal>> variable="NONE">
+<$button>Fill the cell value
+<$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<__content__>> $timestamp="no"/>
+</$button>
+</$list>
+\end
+
 # ''显示单元格内容, 环境变量: `current` - data Tiddler, `key` - data index, `value` - data value''
 #> `<<cell-value>>`
 # ''把 Data-Dictionary 用 Table 的形式展示出来, 每个 Tiddler 相当于一行''
@@ -142,3 +150,6 @@ type: text/vnd.tiddlywiki
   sort-order:"排序顺序">>`
 # ''tableE 的行''
 #> `<<table-row-edit>>`
+# ''如果 cell 里面没有值, 则按照内容来填充 cell''
+#> `<<fill-empty-cell
+content:"cell 的内容">>`
