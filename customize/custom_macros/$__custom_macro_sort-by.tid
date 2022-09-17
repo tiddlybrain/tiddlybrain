@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20220916222003312
+modified: 20220917095457114
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -173,17 +173,53 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 </$set>
 \end
 
-; 1. 从 `/` 处, 将 branch Tiddler 的 title 切开, 并按 level 来分行显示, 像一座塔一样
-: `<<tags-tower start:"0">>`
-; 2. 更新所有 Tiddlers 的 tags
-: `<<update-tags-button cat-prefix:"tag 的前缀" filter:"筛选出所有 Tiddlers 的 filter" cat-algorithm:"如何生成 tag 的 filter" tag-caption:"tag 的 caption">>`
-; 3. 显示 Tags 筛选框
-: `<<categories tags-filter:"筛选出所有 tags 的 filter" cat-prefix:"tag 的前缀" filter:"筛选出所有 Tiddlers 的 filter" cat-algorithm:"如何生成 tag 的 filter" tag-caption:"tag 的 caption" search-title:"搜索框标题">>`
-; 4. 按照 belongs.to 来进行分类展示
-: `<<sort-by-belongs filter:"[tag<currentTiddler>]" sort:"对 record 列表排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" title:"Unique ID">>`
-; 5. 分类显示通用模板
-: `<<sort-by tags-filter:"找到所有的 Tiddlers 的 Tags" belongs-filter:"sort-by-belongs 的 filter" sort:"sort-by-belongs 的 sort" cfilter:"sort-by-belongs 的 cfilter" rheader:"sort-by-belongs 的 rheader">>`
-; 6. 按照 Tags 来进行分类展示
-: `<<sort-by-tags cat-prefix:"tag 的前缀" sort:"对列表排序" sort-tags:"对 tags 进行排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" cat-algorithm:"如何生成 tag 的 filter" tag-caption:"tag 的 caption">>`
-; 7. 按照 item-filter 来进行分类展示
-: `<<sort-by-filter item-filter:"对列表进行筛选" cat-prefix:"tag 的前缀" sort:"对列表排序" sort-tags:"对 tags 进行排序" cfilter:"如果是 Table, 则需要填写" rheader:"如果是 Table, 可以选填" cat-algorithm:"如何生成 tag 的 filter" tag-caption:"tag 的 caption">>`
+# ''从 `/` 处, 将 branch Tiddler 的 title 切开, 并按 level 来分行显示, 像一座塔一样''
+#> `<<tags-tower
+  start:"0">>`
+# ''更新所有 Tiddlers 的 tags''
+#> `<<update-tags-button
+  cat-prefix:"tag 的前缀"
+  filter:"筛选出所有 Tiddlers 的 filter"
+  cat-algorithm:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`
+# ''显示 Tags 筛选框''
+#> `<<categories
+  tags-filter:"筛选出所有 tags 的 filter"
+  cat-prefix:"tag 的前缀"
+  filter:"筛选出所有 Tiddlers 的 filter"
+  cat-algorithm:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption"
+  search-title:"搜索框标题">>`
+# ''按照 belongs.to 来进行分类展示''
+#> `<<sort-by-belongs
+  filter:"[tag<currentTiddler>]"
+  sort:"对 record 列表排序"
+  cfilter:"如果是 Table, 则需要填写"
+  rheader:"如果是 Table, 可以选填"
+  title:"Unique ID">>`
+# ''分类显示通用模板''
+#> `<<sort-by
+  tags-filter:"找到所有的 Tiddlers 的 Tags"
+  belongs-filter:"sort-by-belongs 的 filter"
+  sort:"sort-by-belongs 的 sort"
+  cfilter:"sort-by-belongs 的 cfilter"
+  rheader:"sort-by-belongs 的 rheader">>`
+# ''按照 Tags 来进行分类展示''
+#> `<<sort-by-tags
+  cat-prefix:"tag 的前缀"
+  sort:"对列表排序"
+  sort-tags:"对 tags 进行排序"
+  cfilter:"如果是 Table, 则需要填写"
+  rheader:"如果是 Table, 可以选填"
+  cat-algorithm:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`
+# ''按照 item-filter 来进行分类展示''
+#> `<<sort-by-filter
+  item-filter:"对列表进行筛选"
+  cat-prefix:"tag 的前缀"
+  sort:"对列表排序"
+  sort-tags:"对 tags 进行排序"
+  cfilter:"如果是 Table, 则需要填写"
+  rheader:"如果是 Table, 可以选填"
+  cat-algorithm:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`

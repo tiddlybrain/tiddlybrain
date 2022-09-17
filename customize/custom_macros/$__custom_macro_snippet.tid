@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220917091655830
+modified: 20220917095905845
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -100,7 +100,39 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </$vars>
 \end
 
-# ''按住 Ctrl 并拖到 Snippet 上复制当前 Tiddler''<$macrocall $name="code" content="""<<snippet-drop-ctrl-actions tag:"额外添加的标签">>"""/>
-# ''拖到 Snippet 上发生的动作''<$macrocall $name="code" content="""<<snippet-drop-actions actions:"Tiddler 被放置时的额外动作" tag:"额外添加的标签" celltpl:"Snippet 的模板">>"""/>
-# ''Snippet 的条目''<$macrocall $name="code" content="""<<snippet-content date:"日期 yes/no" sort:"Snippets 排序" limit:"一次最多列出的 Snippets 的数量" caption:"自定义显示条目的内容" cfilter:"如果填写自动切换到 Table 模式" rheader:"如果是 Table 模式可以选填" no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here" has-filter:"是否显示 filter">>"""/>
-# ''创建一个新的 Snippet 或查看已创建的 Snippet''<$macrocall $name="code" content="""<<snippet key:"index key" date:"日期 yes/no" sort:"Snippets 排序" limit:"一次最多列出的 Snippets 的数量" caption:"自定义显示条目的内容" cfilter:"如果填写自动切换到 Table 模式" rheader:"如果是 Table 模式可以选填" actions:"Tiddler 被放置时的额外动作" tag:"Tiddler 被放置时添加额外标签" no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here" cat-view:"是否使用 sort-by-filter 来显示" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" tag-caption:"tag 的 caption" has-filter:"是否显示 filter" celltpl:"设置 Snippet 的模板">>"""/>
+# ''按住 Ctrl 并拖到 Snippet 上复制当前 Tiddler''
+#> `<<snippet-drop-ctrl-actions
+  tag:"额外添加的标签">>`
+# ''拖到 Snippet 上发生的动作''
+#> `<<snippet-drop-actions
+  actions:"Tiddler 被放置时的额外动作"
+  tag:"额外添加的标签"
+  celltpl:"Snippet 的模板">>`
+# ''Snippet 的条目''
+#> `<<snippet-content
+  date:"日期 yes/no"
+  sort:"Snippets 排序"
+  limit:"一次最多列出的 Snippets 的数量"
+  caption:"自定义显示条目的内容"
+  cfilter:"如果填写自动切换到 Table 模式"
+  rheader:"如果是 Table 模式可以选填"
+  no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here"
+  has-filter:"是否显示 filter">>`
+# ''创建一个新的 Snippet 或查看已创建的 Snippet''
+#> `<<snippet
+  key:"index key"
+  date:"日期 yes/no"
+  sort:"Snippets 排序"
+  limit:"一次最多列出的 Snippets 的数量"
+  caption:"自定义显示条目的内容"
+  cfilter:"如果填写自动切换到 Table 模式"
+  rheader:"如果是 Table 模式可以选填"
+  actions:"Tiddler 被放置时的额外动作"
+  tag:"Tiddler 被放置时添加额外标签"
+  no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here"
+  cat-view:"是否使用 sort-by-filter 来显示"
+  cat-prefix:"tag 的前缀"
+  cat-algorithm:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption"
+  has-filter:"是否显示 filter"
+  celltpl:"设置 Snippet 的模板">>`

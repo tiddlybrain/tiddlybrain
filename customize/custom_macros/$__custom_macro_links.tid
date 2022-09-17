@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20220913214204075
+modified: 20220917100639946
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -88,13 +88,14 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-; 1. 在列表的结尾根据 Tiddler 的不同添加 5 种图标 (Tasks, External Links, External Files, External Dirs, Code Snippets)
-: `<<links>>`
-; 2. 在 code-modal 里面的一个 Button, 用于编辑源代码
-: `<<modal-edit-code>>`
-; 3. 在 code-modal 里面的一个 Button, 用于编辑注释
-: `<<modal-edit-comment>>`
-; 4. 用于给 Tiddlers 分类并显示相应的图标
-: `<<icons style:"custom styles">>`
-; 5. 外部文件链接, 包括: url, _canonical_uri, image, path, dir, plain text, belongs.to
-: `<<external-links>>`
+# ''在列表的结尾根据 Tiddler 的不同添加 5 种图标 (Tasks, External Links, External Files, External Dirs, Code Snippets)''
+#> `<<links>>`
+# ''在 code-modal 里面的一个 Button, 用于编辑源代码''
+#> `<<modal-edit-code>>`
+# ''在 code-modal 里面的一个 Button, 用于编辑注释''
+#> `<<modal-edit-comment>>`
+# ''用于给 Tiddlers 分类并显示相应的图标''
+#> `<<icons
+  style:"custom styles">>`
+# ''外部文件链接, 包括: url, _canonical_uri, image, path, dir, plain text, belongs.to''
+#> `<<external-links>>`

@@ -1,6 +1,6 @@
 created: 20211001045719765
 creator: yuzijie
-modified: 20220310121736580
+modified: 20220917100156444
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/ref
@@ -50,8 +50,27 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-# ''以当前 Tiddler 为 root 的 Tree Macro''<$macrocall $name="code" content="""<<ref title:"指向一个 Tiddler 或者一个 Tree Branch" sort:"Tree 的排序方法">>"""/>
-# ''所有以当前 Tiddler 为 tag 的 tiddlers''<$macrocall $name="code" content="""<<ref-tag tag:"标签" sort:"排序" mode:"显示模式" tags:"额外添加的 tags">>"""/>
-# ''所有以当前 Tiddler 为 prefix 的 tiddlers''<$macrocall $name="code" content="""<<ref-prefix prefix:"前缀名" sort:"排序" mode:"显示模式" tags:"额外添加的 tags">>"""/>
-# ''所有当前 Tiddler 的 list field 的 tiddlers''<$macrocall $name="code" content="""<<ref-list title:"指向一个 Tiddler 或者当前 Tiddler" sort:"排序">>"""/>
-# ''以当前 Tiddler 为 root 的 TOC Macro''<$macrocall $name="code" content="""<<ref-toc title:"指向一个 Tiddler 或者当前 Tiddler" sort:"排序">>"""/>
+# ''以当前 Tiddler 为 root 的 Tree Macro''
+#> `<<ref
+  title:"指向一个 Tiddler 或者一个 Tree Branch"
+  sort:"Tree 的排序方法">>`
+# ''所有以当前 Tiddler 为 tag 的 tiddlers''
+#> `<<ref-tag
+  tag:"标签"
+  sort:"排序"
+  mode:"显示模式"
+  tags:"额外添加的 tags">>`
+# ''所有以当前 Tiddler 为 prefix 的 tiddlers''
+#> `<<ref-prefix
+  prefix:"前缀名"
+  sort:"排序"
+  mode:"显示模式"
+  tags:"额外添加的 tags">>`
+# ''所有当前 Tiddler 的 list field 的 tiddlers''
+#> `<<ref-list
+  title:"指向一个 Tiddler 或者当前 Tiddler"
+  sort:"排序">>`
+# ''以当前 Tiddler 为 root 的 TOC Macro''
+#> `<<ref-toc
+  title:"指向一个 Tiddler 或者当前 Tiddler"
+  sort:"排序">>`

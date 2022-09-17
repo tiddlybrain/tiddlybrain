@@ -1,6 +1,6 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20220903033017283
+modified: 20220917102603304
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
@@ -43,5 +43,5 @@ type: text/vnd.tiddlywiki
 </$set></$droppable>
 \end
 
-; 在 Index 里面显示 Trees
-: `<<index-tree>>`
+# ''在 Index 里面显示 Trees''
+#> `<<index-tree>>`

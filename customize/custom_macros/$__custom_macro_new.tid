@@ -1,6 +1,6 @@
 created: 20161118103029230
 creator: yuzijie
-modified: 20220102191015399
+modified: 20220917100359637
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/new
@@ -12,5 +12,12 @@ type: text/vnd.tiddlywiki
 </$button>
 \end
 
-; 新建 Tiddler
-: `<<new name:"按钮名称" template:"模板" class:"tc-btn-invisible" title:"标题" fields:"""tags='标签' text='123'""" style:"按钮风格" actions:"其他动作">>`
+# ''新建 Tiddler''
+#> `<<new
+  name:"按钮名称"
+  template:"模板"
+  class:"tc-btn-invisible"
+  title:"标题"
+  fields:"""tags='标签' text='123'"""
+  style:"按钮风格"
+  actions:"其他动作">>`

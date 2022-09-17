@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20220823140927307
+modified: 20220917094049536
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -144,13 +144,18 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-; 1. 列出计划今天开始的任务
-: `<<tasks-today>>`
-; 2. 单个任务按钮
-: `<<task-list-button color:"颜色" date:"left/passed">>`
-; 3. 所有任务清单
-: `<<task-list>>`
-; 4. 用于创建和修改 Tasks Journal
-: `<<date-pillar date:"相对日期 YYYY0MM0DD" today:"基准日期 YYYY0MM0DD">>`
-; 5. 用于做周计划
-: `<<weekly-plan date:"基准日期">>`
+# ''列出计划今天开始的任务''
+#> `<<tasks-today>>`
+# ''单个任务按钮''
+#> `<<task-list-button
+  color:"颜色"
+  date:"left/passed">>`
+# ''所有任务清单''
+#> `<<task-list>>`
+# ''用于创建和修改 Tasks Journal''
+#> `<<date-pillar
+  date:"相对日期 YYYY0MM0DD"
+  today:"基准日期 YYYY0MM0DD">>`
+# ''用于做周计划''
+#> `<<weekly-plan
+  date:"基准日期">>`

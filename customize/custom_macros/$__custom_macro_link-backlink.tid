@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20220914215949078
+modified: 20220917101247454
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -97,17 +97,100 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 </$set>
 \end
 
-; 1. 一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title
-: `<<l title:"tiddler title" text:"alternative text" class:"custom class" tr:"(Transclution) 显示 tiddler 内容" icon:"是否显示图标" style:"自定义样式" description:"是否显示 Description" note:"是否显示 note" date:"是否显示 date">>`
-; 2. 按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers
-: `<<bl-filter item-filter:"所有需要反查的 Tiddlers" uid:"给 bl 一个唯一的 id" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" popup:"是否通过 Modal 显示" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
-; 3. 反查指向当前 Tiddler 的所有 Tiddlers
-: `<<bl sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" popup:"是否通过 Modal 显示" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
-; 4. 反查指向当前 Tiddler 且属于某个 topic 的所有 Tiddlers
-: `<<bl-topic topic:"主题" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" popup:"是否通过 Modal 显示" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
-; 5. 反查指向当前 Tiddler 且标记了某个 tag 的所有 Tiddlers
-: `<<bl-tag tag:"标签" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" popup:"是否通过 Modal 显示" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
-; 6. 反查指向当前 Tiddler 且相同 note 的所有 Tiddlers
-: `<<bl-note note:"角色" sort:"结果排序" cfilter:"table 列" rheader:"table 标题列" limit:"最大显示行数" note:"是否显示 note" date:"是否显示 date" caption:"按照 caption 来显示结果条目" popup:"是否通过 Modal 显示" cat-prefix:"tag 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"按钮的标题显示" tag-caption:"tag 的 caption">>`
-; 7. 在 Modal 里面显示 bl 条目
-: `<<cat-modal mTitle:"currentTiddler" item-filter:"对列表进行筛选" sort:"Snippets 排序" cfilter:"如果填写自动切换到 Table 模式" rheader:"如果是 Table 模式可以选填" cat-prefix:"tags 的前缀" cat-algorithm:"如何生成 tag 的 filter" cat-caption:"自定义按钮标题" search:"专门为 backlinks 准备的变量" tag-caption:"tag 的 caption">>`
+# ''一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title''
+#> `<<l
+  title:"tiddler title"
+  text:"alternative text"
+  class:"custom class"
+  tr:"(Transclution) 显示 tiddler 内容"
+  icon:"是否显示图标"
+  style:"自定义样式"
+  description:"是否显示 Description"
+  note:"是否显示 note"
+  date:"是否显示 date">>`
+# ''按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers''
+#> `<<bl-filter
+  item-filter:"所有需要反查的 Tiddlers"
+  uid:"给 bl 一个唯一的 id"
+  sort:"结果排序"
+  cfilter:"table 列"
+  rheader:"table 标题列"
+  limit:"最大显示行数"
+  note:"是否显示 note"
+  date:"是否显示 date"
+  caption:"按照 caption 来显示结果条目"
+  popup:"是否通过 Modal 显示"
+  cat-prefix:"tag 的前缀"
+  cat-algorithm:"如何生成 tag 的 filter"
+  cat-caption:"按钮的标题显示"
+  tag-caption:"tag 的 caption">>`
+# ''反查指向当前 Tiddler 的所有 Tiddlers''
+#> `<<bl sort:"结果排序"
+  cfilter:"table 列"
+  rheader:"table 标题列"
+  limit:"最大显示行数"
+  note:"是否显示 note"
+  date:"是否显示 date"
+  caption:"按照 caption 来显示结果条目"
+  popup:"是否通过 Modal 显示"
+  cat-prefix:"tag 的前缀"
+  cat-algorithm:"如何生成 tag 的 filter"
+  cat-caption:"按钮的标题显示"
+  tag-caption:"tag 的 caption">>`
+# ''反查指向当前 Tiddler 且属于某个 topic 的所有 Tiddlers''
+#> `<<bl-topic
+  topic:"主题"
+  sort:"结果排序"
+  cfilter:"table 列"
+  rheader:"table 标题列"
+  limit:"最大显示行数"
+  note:"是否显示 note"
+  date:"是否显示 date"
+  caption:"按照 caption 来显示结果条目"
+  popup:"是否通过 Modal 显示"
+  cat-prefix:"tag 的前缀"
+  cat-algorithm:"如何生成 tag 的 filter"
+  cat-caption:"按钮的标题显示"
+  tag-caption:"tag 的 caption">>`
+# ''反查指向当前 Tiddler 且标记了某个 tag 的所有 Tiddlers''
+#> `<<bl-tag
+  tag:"标签"
+  sort:"结果排序"
+  cfilter:"table 列"
+  rheader:"table 标题列"
+  limit:"最大显示行数"
+  note:"是否显示 note"
+  date:"是否显示 date"
+  caption:"按照 caption 来显示结果条目"
+  popup:"是否通过 Modal 显示"
+  cat-prefix:"tag 的前缀"
+  cat-algorithm:"如何生成 tag 的 filter"
+  cat-caption:"按钮的标题显示"
+  tag-caption:"tag 的 caption">>`
+# ''反查指向当前 Tiddler 且相同 note 的所有 Tiddlers''
+#> `<<bl-note
+  note:"角色"
+  sort:"结果排序"
+  cfilter:"table 列"
+  rheader:"table 标题列"
+  limit:"最大显示行数"
+  note:"是否显示 note"
+  date:"是否显示 date"
+  caption:"按照 caption 来显示结果条目"
+  popup:"是否通过 Modal 显示"
+  cat-prefix:"tag 的前缀"
+  cat-algorithm:"如何生成 tag 的 filter"
+  cat-caption:"按钮的标题显示"
+  tag-caption:"tag 的 caption">>`
+# ''在 Modal 里面显示 bl 条目''
+#> `<<cat-modal
+  mTitle:"currentTiddler"
+  item-filter:"对列表进行筛选"
+  sort:"Snippets 排序"
+  cfilter:"如果填写自动切换到 Table 模式"
+  rheader:"如果是 Table 模式可以选填"
+  cat-prefix:"tags 的前缀"
+  cat-algorithm:"如何生成 tag 的 filter"
+  cat-caption:"自定义按钮标题"
+  search:"专门为 backlinks 准备的变量"
+  tag-caption:"tag 的 caption">>`

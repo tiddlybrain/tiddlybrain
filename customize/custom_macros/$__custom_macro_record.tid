@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20220916104432371
+modified: 20220917100308893
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -88,11 +88,17 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 </$vars>
 \end
 
-; 1. 没有 caption 情况下, record 条目内容的显示
-: `<<record-item-no-caption>>`
-; 2. 使用列表方式显示 Tiddlers
-: `<<record filter:"[tag<currentTiddler>!sort[date]]" uid:"和其他 record 进行区分用的 id">>`
-; 3. 用 Popup 显示 record 条目的内容
-: `<<record-popup uid:"和其他 record 进行区分用的 id">>`
-; 4. 带 filters 的 record
-: `<<records filter:"列表筛选规则" title:"list-filters 的 title" sort:"结果排序">>`
+# ''没有 caption 情况下, record 条目内容的显示''
+#> `<<record-item-no-caption>>`
+# ''使用列表方式显示 Tiddlers''
+#> `<<record
+  filter:"[tag<currentTiddler>!sort[date]]"
+  uid:"和其他 record 进行区分用的 id">>`
+# ''用 Popup 显示 record 条目的内容''
+#> `<<record-popup
+  uid:"和其他 record 进行区分用的 id">>`
+# ''带 filters 的 record''
+#> `<<records
+  filter:"列表筛选规则"
+  title:"list-filters 的 title"
+  sort:"结果排序">>`

@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20220916203640551
+modified: 20220917102112080
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -101,16 +101,38 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
-# ''复制 Tiddler 的 action''<$macrocall $name="code" content="""<<droppable-clone-action>>"""/>
-# ''给 Tiddler 添加未完待续的标签''<$macrocall $name="code" content="""<<droppable-TDC-action>>"""/>
-# ''修改 index tree 列表 action''<$macrocall $name="code" content="""<<droppable-index-tree>>"""/>
-# ''删除 Tiddler 的 action''<$macrocall $name="code" content="""<<droppable-delete-action>>"""/>
-# ''删除 Tiddler 的 Tags 的 action''<$macrocall $name="code" content="""<<droppable-remove-tags-action>>"""/>
-# ''将 Snippet 变为普通 tiddler''<$macrocall $name="code" content="""<<droppable-remove-snippet-action>>"""/>
-# ''Edit, Open, Copy, Delete actions''<$macrocall $name="code" content="""<<eocd-actions>>"""/>
-# ''将旧 Tiddler 按照标准重命名''<$macrocall $name="code" content="""<<droppable-rename-set-caption-action template:"新 Tiddler 模板">>"""/>
-# ''修改 Tasks Journal 的 action''<$macrocall $name="code" content="""<<droppable-date-action>>"""/>
-# ''将内容写入表格内, 用 `;;` 分隔''<$macrocall $name="code" content="""<<add-to-cell-action title:"data tiddler 标题" index:"目标键值" content:"填写内容">>"""/>
-# ''将内容从表格内删除''<$macrocall $name="code" content="""<<remove-from-cell-action title:"data tiddler 标题" index:"目标键值" content:"移除内容">>"""/>
-# ''将内容添加(若没有)进字段/从字段中删除(若存在)''<$macrocall $name="code" content="""<<droppable-add-or-remove-action field:"字段名">>"""/>
-# ''给 Data Tiddler 添加空白键''<$macrocall $name="code" content="""<<droppable-add-empty-indexes indexes:"键值列表">>"""/>
+# ''复制 Tiddler 的 action''
+#> `<<droppable-clone-action>>`
+# ''给 Tiddler 添加未完待续的标签''
+#> `<<droppable-TDC-action>>`
+# ''修改 index tree 列表 action''
+#> `<<droppable-index-tree>>`
+# ''删除 Tiddler 的 action''
+#> `<<droppable-delete-action>>`
+# ''删除 Tiddler 的 Tags 的 action''
+#> `<<droppable-remove-tags-action>>`
+# ''将 Snippet 变为普通 tiddler''
+#> `<<droppable-remove-snippet-action>>`
+# ''Edit, Open, Copy, Delete actions''
+#> `<<eocd-actions>>`
+# ''将旧 Tiddler 按照标准重命名''
+#> `<<droppable-rename-set-caption-action
+  template:"新 Tiddler 模板">>`
+# ''修改 Tasks Journal 的 action''
+#> `<<droppable-date-action>>`
+# ''将内容写入表格内, 用 `;;` 分隔''
+#> `<<add-to-cell-action
+  title:"data tiddler 标题"
+  index:"目标键值"
+  content:"填写内容">>`
+# ''将内容从表格内删除''
+#> `<<remove-from-cell-action
+  title:"data tiddler 标题"
+  index:"目标键值"
+  content:"移除内容">>`
+# ''将内容添加(若没有)进字段/从字段中删除(若存在)''
+#> `<<droppable-add-or-remove-action
+  field:"字段名">>`
+# ''给 Data Tiddler 添加空白键''
+#> `<<droppable-add-empty-indexes
+  indexes:"键值列表">>`

@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20220916204049343
+modified: 20220917102654222
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -53,7 +53,12 @@ Belongs to:
 </$list>
 \end
 
-; 1. 用于筛选结果的 Select
-: `<<filter-options title:"title of the list" filter:"filter from table or record" uid:"编号, list-filters 使用">>`
-; 2. 整合三个 filter-options
-: `<<list-filters title:"title of the list" filter:"filter from table or record">>`
+# ''用于筛选结果的 Select''
+#> `<<filter-options
+  title:"title of the list"
+  filter:"filter from table or record"
+  uid:"编号, list-filters 使用">>`
+# ''整合三个 filter-options''
+#> `<<list-filters
+  title:"title of the list"
+  filter:"filter from table or record">>`

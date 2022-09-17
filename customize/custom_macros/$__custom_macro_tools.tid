@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220914185551426
+modified: 20220917093902080
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -188,25 +188,78 @@ type: text/vnd.tiddlywiki
 </span></$list>
 \end
 
-# ''将树形结构进行展开''<$macrocall $name="code" content="""<<tree-opener tiddler:"branch tiddler" prefix:"同 tree 的 prefix" separator:"/" state-prefix:"$:/state/tree/">>"""/>
-# ''解决 diff-text widget 不能接受 tiddler title 作为参数的缺陷''<$macrocall $name="code" content="""<<diff-title source:"source title" dest:"destination title">>"""/>
-# ''比较两个不同的代码之间的区别''<$macrocall $name="code" content="""<<source-compare>>"""/>
-# ''显示源代码, 并且可以一键复制''<$macrocall $name="code" content="""<<code content:"源代码" language:"编程语言">>"""/>
-# ''生成一个 Collapse 组件''<$macrocall $name="code" content="""<<collapse title:"tiddler title" tags:"额外添加的 tags">>"""/>
-# ''用父 Tiddler 的名字组成 tree 的 prefix''<$macrocall $name="code" content="""<<tree-prefix-builder separator:"/">>"""/>
-# ''使用各种模式来展示内容''<$macrocall $name="code" content="""<<display content:"要展示的内容" mode:"tips/code" state:"name of state tiddler, e.g. $:/state/display/XXX" language:"编程语言">>"""/>
-# ''点击后, 在 Sidebar 打开该链接''<$macrocall $name="code" content="""<<shortcut-linked>>"""/>
-# ''toc-link 是 no 的 Tiddler, 列出其下 tiddlers''<$macrocall $name="code" content="""<<shortcut-unlinked sort:"排序 sort[order]">>"""/>
-# ''在搜索框的下拉菜单里显示 TOC''<$macrocall $name="code" content="""<<shortcut root:"Index" sort:"排序 sort[order]">>"""/>
-# ''把 Tiddler 添加到 Sidebar 的动作''<$macrocall $name="code" content="""<<open-in-sidebar close:"是否关闭 tiddler">>"""/>
-# ''将日期转换成指定的格式''<$macrocall $name="code" content="""<<format-date date:"20200102" template:"YYYY-0MM-0DD">>"""/>
-# ''修改 timeline macro 的 tidder links 的样式''<$macrocall $name="code" content="""<<timeline-title>>"""/>
-# ''为 Branch Tiddler 自动生成 Caption''<$macrocall $name="code" content="""<<branch-caption levels:"从某级之后开始计算标题" separator:"原分隔符", separator2:"新分隔符">>"""/>
-# ''点击链接以后弹出 Modal 的动作''<$macrocall $name="code" content="""<<modal-actions>>"""/>
-# ''Subtitle 的时间显示''<$macrocall $name="code" content="""<<subtitle>>"""/>
-# ''展示 Tiddler 之间的关联关系''<$macrocall $name="code" content="""<<relationships name:"关系名称" filter:"关系对应的 Filter" direct-open:"是否直接打开">>"""/>
-# ''检查通知''<$macrocall $name="code" content="""<<verification-notice>>"""/>
-# ''关闭 Tiddler 的同时, 修改 HistoryList 里面的 current-tiddler''<$macrocall $name="code" content="""<<tiddler-close tiddler:"关闭的 tiddler">>"""/>
-# ''打开 Tiddler 的同时, unfold tiddler''<$macrocall $name="code" content="""<<tiddler-open tiddler:"打开的 tiddler">>"""/>
-# ''从 tiddlers 列表中选择一个, 并赋给另一个 tiddler''<$macrocall $name="code" content="""<<selector filter:"tiddlers 筛选器" caption:"options 显示样式">>"""/>
-# ''从下拉菜单里面选择 status''<$macrocall $name="code" content="""<<status-selector>>"""/>
+# ''将树形结构进行展开''
+#> `<<tree-opener
+  tiddler:"branch tiddler"
+  prefix:"同 tree 的 prefix"
+  separator:"/"
+  state-prefix:"$:/state/tree/">>`
+# ''解决 diff-text widget 不能接受 tiddler title 作为参数的缺陷''
+#> `<<diff-title
+  source:"source title"
+  dest:"destination title">>`
+# ''比较两个不同的代码之间的区别''
+#> `<<source-compare>>`
+# ''显示源代码, 并且可以一键复制''
+#> `<<code
+  content:"源代码"
+  language:"编程语言">>`
+# ''生成一个 Collapse 组件''
+#> `<<collapse
+  title:"tiddler title"
+  tags:"额外添加的 tags">>`
+# ''用父 Tiddler 的名字组成 tree 的 prefix''
+#> `<<tree-prefix-builder
+  separator:"/">>`
+# ''使用各种模式来展示内容''
+#> `<<display
+  content:"要展示的内容"
+  mode:"tips/code"
+  state:"name of state tiddler, e.g. $:/state/display/XXX"
+  language:"编程语言">>`
+# ''点击后, 在 Sidebar 打开该链接''
+#> `<<shortcut-linked>>`
+# ''toc-link 是 no 的 Tiddler, 列出其下 tiddlers''
+#> `<<shortcut-unlinked
+ sort:"排序 sort[order]">>`
+# ''在搜索框的下拉菜单里显示 TOC''
+#> `<<shortcut
+  root:"Index"
+  sort:"排序 sort[order]">>`
+# ''把 Tiddler 添加到 Sidebar 的动作''
+#> `<<open-in-sidebar
+  close:"是否关闭 tiddler">>`
+# ''将日期转换成指定的格式''
+#> `<<format-date
+  date:"20200102"
+  template:"YYYY-0MM-0DD">>`
+# ''修改 timeline macro 的 tidder links 的样式''
+#> `<<timeline-title>>`
+# ''为 Branch Tiddler 自动生成 Caption''
+#> `<<branch-caption
+  levels:"从某级之后开始计算标题"
+  separator:"原分隔符"
+  separator2:"新分隔符">>`
+# ''点击链接以后弹出 Modal 的动作''
+#> `<<modal-actions>>`
+# ''Subtitle 的时间显示''
+#> `<<subtitle>>`
+# ''展示 Tiddler 之间的关联关系''
+#> `<<relationships
+  name:"关系名称"
+  filter:"关系对应的 Filter"
+  direct-open:"是否直接打开">>`
+# ''检查通知''
+#> `<<verification-notice>>`
+# ''关闭 Tiddler 的同时, 修改 HistoryList 里面的 current-tiddler''
+#> `<<tiddler-close
+  tiddler:"关闭的 tiddler">>`
+# ''打开 Tiddler 的同时, unfold tiddler''
+#> `<<tiddler-open
+  tiddler:"打开的 tiddler">>`
+# ''从 tiddlers 列表中选择一个, 并赋给另一个 tiddler''
+#> `<<selector
+  filter:"tiddlers 筛选器"
+  caption:"options 显示样式">>`
+# ''从下拉菜单里面选择 status''
+#> `<<status-selector>>`

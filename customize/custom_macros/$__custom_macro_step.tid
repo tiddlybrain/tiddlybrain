@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20220901011940422
+modified: 20220917095012965
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -138,27 +138,90 @@ type: text/vnd.tiddlywiki
 </$set></$set></$set>
 \end
 
-; 1. 给文字加上一个 popup, 显示注释信息
-: `<<linkIfExists text:"文字" comments:"注释信息">>`
-; 2. Sub-task，完成打个叉
-: `<<s step:"下一步" comments:"注释信息" field:"对应字段">>`
-; 3. 在任务后面显示日期
-: `<<days-button value:"20190102" days:"输入一个宏, 例如 days-passed" step:"任务名称" r:"备注" to:"委托人">>`
-; 4. Step Open 任务启动，等待任务开始执行
-: `<<step-open step:"下一步" comments:"注释信息" t:"20190102(Time reminder)" r:"备注" to:"委托人">>`
-; 5. Step Doing 任务执行中, 并计算任务执行了多长时间
-: `<<step-doing step:"下一步" comments:"注释信息" t:"20190102(start)" r:"备注" to:"委托人">>`
-; 6. Step Done 已完成的任务
-: `<<step-done step:"下一步" comments:"注释信息" d:"20190201(end)" to:"委托人">>`
-; 7. 整合 Open, Doing 和 Done 的功能, 同时增加了统计任务数量的功能
-: `<<a step:"下一步" comments:"注释信息" t:"20190102(start)" r:"备注" d:"20190201(end)" to:"委托人">>`
-; 8. Canceled 任务不可执行，已取消
-: `<<c step:"下一步" comments:"注释信息" t:"20190102(start)" r:"备注" d:"20190201(end)" to:"委托人">>`
-; 9. Waiting Undone 等待之中
-: `<<waiting-undone step:"下一步" comments:"注释信息" t:"20190102(start)" r:"备注" to:"delegated to" symbol:"按钮符号" days:"输入一个宏, 例如 days-passed" color:"#009dd9" type:"text field 里面的内容, waiting 或 deadline">>`
-; 10. Waiting Done 等待结束
-: `<<waiting-done step:"下一步" comments:"注释信息" t:"20190102(start)" d:"20190201(end)" to:"delegated to" color:"#555" duration:"是否计算时间长度">>`
-; 11. Waiting 适用于等待别人完成的事项
-: `<<w step:"下一步" comments:"注释信息" t:"20190102(start)" r:"备注" d:"20190201(end)" to:"delegated to">>`
-; 12. Deadline 适用于倒计时的情况, 以及小里程碑
-: `<<d step:"下一步" comments:"注释信息" t:"20190102(start)" r:"备注" d:"20190201(end)" to:"delegated to">>`
+# ''给文字加上一个 popup, 显示注释信息''
+#> `<<linkIfExists
+  text:"文字"
+  comments:"注释信息">>`
+# ''Sub-task，完成打个叉''
+#> `<<s
+  step:"下一步"
+  comments:"注释信息"
+  field:"对应字段">>`
+# ''在任务后面显示日期''
+#> `<<days-button
+  value:"20190102"
+  days:"输入一个宏, 例如 days-passed"
+  step:"任务名称"
+  r:"备注"
+  to:"委托人">>`
+# ''Step Open 任务启动，等待任务开始执行''
+#> `<<step-open
+  step:"下一步"
+  comments:"注释信息"
+  t:"20190102(Time reminder)"
+  r:"备注"
+  to:"委托人">>`
+# ''Step Doing 任务执行中, 并计算任务执行了多长时间''
+#> `<<step-doing
+  step:"下一步"
+  comments:"注释信息"
+  t:"20190102(start)"
+  r:"备注"
+  to:"委托人">>`
+# ''Step Done 已完成的任务''
+#> `<<step-done
+  step:"下一步"
+  comments:"注释信息"
+  d:"20190201(end)"
+  to:"委托人">>`
+# ''整合 Open, Doing 和 Done 的功能, 同时增加了统计任务数量的功能''
+#> `<<a
+  step:"下一步"
+  comments:"注释信息"
+  t:"20190102(start)"
+  r:"备注"
+  d:"20190201(end)" to:"委托人">>`
+# ''Canceled 任务不可执行，已取消''
+#> `<<c
+  step:"下一步"
+  comments:"注释信息"
+  t:"20190102(start)"
+  r:"备注"
+  d:"20190201(end)"
+  to:"委托人">>`
+# ''Waiting Undone 等待之中''
+#> `<<waiting-undone
+  step:"下一步"
+  comments:"注释信息"
+  t:"20190102(start)"
+  r:"备注"
+  to:"delegated to"
+  symbol:"按钮符号"
+  days:"输入一个宏, 例如 days-passed"
+  color:"#009dd9"
+  type:"text field 里面的内容, waiting 或 deadline">>`
+# ''Waiting Done 等待结束''
+#> `<<waiting-done
+  step:"下一步"
+  comments:"注释信息"
+  t:"20190102(start)"
+  d:"20190201(end)"
+  to:"delegated to"
+  color:"#555"
+  duration:"是否计算时间长度">>`
+# ''Waiting 适用于等待别人完成的事项''
+#> `<<w
+  step:"下一步"
+  comments:"注释信息"
+  t:"20190102(start)"
+  r:"备注"
+  d:"20190201(end)"
+  to:"delegated to">>`
+# ''Deadline 适用于倒计时的情况, 以及小里程碑''
+#> `<<d
+  step:"下一步"
+  comments:"注释信息"
+  t:"20190102(start)"
+  r:"备注"
+  d:"20190201(end)"
+  to:"delegated to">>`

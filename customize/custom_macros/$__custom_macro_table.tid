@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20220915191518302
+modified: 20220917094303952
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -119,13 +119,26 @@ type: text/vnd.tiddlywiki
 </tr>
 \end
 
-; 1. 显示单元格内容, 环境变量: `current` - data Tiddler, `key` - data index, `value` - data value
-: `<<cell-value>>`
-; 2. 把 Data-Dictionary 用 Table 的形式展示出来, 每个 Tiddler 相当于一行
-: `<<table cfilter:"[[A]] [[B]] [[C]] 输入键值" rfilter:"[tag<currentTiddler>] 行标题过滤" rheader:"Name of Row header" title:"表格 ID" sort-order:"排序顺序">>`
-; 3. 展示 Table 的行
-: `<<table-row rheader:"Name of Row header">>`
-; 4. 使用 table 形式编辑 Data tiddlers 的值
-: `<<tableE cfilter:"输入键值" ffilter:"输入字段值" rfilter:"[tag<currentTiddler>] 行标题过滤" title:"表格 ID" fields:"新建词条的时候自定义的字段" tag:"给新 Tiddler 添加额外的 tag" sort-order:"排序顺序">>`
-; 5. tableE 的行
-: `<<table-row-edit>>`
+# ''显示单元格内容, 环境变量: `current` - data Tiddler, `key` - data index, `value` - data value''
+#> `<<cell-value>>`
+# ''把 Data-Dictionary 用 Table 的形式展示出来, 每个 Tiddler 相当于一行''
+#> `<<table
+  cfilter:"[[A]] [[B]] [[C]] 输入键值"
+  rfilter:"[tag<currentTiddler>] 行标题过滤"
+  rheader:"Name of Row header"
+  title:"表格 ID"
+  sort-order:"排序顺序">>`
+# ''展示 Table 的行''
+#> `<<table-row
+  rheader:"Name of Row header">>`
+# ''使用 table 形式编辑 Data tiddlers 的值''
+#> `<<tableE
+  cfilter:"输入键值"
+  ffilter:"输入字段值"
+  rfilter:"[tag<currentTiddler>] 行标题过滤"
+  title:"表格 ID"
+  fields:"新建词条的时候自定义的字段"
+  tag:"给新 Tiddler 添加额外的 tag"
+  sort-order:"排序顺序">>`
+# ''tableE 的行''
+#> `<<table-row-edit>>`

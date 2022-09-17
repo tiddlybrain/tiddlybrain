@@ -1,6 +1,6 @@
 created: 20210809065454577
 creator: yuzijie
-modified: 20220904210948955
+modified: 20220917093130092
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/toc
@@ -70,11 +70,21 @@ type: text/vnd.tiddlywiki
 </$vars>
 \end
 
-; 自定义的 Table of Contents 目录, 修改自 toc-selective-expandable macro
-: `<<custom-toc root:"根目录 Tiddler" sort:"Tiddler 排序的方法" itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class" path:"目录展开需要的 state tiddler 的部分路径">>`
-; custom-toc 目录, 点击后可以打开 Tiddler
-: `<<custom-toc-linked sort:"Tiddler 排序的方法" itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class" path:"目录展开需要的 state tiddler 的部分路径">>`
-; custom-toc 目录, 点击后无法打开 Tiddler, 而是展开下层目录
-: `<<custom-toc-unlinked sort:"Tiddler 排序的方法" itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class" path:"目录展开需要的 state tiddler 的部分路径">>`
-; custom-toc 的目录名字
-: `<<custom-toc-caption>>`
+# ''自定义的 Table of Contents 目录, 修改自 toc-selective-expandable macro''
+#> `<<custom-toc
+  root:"根目录 Tiddler"
+  sort:"Tiddler 排序的方法"
+  itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class"
+  path:"目录展开需要的 state tiddler 的部分路径">>`
+# ''custom-toc 目录, 点击后可以打开 Tiddler''
+#> `<<custom-toc-linked
+  sort:"Tiddler 排序的方法"
+  itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class"
+  path:"目录展开需要的 state tiddler 的部分路径">>`
+# ''custom-toc 目录, 点击后无法打开 Tiddler, 而是展开下层目录''
+#> `<<custom-toc-unlinked
+  sort:"Tiddler 排序的方法"
+  itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class"
+  path:"目录展开需要的 state tiddler 的部分路径">>`
+# ''custom-toc 的目录名字''
+#> `<<custom-toc-caption>>`

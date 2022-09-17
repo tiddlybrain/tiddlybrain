@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20220915191748638
+modified: 20220917102211527
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -71,5 +71,10 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-; 用一个表格来显示 Data Tiddlers 的 Key 和 Value, 支持 Template
-: `<<data-table template:"template 名称, 要和所在的 template 名字一致" filter:"选择要显示的字段, 默认: [all[current]indexes[]]" copy:"Copy 列是否出现, 默认 yes" columns:"额外的列" style:"表格样式">>`
+# ''用一个表格来显示 Data Tiddlers 的 Key 和 Value, 支持 Template''
+#> `<<data-table
+  template:"template 名称, 要和所在的 template 名字一致"
+  filter:"选择要显示的字段, 默认: [all[current]indexes[]]"
+  copy:"Copy 列是否出现, 默认 yes"
+  columns:"额外的列"
+  style:"表格样式">>`

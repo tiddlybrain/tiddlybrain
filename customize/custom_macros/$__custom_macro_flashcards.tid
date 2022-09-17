@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20220626222656618
+modified: 20220917095550948
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -49,9 +49,9 @@ type: text/vnd.tiddlywiki
 </div></div>
 \end
 
-; 1. 显示 Flashcard 卡片的级别
-: `<<flashcard-level>>`
-; 2. 显示 Flashcard 卡片的按钮
-: `<<flashcard-buttons>>`
-; 3. 单个 Flashcard 卡片
-: `<<flashcard>>`
+# ''显示 Flashcard 卡片的级别''
+#> `<<flashcard-level>>`
+# ''显示 Flashcard 卡片的按钮''
+#> `<<flashcard-buttons>>`
+# ''单个 Flashcard 卡片''
+#> `<<flashcard>>`
