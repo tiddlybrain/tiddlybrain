@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20220918060452408
+modified: 20220918212453974
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -38,14 +38,14 @@ type: text/vnd.tiddlywiki
 \define bl-pattern() (\[\[|\||;;|"|'|:|\s|^)$(search)$(\]\]|;;|"|'|:|\n|$)
 \define bl-limit-state(uid) $:/state/bl-limit/$(current)$/$uid$
 
-\define bl-item(note, date, caption)
+\define bl-item(note, date, caption, description)
 <div class="tc-menu-list-item" style="white-space:nowrap;overflow:hidden;"><<links>>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-<$macrocall $name="l" title={{!!title}} text=<<__caption__>> class="bl-title" icon="no" description="yes" note="$note$" date="$date$"/>
+<$macrocall $name="l" title={{!!title}} text=<<__caption__>> class="bl-title" icon="no" description="$description$" note="$note$" date="$date$"/>
 </div>
 \end
 
-\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"10", note, date, caption, popup, cat-prefix, cat-caption)
+\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"10", note:"yes", description:"yes", date, caption, popup, cat-prefix, cat-caption)
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
@@ -55,7 +55,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>/>
 </div></$list>
-<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>>/>""" variable="NONE"><$list filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">>><<bl-item "$note$" "$date$" """$caption$""">></$list></$list>
+<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>>/>""" variable="NONE"><$list filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">>><<bl-item "$note$" "$date$" """$caption$""" "$description$">></$list></$list>
 <$list filter="[<bl-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item" style="margin-top:-3px;">
 <$button class="tc-btn-invisible fold-text">-- <<limit>> of <<bl-qty>> shown --
 <$list filter="[<bl-limit-state '$uid$'>is[missing]]" emptyMessage="<$action-deletetiddler $tiddler=<<bl-limit-state '$uid$'>>/>">
@@ -71,17 +71,17 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 </$set></$set>
 \end
 
-\define bl(sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
+\define bl(sort, cfilter, rheader, limit, note, description, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
 
-\define bl-topic(topic, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
+\define bl-topic(topic, sort, cfilter, rheader, limit, note, description, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
 
-\define bl-tag(tag, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
+\define bl-tag(tag, sort, cfilter, rheader, limit, note, description, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
 
 \define bl-note-filter() note[$(note)$]!is[current]
 
-\define bl-note(note, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-caption)
+\define bl-note(note, sort, cfilter, rheader, limit, note, description, date, caption, popup, cat-prefix, cat-caption)
 <$set name="note" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
-<$macrocall $name="bl-filter" item-filter=<<bl-note-filter>> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
+<$macrocall $name="bl-filter" item-filter=<<bl-note-filter>> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
 </$set>
 \end
 
@@ -117,6 +117,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   rheader:"table 标题列"
   limit:"最大显示行数"
   note:"是否显示 note"
+  description:"是否显示 Description"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
@@ -128,6 +129,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   rheader:"table 标题列"
   limit:"最大显示行数"
   note:"是否显示 note"
+  description:"是否显示 Description"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
@@ -141,6 +143,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   rheader:"table 标题列"
   limit:"最大显示行数"
   note:"是否显示 note"
+  description:"是否显示 Description"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
@@ -154,6 +157,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   rheader:"table 标题列"
   limit:"最大显示行数"
   note:"是否显示 note"
+  description:"是否显示 Description"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
@@ -167,6 +171,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   rheader:"table 标题列"
   limit:"最大显示行数"
   note:"是否显示 note"
+  description:"是否显示 Description"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
