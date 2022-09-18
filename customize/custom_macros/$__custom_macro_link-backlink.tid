@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20220917101247454
+modified: 20220918060452408
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -45,12 +45,12 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"10", note, date, caption, popup, cat-prefix, cat-algorithm, cat-caption, tag-caption)
+\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"10", note, date, caption, popup, cat-prefix, cat-caption)
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
-<$list filter="[<__popup__>is[blank]]" emptyMessage="""<$macrocall $name="cat-modal" mTitle=<<current>> item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-algorithm="$cat-algorithm$" cat-caption="$cat-caption$" search=<<search>> tag-caption="$tag-caption$"/>""" variable="NONE">
+<$list filter="[<__popup__>is[blank]]" emptyMessage="""<$macrocall $name="cat-modal" mTitle=<<current>> item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-caption="$cat-caption$" search=<<search>>/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>/>
@@ -71,27 +71,27 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 </$set></$set>
 \end
 
-\define bl(sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-algorithm, cat-caption, tag-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>> tag-caption=<<__tag-caption__>>/>
+\define bl(sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
 
-\define bl-topic(topic, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-algorithm, cat-caption, tag-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>> tag-caption=<<__tag-caption__>>/>
+\define bl-topic(topic, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
 
-\define bl-tag(tag, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-algorithm, cat-caption, tag-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>> tag-caption=<<__tag-caption__>>/>
+\define bl-tag(tag, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
 
 \define bl-note-filter() note[$(note)$]!is[current]
 
-\define bl-note(note, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-algorithm, cat-caption, tag-caption)
+\define bl-note(note, sort, cfilter, rheader, limit, note, date, caption, popup, cat-prefix, cat-caption)
 <$set name="note" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
-<$macrocall $name="bl-filter" item-filter=<<bl-note-filter>> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> cat-algorithm=<<__cat-algorithm__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>> tag-caption=<<__tag-caption__>>/>
+<$macrocall $name="bl-filter" item-filter=<<bl-note-filter>> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> date=<<__date__>> cat-prefix=<<__cat-prefix__>> caption=<<__caption__>> popup=<<__popup__>> cat-caption=<<__cat-caption__>>/>
 </$set>
 \end
 
-\define cat-modal(mTitle, item-filter, sort, cfilter, rheader, cat-prefix, cat-algorithm, cat-caption, search, tag-caption)
+\define cat-modal(mTitle, item-filter, sort, cfilter, rheader, cat-prefix, cat-filter, cat-caption, search, tag-caption)
 <$set name="qty" filter="[$item-filter$!has[draft.of]$sort$count[]]" select="0">
 <$button dragFilter="[$item-filter$]" class="tc-btn-invisible tc-tiddlylink">
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE">
 <$macrocall $name="tiddler-open" tiddler=<<mTitle>>/><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
 </$list>
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/category-modal" mTitle=<<__mTitle__>> item-filter=<<__item-filter__>> cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-algorithm=<<__cat-algorithm__>> cat-caption=<<__cat-caption__>> qty=<<qty>> tag-caption=<<__tag-caption__>> search=<<__search__>>/>
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/category-modal" mTitle=<<__mTitle__>> item-filter=<<__item-filter__>> cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-filter=<<__cat-filter__>> cat-caption=<<__cat-caption__>> qty=<<qty>> tag-caption=<<__tag-caption__>> search=<<__search__>>/>
 <$list filter="[<__cat-caption__>!is[blank]]" emptyMessage="Total of <<qty>> items"><<__cat-caption__>> <span style="color:#aaa;">(<<qty>>)</span></$list>
 </$button>
 </$set>
@@ -121,9 +121,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
   cat-prefix:"tag 的前缀"
-  cat-algorithm:"如何生成 tag 的 filter"
-  cat-caption:"按钮的标题显示"
-  tag-caption:"tag 的 caption">>`
+  cat-caption:"按钮的标题显示">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl sort:"结果排序"
   cfilter:"table 列"
@@ -134,9 +132,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
   cat-prefix:"tag 的前缀"
-  cat-algorithm:"如何生成 tag 的 filter"
-  cat-caption:"按钮的标题显示"
-  tag-caption:"tag 的 caption">>`
+  cat-caption:"按钮的标题显示">>`
 # ''反查指向当前 Tiddler 且属于某个 topic 的所有 Tiddlers''
 #> `<<bl-topic
   topic:"主题"
@@ -149,9 +145,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
   cat-prefix:"tag 的前缀"
-  cat-algorithm:"如何生成 tag 的 filter"
-  cat-caption:"按钮的标题显示"
-  tag-caption:"tag 的 caption">>`
+  cat-caption:"按钮的标题显示">>`
 # ''反查指向当前 Tiddler 且标记了某个 tag 的所有 Tiddlers''
 #> `<<bl-tag
   tag:"标签"
@@ -164,9 +158,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
   cat-prefix:"tag 的前缀"
-  cat-algorithm:"如何生成 tag 的 filter"
-  cat-caption:"按钮的标题显示"
-  tag-caption:"tag 的 caption">>`
+  cat-caption:"按钮的标题显示">>`
 # ''反查指向当前 Tiddler 且相同 note 的所有 Tiddlers''
 #> `<<bl-note
   note:"角色"
@@ -179,9 +171,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   caption:"按照 caption 来显示结果条目"
   popup:"是否通过 Modal 显示"
   cat-prefix:"tag 的前缀"
-  cat-algorithm:"如何生成 tag 的 filter"
-  cat-caption:"按钮的标题显示"
-  tag-caption:"tag 的 caption">>`
+  cat-caption:"按钮的标题显示">>`
 # ''在 Modal 里面显示 bl 条目''
 #> `<<cat-modal
   mTitle:"currentTiddler"
@@ -190,7 +180,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   cfilter:"如果填写自动切换到 Table 模式"
   rheader:"如果是 Table 模式可以选填"
   cat-prefix:"tags 的前缀"
-  cat-algorithm:"如何生成 tag 的 filter"
+  cat-filter:"如何生成 tag 的 filter"
   cat-caption:"自定义按钮标题"
   search:"专门为 backlinks 准备的变量"
   tag-caption:"tag 的 caption">>`
