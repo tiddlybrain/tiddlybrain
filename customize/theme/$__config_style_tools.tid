@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20220916224331686
+modified: 20220918175823590
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -189,7 +189,7 @@ table.data-table .data-key a {font-weight: bold;}
 table.data-table .data-splitter {text-align: center; font-weight: bold; background-color: #eee; color: #555;}
 .data-value code {white-space: break-spaces; font-size: 14px;}
 .tc-sidebar-lists table.data-table td.data-value {color: #333;}
-.tc-sidebar-lists .data-table .copy-col {display: none;}
+.tc-sidebar-lists .data-table .copy-col {width: 0 !important; overflow: hidden; padding: 0;}
 
 /* For Macro: kanban */
 .kanban table th, .kanban table td {overflow: hidden; height: 1em; vertical-align: top;}
