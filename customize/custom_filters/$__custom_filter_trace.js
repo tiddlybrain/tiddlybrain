@@ -22,7 +22,7 @@ Helper functions
 var tracer = function(current, target, finder, grandparent) {
 	var results = [];
 	finder(current).forEach(function(child) {
-		if (child != grandparent) {
+		if (child !== grandparent) {
 			if (child === target) {
 				results.push([child]);
 			} else {

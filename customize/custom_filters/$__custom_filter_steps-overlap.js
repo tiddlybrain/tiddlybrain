@@ -158,7 +158,7 @@ exports.getTDate = function(source,operator,options) {
 				var content = tiddler.getFieldString("text");
 				var steps = content.match(pattern_step);
 				steps.every(step => {
-					if (step.indexOf(operator.operand) != -1) {
+					if (step.indexOf(operator.operand) !== -1) {
 						var t = getStartTime(step);
 						if (t) results.push(t);
 						return false;
@@ -180,7 +180,7 @@ exports.getDDate = function(source,operator,options) {
 				var content = tiddler.getFieldString("text");
 				var steps = content.match(pattern_step);
 				steps.every(step => {
-					if (step.indexOf(operator.operand) != -1) {
+					if (step.indexOf(operator.operand) !== -1) {
 						var d = getEndTime(step);
 						if (d) results.push(d);
 						return false;
@@ -226,7 +226,7 @@ exports.unfinishedSteps = function(source,operator,options) {
 					var step_name = getStepName(step);
 					if (start_time && start_time <= date && !end_time && step_name) {
 						var task_state = "$:/task-state/" + title + "/" + step_name;
-						if (tiddlers.indexOf(task_state) != -1) results.push(step);
+						if (tiddlers.indexOf(task_state) !== -1) results.push(step);
 					}
 				});
 			}

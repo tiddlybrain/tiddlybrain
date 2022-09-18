@@ -39,7 +39,7 @@ exports.parentPath = function(source,operator,options) {
 						title = parentTitle;
 					}
 				}
-				while (pos != -1);
+				while (pos !== -1);
 				break;
 			default:
 				pos = title.lastIndexOf("/");
