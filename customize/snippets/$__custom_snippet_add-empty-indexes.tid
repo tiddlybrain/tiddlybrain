@@ -1,10 +1,10 @@
 caption: Add Empty Indexes
 created: 20220916205446135
 creator: yuzijie
-modified: 20220916205534270
+modified: 20220918171248511
 modifier: yuzijie
 tags: $:/tags/TextEditor/Snippet customized
 title: $:/custom/snippet/add-empty-indexes
 type: text/vnd.tiddlywiki
 
-<<droppable-add-empty-indexes indexes:"">>
+actions:"<<droppable-add-empty-indexes ''>>"
