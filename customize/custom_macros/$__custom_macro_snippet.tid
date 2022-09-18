@@ -1,25 +1,25 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220917095905845
+modified: 20220918100832331
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
 type: text/vnd.tiddlywiki
 
-\define snippet-drop-ctrl-actions(tag)
+\define snippet-drop-ctrl-actions(tags)
 <$action-createtiddler $basetitle=<<unusedtitle $(template)$>> $template=<<actionTiddler>> date=<<now YYYY0MM0DD>> belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>> caption="$(caption)$✱">
-<$action-listops $tiddler=<<createTiddler-title>> $field="tags" $subfilter="Snippet [<__tag__>]"/>
+<$action-listops $tiddler=<<createTiddler-title>> $field="tags" $subfilter="Snippet $tags$"/>
 </$action-createtiddler>
 \end
 
-\define snippet-drop-actions(actions, tag, celltpl)
+\define snippet-drop-actions(actions, tags, celltpl)
 <$vars template={{{ [<actionTiddler>split[ ]first[]] }}} caption={{{ [<actionTiddler>get[caption]] }}}>
 <$set name="parents" filter="[<currentTiddler>getAllParents[]]">
 <$set name="keywords" filter="[<currentTiddler>getAllParentTitles[]] [<actionTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] [<actionTiddler>type[text/vnd.tiddlywiki]getAllTitles[]] +[unique[]join[, ]]" select="0">
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<snippet-drop-ctrl-actions "$tag$">> variable="NONE">
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<snippet-drop-ctrl-actions "$tags$">> variable="NONE">
 <$action-setfield $tiddler=<<actionTiddler>> $timestamp="no" belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>>/>
-<$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="Snippet [<__tag__>]" $timestamp="no"/>
+<$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="Snippet $tags$" $timestamp="no"/>
 <$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
 </$list>
 <$list filter="[<__celltpl__>is[tiddler]]">
@@ -73,18 +73,29 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </div></$list>
 \end
 
-\define snippet(key, date:"no", sort:"sortan[caption]", limit:"30", caption, cfilter, rheader, actions, tag, no-drop, cat-view, cat-prefix, cat-algorithm, tag-caption, has-filter, celltpl)
+\define snippet(key, date:"no", sort:"sortan[caption]", limit:"30", caption, cfilter, rheader, actions, tags, no-drop, cat-view, cat-prefix, cat-filter, tag-caption, has-filter, celltpl)
 <$vars key={{{ [[$key$]!is[blank]else<key>!is[blank]else{!!note}!is[blank]else{!!caption}] }}} current=<<currentTiddler>>>
-<$droppable actions=<<snippet-drop-actions """$actions$""" """$tag$""" "$celltpl$">> tag="div" class="snippet-container">
+<$droppable actions=<<snippet-drop-actions """$actions$""" """$tags$""" "$celltpl$">> tag="div" class="snippet-container">
 <div class="tc-droppable-placeholder" style="display:block;">
 <$list filter="[<__celltpl__>is[tiddler]]">
 <$list filter="[belongs.to<current>tag[Snippet]note<key>type[application/x-tiddler-dictionary]!celltpl<__celltpl__>limit[1]]">
-<$button>Set template for all snippets!<$list filter="[belongs.to<current>tag[Snippet]note<key>type[application/x-tiddler-dictionary]]">
+<$button>Set template for all snippets!
+<$list filter="[belongs.to<current>tag[Snippet]note<key>type[application/x-tiddler-dictionary]]">
 <$action-setfield celltpl=<<__celltpl__>> $timestamp="no"/>
-</$list></$button>
+</$list>
+</$button>
 </$list>
 </$list>
-<$list filter="[<__cat-view__>!match[yes]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="belongs.to<current>tag[Snippet]note<key>" cat-prefix="$cat-prefix$" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-algorithm="$cat-algorithm$"  tag-caption="$tag-caption$"/>""" variable="NONE">
+<$list filter="[<__tags__>!is[blank]]">
+<$list filter="[belongs.to<current>tag[Snippet]note<key>!tagged<__tags__>limit[1]]">
+<$button>Add tags to all snippets!
+<$list filter="[belongs.to<current>tag[Snippet]note<key>]">
+<$action-listops $field="tags" $subfilter="$tags$" $timestamp="no"/>
+</$list>
+</$button>
+</$list>
+</$list>
+<$list filter="[<__cat-view__>!match[yes]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="belongs.to<current>tag[Snippet]note<key>" cat-prefix="$cat-prefix$" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-filter="$cat-filter$" tag-caption="$tag-caption$"/>""" variable="NONE">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<key>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
 <$set name="snippet-qty" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$count[]]">> select="0">
@@ -102,11 +113,11 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 
 # ''按住 Ctrl 并拖到 Snippet 上复制当前 Tiddler''
 #> `<<snippet-drop-ctrl-actions
-  tag:"额外添加的标签">>`
+  tags:"为 ActionTiddler 添加的额外标签">>`
 # ''拖到 Snippet 上发生的动作''
 #> `<<snippet-drop-actions
   actions:"Tiddler 被放置时的额外动作"
-  tag:"额外添加的标签"
+  tags:"为 ActionTiddler 添加的额外标签"
   celltpl:"Snippet 的模板">>`
 # ''Snippet 的条目''
 #> `<<snippet-content
@@ -128,11 +139,11 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
   cfilter:"如果填写自动切换到 Table 模式"
   rheader:"如果是 Table 模式可以选填"
   actions:"Tiddler 被放置时的额外动作"
-  tag:"Tiddler 被放置时添加额外标签"
+  tags:"为 ActionTiddler 添加的额外标签"
   no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here"
   cat-view:"是否使用 sort-by-filter 来显示"
-  cat-prefix:"tag 的前缀"
-  cat-algorithm:"如何生成 tag 的 filter"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
   has-filter:"是否显示 filter"
   celltpl:"设置 Snippet 的模板">>`
