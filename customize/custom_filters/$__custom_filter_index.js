@@ -148,15 +148,15 @@ exports.getindexParsed = function(source,operator,options) {
 
 exports.slash = function(source,operator,options) {
 	var results = [], result, key = operator.operand || "", data, re = /\s*(?:;;|$)\s*/;
-	var suffixes = operator.suffixes || [], mode = (suffixes[0] || [])[0];
+	var suffixes = operator.suffixes || [], mode = (suffixes[0] || [])[0], flags = suffixes[1] || [];
 	var currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
 	if(currTiddlerTitle) switch(mode) {
 		case "index":
 			data = options.wiki.extractTiddlerDataItem(currTiddlerTitle,key) || null;
 			if(data === null) {
-				result = "Others";
+				result = (flags.indexOf("optional") === -1) ? "/Others" : "";
 				source(function(tiddler,title) {
-					results.push(title + "/" + result);
+					results.push(title + result);
 				});
 			} else {
 				getResults(data,options,currTiddlerTitle).forEach(result => {
@@ -166,15 +166,27 @@ exports.slash = function(source,operator,options) {
 				});
 			}
 			break;
+		case "parent":
+			data = options.wiki.getTiddler(currTiddlerTitle).getFieldString("parents") || "";
+			let parentsArray = $tw.utils.parseStringArray(data).reverse(), level = key - 1;
+			if(parentsArray[level] === undefined) {
+				result = (flags.indexOf("optional") === -1) ? "/Others" : "";
+			} else {
+				result = "/" + getResult(parentsArray[level],options,currTiddlerTitle);
+			}
+			source(function(tiddler,title) {
+				results.push(title + result);
+			});
+			break;
 		default:
 			data = options.wiki.getTiddler(currTiddlerTitle).getFieldString(key) || null;
 			if(data === null) {
-				result = "Others";
+				result = (flags.indexOf("optional") === -1) ? "/Others" : "";
 			} else {
-				result = getResult(data,options,currTiddlerTitle);
+				result = "/" + getResult(data,options,currTiddlerTitle);
 			}
 			source(function(tiddler,title) {
-				results.push(title + "/" + result);
+				results.push(title + result);
 			});
 	}
 	return results;
