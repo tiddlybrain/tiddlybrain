@@ -1,10 +1,10 @@
 caption: Sort-by-tags macro
 created: 20220905190936765
 creator: yuzijie
-modified: 20220914081252101
+modified: 20220918060633716
 modifier: yuzijie
 tags: $:/tags/TextEditor/Snippet customized
 title: $:/custom/snippet/sort-by-tags
 type: text/vnd.tiddlywiki
 
-<<sort-by-tags cat-prefix:"" cfilter:"" rheader:"" cat-algorithm:"" item-filter:"">>
+<<sort-by-tags cat-prefix:"" cfilter:"" rheader:"" cat-filter:"" item-filter:"">>
