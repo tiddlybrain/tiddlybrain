@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20220915074432374
+modified: 20220919082711553
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 \define newDataAction(template, content, description)
 <$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> text="Name: {{!!caption}}
-Description: {{!!description}}" description="" type="application/x-tiddler-dictionary" description=<<__description__>>/>
+Description: {{!!description}}" type="application/x-tiddler-dictionary" description=<<__description__>>/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
@@ -34,7 +34,9 @@ Description: {{!!description}}" description="" type="application/x-tiddler-dicti
 \end
 
 \define newFileLinkDirAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> text=<<__content__>> caption="{{!!text}}" path="" url="" dir="" description=<<__description__>>/>
+<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> text="Name: {{!!caption}}
+Description: {{!!description}}
+主题: ;;" type="application/x-tiddler-dictionary" description=<<__description__>> path="" url="" dir=""/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 

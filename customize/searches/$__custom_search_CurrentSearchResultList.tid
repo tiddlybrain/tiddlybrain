@@ -3,9 +3,9 @@ created: 20210328220236087
 creator: yuzijie
 first-search-filter: [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<current-subfilter>sortan[title]]
 list-after: $:/custom/search/SubtopicSearchResultList
-modified: 20220918195908203
+modified: 20220919080433002
 modifier: yuzijie
-second-search-filter: [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}tagging[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sortan[title]]
+second-search-filter: [{$:/HistoryList!!current-tiddler}] [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}] +[tagging[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sortan[title]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/CurrentSearchResultList
 type: text/vnd.tiddlywiki
