@@ -1,6 +1,6 @@
 created: 20210809065454577
 creator: yuzijie
-modified: 20220917093130092
+modified: 20220919115439922
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/toc
@@ -11,7 +11,9 @@ type: text/vnd.tiddlywiki
 <$transclude field=caption>
 <$view field=title/>
 </$transclude>
-<<icons "font-size:smaller;">>
+<div class="sidebar-item-hover">
+<$button class="tc-btn-invisible" style="color:#999;font-weight:normal;"><<open-in-sidebar close:"no">>{{$:/core/images/open-window}}</$button>
+</div>
 </$set>
 \end
 

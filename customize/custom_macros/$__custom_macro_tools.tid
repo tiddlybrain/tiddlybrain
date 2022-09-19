@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220917093902080
+modified: 20220919114231027
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -166,8 +166,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define tiddler-open(tiddler)
-<$list filter="[<__tiddler__>is[tiddler]!match{$:/HistoryList!!current-tiddler}]">
-<$action-navigate $to=<<__tiddler__>>/>
+<$list filter="[<__tiddler__>is[tiddler]]"><$action-navigate $to=<<__tiddler__>>/>
 <$list filter="[<__tiddler__>addprefix[$:/state/folded/]is[tiddler]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<__tiddler__>] +[putfirst[]]"/>
 </$list>
