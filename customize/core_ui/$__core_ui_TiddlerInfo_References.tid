@@ -1,5 +1,5 @@
 caption: {{$:/language/TiddlerInfo/References/Caption}}
-modified: 20220918184200255
+modified: 20220920220940280
 modifier: yuzijie
 tags: $:/tags/TiddlerInfo customized
 title: $:/core/ui/TiddlerInfo/References
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]type[text/vnd.tiddlywiki]]">
 <$action-sendmessage $message="tm-copy-to-clipboard" $param="<<bl-note note:'$(key)$' date:'no'>>"/>
 </$list>
-</$button>
+</$button>&#32;
 \end
 
 \define backlink-topic-button()
@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]type[text/vnd.tiddlywiki]]">
 <$action-sendmessage $message="tm-copy-to-clipboard" $param="<<bl-topic topic:'$(topic)$' date:'no'>>"/>
 </$list>
-</$button>
+</$button>&#32;
 </$wikify>
 \end
 

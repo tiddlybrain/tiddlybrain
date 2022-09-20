@@ -1,8 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-list-after: $:/custom/search/AllSearchResultList
-modified: 20220905194228892
+modified: 20220920182251524
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList

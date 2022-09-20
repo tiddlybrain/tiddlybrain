@@ -1,13 +1,13 @@
-caption: General
+caption: All
 first-search-filter: [!is[system]!tag[Ignore]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap<userInput>sort[title]limit[500]]
-modified: 20220829181425076
+modified: 20220920182453908
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/core/ui/DefaultSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
-//<small>General matches:</small>//
+//<small>All matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">

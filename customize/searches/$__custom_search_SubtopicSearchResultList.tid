@@ -3,7 +3,7 @@ created: 20220310083819974
 creator: yuzijie
 first-search-filter: [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!is[system]!tag[Ignore]tag[Snippet]subfilter<subtopic-subfilter>limit[100]sortan[belongs.to]]
 list-after: $:/custom/search/TopicSearchResultList
-modified: 20220913221019259
+modified: 20220920202721307
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/SubtopicSearchResultList
@@ -32,9 +32,8 @@ type: text/vnd.tiddlywiki
 
 //<small>Subtopic matches:</small>//&nbsp;
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>&nbsp;
-<$list filter="[[$:/temp/subtopic/filter]is[tiddler]]"><small><$button class="search-tool">
-<$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/>Remove Sub-Filter
-<$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>"""><$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/></$list>
+<$list filter="[[$:/temp/subtopic/filter]is[tiddler]]"><small><$button class="search-tool">Remove Sub-Filter
+<$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>
 </$button></small></$list>
 
 <$list filter="[<link-dropdown>!match[yes]]">
@@ -51,9 +50,7 @@ type: text/vnd.tiddlywiki
 <$set name="subtopic-filter-chain" filter="[{$:/temp/subtopic/filter}] [<subtopic-filter>] +[join[]]" select="0">
 <$action-setfield $tiddler="$:/temp/subtopic/filter" text=<<subtopic-filter-chain>>/>
 </$set>
-<$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>""">
-<$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/>
-</$list>
+<<searchbar-focus-action>>
 </$button>
 </$wikify></$list>
 </span></$let>
