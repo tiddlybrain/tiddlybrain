@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20220919115319137
+modified: 20220920140209377
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -118,7 +118,6 @@ blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #
 .single-line-record .right {margin-left: 0.3em; flex: none;}
 .single-line-record .record-content {white-space: normal;}
 .single-line-record .middle .popup-bottom button.tc-tiddlylink, .single-line-record .middle .record-content button.tc-tiddlylink {width: auto;}
-.snippet-accordion blockquote.record {white-space: nowrap; overflow: hidden;}
 .tc-sidebar-lists blockquote.record .description {display: none;}
 
 /* For Macro: sort-by-belongs */
