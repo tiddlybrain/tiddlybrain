@@ -1,16 +1,15 @@
 created: 20160817211338221
 creator: yuzijie
 list-before: Editor
-modified: 20220916090158454
+modified: 20220920112144435
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Index
 type: text/vnd.tiddlywiki
 
 <<index-tree>>
-<hr style="margin:20px 0 30px 0;">
-<div style="border:1px solid #ddd;background:white;position:relative;padding:5px;">
-<h3 style="color:#333;font-weight:bold;position:absolute;top:-30px;left:10px;">词条更新</h3>
+<div style="border:1px solid #ddd;background:white;position:relative;padding:5px;margin-top:30px;">
+<h3 style="color:#333;font-weight:bold;position:absolute;top:-33px;left:10px;">Latest Updates</h3>
 <ol>
 <$list filter="[all[tiddlers]!tag[customized]!search:title:literal[/]!tag[Ignore]!sort[modified]limit[10]]">
 <li style="white-space:nowrap;overflow:hidden;">
