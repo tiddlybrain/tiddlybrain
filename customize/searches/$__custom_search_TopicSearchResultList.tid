@@ -1,17 +1,37 @@
-caption: Topics
+caption: Topics (<$count filter="[search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!is[system]!tag[Ignore]]"/>)
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [field:title<userInput>] [fieldCaseInsensitive:caption<userInput>] [!tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] [tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[parents]enlist-input[]last[]] +[!is[system]!tag[Ignore]!tag[customized]unique[]limit[100]] -[{$:/config/defaultTemplate}]
+first-search-filter: [field:title<userInput>] [fieldCaseInsensitive:caption<userInput>] [fieldCaseInsensitive:shortcap<userInput>] [!tag[Snippet]!is[system]!tag[Ignore]!tag[customized]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[unique[]] -[{$:/config/defaultTemplate}]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20220911074229969
+modified: 20220921092020010
 modifier: yuzijie
-second-search-filter: [!is[system]!tag[Ignore]!tag[customized]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>get[belongs.to]tag[Snippet]unique[]limit[100]sortan[title]]
+second-search-filter: [search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!is[system]!tag[Ignore]tag[Snippet]subfilter<subtopic-subfilter>limit[100]sortan[belongs.to]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
 
+\define lb() [
+\define rb() ]
+\define subtopic-filter() !contains:parents[$(currentTiddler)$]
+
+\define keywords-filters()
+\whitespace trim
+<div class="search-filters"><$let tv-wikilinks="no">
+<$list filter="$(search-filter)$ +[get[parents]enlist-input[]!tag[Snippet]unique[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>><$action-navigate/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/CurrentSearchResultList"/>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/CurrentSearchResultList"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
+</$button>
+</$wikify></$list>
+</$let></div>
+\end
+
 \define searchResultList()
-//<small>Root Topic matches:</small>//
+\whitespace trim
+<$set name="subtopic-subfilter" filter="[[$:/temp/subtopic/filter]get[text]addprefix<lb>addsuffix<rb>]" emptyValue="[is[tiddler]]" select="0">
+
+//<small>Exact Topic matches:</small>//&nbsp;
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
@@ -22,16 +42,34 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list>
 
-//<small>Parent Topic matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+//<small>All Topic matches:</small>//&nbsp;
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>&nbsp;
+<$list filter="[[$:/temp/subtopic/filter]is[tiddler]]"><small><$button class="search-tool">Remove Sub-Filter
+<$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>
+</$button></small></$list>
+
+<$list filter="[<link-dropdown>!match[yes]]">
+<$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]] }}}><<keywords-filters>></$set>
+</$list>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
 <span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$let tv-wikilinks="no"><span class="subtopic">
+<$list filter="[all[current]get[parents]enlist-input[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>>
+<$set name="subtopic-filter-chain" filter="[{$:/temp/subtopic/filter}] [<subtopic-filter>] +[join[]]" select="0">
+<$action-setfield $tiddler="$:/temp/subtopic/filter" text=<<subtopic-filter-chain>>/>
+</$set>
+<<searchbar-focus-action>>
+</$button>
+</$wikify></$list>
+</span></$let>
 </span>
 </$list>
 </$list>
 
+</$set>
 \end
 <<searchResultList>>
