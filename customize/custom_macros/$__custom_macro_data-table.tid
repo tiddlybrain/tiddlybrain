@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20220917102211527
+modified: 20220922082731498
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define data-value-cell()
-<$list filter="[<current>getindex<key>] :else[<current>get[celltpl]is[tiddler]]" emptyMessage="""<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<actionTiddler>>/>" tag="td" class="data-value"><div class="tc-droppable-placeholder">drop here</div></$droppable>""">
+<$list filter="[<current>getindex<key>] :else[<current>get[celltpl]is[tiddler]has:index<key>]" emptyMessage="""<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<actionTiddler>>/>" tag="td" class="data-value"><div class="tc-droppable-placeholder">drop here</div></$droppable>""">
 <$tiddler tiddler=<<current>>><$list filter="[<value>suffix[;;]]" emptyMessage="""<td class="data-value"><$macrocall $name="cell-value"/></td>""" variable="NONE">
 <$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{[<value>addsuffix<actionTiddler>addsuffix[;;]]}}}/>" tag="td" class="data-value"><$macrocall $name="cell-value"/></$droppable>
 </$list></$tiddler>
@@ -71,6 +71,10 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
+# ''如何显示 data-table 的 key cell''
+#> `<<data-key-cell>>`
+# ''如何显示 data-table 的 value cell''
+#> `<<data-value-cell>>`
 # ''用一个表格来显示 Data Tiddlers 的 Key 和 Value, 支持 Template''
 #> `<<data-table
   template:"template 名称, 要和所在的 template 名字一致"
