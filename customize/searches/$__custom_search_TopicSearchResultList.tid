@@ -3,7 +3,7 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [fieldCaseInsensitive:caption<userInput>] [fieldCaseInsensitive:shortcap<userInput>] [!tag[Snippet]!is[system]!tag[Ignore]!tag[customized]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[unique[]] -[{$:/config/defaultTemplate}]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20220922011314996
+modified: 20220922225309169
 modifier: yuzijie
 second-search-filter: [!is[system]!tag[Ignore]tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<subtopic-subfilter>limit[100]sortan[belongs.to]]
 tags: $:/tags/SearchResults customized
@@ -30,9 +30,7 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>
 </$button></small></$list>
 
-<$list filter="[<link-dropdown>!match[yes]]">
 <$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]] }}}><<root-topics>></$set>
-</$list>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
