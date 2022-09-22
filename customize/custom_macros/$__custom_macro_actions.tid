@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20220920202358071
+modified: 20220922024438346
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -16,12 +16,6 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define droppable-TDC-action()
-<$list filter="[<actionTiddler>status[未完待续]]" emptyMessage="<$action-setfield $tiddler=<<actionTiddler>> status=未完待续/>">
-<$action-deletefield $tiddler=<<actionTiddler>> status/>
-</$list>
-\end
-
 \define droppable-index-tree()
 <$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<actionTiddler>] +[putfirst[]]"/>
@@ -31,9 +25,9 @@ type: text/vnd.tiddlywiki
 \define droppable-delete-action()
 <$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
 <$action-deletetiddler $tiddler=<<actionTiddler>>/>
-<$list filter="[belongs.to<actionTiddler>]"><$action-setfield $tiddler=<<currentTiddler>> belongs.to="" tags=""/></$list>
-<$list filter="[tag<actionTiddler>]"><$action-listops $tags="-[<actionTiddler>]"/></$list>
-<$list filter="[<actionTiddler>listed[]]"><$action-listops $field="list" $subfilter="-[<actionTiddler>]"/></$list>
+<$list filter="[all[tiddlers]belongs.to<actionTiddler>]"><$action-setfield belongs.to="" $timestamp="no"/></$list>
+<$list filter="[all[tiddlers]tag<actionTiddler>]"><$action-listops $field="tags" $subfilter="-[<actionTiddler>]" $timestamp="no"/></$list>
+<$list filter="[all[tiddlers]contains<actionTiddler>]"><$action-listops $field="list" $subfilter="-[<actionTiddler>]" $timestamp="no"/></$list>
 \end
 
 \define droppable-remove-tags-action()
@@ -50,28 +44,21 @@ type: text/vnd.tiddlywiki
 </$fieldmangler>
 \end
 
-\define eocd-actions()
-<$list filter="[[$(edit)$]is[tiddler]]">
-<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-<$action-deletetiddler $tiddler="$:/temp/Draft"/>
-<$macrocall $name="tiddler-open" tiddler="$(edit)$"/>
-</$list>
-<$list filter="[[$(open)$]is[tiddler]]"><$macrocall $name="tiddler-open" tiddler="$(open)$"/></$list>
-<$list filter="""[[$(copy)$]!is[blank]]"""><$action-sendmessage $message="tm-copy-to-clipboard" $param="""$(copy)$"""/></$list>
-<$list filter="[[$(delete)$]is[tiddler]]"><$action-deletetiddler $tiddler="$(delete)$"/></$list>
-\end
-
 \define droppable-rename-set-caption-action(template)
 <$tiddler tiddler=<<actionTiddler>>>
 <$set name="date" filter="[all[current]get[created]format:date[YYYY0MM0DD]]" select="0" emptyValue=<<now YYYY0MM0DD>>>
+<$set name="newTitle" value=<<unusedtitle $template$>>>
 <$list filter="[all[current]!has[caption]] [all[current]has[caption]search:caption:literal[{{!!title}}]]">
-<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} caption={{!!title}} title=<<unusedtitle $template$>> date=<<date>>/>
+<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} caption={{!!title}} title=<<newTitle>> date=<<date>>/>
 </$list>
 <$list filter="[all[current]has[caption]!search:caption:literal[{{!!title}}]]">
-<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} title=<<unusedtitle $template$>> date=<<date>>/>
+<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} title=<<newTitle>> date=<<date>>/>
 </$list>
+<$list filter="[all[tiddlers]belongs.to<actionTiddler>]"><$action-setfield belongs.to=<<newTitle>> $timestamp="no"/></$list>
+<$list filter="[all[tiddlers]tag<actionTiddler>]"><$action-listops $field="tags" $subfilter="-[<actionTiddler>] [<newTitle>]" $timestamp="no"/></$list>
+<$list filter="[all[tiddlers]contains<actionTiddler>]"><$action-listops $field="list" $subfilter="-[<actionTiddler>] [<newTitle>]" $timestamp="no"/></$list>
 <$action-deletetiddler $tiddler=<<actionTiddler>>/>
+</$set>
 </$set>
 </$tiddler>
 \end
@@ -106,12 +93,8 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
-\define searchbar-focus-action() <$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>"""><$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/></$list>
-
 # ''复制 Tiddler 的 action''
 #> `<<droppable-clone-action>>`
-# ''给 Tiddler 添加未完待续的标签''
-#> `<<droppable-TDC-action>>`
 # ''修改 index tree 列表 action''
 #> `<<droppable-index-tree>>`
 # ''删除 Tiddler 的 action''
@@ -120,8 +103,6 @@ type: text/vnd.tiddlywiki
 #> `<<droppable-remove-tags-action>>`
 # ''将 Snippet 变为普通 tiddler''
 #> `<<droppable-remove-snippet-action>>`
-# ''Edit, Open, Copy, Delete actions''
-#> `<<eocd-actions>>`
 # ''将旧 Tiddler 按照标准重命名''
 #> `<<droppable-rename-set-caption-action
   template:"新 Tiddler 模板">>`
@@ -143,5 +124,3 @@ type: text/vnd.tiddlywiki
 # ''给 Data Tiddler 添加空白键''
 #> `<<droppable-add-empty-indexes
   indexes:"键值列表">>`
-# ''自动聚焦搜索框''
-#> `<<searchbar-focus-action>>`

@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220920090433227
+modified: 20220922022235823
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -88,6 +88,9 @@ type: text/vnd.tiddlywiki
 <$button to=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink">
 <$transclude field=caption><$view field=title/></$transclude>
 </$button>
+<div class="sidebar-item-hover">
+<$button class="tc-btn-invisible" style="padding:0;font-size:smaller;"><<open-in-sidebar close:"no">>{{$:/core/images/open-window}}</$button>
+</div>
 </li>
 \end
 
@@ -154,7 +157,7 @@ type: text/vnd.tiddlywiki
 </$set></$list>
 \end
 
-\define verification-notice() <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">@@color:red;Verification Required!@@</$list></$list>
+\define verification-notice() <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">☠️</$list></$list>
 
 \define tiddler-close(tiddler)
 <$list filter="[[$(modal)$]!match[yes]]">
