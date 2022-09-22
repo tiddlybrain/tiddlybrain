@@ -1,37 +1,17 @@
 caption: Current
 created: 20210328220236087
 creator: yuzijie
-first-search-filter: [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortan[title]]
+first-search-filter: [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>subfilter<subtopic-subfilter>sortan[title]]
 list-after: $:/custom/search/TopicSearchResultList
-modified: 20220921091412713
+modified: 20220922015421910
 modifier: yuzijie
-second-search-filter: [{$:/HistoryList!!current-tiddler}] [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}] +[tagging[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>sortan[title]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/CurrentSearchResultList
 type: text/vnd.tiddlywiki
 
-\define note-filter() [note[$(note)$]]
-
-\define note-filters()
-\whitespace trim
-<$list filter="$(search-filter)$ +[get[note]unique[]nth[2]]" variable="NONE">
-<div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[get[note]unique[]sortan[title]]" variable="note">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<note>>
-<$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption=<<note>>/><<searchbar-focus-action>>
-</$button>
-</$list></$let></div>
-</$list>
-\end
-
-\define search-result-info()
-<$let tv-wikilinks="no"><div style="padding-left:10px;font-size:x-small;color:#888;margin-bottom:5px;">
-<$list filter="[all[current]get[parents]enlist-input[]butlast[]]"><$wikify name="keyword" text={{!!caption}} mode="inline"><<keyword>> > </$wikify></$list>
-<$list filter="[all[current]get[parents]enlist-input[]last[]]"><$wikify name="keyword" text={{!!caption}} mode="inline"><<keyword>></$wikify></$list>
-</div></$let>
-\end
-
 \define searchResultList()
 <$set name="note-subfilter" filter="[[$:/temp/note/filter]get[text]]" emptyValue="[is[tiddler]]" select="0">
+<$set name="subtopic-subfilter" filter="[[$:/temp/subtopic/filter]get[text]addprefix<lb>addsuffix<rb>]" emptyValue="[is[tiddler]]" select="0">
 
 <div style="margin-bottom:10px;text-align:center;">Search within:
 __<$transclude tiddler={{$:/HistoryList!!current-tiddler}} field="caption"><$view tiddler={{$:/HistoryList!!current-tiddler}} field="title"/></$transclude>__
@@ -47,28 +27,19 @@ Clear Note Filter: {{$:/temp/note/filter!!caption}}
 
 //<small>Snippet matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$list filter="[[$:/temp/subtopic/filter]is[tiddler]]"><small><$button class="search-tool">Remove Sub-Filter
+<$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>
+</$button></small></$list>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-<<search-result-info>>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/><<parent-topics>>
 </span>
 </$list>
 </$list>
 
-//<small>Other matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
-
-<$list filter="[<userInput>minlength[1]]" variable="ignore">
-<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
-<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-<<search-result-info>>
-</span>
-</$list>
-</$list>
-
+</$set>
 </$set>
 \end
 

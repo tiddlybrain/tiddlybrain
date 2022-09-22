@@ -1,0 +1,74 @@
+created: 20220921232610151
+creator: yuzijie
+modified: 20220922014917856
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/search
+type: text/vnd.tiddlywiki
+
+\define lb() [
+\define rb() ]
+
+\define searchbar-focus-action() <$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>"""><$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/></$list>
+
+\define root-topics()
+\whitespace trim
+<div class="search-filters"><$let tv-wikilinks="no">
+<$list filter="$(search-filter)$ +[get[parents]enlist-input[]!tag[Snippet]unique[]sortan[title]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>><$action-navigate/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/CurrentSearchResultList"/>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/CurrentSearchResultList"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
+</$button>
+</$wikify></$list>
+</$let></div>
+\end
+
+\define subtopic-filter() !contains:parents[$(currentTiddler)$]
+
+\define parent-topics()
+\whitespace trim
+<$let tv-wikilinks="no"><span class="subtopic">
+<$list filter="[all[current]get[parents]enlist-input[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>>
+<$set name="subtopic-filter-chain" filter="[{$:/temp/subtopic/filter}] [<subtopic-filter>] +[join[]]" select="0">
+<$action-setfield $tiddler="$:/temp/subtopic/filter" text=<<subtopic-filter-chain>>/>
+</$set><<searchbar-focus-action>>
+</$button>
+</$wikify></$list>
+</span></$let>
+\end
+
+\define note-filter() [note[$(note)$]]
+
+\define note-filters()
+\whitespace trim
+<div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[get[note]unique[]sortan[title]]" variable="note">
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#a7ffb4;"><<note>>
+<$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption=<<note>>/><<searchbar-focus-action>>
+</$button>
+</$list></$let></div>
+\end
+
+\define searchSelector()
+\whitespace trim
+<$list filter="[[$:/temp/index/filter]is[missing]]" emptyMessage="""<$button class="tc-btn-invisible">
+Search within: <$transclude tiddler={{$:/temp/index/filter}} field="caption"/> &times;
+<$action-deletetiddler $tiddler="$:/temp/index/filter"/><<searchbar-focus-action>>
+</$button>""">Choose a topic<br>
+<$list filter="[tag[$:/tags/Index]]"><$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;margin-left:5px;color:#888;">
+<$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>{{!!caption}}
+</$button></$list>
+</$list>
+\end
+
+# ''自动聚焦搜索框''
+#> `<<searchbar-focus-action>>`
+# ''显示搜索结果的根目录词条, 并且点击后, 跳转到 current search''
+#> `<<root-topics>>`
+# ''显示某个词条的所有父级词条, 并且点击后, 生成一个 filter, 过滤 topics''
+#> `<<parent-topics>>`
+# ''显示搜索结果的 note 字段, 并且点击后, 生成一个 filter, 过滤 note''
+#> `<<note-filters>>`
+# ''给 Index Search 选择一个 Topic''
+#> `<<searchSelector>>`
