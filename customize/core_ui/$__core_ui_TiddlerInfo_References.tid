@@ -1,5 +1,5 @@
 caption: {{$:/language/TiddlerInfo/References/Caption}}
-modified: 20220920220940280
+modified: 20220922213152232
 modifier: yuzijie
 tags: $:/tags/TiddlerInfo customized
 title: $:/core/ui/TiddlerInfo/References
@@ -19,24 +19,9 @@ type: text/vnd.tiddlywiki
 </$button>&#32;
 \end
 
-\define backlink-topic-button()
-\whitespace trim
-<$wikify name="caption" text={{{[<topic>get[caption]]}}}>
-<$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;">Suggest Topic:&#32;<<caption>>
-<$list filter="[all[current]type[application/x-tiddler-dictionary]!has:index<caption>]">
-<$action-setfield $index=<<caption>> $value="<<bl-topic topic:'$(topic)$' date:'no'>>"/>
-</$list>
-<$list filter="[all[current]type[text/vnd.tiddlywiki]]">
-<$action-sendmessage $message="tm-copy-to-clipboard" $param="<<bl-topic topic:'$(topic)$' date:'no'>>"/>
-</$list>
-</$button>&#32;
-</$wikify>
-\end
-
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <div style="margin-bottom:10px;">
 <$list filter="[all[tiddlers]!is[current]!is[system]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>get[note]unique[]]" variable="key"><<backlink-note-button>></$list>
-<$list filter="[all[tiddlers]!is[current]!is[system]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>get[belongs.to]unique[]]" variable="topic"><<backlink-topic-button>></$list>
 </div>
 <$list filter="[all[tiddlers]!is[current]!is[system]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sort[title]]" emptyMessage=<<lingo References/Empty>> template="$:/core/ui/ListItemTemplate"/>
 </$set>

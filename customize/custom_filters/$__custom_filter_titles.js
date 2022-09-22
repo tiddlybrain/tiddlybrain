@@ -44,7 +44,7 @@ exports.getAllIndexTitles = function(source,operator,options) {
 };
 
 exports.getAllTitles = function(source,operator,options) {
-	var results = [], result, matches, pattern = /<<l\s+'(.+)'.*>>|<<l\s+"(.+)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g;
+	var results = [], result, matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g;
 	source(function(tiddler,title) {
 		if (tiddler) {
 			let content = tiddler.getFieldString("caption") + tiddler.getFieldString("description") + tiddler.getFieldString("text");

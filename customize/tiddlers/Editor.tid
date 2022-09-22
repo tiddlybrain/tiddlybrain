@@ -1,7 +1,7 @@
 created: 20181212172024243
 creator: yuzijie
 list-before: $:/core/ui/SideBar/More
-modified: 20220916190844779
+modified: 20220922214913552
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -18,7 +18,6 @@ type: text/vnd.tiddlywiki
 <$button to="$:/Draft"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft</$button>
 <$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button style="color:green;">
 <$tiddler tiddler=<<draft>>>{{!!title}} - {{!!caption}}</$tiddler>
-<$action-setfield $tiddler="$:/state/sidebar" text="no"/>
 <$action-sendmessage $message="tm-edit-tiddler" $param=<<draft>>/>
 </$button>""">
 <$button style="color:red;">{{!!title}} - {{!!caption}} &times;
