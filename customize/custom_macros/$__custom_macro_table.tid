@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20220922081835289
+modified: 20220924091330903
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 \define cell-value-normal()
 <$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
 <$list filter="[<datum>!search:title:regexp[<<snippet|<<bl]]" emptyMessage=<<datum>> variable="NONE">
-<div><$list filter="[field:title<datum>]" emptyMessage=<<cell-value-iterator>>><$macrocall $name="l" title={{!!title}} class="normal-weight" note="yes"/></$list></div>
+<div><$list filter="[field:title<datum>]" emptyMessage=<<cell-value-iterator>>><$macrocall $name="l" title={{!!title}} class="normal-weight" note="yes" description="yes"/></$list></div>
 </$list>
 </$list>
 \end

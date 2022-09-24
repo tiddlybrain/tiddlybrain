@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220922022235823
+modified: 20220924092148214
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -178,7 +178,7 @@ type: text/vnd.tiddlywiki
 \define selector(filter, caption:"{{!!title}}")
 <$list filter="[all[current]type[application/x-tiddler-dictionary]]">
 <$select index=<<key>>><$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list></$select>
-<$list filter="[<value>is[tiddler]]"><$macrocall $name="l" tiddler={{!!title}} text={{$:/core/images/open-window}}/></$list>
+<$list filter="[<value>is[tiddler]]"><$macrocall $name="l" title={{!!title}} text={{$:/core/images/open-window}}/></$list>
 </$list>
 \end
 
