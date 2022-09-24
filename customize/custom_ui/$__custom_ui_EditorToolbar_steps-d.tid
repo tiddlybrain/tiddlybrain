@@ -1,0 +1,18 @@
+caption: Time Stop
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+created: 20220924050709127
+creator: yuzijie
+description: d:<<now "YYYY0MM0DD">>
+icon: $:/core/images/timestamp-off
+list-after: $:/custom/ui/EditorToolbar/steps-t
+modified: 20220924052154499
+modifier: yuzijie
+tags: $:/tags/EditorToolbar customized
+title: $:/custom/ui/EditorToolbar/steps-d
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text={{{ [<now "YYYY0MM0DD">addprefix[d:]] }}}
+/>
