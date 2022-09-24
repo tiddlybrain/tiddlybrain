@@ -22,7 +22,7 @@ unfinishedSteps: 获取未完成的 Steps
 Helper functions
 */
 var getStepName = function(task) {
-	var pattern = /^<<(a|w|d|c)\s+"(.+?)"\s+/;
+	var pattern = /^<<(a|w|d|c)\s+["'](.+?)["']\s+/;
 	var result = task.match(pattern);
 	if(result) {
 		return result[2];
@@ -47,7 +47,7 @@ var getStepType = function(task) {
 }
 
 var getStartTime = function(task) {
-	var pattern = /t:"?(\d{8})"?/;
+	var pattern = /t:["']?(\d{8})["']?/;
 	var result = task.match(pattern);
 	if(result) {
 		return result[1];
@@ -57,7 +57,7 @@ var getStartTime = function(task) {
 }
 
 var getEndTime = function(task) {
-	var pattern = /d:"?(\d{8})"?/;
+	var pattern = /d:["']?(\d{8})["']?/;
 	var result = task.match(pattern);
 	if(result) {
 		return result[1];
@@ -67,7 +67,7 @@ var getEndTime = function(task) {
 }
 
 var getRemark = function(task) {
-	var pattern = /\sr:"(.*?)"/;
+	var pattern = /\sr:["'](.*?)["']/;
 	var result = task.match(pattern);
 	if(result) {
 		return result[1];
@@ -77,7 +77,7 @@ var getRemark = function(task) {
 }
 
 var getDelegate = function(task) {
-	var pattern = /\sto:"(.*?)"/;
+	var pattern = /\sto:["'](.*?)["']/;
 	var result = task.match(pattern);
 	if(result) {
 		return result[1];
