@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220924092148214
+modified: 20220925220701074
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -157,7 +157,7 @@ type: text/vnd.tiddlywiki
 </$set></$list>
 \end
 
-\define verification-notice() <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">☠️</$list></$list>
+\define verification-notice() <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">🔴</$list></$list>
 
 \define tiddler-close(tiddler)
 <$list filter="[[$(modal)$]!match[yes]]">
