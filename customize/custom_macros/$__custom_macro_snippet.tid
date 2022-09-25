@@ -1,15 +1,19 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20220924044447655
+modified: 20220925185149061
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
 type: text/vnd.tiddlywiki
 
-\define snippet-drop-ctrl-actions(tags)
+\define snippet-drop-ctrl-actions(tags, celltpl)
 <$action-createtiddler $basetitle=<<unusedtitle $(template)$>> $template=<<actionTiddler>> date=<<now YYYY0MM0DD>> belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>> caption="$(caption)$✱">
 <$action-listops $tiddler=<<createTiddler-title>> $field="tags" $subfilter="Snippet $tags$"/>
+<$list filter="[<__celltpl__>is[tiddler]]"><$set name="actionTiddler" value=<<createTiddler-title>>>
+<$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>> $timestamp="no"/>
+<$list filter="[<__celltpl__>get[required]]"><$macrocall $name="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
+</$set></$list>
 </$action-createtiddler>
 \end
 
@@ -17,13 +21,14 @@ type: text/vnd.tiddlywiki
 <$vars template={{{ [<actionTiddler>split[ ]first[]] }}} caption={{{ [<actionTiddler>get[caption]] }}}>
 <$set name="parents" filter="[<currentTiddler>getAllParents[]]">
 <$set name="keywords" filter="[<currentTiddler>getAllParentTitles[]] [<actionTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] [<actionTiddler>type[text/vnd.tiddlywiki]getAllTitles[]] [<currentTiddler>getAllTagTitles[]] +[unique[]join[, ]]" select="0">
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<snippet-drop-ctrl-actions "$tags$">> variable="NONE">
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<snippet-drop-ctrl-actions "$tags$" "$celltpl$">> variable="NONE">
 <$action-setfield $tiddler=<<actionTiddler>> $timestamp="no" belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>>/>
 <$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="Snippet $tags$" $timestamp="no"/>
 <$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
 </$list>
 <$list filter="[<__celltpl__>is[tiddler]]">
 <$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>> $timestamp="no"/>
+<$list filter="[<__celltpl__>get[required]]"><$macrocall $name="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
 </$list>
 <<__actions__>>
 </$set>
@@ -86,6 +91,9 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$button>Set template for all snippets!
 <$list filter="[belongs.to<current>tag[Snippet]note<key>type[application/x-tiddler-dictionary]]">
 <$action-setfield celltpl=<<__celltpl__>> $timestamp="no"/>
+<$set name="actionTiddler" value=<<currentTiddler>>><$list filter="[<__celltpl__>get[required]]">
+<$macrocall $name="droppable-add-empty-indexes" indexes=<<currentTiddler>>/>
+</$list></$set>
 </$list>
 </$button>
 </$list>
@@ -117,7 +125,8 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 
 # ''按住 Ctrl 并拖到 Snippet 上复制当前 Tiddler''
 #> `<<snippet-drop-ctrl-actions
-  tags:"为 ActionTiddler 添加的额外标签">>`
+  tags:"为 ActionTiddler 添加的额外标签"
+  celltpl:"Snippet 的模板">>`
 # ''拖到 Snippet 上发生的动作''
 #> `<<snippet-drop-actions
   actions:"Tiddler 被放置时的额外动作"
