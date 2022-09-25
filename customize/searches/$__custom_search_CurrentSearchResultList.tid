@@ -1,9 +1,9 @@
 caption: Current
 created: 20210328220236087
 creator: yuzijie
-first-search-filter: [all[tiddlers]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>subfilter<subtopic-subfilter>sortan[title]]
+first-search-filter: [all[tiddlers]!tag[Ignore]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>subfilter<subtopic-subfilter>sortan[title]]
 list-after: $:/custom/search/TopicSearchResultList
-modified: 20220922015421910
+modified: 20220925185738564
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/CurrentSearchResultList

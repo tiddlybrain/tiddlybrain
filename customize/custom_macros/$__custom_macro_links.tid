@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20220917100639946
+modified: 20220925181817958
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -35,9 +35,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[tag[Comment]belongs.to[$(mTitle)$]]" emptyMessage="""<$button message="tm-close-tiddler"><$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} tags="Comment" type="text/plain" belongs.to="$(mTitle)$" caption="Comment of [[$(mTitle)$]]"/>Create Comment</$button>"""><$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param={{!!title}}/>Edit Comment</$button></$list>
 \end
 
-\define icons(style:"font-weight:normal;")
-<span style=<<__style__>>><$list filter="[all[current]is[missing]!is[system]]">☹️</$list><$list filter="[all[current]!is[system]search:title:literal[/]]">🌿</$list><$list filter="[all[current]has[path]]">📄</$list><$list filter="[all[current]tag[Task]]">🏆</$list></span>
-\end
+\define icons(style:"font-weight:normal;") <span style=<<__style__>>><$list filter="[all[current]is[missing]!is[system]]">☹️</$list><$list filter="[all[current]!is[system]search:title:literal[/]]">🌿</$list><$list filter="[all[current]has[url]]">🔗</$list><$list filter="[all[current]has[path]]">📄</$list><$list filter="[all[current]tag[Task]]">🏆</$list></span>
 
 \define external-links()
 <$set name="path-prefix" value={{$:/config/path-prefix!!path}}>
