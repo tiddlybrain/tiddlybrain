@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20220922082731498
+modified: 20220925202510142
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 \define data-value-cell()
 <$list filter="[<current>getindex<key>] :else[<current>get[celltpl]is[tiddler]has:index<key>]" emptyMessage="""<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<actionTiddler>>/>" tag="td" class="data-value"><div class="tc-droppable-placeholder">drop here</div></$droppable>""">
 <$tiddler tiddler=<<current>>><$list filter="[<value>suffix[;;]]" emptyMessage="""<td class="data-value"><$macrocall $name="cell-value"/></td>""" variable="NONE">
-<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{[<value>addsuffix<actionTiddler>addsuffix[;;]]}}}/>" tag="td" class="data-value"><$macrocall $name="cell-value"/></$droppable>
+<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{[<value>addsuffix<actionTiddler>addsuffix[;;]]}}}/>" tag="td" class="data-value"><div class="tc-droppable-placeholder" style="display:block;"><$macrocall $name="cell-value"/></div></$droppable>
 </$list></$tiddler>
 </$list>
 \end
