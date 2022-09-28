@@ -3,9 +3,9 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [fieldCaseInsensitive:caption<userInput>] [fieldCaseInsensitive:shortcap<userInput>] [!tag[Snippet]!is[system]!tag[Ignore]!tag[customized]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[unique[]] -[{$:/config/defaultTemplate}]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20220922225309169
+modified: 20220928141808314
 modifier: yuzijie
-second-search-filter: [!is[system]!tag[Ignore]tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<subtopic-subfilter>limit[100]sortan[belongs.to]]
+second-search-filter: [!is[system]!tag[Ignore]tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<subtopic-subfilter>limit[300]sortan[belongs.to]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
