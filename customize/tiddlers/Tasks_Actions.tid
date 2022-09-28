@@ -1,7 +1,7 @@
 caption: Daily Plan
 created: 20211009174453738
 creator: yuzijie
-modified: 20220905225929726
+modified: 20220928142241295
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -54,16 +54,14 @@ type: text/vnd.tiddlywiki
 </$set>
 </div>
 
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]contains:plan<curDate>!filter<task-filter>]" columns="Urgent Important Other" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]contains:plan<curDate>!filter<task-filter>]" columns="Urgent Important Other" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
 
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="-[<curDate>]"/>""" tag="div">
-<$details summary="待安排">
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>]">
 <$list filter="[all[current]!has[category]] [all[current]!contains:plan<curDate>!enlist[Urgent Important Other]]" variable="NONE">
 <<kanban-link>>
 </$list>
 </$list>
-</$details>
 </$droppable>
 
 <$list filter="[enlist<tasks>]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">

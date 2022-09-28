@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20220917094049536
+modified: 20220928154215890
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -11,14 +11,14 @@ type: text/vnd.tiddlywiki
 \define tasks-today()
 <span style="font-size:smaller;font-weight:500;color:#333;">
 <$list filter="[prefix<task-state-prefix>limit[1]]" emptyMessage="🏆" variable="NONE">
-<$list filter="[prefix<task-state-prefix>text[waiting]limit[1]]" variable="NONE">
-🏆 <$count filter="[prefix<task-state-prefix>text[waiting]]"/>
-</$list>
 <$list filter="[prefix<task-state-prefix>text[deadline]limit[1]]" variable="NONE">
-⏱️ <$count filter="[prefix<task-state-prefix>text[deadline]]"/>
+☠️ <$count filter="[prefix<task-state-prefix>text[deadline]]"/>
 </$list>
 <$list filter="[prefix<task-state-prefix>!text[waiting]!text[deadline]limit[1]]" variable="NONE">
 ⚔️ <$count filter="[prefix<task-state-prefix>!text[waiting]!text[deadline]]"/>
+</$list>
+<$list filter="[prefix<task-state-prefix>text[waiting]limit[1]]" variable="NONE">
+⏱️ <$count filter="[prefix<task-state-prefix>text[waiting]]"/>
 </$list>
 </$list>
 </span>
@@ -53,10 +53,10 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/task-list]is[tiddler]]">
 <$button><$action-deletetiddler $tiddler="$:/temp/task-list"/>&times; <$transclude tiddler={{$:/temp/task-list}} field="caption"/></$button>
 </$list>
-<$checkbox tiddler="$:/temp/task/waiting" field="text" checked="yes" unchecked="no" default="yes"> Milestone</$checkbox>
 <$checkbox tiddler="$:/temp/task/deadline" field="text" checked="yes" unchecked="no" default="yes"> Deadline</$checkbox>
 <$checkbox tiddler="$:/temp/task/open" field="text" checked="yes" unchecked="no" default="yes"> Open</$checkbox>
 <$checkbox tiddler="$:/temp/task/doing" field="text" checked="yes" unchecked="no" default="yes"> Doing</$checkbox>
+<$checkbox tiddler="$:/temp/task/waiting" field="text" checked="yes" unchecked="no" default="yes"> Waiting</$checkbox>
 <$set name="today" value=<<now YYYY0MM0DD>>><dl class="task-list">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd><<task-list-waiting>></dd></$list>
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
@@ -65,9 +65,6 @@ type: text/vnd.tiddlywiki
 @@color:#333;<$count filter="[prefix[$:/task-state/]contains:plan<dt>]"/>@@
 <$list filter="[<dt>match<today>]">^^@@color:red;Today@@^^</$list>
 </$droppable>
-<$list filter="[[$:/temp/task/waiting]!text[no]]" variable="NONE">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[waiting]contains:plan<dt>]"><dd><<task-list-waiting>></dd></$list>
-</$list>
 <$list filter="[[$:/temp/task/deadline]!text[no]]" variable="NONE">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[deadline]contains:plan<dt>]"><dd><<task-list-deadline>></dd></$list>
 </$list>
@@ -76,6 +73,9 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[[$:/temp/task/doing]!text[no]]" variable="NONE">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[doing]contains:plan<dt>]"><dd><<task-list-doing>></dd></$list>
+</$list>
+<$list filter="[[$:/temp/task/waiting]!text[no]]" variable="NONE">
+<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[waiting]contains:plan<dt>]"><dd><<task-list-waiting>></dd></$list>
 </$list>
 </$list>
 </dl></$set>
@@ -88,7 +88,7 @@ type: text/vnd.tiddlywiki
 <$set name="journal-title" filter="[<__date__>format:date[YYYY-0MM-0DD]]" select="0"><$droppable actions=<<droppable-date-action>> tag="div" class=<<container-class>>>
 <div class="dp-title"><$set name="dp-title" value=<<format-date "$date$" "MM-DD ddd">>>
 <$list filter="[<journal-title>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">//<<dp-title>>//
-<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal" type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>> caption=<<dp-title>> text="日记: <<snippet>>"/>
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal" type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>> caption=<<dp-title>> text="日记: <<bl>>" kw="10em"/>
 </$button>""">
 <$button set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible tc-tiddlylink" style="text-align:center;">
 <<dp-title>><$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/>
@@ -130,13 +130,10 @@ type: text/vnd.tiddlywiki
 <$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">{{!!caption}}
 <span style="color:green;">
 <$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
-- <$macrocall $name="days-left" deadline=<<currentTiddler>>/> 💣
+- ☠️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
 </$list>
 <$list filter="[prefix[$:/task-state/]text[open]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
-- <$macrocall $name="days-left" deadline=<<currentTiddler>>/> 🔥
-</$list>
-<$list filter="[prefix[$:/task-state/]text[doing]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
-- <$macrocall $name="days-passed" start=<<currentTiddler>>/> 🚀
+- ⚔️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
 </$list>
 </span>
 </$button>

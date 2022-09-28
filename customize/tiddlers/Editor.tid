@@ -1,7 +1,7 @@
 created: 20181212172024243
 creator: yuzijie
 list-before: $:/core/ui/SideBar/More
-modified: 20220922214913552
+modified: 20220928150345687
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -49,14 +49,13 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!has[_canonical_uri]]" variable="NONE"><$edit-text tag="textarea" autoHeight="no" class=<<edit-area-class>>>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/code"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD r:"">>'>>/>""">W</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD r:"">>'>>/>""">D</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD r:"">>'>>/>""">A</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD r:"">>'>>/>""">W</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">S</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<now "t:YYYY0MM0DD">>/>""">t:</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<now "d:YYYY0MM0DD">>/>""">d:</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='r:"' suffix='"'/>""">r:</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='to:"' suffix='"'/>""">to:</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text="<<snippet date:'no' cat-view:'no'>>"/>""">snp</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<display content:"' suffix='" mode:"tips">>'/>""">tips</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<$details summary="' suffix='">

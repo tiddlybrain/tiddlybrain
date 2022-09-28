@@ -9,7 +9,6 @@ percent: 计算任务完成率, e.g. percent[a]
 getTDate: 获取开始时间
 getDDate: 获取结束时间
 finishedStepNames: 获取某天完成的 Steps 的名称
-unfinishedSteps: 获取未完成的 Steps
 
 \*/
 (function(){
@@ -125,11 +124,14 @@ exports.percent = function(source,operator,options) {
 		case "a":
 			pattern = '<<a\\s.+?>>';
 			break;
+		case "d":
+			pattern = '<<d\\s.+?>>';
+			break;
 		case "w":
 			pattern = '<<w\\s.+?>>';
 			break;
 		default:
-			pattern = '<<d\\s.+?>>';
+			pattern = '<<[adw]\\s.+?>>';
 	}
 	var regexp = new RegExp(pattern, 'g');
 	source(function(tiddler,title) {
@@ -204,41 +206,6 @@ exports.finishedStepNames = function(source,operator,options) {
 				if (steps) steps.forEach(step => {
 					var d = getEndTime(step);
 					if (d && d === operator.operand) results.push(getStepName(step));
-				});
-			}
-		});
-	}
-	return results;
-};
-
-exports.unfinishedSteps = function(source,operator,options) {
-	var results = [], pattern_step = /<<w\s.+?>>/g;
-	if (operator.operand && !isNaN(operator.operand)) {
-		var date = parseInt(operator.operand);
-		var tiddlers = options.wiki.allTitles();
-		source(function(tiddler,title) {
-			if (tiddler) {
-				var content = tiddler.getFieldString("text");
-				var steps = content.match(pattern_step);
-				if (steps) steps.forEach(step => {
-					var start_time = parseInt(getStartTime(step));
-					var end_time = getEndTime(step);
-					var step_name = getStepName(step);
-					if (start_time && start_time <= date && !end_time && step_name) {
-						var task_state = "$:/task-state/" + title + "/" + step_name;
-						if (tiddlers.indexOf(task_state) !== -1) results.push(step);
-					}
-				});
-			}
-		});
-	} else {
-		source(function(tiddler,title) {
-			if (tiddler) {
-				var content = tiddler.getFieldString("text");
-				var steps = content.match(pattern_step);
-				if (steps) steps.forEach(step => {
-					var end_time = getEndTime(step);
-					if (!end_time) results.push(step);
 				});
 			}
 		});
