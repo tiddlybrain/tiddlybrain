@@ -21,7 +21,7 @@ module-type: filteroperator
 Helper functions
 */
 var getResult = function(data,options,currTiddlerTitle) {
-	if (options.wiki.tiddlerExists(data)) {
+	if(options.wiki.tiddlerExists(data)) {
 		var content = options.wiki.getTiddler(data).getFieldString("caption") || data;
 		return options.wiki.renderText("text/plain","text/vnd.tiddlywiki",content,{
 			parseAsInline: true,
@@ -44,7 +44,7 @@ var getResult = function(data,options,currTiddlerTitle) {
 var getResults = function(data,options,currTiddlerTitle) {
 	var result, results = [], re = /\s*(?:;;|$)\s*/;
 	data.split(re).forEach(datum => {
-		if (datum !== "") {
+		if(datum !== "") {
 			result = getResult(datum,options,currTiddlerTitle);
 			if(result.indexOf(";;") === -1) {
 				results.push(result);
@@ -120,7 +120,7 @@ exports.indexreg = function(source,operator,options) {
 exports.getindexParsed = function(source,operator,options) {
 	var results = [], data, index = operator.operand || null, s;
 	var suffixes = operator.suffixes || [], separator = (suffixes[0] || [])[0];
-	switch (separator) {
+	switch(separator) {
 		case 'comma':
 			s = ',';
 			break;
@@ -176,6 +176,14 @@ exports.slash = function(source,operator,options) {
 			}
 			source(function(tiddler,title) {
 				results.push(title + result);
+			});
+			break;
+		case "date":
+			let currTiddler = options.wiki.getTiddler(currTiddlerTitle);
+			data = currTiddler.getFieldString("date") || currTiddler.getFieldString("created");
+			result = $tw.utils.formatDateString($tw.utils.parseDate(data),key);
+			source(function(tiddler,title) {
+				results.push(title + "/" + result);
 			});
 			break;
 		default:
