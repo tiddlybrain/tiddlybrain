@@ -1,4 +1,4 @@
-modified: 20220922224617622
+modified: 20220929150037320
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 \define add-link-actions()
 <$set name="title" value={{$(linkTiddler)$}}>
-<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[title]]" value=<<title>> emptyValue=<<link-maker>>>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
 </$set>
 </$set>
@@ -68,8 +68,8 @@ Description: {{!!description}}" description="" type="application/x-tiddler-dicti
 <$macrocall $name="new-link-actions" template={{$:/config/defaultTemplate}}/>
 {{$:/core/images/new-button}}
 </$button>
-<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="link" unchecked="title" default="link"> Link Mode</$checkbox>
-<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="title" unchecked="link" default="link"> Title Mode</$checkbox>
+<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="link" unchecked="title" default="title"> Link Mode</$checkbox>
+<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="title" unchecked="link" default="title"> Title Mode</$checkbox>
 </$reveal>
 </$vars>
 
