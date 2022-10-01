@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20220928154215890
+modified: 20221001135658742
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -81,20 +81,18 @@ type: text/vnd.tiddlywiki
 </dl></$set>
 \end
 
-\define date-pillar-task() <$button to=<<currentTiddler>> class="tc-btn-invisible" style="background-color:$(color)$;">{{!!caption}}</$button>
+\define date-pillar-task() <$button to="Tasks/Actions" class="tc-btn-invisible" style="background-color:$(color)$;">{{!!caption}}</$button>
 
 \define date-pillar(date, today)
 <$set name="container-class" filter="[<__date__>match<__today__>]" value="dp-container today" emptyValue="dp-container">
 <$set name="journal-title" filter="[<__date__>format:date[YYYY-0MM-0DD]]" select="0"><$droppable actions=<<droppable-date-action>> tag="div" class=<<container-class>>>
-<div class="dp-title"><$set name="dp-title" value=<<format-date "$date$" "MM-DD ddd">>>
-<$list filter="[<journal-title>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">//<<dp-title>>//
-<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal" type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>> caption=<<dp-title>> text="日记: <<bl>>" kw="10em"/>
+<div class="dp-title"><$list filter="[<journal-title>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">//<<format-date "$date$" "ddd">>//
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal" type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>> caption=<<format-date "$date$" "MM-DD ddd">> text="日记: <<bl>>" kw="10em"/>
 </$button>""">
-<$button set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible tc-tiddlylink" style="text-align:center;">
-<<dp-title>><$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/>
+<$button to="Tasks/Actions" set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible tc-tiddlylink" style="text-align:center;">
+<<format-date "$date$" "ddd">>
 </$button>
-</$list>
-</$set></div>
+</$list></div>
 <div class="dp-content"><ol><$list filter="[<journal-title>indexes[]tag[Task]!sort[color]]"><li>
 <$set name="color" filter="[all[current]has[color]]" value={{!!color}} emptyValue="transparent"><<date-pillar-task>></$set>
 </li></$list></ol></div>

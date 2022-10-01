@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20220924045122370
+modified: 20221001135031181
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -250,8 +250,8 @@ button.collapse-close {background: #f4f4f4; font-weight: normal;}
 .dp-content {min-height: 2em; font-size: small;}
 .dp-content ol {padding-left: 15px; margin: 0;}
 .dp-container.today .dp-title, .dp-container.today .dp-title button {text-decoration: underline;}
-.dp-container.today:hover {flex-basis: 60%;}
-.dp-container.today:hover .dp-content ol {padding-left: 30px;}
+.dp-container:hover {flex-basis: 80%;}
+.dp-container:hover .dp-content ol {padding-left: 20px;}
 
 /* For Macro: weekly-plan */
 .dot {border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7;}
