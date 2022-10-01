@@ -1,14 +1,15 @@
 caption: {{$:/core/images/clone-button}} {{$:/language/Buttons/Clone/Caption}}
 description: {{$:/language/Buttons/Clone/Hint}}
 list-before: $:/core/ui/Buttons/delete
-modified: 20211009093359273
+modified: 20221001075943374
 modifier: yuzijie
-tags: $:/tags/ViewToolbar $:/tags/EditToolbar customized
+tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/clone
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-<$button message="tm-new-tiddler" param=<<currentTiddler>> tooltip={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}} class=<<tv-config-toolbar-class>>>
+<$button tooltip={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}} class=<<tv-config-toolbar-class>>>
+<$set name="actionTiddler" value=<<currentTiddler>>><<droppable-clone-action>></$set>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/clone-button}}
 </$list>

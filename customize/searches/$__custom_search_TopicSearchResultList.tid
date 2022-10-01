@@ -1,11 +1,11 @@
-caption: Topics (<$count filter="[search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!is[system]!tag[Ignore]]"/>)
+caption: Topics
 created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [fieldCaseInsensitive:caption<userInput>] [fieldCaseInsensitive:shortcap<userInput>] [!tag[Snippet]!is[system]!tag[Ignore]!tag[customized]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[unique[]] -[{$:/config/defaultTemplate}]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20220929145554459
+modified: 20221001075322481
 modifier: yuzijie
-second-search-filter: [!is[system]!tag[Ignore]tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<subtopic-subfilter>limit[200]sortan[belongs.to]]
+second-search-filter: [!is[system]!tag[Ignore]tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<subtopic-subfilter>limit[150]sortan[belongs.to]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
@@ -30,7 +30,7 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>
 </$button></small></$list>
 
-<$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]] }}}><<root-topics>></$set>
+<<root-topics>>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>

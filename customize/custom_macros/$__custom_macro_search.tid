@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20220922225907833
+modified: 20221001075103057
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 \define root-topics()
 \whitespace trim
 <div class="search-filters"><$let tv-wikilinks="no">
-<$list filter="$(search-filter)$ +[get[parents]enlist-input[]!tag[Snippet]unique[]sortan[title]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
+<$list filter="[!is[system]!tag[Ignore]search:title,tags,caption,shortcap,keywords,text,note,status,description[$(userInput)$]get[parents]enlist-input[]!tag[Snippet]unique[]sortan[title]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
 <$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>>
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/IndexSearchResultList"/>
@@ -30,7 +30,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$let tv-wikilinks="no"><span class="subtopic">
 <$list filter="[all[current]get[parents]enlist-input[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>>
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:smaller;background:#ccc;color:#fff;"><<keyword>>
 <$set name="subtopic-filter-chain" filter="[{$:/temp/subtopic/filter}] [<subtopic-filter>] +[join[]]" select="0">
 <$action-setfield $tiddler="$:/temp/subtopic/filter" text=<<subtopic-filter-chain>>/>
 </$set><<searchbar-focus-action>>
