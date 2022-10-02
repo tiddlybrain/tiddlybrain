@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20221001075103057
+modified: 20221002162518699
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -50,18 +50,6 @@ type: text/vnd.tiddlywiki
 </$list></$let></div>
 \end
 
-\define searchSelector()
-\whitespace trim
-<$list filter="[[$:/temp/index/filter]is[missing]]" emptyMessage="""<$button class="tc-btn-invisible">
-Search within: <$transclude tiddler={{$:/temp/index/filter}} field="caption"/> &times;
-<$action-deletetiddler $tiddler="$:/temp/index/filter"/><<searchbar-focus-action>>
-</$button>""">Choose a topic<br>
-<$list filter="[tag[$:/tags/Index]]"><$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;margin-left:5px;color:#888;">
-<$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>{{!!caption}}
-</$button></$list>
-</$list>
-\end
-
 # ''自动聚焦搜索框''
 #> `<<searchbar-focus-action>>`
 # ''显示搜索结果的根目录词条, 并且点击后, 跳转到 current search''
@@ -70,5 +58,3 @@ Search within: <$transclude tiddler={{$:/temp/index/filter}} field="caption"/> &
 #> `<<parent-topics>>`
 # ''显示搜索结果的 note 字段, 并且点击后, 生成一个 filter, 过滤 note''
 #> `<<note-filters>>`
-# ''给 Index Search 选择一个 Topic''
-#> `<<searchSelector>>`
