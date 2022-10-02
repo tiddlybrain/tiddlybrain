@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221001135031181
+modified: 20221002090002650
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -74,7 +74,7 @@ dl.task-list dd {white-space: nowrap;}
 .tc-sidebar-tab-open-item code {white-space: nowrap;}
 
 /* For $:/custom/search/... */
-button.search-tool {display: inline-block; width: auto; font-size: smaller; padding: 0px 6px;}
+button.search-tool {display: inline-block; width: auto; padding: 0px 6px;}
 .subtopic {display: block; padding: 1px 0 10px 10px;}
 .subtopic button.tc-tag-label, .search-filters button.tc-tag-label {padding: 0.2em 0.7em; margin-right: 1px; color: #888; font-size: smaller; width: auto; border-radius: 1em; display: inline-block;}
 .subtopic button.tc-tag-label:hover {text-decoration: line-through;}
