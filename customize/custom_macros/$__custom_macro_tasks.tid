@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221001135658742
+modified: 20221002073350392
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -81,7 +81,7 @@ type: text/vnd.tiddlywiki
 </dl></$set>
 \end
 
-\define date-pillar-task() <$button to="Tasks/Actions" class="tc-btn-invisible" style="background-color:$(color)$;">{{!!caption}}</$button>
+\define date-pillar-task(date) <$button to="Tasks/Actions" set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible" style="background-color:$(color)$;">{{!!caption}}</$button>
 
 \define date-pillar(date, today)
 <$set name="container-class" filter="[<__date__>match<__today__>]" value="dp-container today" emptyValue="dp-container">
@@ -94,7 +94,7 @@ type: text/vnd.tiddlywiki
 </$button>
 </$list></div>
 <div class="dp-content"><ol><$list filter="[<journal-title>indexes[]tag[Task]!sort[color]]"><li>
-<$set name="color" filter="[all[current]has[color]]" value={{!!color}} emptyValue="transparent"><<date-pillar-task>></$set>
+<$set name="color" filter="[all[current]has[color]]" value={{!!color}} emptyValue="transparent"><<date-pillar-task "$date$">></$set>
 </li></$list></ol></div>
 </$droppable></$set>
 </$set>
@@ -109,6 +109,15 @@ type: text/vnd.tiddlywiki
 \end
 
 \define weekly-plan(date)
+<h2 style="margin-bottom:10px;color:#666;font-weight:500;">
+Weekly Plan (<<format-date "$date$" "MMM DD, Week WW">>)
+<$set name="left" filter="[[$date$]nextDay[-1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:small;">{{$:/core/images/chevron-left}}</$button>
+</$set>
+<$set name="right" filter="[[$date$]nextDay[1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:small;">{{$:/core/images/chevron-right}}</$button>
+</$set>
+</h2>
 <div style="display:flex;margin-bottom:12px;">
 <$set name="sunday" filter="[<__date__>getSunday[]]" select="0"><$list filter="[range[0],[6]]" variable="num">
 <$set name="current-date" filter="[<sunday>nextDay<num>]" select="0"><$macrocall $name="date-pillar" date=<<current-date>> today=<<__date__>>/></$set>

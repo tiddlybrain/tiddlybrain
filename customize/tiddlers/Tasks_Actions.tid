@@ -1,7 +1,7 @@
 caption: Daily Plan
 created: 20211009174453738
 creator: yuzijie
-modified: 20221001134319747
+modified: 20221002072833235
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -72,10 +72,10 @@ type: text/vnd.tiddlywiki
 </$set>
 </$list></$list>
 
-<h2 style="color:#666;font-weight:500;">复盘
-<$button to=<<journal-title>> class="tc-btn-invisible"><$transclude tiddler=<<journal-title>> field="caption"/></$button>
+<$list filter="[<journal-title>is[tiddler]]">
+<h2 style="color:#666;font-weight:500;">
+<$button to=<<journal-title>> class="tc-btn-invisible">复盘 <$transclude tiddler=<<journal-title>> field="caption"/></$button>
 </h2>
-
 <table style="width:100%;white-space:nowrap;"><tbody>
 <tr><th>规划任务</th><th>执行情况</th></tr>
 <$list filter="[<journal-title>indexes[]tag[Task]]" variable="task"><tr>
@@ -90,6 +90,7 @@ type: text/vnd.tiddlywiki
 </$list></td>
 </tr></$list>
 </tbody></table>
+</$list>
 
 <$droppable actions="<$action-setfield $tiddler=<<actionTiddler>> interval=1/>" tag="div">
 <div class="tc-droppable-placeholder" style="display:block;">

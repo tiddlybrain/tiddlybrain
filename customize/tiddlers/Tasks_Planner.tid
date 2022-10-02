@@ -1,14 +1,13 @@
 caption: Weekly Plan
 created: 20210112195245238
 creator: yuzijie
-modified: 20220530092258209
+modified: 20221002070037585
 modifier: yuzijie
 order: 1
 tags: Tasks customized
 title: Tasks/Planner
 type: text/vnd.tiddlywiki
 
-<h2 style="margin-bottom:10px;color:#666;font-weight:500;">Weekly Plan (<<now "Week WW">>)</h2>
 <$set name="date" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>>
 <$macrocall $name="weekly-plan" date=<<date>>/>
 </$set>
