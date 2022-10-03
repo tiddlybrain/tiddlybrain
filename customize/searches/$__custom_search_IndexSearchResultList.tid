@@ -3,7 +3,7 @@ created: 20220920181640150
 creator: yuzijie
 first-search-filter: [all[tiddlers]!tag[Ignore]contains:parents{$:/temp/index/filter}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>subfilter<subtopic-subfilter>sortan[title]]
 list-after: $:/custom/search/CurrentSearchResultList
-modified: 20221002163717628
+modified: 20221003233214276
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/IndexSearchResultList
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 <$set name="note-subfilter" filter="[[$:/temp/note/filter]get[text]]" emptyValue="[is[tiddler]]" select="0">
 <$set name="subtopic-subfilter" filter="[[$:/temp/subtopic/filter]get[text]addprefix<lb>addsuffix<rb>]" emptyValue="[is[tiddler]]" select="0">
 
-<div style="text-align:center;">Search within:
+<div style="text-align:center;margin-bottom:5px;">Search within:
 <$button to={{$:/temp/index/filter}} class="tc-btn-invisible tc-tiddlylink"><$transclude tiddler={{$:/temp/index/filter}} field="caption"/></$button>
 </div>
 <$list filter="[[$:/temp/note/filter]!is[tiddler]]">
