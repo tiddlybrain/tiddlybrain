@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20220922024438346
+modified: 20221003163835591
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -40,6 +40,8 @@ type: text/vnd.tiddlywiki
 <$fieldmangler tiddler=<<actionTiddler>>>
 <$action-sendmessage $message="tm-remove-field" $param="belongs.to"/>
 <$action-sendmessage $message="tm-remove-field" $param="note"/>
+<$action-sendmessage $message="tm-remove-field" $param="parents"/>
+<$action-sendmessage $message="tm-remove-field" $param="keywords"/>
 <$action-sendmessage $message="tm-remove-tag" $param="Snippet"/>
 </$fieldmangler>
 \end

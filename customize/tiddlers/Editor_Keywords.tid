@@ -1,7 +1,7 @@
 caption: 关键词
 created: 20200908201842064
 creator: yuzijie
-modified: 20221002162140053
+modified: 20221003162910721
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Keywords
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[has[belongs.to]!tag[Ignore]!tag[Comment]]">
 <$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
 <$set name="keywords" filter="[<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] [<currentTiddler>type[text/vnd.tiddlywiki]getAllTitles[]] [<currentTiddler>getAllTagTitles[]] +[unique[]join[, ]]" select="0">
-<$list filter="[{!!keywords}!match<keywords>]" variable="NONE">
+<$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE">
 <$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
 </$list>
 </$set>
@@ -26,7 +26,7 @@ To be updated:
 <$list filter="[has[belongs.to]!tag[Ignore]!tag[Comment]]">
 <$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
 <$set name="keywords" filter="[<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] [<currentTiddler>type[text/vnd.tiddlywiki]getAllTitles[]] [<currentTiddler>getAllTagTitles[]] +[unique[]join[, ]]" select="0">
-<$list filter="[{!!keywords}!match<keywords>]" variable="NONE">
+<$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE">
 <$transclude field="caption"><$view field="title"/></$transclude><br>
 </$list>
 </$set>
