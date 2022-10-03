@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221002090002650
+modified: 20221003173749012
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -235,7 +235,7 @@ pre code.hljs {line-height: 23px; font-size: 14px;}
 li .code-macro {margin: 4px 0;}
 
 /* For Macro: status-selector */
-.status-options {color: red;}
+.status-options {color: red; display: inline-block;}
 .status-options select {border: none; color: red; font-weight: inherit;}
 
 /* For Macro: collapse */
