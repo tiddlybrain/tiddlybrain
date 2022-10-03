@@ -1,9 +1,9 @@
-caption: Daily Plan
+caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221002072833235
+modified: 20221003104857966
 modifier: yuzijie
-order: 2
+order: 3
 tags: Tasks customized
 title: Tasks/Actions
 type: text/vnd.tiddlywiki
@@ -54,11 +54,11 @@ type: text/vnd.tiddlywiki
 </$set>
 </div>
 
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]contains:plan<curDate>!filter<task-filter>]" columns="Urgent Important Other" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]contains:plan<curDate>!filter<task-filter>]" columns="InProgress Easy Difficult" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
 
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="-[<curDate>]"/>""" tag="div">
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>]">
-<$list filter="[all[current]!has[category]] [all[current]!contains:plan<curDate>!enlist[Urgent Important Other]]" variable="NONE">
+<$list filter="[all[current]!has[category]] [all[current]!contains:plan<curDate>!enlist[InProgress Easy Difficult]]" variable="NONE">
 <<kanban-link>>
 </$list>
 </$list>

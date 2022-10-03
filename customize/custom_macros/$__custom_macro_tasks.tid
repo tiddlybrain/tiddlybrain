@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221002073350392
+modified: 20221003104707023
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -60,7 +60,7 @@ type: text/vnd.tiddlywiki
 <$set name="today" value=<<now YYYY0MM0DD>>><dl class="task-list">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd><<task-list-waiting>></dd></$list>
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
-<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/><$action-setfield $tiddler=<<actionTiddler>> category="Other"/>""" tag="dt">
+<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/><$action-setfield $tiddler=<<actionTiddler>>/>""" tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0"><<date-title>></$set>
 @@color:#333;<$count filter="[prefix[$:/task-state/]contains:plan<dt>]"/>@@
 <$list filter="[<dt>match<today>]">^^@@color:red;Today@@^^</$list>
