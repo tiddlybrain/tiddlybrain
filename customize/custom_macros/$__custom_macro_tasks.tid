@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221003104707023
+modified: 20221003120441949
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -26,9 +26,7 @@ type: text/vnd.tiddlywiki
 
 \define task-list-button(color, date)
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">@@color:#333;{{!!remark}}@@
-<$set name="drag" filter="[all[current]!text[waiting]!text[open]]" value=<<currentTiddler>> emptyValue="">
-<$button dragTiddler=<<drag>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:$color$;" message="tm-copy-to-clipboard" param={{!!caption}}>''{{!!caption}}''</$button>
-</$set>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:$color$;" message="tm-copy-to-clipboard" param={{!!caption}}>''{{!!caption}}''</$button>
 <$set name="start" filter="[<task-id>getTDate{!!caption}]" select="0">
 <$list filter="[{!!date}match<start>]" emptyMessage="""<$button class="tc-btn-invisible"><$action-setfield date=<<start>>/>Update Date</$button>""" variable="NONE">
 <$reveal default="$date$" type="match" text="left" style="color:green;"><$macrocall $name="days-left" deadline={{!!date}}/></$reveal>
@@ -57,11 +55,13 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/open" field="text" checked="yes" unchecked="no" default="yes"> Open</$checkbox>
 <$checkbox tiddler="$:/temp/task/doing" field="text" checked="yes" unchecked="no" default="yes"> Doing</$checkbox>
 <$checkbox tiddler="$:/temp/task/waiting" field="text" checked="yes" unchecked="no" default="yes"> Waiting</$checkbox>
-<$set name="today" value=<<now YYYY0MM0DD>>><dl class="task-list">
+<$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd><<task-list-waiting>></dd></$list>
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/><$action-setfield $tiddler=<<actionTiddler>>/>""" tag="dt">
-<$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0"><<date-title>></$set>
+<$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
+<$button to="Tasks/Actions" set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible"><<date-title>></$button>
+</$set>
 @@color:#333;<$count filter="[prefix[$:/task-state/]contains:plan<dt>]"/>@@
 <$list filter="[<dt>match<today>]">^^@@color:red;Today@@^^</$list>
 </$droppable>
@@ -117,6 +117,9 @@ Weekly Plan (<<format-date "$date$" "MMM DD, Week WW">>)
 <$set name="right" filter="[[$date$]nextDay[1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:small;">{{$:/core/images/chevron-right}}</$button>
 </$set>
+<$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]">
+<$button style="font-size:small;" set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
+</$list>
 </h2>
 <div style="display:flex;margin-bottom:12px;">
 <$set name="sunday" filter="[<__date__>getSunday[]]" select="0"><$list filter="[range[0],[6]]" variable="num">

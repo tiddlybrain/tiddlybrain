@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221003104857966
+modified: 20221003114941255
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -58,7 +58,7 @@ type: text/vnd.tiddlywiki
 
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="-[<curDate>]"/>""" tag="div">
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>]">
-<$list filter="[all[current]!has[category]] [all[current]!contains:plan<curDate>!enlist[InProgress Easy Difficult]]" variable="NONE">
+<$list filter="[all[current]!contains:plan<curDate>] :else[all[current]!has[category]]" variable="NONE">
 <<kanban-link>>
 </$list>
 </$list>
