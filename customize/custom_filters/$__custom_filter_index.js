@@ -147,7 +147,7 @@ exports.getindexParsed = function(source,operator,options) {
 };
 
 exports.slash = function(source,operator,options) {
-	var results = [], result, key = operator.operand || "", data, re = /\s*(?:;;|$)\s*/;
+	var results = [], result, key = operator.operand || "", data, currTiddler, re = /\s*(?:;;|$)\s*/;
 	var suffixes = operator.suffixes || [], mode = (suffixes[0] || [])[0], flags = suffixes[1] || [];
 	var currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
 	if(currTiddlerTitle) switch(mode) {
@@ -179,12 +179,42 @@ exports.slash = function(source,operator,options) {
 			});
 			break;
 		case "date":
-			let currTiddler = options.wiki.getTiddler(currTiddlerTitle);
+			currTiddler = options.wiki.getTiddler(currTiddlerTitle);
 			data = currTiddler.getFieldString("date") || currTiddler.getFieldString("created");
 			result = $tw.utils.formatDateString($tw.utils.parseDate(data),key);
 			source(function(tiddler,title) {
 				results.push(title + "/" + result);
 			});
+			break;
+		case "links":
+			let pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g, matches, hasResults = 0;
+			currTiddler = options.wiki.getTiddler(currTiddlerTitle);
+			data = currTiddler.getFieldString("text");
+			while(matches = pattern.exec(data)) {
+				matches.shift();
+				matches.forEach(match => {
+					if (match !== undefined && options.wiki.tiddlerExists(match)) {
+						hasResults = 1;
+						let caption = options.wiki.getTiddler(match).getFieldString("caption") || match;
+						result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",caption,{
+							parseAsInline: true,
+							variables: {
+								currentTiddler: match
+							},
+							parentWidget: options.widget
+						});
+						source(function(tiddler,title) {
+							results.push(title + "/" + result);
+						});
+					}
+				});
+			}
+			if(hasResults === 0) {
+				result = (flags.indexOf("optional") === -1) ? "/Others" : "";
+				source(function(tiddler,title) {
+					results.push(title + result);
+				});
+			}
 			break;
 		default:
 			data = options.wiki.getTiddler(currTiddlerTitle).getFieldString(key) || null;
