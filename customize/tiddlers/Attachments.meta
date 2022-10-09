@@ -1,0 +1,12 @@
+belongs.to: $:/core/ui/MoreSideBar/Types
+caption: Attachment Collector
+created: 20211222002004723
+creator: yuzijie
+keywords: 
+modified: 20221009073716866
+modifier: yuzijie
+note: 
+parents: $:/core/ui/MoreSideBar/Types
+tags: customized Snippet
+title: Attachments
+type: application/x-tiddler-dictionary
