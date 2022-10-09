@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221003120441949
+modified: 20221009193738196
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -87,7 +87,7 @@ type: text/vnd.tiddlywiki
 <$set name="container-class" filter="[<__date__>match<__today__>]" value="dp-container today" emptyValue="dp-container">
 <$set name="journal-title" filter="[<__date__>format:date[YYYY-0MM-0DD]]" select="0"><$droppable actions=<<droppable-date-action>> tag="div" class=<<container-class>>>
 <div class="dp-title"><$list filter="[<journal-title>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">//<<format-date "$date$" "ddd">>//
-<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal" type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>> caption=<<format-date "$date$" "MM-DD ddd">> text="日记: <<bl>>" kw="10em"/>
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>> caption=<<format-date "$date$" "MM-DD ddd">> text="日记: <<bl>>" kw="10em"/>
 </$button>""">
 <$button to="Tasks/Actions" set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible tc-tiddlylink" style="text-align:center;">
 <<format-date "$date$" "ddd">>
