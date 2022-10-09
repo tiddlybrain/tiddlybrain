@@ -1,0 +1,30 @@
+caption: {{$:/language/SideBar/Tags/Caption}}
+modified: 20221009072054563
+modifier: yuzijie
+tags: $:/tags/MoreSideBar customized
+title: $:/core/ui/MoreSideBar/Tags
+type: text/vnd.tiddlywiki
+
+<$set name="tv-config-toolbar-icons" value="yes">
+
+<$set name="tv-config-toolbar-text" value="yes">
+
+<$set name="tv-config-toolbar-class" value="">
+
+{{$:/core/ui/Buttons/tag-manager}}
+
+</$set>
+
+</$set>
+
+</$set>
+
+<$list filter={{$:/core/Filters/AllTags!!filter}}>
+
+<$macrocall $name="l" title={{!!title}}/>
+
+</$list>
+
+<hr class="tc-untagged-separator">
+
+{{$:/core/ui/UntaggedTemplate}}
