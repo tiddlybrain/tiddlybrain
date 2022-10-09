@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221003114941255
+modified: 20221009192912841
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -85,7 +85,9 @@ type: text/vnd.tiddlywiki
 <$macrocall $name="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
 </$button>
 <$set name="style" filter="[[$:/task-state]] [<task>] [<currentTiddler>] +[join[/]is[tiddler]]" value="color:brown;" emptyValue="color:#444;">
-<span style=<<style>>><<currentTiddler>></span>
+<$button message="tm-copy-to-clipboard" param=<<currentTiddler>> style=<<style>> class="tc-btn-invisible">
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<task>>/><<currentTiddler>>
+</$button>
 </$set><br>
 </$list></td>
 </tr></$list>
