@@ -3,13 +3,13 @@ created: 20220118202607895
 creator: yuzijie
 description: Copy current tiddler as a task to the clipboard
 list-after: $:/core/ui/Buttons/fold
-modified: 20220924052910258
+modified: 20221010070603884
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/copy-as-task
 type: text/vnd.tiddlywiki
 
-\define task-template() <<w "$(content)$" "$(tiddler)$" t:$(date)$ r:"">>
+\define task-template() <<a "$(content)$" "$(tiddler)$" t:$(date)$ r:"">>
 
 \whitespace trim
 <$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
