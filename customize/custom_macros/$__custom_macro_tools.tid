@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20220925220701074
+modified: 20221010220809743
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -123,7 +123,7 @@ type: text/vnd.tiddlywiki
 
 \define timeline-title() <<icons>> @@color:#333;<$view field=title/>@@ <$transclude field="caption"/>
 
-\define branch-caption(levels, separator:"/", separator2:" - ") <$set name="newTitle" filter="[all[current]split<__separator__>butfirst<__levels__>join<__separator2__>]" select="0"><<newTitle>></$set>
+\define brcap(levels:"2", new:" - ", old:"/") <$text text={{{ [all[current]split<__old__>butfirst<__levels__>join<__new__>] }}}/>
 
 \define copy-image() <$image source="$(currentTiddler)$" width="" height="" tooltip="$(currentTiddler)$"/>
 
@@ -238,10 +238,10 @@ type: text/vnd.tiddlywiki
 # ''修改 timeline macro 的 tidder links 的样式''
 #> `<<timeline-title>>`
 # ''为 Branch Tiddler 自动生成 Caption''
-#> `<<branch-caption
+#> `<<brcap
   levels:"从某级之后开始计算标题"
-  separator:"原分隔符"
-  separator2:"新分隔符">>`
+  new:"新分隔符"
+  old:"原分隔符">>`
 # ''点击链接以后弹出 Modal 的动作''
 #> `<<modal-actions>>`
 # ''Subtitle 的时间显示''

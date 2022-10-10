@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20220918192010705
+modified: 20221010220956262
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define update-tags-button(cat-prefix:"BR/", filter, cat-filter, tag-caption:"{{!!title}}")
+\define update-tags-button(cat-prefix:"BR/", filter, cat-filter, tag-caption:"<<brcap>>")
 <$list filter="[<__cat-filter__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes' class='tc-btn-invisible'>Update</$button>">
 <$button class="tc-btn-invisible">Update<$list filter=<<__filter__>>>
 <$list filter="[all[current]tags[]prefix<__cat-prefix__>]" variable="tag">
@@ -42,6 +42,13 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list></$button>
 </$list>
+\end
+
+\define toggle-tags-button(tags-filter)
+<$button class="tc-btn-invisible"><$list filter="[prefix[$:/state/sort/$(currentTiddler)$/]text[open]limit[1]]" emptyMessage="""Open All
+<$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="open"/></$list>""" variable="NONE">Close All
+<$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="close"/></$list>
+</$list></$button>
 \end
 
 \define categories(tags-filter, cat-prefix, filter, cat-filter, tag-caption, search-title:"Search here")
@@ -62,6 +69,9 @@ type: text/vnd.tiddlywiki
 </$set></$button>&nbsp;
 <$button class="tc-btn-invisible"><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>Clear Search</$button>
 </$reveal>
+<div class="categories-toggle">
+<$macrocall $name="toggle-tags-button" tags-filter=<<__tags-filter__>>/>
+</div>
 <div class="categories-update">
 <$macrocall $name="update-tags-button" cat-prefix=<<__cat-prefix__>> filter=<<__filter__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
 </div>
