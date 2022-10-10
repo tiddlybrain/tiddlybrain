@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221010220956262
+modified: 20221010231311219
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -112,7 +112,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible sort-by-belongs-title">
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 <$transclude field="caption"><$view field="title"/></$transclude>
-<span style="color:#888;"><$list filter="[<currentTiddler>get[belongs.to]getAllParents[]]" variable="parent">&gt;
+<span style="color:#aaa;"><$list filter="[<currentTiddler>get[belongs.to]getAllParents[]]" variable="parent">&gt;
 <$tiddler tiddler=<<parent>>><$transclude field="caption"><$view field="title"/></$transclude></$tiddler>
 </$list></span>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
