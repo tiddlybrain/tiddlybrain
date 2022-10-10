@@ -1,6 +1,6 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20220922111303306
+modified: 20221010221938731
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
@@ -37,9 +37,12 @@ type: text/vnd.tiddlywiki
 <$reveal type="match" state="$:/config/index-tree" text="" default="" tag="div" class="tc-table-of-contents" style="margin-top:20px;">
 <$macrocall $name="custom-toc" root="Index" sort="!sort[order]"/>
 </$reveal>
-<$reveal type="nomatch" state="$:/config/index-tree" text="" default="" tag="div" class="tc-tiddler-body index-tree-view">
-<$tiddler tiddler={{$:/config/index-tree}}><$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude mode=block/>"><<data-table>></$list></$tiddler>
-</$reveal>
+<$reveal type="nomatch" state="$:/config/index-tree" text="" default="" tag="div" class="tc-tiddler-body index-tree-view"><$tiddler tiddler={{$:/config/index-tree}}>
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude mode=block/>"><<data-table>></$list>
+<$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
+<$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
+</$list>
+</$tiddler></$reveal>
 <hr style="margin:20px 0;">
 </$set></$droppable>
 \end
