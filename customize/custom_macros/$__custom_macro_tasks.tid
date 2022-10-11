@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221009193738196
+modified: 20221011001317950
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -47,6 +47,16 @@ type: text/vnd.tiddlywiki
 \define task-list-waiting() <<task-list-button "#009dd9" "passed">>
 \define task-list-deadline() <<task-list-button "#cd23d8" "left">>
 
+\define task-filter() [all[current]split[/]nth[3]!enlist<tasks>]
+
+\define task-list-droppable-actions()
+<$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
+<$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
+<$list filter="[<actionTiddler>!filter<task-filter>]"><$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/></$list>
+</$set>
+</$set>
+\end
+
 \define task-list()
 <$list filter="[[$:/temp/task-list]is[tiddler]]">
 <$button><$action-deletetiddler $tiddler="$:/temp/task-list"/>&times; <$transclude tiddler={{$:/temp/task-list}} field="caption"/></$button>
@@ -56,9 +66,9 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/doing" field="text" checked="yes" unchecked="no" default="yes"> Doing</$checkbox>
 <$checkbox tiddler="$:/temp/task/waiting" field="text" checked="yes" unchecked="no" default="yes"> Waiting</$checkbox>
 <$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd><<task-list-waiting>></dd></$list>
+<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd><<task-list-doing>></dd></$list>
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
-<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/><$action-setfield $tiddler=<<actionTiddler>>/>""" tag="dt">
+<$droppable actions=<<task-list-droppable-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
 <$button to="Tasks/Actions" set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible"><<date-title>></$button>
 </$set>

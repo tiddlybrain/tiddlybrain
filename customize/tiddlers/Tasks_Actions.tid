@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221010115930387
+modified: 20221011000244142
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -27,8 +27,6 @@ type: text/vnd.tiddlywiki
 </$set>
 </div></$list>
 \end
-
-\define task-filter() [all[current]split[/]nth[3]!enlist<tasks>]
 
 \define review-task()
 <$button to=<<task>> class="tc-btn-invisible" style="background-color:$(color)$;">
