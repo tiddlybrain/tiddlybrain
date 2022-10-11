@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20221009073419406
+modified: 20221011154928581
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -18,8 +18,8 @@ type: text/vnd.tiddlywiki
 \end
 
 \define snippet-drop-actions(actions, tags, celltpl)
+<$list filter="[<actionTiddler>!match<currentTiddler>]" variable="NONE"><$set name="parents" filter="[<currentTiddler>getAllParents[]]">
 <$vars template={{{ [<actionTiddler>split[ ]first[]] }}} caption={{{ [<actionTiddler>get[caption]] }}}>
-<$set name="parents" filter="[<currentTiddler>getAllParents[]]">
 <$set name="keywords" filter="[<actionTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] [<actionTiddler>type[text/vnd.tiddlywiki]getAllTitles[]] [<currentTiddler>getAllTagTitles[]] +[unique[]join[, ]]" select="0">
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<snippet-drop-ctrl-actions "$tags$" "$celltpl$">> variable="NONE">
 <$action-setfield $tiddler=<<actionTiddler>> $timestamp="no" belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>>/>
@@ -32,8 +32,8 @@ type: text/vnd.tiddlywiki
 </$list>
 <<__actions__>>
 </$set>
-</$set>
 </$vars>
+</$set></$list>
 \end
 
 \define snippet-limit-state() $:/state/snippet-limit/$(current)$/$(key)$
