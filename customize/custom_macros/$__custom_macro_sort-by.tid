@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221010231311219
+modified: 20221012200956718
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -58,7 +58,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/search/sort-by/$(currentTiddler)$]is[tiddler]]" emptyMessage="""{{$:/core/images/advanced-search-button}} $search-title$<$action-setfield $tiddler="$:/temp/search/sort-by/$(currentTiddler)$" text=""/>""">{{$:/core/images/close-button}}<$action-deletetiddler $filter="[[$:/temp/search/sort-by/$(currentTiddler)$]]"/></$list>
 </$button>
 <$list filter="[[$:/temp/search/sort-by/$(currentTiddler)$]is[tiddler]]">
-<$edit-text tiddler="$:/temp/search/sort-by/$(currentTiddler)$" tag="input" default=""/>
+<$edit-text tiddler="$:/temp/search/sort-by/$(currentTiddler)$" tag="input" default="" focus="yes"/>
 </$list>
 </div>
 <$set name="tags" filter=<<__tags-filter__>>><$macrocall $name="tags-tower"/></$set>
