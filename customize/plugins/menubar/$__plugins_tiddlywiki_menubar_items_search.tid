@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20220914184742468
+modified: 20221012203602349
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -44,7 +44,7 @@ type: text/vnd.tiddlywiki
 </$keyboard>
 </$keyboard>
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
-<$button class="tc-btn-invisible" style="margin-left:7px;">
+<$button class="tc-btn-invisible" style="margin-left:7px;" tabindex="-1">
 <$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>
 <$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input"/>{{$:/core/images/close-button}}
 </$button>

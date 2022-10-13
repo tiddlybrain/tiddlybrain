@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221010231237795
+modified: 20221013081216706
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -157,7 +157,7 @@ button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; width: 88%;
 .tc-menubar .tc-drop-down {padding: 10px 20px;}
 .tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini .open svg {fill: green;}
 nav.tc-menubar li.tc-menubar-item .tc-menubar-dropdown-arrow svg {width: 1em; height: 0.7em; transform: translateY(-1px);}
-nav.tc-menubar li.tc-menubar-item .tc-menu-list-item svg {fill: #999;}
+nav.tc-menubar li.tc-menubar-item .tc-menu-list-item svg, nav.tc-menubar li.tc-menubar-item .tc-block-dropdown svg {fill: #999;}
 nav.tc-menubar .tc-drop-down .tc-table-of-contents button.tc-tiddlylink {color: #666;}
 nav.tc-menubar .tc-drop-down .tc-table-of-contents button.tc-tiddlylink:hover {color: white;}
 nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #aaa; background: transparent; cursor: default;}
@@ -265,15 +265,3 @@ details:not([open]) > summary {border-bottom: 1px solid #ccc;}
 details details {background-color: white;}
 details .snippet-container {padding-left: 10px;}
 li > details {margin: 0}
-
-/* For Plugin: Tidgraph */
-.ihm-tgr-node {padding: 0; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);}
-.ihm-tgr-collapse {height: 13px; right: -13px;}
-table.ihm-tgr-table {line-height: 18px; font-size: smaller;}
-table.ihm-tgr-table th, table.ihm-tgr-table td {padding: 0 5px;}
-table.ihm-tgr-table td {overflow-wrap: break-word;}
-table.ihm-tgr-table tr:last-child th, table.ihm-tgr-table tr:last-child td {border-bottom: none;}
-table.ihm-tgr-table tr th:last-child, table.ihm-tgr-table tr td:last-child {border-right: none;}
-.ihm-tgr-node-container-east {margin: 8px 10px;}
-.tgr-style {white-space: nowrap; max-width: 180px; overflow: hidden; background-color: white;}
-.tgr-style code {white-space: nowrap;}
