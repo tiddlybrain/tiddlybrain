@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20220919155015167
+modified: 20221013092634119
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -26,7 +26,7 @@ Belongs to:
 <$select tiddler="$:/state/select/$(currentTiddler)$/$title$/$uid$" class=<<select-filter-style>> tooltip="Filter Options">
 <option value=""></option>
 <$list filter="$filter$ +[tags[]!is[current]sortan[title]] -Snippet">
-<option value=<<filter-by-tags-value>> style="color:#ebb000;">Tag: {{!!title}}</option>
+<option value=<<filter-by-tags-value>> style="color:#ebb000;">Tag: <$transclude field=caption><$view field=title/></$transclude></option>
 </$list>
 <$list filter="$filter$ +[get[belongs.to]each:value[]]">
 <option value=<<filter-by-belongs-value>> style="color:#a630f9;"><<filter-get-parents>></option>
