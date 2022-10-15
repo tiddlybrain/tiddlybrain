@@ -2,7 +2,7 @@ belongs.to: $:/core/ui/MoreSideBar/Types
 caption: Attachment Collector
 created: 20211222002004723
 creator: yuzijie
-keywords: 
+keywords: Types
 modified: 20221009073716866
 modifier: yuzijie
 note: 
