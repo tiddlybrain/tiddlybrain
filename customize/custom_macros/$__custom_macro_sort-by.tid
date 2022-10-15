@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221012200956718
+modified: 20221015211536192
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -25,13 +25,16 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define update-tags-button(cat-prefix:"BR/", filter, cat-filter, tag-caption:"<<brcap>>")
-<$list filter="[<__cat-filter__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes' class='tc-btn-invisible'>Update</$button>">
-<$button class="tc-btn-invisible">Update<$list filter=<<__filter__>>>
+\define update-tags-button(cat-prefix, filter, cat-filter, tag-caption:"<<brcap>>", title:"Update", actions)
+<$list filter="[<__cat-prefix__>suffix[/]]" variable="NONE" emptyMessage="@@color:red;Prefix ERROR@@">
+<$list filter="[<__cat-filter__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes' class='tc-btn-invisible'>$title$</$button>">
+<$button class="tc-btn-invisible">$title$$actions$
+<$vars tagging="[tagging[]]"><$list filter="[prefix<__cat-prefix__>!filter<tagging>]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list></$vars>
+<$list filter=<<__filter__>>>
 <$list filter="[all[current]tags[]prefix<__cat-prefix__>]" variable="tag">
 <$action-listops $field="tags" $subfilter="-[<tag>]" $timestamp="no"/>
 </$list>
-<$list filter="[<__cat-prefix__>removesuffix[/]$cat-filter$]" variable="tag">
+<$list filter="[<__cat-prefix__>removesuffix[/]$cat-filter$]" variable="tag"><$list filter="[<tag>!prefix[Filter error]]" variable="NONE">
 <$action-listops $field="tags" $subfilter="[<tag>]" $timestamp="no"/>
 <$list filter="[<tag>is[missing]]">
 <$action-setfield caption=<<__tag-caption__>> text="<<records>>" $timestamp="no"/>
@@ -39,14 +42,16 @@ type: text/vnd.tiddlywiki
 <$action-listops $field="tags" $subfilter="Ignore [<tag>]" $timestamp="no"/>
 </$set>
 </$list>
+</$list></$list>
 </$list>
-</$list></$button>
+</$button>
+</$list>
 </$list>
 \end
 
 \define toggle-tags-button(tags-filter)
-<$button class="tc-btn-invisible"><$list filter="[prefix[$:/state/sort/$(currentTiddler)$/]text[open]limit[1]]" emptyMessage="""Open All
-<$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="open"/></$list>""" variable="NONE">Close All
+<$button class="tc-btn-invisible"><$list filter="[prefix[$:/state/sort/$(currentTiddler)$/]text[open]limit[1]]" emptyMessage="""Unfold all
+<$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="open"/></$list>""" variable="NONE">Fold all
 <$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="close"/></$list>
 </$list></$button>
 \end
@@ -67,7 +72,13 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/temp/menubarsearch" text=<<search-text>>/>
 <$action-setfield $tiddler="$:/temp/menubarsearch/input" text=<<search-text>>/>
 </$set></$button>&nbsp;
-<$button class="tc-btn-invisible"><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>Clear Search</$button>
+<$button class="tc-btn-invisible">Clear Search
+<$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>
+<$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="close"/></$list>
+<$list filter="[<__cat-prefix__>suffix[/]]"><$vars tagging="[tagging[]]">
+<$list filter="[prefix<__cat-prefix__>!filter<tagging>]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
+</$vars></$list>
+</$button>
 </$reveal>
 <div class="categories-toggle">
 <$macrocall $name="toggle-tags-button" tags-filter=<<__tags-filter__>>/>
@@ -161,29 +172,41 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 
 \define filter-tags() [tags[]prefix[$(cat-prefix)$]] -[[$(currentTiddler)$]]
 
-\define sort-by-tags(cat-prefix:"BR/", sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, cat-filter, tag-caption)
-<$set name="cat-prefix" filter="[<__cat-prefix__>suffix[/]]" value=<<__cat-prefix__>> emptyValue="$cat-prefix$/">
+\define sort-by-tags(cat-prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, cat-filter, tag-caption)
+<$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>><$vars tagged="[tags[]prefix<cat-prefix>]">
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="[<currentTiddler>]"/><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
-<$macrocall $name="categories" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[tag<currentTiddler>]'/> items"/>
+<$macrocall $name="categories" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[tag<currentTiddler>]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[tag<currentTiddler>tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}tagging[]] [tag<currentTiddler>!filter<tagged>]'/> items"/>
 </$droppable>
-<$macrocall $name="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title,caption{$:/temp/menubarsearch}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
+<$macrocall $name="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 <$list filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
 <$macrocall $name="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 </div></$list>
-</$set>
+</$vars></$set>
 \end
 
-\define sort-by-filter(item-filter:"all[current]", cat-prefix:"BR/", sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, cat-filter, tag-caption)
-<$set name="cat-prefix" filter="[<__cat-prefix__>suffix[/]]" value=<<__cat-prefix__>> emptyValue="$cat-prefix$/">
-<$macrocall $name="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[$item-filter$]'/> items"/>
-<$macrocall $name="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title,caption{$:/temp/menubarsearch}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
+\define sort-by-filter(item-filter:"all[current]", cat-prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, cat-filter, tag-caption)
+<$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>><$vars tagged="[tags[]prefix<cat-prefix>]">
+<$macrocall $name="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[$item-filter$tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}tagging[]] [$item-filter$!filter<tagged>]'/> items"/>
+<$macrocall $name="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 <$list filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
 <$macrocall $name="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 </div></$list>
-</$set>
+</$vars></$set>
 \end
 
 \define sort-by-topic(topic, note, cat-prefix, sort, sort-tags, cfilter, rheader, cat-filter, tag-caption) <$macrocall $name="sort-by-filter" item-filter="all[tiddlers]contains:parents[$topic$]note[$note$]" cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> sort-tags=<<__sort-tags__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
+
+\define cat-filter-updater(cat-prefix, filter, tag-caption)
+<div class="cat-filter-updater"><span>current filter:</span>
+<$edit-text tiddler="$:/temp/cat-filter/$(currentTiddler)$" tag="input" default={{{ [all[current]get[cat-filter]] }}}/>
+<$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>>
+<$list filter="[[$:/temp/cat-filter/$(currentTiddler)$]is[tiddler]]" variable="NONE">
+<$macrocall $name="update-tags-button" cat-prefix=<<cat-prefix>> filter=<<__filter__>> cat-filter={{$:/temp/cat-filter/$(currentTiddler)$}} tag-caption=<<__tag-caption__>> title="Update Filter" actions="<$action-setfield cat-filter={{$:/temp/cat-filter/$(currentTiddler)$}}/><$action-deletetiddler $tiddler='$:/temp/cat-filter/$(currentTiddler)$'/>"/>
+<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/cat-filter/$(currentTiddler)$"/>Cancel</$button>
+</$list>
+</$set>
+</div>
+\end
 
 # ''从 `/` 处, 将 branch Tiddler 的 title 切开, 并按 level 来分行显示, 像一座塔一样''
 #> `<<tags-tower
@@ -193,7 +216,9 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
   cat-prefix:"tag 的前缀"
   filter:"筛选出所有 Tiddlers 的 filter"
   cat-filter:"如何生成 tag 的 filter"
-  tag-caption:"tag 的 caption">>`
+  tag-caption:"tag 的 caption"
+  title:"按钮标题"
+  actions:"额外动作">>`
 # ''显示 Tags 筛选框''
 #> `<<categories
   tags-filter:"筛选出所有 tags 的 filter"
@@ -245,4 +270,9 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
   cfilter:"如果是 Table, 则需要填写"
   rheader:"如果是 Table, 可以选填"
   cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`
+# ''collector 的字段 cat-filter 的修改框''
+#> `<<cat-filter-updater
+  cat-prefix:"tag 的前缀"
+  filter:"筛选出所有 Tiddlers 的 filter"
   tag-caption:"tag 的 caption">>`
