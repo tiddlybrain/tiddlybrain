@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221010220809743
+modified: 20221015225408221
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -142,7 +142,10 @@ type: text/vnd.tiddlywiki
 \end
 
 \define subtitle()
-<$list filter="[all[current]has[date]]"><<verification-notice>> verified on <$list filter="[all[current]days:date[]]" emptyMessage="""<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible" style="color:#9accb0;font-variant:small-caps;font-variant-numeric:oldstyle-nums;"><$action-setfield $field="last-date" $value={{!!date}}/><$view field="date" format="date" template="YYYY-0MM-0DD"/> <$macrocall $name="days-passed" start={{!!date}}/></$button>""">@@color:#9accb0;today@@</$list>,</$list> modified on <$view field="modified" format="date" template="YYYY-0MM-0DD"/><$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}} class="normal-weight"/></$list>
+<$list filter="[all[current]has[date]]">date
+@@color:#9accb0;<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$macrocall $name=days-passed start={{!!date}}/>">today</$list>@@,
+</$list>
+modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}} class="normal-weight"/></$list>on <$view field="modified" format="date" template="YYYY-0MM-0DD"/>
 \end
 
 \define relationships(name, filter, direct-open:"yes")
@@ -157,7 +160,11 @@ type: text/vnd.tiddlywiki
 </$set></$list>
 \end
 
-\define verification-notice() <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">🔴</$list></$list>
+\define verification-notice()
+<$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">
+<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible verification-notice"><$action-setfield $field="last-date" $value={{!!date}}/>🔴</$button>
+</$list></$list>
+\end
 
 \define tiddler-close(tiddler)
 <$list filter="[[$(modal)$]!match[yes]]">
@@ -251,7 +258,7 @@ type: text/vnd.tiddlywiki
   name:"关系名称"
   filter:"关系对应的 Filter"
   direct-open:"是否直接打开">>`
-# ''检查通知''
+# ''检查通知, 同时可以修改日期''
 #> `<<verification-notice>>`
 # ''关闭 Tiddler 的同时, 修改 HistoryList 里面的 current-tiddler''
 #> `<<tiddler-close
