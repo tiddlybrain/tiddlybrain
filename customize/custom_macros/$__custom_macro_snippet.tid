@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20221011154928581
+modified: 20221015154601494
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -18,9 +18,9 @@ type: text/vnd.tiddlywiki
 \end
 
 \define snippet-drop-actions(actions, tags, celltpl)
-<$list filter="[<actionTiddler>!match<currentTiddler>]" variable="NONE"><$set name="parents" filter="[<currentTiddler>getAllParents[]]">
+<$list filter="[<actionTiddler>is[tiddler]!match<currentTiddler>]" variable="NONE"><$set name="parents" filter="[<currentTiddler>getAllParents[]]">
 <$vars template={{{ [<actionTiddler>split[ ]first[]] }}} caption={{{ [<actionTiddler>get[caption]] }}}>
-<$set name="keywords" filter="[<actionTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] [<actionTiddler>type[text/vnd.tiddlywiki]getAllTitles[]] [<currentTiddler>getAllTagTitles[]] +[unique[]join[, ]]" select="0">
+<$set name="keywords" filter="[<currentTiddler>getAllParentTitles[]] [<actionTiddler>getAllTitles[]] [<actionTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]join[, ]]" select="0">
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<snippet-drop-ctrl-actions "$tags$" "$celltpl$">> variable="NONE">
 <$action-setfield $tiddler=<<actionTiddler>> $timestamp="no" belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>>/>
 <$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="Snippet $tags$" $timestamp="no"/>
@@ -65,6 +65,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table copy:no>>>
 <$set name="class" filter="[all[current]has[_canonical_uri]] [all[current]is[image]]" value="snippet-external" emptyValue="snippet-content"><div class=<<class>>><$transclude mode="block"/>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE"><div style="margin:10px 20px;">
+<$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </div></$list>
 </div></$set>
