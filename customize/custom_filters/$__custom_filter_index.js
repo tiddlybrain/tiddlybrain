@@ -151,21 +151,6 @@ exports.slash = function(source,operator,options) {
 	var suffixes = operator.suffixes || [], mode = (suffixes[0] || [])[0], flags = suffixes[1] || [];
 	var currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
 	if(currTiddlerTitle) switch(mode) {
-		case "index":
-			data = options.wiki.extractTiddlerDataItem(currTiddlerTitle,key) || null;
-			if(data === null) {
-				result = (flags.indexOf("optional") === -1) ? "/Others" : "";
-				source(function(tiddler,title) {
-					results.push(title + result);
-				});
-			} else {
-				getResults(data,options,currTiddlerTitle).forEach(result => {
-					source(function(tiddler,title) {
-						results.push(title + "/" + result);
-					});
-				});
-			}
-			break;
 		case "parent":
 			data = options.wiki.getTiddler(currTiddlerTitle).getFieldString("parents") || "";
 			let parentsArray = $tw.utils.parseStringArray(data).reverse(), level = key - 1;
@@ -216,16 +201,43 @@ exports.slash = function(source,operator,options) {
 				});
 			}
 			break;
-		default:
+		case "field":
 			data = options.wiki.getTiddler(currTiddlerTitle).getFieldString(key) || null;
 			if(data === null) {
 				result = (flags.indexOf("optional") === -1) ? "/Others" : "";
+				source(function(tiddler,title) {
+					results.push(title + result);
+				});
 			} else {
-				result = "/" + getResult(data,options,currTiddlerTitle);
+				if(flags.indexOf("list") === -1) {
+					result = "/" + getResult(data,options,currTiddlerTitle);
+					source(function(tiddler,title) {
+						results.push(title + result);
+					});
+				} else {
+					$tw.utils.parseStringArray(data).forEach(item => {
+						result = "/" + getResult(item,options,currTiddlerTitle);
+						source(function(tiddler,title) {
+							results.push(title + result);
+						});
+					});
+				}
 			}
-			source(function(tiddler,title) {
-				results.push(title + result);
-			});
+			break;
+		default: //index
+			data = options.wiki.extractTiddlerDataItem(currTiddlerTitle,key) || null;
+			if(data === null) {
+				result = (flags.indexOf("optional") === -1) ? "/Others" : "";
+				source(function(tiddler,title) {
+					results.push(title + result);
+				});
+			} else {
+				getResults(data,options,currTiddlerTitle).forEach(result => {
+					source(function(tiddler,title) {
+						results.push(title + "/" + result);
+					});
+				});
+			}
 	}
 	return results;
 };
