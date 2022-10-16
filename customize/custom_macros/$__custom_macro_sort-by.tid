@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221016005529506
+modified: 20221016123010834
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -29,21 +29,17 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__cat-prefix__>suffix[/]]" variable="NONE" emptyMessage="@@color:red;Prefix ERROR@@">
 <$list filter="[<__cat-filter__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes' class='tc-btn-invisible'>$title$</$button>">
 <$button class="tc-btn-invisible">$title$$actions$
-<$vars tagging="[tagging[]]"><$list filter="[prefix<__cat-prefix__>!filter<tagging>]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list></$vars>
 <$list filter=<<__filter__>>>
-<$list filter="[all[current]tags[]prefix<__cat-prefix__>]" variable="tag">
-<$action-listops $field="tags" $subfilter="-[<tag>]" $timestamp="no"/>
-</$list>
+<$list filter="[all[current]tags[]prefix<__cat-prefix__>]" variable="tag"><$action-listops $field="tags" $subfilter="-[<tag>]" $timestamp="no"/></$list>
 <$list filter="[<__cat-prefix__>removesuffix[/]$cat-filter$]" variable="tag"><$list filter="[<tag>!prefix[Filter error]]" variable="NONE">
 <$action-listops $field="tags" $subfilter="[<tag>]" $timestamp="no"/>
 <$list filter="[<tag>is[missing]]">
 <$action-setfield caption=<<__tag-caption__>> text="<<records>>" $timestamp="no"/>
-<$set name="tag" filter="[<__cat-prefix__>split[/]first[]]" select="0">
-<$action-listops $field="tags" $subfilter="Ignore [<tag>]" $timestamp="no"/>
-</$set>
+<$set name="tag" filter="[<__cat-prefix__>split[/]first[]]" select="0"><$action-listops $field="tags" $subfilter="Ignore [<tag>]" $timestamp="no"/></$set>
 </$list>
 </$list></$list>
 </$list>
+<$vars tagging="[tagging[]]"><$list filter="[prefix<__cat-prefix__>!filter<tagging>]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list></$vars>
 </$button>
 </$list>
 </$list>
@@ -118,7 +114,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 <$action-setfield $tiddler=<<belongs-sort-state "$title$">> text="close"/>{{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
-<span style="font-size:medium;">(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">>/>)</span>
+<span>(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">>/>)</span>
 <$tiddler tiddler=<<sbb>>>
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible sort-by-belongs-title">
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
@@ -175,7 +171,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 \define sort-by-tags(cat-prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, cat-filter, tag-caption)
 <$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>><$vars tagged="[tags[]prefix<cat-prefix>]">
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="[<currentTiddler>]"/><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
-<$macrocall $name="categories" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[tag<currentTiddler>]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[tag<currentTiddler>tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}tagging[]] [tag<currentTiddler>!filter<tagged>]'/> items"/>
+<$macrocall $name="categories" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[tag<currentTiddler>]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}tagging[]tag<currentTiddler>] [tag<currentTiddler>!filter<tagged>]'/> items"/>
 </$droppable>
 <$macrocall $name="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 <$list filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
@@ -186,7 +182,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 
 \define sort-by-filter(item-filter:"all[current]", cat-prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, cat-filter, tag-caption)
 <$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>><$vars tagged="[tags[]prefix<cat-prefix>]">
-<$macrocall $name="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[$item-filter$tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}tagging[]] [$item-filter$!filter<tagged>]'/> items"/>
+<$macrocall $name="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}tagging[]$item-filter$] [$item-filter$!filter<tagged>]'/> items"/>
 <$macrocall $name="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/menubarsearch}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 <$list filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
 <$macrocall $name="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
