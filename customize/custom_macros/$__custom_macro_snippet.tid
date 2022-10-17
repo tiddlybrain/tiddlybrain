@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20221015154601494
+modified: 20221017083903015
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -41,6 +41,7 @@ type: text/vnd.tiddlywiki
 
 \define snippet-content(date, sort, limit, caption, cfilter, rheader, no-drop, has-filter)
 <$list filter="[<snippet-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
+@@font-size:small;(<$count filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">>/>)@@
 filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">>/>
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>>/>""" variable="NONE">
