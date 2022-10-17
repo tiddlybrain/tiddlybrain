@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221016124500696
+modified: 20221016125039468
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -168,7 +168,7 @@ nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #
 .macro-table:hover {overflow-x: auto;}
 .tc-sidebar-lists .macro-table:hover {overflow-x: hidden;}
 .macro-table > table {width: 100%; margin: 0; background: white;}
-.macro-table > table > tbody > tr {line-height: 1.5em;}
+.macro-table > table > tbody > tr.heading {line-height: 1.5em;}
 .macro-table > table th {text-align: left; font-size: small;}
 .macro-table > table th, .macro-table > table td, table.data-table .macro-table > table th, table.data-table .macro-table > table td {white-space: nowrap; border: 1px solid #ddd;}
 .macro-table > table td code {white-space: nowrap;}

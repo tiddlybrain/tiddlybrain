@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20221002082616525
+modified: 20221016125134003
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 \define table(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"default", sort-order:"sortan[]")
 <$set name="current" value=<<currentTiddler>>><$set name="is-data-table" value="no">
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
-<tr>
+<tr class="heading">
 <th>&#9733;</th>
 <$reveal default="$rheader$" type="nomatch" text="" tag="th">$rheader$</$reveal>
 <$list filter="$cfilter$" variable="property"><th>
@@ -91,7 +91,7 @@ type: text/vnd.tiddlywiki
 <$set name="current" value=<<currentTiddler>>>
 <h2><$button class="tc-btn-invisible"><$macrocall $name="table-edit-new-action" template={{$:/config/defaultTemplate}} tag="$tag$" fields="$fields$"/>Add New Row</$button></h2>
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
-<tr>
+<tr class="heading">
 <th>Title</th><$list filter="$ffilter$"><th><<currentTiddler>></th></$list>
 <$list filter="$cfilter$" variable="property"><th>
 <$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property>> &#8645;</$button></$list>
