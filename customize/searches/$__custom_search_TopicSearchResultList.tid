@@ -1,9 +1,9 @@
 caption: Topics
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [field:title<userInput>] [search:caption,shortcap<userInput>] [!tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[!is[system]!tag[Ignore]!tag[customized]!tag[Comment]unique[]] -[{$:/config/defaultTemplate}]
+first-search-filter: [field:title<userInput>] [!tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[!is[system]!tag[Ignore]!tag[customized]!tag[Comment]unique[]] -[{$:/config/defaultTemplate}]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20221012094116944
+modified: 20221017141330211
 modifier: yuzijie
 second-search-filter: [!is[system]!tag[Ignore]tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<subtopic-subfilter>limit[150]sortan[belongs.to]]
 tags: $:/tags/SearchResults customized
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 \define searchResultList()
 <$set name="subtopic-subfilter" filter="[[$:/temp/subtopic/filter]get[text]addprefix<lb>addsuffix<rb>]" emptyValue="[is[tiddler]]" select="0">
 
-//<small>Exact Topic matches:</small>//
+//<small>Root Topic matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
