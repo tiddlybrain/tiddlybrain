@@ -1,19 +1,20 @@
 caption: Topics
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [field:title<userInput>] [!tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[!is[system]!tag[Ignore]!tag[customized]!tag[Comment]unique[]] -[{$:/config/defaultTemplate}]
+first-search-filter: [field:title<userInput>] [!is[system]!tag[Ignore]search:title,caption,shortcap,description<userInput>!sort[modified]limit[150]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20221017141330211
+modified: 20221017162503242
 modifier: yuzijie
-second-search-filter: [!is[system]!tag[Ignore]tag[Snippet]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<subtopic-subfilter>limit[150]sortan[belongs.to]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
-<$set name="subtopic-subfilter" filter="[[$:/temp/subtopic/filter]get[text]addprefix<lb>addsuffix<rb>]" emptyValue="[is[tiddler]]" select="0">
+//<small>More search results:</small>//
 
-//<small>Root Topic matches:</small>//
+<<root-topics>>
+
+//<small>Topic matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
@@ -24,22 +25,5 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list>
 
-//<small>All Topic matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
-<$list filter="[[$:/temp/subtopic/filter]is[tiddler]]"><small><$button class="search-tool">Remove Sub-Filter
-<$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>
-</$button></small></$list>
-
-<<root-topics>>
-
-<$list filter="[<userInput>minlength[1]]" variable="ignore">
-<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
-<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/><<parent-topics>>
-</span>
-</$list>
-</$list>
-
-</$set>
 \end
 <<searchResultList>>
