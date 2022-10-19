@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20221018101631486
+modified: 20221018224042772
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -84,7 +84,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </div></$list>
 \end
 
-\define snippet(key, date:"no", sort:"sortan[caption]", limit:"15", caption, cfilter, rheader, actions, tags, no-drop, cat-view, cat-prefix, cat-filter, tag-caption, has-filter, celltpl)
+\define snippet(key, date:"no", sort:"sortan[caption]", limit:"10", caption, cfilter, rheader, actions, tags, no-drop, cat-view, cat-prefix, cat-filter, tag-caption, has-filter, celltpl)
 <$vars key={{{ [[$key$]!is[blank]else<key>!is[blank]else{!!note}] }}} current=<<currentTiddler>>>
 <$droppable actions=<<snippet-drop-actions """$actions$""" """$tags$""" "$celltpl$">> tag="div" class="snippet-container">
 <div class="tc-droppable-placeholder" style="display:block;">
