@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20220925202510142
+modified: 20221020070720611
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -8,8 +8,8 @@ type: text/vnd.tiddlywiki
 
 \define data-key-cell()
 <td class="data-key">
-<$list filter="[<key>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible" dragFilter="[belongs.to<current>tag[Snippet]note<key>]">
-<<key>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<key>>/>
+<$list filter="[<key>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible" dragFilter="[belongs.to<current>tag[Snippet]note<key>]"><<key>>
+<$list filter="[prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]text[open]limit[1]]" emptyMessage="<$list filter='[belongs.to<current>tag[Snippet]note<key>]'><$action-setfield $tiddler=<<snippet-accordion-state>> text='open'/></$list>"><$action-deletetiddler $filter="[prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]]"/></$list>
 </$button>""">
 <$button actions=<<modal-actions>> dragFilter="[belongs.to<current>tag[Snippet]note<key>]" tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
