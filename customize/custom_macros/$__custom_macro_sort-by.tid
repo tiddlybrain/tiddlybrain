@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221020071614122
+modified: 20221020115307148
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -74,6 +74,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__cat-prefix__>suffix[/]]"><$vars tagging="[tagging[]]"><$action-deletetiddler $filter="[prefix<__cat-prefix__>!filter<tagging>]"/></$vars></$list>
 </$button>
 </$reveal>
+<div class="categories-display"><$button class="tc-btn-invisible">
+<$list filter="[<belongs-display-state>is[tiddler]]" emptyMessage="""&#9783;<$action-setfield $tiddler=<<belongs-display-state>> text="table"/>""" variable="NONE">&#9776;<$action-deletetiddler $filter="[<belongs-display-state>]"/></$list>
+</$button></div>
 <div class="categories-toggle">
 <$macrocall $name="toggle-tags-button" tags-filter=<<__tags-filter__>>/>
 </div>
@@ -84,12 +87,14 @@ type: text/vnd.tiddlywiki
 \end
 
 \define belongs-sort-state(title) $:/state/sort/$(currentTiddler)$/$title$/$(sbb)$
+\define belongs-display-state() $:/state/belongs/display/$(currentTiddler)$/$(key)$
 
 \define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default")
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <div class="filter-options">
 filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">>/>
 </div>
+<$list filter="[<belongs-display-state>!text[table]]" emptyMessage="""<$macrocall $name="table" rfilter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/>""" variable="NONE">
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]limit[1]]">> variable="NONE">
 <div style="margin-top:1em;">
 <$reveal default="$cfilter$" type="match" text="" tag="div">
@@ -132,6 +137,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 <$macrocall $name="table" rfilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/>
 </$reveal>
 </$reveal>
+</$list>
 </$list>
 </$vars>
 \end
