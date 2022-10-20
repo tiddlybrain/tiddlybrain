@@ -1,9 +1,9 @@
 caption: Topics
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [field:title<userInput>] [!is[system]!tag[Ignore]search:title,caption,shortcap,description<userInput>!sort[modified]limit[150]]
+first-search-filter: [search:title<userInput>] [search:caption,shortcap,description,keywords<userInput>!sort[modified]] +[!is[system]!tag[Ignore]limit[300]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20221017162503242
+modified: 20221020212346852
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
