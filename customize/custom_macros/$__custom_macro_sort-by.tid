@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221016123010834
+modified: 20221020071614122
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -39,7 +39,7 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list></$list>
 </$list>
-<$vars tagging="[tagging[]]"><$list filter="[prefix<__cat-prefix__>!filter<tagging>]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list></$vars>
+<$vars tagging="[tagging[]]"><$action-deletetiddler $filter="[prefix<__cat-prefix__>!filter<tagging>]"/></$vars>
 </$button>
 </$list>
 </$list>
@@ -48,7 +48,7 @@ type: text/vnd.tiddlywiki
 \define toggle-tags-button(tags-filter)
 <$button class="tc-btn-invisible"><$list filter="[prefix[$:/state/sort/$(currentTiddler)$/]text[open]limit[1]]" emptyMessage="""Unfold all
 <$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="open"/></$list>""" variable="NONE">Fold all
-<$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="close"/></$list>
+<$action-deletetiddler $filter="[prefix[$:/state/sort/$(currentTiddler)$/]]"/>
 </$list></$button>
 \end
 
@@ -70,10 +70,8 @@ type: text/vnd.tiddlywiki
 </$set></$button>&nbsp;
 <$button class="tc-btn-invisible">Clear Search
 <$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>
-<$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="close"/></$list>
-<$list filter="[<__cat-prefix__>suffix[/]]"><$vars tagging="[tagging[]]">
-<$list filter="[prefix<__cat-prefix__>!filter<tagging>]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
-</$vars></$list>
+<$action-deletetiddler $filter="[prefix[$:/state/sort/$(currentTiddler)$/]]"/>
+<$list filter="[<__cat-prefix__>suffix[/]]"><$vars tagging="[tagging[]]"><$action-deletetiddler $filter="[prefix<__cat-prefix__>!filter<tagging>]"/></$vars></$list>
 </$button>
 </$reveal>
 <div class="categories-toggle">
