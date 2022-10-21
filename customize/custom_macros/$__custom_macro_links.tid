@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20221015134349661
+modified: 20221021212700896
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -70,16 +70,16 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler=<<parent>>><$transclude field="caption"><$view field="title"/></$transclude></$tiddler>
 <$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<parent>>/>" variable="NONE">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<parent>>/>
-<$action-sendmessage $message="tm-close-tiddler"/>
 </$list>
+<$action-sendmessage $message="tm-close-tiddler"/>
 </$button>
 <$list filter="[<parent>get[belongs.to]getAllParents[]]" variable="parent">&gt;
 <$button dragTiddler=<<parent>> class="tc-btn-invisible tc-tiddlylink" tooltip=<<parent>>>
 <$tiddler tiddler=<<parent>>><$transclude field="caption"><$view field="title"/></$transclude></$tiddler>
 <$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<parent>>/>" variable="NONE">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<parent>>/>
-<$action-sendmessage $message="tm-close-tiddler"/>
 </$list>
+<$action-sendmessage $message="tm-close-tiddler"/>
 </$button>
 </$list>
 </div></$list>
