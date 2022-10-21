@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221020215122043
+modified: 20221021144352878
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -125,13 +125,14 @@ blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #
 /* For Macro: sort-by-belongs */
 button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; width: 88%; text-overflow: ellipsis; font-weight: 600;}
 button.sort-by-belongs-title span {color: #aaa; font-weight: normal;}
+.belongs-display {margin: 1em 0;}
 
 /* For Macro: sort-by-tags */
 .categories {display: block; margin-bottom: 5px; background: #ccc; padding: 2px 10px 0; border: 1px solid #ddd; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); line-height: 1.5em; position: relative; max-height: 300px; overflow: auto; font-size: small;}
-.categories-clear {position: absolute; top: 2px; right: 140px;}
-.categories-toggle {position: absolute; top: 2px; right: 60px;}
-.categories-update {position: absolute; top: 2px; right: 10px;}
-.categories-display {position: absolute; top: 2px; right: 122px;}
+.categories-clear {position: absolute; top: 2px; right: 130px;}
+.categories-toggle {position: absolute; top: 2px; right: 76px;}
+.categories-update {position: absolute; top: 2px; right: 28px;}
+.categories-display {position: absolute; top: 2px; right: 10px;}
 .sort-by-belongs .macro-table {margin-bottom: 0;}
 .categories-caption {margin-bottom: 0.2em;}
 .categories-caption input {background: transparent; border: none; border-bottom: 1px solid white; width: 60%; color: white;}
