@@ -1,4 +1,4 @@
-modified: 20221020213401368
+modified: 20221021145906176
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -10,7 +10,8 @@ type: text/vnd.tiddlywiki
 <$view field="title"/>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]get[belongs.to]]">@@color:#f75000;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
-<$button class="tc-btn-invisible copy-title" message="tm-copy-to-clipboard" param=<<currentTiddler>>>{{$:/core/images/copy-clipboard}}</$button>
+<$button class="tc-btn-invisible search-dropdown-button"><<open-in-sidebar close:"no">>{{$:/core/images/open-window}}</$button>
+<$button class="tc-btn-invisible search-dropdown-button" message="tm-copy-to-clipboard" param=<<currentTiddler>>>{{$:/core/images/copy-clipboard}}</$button>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$link>
 </div>
