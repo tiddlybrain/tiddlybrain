@@ -1,13 +1,15 @@
 created: 20181212172024243
 creator: yuzijie
 list-before: $:/core/ui/SideBar/More
-modified: 20221012085815918
+modified: 20221021215921797
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
 type: text/vnd.tiddlywiki
 
 \define editor-tab() <$macrocall $name="tabs" tabsList="[tag[Editor]!has[draft.of]]" default="Editor/Keywords" state="$:/state/tab/editor"/>
+\define editor-caption-status() $:/state/editor/caption/$(currentTiddler)$
+\define editor-caption-inputActions() <$list filter="[<editor-caption-status>tags[]]"><$action-setfield $tiddler=<<currentTiddler>> caption=<<actionValue>>/></$list>
 
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
 <$set name="draft" filter="[[$:/temp/Draft]get[draft]]" emptyValue={{$:/HistoryList!!current-tiddler}} select="0">
@@ -26,20 +28,34 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[<draft>!has[draft.of]]">
 <table style="width:100%;"><tbody>
-<$list filter="caption description" variable="fieldName"><tr>
-<td style="width:100px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
-<td style="width:10px;"><$list filter="[all[current]has:field<fieldName>]"><$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field=<<fieldName>>/>{{$:/core/images/delete-button}}</$button></$list></td>
-</tr></$list>
-<tr><td style="width:100px;padding:6px 7px;">type</td>
+<tr>
+<td style="width:100px;">caption</td>
+<td>
+<$list filter="[all[current]has[caption]]"><$list filter="[caption{!!caption}!is[current]]" variable="tag">
+<$checkbox tiddler=<<editor-caption-status>> tag=<<tag>>> <$macrocall $name="l" title=<<tag>> text="{{!!title}} - {{!!caption}} [{{!!note}}]"/></$checkbox>
+</$list></$list>
+<$edit-text field="caption" class="edit-area tc-edit-texteditor" inputActions=<<editor-caption-inputActions>>/>
+</td>
+<td style="width:10px;"><$list filter="[all[current]has:field[caption]]">
+<$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field="caption"/>{{$:/core/images/delete-button}}</$button>
+</$list></td>
+</tr>
+<tr>
+<td style="width:100px;">description</td><td><$edit-text field="description" class="edit-area tc-edit-texteditor"/></td>
+<td style="width:10px;"><$list filter="[all[current]has:field[description]]">
+<$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field="description"/>{{$:/core/images/delete-button}}</$button>
+</$list></td>
+</tr>
+<tr>
+<td style="width:100px;padding:6px 7px;">type</td>
 <td colspan="2">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>&nbsp;
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
 </td>
 </tr>
-<tr><td style="width:100px;padding:6px 7px;">status</td>
-<td><$select field="status">
-<$list filter="[has[status]get[status]unique[]sort[title]]"><option><<currentTiddler>></option></$list>
-</$select></td>
+<tr>
+<td style="width:100px;padding:6px 7px;">status</td>
+<td><$select field="status"><$list filter="[has[status]get[status]unique[]sort[title]]"><option><<currentTiddler>></option></$list></$select></td>
 <td style="width:10px;"><$list filter="[all[current]has:field[status]]">
 <$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field="status"/>{{$:/core/images/delete-button}}</$button>
 </$list></td>
@@ -63,12 +79,11 @@ type: text/vnd.tiddlywiki
 
 
 </$details>'/>""">details</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<now "YYYY0MM0DD ">>/>""">TODAY</$button>
-<$button message="tm-copy-to-clipboard" param=<<now YYYY-0MM-0DD>>>📋TODAY</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<now "YYYY-0MM-0DD ">>/>""">TO-DAY</$button>
+<$button message="tm-copy-to-clipboard" param=<<now YYYY0MM0DD>>>📋TODAY</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='⟨' suffix='⟩'/>""">⟨ ⟩</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='@@color:red;' suffix='@@'/>""">RED</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="⭐"/>""">⭐</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="⚠️"/>""">⚠️</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Name: {{!!caption}}"/>""">Name</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Description: {{!!description}}"/>""">Description</$button>
 </$edit-text></$list>
 </$set>
 <table style="width:100%;margin:0;"><tbody>
