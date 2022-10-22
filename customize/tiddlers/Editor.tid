@@ -1,7 +1,7 @@
 created: 20181212172024243
 creator: yuzijie
 list-before: $:/core/ui/SideBar/More
-modified: 20221022120144793
+modified: 20221022185103291
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -31,8 +31,10 @@ type: text/vnd.tiddlywiki
 <tr>
 <td style="width:100px;">caption</td>
 <td>
-<$list filter="[all[current]has[caption]]"><$list filter="[caption{!!caption}!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]" variable="tag">
-<$checkbox tiddler=<<editor-caption-status>> tag=<<tag>>> <$macrocall $name="l" title=<<tag>> text="{{!!title}} - {{!!caption}} [{{!!note}}]"/></$checkbox>
+<$list filter="[all[current]has[caption]]"><$list filter="[caption{!!caption}!note{!!note}!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]" variable="tag">
+<div style="white-space:nowrap;overflow:auto;width:290px;">
+<$checkbox tiddler=<<editor-caption-status>> tag=<<tag>>> <$macrocall $name="l" title=<<tag>> text="{{!!title}} - {{!!caption}} [{{!!note}}]"/></$checkbox><br>
+</div>
 </$list></$list>
 <$edit-text field="caption" class="edit-area tc-edit-texteditor" inputActions=<<editor-caption-inputActions>>/>
 </td>
