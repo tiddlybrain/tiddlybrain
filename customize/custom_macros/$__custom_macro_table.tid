@@ -1,19 +1,23 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20221023104216452
+modified: 20221024092014326
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
 type: text/vnd.tiddlywiki
 
-\define cell-value-iterator() <$wikify name="content" text=<<datum>>><$list filter="[<content>search:title:literal[;;]]" emptyMessage=<<datum>> variable="value"><<cell-value-normal>></$list></$wikify>
+\define cell-value-iterator()
+<$wikify name="content" text=<<datum>>>
+<$list filter="[<content>search:title:literal[;;]]" emptyMessage=<<datum>> variable="value"><<cell-value-normal>></$list>
+</$wikify>
+\end
 
 \define cell-value-normal()
 <$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
 <$list filter="[<datum>!search:title:regexp[<<snippet|<<bl]]" emptyMessage=<<datum>> variable="NONE">
-<$list filter="[field:title<datum>]" emptyMessage=<<cell-value-iterator>>><div style="white-space:nowrap;overflow:hidden;">
-<$macrocall $name="l" title={{!!title}} class="normal-weight" links="yes" note="yes" description="yes"/>
-</div></$list>
+<div><$list filter="[field:title<datum>]" emptyMessage=<<cell-value-iterator>>>
+<$macrocall $name="l" title={{!!title}} class="normal-weight" links="yes" note="yes" description="yes" style="display:block;white-space:nowrap;overflow:hidden;"/>
+</$list></div>
 </$list>
 </$list>
 \end
