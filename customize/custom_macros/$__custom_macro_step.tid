@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20220928141616745
+modified: 20221025120708206
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -75,7 +75,7 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler=<<task-state>> date="$t$" plan="$t$" caption="$step$" remark="$r$"/>@@color:orange;&#11096;@@
 </$button>""" variable="NONE">
 <$reveal state=<<task-state>> type="match" text="open"><<step-open "$step$" "$comments$" "$t$" "$r$">></$reveal>
-<$reveal state=<<task-state>> type="match" text="doing"><<step-doing "$step$" "$comments$" "$t$" "$r$">></$reveal>
+<$reveal state=<<task-state>> type="nomatch" text="open"><<step-doing "$step$" "$comments$" "$t$" "$r$">></$reveal>
 </$list>
 </$list>
 </$set></$set></$set>
