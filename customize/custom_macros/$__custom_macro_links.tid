@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20221021212700896
+modified: 20221026075752768
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -43,12 +43,6 @@ type: text/vnd.tiddlywiki
 <a href=<<url>> target="_blank" title=<<url>> class="light-color" rel="noopener noreferrer">Open Link in a New Window</a> &middot;
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<url>> tooltip=<<url>>>Copy Link</$button>
 </div></$list>
-<$list filter="[all[current]get[_canonical_uri]]" variable="uri"><div class="external-links" style="background:#ffe9e3;">
-<a href=<<uri>> target="_blank" title=<<uri>> class="light-color" rel="noopener noreferrer">View File in a New Window</a>
-</div></$list>
-<$list filter="[all[current]is[image]]"><div class="external-links" style="background:#e3fffd;">
-<$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<copy-image>>>Copy Image and Paste it in Another Tiddler</$button>
-</div></$list>
 <$list filter="[all[current]get[path]]" variable="path"><div class="external-links" style="background:#e4ffda;">
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>Copy File Path</$button> &middot;
 <$set name="filename" filter="[<path>split[/]last[]]" select="0"><$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<filename>> tooltip=<<filename>>>Copy File Name</$button></$set> &middot;
@@ -57,6 +51,11 @@ type: text/vnd.tiddlywiki
 </div></$list>
 <$list filter="[all[current]get[dir]]" variable="path"><div class="external-links" style="background:#e4ffda;">
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>Copy Directory Path</$button>
+</div></$list>
+<$list filter="[all[current]get[_canonical_uri]]" variable="uri"><div class="external-links" style="background:#ffe9e3;">
+<$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param="<<l title:'$(currentTiddler)$' tr:yes date:yes width:''>>">Copy and Paste it to other tiddlers</$button> &middot;
+<$set name="path" filter="[<uri>removeprefix[./files/]parentPath[]]" select="0"><$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>Copy File Dir</$button></$set> &middot;
+<a href=<<uri>> target="_blank" title=<<uri>> class="light-color" rel="noopener noreferrer">Open in a New Window</a>
 </div></$list>
 <$list filter="[[$(modal)$]!match[yes]]" variable="NONE">
 <$list filter="[all[current]code-body[yes]]"><div class="external-links" style="background:#c9ffee;">

@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221016173415058
+modified: 20221026074152427
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -124,8 +124,6 @@ type: text/vnd.tiddlywiki
 \define timeline-title() <<icons>> @@color:#333;<$view field=title/>@@ <$transclude field="caption"/>
 
 \define brcap(levels:"2", new:" - ", old:"/") <$text text={{{ [all[current]split<__old__>butfirst<__levels__>join<__new__>] }}}/>
-
-\define copy-image() <$image source="$(currentTiddler)$" width="" height="" tooltip="$(currentTiddler)$"/>
 
 \define modal-actions()
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$action-navigate/>" variable="NONE">
