@@ -1,25 +1,25 @@
-caption: Copy as a task
+caption: Copy as a step
 created: 20220118202607895
 creator: yuzijie
-description: Copy current tiddler as a task to the clipboard
+description: Copy current tiddler as a step to the clipboard
 list-after: $:/core/ui/Buttons/fold
-modified: 20221010070603884
+modified: 20221026135312460
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
-title: $:/custom/ui/Buttons/copy-as-task
+title: $:/custom/ui/Buttons/copy-as-step
 type: text/vnd.tiddlywiki
 
-\define task-template() <<a "$(content)$" "$(tiddler)$" t:$(date)$ r:"">>
+\define step-template() <<a "$(content)$" "$(tiddler)$" t:$(date)$ r:"">>
 
 \whitespace trim
 <$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
 <$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue=<<content>> select="0">
-<$button message="tm-copy-to-clipboard" param=<<task-template>> tooltip="Copy current tiddler as a task" aria-label="copy as a task" class=<<tv-config-toolbar-class>>>
+<$button message="tm-copy-to-clipboard" param=<<step-template>> tooltip="Copy current tiddler as a step" aria-label="copy as a step" class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/copy-clipboard}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text="copy as a task"/></span>
+<span class="tc-btn-text"><$text text="copy as a step"/></span>
 </$list>
 </$button>
 </$set>
