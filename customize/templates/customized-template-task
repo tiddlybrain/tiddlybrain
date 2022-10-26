@@ -1,0 +1,4 @@
+Name: {{!!caption}}
+Start: <$view field="date" format="date" template="YYYY-0MM-0DD">N.A.</$view>
+Finish: <$view field="finish" format="date" template="YYYY-0MM-0DD">N.A.</$view>
+Progress: <$text text={{{[all[current]percent[]]}}}/>

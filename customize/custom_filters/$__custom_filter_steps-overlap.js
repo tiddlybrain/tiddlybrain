@@ -109,7 +109,7 @@ exports.overlap = function(source,operator,options) {
 				var S = title, E = title;
 				if (durationCheck(S, E, duration)) results.push(title);
 			} else if (tiddler) {
-				var S = tiddler.getFieldString("start");
+				var S = tiddler.getFieldString("date");
 				var E = tiddler.getFieldString("finish");
 				if (durationCheck(S, E, duration)) results.push(title);
 			}
