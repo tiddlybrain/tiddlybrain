@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20221017191202543
+modified: 20221026075525286
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -36,7 +36,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary"><$action
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
-\define newExtFileActionCopy() <<l title:"$(title)$" tr:"yes" date:"yes">>
+\define newExtFileActionCopy() <<l title:'$(title)$' tr:yes date:yes width:''>>
 
 \define newExtFileAction(template, content, type, path, note)
 <$set name="title" value=<<unusedtitle "$template$">>><$set name="uri" filter="[[$path$]prefix[http]]" value="$path$" emptyValue="./files/$path$">
@@ -77,14 +77,15 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary"><$action
 </p>
 <p style="margin-top:-10px;">
 <$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="image/svg+xml" note="SVG"/>New SVG</$button>
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="image/gif" note="GIF"/>New GIF</$button>
 <$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="image/jpeg" note="JPG"/>New JPG</$button>
 <$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="image/png" note="PNG"/>New PNG</$button>
+<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="text/html" note="HTML"/>New HTML</$button>
 </p>
 <p style="margin-top:-10px;">
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="text/html" note="HTML"/>New HTML</$button>
+<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="image/gif" note="GIF"/>New GIF</$button>
 <$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="application/pdf" note="PDF"/>New PDF</$button>
 <$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="audio/mp3" note="MP3"/>New MP3</$button>
+<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="video/mp4" note="MP4"/>New MP4</$button>
 </p>
 <hr>
 <p>{{$:/config/path-prefix}}</p>
