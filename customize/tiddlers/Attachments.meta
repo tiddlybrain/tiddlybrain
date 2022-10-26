@@ -1,9 +1,9 @@
 belongs.to: $:/core/ui/MoreSideBar/Types
-caption: Attachment Collector
+caption: Attachments Collection
 created: 20211222002004723
 creator: yuzijie
 keywords: Types
-modified: 20221009073716866
+modified: 20221026081701685
 modifier: yuzijie
 note: 
 parents: $:/core/ui/MoreSideBar/Types

@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20221022193047049
+modified: 20221026082357506
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -52,7 +52,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 {{$:/core/images/right-arrow}}<$action-setfield $tiddler=<<snippet-accordion-state>> text="open"/>
 </$list>
 </$button>
-<$set name="direct-open" value="no"><<links>>
+<<links>>
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[<__caption__>!is[blank]]" variable="NONE" emptyMessage="<$transclude field='caption'><$transclude field='text' mode='inline'/></$transclude>"><<__caption__>></$list>
@@ -61,7 +61,6 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </$reveal>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$button>
-</$set>
 <$reveal type="match" state=<<snippet-accordion-state>> text="open" tag="div" class="snippet-accordion"><$set name="key" value="">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table copy:no>>>
