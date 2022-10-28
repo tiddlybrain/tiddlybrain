@@ -1,11 +1,10 @@
 caption: Topics
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [field:title<userInput>] [search:title,caption,shortcap,note<userInput>!is[system]!tag[Ignore]sort[caption]limit[150]]
+first-search-filter: [field:title<userInput>] [search:title,caption,shortcap,note,description<userInput>!is[system]!tag[Ignore]sort[caption]limit[150]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20221021160047170
+modified: 20221028173249167
 modifier: yuzijie
-second-search-filter: [search:caption,shortcap,note,description,keywords<userInput>] :except[search:title,caption,shortcap,note<userInput>] +[!is[system]!tag[Ignore]!sort[modified]limit[150]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
@@ -15,23 +14,12 @@ type: text/vnd.tiddlywiki
 
 <<root-topics>>
 
-//<small>Caption matches:</small>//
+//<small>Topic matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-</span>
-</$list>
-</$list>
-
-//<small>Other matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
-
-<$list filter="[<userInput>minlength[1]]" variable="ignore">
-<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
-<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
