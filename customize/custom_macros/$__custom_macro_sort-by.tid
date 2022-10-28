@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221028184445449
+modified: 20221028190855783
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define update-tags-button(cat-prefix, filter, cat-filter, tag-caption:"<<brcap>>", title:"Update", actions)
-<$list filter="[<__cat-prefix__>suffix[/]]" variable="NONE" emptyMessage="@@color:red;Prefix ERROR@@">
+<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$list filter="[<__cat-prefix__>suffix[/]]" variable="NONE" emptyMessage="@@color:red;Prefix ERROR@@">
 <$list filter="[<__cat-filter__>!is[blank]]" variable="NONE" emptyMessage="<$button disabled='yes' class='tc-btn-invisible'>$title$</$button>">
 <$button class="tc-btn-invisible">$title$$actions$
 <$list filter=<<__filter__>>>
@@ -42,7 +42,7 @@ type: text/vnd.tiddlywiki
 <$vars tagging="[tagging[]]"><$action-deletetiddler $filter="[prefix<__cat-prefix__>!filter<tagging>]"/></$vars>
 </$button>
 </$list>
-</$list>
+</$list></$list>
 \end
 
 \define toggle-tags-button(tags-filter)
@@ -187,7 +187,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 \define sort-by-topic(topic, note, cat-prefix, sort, sort-tags, cfilter, rheader, cat-filter, tag-caption) <$macrocall $name="sort-by-filter" item-filter="all[tiddlers]contains:parents[$topic$]note[$note$]" cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> sort-tags=<<__sort-tags__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
 
 \define cat-filter-updater(cat-prefix, filter, tag-caption)
-<div class="cat-filter-updater"><span>current filter:</span>
+<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><div class="cat-filter-updater"><span>current filter:</span>
 <$edit-text tiddler="$:/temp/cat-filter/$(currentTiddler)$" tag="input" default={{{ [all[current]get[cat-filter]] }}}/>
 <$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>>
 <$list filter="[[$:/temp/cat-filter/$(currentTiddler)$]is[tiddler]]" variable="NONE">
@@ -195,7 +195,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/cat-filter/$(currentTiddler)$"/>Cancel</$button>
 </$list>
 </$set>
-</div>
+</div></$list>
 \end
 
 # ''从 `/` 处, 将 branch Tiddler 的 title 切开, 并按 level 来分行显示, 像一座塔一样''
