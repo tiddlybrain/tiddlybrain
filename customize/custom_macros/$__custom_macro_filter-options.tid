@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20221027210437468
+modified: 20221029092607448
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -12,10 +12,15 @@ type: text/vnd.tiddlywiki
 \define filter-by-note-value() +[note[$(currentTiddler)$]]
 \define filter-build(f1,f5) $f1$ $(f2)$ $(f3)$ $(f4)$ $f5$
 
+\define filter-options-actions(title, uid)
+<$list filter="[[$:/state/select/$(currentTiddler)$/$title$/$uid$]search:text:literal[search:title,caption,shortcap,keywords,description,text:some]]"><<searchbar-focus-action>></$list>
+\end
+
 \define filter-options(title, filter, uid:"1")
 <$set name="select-filter-style" filter="[[$:/state/select/$(currentTiddler)$/$title$/$uid$]has[text]]" value="select-filter dark" emptyValue="select-filter">
-<$select tiddler="$:/state/select/$(currentTiddler)$/$title$/$uid$" class=<<select-filter-style>> tooltip="Filter Options">
+<$select tiddler="$:/state/select/$(currentTiddler)$/$title$/$uid$" class=<<select-filter-style>> tooltip="Filter Options" actions=<<filter-options-actions "$title$" "$uid$">>>
 <option value=""></option>
+<option value="+[search:title,caption,shortcap,keywords,description,text:some{$:/temp/menubarsearch}]">Menubar Search</option>
 <$list filter="$filter$ +[tags[]!is[current]!search:title:literal[/]sortan[caption]] -Snippet">
 <option value=<<filter-by-tags-value>> style="color:#ebb000;">Tag: <$transclude field=caption><$view field=title/></$transclude></option>
 </$list>
@@ -27,7 +32,6 @@ type: text/vnd.tiddlywiki
 <$list filter="$filter$ +[get[note]each:value[]]">
 <option value=<<filter-by-note-value>> style="color:green;">Note: {{!!title}}</option>
 </$list>
-<option value="+[search:title,caption,shortcap,keywords,description,text:some{$:/temp/menubarsearch}]">Menubar Search</option>
 </$select>
 </$set>
 \end
@@ -42,6 +46,10 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
+# ''当 filter-options 的 Select 被触发后, 执行的动作''
+#> `<<filter-options-actions
+  title:"title of the list"
+  uid:"编号">>`
 # ''用于筛选结果的 Select''
 #> `<<filter-options
   title:"title of the list"
