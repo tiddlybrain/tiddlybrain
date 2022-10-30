@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20221028130154766
+modified: 20221030023149119
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -30,6 +30,10 @@ type: text/vnd.tiddlywiki
 <$reveal default=<<__tr__>> type="match" text="yes" class="l" tag="div" style=<<__style__>>>
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage="<<data-table>>"><$transclude mode="block"/></$list>
+</$list>
+<$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
+<$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
+<$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
 <div style="text-align:right;font-size:small;margin-top:-1em;">&#10033;&nbsp;<$macrocall $name="l" links="yes" title=<<currentTiddler>> description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>>/></div>
 </$reveal>
