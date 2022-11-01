@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20221029092607448
+modified: 20221101221528318
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -36,7 +36,10 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define list-filters(title, filter)
+\define calculator-state() +[getindex[$(currentTiddler)$]$(operator)$[]]
+\define calculator-result(filter) <$text text={{{ $filter$ $(search-filter)$ }}}/>
+
+\define list-filters(title, filter, cfilter)
 <$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="1"/>
 <$list filter="[[$:/state/select/$(currentTiddler)$/$title$/1]has[text]] :else[[$:/state/select/$(currentTiddler)$/$title$/2]has[text]]" variable="NONE">
 <$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="2"/>
@@ -44,6 +47,23 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/state/select/$(currentTiddler)$/$title$/2]has[text]] :else[[$:/state/select/$(currentTiddler)$/$title$/3]has[text]]" variable="NONE">
 <$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="3"/>
 </$list>
+<$list filter="[<__cfilter__>!is[blank]]" variable="NONE"><span class="calculator">
+<$select tiddler="$:/temp/calculator/$(currentTiddler)$/$title$" field="note" default='calculate'>
+<option disabled>calculate</option>
+<$list filter='sum average'><option value=<<currentTiddler>>><<currentTiddler>></option></$list>
+</$select>
+<$list filter="[[$:/temp/calculator/$(currentTiddler)$/$title$]get[note]]" variable="operator">of
+<$select tiddler="$:/temp/calculator/$(currentTiddler)$/$title$">
+<$list filter=<<__cfilter__>>><option value=<<calculator-state>>><<currentTiddler>></option></$list>
+</$select>
+</$list>
+<$list filter="[[$:/temp/calculator/$(currentTiddler)$/$title$]get[text]]" variable="search-filter">is
+<$macrocall $name="calculator-result" filter=<<__filter__>>/>
+</$list>
+<$list filter="[[$:/temp/calculator/$(currentTiddler)$/$title$]is[tiddler]]">
+<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<currentTiddler>>/>&times;</$button>
+</$list>
+</span></$list>
 \end
 
 # ''当 filter-options 的 Select 被触发后, 执行的动作''
@@ -58,4 +78,5 @@ type: text/vnd.tiddlywiki
 # ''整合三个 filter-options''
 #> `<<list-filters
   title:"title of the list"
-  filter:"filter from table or record">>`
+  filter:"filter from table or record"
+  cfilter:"给 Calculator 使用, 用于 index 的下拉菜单">>`

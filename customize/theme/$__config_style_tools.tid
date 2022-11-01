@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221101135833291
+modified: 20221101221724383
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -51,7 +51,7 @@ button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis;
 .snippet-accordion > * {margin-top: 10px;}
 .snippet .data-table {white-space: normal;}
 .snippet button code {white-space: nowrap;}
-.fold-text {font-style: italic; color: #999; font-variant: small-caps;}
+.fold-text {font-size: small; color: #999; font-variant: small-caps;}
 .data-table + .filter-options {padding-top: 0.3em;}
 
 /* For Macro: task-list */
@@ -174,7 +174,7 @@ nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #
 .macro-table > table th {text-align: left; font-size: small;}
 .macro-table > table th, .macro-table > table td, table.data-table .macro-table > table th, table.data-table .macro-table > table td, .macro-table > table td code {white-space: nowrap;}
 .macro-table > table td input {width: 100%; border: 1px dashed #ccc;}
-table.data-table .macro-table {margin: 0.5em 0; font-size: small; line-height: 26px;}
+table.data-table .macro-table {margin: 0; font-size: small; line-height: 26px;}
 .table-links button svg {max-width: none;}
 td span a.tc-tiddlylink-resolves {font-weight: 400;}
 
@@ -231,6 +231,9 @@ pre code.hljs {line-height: 23px; font-size: 14px;}
 .select-filter.dark {color: #333; width: initial; font-size: 15px; vertical-align: baseline; border-bottom: 1px solid #ddd; height: 21px;}
 .filter-options {font-variant: small-caps; line-height: 23px; margin: -5px 0;}
 .filter-options .select-filter {font-size: small;}
+
+/* For Macro: list-filters */
+.calculator select {border: none; border-bottom: 1px solid #ccc; font-size: small; background: transparent;}
 
 /* For Macro: code */
 .code-macro > pre {margin: 0;}
