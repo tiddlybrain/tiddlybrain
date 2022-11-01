@@ -2,7 +2,7 @@ caption: Snippets
 created: 20211009085515046
 creator: yuzijie
 list-after: $:/core/ui/TiddlerInfo/Listed
-modified: 20220916205122958
+modified: 20221101165622411
 modifier: yuzijie
 tags: $:/tags/TiddlerInfo customized
 title: $:/custom/ui/TiddlerInfo/Snippets
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 \define snippet-button()
 \whitespace trim
 <$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;">Missing Key:&#32;<<key>>
-<$action-setfield $index=<<key>> $value='<<snippet date:"no" cat-view:"no">>'/>
+<$action-setfield $index=<<key>> $value='<<snippet date:"no">>'/>
 </$button>
 \end
 

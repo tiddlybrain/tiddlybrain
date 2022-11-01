@@ -1,8 +1,8 @@
-HTML: <<snippet date:'yes' cat-view:'no'>>
-PDF: <<snippet date:'yes' cat-view:'no'>>
-MP3: <<snippet date:'yes' cat-view:'no'>>
-MP4: <<snippet date:'yes' cat-view:'no'>>
-JPG: <<snippet date:'yes' cat-view:'no'>>
-PNG: <<snippet date:'yes' cat-view:'no'>>
-SVG: <<snippet date:'yes' cat-view:'no'>>
-GIF: <<snippet date:'yes' cat-view:'no'>>
+HTML: <<snippet date:'yes'>>
+PDF: <<snippet date:'yes'>>
+MP3: <<snippet date:'yes'>>
+MP4: <<snippet date:'yes'>>
+JPG: <<snippet date:'yes'>>
+PNG: <<snippet date:'yes'>>
+SVG: <<snippet date:'yes'>>
+GIF: <<snippet date:'yes'>>
