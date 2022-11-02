@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221011000244142
+modified: 20221102112951600
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 <$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content={{!!caption}}/>
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<curDate>]"/>
 </$button>
-<$set name="drag" filter="[all[current]!text[waiting]]" value=<<currentTiddler>> emptyValue="">
+<$set name="drag" filter="[all[current]!text[waiting]!text[deadline]]" value=<<currentTiddler>> emptyValue="">
 <$button to=<<task>> dragTiddler=<<drag>> tooltip={{!!caption}} class="tc-btn-invisible" style=<<color>>><$transclude field=caption/></$button>
 </$set>
 </div></$list>
@@ -52,11 +52,11 @@ type: text/vnd.tiddlywiki
 </$set>
 </div>
 
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]contains:plan<curDate>!filter<task-filter>]" columns="InProgress Easy Difficult" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="InProgress Easy Difficult" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
 
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="-[<curDate>]"/>""" tag="div">
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>]">
-<$list filter="[all[current]contains:plan<curDate>!has[category]] :else[all[current]text[waiting]]" variable="NONE"><<kanban-link>></$list>
+<$list filter="[all[current]contains:plan<curDate>!has[category]] :else[all[current]text[waiting]] :else[all[current]text[deadline]]" variable="NONE"><<kanban-link>></$list>
 </$list>
 </$droppable>
 
