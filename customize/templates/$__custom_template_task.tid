@@ -1,7 +1,7 @@
 created: 20181001195337690
 creator: yuzijie
 list-after: $:/custom/template/top
-modified: 20221026202755534
+modified: 20221102225016031
 modifier: yuzijie
 tags: $:/tags/ViewTemplate customized
 title: $:/custom/template/task
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 <$button set="!!date" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">N.A.</$button>
 </$view></td>
 <td><$macrocall $name="days-passed" start={{!!date}} end={{!!finish}}/></td>
-<td><$text text={{{[all[current]percent[]]}}}/></td>
+<td><$text text={{{[all[current]percent[d]]}}}/></td>
 <td><$list filter="[all[current]has[finish]]" emptyMessage=<<tasks-today>>>
 <$set name="pattern-step" value="<<[adw]\s.+>>">Total Steps: <$count filter="[{!!text}matches<pattern-step>]"/></$set>
 </$list></td>

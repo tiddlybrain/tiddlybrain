@@ -130,11 +130,8 @@ exports.percent = function(source,operator,options) {
 		case "w":
 			pattern = '<<w\\s.+?>>';
 			break;
-		case "all":
-			pattern = '<<[adw]\\s.+?>>';
-			break;
 		default:
-			pattern = '<<[aw]\\s.+?>>';
+			pattern = '<<[adw]\\s.+?>>';
 	}
 	var regexp = new RegExp(pattern, 'g');
 	source(function(tiddler,title) {

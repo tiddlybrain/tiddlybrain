@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221101220929923
+modified: 20221102224327411
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -70,7 +70,7 @@ type: text/vnd.tiddlywiki
 </$button>
 </$reveal>
 <div class="categories-display"><$button class="tc-btn-invisible">
-<$list filter="[<belongs-display-state>is[tiddler]]" emptyMessage="""&#9783;<$action-setfield $tiddler=<<belongs-display-state>> text="list"/>""" variable="NONE">&#9776;<$action-deletetiddler $filter="[<belongs-display-state>]"/></$list>
+<$list filter="[<belongs-display-state>is[tiddler]]" emptyMessage="""&#9776;<$action-setfield $tiddler=<<belongs-display-state>> text="list"/>""" variable="NONE">&#9783;<$action-deletetiddler $filter="[<belongs-display-state>]"/></$list>
 </$button></div>
 <div class="categories-toggle">
 <$macrocall $name="toggle-tags-button" tags-filter=<<__tags-filter__>>/>
@@ -94,7 +94,7 @@ type: text/vnd.tiddlywiki
 <div class="filter-options">
 filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">> cfilter=<<__cfilter__>>/>
 </div>
-<$list filter="[<belongs-display-state>!text[list]]" emptyMessage="""<$macrocall $name="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/>""" variable="NONE">
+<$list filter="[<belongs-display-state>text[list]]" emptyMessage="""<$macrocall $name="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/>""" variable="NONE">
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]limit[1]]">> variable="NONE">
 <div style="margin-top:1em;">
 <$macrocall $name="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/>
