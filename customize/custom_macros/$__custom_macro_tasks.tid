@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221102113619294
+modified: 20221104104654928
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -70,7 +70,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$droppable actions=<<task-list-droppable-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
-<$button to="Tasks/Actions" set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible"><<date-title>></$button>
+<$button set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/><<date-title>>
+</$button>
 </$set>
 @@color:#333;<$count filter="[prefix[$:/task-state/]contains:plan<dt>]"/>@@
 <$list filter="[<dt>match<today>]">^^@@color:red;Today@@^^</$list>
@@ -91,7 +93,11 @@ type: text/vnd.tiddlywiki
 </dl></$set>
 \end
 
-\define date-pillar-task(date) <$button to="Tasks/Actions" set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible" style="background-color:$(color)$;">{{!!caption}}</$button>
+\define date-pillar-task(date)
+<$button set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible" style="background-color:$(color)$;">
+<$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/>{{!!caption}}
+</$button>
+\end
 
 \define date-pillar(date, today)
 <$set name="container-class" filter="[<__date__>match<__today__>]" value="dp-container today" emptyValue="dp-container">
@@ -99,8 +105,8 @@ type: text/vnd.tiddlywiki
 <div class="dp-title"><$list filter="[<journal-title>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">//<<format-date "$date$" "ddd">>//
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>> caption=<<format-date "$date$" "MM-DD ddd">> text="日记: <<bl>>" kw="10em"/>
 </$button>""">
-<$button to="Tasks/Actions" set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible tc-tiddlylink" style="text-align:center;">
-<<format-date "$date$" "ddd">>
+<$button set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible tc-tiddlylink" style="text-align:center;">
+<$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/><<format-date "$date$" "ddd">>
 </$button>
 </$list></div>
 <div class="dp-content"><ol><$list filter="[<journal-title>indexes[]tag[Task]!sort[color]]"><li>
@@ -137,13 +143,13 @@ Weekly Plan (<<format-date "$date$" "MMM DD, Week WW">>)
 </$list></$set>
 </div>
 <div style="border:1px solid #e0e0e0;padding:10px 20px;background:#fafafa;border-radius:7px;">
-<div style="margin:3px 0 12px 0;">
+<div style="margin:3px 0 8px 0;">
 <<color-palette color:"#ffd47d" bg-color:"#ffd47d" name:"Daily">>
 <<color-palette color:"#ffbea1" bg-color:"#ffbea1" name:"Important">>
 <<color-palette color:"#c3ffa2" bg-color:"#c3ffa2" name:"Weekly">>
 <<color-palette color:"" bg-color:"#c9fffe" name:"On Hold">>
 </div>
-<$list filter="[prefix[$:/task-state/]split[/]tag[Task]each:value[]!sort[color]]"><div style="margin:0.3em 0;">
+<$list filter="[prefix[$:/task-state/]split[/]tag[Task]each:value[]!sort[color]]"><div style="white-space:nowrap;margin-top:5px;">
 <$set name="color" filter="[all[current]has[color]]" value={{!!color}} emptyValue="#c9fffe">
 <$button set="$:/temp/task-list" setTo={{!!title}} class="tc-btn-invisible"><<priority-dot>></$button>
 </$set>

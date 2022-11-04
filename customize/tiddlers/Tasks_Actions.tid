@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221102112951600
+modified: 20221104103157962
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -52,7 +52,7 @@ type: text/vnd.tiddlywiki
 </$set>
 </div>
 
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="InProgress Easy Difficult" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="Easy Difficult" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<curDate>]"/>"""/>
 
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="-[<curDate>]"/>""" tag="div">
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>]">
