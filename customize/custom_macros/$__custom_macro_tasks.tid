@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221104104654928
+modified: 20221105204925206
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -24,35 +24,70 @@ type: text/vnd.tiddlywiki
 </span>
 \end
 
-\define task-list-button(color, date)
+\define task-list-open()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">@@color:#333;{{!!remark}}@@
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:$color$;" message="tm-copy-to-clipboard" param={{!!caption}}>''{{!!caption}}''</$button>
-<$set name="start" filter="[<task-id>getTDate{!!caption}]" select="0">
-<$list filter="[{!!date}match<start>]" emptyMessage="""<$button class="tc-btn-invisible"><$action-setfield date=<<start>>/>Update Date</$button>""" variable="NONE">
-<$reveal default="$date$" type="match" text="left" style="color:green;"><$macrocall $name="days-left" deadline={{!!date}}/></$reveal>
-<$reveal default="$date$" type="match" text="passed" style="color:green;"><$macrocall $name="days-passed" start={{!!date}}/></$reveal>
-</$list>
-</$set>
-<$button class="tc-btn-invisible" dragTiddler=<<task-id>> message="tm-copy-to-clipboard" param={{!!caption}}>
-<$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>(<$transclude tiddler=<<task-id>> field="caption"/>)
+<$list filter="[all[current]plan<today>]"><$button class="tc-btn-invisible" tooltip="Start" set=<<currentTiddler>> setTo="doing">{{$:/core/images/timestamp-on}}</$button></$list>
+<$list filter="[all[current]!plan<today>]"><$button class="tc-btn-invisible" tooltip="Change Date" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/cancel-button}}
+</$button></$list>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
+''{{!!caption}}'' <$macrocall $name="days-left" deadline={{!!date}}/>
 </$button>
-<$list filter="[all[current]get[plan]enlist-input[]nth[2]]" variable="NONE">
-<$button class="tc-btn-invisible">&times;<$action-listops $field="plan" $subfilter="-[<dt>]"/></$button>
-</$list>
+<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
 </$set>
 \end
 
-\define task-list-open() <<task-list-button "brown" "left">>
-\define task-list-doing() <<task-list-button "green" "passed">>
-\define task-list-waiting() <<task-list-button "#009dd9" "passed">>
-\define task-list-deadline() <<task-list-button "#cd23d8" "left">>
+\define task-list-doing()
+<$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">@@color:#333;{{!!remark}}@@
+<$list filter="[all[current]get[plan]enlist-input[]nth[2]]" emptyMessage="""<$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
+</$button>""" variable="NONE">
+<$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Pause">{{$:/core/images/timestamp-off}}
+<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
+</$button></$list>
+<$list filter="[<dt>!match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Cancel">{{$:/core/images/cancel-button}}
+<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>
+</$button></$list>
+</$list>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:green;" message="tm-copy-to-clipboard" param={{!!caption}}>
+''{{!!caption}}'' <$macrocall $name="days-passed" start={{!!date}}/>
+</$button>
+<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
+</$set>
+\end
+
+\define task-list-waiting()
+<$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">@@color:#333;{{!!remark}}@@
+<$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>{{$:/core/images/save-button}}
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>
+</$button>
+<$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#009dd9;" message="tm-copy-to-clipboard" param={{!!caption}}>
+''{{!!caption}}'' <$macrocall $name="days-passed" start={{!!date}}/>
+</$button>
+<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
+</$set>
+\end
+
+\define task-list-deadline()
+<$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">@@color:#333;{{!!remark}}@@
+<$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>{{$:/core/images/save-button}}
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>
+</$button>
+<$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#cd23d8;" message="tm-copy-to-clipboard" param={{!!caption}}>
+''{{!!caption}}'' <$macrocall $name="days-left" deadline={{!!date}}/>
+</$button>
+<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
+</$set>
+\end
 
 \define task-filter() [all[current]split[/]nth[3]!enlist<tasks>]
 
 \define task-list-droppable-actions()
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
-<$list filter="[<actionTiddler>!text[waiting]!text[deadline]!filter<task-filter>]"><$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/></$list>
+<$list filter="[<actionTiddler>!text[open]!text[waiting]!text[deadline]!filter<task-filter>]">
+<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>
+</$list>
 </$set>
 </$set>
 \end
@@ -66,8 +101,11 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/doing" field="text" checked="yes" unchecked="no" default="yes"> Doing</$checkbox>
 <$checkbox tiddler="$:/temp/task/waiting" field="text" checked="yes" unchecked="no" default="yes"> Waiting</$checkbox>
 <$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd><<task-list-doing>></dd></$list>
+<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd>
+<$button set="!!plan" setTo={{!!date}} class="tc-btn-invisible" style="white-space:nowrap;color:red;">NO PLAN: ''{{!!caption}}''</$button>
+</dd></$list>
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
+<$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0"><$set name="journal-caption" filter="[<dt>format:date[MM-DD ddd]]" select="0">
 <$droppable actions=<<task-list-droppable-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible">
@@ -76,6 +114,9 @@ type: text/vnd.tiddlywiki
 </$set>
 @@color:#333;<$count filter="[prefix[$:/task-state/]contains:plan<dt>]"/>@@
 <$list filter="[<dt>match<today>]">^^@@color:red;Today@@^^</$list>
+<$list filter="[<journal-title>is[missing]]"><$button>Create Date
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>> caption=<<journal-caption>> text="日记: <<bl>>"/>
+</$button></$list>
 </$droppable>
 <$list filter="[[$:/temp/task/deadline]!text[no]]" variable="NONE">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[deadline]contains:plan<dt>]"><dd><<task-list-deadline>></dd></$list>
@@ -89,6 +130,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/task/waiting]!text[no]]" variable="NONE">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[waiting]contains:plan<dt>]"><dd><<task-list-waiting>></dd></$list>
 </$list>
+</$set></$set>
 </$list>
 </dl></$set>
 \end
@@ -169,10 +211,6 @@ Weekly Plan (<<format-date "$date$" "MMM DD, Week WW">>)
 
 # ''列出计划今天开始的任务''
 #> `<<tasks-today>>`
-# ''单个任务按钮''
-#> `<<task-list-button
-  color:"颜色"
-  date:"left/passed">>`
 # ''所有任务清单''
 #> `<<task-list>>`
 # ''用于创建和修改 Tasks Journal''
