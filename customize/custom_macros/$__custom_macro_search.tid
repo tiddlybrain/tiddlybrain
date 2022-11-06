@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20221101134902259
+modified: 20221105212030328
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <div class="search-filters"><$let tv-wikilinks="no">
 <$list filter="[!is[system]!tag[Ignore]search:title,tags,caption,shortcap,keywords,text,note,status,description[$(userInput)$]get[parents]enlist-input[]!tag[Snippet]unique[]sortan[title]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;"><<keyword>>
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;color:#333;"><<keyword>>
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/IndexSearchResultList"/>
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/IndexSearchResultList"/>
