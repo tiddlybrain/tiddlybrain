@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221105204925206
+modified: 20221106162756790
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -85,7 +85,7 @@ type: text/vnd.tiddlywiki
 \define task-list-droppable-actions()
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
-<$list filter="[<actionTiddler>!text[open]!text[waiting]!text[deadline]!filter<task-filter>]">
+<$list filter="[<actionTiddler>!text[open]!text[waiting]!text[deadline]]">
 <$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>
 </$list>
 </$set>
