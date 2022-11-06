@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20221101004514406
+modified: 20221106161213781
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -56,10 +56,6 @@ a.tc-tiddlylink {text-align: left;}
 .tc-modal {left: 15%; width: 70%; top: 1em;}
 }
 
-@media (min-width: 960px) {
-.tc-tiddler-frame {border-radius: 3px;}
-}
-
 @media (min-width: 600px) {
 .tc-tiddler-frame {padding: 22px 35px;}
 .tc-tiddler-info {margin-left: -35px; margin-right: -35px;}
@@ -73,11 +69,12 @@ input[type=search].tc-menu-show-when-wide {display: none;}
 }
 
 /* Sidebar */
-@media (min-width: 960px) {
+@media (min-width: 1400px) {
+.tc-tiddler-frame {border-radius: 3px;}
 .tc-sidebar-scrollable {padding-top: 60px;}
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1400px) {
 .tc-site-title {font-size: 1.9em; margin-bottom: -1px; position: absolute; top: 20px;}
 .sidebar-segments-open {display: none;}
 .tc-page-controls {position: absolute; top: 10px; right: 0;}
