@@ -34,7 +34,7 @@ var stringToColor = function(str) {
 Export our filter function
 */
 exports.colorize = function(source,operator,options) {
-        var results = [];
+	var results = [];
 	source(function(tiddler,title) {
 		var colorCode = stringToColor(title);
 		results.push(colorCode);
