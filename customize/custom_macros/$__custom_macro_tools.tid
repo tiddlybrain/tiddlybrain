@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221106222233236
+modified: 20221107182418544
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -195,6 +195,17 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
 </$select>]</span></$list>
 \end
 
+\define tag-list()
+\whitespace trim
+<$list filter="[all[current]tags[]type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]">
+<$set name="style" filter="[all[current]get[color]] :else[all[current]colorize[]] +[addprefix[background:]]" select="0">
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tag-label tag-list" style=<<style>>>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</$button>
+</$set>
+</$list>
+\end
+
 # ''将树形结构进行展开''
 #> `<<tree-opener
   tiddler:"branch tiddler"
@@ -270,3 +281,5 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
   caption:"options 显示样式">>`
 # ''从下拉菜单里面选择 status''
 #> `<<status-selector>>`
+# ''展示当前 Tiddler 的所有非 Branch tiddler 的 Tags''
+#> `<<tag-list>>`
