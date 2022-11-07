@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221104104040968
+modified: 20221107190604102
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -250,7 +250,7 @@ button.collapse-open, button.collapse-close {padding: .7em 0 .7em .8em; backgrou
 button.collapse-close {background: #f4f4f4; font-weight: normal;}
 
 /* For Macro: date-pillar */
-.dp-container {flex-basis: 15%; flex-grow: 0; background-color: white; padding: 8px 5px 10px 5px; border: 1px solid #f4f4f4; white-space: nowrap; overflow: hidden; transition: flex-basis 400ms ease-in-out; line-height: 25px; border-radius: 7px;}
+.dp-container {flex-basis: 15%; flex-grow: 0; background-color: white; padding: 8px 5px 10px 5px; border: 1px solid #f4f4f4; white-space: nowrap; overflow: hidden; transition: flex-basis 0.4s ease-out; line-height: 25px; border-radius: 7px;}
 .dp-title {font-size: 1.05em; font-variant: small-caps; text-align: center;}
 .dp-title button.tc-tiddlylink {color: brown; font-weight: 500; width: 100%;}
 .dp-content {min-height: 2em; font-size: small;}
@@ -270,6 +270,10 @@ button.collapse-close {background: #f4f4f4; font-weight: normal;}
 /* For Macro: verification-notice */
 .verification-notice {font-size: small;}
 .tc-tags-wrapper .verification-notice {vertical-align: middle;}
+
+/* For Macro: tag-list */
+button.tc-tag-label.tag-list {font-size: smaller; margin: 0 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 30px; transition: max-width 0.6s ease-out; line-height: 1em;}
+button.tc-tag-label.tag-list:hover {max-width: 400px;}
 
 /* For Plugin: Details */
 details[open] {border-bottom: 1px solid #eee;}
