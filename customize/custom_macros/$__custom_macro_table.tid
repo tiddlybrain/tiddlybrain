@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20221024092014326
+modified: 20221107203724160
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -32,6 +32,7 @@ type: text/vnd.tiddlywiki
 
 \define table-sort-option() $:/state/table/$(current)$/$(tableTitle)$
 \define table-subfilter() [index:$(property)$[$(index-value)$]]
+\define property-title() <$list filter="[<property>is[tiddler]]" emptyMessage=<<property>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
 
 \define table(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"default", sort-order:"sortan[]")
 <$set name="current" value=<<currentTiddler>>><$set name="is-data-table" value="no">
@@ -40,7 +41,7 @@ type: text/vnd.tiddlywiki
 <th>&#9733;</th>
 <$reveal default="$rheader$" type="nomatch" text="" tag="th">$rheader$</$reveal>
 <$list filter="$cfilter$" variable="property"><th>
-<$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property>> &#8645;</$button></$list>
+<$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property-title>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property-title>> &#8645;</$button></$list>
 </th></$list>
 </tr>
 <$set name="cfilter" filter="$cfilter$"><$set name="rheader" value="$rheader$">
@@ -98,7 +99,7 @@ type: text/vnd.tiddlywiki
 <tr class="heading">
 <th>Title</th><$list filter="$ffilter$"><th><<currentTiddler>></th></$list>
 <$list filter="$cfilter$" variable="property"><th>
-<$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property>> &#8645;</$button></$list>
+<$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property-title>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property-title>> &#8645;</$button></$list>
 </th></$list>
 </tr>
 <$set name="cfilter" filter="$cfilter$"><$set name="ffilter" filter="$ffilter$">
