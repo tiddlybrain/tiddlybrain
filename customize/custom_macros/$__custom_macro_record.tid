@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20221026194036304
+modified: 20221108125408645
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -35,7 +35,7 @@ type: text/vnd.tiddlywiki
 <$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!code-body[yes]!is[image]then[yes]] -[[$(direct-open)$]match[yes]] -[[$(modal)$]match[yes]]" value="single-line-record" emptyValue="">
 <div class=<<class>>>
 <span class="left">
-<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list> <<links>>
 </span>
 <span class="middle"><$list filter="[<class>!match[single-line-record]]" variable="NONE" emptyMessage=<<record-popup '$uid$'>>>
 <$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">
@@ -44,7 +44,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 </$button>
 </$list></span>
-<span class="right"><<links>>
+<span class="right">
 <$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#aaa;">
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 <$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>
