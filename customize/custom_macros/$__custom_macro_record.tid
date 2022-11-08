@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20221108125408645
+modified: 20221108131809822
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
-<cite style="font-style:normal;text-align:right;">
+<cite style="font-style:normal;text-align:right;"><<links>>
 <span style="font-size:small;">
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
@@ -24,7 +24,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 </$button>
 </span>
-<<links>>
 </cite>
 \end
 
@@ -34,8 +33,8 @@ type: text/vnd.tiddlywiki
 <blockquote class="tc-quote record" style=<<border-color>>><$list filter="[all[current]has[caption]]" emptyMessage=<<record-item-no-caption>>>
 <$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!code-body[yes]!is[image]then[yes]] -[[$(direct-open)$]match[yes]] -[[$(modal)$]match[yes]]" value="single-line-record" emptyValue="">
 <div class=<<class>>>
-<span class="left">
-<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list> <<links>>
+<span class="left"><span><<links>></span>
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 </span>
 <span class="middle"><$list filter="[<class>!match[single-line-record]]" variable="NONE" emptyMessage=<<record-popup '$uid$'>>>
 <$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">
@@ -44,12 +43,10 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 </$button>
 </$list></span>
-<span class="right">
-<$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#aaa;">
+<span class="right"><$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#aaa;">
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 <$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>
-</$button>
-</span>
+</$button></span>
 </div>
 </$set>
 </$list></blockquote>
