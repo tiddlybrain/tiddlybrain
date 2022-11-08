@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20221108131809822
+modified: 20221108150716605
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -12,7 +12,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
-<cite style="font-style:normal;text-align:right;"><<links>>
+<cite style="font-style:normal;text-align:right;">
+<<links>> <<tag-list>>
 <span style="font-size:small;">
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
@@ -33,7 +34,8 @@ type: text/vnd.tiddlywiki
 <blockquote class="tc-quote record" style=<<border-color>>><$list filter="[all[current]has[caption]]" emptyMessage=<<record-item-no-caption>>>
 <$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!code-body[yes]!is[image]then[yes]] -[[$(direct-open)$]match[yes]] -[[$(modal)$]match[yes]]" value="single-line-record" emptyValue="">
 <div class=<<class>>>
-<span class="left"><span><<links>></span>
+<span class="left">
+<span><<links>> <<tag-list>></span>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 </span>
 <span class="middle"><$list filter="[<class>!match[single-line-record]]" variable="NONE" emptyMessage=<<record-popup '$uid$'>>>

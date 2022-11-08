@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20221101221119653
+modified: 20221108144937057
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -14,7 +14,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 <$list filter="[<__links__>match[yes]]" variable="NONE"><<links>></$list>
 <$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
-<$list filter="[<__note__>match[yes]]" variable="NONE"><$list filter="[all[current]has[note]]">&#32;@@color:green;[{{!!note}}]@@</$list></$list>
+<$list filter="[<__note__>match[yes]]" variable="NONE">
+<$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">&#32;@@color:green;[{{!!note}}]@@</$list>
+</$list>
 <$list filter="[<__parent__>match[yes]]" variable="NONE">
 <$list filter="[all[current]get[belongs.to]]">&#32;@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$list>
