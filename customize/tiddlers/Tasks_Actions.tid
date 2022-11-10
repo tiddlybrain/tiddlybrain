@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221110013644748
+modified: 20221110102101286
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -46,9 +46,10 @@ type: text/vnd.tiddlywiki
 
 <$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="div">
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>!has[category]!text[waiting]!text[deadline]contains:plan<curDate>]"><<kanban-link>></$list>
-<hr><$list filter="[prefix[$:/task-state/]!filter<task-filter>!text[open]!text[doing]]"><<kanban-link>></$list>
+<hr>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>!text[open]!text[doing]sort[date]]"><<kanban-link>></$list>
 </$droppable>
-
+<hr>
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><$button class="tc-btn-invisible tc-tiddlylink">
