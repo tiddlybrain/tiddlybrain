@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221105201323634
+modified: 20221110013644748
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -45,12 +45,11 @@ type: text/vnd.tiddlywiki
 <$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="Easy Difficult" status="category" waiting-lane="no"/>
 
 <$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="div">
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>]">
-<$list filter="[all[current]contains:plan<curDate>!has[category]] :else[all[current]text[waiting]] :else[all[current]text[deadline]]" variable="NONE"><<kanban-link>></$list>
-</$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>!has[category]!text[waiting]!text[deadline]contains:plan<curDate>]"><<kanban-link>></$list>
+<hr><$list filter="[prefix[$:/task-state/]!filter<task-filter>!text[open]!text[doing]]"><<kanban-link>></$list>
 </$droppable>
 
-<$list filter="[enlist<tasks>]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><$button class="tc-btn-invisible tc-tiddlylink">
 <<currentTiddler>><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
