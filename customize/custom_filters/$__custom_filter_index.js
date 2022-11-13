@@ -175,11 +175,9 @@ exports.getindexParsedList = function(source,operator,options) {
 		source(function(tiddler,title) {
 			title = tiddler ? tiddler.fields.title : title;
 			data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
-			if(data) {
-				getResults(data,options,title).forEach(item => {
-					results.push(item);
-				});
-			}
+			if(data) getResults(data,options,title).forEach(item => {
+				results.push(item);
+			});
 		});
 	}
 	return results;
