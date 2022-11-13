@@ -5,10 +5,11 @@ tags: customized
 module-type: filteroperator
 
 1. Filter tiddlers by the given key and value, e.g. [[tiddlers]index:key[value]]
-2. Filter tiddlers by the given key and regex pattern, e.g. [[tiddlers]indexreg:key[regexp]]
-3. Return the value of a given index, value parsed, e.g. [[tiddlers]getindexParsed[key]]
-4. Return the value of a given index, value parsed & joined, e.g. [[tiddlers]getindexJoined[key]]
-5. Branch Tiddler Constructor Filter, e.g. [slash:index[a]slash:field[b]]
+2. Filter tiddlers by the given key and value, e.g. [[tiddlers]indexSearch:key[value]]
+3. Filter tiddlers by the given key and regex pattern, e.g. [[tiddlers]indexreg:key[regexp]]
+4. Return the value of a given index, value parsed, e.g. [[tiddlers]getindexParsed[key]]
+5. Return the value of a given index, value parsed, e.g. [[tiddlers]getindexParsedList[key]]
+6. Branch Tiddler Constructor Filter, e.g. [slash:index[a]slash:field[b]]
 
 \*/
 (function(){
@@ -72,14 +73,38 @@ exports.index = function(source,operator,options) {
 			} else {
 				if(data === value) results.push(title);
 			}
-		} else {
-			results.push(title);
 		}
 	});
 	return results;
 };
 
-exports.indexreg = function(source,operator,options) {
+exports.indexSearch = function(source,operator,options) {
+	var results = [], invert = operator.prefix === "!", value = operator.operand || "";
+	var suffixes = operator.suffixes || [], index = (suffixes[0] || [])[0], flags = suffixes[1] || [];
+	source(function(tiddler,title) {
+		title = tiddler ? tiddler.fields.title : title;
+		if(index) {
+			var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
+			if(flags.indexOf("literal") === -1) data = getResults(data,options,title).join('');
+			if(value === "*") {
+				if(invert) {
+					if(data !== "") results.push(title);
+				} else {
+					if(data === "") results.push(title);
+				}
+			} else {
+				if(invert) {
+					if(data.indexOf(value) === -1) results.push(title);
+				} else {
+					if(data.indexOf(value) !== -1) results.push(title);
+				}
+			}
+		}
+	});
+	return results;
+};
+
+exports.indexRegex = function(source,operator,options) {
 	var results = [], invert = operator.prefix === "!", regexpString = operator.operand, regexp, regflags;
 	if(regexpString) {
 		// Process flags and construct regexp
@@ -109,8 +134,6 @@ exports.indexreg = function(source,operator,options) {
 				match = regexp.test(data);
 				if(invert) match = !match;
 				if(match) results.push(title);
-			} else {
-				results.push(title);
 			}
 		});
 		return results;
@@ -140,6 +163,22 @@ exports.getindexParsed = function(source,operator,options) {
 			if(data) {
 				data = getResults(data,options,title).join(s);
 				results.push(data);
+			}
+		});
+	}
+	return results;
+};
+
+exports.getindexParsedList = function(source,operator,options) {
+	var results = [], data, index = operator.operand || null;
+	if(index !== null) {
+		source(function(tiddler,title) {
+			title = tiddler ? tiddler.fields.title : title;
+			data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
+			if(data) {
+				getResults(data,options,title).forEach(item => {
+					results.push(item);
+				});
 			}
 		});
 	}
