@@ -40,7 +40,7 @@ var getResult = function(data,options,currTiddlerTitle) {
 			parentWidget: options.widget
 		});
 	} else {
-		return "";
+		return null;
 	}
 }
 
@@ -49,10 +49,12 @@ var getResults = function(data,options,currTiddlerTitle) {
 	data.split(re).forEach(datum => {
 		if(datum !== "") {
 			result = getResult(datum,options,currTiddlerTitle);
-			if(result.indexOf(";;") === -1) {
-				results.push(result);
-			} else {
-				results = results.concat(getResults(result,options,currTiddlerTitle));
+			if(result !== null) {
+				if(result.indexOf(";;") === -1) {
+					results.push(result);
+				} else {
+					results = results.concat(getResults(result,options,currTiddlerTitle));
+				}
 			}
 		}
 	});
