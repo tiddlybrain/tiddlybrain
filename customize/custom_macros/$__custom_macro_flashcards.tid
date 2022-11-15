@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20220917095550948
+modified: 20221114235851018
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -11,23 +11,16 @@ type: text/vnd.tiddlywiki
 \define flashcard-border-style() border-top: 6px solid $(color)$;
 
 \define flashcard-level()
-<div class="tc-card-buttons">
-<$button class="tc-btn-invisible"><$action-setfield side-a={{!!side-a}} side-b={{!!side-b}}/><$action-sendmessage $message="tm-edit-tiddler"/>✒️</$button>
-<$set name="level" filter="[all[current]get[level]addprefix[Level ]]" select="0" emptyValue="Level 0">
-<$button class="tc-btn-invisible" popup=<<flashcard-popup-state>>><<level>></$button>
-</$set>
-<$reveal state=<<flashcard-popup-state>> type="popup" animate="yes" class="tc-drop-down" style="min-width:initial;color:#666;padding:10px 15px;">
-<div><$tiddler tiddler={{!!belongs.to}}><$transclude tiddler={{!!belongs.to}} field="caption"/></$tiddler></div>
-<div><$transclude tiddler={{!!belongs.to}} field="caption"/></div><div>{{!!note}}</div>
-</$reveal>
-</div>
+<div class="tc-card-buttons"><$set name="level" filter="[all[current]get[level]addprefix[Level ]]" select="0" emptyValue="Level 0">
+<$button class="tc-btn-invisible tc-tiddlylink"><<level>><$action-setfield side-a={{!!side-a}} side-b={{!!side-b}}/><$action-sendmessage $message="tm-edit-tiddler"/></$button>
+</$set></div>
 \end
 
 \define flashcard-buttons()
 <div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1">
 <$set name="level" filter="[all[current]get[level]addprefix[Level ]]" select="0" emptyValue="Level 0">
 <$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙁<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level="1"/></$button>
-<$macrocall $name="l" title={{!!title}} text=<<level>> style="margin:0 10px;"/>
+<$macrocall $name="l" title={{!!title}} text=<<level>> style="margin:0 10px;" note="no"/>
 <$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙂<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level=<<up>>/></$button>
 </$set>
 </$set></div>
@@ -40,6 +33,14 @@ type: text/vnd.tiddlywiki
 <$set name="O" filter="[{!!default}match[B]]" value=<<A>> emptyValue=<<B>>>
 <$set name="color" filter="[all[current]get[belongs.to]colorize[]]" emptyValue="#29B6F6" select="0">
 <div class="tc-card" style=<<flashcard-border-style>>><div class="tc-card-content">
+<div style="font-weight:normal;margin-bottom:10px;font-size:smaller;">
+<$list filter="[all[current]get[parents]enlist-input[]reverse[]butlast[]]">
+<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let> /
+</$list>
+<$list filter="[all[current]get[parents]enlist-input[]first[]]">
+<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
+</$list>
+</div>
 <$button class="tc-btn-invisible" dragTiddler=<<currentTiddler>>>
 <$list filter="[<flashcard-state>is[tiddler]]" emptyMessage="""<$action-setfield $tiddler=<<flashcard-state>> text="show"/><<X>>""" variable="NONE">
 <$action-deletetiddler $tiddler=<<flashcard-state>>/><<O>>
