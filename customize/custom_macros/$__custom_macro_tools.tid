@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221109073109439
+modified: 20221120153246708
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -180,9 +180,9 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
 </$list>
 \end
 
-\define selector(filter, caption:"{{!!caption}} [{{!!description}}]")
+\define selector(filter, caption:"{{!!caption}} [{{!!description}}]", class)
 <$list filter="[all[current]type[application/x-tiddler-dictionary]]">
-<$select index=<<key>>><$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list></$select>
+<$select index=<<key>> class="$class$"><$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list></$select>
 <$list filter="[<value>is[tiddler]]"><$macrocall $name="l" title={{!!title}} text={{$:/core/images/open-window}} note=no/></$list>
 </$list>
 \end
@@ -278,7 +278,8 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
 # ''从 tiddlers 列表中选择一个, 并赋给另一个 tiddler''
 #> `<<selector
   filter:"tiddlers 筛选器"
-  caption:"options 显示样式">>`
+  caption:"options 显示样式"
+  class:"select widget 的 class">>`
 # ''从下拉菜单里面选择 status''
 #> `<<status-selector>>`
 # ''展示当前 Tiddler 的所有非 Branch tiddler 的 Tags''
