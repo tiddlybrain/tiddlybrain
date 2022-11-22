@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20221020070720611
+modified: 20221122105403264
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 
 \define data-table-column-width() width:$(width)$;
 
-\define data-table(template, filter:"[all[current]indexes[]]", copy:"yes", columns, style)
+\define data-table(template, filter:"[all[current]indexes:non-empty[]]", copy:"yes", columns, style)
 <$list filter="[all[current]!has[template]] [all[current]template<__template__>]" emptyMessage="<$transclude tiddler={{!!template}} mode=block/>">
 <table class="data-table" style="width:100%;$style$"><$set name="is-data-table" value="yes">
 <tr>
