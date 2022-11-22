@@ -61,6 +61,17 @@ var getResults = function(data,options,currTiddlerTitle) {
 	return results;
 }
 
+var getCellData = function(tiddler,index,options) {
+	var data = options.wiki.extractTiddlerDataItem(tiddler,index);
+	if(!data) {
+		var celltpl = tiddler.getFieldString("celltpl");
+		if(options.wiki.tiddlerExists(celltpl)) {
+			data = options.wiki.extractTiddlerDataItem(celltpl,index) || "";
+		}
+	}
+	return data;
+}
+
 /*
 Export our filter function
 */
@@ -68,9 +79,8 @@ exports.index = function(source,operator,options) {
 	var results = [], invert = operator.prefix === "!", value = operator.operand || "";
 	var suffixes = operator.suffixes || [], index = (suffixes[0] || [])[0], flags = suffixes[1] || [];
 	source(function(tiddler,title) {
-		title = tiddler ? tiddler.fields.title : title;
-		if(index) {
-			var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
+		if(index && tiddler) {
+			var data = getCellData(tiddler,index,options);
 			if(flags.indexOf("literal") === -1) data = getResults(data,options,title).join('');
 			if(invert) {
 				if(data !== value) results.push(title);
@@ -86,9 +96,8 @@ exports.indexSearch = function(source,operator,options) {
 	var results = [], invert = operator.prefix === "!", value = operator.operand || "";
 	var suffixes = operator.suffixes || [], index = (suffixes[0] || [])[0], flags = suffixes[1] || [];
 	source(function(tiddler,title) {
-		title = tiddler ? tiddler.fields.title : title;
-		if(index) {
-			var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
+		if(index && tiddler) {
+			var data = getCellData(tiddler,index.options);
 			if(flags.indexOf("literal") === -1) data = getResults(data,options,title).join('');
 			if(value === "*") {
 				if(invert) {
@@ -131,9 +140,8 @@ exports.indexRegex = function(source,operator,options) {
 		// Process the incoming tiddlers
 		var suffixes = operator.suffixes || [], index = (suffixes[0] || [])[0], flags = suffixes[1] || [];
 		source(function(tiddler,title) {
-			title = tiddler ? tiddler.fields.title : title;
-			if(index) {
-				var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "", match;
+			if(index && tiddler) {
+				var data = getCellData(tiddler,index,options), match;
 				if(flags.indexOf("transform") !== -1) data = getResults(data,options,title).join('');
 				match = regexp.test(data);
 				if(invert) match = !match;
@@ -162,11 +170,12 @@ exports.getindexParsed = function(source,operator,options) {
 	}
 	if(index !== null) {
 		source(function(tiddler,title) {
-			title = tiddler ? tiddler.fields.title : title;
-			data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
-			if(data) {
-				data = getResults(data,options,title).join(s);
-				results.push(data);
+			if(tiddler) {
+				data = getCellData(tiddler,index,options);
+				if(data) {
+					data = getResults(data,options,title).join(s);
+					results.push(data);
+				}
 			}
 		});
 	}
@@ -177,11 +186,12 @@ exports.getindexParsedList = function(source,operator,options) {
 	var results = [], data, index = operator.operand || null;
 	if(index !== null) {
 		source(function(tiddler,title) {
-			title = tiddler ? tiddler.fields.title : title;
-			data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
-			if(data) getResults(data,options,title).forEach(item => {
-				results.push(item);
-			});
+			if(tiddler) {
+				data = getCellData(tiddler,index,options);
+				if(data) getResults(data,options,title).forEach(item => {
+					results.push(item);
+				});
+			}
 		});
 	}
 	return results;
