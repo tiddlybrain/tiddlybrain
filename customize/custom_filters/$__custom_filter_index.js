@@ -62,8 +62,8 @@ var getResults = function(data,options,currTiddlerTitle) {
 }
 
 var getCellData = function(tiddler,index,options) {
-	var data = options.wiki.extractTiddlerDataItem(tiddler,index);
-	if(!data) {
+	var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
+	if(data === "") {
 		var celltpl = tiddler.getFieldString("celltpl");
 		if(options.wiki.tiddlerExists(celltpl)) {
 			data = options.wiki.extractTiddlerDataItem(celltpl,index) || "";
@@ -97,7 +97,7 @@ exports.indexSearch = function(source,operator,options) {
 	var suffixes = operator.suffixes || [], index = (suffixes[0] || [])[0], flags = suffixes[1] || [];
 	source(function(tiddler,title) {
 		if(index && tiddler) {
-			var data = getCellData(tiddler,index.options);
+			var data = getCellData(tiddler,index,options);
 			if(flags.indexOf("literal") === -1) data = getResults(data,options,title).join('');
 			if(value === "*") {
 				if(invert) {
