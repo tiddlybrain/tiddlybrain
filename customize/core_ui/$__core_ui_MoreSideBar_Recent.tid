@@ -1,6 +1,6 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
 list-before: $:/core/ui/MoreSideBar/All
-modified: 20220918155555196
+modified: 20221124092953730
 modifier: yuzijie
 tags: $:/tags/MoreSideBar customized
 title: $:/core/ui/MoreSideBar/Recent
@@ -17,6 +17,7 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
 <<icons>> <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$button>
 <$button class="tc-btn-invisible"><$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="-[{!!title}]"/>&times;</$button>
 </div></$list>

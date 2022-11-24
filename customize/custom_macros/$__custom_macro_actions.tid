@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20221003163835591
+modified: 20221124093552891
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -47,7 +47,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define droppable-rename-set-caption-action(template)
-<$tiddler tiddler=<<actionTiddler>>>
+<$tiddler tiddler=<<actionTiddler>>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<actionTiddler>>/>
 <$set name="date" filter="[all[current]get[created]format:date[YYYY0MM0DD]]" select="0" emptyValue=<<now YYYY0MM0DD>>>
 <$set name="newTitle" value=<<unusedtitle $template$>>>
 <$list filter="[all[current]!has[caption]] [all[current]has[caption]search:caption:literal[{{!!title}}]]">
