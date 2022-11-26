@@ -1,0 +1,9 @@
+caption: {{$:/language/EditTemplate/Body/Preview/Type/Output}}
+modified: 20221126223311315
+modifier: yuzijie
+tags: $:/tags/EditPreview customized
+title: $:/core/ui/EditTemplate/body/preview/output
+type: text/vnd.tiddlywiki
+
+\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!has[draft.of]]
+<$set name="tv-tiddler-preview" value="yes"><div class="tc-tiddler-body"><$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list></div></$set>
