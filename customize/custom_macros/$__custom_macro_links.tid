@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20221116222022716
+modified: 20221127111755539
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]get[path]]" variable="path"><$set name="url" filter="[<path>addprefix[./files/]]" select="0">
 <a href=<<url>> target="_blank" title=<<url>> class="links" rel="noopener noreferrer">{{$:/core/images/file}}</a>
 </$set></$list>
-<$list filter="[all[current]get[dir]]" variable="path"><$set name="path-prefix" value={{$:/config/path-prefix!!path}}>
+<$list filter="[all[current]get[dir]]" variable="path"><$set name="path-prefix" value={{$:/config/index-tree!!path}}>
 <$button class="tc-btn-invisible links" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>{{$:/core/images/folder}}</$button>
 </$set></$list>
 <$list filter="[all[current]code-body[yes]]"><$set name="code-style" filter="[tag[Comment]belongs.to<currentTiddler>]" value="fill:red;" emptyValue="">
@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
 \define icons(style:"font-weight:normal;") <span style=<<__style__>>><$list filter="[all[current]is[missing]!is[system]]">☹️</$list><$list filter="[all[current]!is[system]search:title:literal[/]]">🌿</$list><$list filter="[all[current]has[url]]">🔗</$list><$list filter="[all[current]has[path]]">📄</$list><$list filter="[all[current]tag[Task]]">🏆</$list></span>
 
 \define external-links()
-<$set name="path-prefix" value={{$:/config/path-prefix!!path}}>
+<$set name="path-prefix" value={{$:/config/index-tree!!path}}>
 <$list filter="[all[current]get[url]]" variable="url"><div class="external-links" style="background:#d9fff0;">
 <a href=<<url>> target="_blank" title=<<url>> class="light-color" rel="noopener noreferrer">Open Link in a New Window</a> &middot;
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<url>> tooltip=<<url>>>Copy Link</$button>

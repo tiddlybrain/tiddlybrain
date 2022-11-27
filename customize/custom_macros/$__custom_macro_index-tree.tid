@@ -1,19 +1,18 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20221015154624998
+modified: 20221127113619169
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
 type: text/vnd.tiddlywiki
 
 \define index-tree-breadcrumb-filter(sort:"sortan[title]")
-[all[current]next[$:/config/index-tree]!list<tv-story-list>] [all[current]tags[]!is[system]]
-[all[current]listed[]!is[system]] [all[current]parentPath[valid]] [all[current]get[belongs.to]]
--[{$:/config/index-tree}] +[is[tiddler]!toc-link[no]!tag[Ignore]$sort$]
+[all[current]next[$:/config/index-tree]] [all[current]tags[]!is[system]] [all[current]listed[]!is[system]]
+[all[current]parentPath[valid]] [all[current]get[belongs.to]] -[{$:/temp/index-tree}] +[is[tiddler]!toc-link[no]!tag[Ignore]$sort$]
 \end
 
 \define index-tree-pill()
-<span class="index-tree-tab"><$button set="$:/config/index-tree" setTo={{!!title}} tooltip={{!!title}} dragTiddler={{!!title}}>
+<span class="index-tree-tab"><$button set="$:/temp/index-tree" setTo={{!!title}} tooltip={{!!title}} dragTiddler={{!!title}}>
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[{!!title}] +[putfirst[]]"/>
 <$transclude field="caption"><$view field="title"/></$transclude>
 </$button></span>
@@ -21,23 +20,21 @@ type: text/vnd.tiddlywiki
 
 \define index-tree()
 <$droppable actions=<<droppable-index-tree>> tag="div"><$set name="direct-open" value="yes">
-<div class="index-tree tc-droppable-placeholder" style="display:block;">
-<$list filter="[[$:/config/index-tree]has[text]]"><$tiddler tiddler={{$:/config/index-tree}}>
-<span class="index-tree-tab"><$button set="$:/config/index-tree" setTo="" dragTiddler="Index">{{$:/core/images/home-button}} Home</$button></span>
+<div class="index-tree tc-droppable-placeholder" style="display:block;"><$list filter="[[$:/temp/index-tree]get[text]]">
+<span class="index-tree-tab"><$button set="$:/temp/index-tree" setTo="" dragTiddler="Index">{{$:/core/images/home-button}} Home</$button></span>
 <$list filter=<<index-tree-breadcrumb-filter>>><<index-tree-pill>> </$list>
 <span class="index-tree-tab" style="background:#f8f8f8;"><$button tooltip={{!!title}} dragTiddler={{!!title}} to={{!!title}}>
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$set name="previous" filter="[enlist{$:/config/index-tree!!list}nth[2]]" select="0">
-<$action-setfield $tiddler="$:/config/index-tree" text=<<previous>>/>
+<$action-setfield $tiddler="$:/temp/index-tree" text=<<previous>>/>
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<previous>] +[putfirst[]]"/>
 </$set>
 </$button></span>
-</$tiddler></$list>
-</div>
-<$reveal type="match" state="$:/config/index-tree" text="" default="" tag="div" class="tc-table-of-contents" style="margin-top:20px;">
+</$list></div>
+<$reveal type="match" state="$:/temp/index-tree" text="" default="" tag="div" class="tc-table-of-contents" style="margin-top:20px;">
 <$macrocall $name="custom-toc" root="Index" sort="!sort[order]"/>
 </$reveal>
-<$reveal type="nomatch" state="$:/config/index-tree" text="" default="" tag="div" class="tc-tiddler-body index-tree-view"><$tiddler tiddler={{$:/config/index-tree}}>
+<$reveal type="nomatch" state="$:/temp/index-tree" text="" default="" tag="div" class="tc-tiddler-body index-tree-view"><$tiddler tiddler={{$:/temp/index-tree}}>
 <$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude mode=block/>"><<data-table>></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>

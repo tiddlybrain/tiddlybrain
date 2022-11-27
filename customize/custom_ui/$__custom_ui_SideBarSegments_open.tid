@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20221022234135484
+modified: 20221127112206655
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -47,7 +47,7 @@ type: text/vnd.tiddlywiki
 </$list>
 <$droppable actions="<<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter='[<actionTiddler>]'/>" tag="div">
 <div class="tc-droppable-placeholder">{{$:/core/images/blank}}</div>
-<$list filter="[recentlyClosed[]!is[missing]!{$:/config/index-tree}limit[1]]">
+<$list filter="[recentlyClosed[]!is[missing]!{$:/temp/index-tree}limit[1]]">
 <div class="tc-sidebar-tab-open-item" style="white-space:nowrap;overflow:hidden;">
 <$button to=<<currentTiddler>> class="tc-btn-invisible" style="fill:#ccc;">{{$:/core/images/chevron-up}}</$button>
 <$button to=<<currentTiddler>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink" style="color:#bbb;">

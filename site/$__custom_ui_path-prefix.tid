@@ -1,0 +1,14 @@
+created: 20190212203619173
+creator: yuzijie
+modified: 20221127111653434
+modifier: yuzijie
+tags: customized
+title: $:/custom/ui/path-prefix
+type: text/vnd.tiddlywiki
+
+<$button to="$:/custom/ui/path-prefix" class="tc-btn-invisible">Path Prefix</$button>
+<$select tiddler='$:/config/index-tree' field='path'>
+<option>file://D:/Samba/</option>
+<option>file://192.168.123.1/share/NAS/</option>
+</$select>
+<$button message="tm-copy-to-clipboard" param={{$:/config/index-tree!!path}} class="tc-btn-invisible">{{$:/core/images/copy-clipboard}}</$button> 

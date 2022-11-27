@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20221116222229084
+modified: 20221127111815486
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -86,7 +86,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary"><$action
 <$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newAtt}} path={{$:/temp/newAtt!!path}} type="video/mp4" note="MP4"/>New MP4</$button>
 </p>
 <hr>
-<p>{{$:/config/path-prefix}}</p>
+<p>{{$:/custom/ui/path-prefix}}</p>
 <p style="margin-top:-10px;">
 <$button message="tm-edit-tiddler" param="$:/config/defaultTemplate" class="tc-btn-invisible">Default Template: @@color:red;{{$:/config/defaultTemplate}}@@</$button>
 </p>
