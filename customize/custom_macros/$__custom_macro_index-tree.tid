@@ -1,6 +1,6 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20221127113619169
+modified: 20221203202856335
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
@@ -41,7 +41,6 @@ type: text/vnd.tiddlywiki
 <$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
 </$tiddler></$reveal>
-<hr style="margin:20px 0;">
 </$set></$droppable>
 \end
 
