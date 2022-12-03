@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221128003157275
+modified: 20221203164430800
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -251,14 +251,12 @@ button.collapse-open, button.collapse-close {padding: .7em 0 .7em .8em; backgrou
 button.collapse-close {background: #f4f4f4; font-weight: normal;}
 
 /* For Macro: date-pillar */
-.dp-container {flex-basis: 15%; flex-grow: 0; background-color: white; padding: 8px 5px 10px 5px; border: 1px solid #f4f4f4; white-space: nowrap; overflow: hidden; transition: flex-basis 0.4s ease-out; line-height: 25px; border-radius: 7px;}
+.dp-container {flex-basis: 15%; flex-grow: 0; background-color: white; padding: 8px 5px 10px 5px; border: 1px solid #f4f4f4; white-space: nowrap; overflow: hidden; line-height: 25px; border-radius: 7px;}
 .dp-title {font-size: 1.05em; font-variant: small-caps; text-align: center;}
 .dp-title button.tc-tiddlylink {color: brown; font-weight: 500; width: 100%;}
 .dp-content {min-height: 2em; font-size: small;}
 .dp-content ol {padding-left: 15px; margin: 0;}
-.dp-container.today {background: #ffe998;}
-.dp-container:hover {flex-basis: 80%;}
-.dp-container:hover .dp-content ol {padding-left: 20px;}
+.dp-container.today {background: #ffe998; flex-basis: 25%;}
 
 /* For Macro: weekly-plan */
 .dot {border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7; text-shadow: 0 1px 0 rgb(255 255 255 / 80%);}
