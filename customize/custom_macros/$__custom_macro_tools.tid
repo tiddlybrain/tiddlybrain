@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221128002551750
+modified: 20221204152128490
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -187,6 +187,26 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
 </$list>
 \end
 
+\define multi-selector(filter, caption:"{{!!caption}} [{{!!description}}]", class)
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]">
+<$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
+<$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$macrocall $name="l" title=<<datum>> class="normal-weight" note="no"/></$list>;
+</$list>
+<$reveal type="nomatch" text="show" state="$:/state/multi-selector/$(currentTiddler)$/$(key)$">
+<$button set="$:/state/multi-selector/$(currentTiddler)$/$(key)$" setTo="show" class="tc-btn-invisible">{{$:/core/images/edit-button}}</$button>
+</$reveal>
+<$reveal type="match" text="show" state="$:/state/multi-selector/$(currentTiddler)$/$(key)$" tag="div">
+<$button style="display:block;margin:5px 0;">Done
+<$set name="value" filter="[enlist{$:/state/multi-selector/$(currentTiddler)$/$(key)$!!list}join[;;]]" select="0"><$action-setfield $index=<<key>> $value=<<value>>/></$set>
+<$action-deletetiddler $tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$"/>
+</$button>
+<$select tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$" field="list" multiple class="$class$">
+<$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
+</$select>
+</$reveal>
+</$list>
+\end
+
 \define status-selector()
 <$list filter="[all[current]!has[status]]" emptyMessage="<$button class='tc-btn-invisible' style='color:red;'><$action-deletefield $field='status'/>[{{!!status}}]</$button>">
 <$list filter="[all[current]get[status-options]] :else[all[current]get[celltpl]get[status-options]]" variable="options">
@@ -277,8 +297,13 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
 # ''打开 Tiddler 的同时, unfold tiddler''
 #> `<<tiddler-open
   tiddler:"打开的 tiddler">>`
-# ''从 tiddlers 列表中选择一个, 并赋给另一个 tiddler''
+# ''从 tiddlers 列表中选择一个值赋给另一个 tiddler''
 #> `<<selector
+  filter:"tiddlers 筛选器"
+  caption:"options 显示样式"
+  class:"select widget 的 class">>`
+# ''从 tiddlers 列表中选择多个值赋给另一个 tiddler''
+#> `<<multi-selector
   filter:"tiddlers 筛选器"
   caption:"options 显示样式"
   class:"select widget 的 class">>`
