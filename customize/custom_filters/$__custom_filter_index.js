@@ -99,11 +99,17 @@ exports.indexSearch = function(source,operator,options) {
 		if(index && tiddler) {
 			var data = getCellData(tiddler,index,options);
 			if(flags.indexOf("literal") === -1) data = getResults(data,options,title).join('');
-			if(value === "*") {
+			if(value === "#") {
 				if(invert) {
 					if(data !== "") results.push(title);
 				} else {
 					if(data === "") results.push(title);
+				}
+			} else if(value === "*") {
+				if(invert) {
+					if(data === "") results.push(title);
+				} else {
+					if(data !== "") results.push(title);
 				}
 			} else {
 				if(invert) {
