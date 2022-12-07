@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221204152128490
+modified: 20221207130130393
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -175,7 +175,8 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
 
 \define tiddler-open(tiddler)
 <$list filter="[<__tiddler__>is[tiddler]]"><$action-navigate $to=<<__tiddler__>>/>
-<$list filter="[<__tiddler__>addprefix[$:/state/folded/]is[tiddler]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
+<$action-deletetiddler $filter="[<__tiddler__>addprefix[$:/state/folded/]is[tiddler]]"/>
+<$action-deletetiddler $filter="[prefix[$:/state/snippet-limit/]] [prefix[$:/state/snippet-accordion/]] [prefix[$:/state/bl-limit/]]"/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<__tiddler__>] +[putfirst[]]"/>
 </$list>
 \end
