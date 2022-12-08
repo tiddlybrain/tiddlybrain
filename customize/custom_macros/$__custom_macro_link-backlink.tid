@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20221108144937057
+modified: 20221208131704497
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -52,11 +52,12 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter)
+\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption)
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
+<$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$"/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 @@font-size:small;(<$count filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>/>)@@
@@ -71,23 +72,24 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 </$button>
 </div></$list>
 </$set>
+</$list>
 </$vars>
 </$set>
 </$set>
 </$set></$set>
 \end
 
-\define bl(item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]$item-filter$" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>>/>
+\define bl(item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]$item-filter$" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
 
-\define bl-topic(topic, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]$item-filter$" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>>/>
+\define bl-topic(topic, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]$item-filter$" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
 
-\define bl-tag(tag, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]$item-filter$" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>>/>
+\define bl-tag(tag, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]$item-filter$" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
 
 \define bl-note-filter(item-filter) note[$(note)$]!is[current]$item-filter$
 
-\define bl-note(note, item-filter, sort, cfilter, rheader, limit, description, parent, date, caption, has-filter)
+\define bl-note(note, item-filter, sort, cfilter, rheader, limit, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption)
 <$set name="note" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
-<$macrocall $name="bl-filter" item-filter=<<bl-note-filter """$item-filter$""">> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note="no" description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>>/>
+<$macrocall $name="bl-filter" item-filter=<<bl-note-filter """$item-filter$""">> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note="no" description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
 </$set>
 \end
 
@@ -116,7 +118,10 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   parent:"是否显示 belongs.to"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
-  has-filter:"是否显示 filter">>`
+  has-filter:"是否显示 filter"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl
   item-filter:"额外筛选条件"
@@ -129,7 +134,10 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   parent:"是否显示 belongs.to"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
-  has-filter:"是否显示 filter">>`
+  has-filter:"是否显示 filter"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`
 # ''反查指向当前 Tiddler 且属于某个 topic 的所有 Tiddlers''
 #> `<<bl-topic
   topic:"主题"
@@ -143,7 +151,10 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   parent:"是否显示 belongs.to"v
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
-  has-filter:"是否显示 filter">>`
+  has-filter:"是否显示 filter"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`
 # ''反查指向当前 Tiddler 且标记了某个 tag 的所有 Tiddlers''
 #> `<<bl-tag
   tag:"标签"
@@ -157,7 +168,10 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   parent:"是否显示 belongs.to"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
-  has-filter:"是否显示 filter">>`
+  has-filter:"是否显示 filter"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`
 # ''反查指向当前 Tiddler 且相同 note 的所有 Tiddlers''
 #> `<<bl-note
   note:"角色"
@@ -170,4 +184,7 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   parent:"是否显示 belongs.to"
   date:"是否显示 date"
   caption:"按照 caption 来显示结果条目"
-  has-filter:"是否显示 filter">>`
+  has-filter:"是否显示 filter"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption">>`

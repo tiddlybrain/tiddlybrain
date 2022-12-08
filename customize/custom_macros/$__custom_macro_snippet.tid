@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20221107183659695
+modified: 20221208124552805
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -85,7 +85,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </div></$list>
 \end
 
-\define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, rheader, actions, tags, no-drop, has-filter, celltpl)
+\define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, rheader, actions, tags, no-drop, cat-prefix, cat-filter, tag-caption, has-filter, celltpl)
 <$vars key={{{ [[$key$]!is[blank]else<key>!is[blank]else{!!note}] }}} current=<<currentTiddler>>>
 <$droppable actions=<<snippet-drop-actions """$actions$""" """$tags$""" "$celltpl$">> tag="div" class="snippet-container">
 <div class="tc-droppable-placeholder" style="display:block;">
@@ -110,6 +110,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </$button>
 </$list>
 </$list>
+<$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="belongs.to<current>tag[Snippet]note<key>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$"/>""" variable="NONE">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<key>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
 <$set name="snippet-qty" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$count[]]">> select="0">
@@ -119,6 +120,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </$set>
 </$vars>
 </$set>
+</$list>
 </div>
 </$droppable>
 </$vars>
@@ -155,5 +157,8 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
   actions:"Tiddler 被放置时的额外动作"
   tags:"为 ActionTiddler 添加的额外标签"
   no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption"
   has-filter:"是否显示 filter"
   celltpl:"设置 Snippet 的模板">>`
