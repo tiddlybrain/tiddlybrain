@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20221207172635452
+modified: 20221208140620377
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -89,11 +89,11 @@ type: text/vnd.tiddlywiki
 <$reveal default="$cfilter$" type="nomatch" text="" tag="div"><$macrocall $name="table" rfilter=<<__filter__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/></$reveal>
 \end
 
-\define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default")
+\define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default", has-filter:"yes")
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
-<div class="filter-options">
+<$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options">
 filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">> cfilter=<<__cfilter__>>/>
-</div>
+</div></$list>
 <$list filter="[<belongs-display-state>text[list]]" emptyMessage="""<$macrocall $name="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>>/>""" variable="NONE">
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]limit[1]]">> variable="NONE">
 <div style="margin-top:1em;">
@@ -169,7 +169,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 </$droppable>
 <$macrocall $name="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 <$list filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
-<$macrocall $name="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
+<$macrocall $name="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no"/>
 </div></$list>
 </$vars></$set>
 \end
@@ -179,7 +179,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 <$macrocall $name="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}tagging[]$item-filter$] [$item-filter$!filter<tagged>]'/> items"/>
 <$macrocall $name="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
 <$list filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
-<$macrocall $name="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>>/>
+<$macrocall $name="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no"/>
 </div></$list>
 </$vars></$set>
 \end
@@ -229,7 +229,8 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
   sort:"对 record 列表排序"
   cfilter:"如果是 Table, 则需要填写"
   rheader:"如果是 Table, 可以选填"
-  title:"Unique ID">>`
+  title:"Unique ID"
+  has-filter:"是否显示 filter">>`
 # ''分类显示通用模板''
 #> `<<sort-by
   tags-filter:"找到所有的 Tiddlers 的 Tags"
