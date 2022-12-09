@@ -1,0 +1,14 @@
+caption: 改时间
+created: 20221209123548429
+creator: yuzijie
+modified: 20221209113548429
+modifier: yuzijie
+tags: Editor customized
+title: Editor/Date
+type: text/vnd.tiddlywiki
+
+<$droppable actions="<$action-setfield $tiddler=<<actionTiddler>> created=<<now 'YYYY0MM0DD0hh0mm0ss0XXX'>>/>" tag="div">
+<div class="tc-droppable-placeholder" style="display:inline-block;padding:15px 0;border-radius:15px;">
+修改 Created Date 为当前时间
+</div>
+</$droppable>
