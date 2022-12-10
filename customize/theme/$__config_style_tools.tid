@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221208134538552
+modified: 20221210145419655
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 .description {color: #aaa;}
 
 /* For Macro: display */
-.tips, .warning, .danger {display: inline-block; border-radius: 0.25rem; padding: 0.1rem 0.75rem 0.1rem 0.55rem; border: 1px solid #ccc;}
+.tips, .warning, .danger {display: inline-block; border-radius: 0.2rem; padding: 0 0.75rem 0 0.55rem;}
 .tips {color: #31708f; background-color: #d9edf7; border-color: #bce8f1;}
 .tips::before {content: '💡 ';}
 .warning {color: #8a6d3b; background-color: #fcf8e3; border-color: #faebcc;}
