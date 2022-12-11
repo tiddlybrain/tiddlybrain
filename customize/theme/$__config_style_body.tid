@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20221129005151741
+modified: 20221211175439582
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -97,6 +97,8 @@ a.tc-tiddlylink {text-align: left;}
 .tc-sidebar-tab-open-item .tc-btn-text {margin: 0; color: #999;}
 
 .tc-sidebar-tab-open-item a.tc-tiddlylink-external {display: inline; padding: 0;}
+
+.tc-sidebar-tab-open-item .sidebar-tab-open-btn {display: inline-block; width: auto;}
 
 .tc-more-sidebar {margin-top: -5px;}
 

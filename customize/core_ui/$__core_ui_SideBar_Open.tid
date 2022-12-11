@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20221129012924598
+modified: 20221211180636287
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -30,7 +30,7 @@ $button$
 <div class="tc-sidebar-tab-open">
 <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
-<$macrocall $name="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink">
+<$macrocall $name="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn">
 <$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no"><$macrocall $name="icons"/>
 <$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot;</$list>
@@ -38,13 +38,16 @@ $button$
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]get[belongs.to]]">@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$let>
-</$button>"""/>
+</$button>
+<div class="sidebar-item-hover"><$button class="tc-btn-invisible sidebar-tab-open-btn" style="font-size:smaller;padding:0;">
+<<open-in-sidebar>>{{$:/core/images/open-window}}
+</$button></div>"""/>
 </div>
 </$list>
 <$tiddler tiddler="">
-<div style="margin-bottom:5px;">
+<div class="tc-sidebar-tab-open-item" style="margin-bottom:5px;">
 <$macrocall $name="droppable-item" button="""<$list filter="[recentlyClosed[]!is[missing]!{$:/temp/index-tree}limit[1]]">
-<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink" style="color:#bbb;margin:5px 0;">
+<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:#bbb;margin:0 0 5px 0;">
 <$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no"><$macrocall $name="icons"/>
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot;</$list>
@@ -53,9 +56,12 @@ $button$
 <$list filter="[all[current]get[belongs.to]]">[<$transclude field=caption><$view field=title/></$transclude>]</$list>
 </$let>
 </$button>
+<div class="sidebar-item-hover"><$button class="tc-btn-invisible sidebar-tab-open-btn" style="font-size:smaller;padding:0;">
+<<open-in-sidebar>>{{$:/core/images/open-window}}
+</$button></div>
 </$list>
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button>
-<$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-mini tc-btn-invisible" style="font-variant:all-small-caps;">close others</$button>"""/>
+<$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">close others</$button>"""/>
 </div>
 </$tiddler>
 </div>
