@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221207130130393
+modified: 20221213133525172
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -182,15 +182,15 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
 \end
 
 \define selector(filter, caption:"{{!!caption}} [{{!!description}}]", class)
-<$list filter="[all[current]type[application/x-tiddler-dictionary]]">
-<$select index=<<key>> class="$class$"><$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list></$select>
-<$list filter="[<value>is[tiddler]]"><$macrocall $name="l" title={{!!title}} text={{$:/core/images/open-window}} note=no/></$list>
-</$list>
+<$list filter="[celltpl<currentTiddler>limit[1]]" emptyMessage="""<$list filter="[<value>!is[tiddler]]" emptyMessage="<<l '$(value)$' class:'normal-weight' note:'no'>>" variable="NONE">
+<$list filter="[<value>is[blank]]" emptyMessage=<<value>> variable="NONE"><$select index=<<key>> class="$class$" default="N/A">
+<option disabled>N/A</option><$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
+</$select></$list>
+</$list>""">Selector</$list>
 \end
 
 \define multi-selector(filter, caption:"{{!!caption}} [{{!!description}}]", class)
-<$list filter="[all[current]type[application/x-tiddler-dictionary]]">
-<$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
+<$list filter="[celltpl<currentTiddler>limit[1]]" emptyMessage="""<$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
 <$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$macrocall $name="l" title=<<datum>> class="normal-weight" note="no"/></$list>;
 </$list>
 <$reveal type="nomatch" text="show" state="$:/state/multi-selector/$(currentTiddler)$/$(key)$">
@@ -204,8 +204,7 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
 <$select tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$" field="list" multiple class="$class$">
 <$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
 </$select>
-</$reveal>
-</$list>
+</$reveal>""">Multi-Selector</$list>
 \end
 
 \define status-selector()
