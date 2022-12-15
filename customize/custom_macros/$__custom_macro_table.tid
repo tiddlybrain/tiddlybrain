@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20221108150235275
+modified: 20221214134831211
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -34,23 +34,23 @@ type: text/vnd.tiddlywiki
 \define table-subfilter() [index:$(property)$[$(index-value)$]]
 \define property-title() <$list filter="[<property>is[tiddler]]" emptyMessage=<<property>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
 
-\define table(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"default", sort-order:"sortan[]")
+\define table(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"default", sort-order:"sortan[]", first-col:"yes")
 <$set name="current" value=<<currentTiddler>>><$set name="is-data-table" value="no">
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
 <tr class="heading">
-<th>&#9733;</th>
+<$reveal default="$first-col$" type="match" text="yes" tag="th">&#9733;</$reveal>
 <$reveal default="$rheader$" type="nomatch" text="" tag="th">$rheader$</$reveal>
 <$list filter="$cfilter$" variable="property"><th>
 <$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property-title>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property-title>> &#8645;</$button></$list>
 </th></$list>
 </tr>
 <$set name="cfilter" filter="$cfilter$"><$set name="rheader" value="$rheader$">
-<$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$rheader$">></$list>""">
+<$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$rheader$" "$first-col$">></$list>""">
 <$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
 <$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]$sort-order$]" variable="index-value">
-<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$">></$list>
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$">></$list>
 </$list>
-<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$">></$list>
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$">></$list>
 </$tiddler></$set>
 </$list>
 </$set></$set>
@@ -58,10 +58,10 @@ type: text/vnd.tiddlywiki
 </$set></$set>
 \end
 
-\define table-row(rheader)
+\define table-row(rheader, first-col)
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="background:#fff3c9;" emptyValue={{{ [all[current]get[color]addprefix[background:]addsuffix[;]] }}}><tr style=<<style>>>
 <$set name="fdate" filter="[{!!date}format:date[YYYY-0MM-0DD]]">
-<td><div class="table-links">
+<$reveal default="$first-col$" type="match" text="yes" tag="td"><div class="table-links">
 <$reveal default="$rheader$" type="match" text="">
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible links" style="fill:#5778d8;">
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>{{$:/core/images/open-window}}
@@ -70,7 +70,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
 <<links>> <<tag-list>>
-</div></td>
+</div></$reveal>
 <$reveal default="$rheader$" type="nomatch" text="" tag="td">
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<fdate>> class="tc-btn-invisible tc-tiddlylink">
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>{{!!title}}
@@ -142,10 +142,12 @@ type: text/vnd.tiddlywiki
   rfilter:"[tag<currentTiddler>] 行标题过滤"
   rheader:"Name of Row header"
   title:"表格 ID"
-  sort-order:"排序顺序">>`
+  sort-order:"排序顺序"
+  first-col:"是否显示第一列">>`
 # ''展示 Table 的行''
 #> `<<table-row
-  rheader:"Name of Row header">>`
+  rheader:"Name of Row header"
+  first-col:"是否显示第一列">>`
 # ''使用 table 形式编辑 Data tiddlers 的值''
 #> `<<tableE
   cfilter:"输入键值"
