@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20221213113308595
+modified: 20221215142304792
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -46,7 +46,6 @@ a.tc-tiddlylink {text-align: left;}
 .tc-tags-wrapper button.tc-tag-label:hover, .tc-tags-wrapper span.tc-tag-label:hover {max-width: 400px;}
 .tc-tags-wrapper button.tc-tag-label svg, .tc-tags-wrapper span.tc-tag-label svg {margin-left: 2px;}
 .tc-tags-wrapper .tc-drop-down .tc-menu-list-item button {padding: 0 14px 0 14px; display: block; width: 100%;}
-.tc-tags-wrapper .tc-drop-down .tc-menu-list-item button.search-dropdown-button {display: none;}
 
 .tc-search-results select {border: none; -webkit-appearance: none; appearance: none;}
 .tc-search-results select::-ms-expand {display: none;}
@@ -152,7 +151,6 @@ input[type=text].new-tiddler-input-box, input:not([type]).new-tiddler-input-box 
 .tc-block-dropdown.tc-search-drop-down a a {display: inline; padding: 0;}
 .tc-drop-down.recent a, .tc-drop-down.recent button {display: inline-block; width: auto; padding: 0 0 0 5px;}
 .tc-drop-down, .tc-block-dropdown {animation: pop .15s ease-in forwards;}
-.tc-drop-down button svg, .tc-drop-down a svg {transform: translateY(1px);}
 .tc-drop-down .tc-menu-list-item button {display: inline-block; width: auto; padding: 0;}
 .tc-drop-down .tc-menu-list-item button.search-dropdown-button {background: transparent; transform: translateY(-2px); font-size: smaller;}
 button.search-dropdown-button {font-size: small;}

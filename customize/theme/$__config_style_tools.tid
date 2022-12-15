@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221211102332505
+modified: 20221215144453580
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -35,7 +35,7 @@ button.img {border: 1px solid #ddd; box-shadow: 0px 0px 2px 1px #f5f5f5;}
 
 /* For Macro: snippet */
 .snippet {white-space: nowrap;}
-button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis; color: #666;}
+button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis; color: #666; line-height: 30px;}
 .snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
 .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table {margin: 10px 20px;}
 .snippet-content > h2, .snippet-content > h3 {margin-left: 20px; margin-right: 20px;}
@@ -72,7 +72,8 @@ dl.task-list dd {white-space: nowrap;}
 
 /* For $:/custom/ui/SideBarSegments/open */
 .sidebar-item-hover {display: none;}
-.tc-sidebar-tab-open-item:hover .sidebar-item-hover, .toc-item:hover > a > .sidebar-item-hover, .toc-item:hover > .sidebar-item-hover {display: inline-block;}
+.tc-sidebar-tab-open-item:hover .sidebar-item-hover, .toc-item:hover > a > .sidebar-item-hover, .toc-item:hover > .sidebar-item-hover, .tc-menu-list-item:hover > a > .sidebar-item-hover {display: inline-block;}
+.tc-drop-down .tc-menu-list-item:hover > a > .sidebar-item-hover {display: none;}
 .tc-sidebar-tab-open-item code {white-space: nowrap;}
 
 /* For $:/custom/search/... */
@@ -114,7 +115,7 @@ blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #
 .single-line-record {display: flex; white-space: nowrap; position: relative;}
 .single-line-record .left span:last-child {margin-right: 0.3em;}
 .single-line-record .middle {min-width: 0;}
-.single-line-record .middle button.tc-tiddlylink {width: 100%; overflow: hidden; text-overflow: ellipsis;}
+.single-line-record .middle button.tc-tiddlylink {width: 100%; overflow: hidden; text-overflow: ellipsis; line-height: 26px;}
 .single-line-record .middle .data-value button.tc-tiddlylink {width: auto; display: inline-block;}
 .single-line-record .middle button code {display: inline-block;}
 .single-line-record .right {margin-left: 0.3em; flex: none;}
@@ -163,7 +164,6 @@ button.sort-by-belongs-title span {color: #aaa; font-weight: normal;}
 .tc-menubar .tc-drop-down {padding: 10px 20px;}
 .tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini .open svg {fill: green;}
 nav.tc-menubar li.tc-menubar-item .tc-menubar-dropdown-arrow svg {width: 1em; height: 0.7em; transform: translateY(-1px);}
-nav.tc-menubar li.tc-menubar-item .tc-menu-list-item svg, nav.tc-menubar li.tc-menubar-item .tc-block-dropdown svg {fill: #999;}
 nav.tc-menubar .tc-drop-down .tc-table-of-contents button.tc-tiddlylink {color: #666;}
 nav.tc-menubar .tc-drop-down .tc-table-of-contents button.tc-tiddlylink:hover {color: white;}
 nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #aaa; background: transparent; cursor: default;}
@@ -173,7 +173,7 @@ nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #
 .macro-table:hover {overflow-x: auto;}
 .tc-sidebar-lists .macro-table:hover {overflow-x: hidden;}
 .macro-table > table {width: 100%; margin: 0; background: white;}
-.macro-table > table th {text-align: left; font-size: small;}
+.macro-table > table th {text-align: left; line-height: 23px;}
 .macro-table > table th, .macro-table > table td, table.data-table .macro-table > table th, table.data-table .macro-table > table td, .macro-table > table td code {white-space: nowrap;}
 .macro-table > table td input {width: 100%; border: 1px dashed #ccc;}
 table.data-table .macro-table {margin: 0; font-size: small; line-height: 26px;}
@@ -214,6 +214,8 @@ table.data-table .data-splitter {text-align: center; font-weight: bold; backgrou
 /* For Macro: l */
 .l embed {height: 600px;}
 .l > details:last-child {margin-bottom: 0;}
+.l img {border: 1px dashed #ccc; border-radius: 0.2rem;}
+button.l {line-height: inherit;}
 
 /* For Macro: links */
 a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
