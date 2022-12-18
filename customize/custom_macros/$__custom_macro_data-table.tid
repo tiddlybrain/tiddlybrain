@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20221122105403264
+modified: 20221218205929731
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -42,8 +42,8 @@ type: text/vnd.tiddlywiki
 <$link to=<<currentTiddler>>><$transclude field="value"><$transclude field="caption"><$view field="title"/></$transclude></$transclude></$link>
 </$list>
 </th></$set></$list>
-<$reveal default="$copy$" type="match" text="yes" tag="th" style="width:35px;filter:grayscale(1);" class="copy-col">
-<$droppable actions=<<droppable-add-or-remove-action "columns">>>🏛️</$droppable>
+<$reveal default="$copy$" type="match" text="yes" tag="th" style="width:35px;" class="copy-col">
+<$droppable actions=<<droppable-add-or-remove-action "columns">>>CL</$droppable>
 </$reveal>
 </tr>
 <$set name="current" value=<<currentTiddler>>>
