@@ -1,8 +1,0 @@
-list-after: $:/core/ui/ViewTemplate/subtitle/modified
-modified: 20221218164232032
-modifier: yuzijie
-tags: $:/tags/ViewTemplate/Subtitle customized
-title: $:/core/ui/ViewTemplate/subtitle/modifier
-type: text/vnd.tiddlywiki
-
-<$link to={{!!modifier}}/>
