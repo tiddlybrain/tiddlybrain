@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20221127111815486
+modified: 20221218170440363
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -54,8 +54,8 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary"><$action
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" class="tc-btn-invisible" tooltip="Edit Configurations" tabindex="-1">⚙️</$button><br>
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="28" class="new-tiddler-input-box" placeholder="Tiddler Description" field="description"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
-<$button class="tc-btn-invisible" style="margin-left:3px;"><$macrocall $name="newDataQuickAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>{{$:/core/images/new-button}}</$button>
-<$button class="tc-btn-invisible" style="margin-left:3px;"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>{{$:/core/images/close-button}}</$button>
+<$button class="tc-btn-invisible"><$macrocall $name="newDataQuickAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>➕</$button>
+<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
 </$keyboard></p>
 <p style="margin-top:-10px;">
@@ -70,7 +70,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary"><$action
 <$button class="tc-btn-invisible" tooltip="Open Attachment Collector" tabindex="-1"><<tiddler-open tiddler:"Attachments">>✉️</$button><br>
 <$edit-text tiddler="$:/temp/newAtt" tag="input" size="28" class="new-tiddler-input-box" placeholder="Attachment Path" field="path"/>
 <$list filter="[[$:/temp/newAtt]is[tiddler]]">
-<$button class="tc-btn-invisible" style="margin-left:4px;"><$action-deletetiddler $tiddler="$:/temp/newAtt"/>{{$:/core/images/close-button}}</$button>
+<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newAtt"/>❌</$button>
 </$list>
 </p>
 <p style="margin-top:-10px;">
