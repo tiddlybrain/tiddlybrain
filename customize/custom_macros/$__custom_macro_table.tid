@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20221214134831211
+modified: 20221218204130189
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -31,26 +31,33 @@ type: text/vnd.tiddlywiki
 \end
 
 \define table-sort-option() $:/state/table/$(current)$/$(tableTitle)$
+\define table-row-selection() $:/temp/table/$(current)$/$(tableTitle)$
 \define table-subfilter() [index:$(property)$[$(index-value)$]]
 \define property-title() <$list filter="[<property>is[tiddler]]" emptyMessage=<<property>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
 
-\define table(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"default", sort-order:"sortan[]", first-col:"yes")
+\define table-check-all(rfilter) <$action-listops $tiddler=<<table-row-selection>> $field="list" $filter=<<__rfilter__>>/>
+\define table-uncheck-all() <$action-deletetiddler $tiddler=<<table-row-selection>>/>
+
+\define table(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"default", sort-order:"sortan[]", first-col:"yes", checkbox)
 <$set name="current" value=<<currentTiddler>>><$set name="is-data-table" value="no">
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
 <tr class="heading">
-<$reveal default="$first-col$" type="match" text="yes" tag="th">&#9733;</$reveal>
+<$reveal default="$first-col$" type="match" text="yes" tag="th"><$list filter="[<__checkbox__>match[yes]]" variable="NONE" emptyMessage="&#9733;">
+<$checkbox filter={{{ [list<table-row-selection>count[]] }}} checked={{{ $rfilter$ +[!has[draft.of]count[]] }}} unchecked="0" checkactions=<<table-check-all "$rfilter$ +[!has[draft.of]]">> uncheckactions=<<table-uncheck-all>> indeterminate="yes"/>
+<$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<table-row-selection>> tooltip="Copy tiddler title contains all selections">{{$:/core/images/copy-clipboard}}</$button>
+</$list></$reveal>
 <$reveal default="$rheader$" type="nomatch" text="" tag="th">$rheader$</$reveal>
 <$list filter="$cfilter$" variable="property"><th>
 <$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property-title>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property-title>> &#8645;</$button></$list>
 </th></$list>
 </tr>
 <$set name="cfilter" filter="$cfilter$"><$set name="rheader" value="$rheader$">
-<$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$rheader$" "$first-col$">></$list>""">
+<$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>""">
 <$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
 <$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]$sort-order$]" variable="index-value">
-<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$">></$list>
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>
 </$list>
-<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$">></$list>
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>
 </$tiddler></$set>
 </$list>
 </$set></$set>
@@ -58,10 +65,11 @@ type: text/vnd.tiddlywiki
 </$set></$set>
 \end
 
-\define table-row(rheader, first-col)
+\define table-row(rheader, first-col, checkbox)
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="background:#fff3c9;" emptyValue={{{ [all[current]get[color]addprefix[background:]addsuffix[;]] }}}><tr style=<<style>>>
 <$set name="fdate" filter="[{!!date}format:date[YYYY-0MM-0DD]]">
 <$reveal default="$first-col$" type="match" text="yes" tag="td"><div class="table-links">
+<$list filter="[<__checkbox__>match[yes]]" variable="NONE"><$checkbox tiddler=<<table-row-selection>> listField="list" checked=<<currentTiddler>>/></$list>
 <$reveal default="$rheader$" type="match" text="">
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible links" style="fill:#5778d8;">
 <$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>{{$:/core/images/open-window}}
@@ -143,11 +151,13 @@ type: text/vnd.tiddlywiki
   rheader:"Name of Row header"
   title:"表格 ID"
   sort-order:"排序顺序"
-  first-col:"是否显示第一列">>`
+  first-col:"是否显示第一列"
+  checkbox:"是否显示行复选框">>`
 # ''展示 Table 的行''
 #> `<<table-row
   rheader:"Name of Row header"
-  first-col:"是否显示第一列">>`
+  first-col:"是否显示第一列"
+  checkbox:"是否显示行复选框">>`
 # ''使用 table 形式编辑 Data tiddlers 的值''
 #> `<<tableE
   cfilter:"输入键值"
