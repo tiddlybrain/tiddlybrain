@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221218162812268
+modified: 20221218221907586
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -175,10 +175,13 @@ type: text/vnd.tiddlywiki
 \end
 
 \define selector(filter, caption:"{{!!caption}} [{{!!description}}]", class)
-<$list filter="[celltpl<currentTiddler>limit[1]]" emptyMessage="""<$list filter="[<value>!is[tiddler]]" emptyMessage="<<l '$(value)$' class:'normal-weight' note:'no'>>" variable="NONE">
-<$list filter="[<value>is[blank]]" emptyMessage=<<value>> variable="NONE"><$select index=<<key>> class="$class$" default="N/A">
-<option disabled>N/A</option><$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
-</$select></$list>
+<$list filter="[celltpl<currentTiddler>limit[1]]" emptyMessage="""<$list filter="[<value>is[blank]]" variable="NONE">
+<$select index=<<key>> class="$class$" default="N/A"><option disabled>N/A</option>
+<$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
+</$select>
+</$list>
+<$list filter="[<value>!is[blank]]" variable="NONE">
+<$list filter="[<value>is[tiddler]]" emptyMessage=<<value>> variable="NONE"><$macrocall $name="l" title=<<value>> class='normal-weight' note='no'/></$list>
 </$list>""">Selector</$list>
 \end
 
