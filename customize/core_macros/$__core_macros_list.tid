@@ -4,20 +4,22 @@ tags: $:/tags/Macro customized
 title: $:/core/macros/list
 type: text/vnd.tiddlywiki
 
-\define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage)
+\define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage,text)
 \whitespace trim
-<$type$ class="$class$">
-<$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
-<$subtype$><$macrocall $name="l" title={{!!title}}/></$subtype$>
+<$genesis $type=<<__type__>> class=<<__class__>>>
+<$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
+<$genesis $type=<<__subtype__>>>
+<$macrocall $name="l" title={{!!title}} text=<<__text__>> note=no date=no parent=no/>
+</$genesis>
 </$list>
-</$type$>
+</$genesis>
 \end
 
 \define list-links-draggable-drop-actions()
 <$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
-\define list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate)
+\define list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate,text)
 \whitespace trim
 <span class="tc-links-draggable-list">
 <$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
@@ -27,7 +29,7 @@ type: text/vnd.tiddlywiki
 <div class="tc-droppable-placeholder"/>
 <div>
 <$transclude tiddler="""$itemTemplate$""">
-<$macrocall $name="l" title={{!!title}} class="tc-popup-keep"/>
+<$macrocall $name="l" title={{!!title}} class="tc-popup-keep" text=<<__text__>> note=no date=no parent=no/>
 </$transclude>
 </div>
 </$droppable>

@@ -1,9 +1,0 @@
-modified: 20220614001055103
-modifier: yuzijie
-tags: $:/tags/ViewTemplate customized
-title: $:/core/ui/ViewTemplate/subtitle
-type: text/vnd.tiddlywiki
-
-<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<div class="tc-subtitle"><<subtitle>></div>
-</$reveal>

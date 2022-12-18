@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221213133525172
+modified: 20221218162812268
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -139,13 +139,6 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define subtitle()
-<$list filter="[all[current]has[date]]">date
-@@color:#9accb0;<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$macrocall $name=days-passed start={{!!date}}/>">today</$list>@@,
-</$list>
-modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}} class="normal-weight"/></$list>on <$view field="modified" format="date" template="YYYY-0MM-0DD"/>
-\end
-
 \define relationships(name, filter, direct-open:"yes")
 <$list filter="$filter$ +[limit[1]]" variable="NONE"><$set name="state" value="$:/state/relationships/$(currentTiddler)$/$name$">
 <$reveal type="match" state=<<state>> text="close" tag="div" style="padding-top:1em;">
@@ -282,8 +275,6 @@ modified <$list filter="[all[current]has[modifier]]"> by <$link to={{!!modifier}
   old:"原分隔符">>`
 # ''点击链接以后弹出 Modal 的动作''
 #> `<<modal-actions>>`
-# ''Subtitle 的时间显示''
-#> `<<subtitle>>`
 # ''展示 Tiddler 之间的关联关系''
 #> `<<relationships
   name:"关系名称"

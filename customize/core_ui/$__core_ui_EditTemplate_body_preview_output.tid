@@ -6,4 +6,9 @@ title: $:/core/ui/EditTemplate/body/preview/output
 type: text/vnd.tiddlywiki
 
 \import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!has[draft.of]]
-<$set name="tv-tiddler-preview" value="yes"><div class="tc-tiddler-body"><$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list></div></$set>
+<$set name="tv-tiddler-preview" value="yes">
+<div class="tc-tiddler-body">
+<$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]] }}} />
+</div>
+</$set>
