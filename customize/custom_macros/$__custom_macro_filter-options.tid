@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20221206132821300
+modified: 20221218183142320
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<select-value>get[text]match[*]]">Has Value</$list>
 \end
 
-\define filter-options(title, filter, uid:"1")
+\define filter-options(title, filter, uid:"1", cfilter)
 <$set name="select-state" value="$:/state/select/$(currentTiddler)$/$title$/$uid$">
 <$set name="select-value" value="$:/temp/select/$(currentTiddler)$/$title$/$uid$">
 <$set name="select-filter-style" filter="[<select-state>has[text]]" value="select-filter dark" emptyValue="select-filter">
@@ -41,7 +41,7 @@ type: text/vnd.tiddlywiki
 <$list filter="$filter$ +[get[note]each:value[]]">
 <option value=<<filter-by-note-value>> style="color:green;">Note: {{!!title}}</option>
 </$list>
-<$list filter="$filter$ +[indexes[]!is[tiddler]!match[--]each:value[]]" variable="index">
+<$list filter="$cfilter$" variable="index">
 <option value=<<filter-by-index-value>> style="color:#762597;">Index: <<index>></option>
 </$list>
 </$select>
@@ -61,16 +61,16 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define calculator-state() +[getindex[$(currentTiddler)$]$(operator)$[]]
+\define calculator-state() +[getindexParsed[$(currentTiddler)$]$(operator)$[]]
 \define calculator-result(filter) <$text text={{{ $filter$ $(search-filter)$ }}}/>
 
 \define list-filters(title, filter, cfilter)
-<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="1"/>
+<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="1" cfilter=<<__cfilter__>>/>
 <$list filter="[[$:/state/select/$(currentTiddler)$/$title$/1]has[text]] :else[[$:/state/select/$(currentTiddler)$/$title$/2]has[text]]" variable="NONE">
-<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="2"/>
+<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="2" cfilter=<<__cfilter__>>/>
 </$list>
 <$list filter="[[$:/state/select/$(currentTiddler)$/$title$/2]has[text]] :else[[$:/state/select/$(currentTiddler)$/$title$/3]has[text]]" variable="NONE">
-<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="3"/>
+<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="3" cfilter=<<__cfilter__>>/>
 </$list>
 <$list filter="[<__cfilter__>!is[blank]]" variable="NONE"><span class="calculator">
 <$select tiddler="$:/temp/calculator/$(currentTiddler)$/$title$" field="note" default='analysis'>
@@ -83,7 +83,7 @@ type: text/vnd.tiddlywiki
 </$select>
 </$list>
 <$list filter="[[$:/temp/calculator/$(currentTiddler)$/$title$]get[text]]" variable="search-filter">is
-<$macrocall $name="calculator-result" filter=<<__filter__>>/>
+<span style="border-bottom:1px dotted #ccc;padding:0 3px;"><$macrocall $name="calculator-result" filter=<<__filter__>>/></span>
 </$list>
 <$list filter="[[$:/temp/calculator/$(currentTiddler)$/$title$]is[tiddler]]">
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<currentTiddler>>/>&times;</$button>
@@ -99,7 +99,8 @@ type: text/vnd.tiddlywiki
 #> `<<filter-options
   title:"title of the list"
   filter:"filter from table or record"
-  uid:"编号, list-filters 使用">>`
+  uid:"编号, list-filters 使用"
+  cfilter:"用于 index 的下拉菜单">>`
 # ''整合三个 filter-options''
 #> `<<list-filters
   title:"title of the list"

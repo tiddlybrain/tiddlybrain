@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221218173842779
+modified: 20221218182638319
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -237,7 +237,7 @@ pre code.hljs {line-height: 23px; font-size: 14px;}
 .filter-options .select-filter {font-size: small;}
 
 /* For Macro: list-filters */
-.calculator select {border: none; border-bottom: 1px solid #ccc; font-size: small; background: transparent;}
+.calculator select {border-style: dotted; font-size: small; background: transparent;}
 
 /* For Macro: code */
 .code-macro > pre {margin: 0;}
