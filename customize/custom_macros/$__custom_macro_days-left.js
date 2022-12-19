@@ -20,6 +20,7 @@ Information about this macro
 exports.name = "days-left";
 
 exports.params = [
+    {name: "begin"},    //start date
     {name: "deadline"}  //date of the deadline
 ];
 
@@ -51,8 +52,8 @@ var dayDiff = function(first, second) {
 /*
 Run the macro
 */
-exports.run = function(deadline) {
-    var diff = dayDiff(getDate(), getDate(deadline));
+exports.run = function(begin, deadline) {
+    var diff = dayDiff(getDate(begin), getDate(deadline));
     if (diff > 5) {
         return diff + " days left";
     } else if (diff > 3) {

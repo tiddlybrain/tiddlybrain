@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221111223805631
+modified: 20221219143059056
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -96,14 +96,3 @@ type: text/vnd.tiddlywiki
 </$list></ol>
 </div>
 </$droppable>
-
-<$details summary="Do not need to be verified">
-<ol><$list filter="[has[interval]sort[date]]">
-<$set name="interval" filter="[all[current]get[interval]negate[]add[1]]" select="0">
-<$list filter="[all[current]days:date<interval>]"><li>
-<$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
-<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-</li></$list>
-</$set>
-</$list></ol>
-</$details>
