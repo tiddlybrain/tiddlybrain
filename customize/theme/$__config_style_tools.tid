@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20221220135057302
+modified: 20221226174817709
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -88,7 +88,7 @@ button.search-tool {display: inline-block; width: auto; padding: 0px 6px;}
 .single-line-record .record-drop-down .external-links button.tc-tiddlylink {width: auto;}
 
 /* For Template Task */
-table.task-info {width: 100%; font-size: small; text-align: center; table-layout: fixed;}
+table.task-info {width: 100%; font-size: small; text-align: center; table-layout: fixed; line-height: 22px;}
 
 /* For Macro: toc */
 .tc-table-of-contents li {padding-top: 0.5em;}
@@ -261,7 +261,7 @@ button.collapse-close {background: #f4f4f4; font-weight: normal;}
 .dp-container.today {background: #ffe998; flex-basis: 25%;}
 
 /* For Macro: weekly-plan */
-.dot {border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7; text-shadow: 0 1px 0 rgb(255 255 255 / 80%);}
+.dot {color: #333; border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7; text-shadow: 0 1px 0 rgb(255 255 255 / 80%);}
 
 /* For Macro: cat-filter-updater */
 .cat-filter-updater {display: flex; color: #999; font-variant: small-caps;}
@@ -269,8 +269,7 @@ button.collapse-close {background: #f4f4f4; font-weight: normal;}
 .cat-filter-updater button {padding: 0 5px; color: #999;}
 
 /* For Macro: verification-notice */
-.verification-notice {font-size: small;}
-.tc-tags-wrapper .verification-notice {vertical-align: middle;}
+button.verification-notice {background: red;}
 
 /* For Macro: tag-list */
 button.tc-tag-label.tag-list {font-size: smaller; margin: 0 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 35px; vertical-align: bottom;}
