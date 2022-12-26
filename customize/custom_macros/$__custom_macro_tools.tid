@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221218221907586
+modified: 20221226150203471
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -153,7 +153,7 @@ type: text/vnd.tiddlywiki
 
 \define verification-notice()
 <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">
-<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible verification-notice"><$action-setfield $field="last-date" $value={{!!date}}/>🔴</$button>
+<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible tc-tag-label verification-notice"><$action-setfield $field="last-date" $value={{!!date}}/>Expired</$button>
 </$list></$list>
 \end
 

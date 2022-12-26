@@ -1,15 +1,16 @@
 created: 20210516172453585
 creator: yuzijie
-footer: <$list filter="[<mTitle>has[date]]"><<verification-notice>>@@color:green;<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$macrocall $name=days-passed start={{!!date}}/>">Today</$list>@@</$list>&nbsp;&nbsp;<$list filter="[<mTitle>!is[missing]]"><$button message="tm-close-tiddler"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button> <$button><<open-in-sidebar>>SIDEBAR</$button> <$list filter="[{$:/status/IsReadOnly}!match[yes]]"><$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>EDIT</$button></$list></$list> <$button message="tm-close-tiddler">CLOSE</$button>
-modified: 20221015224956964
+footer: <$list filter="[<mTitle>has[date]]">@@color:green;<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$macrocall $name=days-passed start={{!!date}}/>">Today</$list>@@</$list>&nbsp;&nbsp;<$list filter="[<mTitle>!is[missing]]"><$button message="tm-close-tiddler"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button> <$button><<open-in-sidebar>>SIDEBAR</$button> <$list filter="[{$:/status/IsReadOnly}!match[yes]]"><$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>EDIT</$button></$list></$list> <$button message="tm-close-tiddler">CLOSE</$button>
+modified: 20221226150859911
 modifier: yuzijie
-subtitle: <$list filter="[<mTitle>!is[missing]]"><$transclude field="caption"><$view field="title"/></$transclude> <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> <<status-selector>> <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list><div style="float:right;font-size:smaller;"><$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>>{{$:/core/images/copy-clipboard}} <<mTitle>></$button></div></$list>
+subtitle: <$list filter="[<mTitle>!is[missing]]"><$transclude field="caption"><$view field="title"/></$transclude> <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> <<status-selector>> <<verification-notice>> <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list><div style="float:right;font-size:smaller;"><$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>>{{$:/core/images/copy-clipboard}} <<mTitle>></$button></div></$list>
 tags: customized
 title: $:/custom/template/normal-modal
 type: text/vnd.tiddlywiki
 
 <$tiddler tiddler=<<mTitle>>><div style="margin-top:15px;"><$let modal="yes"><<external-links>></$let></div></$tiddler>
 <div class="tc-tiddler-body"><$set name="modal" value="yes"><$list filter="[<mTitle>is[tiddler]]" emptyMessage=<<mTitle>>>
+<$list filter="[<mTitle>tag[Task]]"><<task-top>></$list>
 <$list filter="[<mTitle>!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude tiddler=<<mTitle>> mode="block"/></$list>
 <$tiddler tiddler=<<mTitle>>>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
