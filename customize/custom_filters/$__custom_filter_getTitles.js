@@ -1,5 +1,5 @@
 /*\
-title: $:/custom/filter/titles.js
+title: $:/custom/filter/getTitles.js
 type: application/javascript
 tags: customized
 module-type: filteroperator
@@ -44,7 +44,7 @@ exports.getAllIndexTitles = function(source,operator,options) {
 };
 
 exports.getAllTitles = function(source,operator,options) {
-	var results = [], result, matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g;
+	var results = [], matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g;
 	source(function(tiddler,title) {
 		if (tiddler) {
 			let content = tiddler.getFieldString("caption") + tiddler.getFieldString("description") + tiddler.getFieldString("text");
@@ -53,7 +53,7 @@ exports.getAllTitles = function(source,operator,options) {
 				matches.forEach(match => {
 					if (match !== undefined && options.wiki.tiddlerExists(match)) {
 						let caption = options.wiki.getTiddler(match).getFieldString("caption") || match;
-						result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",caption,{
+						let result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",caption,{
 							parseAsInline: true,
 							variables: {
 								currentTiddler: match
