@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20221220225538302
+modified: 20221226183952729
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -177,13 +177,7 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define priority-dot() <span class="dot" style="background-color:$(color)$;padding:2px 8px 3px;">@@color:#333;<<currentTiddler>>@@</span>
-
-\define color-palette(color, bg-color, name)
-<$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> color="$color$"/>""">
-<span class="dot" style="background-color:$bg-color$;padding:1px 8px 2px 8px;color:#333;">$name$</span>
-</$droppable>
-\end
+\define priority-dot() <span class="dot" style="background-color:$(color)$;padding:2px 8px 3px;"><$transclude field="status"><$view field="title"/></$transclude></span>
 
 \define weekly-plan(date)
 <h2 style="margin-bottom:10px;color:#666;font-weight:500;">
@@ -204,29 +198,57 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 </$list></$set>
 </div>
 <div style="border:1px solid #e0e0e0;padding:10px 20px;background:#fafafa;border-radius:7px;">
-<div style="margin:3px 0 8px 0;">
-<<color-palette color:"#ffd47d" bg-color:"#ffd47d" name:"Daily">>
-<<color-palette color:"#ffbea1" bg-color:"#ffbea1" name:"Important">>
-<<color-palette color:"#c3ffa2" bg-color:"#c3ffa2" name:"Weekly">>
-<<color-palette color:"" bg-color:"#c9fffe" name:"On Hold">>
-</div>
-<$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]!sort[color]]">
-<div style="white-space:nowrap;margin-top:5px;">
-<$set name="color" filter="[all[current]has[color]]" value={{!!color}} emptyValue="#c9fffe">
+<$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]sort[status]]">
+<div style="white-space:nowrap;margin:7px 0;">
+<$set name="color" filter="[all[current]status[Doing]]" value="#ffbea1" emptyValue="#c9fffe">
+<$set name="color" filter="[all[current]status[Stuck]]" value="#ffd47d" emptyValue=<<color>>>
+<$set name="color" filter="[all[current]status[Todo]]" value="#c3ffa2" emptyValue=<<color>>>
 <$button set="$:/temp/task-list" setTo={{!!title}} class="tc-btn-invisible"><<priority-dot>></$button>
 </$set>
-<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">{{!!caption}}
-<span style="color:green;">
+</$set>
+</$set>
+<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">{{!!caption}}<span style="color:green;">
 <$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
 - ☠️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
 </$list>
 <$list filter="[prefix[$:/task-state/]text[open]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
 - ⚔️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
 </$list>
-</span>
-</$button>
+</span></$button>
 </div>
 </$list>
+</div>
+\end
+
+\define task-top()
+<div style="position:relative;">
+<$reveal type="popup" state="$:/state/popup/task/$(currentTiddler)$" position="aboveleft" tag="div">
+<div class="record-drop-down tc-popup-keep" style="line-height:26px;padding:8px;margin:auto;transform:translateX(43%);">
+<$macrocall $name="sort-by-filter" item-filter="tag[Tasks/Journal]has:index<currentTiddler>" cat-prefix="BR/Journals/" cfilter="[[$(currentTiddler)$]]" rheader="Date"/>
+</div>
+</$reveal>
+<table class="task-info"><tbody>
+<tr><th>Start</th><th>Duration</th><th>Progress</th><th>Statistics</th><th>Finish</th></tr>
+<tr>
+<td><$view field="date" format="date" template="YYYY-0MM-0DD">
+<$button set="!!date" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">N.A.</$button>
+</$view></td>
+<td><$macrocall $name="days-passed" start={{!!date}} end={{!!finish}}/></td>
+<td><$text text={{{[all[current]percent[d]]}}}/></td>
+<td>
+<$list filter="[all[current]has[finish]]" emptyMessage=<<tasks-today>>>
+<$set name="pattern-step" value="<<[adw]\s.+>>">Total Steps: <$count filter="[{!!text}matches<pattern-step>]"/></$set>
+</$list>
+<$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible">📅</$button>
+</td>
+<td><$view field="finish" format="date" template="YYYY-0MM-0DD">
+<$button set="!!finish" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">
+<$fieldmangler><$action-sendmessage $message="tm-remove-field" $param="status"/></$fieldmangler>
+<$list filter="[all[current]has[deadline]]" emptyMessage="N.A."><$macrocall $name="days-left" deadline={{!!deadline}}/></$list>
+</$button>
+</$view></td>
+</tr>
+</tbody></table>
 </div>
 \end
 
@@ -241,3 +263,5 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 # ''用于做周计划''
 #> `<<weekly-plan
   date:"基准日期">>`
+# ''用在任务 Tiddler 的头部, 展示任务相关的信息''
+#> `<<task-top>>`
