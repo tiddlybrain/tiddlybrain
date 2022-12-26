@@ -1,7 +1,7 @@
 caption: Actions
 created: 20211009174453738
 creator: yuzijie
-modified: 20221219143059056
+modified: 20221226154131311
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -83,16 +83,13 @@ type: text/vnd.tiddlywiki
 </tbody></table>
 </$list>
 
-<$droppable actions="<$action-setfield $tiddler=<<actionTiddler>> interval=1/>" tag="div">
-<div class="tc-droppable-placeholder" style="display:block;">
-<h2 style="margin-bottom:15px;color:#666;font-weight:500;">Verification Required</h2>
-<ol><$list filter="[has[interval]sort[date]]">
-<$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
-<$list filter="[all[current]!days:date<interval>]"><li>
-<$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
-<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-</li></$list>
-</$set>
-</$list></ol>
-</div>
-</$droppable>
+<$droppable actions="<$action-setfield $tiddler=<<actionTiddler>> interval=1/>" tag="div"><div class="tc-droppable-placeholder" style="display:block;">
+<h3 style="margin-bottom:15px;color:#666;font-weight:500;">Verification Required</h3>
+<ol><$list filter="[has[interval]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
+<$list filter="[all[current]!days:date<interval>]"><li><$macrocall $name="l" title={{!!title}}/></li></$list>
+</$set></$list></ol>
+<$list filter="[has[interval]date<today>limit[1]]" variable="NONE">
+<h3 style="margin-bottom:15px;color:#666;font-weight:500;">Verified Today</h3>
+<ol><$list filter="[has[interval]date<today>]"><li><$macrocall $name="l" title={{!!title}}/></li></$list></ol>
+</$list>
+</div></$droppable>
