@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20221114235851018
+modified: 20221226233430578
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -29,8 +29,8 @@ type: text/vnd.tiddlywiki
 \define flashcard()
 <$set name="A" filter="[all[current]has[side-a]]" value={{!!side-a}} emptyValue={{!!caption}}>
 <$set name="B" filter="[all[current]has[side-b]]" value={{!!side-b}} emptyValue={{!!description}}>
-<$set name="X" filter="[{!!default}!match[B]]" value=<<A>> emptyValue=<<B>>>
-<$set name="O" filter="[{!!default}match[B]]" value=<<A>> emptyValue=<<B>>>
+<$set name="X" filter="[{!!default}match[A]]" value=<<A>> emptyValue=<<B>>>
+<$set name="O" filter="[{!!default}!match[A]]" value=<<A>> emptyValue=<<B>>>
 <$set name="color" filter="[all[current]get[belongs.to]colorize[]]" emptyValue="#29B6F6" select="0">
 <div class="tc-card" style=<<flashcard-border-style>>><div class="tc-card-content">
 <div style="font-weight:normal;margin-bottom:10px;font-size:smaller;">
