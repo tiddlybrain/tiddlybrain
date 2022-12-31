@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221226150203471
+modified: 20221231231113105
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -175,18 +175,21 @@ type: text/vnd.tiddlywiki
 \end
 
 \define selector(filter, caption:"{{!!caption}} [{{!!description}}]", class)
-<$list filter="[celltpl<currentTiddler>limit[1]]" emptyMessage="""<$list filter="[<value>is[blank]]" variable="NONE">
+<$list filter="[<current>has[celltpl]]" emptyMessage="Selector">
+<$list filter="[<value>is[blank]]" variable="NONE">
 <$select index=<<key>> class="$class$" default="N/A"><option disabled>N/A</option>
 <$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
 </$select>
 </$list>
 <$list filter="[<value>!is[blank]]" variable="NONE">
 <$list filter="[<value>is[tiddler]]" emptyMessage=<<value>> variable="NONE"><$macrocall $name="l" title=<<value>> class='normal-weight' note='no'/></$list>
-</$list>""">Selector</$list>
+</$list>
+</$list>
 \end
 
 \define multi-selector(filter, caption:"{{!!caption}} [{{!!description}}]", class)
-<$list filter="[celltpl<currentTiddler>limit[1]]" emptyMessage="""<$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
+<$list filter="[<current>has[celltpl]]" emptyMessage="Multi-Selector">
+<$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
 <$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$macrocall $name="l" title=<<datum>> class="normal-weight" note="no"/></$list>;
 </$list>
 <$reveal type="nomatch" text="show" state="$:/state/multi-selector/$(currentTiddler)$/$(key)$">
@@ -200,7 +203,8 @@ type: text/vnd.tiddlywiki
 <$select tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$" field="list" multiple class="$class$">
 <$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
 </$select>
-</$reveal>""">Multi-Selector</$list>
+</$reveal>
+</$list>
 \end
 
 \define status-selector()
