@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20221211180636287
+modified: 20230101092144450
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -21,7 +21,13 @@ type: text/vnd.tiddlywiki
 <$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>> tag="div">
 <<placeholder>>
 <div>
-<$list filter="[all[current]match{$:/HistoryList!!current-tiddler}]"><span style="position:absolute;left:-3px;">📍</span></$list>
+<$list filter="[all[current]match{$:/HistoryList!!current-tiddler}]">
+<$button style="position:absolute;left:-3px;" class="tc-btn-invisible" tag="span">📍
+<$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState="$:/state/folded/$(currentTiddler)$"/>
+<$macrocall $name="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
+<$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>
+</$button>
+</$list>
 $button$
 </div>
 </$droppable>
