@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20221218192733086
+modified: 20230101184040888
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -60,7 +60,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$"/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
-@@font-size:small;(<$count filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>/>)@@
+<$set name="links" filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$addprefix[<<l ']addsuffix['>>]join[, ]]">> select="0">
+<$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>>(<$count filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>/>)</$button>
+</$set>
 filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>>/>""" variable="NONE"><$list filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">>><<bl-item "$note$" "$date$" """$caption$""" "$description$" "$parent$">></$list></$list>
