@@ -1,7 +1,7 @@
 created: 20181212172024243
 creator: yuzijie
 list-before: $:/core/ui/SideBar/More
-modified: 20221228003151411
+modified: 20230105210824004
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -55,12 +55,12 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field="caption"/>{{$:/core/images/delete-button}}</$button>
 </$list></td>
 </tr>
-<tr>
-<td style="width:100px;">description</td><td><$edit-text field="description" class="edit-area tc-edit-texteditor"/></td>
-<td style="width:10px;"><$list filter="[all[current]has:field[description]]">
-<$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field="description"/>{{$:/core/images/delete-button}}</$button>
+<$list filter="description status" variable="field"><tr>
+<td style="width:100px;"><<field>></td><td><$edit-text field=<<field>> class="edit-area tc-edit-texteditor"/></td>
+<td style="width:10px;"><$list filter="[all[current]has:field<field>]">
+<$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field=<<field>>/>{{$:/core/images/delete-button}}</$button>
 </$list></td>
-</tr>
+</tr></$list>
 <tr>
 <td style="width:100px;padding:6px 7px;">type</td>
 <td colspan="2" style="position:relative;">
@@ -102,7 +102,7 @@ type: text/vnd.tiddlywiki
 </$edit-text></$list>
 </$set>
 <table style="width:100%;margin:0;"><tbody>
-<$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents]] shortcap note status date path url dir interval order kw" variable="fieldName"><tr>
+<$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents]] note date path url dir interval order kw shortcap" variable="fieldName"><tr>
 <td style="width:100px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
 <td style="width:10px;"><$list filter="[all[current]has:field<fieldName>]">
 <$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field=<<fieldName>>/>{{$:/core/images/delete-button}}</$button>
