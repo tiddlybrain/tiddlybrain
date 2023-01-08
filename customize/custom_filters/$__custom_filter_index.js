@@ -31,7 +31,7 @@ var getResult = function(data,options,currTiddlerTitle) {
 			},
 			parentWidget: options.widget
 		});
-	} else if(data.indexOf("<<snippet") === -1 && data.indexOf("<<bl") === -1) {
+	} else if(data.indexOf("<<snippet") === -1) {
 		return options.wiki.renderText("text/plain","text/vnd.tiddlywiki",data,{
 			parseAsInline: true,
 			variables: {
