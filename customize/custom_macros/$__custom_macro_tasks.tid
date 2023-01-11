@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230104213018852
+modified: 20230110232442400
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -192,12 +192,7 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 <$button style="font-size:small;" set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
 </$list>
 </h2>
-<div style="display:flex;margin-bottom:9px;">
-<$set name="sunday" filter="[<__date__>getSunday[]]" select="0"><$list filter="[range[0],[6]]" variable="num">
-<$set name="current-date" filter="[<sunday>nextDay<num>]" select="0"><$macrocall $name="date-pillar" date=<<current-date>> today=<<__date__>>/></$set>
-</$list></$set>
-</div>
-<div style="border:1px solid #e0e0e0;padding:10px 20px;background:#fafafa;border-radius:7px;">
+<div style="border:1px solid #e0e0e0;padding:10px 20px;background:#fafafa;border-radius:7px;margin-bottom:10px;">
 <$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]sort[status]]">
 <div style="white-space:nowrap;margin:7px 0;">
 <$set name="color" filter="[all[current]status[Doing]]" value="#ffbea1" emptyValue="#c9fffe">
@@ -217,6 +212,11 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 </span></$button>
 </div>
 </$list>
+</div>
+<div style="display:flex;">
+<$set name="sunday" filter="[<__date__>getSunday[]]" select="0"><$list filter="[range[0],[6]]" variable="num">
+<$set name="current-date" filter="[<sunday>nextDay<num>]" select="0"><$macrocall $name="date-pillar" date=<<current-date>> today=<<__date__>>/></$set>
+</$list></$set>
 </div>
 \end
 
