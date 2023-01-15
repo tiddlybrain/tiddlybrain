@@ -1,13 +1,11 @@
-created: 20230111163521450
+created: 20230114095841516
 creator: yuzijie
-key: alt+W
-modified: 20230111164159817
+key: alt+E
+modified: 20230114100032409
 modifier: yuzijie
 tags: $:/tags/KeyboardShortcut customized
 title: $:/custom/ui/KeyboardShortcuts/sidebar-editor
 type: text/vnd.tiddlywiki
 
-<$list filter="[{$:/state/sidebar}!match[yes]]" emptyMessage="<$action-setfield $tiddler='$:/state/sidebar' text='no'/>">
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-</$list>

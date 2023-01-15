@@ -1,7 +1,7 @@
 created: 20181212172024243
 creator: yuzijie
 list-before: $:/core/ui/SideBar/More
-modified: 20230107184507915
+modified: 20230115115236597
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -86,9 +86,9 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/snippet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/details"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/tips"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD r:"">>'>>/>""">D</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD r:"">>'>>/>""">A</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD r:"">>'>>/>""">W</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">D</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">A</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">W</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">S</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<now "t:YYYY0MM0DD">>/>""">t:</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<now "d:YYYY0MM0DD">>/>""">d:</$button>
@@ -103,7 +103,7 @@ type: text/vnd.tiddlywiki
 </$edit-text></$list>
 </$set>
 <table style="width:100%;margin:0;"><tbody>
-<$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents]] note date path url dir interval order kw shortcap" variable="fieldName"><tr>
+<$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] note date path url dir interval order kw shortcap" variable="fieldName"><tr>
 <td style="width:100px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
 <td style="width:10px;"><$list filter="[all[current]has:field<fieldName>]">
 <$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field=<<fieldName>>/>{{$:/core/images/delete-button}}</$button>
