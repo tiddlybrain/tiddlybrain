@@ -1,6 +1,6 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20221203202856335
+modified: 20230115175203094
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
@@ -28,6 +28,7 @@ type: text/vnd.tiddlywiki
 <$set name="previous" filter="[enlist{$:/config/index-tree!!list}nth[2]]" select="0">
 <$action-setfield $tiddler="$:/temp/index-tree" text=<<previous>>/>
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<previous>] +[putfirst[]]"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$set>
 </$button></span>
 </$list></div>
