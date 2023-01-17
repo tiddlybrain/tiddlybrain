@@ -1,9 +1,9 @@
 caption: 任务模板
 created: 20221026195223207
 creator: yuzijie
-modified: 20230106121416090
+modified: 20230117181701582
 modifier: yuzijie
-status-options: Todo Doing Waiting Review Stuck Paused
+status-options: Todo Doing Review Stuck
 tags: customized
 title: customized-template-task
 type: application/x-tiddler-dictionary

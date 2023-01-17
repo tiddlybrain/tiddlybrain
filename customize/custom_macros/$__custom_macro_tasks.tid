@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230111170631184
+modified: 20230117184511964
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -154,12 +154,6 @@ type: text/vnd.tiddlywiki
 </dl></$set>
 \end
 
-\define date-pillar-task(date)
-<$button set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible" style="background-color:$(color)$;">
-<$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/>{{!!caption}}
-</$button>
-\end
-
 \define date-pillar(date, today)
 <$set name="container-class" filter="[<__date__>match<__today__>]" value="dp-container today" emptyValue="dp-container">
 <$set name="journal-title" filter="[<__date__>format:date[YYYY-0MM-0DD]]" select="0"><$droppable actions=<<droppable-date-action>> tag="div" class=<<container-class>>>
@@ -170,9 +164,15 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/><<format-date "$date$" "ddd">>
 </$button>
 </$list></div>
-<div class="dp-content"><ol><$list filter="[<journal-title>indexes[]tag[Task]!sort[color]]"><li>
-<$set name="color" filter="[all[current]has[color]]" value={{!!color}} emptyValue="transparent"><<date-pillar-task "$date$">></$set>
-</li></$list></ol></div>
+<div class="dp-content"><ol>
+<$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]status[Doing]] [<journal-title>indexes[]tag[Task]] +[each:value[]!sort[date]]">
+<li><$set name="color" filter="[<journal-title>!has:index<currentTiddler>]" value="opacity:10%;" emptyValue="">
+<$button set="$:/temp/plan/date" setTo=<<__date__>> class="tc-btn-invisible" style=<<color>>>
+<$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/>{{!!caption}}
+</$button>
+</$set></li>
+</$list>
+</ol></div>
 </$droppable></$set>
 </$set>
 \end
@@ -193,11 +193,11 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 </$list>
 </h2>
 <div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;margin-bottom:10px;">
-<$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]sort[status]]">
+<$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]!sort[date]]">
 <div style="white-space:nowrap;margin:7px 0;">
 <$set name="color" filter="[all[current]status[Doing]]" value="#ffbea1" emptyValue="#c9fffe">
 <$set name="color" filter="[all[current]status[Stuck]]" value="#ffd47d" emptyValue=<<color>>>
-<$set name="color" filter="[all[current]status[Todo]]" value="#c3ffa2" emptyValue=<<color>>>
+<$set name="color" filter="[all[current]status[Review]]" value="#c3ffa2" emptyValue=<<color>>>
 <$button set="$:/temp/task-list" setTo={{!!title}} class="tc-btn-invisible"><<priority-dot>></$button>
 </$set>
 </$set>
