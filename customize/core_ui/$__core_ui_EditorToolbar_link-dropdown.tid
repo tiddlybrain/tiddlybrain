@@ -1,4 +1,4 @@
-modified: 20220929150037320
+modified: 20230122005534581
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -75,9 +75,9 @@ Description: {{!!description}}" description="" type="application/x-tiddler-dicti
 {{$:/core/images/new-button}}
 </$button>
 &#32;
-<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="link" unchecked="title" default="title"> Link Mode</$checkbox>
+<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="link" unchecked="title" default="title"> Link Macro</$checkbox>
 &#32;
-<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="title" unchecked="link" default="title"> Title Mode</$checkbox>
+<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="title" unchecked="link" default="title"> Title Only</$checkbox>
 </$reveal>
 </$vars>
 

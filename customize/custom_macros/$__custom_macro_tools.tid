@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20221231231113105
+modified: 20230119140049378
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -102,7 +102,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define shortcut(root:"Index", sort:"!sort[order]")
-<ol class="tc-toc toc-selective-expandable"><$list filter="[<__root__>taggingOrPrefixed[]!has[draft.of]$sort$] -[<__root__>]">
+<ol class="tc-toc toc-selective-expandable"><$list filter="[<__root__>taggingOrPrefixed[]!has[draft.of]!tag[Ignore]$sort$] -[<__root__>]">
 <$list filter="[all[current]toc-link[no]]" variable="NONE" emptyMessage=<<shortcut-linked>>>
 <$macrocall $name="shortcut-unlinked" sort=<<__sort__>>/>
 </$list>
