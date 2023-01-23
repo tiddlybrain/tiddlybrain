@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230118194448282
+modified: 20230123093851074
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -107,7 +107,7 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/waiting" field="text" checked="yes" unchecked="no" default="yes"> Waiting</$checkbox>
 <$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd>
-<$button set="!!plan" setTo={{!!date}} class="tc-btn-invisible" style="white-space:nowrap;color:red;">NO PLAN: ''{{!!caption}}''</$button>
+<$button set="!!plan" setTo=<<today>> class="tc-btn-invisible" style="white-space:nowrap;color:red;">NO PLAN: ''{{!!caption}}''</$button>
 </dd></$list>
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
