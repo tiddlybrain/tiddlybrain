@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230124144827513
+modified: 20230124165104017
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -219,7 +219,7 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 \define task-top()
 <div style="position:relative;">
 <$reveal type="popup" state="$:/state/popup/task/$(currentTiddler)$" position="aboveleft" tag="div">
-<div class="record-drop-down tc-popup-keep" style="line-height:26px;padding:8px;margin:auto;transform:translateX(40%);">
+<div class="record-drop-down tc-popup-keep" style="line-height:26px;padding:8px;margin:auto;">
 <$macrocall $name="sort-by-filter" item-filter="tag[Tasks/Journal]has:index<currentTiddler>" cat-prefix="BR/Journals/" cfilter="[[$(currentTiddler)$]]" rheader="Date"/>
 </div>
 </$reveal>

@@ -1,8 +1,8 @@
-HTML: <<snippet date:'yes'>>
-PDF: <<snippet date:'yes'>>
-MP3: <<snippet date:'yes'>>
-MP4: <<snippet date:'yes'>>
-JPG: <<snippet date:'yes'>>
-PNG: <<snippet date:'yes'>>
-SVG: <<snippet date:'yes'>>
-GIF: <<snippet date:'yes'>>
+JPG: <<snippet date:'yes' sort:'!sort[modified]'>>
+PNG: <<snippet date:'yes' sort:'!sort[modified]'>>
+SVG: <<snippet date:'yes' sort:'!sort[modified]'>>
+GIF: <<snippet date:'yes' sort:'!sort[modified]'>>
+MP3: <<snippet date:'yes' sort:'!sort[modified]'>>
+MP4: <<snippet date:'yes' sort:'!sort[modified]'>>
+HTML: <<snippet date:'yes' sort:'!sort[modified]'>>
+PDF: <<snippet date:'yes' sort:'!sort[modified]'>>

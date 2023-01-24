@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230123211159312
+modified: 20230124165825257
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -37,7 +37,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary"><$action
 
 \define newExtFileAction(template, content, type, path, note)
 <$set name="title" value=<<unusedtitle "$template$">>><$set name="uri" filter="[[$path$]prefix[http]]" value="$path$" emptyValue="./files/$path$">
-<$action-setfield $tiddler=<<title>> date=<<now YYYY0MM0DD>> belongs.to="Attachments" note="$note$" tags="Snippet Ignore" caption="$content$" type="$type$" _canonical_uri=<<uri>>/>
+<$action-setfield $tiddler=<<title>> date=<<now YYYY0MM0DD>> belongs.to="Attachments" note="$note$" tags="Snippet" caption="$content$" type="$type$" _canonical_uri=<<uri>>/>
 <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<newExtFileActionCopy>>/>
 </$set></$set>
 <$action-deletetiddler $tiddler="$:/temp/newAtt"/>
