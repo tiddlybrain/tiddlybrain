@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20221108150716605
+modified: 20230125163402917
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 <$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
 <$set name="border-color" filter="[all[current]get[color]addprefix[border-left-color:]]" emptyValue="" select="0">
 <blockquote class="tc-quote record" style=<<border-color>>><$list filter="[all[current]has[caption]]" emptyMessage=<<record-item-no-caption>>>
-<$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!code-body[yes]!is[image]then[yes]] -[[$(direct-open)$]match[yes]] -[[$(modal)$]match[yes]]" value="single-line-record" emptyValue="">
+<$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!code-body[yes]!is[image]then[yes]] -[[$(direct-open)$]match[yes]]" value="single-line-record" emptyValue="">
 <div class=<<class>>>
 <span class="left">
 <span><<links>> <<tag-list>></span>
@@ -42,7 +42,6 @@ type: text/vnd.tiddlywiki
 <$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">
 {{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
-<$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 </$button>
 </$list></span>
 <span class="right"><$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#aaa;">
@@ -68,6 +67,7 @@ type: text/vnd.tiddlywiki
 <$set name="direct-open" value="yes"><$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible record-title">
 {{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
+<$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 </$button></$set>
 <hr style="margin:0;"><<external-links>>
 <div class="record-content">
