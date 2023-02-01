@@ -3,16 +3,14 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [!is[system]!tag[Ignore]fieldInsensitive:caption<userInput>sort[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20221206134157558
+modified: 20230201002150080
 modifier: yuzijie
-second-search-filter: [!is[system]!tag[Ignore]!fieldInsensitive:caption<userInput>search:title,caption,shortcap,note,description<userInput>sort[belongs.to]limit[100]]
+second-search-filter: [!is[system]!tag[Ignore]!fieldInsensitive:caption<userInput>search:title,caption,shortcap,note,description,keywords<userInput>sort[belongs.to]limit[100]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
-<div style="text-align:center;">Choose a topic to search:</div><<root-topics>>
-
 //<small>Title matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
@@ -23,6 +21,7 @@ type: text/vnd.tiddlywiki
 </span>
 </$list>
 </$list>
+<<root-topics>>
 
 //<small>All matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>

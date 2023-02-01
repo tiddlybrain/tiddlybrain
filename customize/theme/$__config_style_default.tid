@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20230109141831261
+modified: 20230129110939525
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -36,7 +36,7 @@ dd > pre {margin: 10px 0;}
 
 pre {padding: 5px 8px 5px !important; overflow-x: auto;}
 
-code {background-color: transparent; border: none; border-radius: 0; padding: 0; font-size: 1.125em;}
+code {background-color: transparent; border: none; border-radius: 0; padding: 0;}
 
 pre > code {white-space: pre;}
 
