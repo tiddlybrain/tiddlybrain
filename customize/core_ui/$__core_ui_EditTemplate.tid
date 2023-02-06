@@ -1,4 +1,4 @@
-modified: 20230122010828630
+modified: 20230205194056630
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditTemplate
@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 <$list filter="[{!!draft.of}!is[system]]" variable="NONE">
 <$list filter="[all[current]has[belongs.to]]"><$set name="parents" filter="[{!!belongs.to}getAllParents[]]"><$action-sendmessage $message="tm-add-field" $name="parents" $value=<<parents>>/></$set></$list>
-<$action-sendmessage $message="tm-add-field" $name="keywords" $value={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sort[title]join[, ]] }}}/>
+<$action-sendmessage $message="tm-add-field" $name="keywords" $value={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}/>
 </$list>
 <<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-save-tiddler"/>

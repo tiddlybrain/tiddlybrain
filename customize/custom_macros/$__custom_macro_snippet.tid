@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20230101183809320
+modified: 20230205194017980
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 \define snippet-drop-actions(actions, tags, celltpl)
 <$list filter="[<actionTiddler>is[tiddler]!match<currentTiddler>]" variable="NONE"><$set name="parents" filter="[<currentTiddler>getAllParents[]]">
 <$vars template={{{ [<actionTiddler>split[ ]first[]] }}} caption={{{ [<actionTiddler>get[caption]] }}}>
-<$set name="keywords" filter="[<currentTiddler>getAllParentTitles[]] [<actionTiddler>getAllTitles[]] [<actionTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sort[title]join[, ]]" select="0">
+<$set name="keywords" filter="[<currentTiddler>getAllParentTitles[]] [<actionTiddler>getAllTitles[]] [<actionTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]]" select="0">
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<snippet-drop-ctrl-actions "$tags$" "$celltpl$">> variable="NONE">
 <$action-setfield $tiddler=<<actionTiddler>> $timestamp="no" belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>>/>
 <$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="Snippet $tags$" $timestamp="no"/>

@@ -1,7 +1,8 @@
 caption: 关键词
 created: 20200908201842064
 creator: yuzijie
-modified: 20221228204414371
+keywords: 
+modified: 20230205193923001
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Keywords
@@ -10,7 +11,7 @@ type: text/vnd.tiddlywiki
 <$button>Regenerate all keywords!
 <$list filter="[has[belongs.to]!tag[Comment]]">
 <$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
-<$set name="keywords" filter="[{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sort[title]join[, ]]" select="0">
+<$set name="keywords" filter="[{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]]" select="0">
 <$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE">
 <$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
 </$list>
@@ -25,7 +26,7 @@ To be updated:
 
 <$list filter="[has[belongs.to]!tag[Comment]]">
 <$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
-<$set name="keywords" filter="[{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sort[title]join[, ]]" select="0">
+<$set name="keywords" filter="[{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]]" select="0">
 <$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE">
 <$view field="title"/><br>
 </$list>
