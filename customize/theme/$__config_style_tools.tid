@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230201000235381
+modified: 20230207112037478
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 .tips, .warning, .danger {display: inline-block; border-radius: 0.2rem; padding: 0 0.75rem 0 0.55rem;}
 .tips {color: #31708f; background-color: #d9edf7; border-color: #bce8f1;}
 .tips::before {content: '💡 ';}
-.warning {color: #8a6d3b; background-color: #fcf8e3; border-color: #faebcc;}
+.warning {color: #8a6d3b; background-color: #ffef9b; border-color: #faebcc;}
 .warning::before {content: '⚠️ ';}
 .danger {color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
 .danger::before {content: '⛔ ';}
@@ -281,8 +281,8 @@ td button.tc-tag-label.tag-list {vertical-align: baseline;}
 details {padding: 0 0.5em 0 1em;}
 details[open] {border-bottom: 1px solid #eee; border-radius: 3px;}
 details[open] > *:last-child {margin-bottom: 0;}
-details > summary {padding: 0 0 0 1.1em; background: white; margin: 0 -0.5em 0 -1em;}
-details:hover > summary {background: #fff3c9; padding-left: 1.4em;}
+details > summary {padding: 0 0 0 1.1em; background: white; margin: 0 -0.5em 0 -1em; transition: padding ease-in .2s;}
+details:hover > summary {background: #fff3c9; padding-left: 1.5em;}
 details details {background: white;}
 details details > summary {background: #f8f8f8;}
 .tc-sidebar-lists details > summary {background: #f4f4f4;}
