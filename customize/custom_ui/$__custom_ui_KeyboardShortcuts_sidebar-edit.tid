@@ -1,0 +1,13 @@
+created: 20230215090932680
+creator: yuzijie
+key: ctrl-Enter
+modified: 20230215091109544
+modifier: yuzijie
+tags: $:/tags/KeyboardShortcut customized
+title: $:/custom/ui/KeyboardShortcuts/sidebar-edit
+type: text/vnd.tiddlywiki
+
+<$list filter="[[$:/state/sidebar]get[text]match[no]]" emptyMessage="<$action-setfield $tiddler='$:/state/sidebar' text='no'/>">
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+</$list>
