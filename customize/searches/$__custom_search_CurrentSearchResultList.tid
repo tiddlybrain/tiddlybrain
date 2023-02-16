@@ -3,7 +3,7 @@ created: 20221213151332719
 creator: yuzijie
 first-search-filter: [all[tiddlers]!tag[Ignore]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>subfilter<subtopic-subfilter>sortsub<topic-level>]
 list-after: $:/custom/search/TopicSearchResultList
-modified: 20221213160551234
+modified: 20230216220435330
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/CurrentSearchResultList
@@ -22,9 +22,10 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>
 </$button></small></$list>
 
-<div style="margin-bottom:5px;text-align:center;">Search within:
-__<$transclude tiddler={{$:/HistoryList!!current-tiddler}} field="caption"><$view tiddler={{$:/HistoryList!!current-tiddler}} field="title"/></$transclude>__
+<div style="text-align:center;text-decoration:underline;">Search within:
+<$transclude tiddler={{$:/HistoryList!!current-tiddler}} field="caption"><$view tiddler={{$:/HistoryList!!current-tiddler}} field="title"/></$transclude>
 </div>
+
 <$list filter="[[$:/temp/note/filter]!is[tiddler]]"><$set name="search-filter" value={{{ [<configTiddler>get[first-search-filter]] }}}><<note-filters>></$set></$list>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
