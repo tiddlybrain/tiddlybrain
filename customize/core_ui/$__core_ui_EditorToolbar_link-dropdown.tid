@@ -1,4 +1,4 @@
-modified: 20230122005534581
+modified: 20230219192002927
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -37,9 +37,10 @@ type: text/vnd.tiddlywiki
 
 \define new-link-actions(template)
 <$set name="title" value=<<unusedtitle "$template$">>><$set name="caption" filter="[<searchTiddler>get[text]]" select="0">
-<$action-createtiddler $basetitle=<<title>> date=<<now YYYY0MM0DD>> caption=<<caption>> text="Name: {{!!caption}}
-Description: {{!!description}}" description="" type="application/x-tiddler-dictionary"/>
-<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-maker>>/>
+<$action-createtiddler $basetitle=<<title>> date=<<now YYYY0MM0DD>> caption=<<caption>>/>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
+<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
+</$set>
 <$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]"/>
 <$action-navigate $to=<<title>> $scroll="no"/>
 </$set></$set>
