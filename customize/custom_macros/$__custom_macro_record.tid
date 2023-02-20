@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20230125163402917
+modified: 20230220221712268
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -83,7 +83,10 @@ type: text/vnd.tiddlywiki
 \define records(filter:"[tag<currentTiddler>]", title:"records", sort:"sortan[caption]")
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <div class="filter-options">
-filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$ +[!has[draft.of]]">>/>
+<$set name="links" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$addprefix[<<l ']addsuffix['>>]join[, ]]">> select="0">
+<$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>>(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>)</$button>
+</$set>
+filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
 </div>
 <div style="margin-top:1em;">
 <$macrocall $name="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
