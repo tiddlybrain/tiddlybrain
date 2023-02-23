@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230213211510705
+modified: 20230223111010815
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -276,7 +276,7 @@ button.verification-notice {background: red;}
 button.tc-tag-label.tag-list {font-size: smaller; margin: 0 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 35px; vertical-align: bottom;}
 .left button.tc-tag-label.tag-list {vertical-align: text-bottom;}
 cite button.tc-tag-label.tag-list {vertical-align: middle;}
-td button.tc-tag-label.tag-list {vertical-align: baseline;}
+td button.tc-tag-label.tag-list, button button.tc-tag-label.tag-list {vertical-align: baseline;}
 
 /* For Plugin: Details */
 details {padding: 0 0.5em 0 1em;}

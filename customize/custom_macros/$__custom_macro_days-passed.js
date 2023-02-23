@@ -53,19 +53,17 @@ var dayDiff = function(first, second) {
 Run the macro
 */
 exports.run = function(start, end) {
-    var diff = dayDiff(getDate(start), getDate(end));
-    if (diff < 0) {
+    var diff = dayDiff(getDate(start), getDate(end)) + 1;
+    if (diff < 1) {
 	return `@@font-weight:bold;on ${start.substring(0,4)}-${start.substring(4,6)}-${start.substring(6,8)}@@`;
-    } else if (diff == 0) {
+    } else if (diff == 1) {
         return "Today";
-    } else if (diff <= 1) {
-        return diff + " day passed";
-    } else if (diff < 3) {
-        return diff + " days passed";
-    } else if (diff < 5) {
-        return "@@color:fuchsia;" + diff + " days passed@@";
+    } else if (diff < 4) {
+        return diff + " days";
+    } else if (diff < 8) {
+        return "@@color:fuchsia;" + diff + " days@@";
     } else {
-	return "@@color:red;" + diff + " days passed@@";
+	return "@@color:red;" + diff + " days@@";
     }
 };
 
