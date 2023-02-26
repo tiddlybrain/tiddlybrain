@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230212161535017
+modified: 20230226140117450
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -43,7 +43,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>!has[category]!text[waiting]!text[deadline]contains:plan<curDate>]"><<kanban-link>></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>!text[open]!text[doing]sort[date]]"><<kanban-link>></$list>
 </$droppable>
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="Must Maybe" status="category" waiting-lane="no"/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="立即 稍后 求助" status="category" waiting-lane="no"/>
 
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
