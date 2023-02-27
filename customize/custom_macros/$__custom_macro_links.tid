@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20230211183303232
+modified: 20230227214952065
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -71,7 +71,7 @@ type: text/vnd.tiddlywiki
 </$list>
 <$action-sendmessage $message="tm-close-tiddler"/>
 </$button>
-<$list filter="[<parent>get[belongs.to]getAllParents[]]" variable="parent">&gt;
+<$list filter="[<parent>get[belongs.to]getAllParents[]]" variable="parent">&lt;
 <$button dragTiddler=<<parent>> class="tc-btn-invisible tc-tiddlylink" tooltip=<<parent>>>
 <$tiddler tiddler=<<parent>>><$transclude field="caption"><$view field="title"/></$transclude></$tiddler>
 <$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<parent>>/>" variable="NONE">

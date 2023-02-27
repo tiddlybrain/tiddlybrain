@@ -3,13 +3,13 @@ created: 20220118202607895
 creator: yuzijie
 description: Copy current tiddler as a step to the clipboard
 list-after: $:/core/ui/Buttons/fold
-modified: 20230115115949432
+modified: 20230227001540438
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/copy-as-step
 type: text/vnd.tiddlywiki
 
-\define step-template() <<d "$(content)$" "$(tiddler)$" t:$(date)$>>
+\define step-template() <<adw "$(content)$" "$(tiddler)$" t:$(date)$>>
 
 \whitespace trim
 <$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
