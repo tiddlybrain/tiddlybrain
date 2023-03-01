@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230226133524637
+modified: 20230301045649294
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -41,32 +41,32 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-\define collapse(title, tags)
+\define collapse(title, text, class, style)
 <$set name="state" value=<<qualify "$:/state/collapse/$title$">>>
-<$reveal type="nomatch" state=<<state>> text="open" tag="div">
-<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="[<__title__>] $tags$"/><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
+<$reveal type="nomatch" state=<<state>> text="open" tag="div" class=<<__class__>> style=<<__style__>>>
 <$button set=<<state>> setTo="open" dragTiddler="$title$" class="tc-btn-invisible collapse-close" tooltip=<<__title__>>>
 <$tiddler tiddler="$title$">{{$:/core/images/right-arrow}}
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 </$tiddler>
 </$button>
-</$droppable>
 </$reveal>
-<$reveal type="match" state=<<state>> text="open" tag="div">
-<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="[<__title__>] $tags$"/><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>""" tag="div">
+<$reveal type="match" state=<<state>> text="open" tag="div" class=<<__class__>> style=<<__style__>>>
 <$button dragTiddler="$title$" class="tc-btn-invisible collapse-open" tooltip=<<__title__>>><$action-deletetiddler $tiddler=<<state>>/>
 <$tiddler tiddler="$title$">{{$:/core/images/down-arrow}}
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 </$tiddler>
 </$button>
-<div style="padding-left:0.8em;">
-<$list filter="[[$title$]!type[application/x-tiddler-dictionary]]" emptyMessage="<<data-table>>"><$transclude tiddler="$title$" mode="block"/></$list>
-</div>
-</$droppable>
+<div style="padding-left:0.8em;"><$tiddler tiddler="$title$">
+<$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
+<$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
+<$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
+<$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
+</$list>
+</$tiddler></div>
 </$reveal>
 </$set>
 \end
@@ -249,7 +249,9 @@ type: text/vnd.tiddlywiki
 # ''生成一个 Collapse 组件''
 #> `<<collapse
   title:"tiddler title"
-  tags:"额外添加的 tags">>`
+  text:"重写标题的文字"
+  class:"自定义 class"
+  style:"自定义样式">>`
 # ''用父 Tiddler 的名字组成 tree 的 prefix''
 #> `<<tree-prefix-builder
   separator:"/">>`

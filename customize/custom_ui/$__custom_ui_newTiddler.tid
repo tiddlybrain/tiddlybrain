@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230220203905447
+modified: 20230301041435280
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -34,7 +34,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
-\define newExtFileActionCopy() <<l title:'$(title)$' tr:yes date:yes style:''>>
+\define newExtFileActionCopy() <<l title:'$(title)$' mode:tr date:yes style:''>>
 
 \define newExtFileAction(template, content, type, path, note)
 <$set name="title" value=<<unusedtitle "$template$">>><$set name="uri" filter="[[$path$]prefix[http]]" value="$path$" emptyValue="./files/$path$">

@@ -1,6 +1,6 @@
 created: 20211001045719765
 creator: yuzijie
-modified: 20220917100156444
+modified: 20230301050042338
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/ref
@@ -14,26 +14,26 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define ref-tag(tag, sort, mode:"tabs", tags)
+\define ref-tag(tag, sort, mode:"tabs")
 <$set name="ref-title" filter="[<__tag__>is[blank]]" value=<<currentTiddler>> emptyValue=<<__title__>>>
 <$reveal default="$mode$" type="match" text="tabs" tag="div">
 <$macrocall $name="tabs" tabsList="[tag<ref-title>$sort$]" default={{{[tag<ref-title>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </$reveal>
 <$reveal default="$mode$" type="nomatch" text="tabs" tag="div">
-<$list filter="[tag<ref-title>$sort$]"><$macrocall $name="collapse" title=<<currentTiddler>> tags=<<__tags__>>/></$list>
+<$list filter="[tag<ref-title>$sort$]"><$macrocall $name="collapse" title=<<currentTiddler>>/></$list>
 </$reveal>
 </$set>
 \end
 
 \define ref-prefix-filter() [removeprefix[$(ref-title)$]!search:title:literal[/]]
 
-\define ref-prefix(prefix, sort:"sort[title]", mode:"tabs", tags)
+\define ref-prefix(prefix, sort:"sort[title]", mode:"tabs")
 <$set name="ref-title" filter="[<__prefix__>is[blank]]" value="$(currentTiddler)$/" emptyValue=<<__prefix__>>>
 <$reveal default="$mode$" type="match" text="tabs" tag="div">
 <$macrocall $name="tabs" tabsList="[prefix<ref-title>filter<ref-prefix-filter>$sort$]" default={{{[prefix<ref-title>filter<ref-prefix-filter>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </$reveal>
 <$reveal default="$mode$" type="nomatch" text="tabs" tag="div">
-<$list filter="[prefix<ref-title>filter<ref-prefix-filter>$sort$]"><$macrocall $name="collapse" title=<<currentTiddler>> tags=<<__tags__>>/></$list>
+<$list filter="[prefix<ref-title>filter<ref-prefix-filter>$sort$]"><$macrocall $name="collapse" title=<<currentTiddler>>/></$list>
 </$reveal>
 </$set>
 \end
@@ -58,14 +58,12 @@ type: text/vnd.tiddlywiki
 #> `<<ref-tag
   tag:"标签"
   sort:"排序"
-  mode:"显示模式"
-  tags:"额外添加的 tags">>`
+  mode:"显示模式">>`
 # ''所有以当前 Tiddler 为 prefix 的 tiddlers''
 #> `<<ref-prefix
   prefix:"前缀名"
   sort:"排序"
-  mode:"显示模式"
-  tags:"额外添加的 tags">>`
+  mode:"显示模式">>`
 # ''所有当前 Tiddler 的 list field 的 tiddlers''
 #> `<<ref-list
   title:"指向一个 Tiddler 或者当前 Tiddler"
