@@ -1,4 +1,4 @@
-modified: 20220428203337297
+modified: 20230304194938946
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/TagTemplate
@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 <$transclude tiddler=<<listItem>>/> 
 </$list>
 <hr>
-<$macrocall $name="list-tagged-draggable" tag=<<currentTiddler>> subFilter="sortan[caption]"/>
+<$macrocall $name="list-tagged-draggable" tag=<<currentTiddler>> subFilter="sortan[caption]limit[150]"/>
 </$reveal>
 </$set>
 </span>
