@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20230301045018854
+modified: 20230305195823641
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -53,7 +53,7 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"8", note:"yes", description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox)
+\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"8", note:"yes", description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order)
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
@@ -66,7 +66,7 @@ type: text/vnd.tiddlywiki
 </$set>
 filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
-<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>>/>""" variable="NONE"><$list filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">>><<bl-item "$note$" "$date$" """$caption$""" "$description$" "$parent$">></$list></$list>
+<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE"><$list filter=<<filter-build "[$item-filter$!belongs.to<current>search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">>><<bl-item "$note$" "$date$" """$caption$""" "$description$" "$parent$">></$list></$list>
 <$list filter="[<bl-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item" style="margin:-3px 0 3px 0;">
 <$button class="tc-btn-invisible fold-text">-- <<limit>> of <<bl-qty>> shown --
 <$list filter="[<bl-limit-state '$uid$'>is[missing]]" emptyMessage="<$action-deletetiddler $tiddler=<<bl-limit-state '$uid$'>>/>">
@@ -82,17 +82,17 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 </$set></$set>
 \end
 
-\define bl(item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]$item-filter$" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>>/>
+\define bl(item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]$item-filter$" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 
-\define bl-topic(topic, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]$item-filter$" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>>/>
+\define bl-topic(topic, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order) <$macrocall $name="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]$item-filter$" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 
-\define bl-tag(tag, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]$item-filter$" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>>/>
+\define bl-tag(tag, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order) <$macrocall $name="bl-filter" item-filter="[$tag$]tagging[]$item-filter$" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 
 \define bl-note-filter(item-filter) note[$(note)$]!is[current]$item-filter$
 
-\define bl-note(note, item-filter, sort, cfilter, rheader, limit, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox)
+\define bl-note(note, item-filter, sort, cfilter, rheader, limit, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order)
 <$set name="note" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
-<$macrocall $name="bl-filter" item-filter=<<bl-note-filter """$item-filter$""">> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note="no" description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>>/>
+<$macrocall $name="bl-filter" item-filter=<<bl-note-filter """$item-filter$""">> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note="no" description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </$set>
 \end
 
@@ -125,7 +125,8 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   cat-prefix:"Category 的前缀"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
-  checkbox:"table 模式下是否显示复选框">>`
+  checkbox:"table 模式下是否显示复选框"
+  sort-order:"Table 按照列排序的顺序">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl
   item-filter:"额外筛选条件"
@@ -142,7 +143,8 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   cat-prefix:"Category 的前缀"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
-  checkbox:"table 模式下是否显示复选框">>`
+  checkbox:"table 模式下是否显示复选框"
+  sort-order:"Table 按照列排序的顺序">>`
 # ''反查指向当前 Tiddler 且属于某个 topic 的所有 Tiddlers''
 #> `<<bl-topic
   topic:"主题"
@@ -160,7 +162,8 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   cat-prefix:"Category 的前缀"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
-  checkbox:"table 模式下是否显示复选框">>`
+  checkbox:"table 模式下是否显示复选框"
+  sort-order:"Table 按照列排序的顺序">>`
 # ''反查指向当前 Tiddler 且标记了某个 tag 的所有 Tiddlers''
 #> `<<bl-tag
   tag:"标签"
@@ -178,7 +181,8 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   cat-prefix:"Category 的前缀"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
-  checkbox:"table 模式下是否显示复选框">>`
+  checkbox:"table 模式下是否显示复选框"
+  sort-order:"Table 按照列排序的顺序">>`
 # ''反查指向当前 Tiddler 且相同 note 的所有 Tiddlers''
 #> `<<bl-note
   note:"角色"
@@ -195,4 +199,5 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   cat-prefix:"Category 的前缀"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
-  checkbox:"table 模式下是否显示复选框">>`
+  checkbox:"table 模式下是否显示复选框"
+  sort-order:"Table 按照列排序的顺序">>`

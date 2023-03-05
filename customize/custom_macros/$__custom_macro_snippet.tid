@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20230215194931668
+modified: 20230305200051140
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -40,14 +40,14 @@ type: text/vnd.tiddlywiki
 \define snippet-limit-state() $:/state/snippet-limit/$(current)$/$(key)$
 \define snippet-accordion-state() $:/state/snippet-accordion/$(current)$/$(key)$/$(currentTiddler)$
 
-\define snippet-content(date, sort, limit, caption, cfilter, rheader, no-drop, has-filter, checkbox)
+\define snippet-content(date, sort, limit, caption, cfilter, rheader, no-drop, has-filter, checkbox, sort-order)
 <$list filter="[<snippet-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 <$set name="links" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$addprefix[<<l ']addsuffix['>>]join[, ]]">> select="0">
 <$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">>>(<$count filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">>/>)</$button>
 </$set>
 filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
-<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>>/>""" variable="NONE">
+<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
 <$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]">@@color:red;Drop Tiddler Here@@</$list>"""><div class="snippet">
 <$button class="tc-btn-invisible links" style="fill:#5778d8;font-size:small;">
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}<$action-deletetiddler $tiddler=<<snippet-accordion-state>>/>" variable="NONE">{{$:/core/images/right-arrow}}<$list filter="[<direct-open>!match[yes]]" emptyMessage=<<open-in-sidebar>> variable="NONE"><$action-setfield $tiddler=<<snippet-accordion-state>> text="open"/></$list></$list>
@@ -85,7 +85,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </div></$list>
 \end
 
-\define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, rheader, actions, tags, no-drop, cat-prefix, cat-filter, tag-caption, has-filter, celltpl, checkbox)
+\define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, rheader, actions, tags, no-drop, cat-prefix, cat-filter, tag-caption, has-filter, celltpl, checkbox, sort-order)
 <$vars key={{{ [[$key$]!is[blank]else<key>!is[blank]else{!!note}] }}} current=<<currentTiddler>>>
 <$droppable actions=<<snippet-drop-actions """$actions$""" """$tags$""" "$celltpl$">> tag="div" class="snippet-container">
 <div class="tc-droppable-placeholder" style="display:block;">
@@ -115,7 +115,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
 <$set name="snippet-qty" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$count[]]">> select="0">
 <$set name="limit" filter="[<snippet-limit-state>get[text]]" emptyValue=<<__limit__>> select="0">
-<$macrocall $name="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> no-drop=<<__no-drop__>> has-filter=<<__has-filter__>> checkbox=<<__checkbox__>>/>
+<$macrocall $name="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> no-drop=<<__no-drop__>> has-filter=<<__has-filter__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </$set>
 </$set>
 </$vars>
@@ -145,7 +145,8 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
   rheader:"如果是 Table 模式可以选填"
   no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here"
   has-filter:"是否显示 filter"
-  checkbox:"table 模式下是否显示复选框">>`
+  checkbox:"table 模式下是否显示复选框"
+  sort-order:"Table 按照列排序的顺序">>`
 # ''创建一个新的 Snippet 或查看已创建的 Snippet''
 #> `<<snippet
   key:"index key"
@@ -163,4 +164,5 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
   tag-caption:"tag 的 caption"
   has-filter:"是否显示 filter"
   celltpl:"设置 Snippet 的模板"
-  checkbox:"table 模式下是否显示复选框">>`
+  checkbox:"table 模式下是否显示复选框"
+  sort-order:"Table 按照列排序的顺序">>`

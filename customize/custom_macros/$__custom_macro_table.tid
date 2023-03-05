@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20230220225158279
+modified: 20230305193914214
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -164,7 +164,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
   rfilter:"[tag<currentTiddler>] 行标题过滤"
   rheader:"Name of Row header"
   title:"表格 ID"
-  sort-order:"排序顺序"
+  sort-order:"按照列排序的顺序"
   first-col:"是否显示第一列"
   checkbox:"是否显示行复选框">>`
 # ''展示 Table 的行''
@@ -180,7 +180,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
   title:"表格 ID"
   fields:"新建词条的时候自定义的字段"
   tag:"给新 Tiddler 添加额外的 tag"
-  sort-order:"排序顺序">>`
+  sort-order:"按照列排序的顺序">>`
 # ''tableE 的行''
 #> `<<table-row-edit>>`
 # ''如果 cell 里面没有值, 则按照内容来填充 cell''
@@ -192,6 +192,6 @@ content:"cell 的内容">>`
   rfilter:"[tag<currentTiddler>] 行标题过滤"
   rheader:"Name of Row header"
   title:"表格 ID"
-  sort-order:"排序顺序"
+  sort-order:"按照列排序的顺序"
   first-col:"是否显示第一列"
   checkbox:"是否显示行复选框">>`
