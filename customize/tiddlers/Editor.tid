@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230227224206910
+modified: 20230306185133909
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -11,16 +11,6 @@ type: text/vnd.tiddlywiki
 \define editor-tab() <$macrocall $name="tabs" tabsList="[tag[Editor]!has[draft.of]]" default="Editor/Keywords" state="$:/state/tab/editor"/>
 \define editor-caption-status() $:/state/editor/caption/$(currentTiddler)$
 \define editor-caption-inputActions() <$list filter="[<editor-caption-status>tags[]]"><$action-setfield $tiddler=<<currentTiddler>> caption=<<actionValue>>/></$list>
-
-\define editor-tag-button()
-\whitespace trim
-<$list filter="[all[current]type[text/vnd.tiddlywiki]!search:title:literal[/]!tag[Ignore]!list[$(current)$!!tags]]"><div style="margin:10px;">
-<$button dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible tc-tag-label" style="background:#5687b9;">
-<$action-listops $tiddler=<<current>> $field="tags" $subfilter="[<currentTiddler>]"/>
-<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
-</$button>
-</div></$list>
-\end
 
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
 <$set name="draft" filter="[[$:/temp/Draft]get[draft]]" emptyValue={{$:/HistoryList!!current-tiddler}} select="0">
@@ -77,12 +67,6 @@ type: text/vnd.tiddlywiki
 <td colspan="2" style="position:relative;">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>&nbsp;
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
-<$list filter="[{$:/HistoryList!!current-tiddler}is[tiddler]]" variable="current">
-<$button popup="$:/state/popup/collector" style="margin-left:10px;">Find a collector</$button>
-<$reveal type="popup" state="$:/state/popup/collector"><div class="record-drop-down tc-popup-keep" style="min-width:100px;">
-<$list filter={{$:/core/Filters/AllTags!!filter}}><<editor-tag-button>></$list>
-</div></$reveal>
-</$list>
 <$list filter="[{$:/HistoryList!!current-tiddler}is[tiddler]!tag[Task]]"><$fieldmangler>
 <$button set="!!celltpl" setTo="customized-template-task" message="tm-add-tag" param="Task" style="margin-left:10px;">To Task</$button>
 </$fieldmangler></$list>
