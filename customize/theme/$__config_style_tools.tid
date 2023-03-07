@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230307084329223
+modified: 20230307101955067
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -215,6 +215,7 @@ table.data-table .data-splitter {text-align: center; font-weight: bold; backgrou
 .l img {border: 1px dashed #ccc; border-radius: 0.2rem;}
 .l code {color: #5778d8;}
 button.l {line-height: inherit;}
+.tc-sidebar-lists button.l {color: #5778d8;}
 
 /* For Macro: links */
 a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
@@ -282,8 +283,8 @@ td button.tc-tag-label.tag-list, button button.tc-tag-label.tag-list {vertical-a
 details {padding: 0 0.5em 0 1em;}
 details[open] {border-bottom: 1px solid #eee; border-radius: 3px;}
 details[open] > *:last-child {margin-bottom: 0;}
-details > summary {padding: 0 0 0 1.1em; background: white; margin: 0 -0.5em 0 -1em; transition: padding ease-in .2s;}
-details:hover > summary {background: #f8f8f8; padding-left: 1.5em;}
+details > summary {padding: 0 0 0 1.1em; background: white; margin: 0 -0.5em 0 -1em; transition: padding ease-in .1s;}
+details:hover > summary {background: #f8f8f8; padding-left: 1.3em;}
 details details {background: white;}
 details details > summary {background: #f8f8f8;}
 .tc-sidebar-lists details > summary {background: #f4f4f4;}
