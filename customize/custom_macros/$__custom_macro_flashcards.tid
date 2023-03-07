@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20221226233430578
+modified: 20230307085519834
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -40,8 +40,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]get[parents]enlist-input[]first[]]">
 <$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$list>
+<$list filter="[all[current]has[note]]">@@display:inline-block;color:green;[{{!!note}}]@@</$list>
 </div>
-<$button class="tc-btn-invisible" dragTiddler=<<currentTiddler>>>
+<$button class="tc-btn-invisible" dragTiddler=<<currentTiddler>> style="font-size:larger;text-align:center;">
 <$list filter="[<flashcard-state>is[tiddler]]" emptyMessage="""<$action-setfield $tiddler=<<flashcard-state>> text="show"/><<X>>""" variable="NONE">
 <$action-deletetiddler $tiddler=<<flashcard-state>>/><<O>>
 </$list>
