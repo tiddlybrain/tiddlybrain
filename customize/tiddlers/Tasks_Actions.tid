@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230226140117450
+modified: 20230308165312759
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 <$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
 
-<div style="text-align:center;">
+<div style="text-align:center;margin-bottom:10px;">
 <$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible">{{$:/core/images/chevron-left}}</$button>
 </$set>
@@ -40,10 +40,12 @@ type: text/vnd.tiddlywiki
 </div>
 
 <$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="div">
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>!has[category]!text[waiting]!text[deadline]contains:plan<curDate>]"><<kanban-link>></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>!text[open]!text[doing]sort[date]]"><<kanban-link>></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]!has[category]contains:plan<curDate>]"><<kanban-link>></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]!has[category]!pause<curDate>sort[date]]"><<kanban-link>></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]contains:plan<curDate>]"><<kanban-link>></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[waiting]sort[date]]"><<kanban-link>></$list>
 </$droppable>
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="立即 稍后 求助" status="category" waiting-lane="no"/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="立即 稍后 求助" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
 
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
@@ -57,21 +59,22 @@ type: text/vnd.tiddlywiki
 <h2><$button to=<<journal-title>> class="tc-btn-invisible" style="font-weight:500;">Review (<$transclude tiddler=<<journal-title>> field="caption"/>)</$button></h2>
 <table style="width:100%;white-space:nowrap;background:white;"><tbody>
 <tr><th>规划任务</th><th>执行情况</th></tr>
-<$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:28px;">
+<$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:28px;"><$set name="currTask" value=<<task>>>
 <td><$button to=<<task>> class="tc-btn-invisible">
 @@color:#d300cc;<$transclude tiddler=<<task>> field="title"/>@@ <$transclude tiddler=<<task>> field="caption"/>
 </$button></td>
-<td><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]">
+<td><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
 <$button class="tc-btn-invisible">&times;
-<$macrocall $name="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
+<$action-setfield $tiddler=<<task-state>> pause=""/>
+<$macrocall $name="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>
 </$button>
-<$set name="style" filter="[[$:/task-state]] [<task>] [<currentTiddler>] +[join[/]is[tiddler]]" value="color:brown;" emptyValue="color:#444;">
-<$button message="tm-copy-to-clipboard" param=<<currentTiddler>> style=<<style>> class="tc-btn-invisible">
-<$action-sendmessage $message="tm-edit-tiddler" $param=<<task>>/><<currentTiddler>>
+<$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;">
+<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible">
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<task>>/><<currStep>>
 </$button>
 </$set><br>
 </$list></td>
-</tr></$list>
+</$set></tr></$list>
 </tbody></table>
 <<data-table filter:"[all[current]indexes[]!tag[Task]]">>
 </$list>

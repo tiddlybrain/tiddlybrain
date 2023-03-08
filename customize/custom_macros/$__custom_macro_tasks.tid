@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230124165104017
+modified: 20230308162955171
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -40,10 +40,12 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
 </$button>
-<$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Pause">{{$:/core/images/timestamp-off}}
-<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
+<$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Pause" set="!!category" setTo="">{{$:/core/images/timestamp-off}}
+<$action-setfield $tiddler=<<currentTiddler>> pause=<<today>>/>
+<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>
+<$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
 </$button></$list>
-<$list filter="[<dt>!match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Cancel">{{$:/core/images/cancel-button}}
+<$list filter="[<dt>!match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Cancel" set="!!category" setTo="">{{$:/core/images/cancel-button}}
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>
 </$button></$list>
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:green;" message="tm-copy-to-clipboard" param={{!!caption}}>
