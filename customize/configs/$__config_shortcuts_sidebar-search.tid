@@ -1,9 +1,9 @@
 created: 20221211185758235
 creator: yuzijie
-modified: 20230111163138207
+modified: 20230308004613024
 modifier: yuzijie
 tags: customized
 title: $:/config/shortcuts/sidebar-search
 type: text/vnd.tiddlywiki
 
-ctrl-shift-F alt-S
+ctrl-shift-F ctrl-L
