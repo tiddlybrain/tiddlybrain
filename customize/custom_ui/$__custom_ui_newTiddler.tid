@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230301041435280
+modified: 20230309202631415
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -13,7 +13,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 \end
 
 \define newQuickAction(template, content, description)
-<$action-createtiddler $basetitle="$template$" date=<<now YYYY0MM0DD>> caption=<<__content__>> description=<<__description__>>>
+<$action-createtiddler $basetitle="$template$" date=<<now YYYY0MM0DD>> caption=<<__content__>> description=<<__description__>> type="text/vnd.tiddlywiki">
 <$action-navigate $to=<<createTiddler-title>> $scroll="no"/>
 </$action-createtiddler>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>

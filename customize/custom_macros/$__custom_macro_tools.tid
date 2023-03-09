@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230308090029772
+modified: 20230309202125591
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -188,9 +188,12 @@ type: text/vnd.tiddlywiki
 \end
 
 \define multi-selector(filter:"[belongs.to{!!belongs.to}note{!!note}getindex<key>splitregexp[\s*;;\s*]unique[]]", caption:"{{!!caption}} [{{!!description}}]", class)
+\whitespace trim
 <$list filter="[<current>has[celltpl]]" emptyMessage="To select">
 <$list filter="[<value>!is[blank]]"><$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
-<$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$macrocall $name="l" title=<<datum>> class="normal-weight" note="no"/></$list>&nbsp;
+<span style="border-bottom:1px solid #78bb4e;margin-right:5px;">
+<$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$macrocall $name="l" title=<<datum>> class="normal-weight" note="no"/></$list>
+</span>
 </$list></$list>
 <$list filter="[<value>is[blank]]" variable="NONE">
 <$reveal type="nomatch" text="show" state="$:/state/multi-selector/$(currentTiddler)$/$(key)$">
