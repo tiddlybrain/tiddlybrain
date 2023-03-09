@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230308162955171
+modified: 20230309083723035
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -191,7 +191,7 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 </$list>
 </h2>
 <div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;margin-bottom:10px;">
-<$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]!sort[date]]">
+<$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]sort[status]]">
 <div style="white-space:nowrap;margin:7px 0;">
 <$set name="color" filter="[all[current]status[Doing]]" value="#ffbea1" emptyValue="#c9fffe">
 <$set name="color" filter="[all[current]status[Stuck]]" value="#ffd47d" emptyValue=<<color>>>
