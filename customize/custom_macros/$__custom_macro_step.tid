@@ -1,13 +1,22 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20221102101233933
+modified: 20230311102436771
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
 type: text/vnd.tiddlywiki
 
 \define task-state() $:/task-state/$(currTask)$/$(currStep)$
+\define date-dropdown-state(step) $:/state/date-dropdown/$step$
 \define date-pattern() ^20[0-9]{2}[01][0-9]{3}$
+
+\define date-dropdown(step)
+<$reveal type="popup" state=<<date-dropdown-state "$step$">>><div class="record-drop-down tc-popup-keep"><div class="record-content">
+<$set name="key" value=<<currentTiddler>>><$vars date-filter="[getindex<key>splitregexp[\s*;;\s*]match[$step$]]">
+<$list filter="[tag[Tasks/Journal]filter<date-filter>]"><div><$macrocall $name="l" title=<<currentTiddler>>/></div></$list>
+</$vars></$set>
+</div></div></$reveal>
+\end
 
 \define linkIfExists(text,comments)
 <$reveal default="$comments$" type="match" text="">$text$</$reveal>
@@ -60,10 +69,11 @@ type: text/vnd.tiddlywiki
 
 \define step-done(step,comments,t,d)
 <span style="color:#555;"><<linkIfExists "$step$" "$comments$">></span> @@color:green;&#10003;@@
-<$set name="taskName" value={{!!caption}}><$set name="today" value=<<now "YYYY0MM0DD">>><$list filter="[[$d$]regexp<date-pattern>]">
-<$button class="tc-btn-invisible" style="font-size:smaller;color:#555;" tooltip=<<format-t>> message="tm-copy-to-clipboard" param="$step$">
-(<<format-date "$d$" "YYYY-0MM-0DD ddd">>) <$reveal default="$t$" type="lt" text="$d$"><$macrocall $name="days-passed" start="$t$" end="$d$"/></$reveal>
-</$button>
+<$set name="taskName" value={{!!caption}}><$set name="today" value=<<now "YYYY0MM0DD">>><$list filter="[[$d$]regexp<date-pattern>]" variable="NONE">
+<$reveal default="$t$" type="lt" text="$d$">
+<$button class="tc-btn-invisible" style="font-size:smaller;" popup=<<date-dropdown-state "$step$">>><$macrocall $name="days-passed" start="$t$" end="$d$"/></$button><<date-dropdown "$step$">>
+</$reveal>
+<$button class="tc-btn-invisible" style="font-size:smaller;color:#555;" tooltip=<<format-t>> message="tm-copy-to-clipboard" param="$step$">(<<format-date "$d$" "YYYY-0MM-0DD ddd">>)</$button>
 <$list filter="[<task-state>has[title]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 </$list></$set></$set>
 \end
@@ -115,9 +125,10 @@ type: text/vnd.tiddlywiki
 
 \define waiting-done(step,comments,t,d,color:"#009dd9",duration)
 <span style="color:#555;"><<linkIfExists "$step$" "$comments$">></span> @@color:$color$;&#10003;@@
-<$button class="tc-btn-invisible" style="font-size:smaller;color:#555;" tooltip=<<format-t>> message="tm-copy-to-clipboard" param="$step$">
-<$reveal default="$duration$" type="match" text="yes"><$reveal default="$t$" type="lt" text="$d$"><$macrocall $name="days-passed" start="$t$" end="$d$"/></$reveal></$reveal> (<<format-date "$d$" "YYYY-0MM-0DD ddd">>)
-</$button>
+<$reveal default="$duration$" type="match" text="yes"><$reveal default="$t$" type="lt" text="$d$">
+<$button class="tc-btn-invisible" style="font-size:smaller;" popup=<<date-dropdown-state "$step$">>><$macrocall $name="days-passed" start="$t$" end="$d$"/></$button><<date-dropdown "$step$">>
+</$reveal></$reveal>
+<$button class="tc-btn-invisible" style="font-size:smaller;color:#555;" tooltip=<<format-t>> message="tm-copy-to-clipboard" param="$step$">(<<format-date "$d$" "YYYY-0MM-0DD ddd">>)</$button>
 <$list filter="[<task-state>has[title]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 \end
 
