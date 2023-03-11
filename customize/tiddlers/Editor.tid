@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230307101308265
+modified: 20230311110945385
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -92,6 +92,7 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/snippet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/details"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/tips"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/pagenum"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">D</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">A</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">W</$button>
