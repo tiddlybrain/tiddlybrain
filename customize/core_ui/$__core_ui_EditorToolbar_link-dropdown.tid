@@ -1,4 +1,4 @@
-modified: 20230309202735905
+modified: 20230311080738115
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -25,13 +25,6 @@ type: text/vnd.tiddlywiki
 \end
 
 \define cancel-search-actions() <$list filter="[<storeTitle>!has[text]] +[<searchTiddler>!has[text]]" emptyMessage="<<cancel-search-actions-inner>>"><$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/></$list>
-
-\define external-link()
-\whitespace trim
-<$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-3px);" actions=<<add-link-actions>>>
-{{$:/core/images/chevron-right}}
-</$button>
-\end
 
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<nextTab>>/>"/>
 
@@ -64,16 +57,14 @@ type: text/vnd.tiddlywiki
 </$keyboard>
 &#32;
 <$reveal tag="span" state=<<storeTitle>> type="nomatch" text="">
-<<external-link>>
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-3px);">
+<$macrocall $name="new-link-actions" template={{$:/config/defaultTemplate}}/>
+{{$:/core/images/new-button}}
+</$button>
 &#32;
 <$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-3px);">
 <<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
 {{$:/core/images/close-button}}
-</$button>
-&#32;
-<$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-3px);">
-<$macrocall $name="new-link-actions" template={{$:/config/defaultTemplate}}/>
-{{$:/core/images/new-button}}
 </$button>
 &#32;
 <$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="link" unchecked="title" default="title"> Link Macro</$checkbox>
