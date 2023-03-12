@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20230305200051140
+modified: 20230312114201056
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -53,15 +53,14 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}<$action-deletetiddler $tiddler=<<snippet-accordion-state>>/>" variable="NONE">{{$:/core/images/right-arrow}}<$list filter="[<direct-open>!match[yes]]" emptyMessage=<<open-in-sidebar>> variable="NONE"><$action-setfield $tiddler=<<snippet-accordion-state>> text="open"/></$list></$list>
 </$button>
 <<links>>
-<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
+<$set name="direct-open" value="yes"><$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[<__caption__>!is[blank]]" variable="NONE" emptyMessage="<$transclude field='caption'><$transclude field='text' mode='inline'/></$transclude>"><<__caption__>></$list>
 <$reveal default="$date$" type="match" text="yes" style="color:#aaa;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
 </$reveal>
-<<tag-list>>
-<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
-</$button>
+<<tag-list>> <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$button></$set>
 <$reveal type="match" state=<<snippet-accordion-state>> text="open" tag="div" class="snippet-accordion"><$set name="key" value="">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table copy:no>>>
