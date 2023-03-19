@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20230312114201056
+modified: 20230319155540283
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -37,6 +37,15 @@ type: text/vnd.tiddlywiki
 </$set></$list>
 \end
 
+\define snippet-modal-actions()
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$action-navigate/>" variable="NONE">
+<$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/></$list>
+</$list>
+<$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
+</$list>
+\end
+
 \define snippet-limit-state() $:/state/snippet-limit/$(current)$/$(key)$
 \define snippet-accordion-state() $:/state/snippet-accordion/$(current)$/$(key)$/$(currentTiddler)$
 
@@ -53,14 +62,14 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}<$action-deletetiddler $tiddler=<<snippet-accordion-state>>/>" variable="NONE">{{$:/core/images/right-arrow}}<$list filter="[<direct-open>!match[yes]]" emptyMessage=<<open-in-sidebar>> variable="NONE"><$action-setfield $tiddler=<<snippet-accordion-state>> text="open"/></$list></$list>
 </$button>
 <<links>>
-<$set name="direct-open" value="yes"><$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
+<$button actions=<<snippet-modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[<__caption__>!is[blank]]" variable="NONE" emptyMessage="<$transclude field='caption'><$transclude field='text' mode='inline'/></$transclude>"><<__caption__>></$list>
 <$reveal default="$date$" type="match" text="yes" style="color:#aaa;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
 </$reveal>
 <<tag-list>> <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
-</$button></$set>
+</$button>
 <$reveal type="match" state=<<snippet-accordion-state>> text="open" tag="div" class="snippet-accordion"><$set name="key" value="">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table copy:no>>>
@@ -134,6 +143,8 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
   actions:"Tiddler 被放置时的额外动作"
   tags:"为 ActionTiddler 添加的额外标签"
   celltpl:"Snippet 的模板">>`
+# ''点击 snippet 条目以后, 出发的动作''
+#> `<<snippet-modal-actions>>`
 # ''Snippet 的条目''
 #> `<<snippet-content
   date:"日期 yes/no"
