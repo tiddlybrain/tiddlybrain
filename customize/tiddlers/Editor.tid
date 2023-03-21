@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230311110945385
+modified: 20230321060306629
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -12,43 +12,7 @@ type: text/vnd.tiddlywiki
 \define editor-caption-status() $:/state/editor/caption/$(currentTiddler)$
 \define editor-caption-inputActions() <$list filter="[<editor-caption-status>tags[]]"><$action-setfield $tiddler=<<currentTiddler>> caption=<<actionValue>>/></$list>
 
-\define editor-display()
-<$tiddler tiddler=<<draft>>><div class="editor-display">
-<$transclude tiddler="$:/core/ui/ViewTemplate/tags"/>
-<$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
-<$transclude tiddler="$:/core/ui/ViewTemplate/body"/>
-</div></$tiddler>
-\end
-
-<$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
-<$set name="draft" filter="[[$:/temp/Draft]get[draft]]" emptyValue={{$:/HistoryList!!current-tiddler}} select="0">
-<$reveal type="nomatch" state="$:/state/editor-toolbar" text="show" tag="div">
-<$droppable actions="""<$action-setfield $tiddler="$:/temp/Draft" draft=<<actionTiddler>>/>""" tag="div">
-<div class="tc-droppable-placeholder" style="display:block;">
-<$button set="$:/state/editor-toolbar" setTo="show">Toolbar</$button>
-<$button to="$:/Draft"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft</$button>
-<$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button style="color:green;">
-<$tiddler tiddler=<<draft>>>{{!!title}} - {{!!caption}}</$tiddler>
-<$action-sendmessage $message="tm-edit-tiddler" $param=<<draft>>/>
-</$button>
-<$button>{{$:/core/images/cancel-button}}
-<$macrocall $name="tiddler-close" tiddler=<<draft>>/>
-<$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]">
-<$action-setfield $tiddler="$:/HistoryList" current-tiddler=""/>
-</$list>
-</$button>""">
-<$button style="color:red;">{{!!title}} - {{!!caption}} &times;
-<$action-deletetiddler $tiddler="$:/temp/Draft"/>
-</$button>
-</$list>
-<$reveal type="nomatch" state="$:/state/editor-display" text="show">
-<$button set="$:/state/editor-display" setTo="show">{{$:/core/images/preview-closed}}</$button>
-</$reveal>
-<$reveal type="match" state="$:/state/editor-display" text="show">
-<$button set="$:/state/editor-display" setTo="hide">{{$:/core/images/preview-open}}</$button>
-</$reveal>
-<$list filter="[<draft>!has[draft.of]]" emptyMessage=<<editor-display>>>
-<$reveal type="nomatch" state="$:/state/editor-display" text="show">
+\define editor-title()
 <table style="width:100%;"><tbody>
 <tr>
 <td style="width:100px;">caption</td>
@@ -81,6 +45,48 @@ type: text/vnd.tiddlywiki
 </td>
 </tr>
 </tbody></table>
+\end
+
+\define editor-display()
+<$tiddler tiddler=<<draft>>>
+<<editor-title>>
+<div class="editor-display">
+<$transclude tiddler="$:/core/ui/ViewTemplate/tags"/>
+<$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
+<$transclude tiddler="$:/core/ui/ViewTemplate/body"/>
+</div>
+</$tiddler>
+\end
+
+<$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
+<$set name="draft" filter="[[$:/temp/Draft]get[draft]]" emptyValue={{$:/HistoryList!!current-tiddler}} select="0">
+<$reveal type="nomatch" state="$:/state/editor-toolbar" text="show" tag="div">
+<$droppable actions="""<$action-setfield $tiddler="$:/temp/Draft" draft=<<actionTiddler>>/>""" tag="div">
+<div class="tc-droppable-placeholder" style="display:block;">
+<$button set="$:/state/editor-toolbar" setTo="show">Toolbar</$button>
+<$button to="$:/Draft"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft</$button>
+<$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button style="color:green;">
+<$tiddler tiddler=<<draft>>>{{!!title}} - {{!!caption}}</$tiddler>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<draft>>/>
+</$button>
+<$button>{{$:/core/images/cancel-button}}
+<$macrocall $name="tiddler-close" tiddler=<<draft>>/>
+<$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]">
+<$action-setfield $tiddler="$:/HistoryList" current-tiddler=""/>
+</$list>
+</$button>""">
+<$button style="color:red;">{{!!title}} - {{!!caption}} &times;
+<$action-deletetiddler $tiddler="$:/temp/Draft"/>
+</$button>
+</$list>
+<$reveal type="nomatch" state="$:/state/editor-display" text="show">
+<$button set="$:/state/editor-display" setTo="show">{{$:/core/images/preview-closed}}</$button>
+</$reveal>
+<$reveal type="match" state="$:/state/editor-display" text="show">
+<$button set="$:/state/editor-display" setTo="hide">{{$:/core/images/preview-open}}</$button>
+</$reveal>
+<$list filter="[<draft>!has[draft.of]]" emptyMessage=<<editor-display>>>
+<$reveal type="nomatch" state="$:/state/editor-display" text="show"><<editor-title>>
 <$set name="edit-area-class" filter="[[$:/temp/Draft]!has[draft]]" value="edit-area tc-edit-texteditor" emptyValue="edit-area tc-edit-texteditor red">
 <$list filter="[all[current]!has[_canonical_uri]!is[image]!tag[customized]]" variable="NONE"><$edit-text tag="textarea" autoHeight="no" class=<<edit-area-class>>>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/bold"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
