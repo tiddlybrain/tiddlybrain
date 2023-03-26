@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20230301041222961
+modified: 20230326180950434
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
 \define icons(style:"font-weight:normal;") <span style=<<__style__>>><$list filter="[all[current]is[missing]!is[system]]">☹️</$list><$list filter="[all[current]!is[system]search:title:literal[/]]">🌿</$list><$list filter="[all[current]has[url]]">🔗</$list><$list filter="[all[current]has[path]]">📄</$list><$list filter="[all[current]tag[Task]]">🏆</$list></span>
 
 \define external-links()
-<$set name="path-prefix" value={{$:/config/index-tree!!path}}>
+<$vars path-prefix={{$:/config/index-tree!!path}} current=<<currentTiddler>>>
 <$list filter="[all[current]get[url]]" variable="url"><div class="external-links" style="background:#d9fff0;">
 <a href=<<url>> target="_blank" title=<<url>> class="light-color" rel="noopener noreferrer">Open Link in a New Window</a> &middot;
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<url>> tooltip=<<url>>>Copy Link</$button>
@@ -63,25 +63,18 @@ type: text/vnd.tiddlywiki
 </$button> &middot; <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param={{!!text}}>Copy content</$button>
 </div></$list>
 </$list>
-<$list filter="[all[current]get[belongs.to]]" variable="parent"><div class="external-links" style="background:#fff3c9;">
-<$button dragTiddler=<<parent>> class="tc-btn-invisible tc-tiddlylink" tooltip=<<parent>>>
-<$tiddler tiddler=<<parent>>><$transclude field="caption"><$view field="title"/></$transclude></$tiddler>
-<$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<parent>>/>" variable="NONE">
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<parent>>/>
-</$list>
-<$action-sendmessage $message="tm-close-tiddler"/>
-</$button>
-<$list filter="[<parent>get[belongs.to]getAllParents[]]" variable="parent">&lt;
-<$button dragTiddler=<<parent>> class="tc-btn-invisible tc-tiddlylink" tooltip=<<parent>>>
-<$tiddler tiddler=<<parent>>><$transclude field="caption"><$view field="title"/></$transclude></$tiddler>
-<$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<parent>>/>" variable="NONE">
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<parent>>/>
-</$list>
-<$action-sendmessage $message="tm-close-tiddler"/>
+<$list filter="[all[current]get[belongs.to]]"><div class="external-links" style="background:#fff3c9;">
+<$set name="direct-open" value="yes"><$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$list filter="[[$(modal)$]!match[yes]]"><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/></$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</$button></$set>
+<$list filter="[all[current]get[belongs.to]getAllParents[]]">&lt;
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$transclude field="caption"><$view field="title"/></$transclude>
 </$button>
 </$list>
 </div></$list>
-</$set>
+</$vars>
 \end
 
 # ''在列表的结尾根据 Tiddler 的不同添加 5 种图标 (Tasks, External Links, External Files, External Dirs, Code Snippets)''

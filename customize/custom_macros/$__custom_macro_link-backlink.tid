@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20230305195823641
+modified: 20230325105907832
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -12,7 +12,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__mode__>match[link]]" variable="NONE"><span style=<<__style__>>><$set name="current" value=<<mTitle>>>
 <$list filter="[<__links__>match[yes]]" variable="NONE"><<links>></$list>
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="l tc-btn-invisible tc-tiddlylink $class$">
-<$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 <$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
 <$list filter="[<__note__>match[yes]]" variable="NONE">
 <$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">&#32;@@color:green;[{{!!note}}]@@</$list>
@@ -24,8 +23,7 @@ type: text/vnd.tiddlywiki
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
 </span></$list>
 <$list filter="[<__description__>match[yes]]" variable="NONE">
-<$list filter="[all[current]has[description]]">@@color:#aaa;&#32;-&#32;{{!!description}}@@
-</$list>
+<$list filter="[all[current]has[description]]">@@color:#aaa;&#32;-&#32;{{!!description}}@@</$list>
 </$list>
 </$button>
 </$set></span></$list>

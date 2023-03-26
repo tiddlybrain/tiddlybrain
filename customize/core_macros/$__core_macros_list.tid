@@ -1,4 +1,4 @@
-modified: 20220810181318933
+modified: 20230326201037424
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/core/macros/list
@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <span class="tc-links-draggable-list">
 <$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
-<$type$ class="$class$">
+<$genesis $type=<<__type__>> class="$class$">
 <$list filter="[list[$tiddler$!!$field$]]" emptyMessage=<<__emptyMessage__>>>
 <$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""" enable=<<tv-enable-drag-and-drop>>>
 <div class="tc-droppable-placeholder"/>
@@ -42,7 +42,7 @@ type: text/vnd.tiddlywiki
 <div style="height:0.5em;"/>
 </$droppable>
 </$tiddler>
-</$type$>
+</$genesis>
 </$vars>
 </span>
 \end
@@ -75,22 +75,22 @@ type: text/vnd.tiddlywiki
 <span class="tc-tagged-draggable-list">
 <$set name="tag" value=<<__tag__>>>
 <$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>> storyview=<<__storyview__>>>
-<$elementTag$ class="tc-menu-list-item">
+<$genesis $type=<<__elementTag__>> class="tc-menu-list-item">
 <$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""" enable=<<tv-enable-drag-and-drop>>>
-<$elementTag$ class="tc-droppable-placeholder"/>
-<$elementTag$>
+<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
+<$genesis $type=<<__elementTag__>>>
 <$transclude tiddler="""$itemTemplate$""">
 <$macrocall $name="l" title={{!!title}} class="tc-popup-keep"/>
 </$transclude>
-</$elementTag$>
+</$genesis>
 </$droppable>
-</$elementTag$>
+</$genesis>
 </$list>
 <$tiddler tiddler="">
 <$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""" enable=<<tv-enable-drag-and-drop>>>
-<$elementTag$ class="tc-droppable-placeholder"/>
-<$elementTag$ style="height:0.5em;">
-</$elementTag$>
+<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
+<$genesis $type=<<__elementTag__>> style="height:0.5em;">
+</$genesis>
 </$droppable>
 </$tiddler>
 </$set>

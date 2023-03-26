@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20230309092709602
+modified: 20230325110038635
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -11,7 +11,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[<key>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible" dragFilter="[belongs.to<current>tag[Snippet]note<key>]" message="tm-copy-to-clipboard" param=<<key>>><<key>><$list filter="[prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]text[open]limit[1]]" emptyMessage="<$list filter='[belongs.to<current>tag[Snippet]note<key>]'><$action-setfield $tiddler=<<snippet-accordion-state>> text='open'/></$list>"><$action-deletetiddler $filter="[prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]]"/></$list></$button>""">
 <$button actions=<<modal-actions>> tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
-<$list filter="[[$(modal)$]match[yes]]"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/></$list>
 </$button>
 </$list>
 </td>

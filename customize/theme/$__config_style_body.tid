@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20230116160208129
+modified: 20230326203724276
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -49,7 +49,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-tags-wrapper button.tc-tag-label code, .tc-tags-wrapper span.tc-tag-label code {white-space: nowrap;}
 .tc-tags-wrapper button.tc-tag-label:hover, .tc-tags-wrapper span.tc-tag-label:hover {max-width: 400px;}
 .tc-tags-wrapper button.tc-tag-label svg, .tc-tags-wrapper span.tc-tag-label svg {margin-left: 2px;}
-.tc-tags-wrapper .tc-drop-down .tc-menu-list-item button {padding: 0 14px 0 14px; display: block; width: 100%;}
+.tc-tag-list-item .tc-drop-down .tc-menu-list-item button {padding: 0 14px 0 14px; display: block; width: 100%;}
 
 .tc-search-results select {border: none; -webkit-appearance: none; appearance: none;}
 .tc-search-results select::-ms-expand {display: none;}
