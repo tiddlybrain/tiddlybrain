@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230311103315308
+modified: 20230327194932129
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -61,7 +61,9 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
 </$button>
 <$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Pause">{{$:/core/images/timestamp-off}}
-<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
+<$action-setfield $tiddler=<<currentTiddler>> pause=<<today>>/>
+<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>
+<$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
 </$button></$list>
 <$list filter="[<dt>!match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Cancel">{{$:/core/images/cancel-button}}
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>
@@ -190,7 +192,12 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 <$button style="font-size:small;" set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
 </$list>
 </h2>
-<div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;margin-bottom:10px;">
+<div style="display:flex;margin:13px 0 10px 0;">
+<$set name="sunday" filter="[<__date__>getSunday[]]" select="0"><$list filter="[range[0],[6]]" variable="num">
+<$set name="current-date" filter="[<sunday>nextDay<num>]" select="0"><$macrocall $name="date-pillar" date=<<current-date>> today=<<__date__>>/></$set>
+</$list></$set>
+</div>
+<div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;">
 <$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]sort[status]]">
 <div style="white-space:nowrap;margin:7px 0;">
 <$set name="color" filter="[all[current]status[Doing]]" value="#ffbea1" emptyValue="#c9fffe">
@@ -210,11 +217,6 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 </span></$button>
 </div>
 </$list>
-</div>
-<div style="display:flex;">
-<$set name="sunday" filter="[<__date__>getSunday[]]" select="0"><$list filter="[range[0],[6]]" variable="num">
-<$set name="current-date" filter="[<sunday>nextDay<num>]" select="0"><$macrocall $name="date-pillar" date=<<current-date>> today=<<__date__>>/></$set>
-</$list></$set>
 </div>
 \end
 
