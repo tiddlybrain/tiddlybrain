@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230327194442631
+modified: 20230328122246135
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -40,9 +40,9 @@ type: text/vnd.tiddlywiki
 </div>
 
 <$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="div">
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]]"><<kanban-link>></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]!has[category]contains:plan<curDate>]"><<kanban-link>></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]!has[category]!pause<curDate>sort[date]]"><<kanban-link>></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]contains:plan<curDate>]"><<kanban-link>></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[waiting]!pause<curDate>sort[date]]"><<kanban-link>></$list>
 </$droppable>
 <$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="立即 稍后 求助" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
