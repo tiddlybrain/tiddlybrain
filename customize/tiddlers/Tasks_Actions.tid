@@ -2,21 +2,12 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230328122246135
+modified: 20230330205136326
 modifier: yuzijie
 order: 3
 tags: Tasks customized
 title: Tasks/Actions
 type: text/vnd.tiddlywiki
-
-\define kanban-link()
-<div>
-<$list filter="[all[current]text[open]]"><<task-list-open>></$list>
-<$list filter="[all[current]text[doing]]"><<task-list-doing>></$list>
-<$list filter="[all[current]text[waiting]]"><<task-list-waiting>></$list>
-<$list filter="[all[current]text[deadline]]"><<task-list-deadline>></$list>
-</div>
-\end
 
 <$set name="curDate" filter="[[$:/temp/plan/date]get[text]else<now YYYY0MM0DD>]" select="0"><$vars today=<<curDate>> dt=<<curDate>>>
 <$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
@@ -39,13 +30,13 @@ type: text/vnd.tiddlywiki
 </$set>
 </div>
 
-<$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="div">
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]]"><<kanban-link>></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]!has[category]contains:plan<curDate>]"><<kanban-link>></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]!has[category]!pause<curDate>sort[date]]"><<kanban-link>></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[waiting]!pause<curDate>sort[date]]"><<kanban-link>></$list>
+<$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="ol" class="actions-task-list">
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]]"><li><<task-list-deadline>></li></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[waiting]!pause<curDate>sort[date]]"><li><<task-list-waiting>></li></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]!has[category]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]!has[category]!pause<curDate>sort[date]]"><li><<task-list-doing>></li></$list>
 </$droppable>
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="立即 稍后 求助" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="立即 稍后" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
 
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
@@ -89,3 +80,7 @@ type: text/vnd.tiddlywiki
 <ol><$list filter="[has[interval]date<today>]"><li><$macrocall $name="l" title={{!!title}}/></li></$list></ol>
 </$list>
 </div></$droppable>
+
+<style>
+.actions-task-list {color: #333; padding-left: 15px;}
+</style>
