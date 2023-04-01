@@ -2,12 +2,21 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230330205136326
+modified: 20230401092730790
 modifier: yuzijie
 order: 3
 tags: Tasks customized
 title: Tasks/Actions
 type: text/vnd.tiddlywiki
+
+\define kanban-link()
+<div>
+<$list filter="[all[current]text[open]]"><<task-list-open>></$list>
+<$list filter="[all[current]text[doing]]"><<task-list-doing>></$list>
+<$list filter="[all[current]text[waiting]]"><<task-list-waiting>></$list>
+<$list filter="[all[current]text[deadline]]"><<task-list-deadline>></$list>
+</div>
+\end
 
 <$set name="curDate" filter="[[$:/temp/plan/date]get[text]else<now YYYY0MM0DD>]" select="0"><$vars today=<<curDate>> dt=<<curDate>>>
 <$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
