@@ -1,24 +1,16 @@
 caption: Table in HTML format
 created: 20181210052344075
 creator: yuzijie
-modified: 20211208213226931
+modified: 20230402082124912
 modifier: yuzijie
 tags: $:/tags/TextEditor/Snippet customized
 title: $:/custom/snippet/HTML-table
 type: text/vnd.tiddlywiki
 
-<table style="width:100%">
-<tr>
-  <th></th>
-</tr>
+<table style="width:100%"><tbody>
+<tr><th></th><th></th></tr>
 <tr>
   <td></td>
+  <td></td>
 </tr>
-</table>
-
-<table style="width:100%" class="data-table">
-<tr>
-<td class="data-key"></td>
-<td class="data-value"></td>
-</tr>
-</table>
+</tbody></table>

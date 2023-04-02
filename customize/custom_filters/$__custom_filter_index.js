@@ -171,6 +171,9 @@ exports.getindexParsed = function(source,operator,options) {
 		case 'commaspace':
 			s = ', ';
 			break;
+		case 'br':
+			s = '<br>';
+			break;
 		default:
 			s = '';
 	}
