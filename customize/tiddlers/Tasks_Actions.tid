@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230401092730790
+modified: 20230402080336122
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -31,9 +31,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]" emptyMessage="<$button disabled=yes>Today</$button>">
 <$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
 </$list>
-<$list filter="[<journal-title>is[missing]]"><$set name="caption" filter="[<curDate>format:date[MM-DD ddd]]" select="0"><$button>Add Date
-<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" date=<<curDate>> caption=<<caption>> text="日记: <<bl>>" kw="10em"/>
-</$button></$set></$list>
+<$list filter="[<journal-title>is[missing]]"><$button>Add Date
+<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" date=<<curDate>> caption="<$macrocall $name=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" text="日记: <<bl>>" kw="10em"/>
+</$button></$list>
 <$set name="right" filter="[<curDate>nextDay[1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible">{{$:/core/images/chevron-right}}</$button>
 </$set>
