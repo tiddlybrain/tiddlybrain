@@ -4,12 +4,15 @@ created: 20221101141524058
 creator: yuzijie
 description: Turn title into a link
 icon: $:/core/images/permalink-button
-modified: 20221101141717336
+modified: 20230402200140238
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/link
 type: text/vnd.tiddlywiki
 
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value="title" emptyValue="link">
+<$action-setfield $tiddler="$:/state/link-dropdown/mode" text=<<link-text>>/>
+</$set>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
