@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230318114359629
+modified: 20230403030143985
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -34,7 +34,7 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define code(content, language, copy:"yes")
+\define code(content, language, copy)
 <div class="code-macro">
 <$set name="lang" filter="[<__language__>is[blank]]" value=<<language>> emptyValue=<<__language__>>><$codeblock code=<<__content__>> language=<<lang>>/></$set>
 <$reveal default=<<__copy__>> type="match" text="yes"><$macrocall $name="copy-to-clipboard" src=<<__content__>>/></$reveal>
