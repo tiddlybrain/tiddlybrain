@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230402083927197
+modified: 20230403081753168
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -179,17 +179,26 @@ type: text/vnd.tiddlywiki
 
 \define priority-dot() <span class="dot" style="background-color:$(color)$;padding:2px 8px 3px;"><$transclude field="status"><$view field="title"/></$transclude></span>
 
+\define weekly-link(date)
+<$set name="year" filter="[[$date$]format:date[YYYY]]" select="0">
+<$set name="week" filter="[[$date$]format:date[WeekWW]]" select="0">
+<$set name="BR" filter="[[BR/Journals]] [<year>] [<week>] +[join[/]]" select="0">
+<$macrocall $name="l" title=<<BR>> text=<<format-date "$date$" "MMM 0DD, Week WW">>/>
+</$set>
+</$set>
+</$set>
+\end
+
 \define weekly-plan(date)
-<h2 style="margin-bottom:10px;color:#666;font-weight:500;">
-Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
+<h2 style="margin-bottom:10px;color:#666;font-weight:500;">Weekly Plan -<<weekly-link "$date$">>
 <$set name="left" filter="[[$date$]nextDay[-1]]" select="0">
-<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:small;">{{$:/core/images/chevron-left}}</$button>
+<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-left}}</$button>
 </$set>
 <$set name="right" filter="[[$date$]nextDay[1]]" select="0">
-<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:small;">{{$:/core/images/chevron-right}}</$button>
+<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-right}}</$button>
 </$set>
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]">
-<$button style="font-size:small;" set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
+<$button style="font-size:small;transform:translateY(-2px);" set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
 </$list>
 </h2>
 <div style="display:flex;margin:13px 0 10px 0;">
@@ -253,6 +262,7 @@ Weekly Plan (<<format-date "$date$" "MMM 0DD, Week WW">>)
 \end
 
 \define weekly-review()
+<h3>Weekly Review</h3>
 <table style="width:100%"><tbody>
 <tr><th>Task</th><th>Steps</th></tr>
 <$list filter="[tag<currentTiddler>indexes[]is[tiddler]]" variable="task"><tr>
