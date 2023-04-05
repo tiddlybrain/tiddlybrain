@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20230328002035987
+modified: 20230405142251963
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -14,8 +14,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]get[url]]" variable="url">
 <a href=<<url>> target="_blank" title=<<url>> class="links" rel="noopener noreferrer">{{$:/core/images/link}}</a>
 </$list>
-<$list filter="[all[current]get[path]]" variable="path"><$set name="url" filter="[<path>addprefix[./files/ext/]]" select="0">
-<a href=<<url>> target="_blank" title=<<url>> class="links" rel="noopener noreferrer">{{$:/core/images/file}}</a>
+<$list filter="[all[current]get[path]]" variable="path"><$set name="path-prefix" value={{$:/config/index-tree!!path}}>
+<$button class="tc-btn-invisible links" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>{{$:/core/images/file}}</$button>
 </$set></$list>
 <$list filter="[all[current]get[dir]]" variable="path"><$set name="path-prefix" value={{$:/config/index-tree!!path}}>
 <$button class="tc-btn-invisible links" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>{{$:/core/images/folder}}</$button>
