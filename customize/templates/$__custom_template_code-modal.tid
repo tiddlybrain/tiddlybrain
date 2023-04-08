@@ -1,7 +1,7 @@
 created: 20190216164326004
 creator: yuzijie
-footer: <$list filter="[<mTitle>has[date]]">@@color:green;<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$macrocall $name=days-passed start={{!!date}}/>">Today</$list>@@</$list>&nbsp;&nbsp;<$button message="tm-close-tiddler"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button> <$button message="tm-close-tiddler"><$set name="actionTiddler" value=<<mTitle>>><<droppable-clone-action>></$set>CLONE</$button> <$list filter="[{$:/status/IsReadOnly}!match[yes]]"><$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>EDIT</$button> <<modal-edit-code>> <<modal-edit-comment>></$list> <$button message="tm-close-tiddler">CLOSE</$button>
-modified: 20230116164736831
+footer: <<modal-buttons>>
+modified: 20230408135628463
 modifier: yuzijie
 subtitle: <$tiddler tiddler=<<mTitle>>><$transclude field="caption"><$view field="title"/></$transclude> <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> <<status-selector>> <<verification-notice>> <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list></$tiddler><div style="float:right;font-size:smaller;"><$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>><<mTitle>></$button> &middot; <$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mContent>>>copy content</$button></div>
 tags: customized
@@ -11,7 +11,5 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler=<<mTitle>>><div style="margin-top:15px;"><$let modal="yes"><<external-links>></$let></div></$tiddler>
 <section class="code-viewer" style="margin:15px 0;">
 <$list filter="[tag[Comment]belongs.to<mTitle>]"><$edit-text class="tc-edit-texteditor heightless"/></$list>
-<$list filter="[{$:/temp/code-viewer/edit}!match[yes]]" emptyMessage="""<$edit-text class="tc-edit-texteditor edit" tiddler=<<mTitle>>/>""">
 <$set name="lang" filter="[<mTitle>get[language]else[text]]"><$codeblock code=<<mContent>> language=<<lang>>/></$set>
-</$list>
 </section>

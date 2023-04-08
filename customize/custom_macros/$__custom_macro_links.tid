@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20230405142251963
+modified: 20230408135254505
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -25,14 +25,6 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mTitle={{!!title}} mContent={{!!text}}/>
 </$button>
 </$set></$list>
-\end
-
-\define modal-edit-code()
-<$list filter="[{$:/temp/code-viewer/edit}match[yes]]" emptyMessage="""<$button set="$:/temp/code-viewer/edit" setTo="yes">Edit Code</$button>"""><$button set="$:/temp/code-viewer/edit" setTo="" message="tm-close-tiddler"><$tiddler tiddler="$(mTitle)$"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mContent={{!!text}} mTitle={{!!title}}/></$tiddler>Edit Done</$button></$list>
-\end
-
-\define modal-edit-comment()
-<$list filter="[tag[Comment]belongs.to[$(mTitle)$]]" emptyMessage="""<$button message="tm-close-tiddler"><$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} tags="Comment" type="text/plain" belongs.to="$(mTitle)$" caption="Comment of [[$(mTitle)$]]"/>Create Comment</$button>"""><$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param={{!!title}}/>Edit Comment</$button></$list>
 \end
 
 \define icons(style:"font-weight:normal;") <span style=<<__style__>>><$list filter="[all[current]is[missing]!is[system]]">☹️</$list><$list filter="[all[current]!is[system]search:title:literal[/]]">🌿</$list><$list filter="[all[current]has[url]]">🔗</$list><$list filter="[all[current]has[path]]">📄</$list><$list filter="[all[current]tag[Task]]">🏆</$list></span>
@@ -80,10 +72,6 @@ type: text/vnd.tiddlywiki
 
 # ''在列表的结尾根据 Tiddler 的不同添加 5 种图标 (Tasks, External Links, External Files, External Dirs, Code Snippets)''
 #> `<<links>>`
-# ''在 code-modal 里面的一个 Button, 用于编辑源代码''
-#> `<<modal-edit-code>>`
-# ''在 code-modal 里面的一个 Button, 用于编辑注释''
-#> `<<modal-edit-comment>>`
 # ''用于给 Tiddlers 分类并显示相应的图标''
 #> `<<icons
   style:"custom styles">>`

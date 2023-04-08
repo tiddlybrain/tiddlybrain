@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230405142550737
+modified: 20230408140407372
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -216,6 +216,7 @@ table.data-table .data-splitter {text-align: center; font-weight: bold; backgrou
 .l code {color: #5778d8;}
 button.l {line-height: inherit;}
 .tc-sidebar-lists button.l {color: #5778d8;}
+.modal-buttons button.l svg {vertical-align: middle; font-size: smaller; fill:#5778d8;}
 
 /* For Macro: links */
 a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
@@ -227,7 +228,6 @@ a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
 .code-viewer pre {flex: 1 0 62%; margin: 0; border: none; border-radius: 0;}
 .code-viewer pre code {font-size: 1em;}
 .code-viewer textarea {flex: 0 0 38%; border: none; white-space: pre; font-size: 1em; line-height: 23px; padding: 12px 8px 0; height: 2000px !important; border-radius: 0;}
-.code-viewer textarea.edit {flex: 1 0 62%;}
 .code-viewer textarea.heightless {height: unset !important;}
 pre code.hljs {line-height: 23px; font-size: 14px;}
 
