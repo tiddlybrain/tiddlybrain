@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230402080336122
+modified: 20230408145524006
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -45,7 +45,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]!has[category]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]!has[category]!pause<curDate>sort[date]]"><li><<task-list-doing>></li></$list>
 </$droppable>
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="立即 稍后" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]!text[deadline]contains:plan<curDate>!filter<task-filter>]" columns="主要工作 次要工作" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
 
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
