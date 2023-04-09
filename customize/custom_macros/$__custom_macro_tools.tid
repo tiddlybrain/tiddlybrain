@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230408141200286
+modified: 20230408151456761
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -155,15 +155,15 @@ type: text/vnd.tiddlywiki
 {{$:/core/images/left-arrow}}<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$button>
 </span></$list>
-<$list filter="[<mTitle>has[date]]"><span style="color:green;margin-right:10px;">
+<$list filter="[<mTitle>has[date]]"><span style="color:green;margin-right:8px;">
 <$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$macrocall $name=days-passed start={{!!date}}/>">Today</$list>
 </span></$list>
 <$list filter="[<mTitle>!is[missing]]">
-<$button message="tm-close-tiddler"><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/><$action-deletetiddler $tiddler="$:/state/modal/history"/>OPEN</$button>
-<$button><<open-in-sidebar>><$action-deletetiddler $tiddler="$:/state/modal/history"/>SIDEBAR</$button>
+<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button>
+<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><<open-in-sidebar close:"no">>SIDEBAR</$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]">
-<$button message="tm-close-tiddler"><$set name="actionTiddler" value=<<mTitle>>><<droppable-clone-action>></$set><$action-deletetiddler $tiddler="$:/state/modal/history"/>CLONE</$button>
-<$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/><$action-deletetiddler $tiddler="$:/state/modal/history"/>EDIT</$button>
+<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$set name="actionTiddler" value=<<mTitle>>><<droppable-clone-action>></$set>CLONE</$button>
+<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>EDIT</$button>
 <$list filter="[<mTitle>code-body[yes]]"><<modal-edit-comment>></$list>
 </$list>
 </$list>
@@ -171,10 +171,10 @@ type: text/vnd.tiddlywiki
 \end
 
 \define modal-edit-comment()
-<$list filter="[tag[Comment]belongs.to<mTitle>]" emptyMessage="""<$button message="tm-close-tiddler">Create Comment
+<$list filter="[tag[Comment]belongs.to<mTitle>]" emptyMessage="""<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/>Create Comment
 <$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} tags="Comment" type="text/plain" belongs.to="$(mTitle)$" caption="Comment of [[$(mTitle)$]]"/>
-<$action-deletetiddler $tiddler="$:/state/modal/history"/></$button>""">
-<$button message="tm-close-tiddler"><$action-sendmessage $message="tm-edit-tiddler" $param={{!!title}}/><$action-deletetiddler $tiddler="$:/state/modal/history"/>Edit Comment</$button>
+</$button>""">
+<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-sendmessage $message="tm-edit-tiddler" $param={{!!title}}/>Edit Comment</$button>
 </$list>
 \end
 
