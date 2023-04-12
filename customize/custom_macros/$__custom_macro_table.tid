@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20230325105851033
+modified: 20230412112359497
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -71,14 +71,14 @@ type: text/vnd.tiddlywiki
 <$reveal default="$first-col$" type="match" text="yes" tag="td"><div class="table-links">
 <$list filter="[<__checkbox__>match[yes]]" variable="NONE"><$checkbox tiddler=<<table-row-selection>> listField="list" checked=<<currentTiddler>>/></$list>
 <$reveal default="$rheader$" type="match" text="">
-<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible links" style="fill:#5778d8;">{{$:/core/images/open-window}}</$button>
+<$button actions=<<snippet-modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible links" style="fill:#5778d8;">{{$:/core/images/open-window}}</$button>
 </$reveal>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
 <<links>> <<tag-list>>
 </div></$reveal>
 <$reveal default="$rheader$" type="nomatch" text="" tag="td">
-<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<fdate>> class="tc-btn-invisible tc-tiddlylink">{{!!title}}</$button>
+<$button actions=<<snippet-modal-actions>> dragTiddler={{!!title}} tooltip=<<fdate>> class="tc-btn-invisible tc-tiddlylink">{{!!title}}</$button>
 </$reveal>
 </$set>
 <$set name="current" value={{!!title}}><$list filter="$(cfilter)$" variable="key">
