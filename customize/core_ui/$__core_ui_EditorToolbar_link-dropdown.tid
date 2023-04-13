@@ -1,4 +1,4 @@
-modified: 20230408000239260
+modified: 20230413220601716
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 \define get-focus-selector() [data-tiddler-title="$(cssEscapedTitle)$"] .tc-create-wikitext-link input
 
 \define cancel-search-actions-inner()
-<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}><$list filter="[<searchTiddler>get[text]!match<userInput>]" emptyMessage="<$action-deletetiddler $filter='[<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]'/>"><$action-setfield $tiddler=<<searchTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/></$list></$set>
+<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}><$list filter="[<searchTiddler>get[text]!match<userInput>]" emptyMessage="<$action-deletetiddler $filter='[<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>] $:/state/tab/search-results/sidebar $:/state/search/currentTab'/>"><$action-setfield $tiddler=<<searchTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/></$list></$set>
 \end
 
 \define cancel-search-actions() <$list filter="[<storeTitle>!has[text]] +[<searchTiddler>!has[text]]" emptyMessage="<<cancel-search-actions-inner>>"><$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/></$list>

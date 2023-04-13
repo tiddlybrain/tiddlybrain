@@ -1,4 +1,4 @@
-modified: 20221215141358968
+modified: 20230413220817152
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -9,6 +9,11 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]">@@color:#555;{{!!caption}}@@</$list>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
+<$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/advanced-search-button}}
+<$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/IndexSearchResultList"/>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/IndexSearchResultList"/>
+</$button>
 <div class="sidebar-item-hover">
 <$button class="tc-btn-invisible search-dropdown-button"><<open-in-sidebar close:"no">>{{$:/core/images/open-window}}</$button>
 </div>
