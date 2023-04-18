@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230409114404687
+modified: 20230418194735967
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -57,7 +57,7 @@ type: text/vnd.tiddlywiki
 
 <$list filter="[<journal-title>is[tiddler]]">
 <h2><$button to=<<journal-title>> class="tc-btn-invisible" style="font-weight:500;">Review (<$transclude tiddler=<<journal-title>> field="caption"/>)</$button></h2>
-<table style="width:100%;white-space:nowrap;background:white;"><tbody>
+<table style="width:100%;white-space:nowrap;background:white;"><$droppable actions=<<droppable-date-action>> tag="tbody">
 <tr><th>规划任务</th><th>执行情况</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:24px;"><$set name="currTask" value=<<task>>>
 <td><$button to=<<task>> class="tc-btn-invisible">
@@ -75,7 +75,7 @@ type: text/vnd.tiddlywiki
 </$set><br>
 </$list></td>
 </$set></tr></$list>
-</tbody></table>
+</$droppable></table>
 <<data-table filter:"[all[current]indexes[]!tag[Task]]">>
 </$list>
 

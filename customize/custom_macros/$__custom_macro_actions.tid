@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20221127113637053
+modified: 20230418194308258
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -66,9 +66,9 @@ type: text/vnd.tiddlywiki
 \end
 
 \define droppable-date-action()
-<$list filter="[<journal-title>is[tiddler]!has:index<actionTiddler>]">
+<$list filter="[<journal-title>is[tiddler]!has:index<actionTiddler>]"><$list filter="[<actionTiddler>tag[Task]]">
 <$action-setfield $tiddler=<<journal-title>> $index=<<actionTiddler>> $value=""/>
-</$list>
+</$list></$list>
 \end
 
 \define add-to-cell-action(title, index, content)
