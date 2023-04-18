@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230405092246805
+modified: 20230418205850290
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -210,7 +210,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix[$:/task-state/]split[/]tag[Task]] [tag[Task]has[status]] +[each:value[]sort[status]]">
 <div style="white-space:nowrap;margin:7px 0;">
 <$set name="color" filter="[all[current]status[Doing]]" value="#ffbea1" emptyValue="#c9fffe">
-<$set name="color" filter="[all[current]status[Onhold]]" value="#ff87fd" emptyValue=<<color>>>
+<$set name="color" filter="[all[current]status[Onhold]]" value="#fff38a" emptyValue=<<color>>>
 <$set name="color" filter="[all[current]status[Review]]" value="#c3ffa2" emptyValue=<<color>>>
 <$button set="$:/temp/task-list" setTo={{!!title}} class="tc-btn-invisible"><<priority-dot>></$button>
 </$set>

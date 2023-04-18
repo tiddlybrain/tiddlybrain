@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230418194735967
+modified: 20230418210338878
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -40,7 +40,7 @@ type: text/vnd.tiddlywiki
 </div>
 
 <$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="ol" class="actions-task-list">
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]]"><li><<task-list-deadline>></li></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[waiting]!pause<curDate>sort[date]]"><li><<task-list-waiting>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]!has[category]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]!has[category]!pause<curDate>] [prefix[$:/task-state/]!filter<task-filter>text[doing]!has[plan]!pause<curDate>]"><li><<task-list-doing>></li></$list>
