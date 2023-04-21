@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230412183031959
+modified: 20230421111015957
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -19,8 +19,16 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
-\define newTaskAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" celltpl="customized-template-task" tags="Task" caption=<<__content__>>>
+\define newTaskAction(template, content)
+<$action-sendmessage $message="tm-new-tiddler" $param="$template$" celltpl="customized-template-task" tags="Task" caption=<<__content__>> text="!!! 问题描述
+
+!!! 任务管理
+
+!!! 提单人
+
+!!! 附件
+
+<<snippet key:'附件' date:yes>>"/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
@@ -45,12 +53,12 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 \end
 
 \define newFileAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" path=<<__description__>>/>
+<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> type="text/vnd.tiddlywiki" path=<<__description__>>/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
 \define newLinkAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" url=<<__description__>>/>
+<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> type="text/vnd.tiddlywiki" url=<<__description__>>/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
@@ -74,7 +82,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 <p style="margin-top:-10px;">
 <$button><$macrocall $name="newDataAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New Data</$button>
 <$button><$macrocall $name="newRecordAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New Record</$button>
-<$button><$macrocall $name="newTaskAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New Task</$button>
+<$button><$macrocall $name="newTaskAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}}/>New Task</$button>
 </p>
 <p style="margin-top:-10px;">
 <$button><$macrocall $name="newFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New File</$button>
