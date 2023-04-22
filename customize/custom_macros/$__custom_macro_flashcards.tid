@@ -1,59 +1,42 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20230307085519834
+modified: 20230422135012232
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
 type: text/vnd.tiddlywiki
 
-\define flashcard-state() $:/state/flashcard/$(currentTiddler)$
-\define flashcard-popup-state() $:/state/flashcard/popup/$(currentTiddler)$
 \define flashcard-border-style() border-top: 6px solid $(color)$;
 
-\define flashcard-level()
-<div class="tc-card-buttons"><$set name="level" filter="[all[current]get[level]addprefix[Level ]]" select="0" emptyValue="Level 0">
-<$button class="tc-btn-invisible tc-tiddlylink"><<level>><$action-setfield side-a={{!!side-a}} side-b={{!!side-b}}/><$action-sendmessage $message="tm-edit-tiddler"/></$button>
-</$set></div>
-\end
-
-\define flashcard-buttons()
-<div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1">
-<$set name="level" filter="[all[current]get[level]addprefix[Level ]]" select="0" emptyValue="Level 0">
-<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙁<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level="1"/></$button>
-<$macrocall $name="l" title={{!!title}} text=<<level>> style="margin:0 10px;" note="no"/>
-<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙂<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level=<<up>>/></$button>
-</$set>
-</$set></div>
-\end
-
 \define flashcard()
-<$set name="A" filter="[all[current]has[side-a]]" value={{!!side-a}} emptyValue={{!!caption}}>
-<$set name="B" filter="[all[current]has[side-b]]" value={{!!side-b}} emptyValue={{!!description}}>
-<$set name="X" filter="[{!!default}match[A]]" value=<<A>> emptyValue=<<B>>>
-<$set name="O" filter="[{!!default}!match[A]]" value=<<A>> emptyValue=<<B>>>
 <$set name="color" filter="[all[current]get[belongs.to]colorize[]]" emptyValue="#29B6F6" select="0">
 <div class="tc-card" style=<<flashcard-border-style>>><div class="tc-card-content">
-<div style="font-weight:normal;margin-bottom:10px;font-size:smaller;">
-<$list filter="[all[current]get[parents]enlist-input[]reverse[]butlast[]]">
-<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let> /
-</$list>
-<$list filter="[all[current]get[parents]enlist-input[]first[]]">
-<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
-</$list>
-<$list filter="[all[current]has[note]]">@@display:inline-block;color:green;[{{!!note}}]@@</$list>
-</div>
-<$button class="tc-btn-invisible" dragTiddler=<<currentTiddler>> style="font-size:larger;text-align:center;">
-<$list filter="[<flashcard-state>is[tiddler]]" emptyMessage="""<$action-setfield $tiddler=<<flashcard-state>> text="show"/><<X>>""" variable="NONE">
-<$action-deletetiddler $tiddler=<<flashcard-state>>/><<O>>
-</$list>
-</$button>
-<$list filter="[<flashcard-state>is[tiddler]]" variable="NONE" emptyMessage=<<flashcard-level>>><<flashcard-buttons>></$list>
+<$macrocall $name="l" title={{!!title}} note="no" style="display:block;"/>
+<div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1">
+<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙁<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level="1"/></$button>
+<$list filter="[belongs.to[Flashcard]level{!!level}]" emptyMessage="Level 0"><$button class="tc-btn-invisible">{{!!caption}}<$macrocall $name="tiddler-open" tiddler={{!!title}}/></$button></$list>
+<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙂<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level=<<up>>/></$button>
+</$set></div>
 </div></div>
+</$set>
 \end
 
-# ''显示 Flashcard 卡片的级别''
-#> `<<flashcard-level>>`
-# ''显示 Flashcard 卡片的按钮''
-#> `<<flashcard-buttons>>`
-# ''单个 Flashcard 卡片''
+\define flashcards(level)
+<div style="margin:2em 0;">
+<$list filter="[tag[Flashcard]level[$level$]!days:date{Flashcard Level $level$!!interval}]"><<flashcard>></$list>
+<$details summary="Hidden">
+<$list filter="[tag[Flashcard]level[$level$]days:date{Flashcard Level $level$!!interval}]"><<flashcard>></$list>
+</$details>
+</div>
+\end
+
+\define flashcards-count(level) <$count filter="[tag[Flashcard]level[$level$]]"/>
+
+# ''显示单个 Flashcard''
 #> `<<flashcard>>`
+# ''显示某个 Level 下所有的 Flashcards''
+#> `<<flashcards
+  level:"级别">>`
+# ''显示某个 Level 下的 Flashcards 的数量''
+#> `<<flashcards-count
+  level:"级别">>`

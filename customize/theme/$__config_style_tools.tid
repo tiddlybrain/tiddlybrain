@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230409195006177
+modified: 20230422125255150
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -56,13 +56,14 @@ button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis;
 /* For Macro: task-list */
 dl.task-list dd {white-space: nowrap;}
 
-/* For Macro: flashcards */
+/* For Macro: flashcard */
 .tc-card {width: 225px; height: 180px; display: flex; overflow: auto; background-color: white; border-radius: 7%; box-shadow: 0 8px 17px -8px #A3A5AE; transition: box-shadow 0.3s ease-in-out;}
 .tc-card:hover {box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);}
-.tc-card-content {text-align: center; font-weight: 600; padding: 15px; width: 100%; margin: auto;}
+.tc-card-content {text-align: center; padding: 15px; width: 100%; margin: auto;}
 .tc-card-content > button {transition: color 0.2s ease-in-out;}
 .tc-card:hover .tc-card-content > button {color: #1462ff;}
 .tc-card-buttons {margin-top: 10px;}
+.tc-card-content button.l {color: #333; text-align: center; font-size: larger;}
 
 /* For Sidebar: Index & Editor */
 .tc-sidebar-header .tc-sidebar-lists .tc-drop-down p {margin-top: 1em; margin-bottom: 1em;}

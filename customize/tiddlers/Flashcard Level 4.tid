@@ -1,0 +1,17 @@
+belongs.to: Flashcard
+caption: {{!!note}} {{!!level}}
+created: 20230422083146249
+creator: yuzijie
+description: <<flashcards-count "4">>
+interval: -3
+keywords: Flashcards
+level: 4
+modified: 20230422132141718
+modifier: yuzijie
+note: Level
+parents: Flashcard
+tags: Snippet
+title: Flashcard Level 4
+type: text/vnd.tiddlywiki
+
+<$macrocall $name="flashcards" level={{!!level}}/>

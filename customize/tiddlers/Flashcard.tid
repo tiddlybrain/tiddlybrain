@@ -2,19 +2,14 @@ caption: Flashcards
 created: 20220625184828073
 creator: yuzijie
 keywords: 
-modified: 20230307084959602
+modified: 20230422125943574
 modifier: yuzijie
 order: 5
-tags: Tasks customized
+tags: Tasks customized Ignore
 title: Flashcard
 type: text/vnd.tiddlywiki
 
-\define flashcard-filter() <$list filter="[all[current]!days:date{$:/config/flashcards/intervals##$(lvl)$}] [all[current]!has[level]]"><<flashcard>></$list>
-
-<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="Flashcard"/>""" tag="h2">
-<span style="border-left:6px solid #00cbff;padding:3px 0 5px 10px;">Drop flashcards here to add</span>
+<$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="Flashcard"/>""" tag="div">
+<div style="margin-bottom:1em;"><$list filter="[tag[Flashcard]!has[level]]"><<flashcard>></$list></div>
+<<snippet key:"Level" limit:20 sort:"sortan[level]">>
 </$droppable>
-<div style="display:flex;flex-wrap:wrap;gap:20px 10px;margin-bottom:25px;">
-<$list filter="[tag[Flashcard]]"><$set name="lvl" value={{!!level}} emptyValue="0"><<flashcard-filter>></$set></$list>
-</div>
-<$details summary="Level 15"><<list-links "[tag[Flashcard]level[15]]">></$details>
