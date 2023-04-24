@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230421111015957
+modified: 20230424101442460
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -26,9 +26,9 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 
 !!! 提单人
 
-!!! 附件
+!!! 往来邮件
 
-<<snippet key:'附件' date:yes>>"/>
+<<snippet key:'邮件' date:yes>>"/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
