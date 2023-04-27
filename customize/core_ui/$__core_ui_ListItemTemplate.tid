@@ -1,15 +1,14 @@
-modified: 20230416001803371
+modified: 20230427194459993
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
 type: text/vnd.tiddlywiki
 
-<div class="tc-menu-list-item">
-<$link to=<<currentTiddler>>><<icons>> <$view field="title"/>
+<div class="tc-menu-list-item"><$link to=<<currentTiddler>>><<icons>> <$view field="title"/>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$list filter="[all[current]has[caption]]">@@color:#555;{{!!caption}}@@</$list>
+<$let tv-wikilinks="no"><$list filter="[all[current]has[caption]]">{{!!caption}}</$list></$let>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
-<$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/advanced-search-button}}
+<$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/close-others-button}}
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/IndexSearchResultList"/>
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/IndexSearchResultList"/>
@@ -18,5 +17,4 @@ type: text/vnd.tiddlywiki
 <div class="sidebar-item-hover">
 <$button class="tc-btn-invisible search-dropdown-button"><<open-in-sidebar close:"no">>{{$:/core/images/open-window}}</$button>
 </div>
-</$link>
-</div>
+</$link></div>
