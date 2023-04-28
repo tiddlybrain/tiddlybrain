@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230424041850021
+modified: 20230428140312817
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -65,10 +65,11 @@ type: text/vnd.tiddlywiki
 </$button></td>
 <td><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
 <$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div>
-<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>></$button>
+<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>>
 <$button class="tc-btn-invisible">&times;
+<$list filter="[<task-state>is[tiddler]]"><$action-setfield $tiddler=<<task-state>> pause=""/></$list>
 <$macrocall $name="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>
-<$action-setfield $tiddler=<<task-state>> pause=""/>
+</$button>
 </$button>
 </div></$set>
 </$list></td>
