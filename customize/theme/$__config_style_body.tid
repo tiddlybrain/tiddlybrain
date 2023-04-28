@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20230427193629317
+modified: 20230427211447211
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -23,7 +23,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-tiddler-frame td svg {max-width: fit-content;}
 
 .tc-tiddler-controls button svg, .tc-menubar .tc-sidebar-tab-open-item button svg {vertical-align: baseline;}
-.tc-tiddler-controls .tc-drop-down svg {transform: translateY(2px);}
+.tc-tiddler-controls .tc-drop-down svg {transform: translateY(1px);}
 .tc-page-controls .tc-drop-down button svg {transform: translateY(-2px);}
 .tc-menubar .tc-sidebar-tab-open-item button svg {transform: translateY(1px);}
 
