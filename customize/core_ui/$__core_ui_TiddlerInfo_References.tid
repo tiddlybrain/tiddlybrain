@@ -1,5 +1,5 @@
 caption: {{$:/language/TiddlerInfo/References/Caption}}
-modified: 20220924091009130
+modified: 20230429030007527
 modifier: yuzijie
 tags: $:/tags/TiddlerInfo customized
 title: $:/core/ui/TiddlerInfo/References
@@ -10,12 +10,7 @@ type: text/vnd.tiddlywiki
 \define backlink-note-button()
 \whitespace trim
 <$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;">Suggest Key:&#32;<<key>>
-<$list filter="[all[current]type[application/x-tiddler-dictionary]!has:index<key>]">
-<$action-setfield $index=<<key>> $value='<<bl-note note:"$(key)$" date:"no">>'/>
-</$list>
-<$list filter="[all[current]type[text/vnd.tiddlywiki]]">
-<$action-sendmessage $message="tm-copy-to-clipboard" $param='<<bl-note note:"$(key)$" date:"no">>'/>
-</$list>
+<$list filter="[all[current]type[application/x-tiddler-dictionary]!has:index<key>]" emptyMessage="""<$action-sendmessage $message="tm-copy-to-clipboard" $param='<<bl-note note:"$(key)$" date:"no">>'/>"""><$action-setfield $index=<<key>> $value='<<bl-note note:"$(key)$" date:"no">>'/></$list>
 </$button>&#32;
 \end
 
