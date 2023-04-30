@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230428115216597
+modified: 20230430191419792
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -36,10 +36,10 @@ button.img {border: 1px solid #ddd; box-shadow: 0px 0px 2px 1px #f5f5f5;}
 /* For Macro: snippet */
 .snippet {white-space: nowrap;}
 button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis; line-height: 30px;}
-.snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; padding-bottom: 3px; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
+.snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
 .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table {margin: 10px 20px;}
 .snippet-content > h2, .snippet-content > h3, .snippet-content > details {margin-left: 20px;}
-.snippet-content > h3 {margin-top: 1em;}
+.snippet-content > h3 {margin-top: 10px; margin-bottom: 10px;}
 .snippet-external {margin: 1em 0; line-height: 0;}
 .snippet-external embed, .snippet-external iframe {height: 600px;}
 .snippet-container .macro-table td {white-space: nowrap;}
