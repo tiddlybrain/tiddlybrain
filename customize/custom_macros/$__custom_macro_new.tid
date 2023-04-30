@@ -1,15 +1,23 @@
 created: 20161118103029230
 creator: yuzijie
-modified: 20220917100359637
+modified: 20230430111612372
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/new
 type: text/vnd.tiddlywiki
 
-\define new(name,template,class,title,fields,style,actions)
+\define new(name, template, class, title, fields, style, actions)
 <$button class="$class$" style="$style$">$name$$actions$
 <$action-sendmessage $message="tm-new-tiddler" $param="$template$" title="$title$" $fields$/>
 </$button>
+\end
+
+\define newTiddlerAction(template, caption, type:"text/vnd.tiddlywiki", field:"description", content, text, scroll:"yes")
+<$action-createtiddler $basetitle=<<unusedtitle "$template$">> date=<<now YYYY0MM0DD>> caption=<<__caption__>> type=<<__type__>> text=<<__text__>>>
+<$list filter="[<__content__>!is[blank]]"><$action-setfield $tiddler=<<createTiddler-title>> $field=<<__field__>> $value=<<__content__>>/></$list>
+<$action-navigate $to=<<createTiddler-title>> $scroll=<<__scroll__>>/>
+</$action-createtiddler>
+<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
 # ''新建 Tiddler''
@@ -21,3 +29,12 @@ type: text/vnd.tiddlywiki
   fields:"""tags='标签' text='123'"""
   style:"按钮风格"
   actions:"其他动作">>`
+# ''新建 Tiddler 的动作''
+#> `<<newTiddlerAction
+  template:"基础标题模板"
+  caption:"caption 内容"
+  type:"tiddler type"
+  field:"字段, 默认是 description"
+  content:"field 的内容"
+  text:"text 字段的内容"
+  scroll:"是否显示新 Tiddler, 默认 yes">>`

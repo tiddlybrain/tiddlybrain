@@ -1,26 +1,13 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230429034030663
+modified: 20230430113712848
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
 type: text/vnd.tiddlywiki
 
-\define newDataAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> text="Name: {{!!caption}}
-Description: {{!!description}}" type="application/x-tiddler-dictionary" description=<<__description__>>/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newQuickAction(template, content, description)
-<$action-createtiddler $basetitle="$template$" date=<<now YYYY0MM0DD>> caption=<<__content__>> description=<<__description__>> type="text/vnd.tiddlywiki">
-<$action-navigate $to=<<createTiddler-title>> $scroll="no"/>
-</$action-createtiddler>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newTaskAction(template, content)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" celltpl="customized-template-task" tags="Task" caption=<<__content__>> text="!!! 问题描述
+\define newTaskAction(template, caption)
+<$action-sendmessage $message="tm-new-tiddler" $param="$template$" celltpl="customized-template-task" tags="Task" caption=<<__caption__>> text="!!! 问题描述
 
 !!! 任务管理
 
@@ -32,38 +19,18 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
-\define newRecordAction(template, content:"{{!!text}}", description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> description=<<__description__>>/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newCodeAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> language="" code-body="yes" description=<<__description__>>/>
+\define newCodeAction(template, caption)
+<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__caption__>> language="" code-body="yes"/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
 \define newExtFileActionCopy() <<l title:'$(title)$' mode:tr date:yes style:''>>
 
-\define newExtFileAction(template, content, type, path, note)
+\define newExtFileAction(template, caption, type, path, note)
 <$set name="title" value=<<unusedtitle "$template$">>><$set name="uri" filter="[[$path$]prefix[http]]" value="$path$" emptyValue="./files/$path$">
-<$action-setfield $tiddler=<<title>> date=<<now YYYY0MM0DD>> belongs.to="Attachments" note="$note$" tags="Snippet" caption="$content$" type="$type$" _canonical_uri=<<uri>>/>
+<$action-setfield $tiddler=<<title>> date=<<now YYYY0MM0DD>> belongs.to="Attachments" note="$note$" tags="Snippet" caption="$caption$" type="$type$" _canonical_uri=<<uri>>/>
 <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<newExtFileActionCopy>>/>
 </$set></$set>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newFileAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> type="text/vnd.tiddlywiki" path=<<__description__>>/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newDirAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> type="text/vnd.tiddlywiki" dir=<<__description__>>/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newLinkAction(template, content, description)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> type="text/vnd.tiddlywiki" url=<<__description__>>/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
@@ -72,7 +39,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]limit[1]]"><$button class="tc-btn-invisible">Save All
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]]"><$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>>/></$list>
 </$button></$list>
-<p><$keyboard key="alt+enter" actions="<$macrocall $name=newQuickAction template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>" tag="div">
+<p><$keyboard key="alt+enter" actions="<$macrocall $name=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}} scroll=no/>" tag="div">
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="30" class="new-tiddler-input-box" placeholder="Caption" default="" focus="yes"/>
 <$set name="newValue" filter="[[$:/temp/newTiddler]get[text]] [<now YYYY-0MM-0DD>] +[join[ ]]" select="0">
 <$button set="$:/temp/newTiddler" setTo=<<newValue>> tabindex="-1" class="tc-btn-invisible">📆</$button>
@@ -80,35 +47,37 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" descript
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" class="tc-btn-invisible" tooltip="Edit Configurations" tabindex="-1">⚙️</$button><br>
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="30" class="new-tiddler-input-box" placeholder="Description/path/url/dir/attachment" field="description"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
-<$button class="tc-btn-invisible"><$macrocall $name="newQuickAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>➕</$button>
+<$button class="tc-btn-invisible"><$macrocall $name=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}} scroll=no/>➕</$button>
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
 </$keyboard></p>
+<$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>
 <p>
-<$button><$macrocall $name="newDataAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New Data</$button>
-<$button><$macrocall $name="newRecordAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New Record</$button>
-<$button><$macrocall $name="newTaskAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}}/>New Task</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" content=<<content>> text="Name: {{!!caption}}
+Description: {{!!description}}"/>New Data</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>>/>New Record</$button>
+<$button><$macrocall $name="newTaskAction" template=<<template>> caption=<<caption>>/>New Task</$button>
 </p>
 <p style="margin-top:-10px;">
-<$button><$macrocall $name="newFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New File</$button>
-<$button><$macrocall $name="newLinkAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New Link</$button>
-<$button><$macrocall $name="newDirAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New Dir</$button>
-<$button><$macrocall $name="newCodeAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}}/>New Code</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>>/>New File</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>>/>New Link</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>>/>New Dir</$button>
+<$button><$macrocall $name="newCodeAction" template=<<template>> caption=<<caption>>/>New Code</$button>
 </p>
 <div style="font-variant:all-petite-caps;margin:-8px 0 -12px;">Attachments</div>
 <p>
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} path={{$:/temp/newTiddler!!description}} type="image/jpeg" note="JPG"/>New JPG</$button>
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} path={{$:/temp/newTiddler!!description}} type="image/png" note="PNG"/>New PNG</$button>
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} path={{$:/temp/newTiddler!!description}} type="image/gif" note="GIF"/>New GIF</$button>
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} path={{$:/temp/newTiddler!!description}} type="image/svg+xml" note="SVG"/>New SVG</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/jpeg" note="JPG"/>New JPG</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/png" note="PNG"/>New PNG</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/gif" note="GIF"/>New GIF</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/svg+xml" note="SVG"/>New SVG</$button>
 </p>
 <p style="margin-top:-10px;">
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} path={{$:/temp/newTiddler!!description}} type="text/html" note="HTML"/>New HTML</$button>
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} path={{$:/temp/newTiddler!!description}} type="application/pdf" note="PDF"/>New PDF</$button>
-<$button><$macrocall $name="newExtFileAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} path={{$:/temp/newTiddler!!description}} type="audio/mp3" note="MP3"/>New MP3</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="text/html" note="HTML"/>New HTML</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="application/pdf" note="PDF"/>New PDF</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="audio/mp3" note="MP3"/>New MP3</$button>
 </p>
 <div style="font-variant:all-petite-caps;margin:-8px 0 -12px;">User defined</div><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="block"/>
-<hr>
+</$vars><hr>
 <p>{{$:/custom/ui/path-prefix}}</p>
 <p style="margin-top:-10px;">
 <$button message="tm-edit-tiddler" param="$:/config/defaultTemplate" class="tc-btn-invisible">Default Template: @@color:red;{{$:/config/defaultTemplate}}@@</$button>
