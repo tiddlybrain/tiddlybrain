@@ -2,7 +2,7 @@ caption: 关键词
 created: 20200908201842064
 creator: yuzijie
 keywords: 
-modified: 20230205193923001
+modified: 20230501074631091
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Keywords
@@ -12,12 +12,11 @@ type: text/vnd.tiddlywiki
 <$list filter="[has[belongs.to]!tag[Comment]]">
 <$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
 <$set name="keywords" filter="[{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]]" select="0">
-<$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE">
-<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
-</$list>
+<$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE"><$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/></$list>
 </$set>
 </$set>
 </$list>
+<$action-deletetiddler $filter="[prefix[$:/temp/]] [prefix[$:/state/]]"/>
 </$button>
 
 <hr style="margin-top:16px;">
