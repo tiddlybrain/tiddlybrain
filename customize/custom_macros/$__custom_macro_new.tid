@@ -1,6 +1,6 @@
 created: 20161118103029230
 creator: yuzijie
-modified: 20230430143836886
+modified: 20230501140801112
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/new
@@ -12,12 +12,14 @@ type: text/vnd.tiddlywiki
 </$button>
 \end
 
-\define newTiddlerAction(template, caption, type:"text/vnd.tiddlywiki", field:"description", content, text, edit:"no", scroll:"yes")
+\define newTiddlerAction(template, caption, type:"text/vnd.tiddlywiki", field:"description", content, text, edit:"no", scroll:"yes", popup)
 <$action-createtiddler $basetitle=<<unusedtitle "$template$">> date=<<now YYYY0MM0DD>> caption=<<__caption__>> type=<<__type__>> text=<<__text__>>>
 <$list filter="[<__content__>!is[blank]]"><$action-setfield $tiddler=<<createTiddler-title>> $field=<<__field__>> $value=<<__content__>>/></$list>
 <$list filter="[<__edit__>!match[yes]]" emptyMessage="<$action-sendmessage $message=tm-edit-tiddler $param=<<createTiddler-title>>/>">
 <$action-navigate $to=<<createTiddler-title>> $scroll=<<__scroll__>>/>
-<$list filter="[<__scroll__>match[yes]]"><$action-deletetiddler $tiddler="$:/state/popup/menubar/NewTiddler"/></$list>
+<$list filter="[<__scroll__>match[yes]] :else[<__popup__>match[close]]">
+<$action-deletetiddler $filter="[[$:/state/popup/menubar/NewTiddler]] [[$:/state/popup/NewTiddlerWindow]]"/>
+</$list>
 </$list>
 </$action-createtiddler>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
@@ -41,4 +43,5 @@ type: text/vnd.tiddlywiki
   content:"field 的内容"
   text:"text 字段的内容"
   edit:"是否进入编辑模式"
-  scroll:"是否显示新 Tiddler, 默认 yes">>`
+  scroll:"是否显示新 Tiddler, 默认 yes"
+  popup:"如果填写 close, 则创建 tiddler 以后关闭 popup">>`

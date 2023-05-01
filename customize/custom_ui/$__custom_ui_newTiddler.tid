@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230430142257024
+modified: 20230501140241230
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -59,9 +59,9 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$macrocall $name="newTaskAction" template=<<template>> caption=<<caption>>/>New Task</$button>
 </p>
 <p style="margin-top:-10px;">
-<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>>/>New File</$button>
-<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>>/>New Link</$button>
-<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>>/>New Dir</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> scroll="no" popup="close"/>New File</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> scroll="no" popup="close"/>New Link</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> scroll="no" popup="close"/>New Dir</$button>
 <$button><$macrocall $name="newCodeAction" template=<<template>> caption=<<caption>>/>New Code</$button>
 </p>
 <div style="font-variant:all-petite-caps;margin:-8px 0 -12px;">Attachments</div>
