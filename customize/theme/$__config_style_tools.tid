@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230504005657829
+modified: 20230504234011266
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -150,6 +150,7 @@ button.sort-by-belongs-title span {color: #aaa; font-weight: normal;}
 .record-copy {margin: 5px; position: absolute; right: 0; display: none;}
 .record-drop-down:hover .record-copy {display: block;}
 .popup-bottom {font-size: small; background: #fff3c9; text-align: center; border-radius: 0 0 3px 3px; padding: 3px;}
+.date-dropdown .record-drop-down {min-width: 200px;}
 
 /* For Macro: tree */
 .tc-tree button {color: #ccc;}
