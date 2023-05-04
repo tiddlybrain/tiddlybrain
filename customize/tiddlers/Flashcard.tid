@@ -2,7 +2,7 @@ caption: Flashcards
 created: 20220625184828073
 creator: yuzijie
 keywords: 
-modified: 20230422141012808
+modified: 20230504003335480
 modifier: yuzijie
 order: 5
 tags: Tasks customized Ignore
@@ -11,6 +11,6 @@ type: text/vnd.tiddlywiki
 
 <$droppable actions="""<$action-listops $tiddler=<<actionTiddler>> $tags="Flashcard"/>""" tag="div">
 <h2 style="color:#333;font-weight:normal;padding-top:10px;">Flashcards</h2>
-<div style="margin-bottom:1em;"><$list filter="[tag[Flashcard]!has[level]]"><<flashcard>></$list></div>
+<div style="display:flex;flex-wrap:wrap;gap:20px 10px;margin-bottom:1em;"><$list filter="[tag[Flashcard]!has[level]]"><<flashcard>></$list></div>
 <<snippet key:"Level" limit:20 sort:"sortan[level]">>
 </$droppable>

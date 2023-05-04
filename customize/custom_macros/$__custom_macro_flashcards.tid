@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20230422141427196
+modified: 20230504010302803
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -11,6 +11,9 @@ type: text/vnd.tiddlywiki
 \define flashcard()
 <$set name="color" filter="[all[current]get[belongs.to]colorize[]]" emptyValue="#29B6F6" select="0">
 <div class="tc-card" style=<<flashcard-border-style>>><div class="tc-card-content">
+<$list filter="[all[current]get[belongs.to]]"><div style="margin-bottom:5px;font-size:smaller;color:#999;">
+<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
+</div></$list>
 <$macrocall $name="l" title={{!!title}} note="no" style="display:block;"/>
 <div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1">
 <$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙁<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level="1"/></$button>
@@ -22,10 +25,10 @@ type: text/vnd.tiddlywiki
 \end
 
 \define flashcards(level)
-<div style="margin:2em 0;">
-<$list filter="[tag[Flashcard]level[$level$]!days:date{Flashcard Level $level$!!interval}]" emptyMessage="✔️"><<flashcard>></$list>
-<hr style="margin:2em 0 1em 0;"><$details summary="Hidden">
-<$list filter="[tag[Flashcard]level[$level$]days:date{Flashcard Level $level$!!interval}]"><<flashcard>></$list>
+<div style="margin:2em 0;" class="flashcards">
+<div style="display:flex;flex-wrap:wrap;gap:20px 10px;"><$list filter="[tag[Flashcard]level[$level$]!days:date{Flashcard Level $level$!!interval}]" emptyMessage="✔️"><<flashcard>></$list></div>
+<p style="margin:2em 0;"/><$details summary="Hidden">
+<div style="display:flex;flex-wrap:wrap;gap:20px 10px;"><$list filter="[tag[Flashcard]level[$level$]days:date{Flashcard Level $level$!!interval}]"><<flashcard>></$list></div>
 </$details>
 </div>
 \end
