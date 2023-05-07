@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230401153857169
+modified: 20230507120030195
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -39,8 +39,11 @@ type: text/vnd.tiddlywiki
 <td colspan="2" style="position:relative;">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>&nbsp;
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
-<$list filter="[{$:/HistoryList!!current-tiddler}is[tiddler]!tag[Task]]"><$fieldmangler>
-<$button set="!!celltpl" setTo="customized-template-task" message="tm-add-tag" param="Task" style="margin-left:10px;">To Task</$button>
+<$list filter="[<draft>is[tiddler]!tag[Task]]"><$fieldmangler>
+<$button set="!!celltpl" setTo="customized-template-task" message="tm-add-tag" param="Task" style="margin-left:10px;" tooltip="Make it a task">Task</$button>
+</$fieldmangler></$list>
+<$list filter="[<draft>is[tiddler]!tag[Flashcard]]"><$fieldmangler>
+<$button message="tm-add-tag" param="Flashcard" style="margin-left:10px;" tooltip="Make it a Flashcard">Flashcard</$button>
 </$fieldmangler></$list>
 </td>
 </tr>
