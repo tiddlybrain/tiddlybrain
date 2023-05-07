@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20230507103621304
+modified: 20230507185309339
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -15,6 +15,7 @@ type: text/vnd.tiddlywiki
 <$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </div></$list>
 <$macrocall $name="l" title={{!!title}} note="no" style="display:block;"/>
+<$list filter="[all[current]get[question]]"><div style="color:#666;margin-top:5px;"><<currentTiddler>></div></$list>
 <div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1">
 <$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙁<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level="1"/></$button>
 <$list filter="[belongs.to[Flashcard]level{!!level}]" emptyMessage="Level 0"><$button class="tc-btn-invisible">{{!!caption}}<$macrocall $name="tiddler-open" tiddler={{!!title}}/></$button></$list>
