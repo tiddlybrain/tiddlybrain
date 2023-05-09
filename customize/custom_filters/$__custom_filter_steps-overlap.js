@@ -65,16 +65,6 @@ var getEndTime = function(task) {
 	}
 }
 
-var getRemark = function(task) {
-	var pattern = /\sr:["'](.*?)["']/;
-	var result = task.match(pattern);
-	if(result) {
-		return result[1];
-	} else {
-		return "";
-	}
-}
-
 var getDelegate = function(task) {
 	var pattern = /\sto:["'](.*?)["']/;
 	var result = task.match(pattern);
