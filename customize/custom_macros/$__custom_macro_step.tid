@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20230509223011289
+modified: 20230510135535852
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -42,7 +42,7 @@ type: text/vnd.tiddlywiki
 \define days-button(value,days,step)
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>><<__days__>></$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>is[tiddler]!date[$value$]]">
-<$button class="tc-btn-invisible">Update Date<$action-setfield $tiddler=<<task-state>> text="open" date="$value$" caption="$step$"/></$button>
+<$button class="tc-btn-invisible">Update Date<$action-setfield $tiddler=<<task-state>> text="open" date="$value$" plan="$value$" caption="$step$"/></$button>
 </$list>
 \end
 
@@ -112,7 +112,7 @@ type: text/vnd.tiddlywiki
 </$button>
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>><<__days__>></$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>!date[$t$]]">
-<$button class="tc-btn-invisible">Update Date<$action-setfield $tiddler=<<task-state>> text="$type$" date="$t$" caption="$step$"/></$button>
+<$button class="tc-btn-invisible">Update Date<$action-setfield $tiddler=<<task-state>> text="$type$" date="$t$" plan="$t$" caption="$step$"/></$button>
 </$list>
 </$list>
 \end
