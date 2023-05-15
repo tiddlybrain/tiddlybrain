@@ -3,7 +3,7 @@ created: 20221213151332719
 creator: yuzijie
 first-search-filter: [all[tiddlers]!tag[Ignore]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>subfilter<subtopic-subfilter>sortsub<topic-level>]
 list-after: $:/custom/search/TopicSearchResultList
-modified: 20230216220435330
+modified: 20230515113631457
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/CurrentSearchResultList
@@ -15,18 +15,20 @@ type: text/vnd.tiddlywiki
 
 //<small>Current matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
-<$list filter="[[$:/temp/subtopic/filter]is[tiddler]]"><small><$button class="search-tool">Remove Sub-Filter
-<$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>
+<$list filter="[[$:/temp/subtopic/filter]is[tiddler]]"><small><$button class="search-tool">
+<$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>Remove Sub-Filter
 </$button></small></$list>
-<$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">Clear Note Filter: {{$:/temp/note/filter!!caption}}
-<$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>
+<$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
+<$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
 </$button></small></$list>
 
 <div style="text-align:center;text-decoration:underline;">Search within:
 <$transclude tiddler={{$:/HistoryList!!current-tiddler}} field="caption"><$view tiddler={{$:/HistoryList!!current-tiddler}} field="title"/></$transclude>
 </div>
 
-<$list filter="[[$:/temp/note/filter]!is[tiddler]]"><$set name="search-filter" value={{{ [<configTiddler>get[first-search-filter]] }}}><<note-filters>></$set></$list>
+<$list filter="[[$:/temp/note/filter]!is[tiddler]]">
+<$set name="search-filter" value={{{ [<configTiddler>get[first-search-filter]] }}}><<note-filters>></$set>
+</$list>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>

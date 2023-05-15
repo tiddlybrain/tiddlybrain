@@ -3,14 +3,16 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]fieldInsensitive:caption<userInput>sort[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20230513134201141
+modified: 20230515114048218
 modifier: yuzijie
-second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!fieldInsensitive:caption<userInput>search:title,caption,shortcap,note,description,keywords<userInput>sort[note]limit[100]]
+second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!fieldInsensitive:caption<userInput>search:title,caption,shortcap,note,description,keywords<userInput>subfilter<note-subfilter>sort[note]limit[100]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
+<$set name="note-subfilter" filter="[[$:/temp/note/filter]get[text]]" emptyValue="[is[tiddler]]" select="0">
+
 //<small>Title matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
@@ -25,6 +27,13 @@ type: text/vnd.tiddlywiki
 
 //<small>All matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
+<$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
+</$button></small></$list>
+
+<$list filter="[[$:/temp/note/filter]!is[tiddler]]">
+<$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]] }}}><<note-filters>></$set>
+</$list>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
@@ -34,5 +43,6 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list>
 
+</$set>
 \end
 <<searchResultList>>
