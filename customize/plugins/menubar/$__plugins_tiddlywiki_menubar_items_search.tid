@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20230412183850558
+modified: 20230515172259664
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 \define cancel-search-actions()
 <$set name="userInput" value={{{ [<__storeTitle__>get[text]] }}}>
-<$list filter="[<__tiddler__>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>] $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab"/>""">
+<$list filter="[<__tiddler__>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>] $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter"/>""">
 <$action-setfield $tiddler=<<__tiddler__>> text=<<userInput>>/><$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 </$set>
