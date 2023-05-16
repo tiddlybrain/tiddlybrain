@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20230409180019360
+modified: 20230516124704607
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -61,9 +61,11 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
 <$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]">@@color:red;Drop Tiddler Here@@</$list>"""><div class="snippet">
-<$button class="tc-btn-invisible links" style="fill:#5778d8;font-size:small;">
+<$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="fill:red;" emptyValue={{{ [all[current]get[color]addprefix[fill:]addsuffix[;]] }}}>
+<$button class="tc-btn-invisible links accordion" style=<<style>>>
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}<$action-deletetiddler $tiddler=<<snippet-accordion-state>>/>" variable="NONE">{{$:/core/images/right-arrow}}<$list filter="[<direct-open>!match[yes]]" emptyMessage=<<open-in-sidebar>> variable="NONE"><$action-setfield $tiddler=<<snippet-accordion-state>> text="open"/></$list></$list>
 </$button>
+</$set>
 <<links>>
 <$button actions=<<snippet-modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
