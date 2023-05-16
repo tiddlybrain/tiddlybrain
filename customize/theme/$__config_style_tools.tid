@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230515114202314
+modified: 20230516124052416
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -52,6 +52,7 @@ button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis;
 .snippet button code {white-space: nowrap;}
 .fold-text {font-size: small; color: #999; font-variant: small-caps;}
 .data-table + .filter-options {padding-top: 0.3em;}
+button.links.accordion {fill: #5778d8; font-size: small;}
 
 /* For Macro: task-list */
 dl.task-list dd {white-space: nowrap;}

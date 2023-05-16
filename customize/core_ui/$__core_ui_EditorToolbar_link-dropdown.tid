@@ -1,4 +1,4 @@
-modified: 20230515172610521
+modified: 20230516121818903
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -34,7 +34,7 @@ type: text/vnd.tiddlywiki
 <$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
 </$set>
-<$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]"/>
+<$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>] $:/temp/note/filter"/>
 <$action-navigate $to=<<title>> $scroll="no"/>
 </$set></$set>
 \end
