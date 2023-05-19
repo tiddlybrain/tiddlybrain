@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230516124052416
+modified: 20230519103159123
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -259,15 +259,7 @@ button.collapse-open, button.collapse-close {width: 100%; fill: #999; white-spac
 button.collapse-open, button.collapse-close {padding: .7em 0 .7em .8em; background: #eee; border-bottom: 1px solid #ddd; border-radius: 0;}
 button.collapse-close {background: #f4f4f4; font-weight: normal;}
 
-/* For Macro: date-pillar */
-.dp-container {flex-basis: 15%; flex-grow: 0; background-color: white; padding: 8px 5px 10px 5px; border: 1px solid #f4f4f4; white-space: nowrap; overflow: hidden; line-height: 25px; border-radius: 7px;}
-.dp-title {font-size: 1.05em; font-variant: small-caps; text-align: center;}
-.dp-title button.tc-tiddlylink {color: brown; font-weight: 500; width: 100%;}
-.dp-content {min-height: 2em; font-size: small;}
-.dp-content ol {padding-left: 15px; margin: 0;}
-.dp-container.today {background: #ffe998;}
-
-/* For Macro: weekly-plan */
+/* For Macro: planner */
 .dot {color: #333; border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7; text-shadow: 0 1px 0 rgb(255 255 255 / 80%);}
 
 /* For Macro: cat-filter-updater */
