@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20230129110939525
+modified: 20230520095608164
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -46,7 +46,7 @@ li pre, li table {margin: 3px 0;}
 
 li > blockquote > p, blockquote > div {margin: 5px 0;}
 
-blockquote {border-width: 4px; margin: 0 0 0 15px; border-color: #aaa;}
+blockquote {border-width: 4px; margin: 0 0 0 15px; border-color: #d5d5d5;}
 
 blockquote cite {margin: 0 0 0.2em 0; display: block;}
 
