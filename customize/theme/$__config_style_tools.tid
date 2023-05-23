@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230519103159123
+modified: 20230523160311101
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -39,7 +39,7 @@ button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis;
 .snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
 .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table {margin: 10px 20px;}
 .snippet-content > h2, .snippet-content > h3, .snippet-content > details {margin-left: 20px;}
-.snippet-content > h3 {margin-top: 10px; margin-bottom: 10px;}
+.snippet-content > h3 {margin-top: 15px; margin-bottom: 15px;}
 .snippet-external {margin: 1em 0; line-height: 0;}
 .snippet-external embed, .snippet-external iframe {height: 600px;}
 .snippet-container .macro-table td {white-space: nowrap;}
@@ -281,7 +281,7 @@ details {padding: 0 0.5em 0 1em;}
 details[open] {border-bottom: 1px solid #eee; border-radius: 3px;}
 details[open] > *:last-child {margin-bottom: 0;}
 details > summary {padding: 0 0 0 1.1em; background: white; margin: 0 -0.5em 0 -1em; transition: padding ease-in .1s;}
-details:hover > summary {background: #f8f8f8; padding-left: 1.3em;}
+details:hover > summary {padding-left: 1.3em;}
 details details {background: white;}
 details details > summary {background: #f8f8f8;}
 .tc-sidebar-lists details > summary {background: #f4f4f4;}
