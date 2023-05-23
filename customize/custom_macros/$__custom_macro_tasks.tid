@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230522202434363
+modified: 20230523200340708
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -42,7 +42,7 @@ type: text/vnd.tiddlywiki
 </$button>
 <$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Done for today" set="!!category" setTo="">
 <$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
-<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/timestamp-off}}
+<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/plus-button}}
 </$button></$list>
 <$list filter="[<dt>!match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Cancel" set="!!category" setTo="">
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/cancel-button}}
@@ -61,7 +61,7 @@ type: text/vnd.tiddlywiki
 </$button>
 <$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Done for today">
 <$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
-<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/timestamp-off}}
+<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/plus-button}}
 </$button></$list>
 <$list filter="[<dt>!match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Cancel">
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/cancel-button}}
