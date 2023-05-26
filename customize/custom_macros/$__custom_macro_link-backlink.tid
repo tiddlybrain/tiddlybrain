@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20230413190550301
+modified: 20230526112843884
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -39,6 +39,14 @@ type: text/vnd.tiddlywiki
 </div></$list>
 <$list filter="[<__mode__>match[cl]]" variable="NONE"><$macrocall $name="collapse" title=<<currentTiddler>> text=<<__text__>> class=<<__class__>> style=<<__style__>>/></$list>
 </$tiddler>
+\end
+
+\define ct(title, text)
+\whitespace trim
+<span style="border-bottom:1px solid #78bb4e;">$text$</span>
+<sup><$list filter="[<__title__>regexp[^http]split[/]nth[3]]" emptyMessage="<$macrocall $name='l' title=<<__title__>>/>">
+<a href="$title$" target="_blank" title="$title$" rel="noopener noreferrer"><<currentTiddler>></a>
+</$list></sup>
 \end
 
 \define bl-pattern() (\[\[|\||;;|"|'|:|\s|^)$(search)$(\]\]|;;|"|'|:|\n|$)
@@ -106,6 +114,10 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   note:"是否显示 note"
   date:"是否显示 date"
   parent:"是否显示 belongs.to">>`
+# ''cite, 显示文字段落的出处''
+#> `<<ct
+  source:"url or tiddler title"
+  text:"quoted text">>`
 # ''按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filter
   item-filter:"所有需要反查的 Tiddlers"
