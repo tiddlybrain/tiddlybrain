@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230528110207088
+modified: 20230528110609786
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -44,7 +44,7 @@ type: text/vnd.tiddlywiki
 </$list>
 </$keyboard></p>
 <$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>
-<p>
+<p style="margin-top:-10px;">
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" content=<<content>> text="Name: {{!!caption}}
 Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> edit="yes"/>New Record</$button>
