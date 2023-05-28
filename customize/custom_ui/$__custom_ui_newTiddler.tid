@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230509155824539
+modified: 20230528110207088
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -56,9 +56,9 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> scroll="no" popup="close"/>New Dir</$button>
 <$button><$macrocall $name="newCodeAction" template=<<template>> caption=<<caption>>/>New Code</$button>
 </p>
-<div style="font-variant:all-petite-caps;margin:-8px 0 -12px;">User defined</div><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="block"/>
-<div style="font-variant:all-petite-caps;margin:-8px 0 -12px;">Attachments</div>
-<p>
+<p style="margin-top:-10px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
+<p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Attachments</p>
+<p style="margin-top:-10px;">
 <$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/jpeg" note="JPG"/>New JPG</$button>
 <$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/png" note="PNG"/>New PNG</$button>
 <$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/gif" note="GIF"/>New GIF</$button>
@@ -69,8 +69,9 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="application/pdf" note="PDF"/>New PDF</$button>
 <$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="audio/mp3" note="MP3"/>New MP3</$button>
 </p>
-</$vars><hr>
-<p>{{$:/custom/ui/path-prefix}}</p>
+</$vars>
+<p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Configurations</p>
+<p style="margin-top:-10px;">{{$:/custom/ui/path-prefix}}</p>
 <p style="margin-top:-10px;">
 <$button message="tm-edit-tiddler" param="$:/config/defaultTemplate" class="tc-btn-invisible">Default Template: @@color:red;{{$:/config/defaultTemplate}}@@</$button>
 </p>

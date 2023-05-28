@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230525092329903
+modified: 20230527114208443
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -289,4 +289,4 @@ details details > summary {background: #f8f8f8;}
 details .snippet-container {padding-left: 10px;}
 details > blockquote {margin-left: 10px;}
 li > details {margin: 0}
-details pre, details code, details .hljs {background: white;}
+details pre, details .hljs {background: white;}
