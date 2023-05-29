@@ -4,8 +4,9 @@ created: 20220226055106060
 creator: yuzijie
 description: Details Macro
 icon: $:/core/images/info-button
-modified: 20220226055808486
+modified: 20230529094106277
 modifier: yuzijie
+shortcuts: ctrl-D
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/details
 type: text/vnd.tiddlywiki
@@ -13,10 +14,10 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
-	prefix='<$details summary="'
-	suffix='">
+	prefix='<$details summary="">
 
-
+'
+	suffix='
 
 </$details>'
 />
