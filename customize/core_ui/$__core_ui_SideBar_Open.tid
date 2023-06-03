@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20230221234912960
+modified: 20230603211940230
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -38,10 +38,9 @@ $button$
 <div class="tc-sidebar-tab-open-item">
 <$macrocall $name="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn">
 <$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/sidebar" text="no"/>
-<$let tv-wikilinks="no"><$macrocall $name="icons"/>
-<$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot;</$list>
-<$view field="title"/>
+<$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot; </$list><$view field="title"/>
 <$list filter="[all[current]get[belongs.to]]">@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$let>
 </$button>
@@ -55,10 +54,9 @@ $button$
 <$macrocall $name="droppable-item" button="""<$list filter="[recentlyClosed[]!is[missing]!{$:/temp/index-tree}limit[1]]">
 <$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:#bbb;margin:0 0 5px 0;">
 <$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
-<$let tv-wikilinks="no"><$macrocall $name="icons"/>
-<$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot;</$list>
-<$view field="title"/>
+<$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
+<$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
 <$list filter="[all[current]get[belongs.to]]">[<$transclude field=caption><$view field=title/></$transclude>]</$list>
 </$let>
 </$button>
