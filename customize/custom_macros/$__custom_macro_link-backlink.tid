@@ -1,12 +1,12 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20230602143952365
+modified: 20230605225110222
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
 type: text/vnd.tiddlywiki
 
-\define l(title, text, class:"l", mode:"link", links, style, description, note:"yes", date, parent)
+\define l(title, text, class:"l", mode:"link", links:"yes", style, description, note:"yes", date, parent)
 \whitespace trim
 <$tiddler tiddler="$title$">
 <$list filter="[<__mode__>match[link]]" variable="NONE"><span style=<<__style__>>><$set name="current" value=<<mTitle>>>
@@ -53,7 +53,7 @@ type: text/vnd.tiddlywiki
 \define bl-limit-state(uid) $:/state/bl-limit/$(current)$/$uid$
 
 \define bl-item(note, date, caption, description, parent)
-<div class="tc-menu-list-item" style="white-space:nowrap;overflow:hidden;"><<links>>
+<div class="tc-menu-list-item" style="white-space:nowrap;overflow:hidden;">
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$macrocall $name="l" title={{!!title}} text=<<__caption__>> class="bl-title" description="$description$" note="$note$" date="$date$" parent="$parent$"/>
 </div>
