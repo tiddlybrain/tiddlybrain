@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20230510135535852
+modified: 20230606081429484
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]contains:$field$[$step$]]" emptyMessage="""''<<linkIfExists "$step$" "$comments$">>''
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$" style="color:coral;">
 <$action-listops $field="$field$" $subfilter="[[$step$]]"/>&#9744;
-</$button>"""><<linkIfExists "$step$" "$comments$">>
+</$button>"""><em><<linkIfExists "$step$" "$comments$">></em>
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$" style="color:coral;">
 <$action-listops $field="$field$" $subfilter="-[[$step$]]"/>&#9746;
 </$button>
