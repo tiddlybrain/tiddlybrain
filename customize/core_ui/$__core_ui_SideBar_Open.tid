@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20230603211940230
+modified: 20230608000815689
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -44,9 +44,11 @@ $button$
 <$list filter="[all[current]get[belongs.to]]">@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$let>
 </$button>
-<div class="sidebar-item-hover"><$button class="tc-btn-invisible sidebar-tab-open-btn" style="font-size:smaller;padding:0;">
-<<open-in-sidebar>>{{$:/core/images/open-window}}
-</$button></div>"""/>
+<span class="sidebar-open-tools">
+<$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button> &middot;
+<$button class="tc-btn-invisible sidebar-tab-open-btn"><<open-in-sidebar>>sidebar</$button> &middot;
+<$button class="tc-btn-invisible sidebar-tab-open-btn"><$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>close</$button>
+</span>"""/>
 </div>
 </$list>
 <$tiddler tiddler="">
@@ -60,9 +62,10 @@ $button$
 <$list filter="[all[current]get[belongs.to]]">[<$transclude field=caption><$view field=title/></$transclude>]</$list>
 </$let>
 </$button>
-<div class="sidebar-item-hover"><$button class="tc-btn-invisible sidebar-tab-open-btn" style="font-size:smaller;padding:0;">
-<<open-in-sidebar>>{{$:/core/images/open-window}}
-</$button></div>
+<span class="sidebar-open-tools">
+<$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button> &middot;
+<$button class="tc-btn-invisible sidebar-tab-open-btn"><<open-in-sidebar>>sidebar</$button>
+</span>
 </$list>
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button>
 <$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">close others</$button>"""/>
