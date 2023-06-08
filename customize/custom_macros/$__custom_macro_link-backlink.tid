@@ -1,28 +1,31 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20230606123926637
+modified: 20230607234842740
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
 type: text/vnd.tiddlywiki
 
-\define l(title, text, class:"l", mode:"link", links:"yes", style, description, note:"yes", date, parent)
+\define l(title, text, class:"l", mode:"link", links:"yes", style, description, note:"yes", date, parent, status)
 <$tiddler tiddler="$title$">
 <$list filter="[<__mode__>match[link]]" variable="NONE"><span style=<<__style__>>><$set name="current" value=<<mTitle>>>
+<$list filter="[<__status__>match[yes]]" variable="NONE">
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
+</$list>
 <$list filter="[<__links__>match[yes]]" variable="NONE"><<links>></$list>
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink $class$">
 <$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
 <$list filter="[<__note__>match[yes]]" variable="NONE">
-<$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">&#32;@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
 </$list>
 <$list filter="[<__parent__>match[yes]]" variable="NONE">
-<$list filter="[all[current]get[belongs.to]]">&#32;@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+<$list filter="[all[current]get[belongs.to]]">@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$list>
-<$list filter="[<__date__>match[yes]]" variable="NONE">&#32;<span style="color:#666;">
+<$list filter="[<__date__>match[yes]]" variable="NONE"><span style="color:#666;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
 </span></$list>
 <$list filter="[<__description__>match[yes]]" variable="NONE">
-<$list filter="[all[current]has[description]]">@@color:#aaa;&#32;-&#32;{{!!description}}@@</$list>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$list>
 </$button>
 </$set></span></$list>
@@ -34,7 +37,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
-<div style="text-align:right;font-size:small;margin-top:-1em;">&#10033;&nbsp;<$macrocall $name="l" links="yes" title=<<currentTiddler>> description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>>/></div>
+<div style="text-align:right;font-size:small;margin-top:-1em;">&#10033;&nbsp;<$macrocall $name="l" links="yes" title=<<currentTiddler>> description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status=<<__status__>>/></div>
 </div></$list>
 <$list filter="[<__mode__>match[cl]]" variable="NONE"><$macrocall $name="collapse" title=<<currentTiddler>> text=<<__text__>> class=<<__class__>> style=<<__style__>>/></$list>
 </$tiddler>
@@ -54,7 +57,7 @@ type: text/vnd.tiddlywiki
 \define bl-item(note, date, caption, description, parent)
 <div class="tc-menu-list-item" style="white-space:nowrap;overflow:hidden;">
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-<$macrocall $name="l" title={{!!title}} text=<<__caption__>> class="bl-title" description="$description$" note="$note$" date="$date$" parent="$parent$"/>
+<$macrocall $name="l" title={{!!title}} text=<<__caption__>> class="bl-title" description="$description$" note="$note$" date="$date$" parent="$parent$" status="yes"/>
 </div>
 \end
 
@@ -112,7 +115,8 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   description:"是否显示 Description"
   note:"是否显示 note"
   date:"是否显示 date"
-  parent:"是否显示 belongs.to">>`
+  parent:"是否显示 belongs.to"
+  status:"是否显示 status">>`
 # ''cite, 显示文字段落的出处''
 #> `<<ct
   source:"url or tiddler title"
