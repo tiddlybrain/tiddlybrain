@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230528143319242
+modified: 20230608172833612
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -227,7 +227,7 @@ button.l {line-height: inherit;}
 /* For Macro: links */
 a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
 .links svg {transform: translateY(-1px);}
-.links svg.tc-image-mono-block, .links svg.tc-image-file, .table-links .links svg {transform: none;}
+.links svg.tc-image-mono-block, .table-links .links svg {transform: none;}
 
 /* For Macro: links, modal code viewer, highlight.js */
 .code-viewer {border: 1px solid #cccccc; display: flex;}
