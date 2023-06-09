@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230520100016458
+modified: 20230609212314927
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -149,7 +149,23 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define modal-buttons()
+\define modal-subtitle()
+<$list filter="[<mTitle>!is[missing]]">
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<<status-selector>>
+<<verification-notice>>
+<$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
+<div style="float:right;font-size:smaller;margin-right:1px;"><$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
+<$button message="tm-copy-to-clipboard" class="tc-btn-invisible" style="margin-right:3px;" param=<<mTitle>>><<mTitle>></$button>
+<$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue=<<content>> select="0">
+<$button message="tm-copy-to-clipboard" param=<<step-template>> style="fill:#666;" tooltip="Copy as a step" class="tc-btn-invisible">{{$:/core/images/timestamp-on}}</$button>
+</$set>
+</$let></div>
+</$list>
+\end
+
+\define modal-footer()
 <$list filter="[enlist{$:/state/modal/history!!list}last[]]"><span style="float:left;" class="modal-buttons">
 <$button dragTiddler={{!!title}} tooltip={{!!title}} class="l tc-btn-invisible tc-tiddlylink">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
@@ -334,8 +350,10 @@ type: text/vnd.tiddlywiki
   old:"原分隔符">>`
 # ''点击链接以后弹出 Modal 的动作''
 #> `<<modal-actions>>`
-# ''Modal 的 Footer 的按钮''
-#> `<<modal-buttons>>`
+# ''Modal 的 Subtitle''
+#> `<<modal-subtitle>>`
+# ''Modal 的 Footer''
+#> `<<modal-footer>>`
 # ''在 code-modal 里面的一个 Button, 用于编辑注释''
 #> `<<modal-edit-comment>>`
 # ''展示 Tiddler 之间的关联关系''

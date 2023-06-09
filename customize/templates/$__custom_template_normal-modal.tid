@@ -1,9 +1,9 @@
 created: 20210516172453585
 creator: yuzijie
-footer: <<modal-buttons>>
-modified: 20230408051107030
+footer: <<modal-footer>>
+modified: 20230609205138776
 modifier: yuzijie
-subtitle: <$list filter="[<mTitle>!is[missing]]"><$transclude field="caption"><$view field="title"/></$transclude> <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> <<status-selector>> <<verification-notice>> <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list><div style="float:right;font-size:smaller;"><$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>><<mTitle>></$button></div></$list>
+subtitle: <<modal-subtitle>>
 tags: customized
 title: $:/custom/template/normal-modal
 type: text/vnd.tiddlywiki
