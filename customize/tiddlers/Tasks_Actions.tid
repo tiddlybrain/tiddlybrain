@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230522202105702
+modified: 20230610134328447
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -55,9 +55,9 @@ type: text/vnd.tiddlywiki
 </$set>
 </$list></$list>
 
-<$list filter="[<journal-title>is[tiddler]]">
+<$list filter="[<journal-title>is[tiddler]]"><$droppable actions=<<droppable-date-action>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
 <h2><$button to=<<journal-title>> class="tc-btn-invisible" style="font-weight:500;">Review (<$transclude tiddler=<<journal-title>> field="caption"/>)</$button></h2>
-<table style="width:100%;background:white;table-layout:fixed;"><$droppable actions=<<droppable-date-action>> tag="tbody">
+<table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>规划任务</th><th>执行情况</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:24px;"><$set name="currTask" value=<<task>>>
 <td><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:4px 0;">
@@ -71,18 +71,18 @@ type: text/vnd.tiddlywiki
 </div></$set>
 </$list></td>
 </$set></tr></$list>
-</$droppable></table>
+</tbody></table>
 <<data-table filter:"[all[current]indexes[]!tag[Task]]">>
-</$list>
+</div></$droppable></$list>
 
 <$droppable actions="<$action-setfield $tiddler=<<actionTiddler>> interval=1/>" tag="div"><div class="tc-droppable-placeholder" style="display:block;">
 <h2 style="margin-bottom:15px;color:#333;font-weight:500;">Verification Required</h2>
-<ol><$list filter="[has[interval]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
-<$list filter="[all[current]!days:date<interval>]"><li><$macrocall $name="l" title={{!!title}}/></li></$list>
-</$set></$list></ol>
+<$list filter="[has[interval]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
+<$list filter="[all[current]!days:date<interval>]"><div><$macrocall $name="l" title={{!!title}}/></div></$list>
+</$set></$list>
 <$list filter="[has[interval]date<today>limit[1]]" variable="NONE">
 <h3 style="margin-bottom:15px;color:#333;font-weight:500;">Verified Today</h3>
-<ol><$list filter="[has[interval]date<today>]"><li><$macrocall $name="l" title={{!!title}}/></li></$list></ol>
+<$list filter="[has[interval]date<today>]"><div><$macrocall $name="l" title={{!!title}}/></div></$list>
 </$list>
 </div></$droppable>
 
