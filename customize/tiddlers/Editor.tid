@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230531211529788
+modified: 20230610175428810
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -95,6 +95,8 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$:/core/ui/EditorToolbar/bold"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/mono-line"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/linkify"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/list-bullet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/list-number"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/code"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
