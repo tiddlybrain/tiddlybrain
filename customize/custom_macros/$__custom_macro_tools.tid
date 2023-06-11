@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230609212314927
+modified: 20230611210216664
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -156,10 +156,10 @@ type: text/vnd.tiddlywiki
 <<status-selector>>
 <<verification-notice>>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
-<div style="float:right;font-size:smaller;margin-right:1px;"><$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
-<$button message="tm-copy-to-clipboard" class="tc-btn-invisible" style="margin-right:3px;" param=<<mTitle>>><<mTitle>></$button>
+<div style="float:right;font-size:smaller;"><$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
+<$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>><<mTitle>></$button> &middot;
 <$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue=<<content>> select="0">
-<$button message="tm-copy-to-clipboard" param=<<step-template>> style="fill:#666;" tooltip="Copy as a step" class="tc-btn-invisible">{{$:/core/images/timestamp-on}}</$button>
+<$button message="tm-copy-to-clipboard" param=<<step-template>> tooltip="Copy as a step" class="tc-btn-invisible">STEP</$button>
 </$set>
 </$let></div>
 </$list>
