@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230615215850053
+modified: 20230616114601281
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -43,7 +43,7 @@ type: text/vnd.tiddlywiki
 <$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
 <$set name="keywords" filter="[{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]]" select="0">
 <$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE">
-<$button style="margin-left:5px;" tooltip="Update Keywords">Keywords<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/></$button>
+<$button style="margin-left:5px;background:red;" tooltip="Update Keywords">Keywords<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/></$button>
 </$list>
 </$set>
 </$set>

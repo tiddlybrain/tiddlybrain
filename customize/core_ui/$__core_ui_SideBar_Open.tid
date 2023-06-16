@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20230608000815689
+modified: 20230616124359256
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -46,7 +46,7 @@ $button$
 </$button>
 <span class="sidebar-open-tools">
 <$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button> &middot;
-<$button class="tc-btn-invisible sidebar-tab-open-btn"><<open-in-sidebar>>sidebar</$button> &middot;
+<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button> &middot;
 <$button class="tc-btn-invisible sidebar-tab-open-btn"><$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>close</$button>
 </span>"""/>
 </div>
@@ -64,7 +64,7 @@ $button$
 </$button>
 <span class="sidebar-open-tools">
 <$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button> &middot;
-<$button class="tc-btn-invisible sidebar-tab-open-btn"><<open-in-sidebar>>sidebar</$button>
+<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button>
 </span>
 </$list>
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button>
