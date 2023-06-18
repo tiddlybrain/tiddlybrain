@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20230516125406385
+modified: 20230618122936899
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -30,7 +30,7 @@ type: text/vnd.tiddlywiki
 
 \define record(filter:"[tag<currentTiddler>!sort[date]]", uid:"1")
 <$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
-<$set name="border-color" filter="[<tv-story-list>contains<currentTiddler>]" value="border-left-color:red;" emptyValue={{{ [all[current]get[color]addprefix[border-left-color:]addsuffix[;]] }}}>
+<$set name="border-color" filter="[<tv-story-list>contains<currentTiddler>]" value="border-left-color:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[border-left-color:]addsuffix[;]] }}}>
 <blockquote class="tc-quote record" style=<<border-color>>><$list filter="[all[current]has[caption]]" emptyMessage=<<record-item-no-caption>>>
 <$set name="class" filter="[all[current]!search:caption:literal[{{!!text}}]!code-body[yes]!is[image]then[yes]] -[[$(direct-open)$]match[yes]]" value="single-line-record" emptyValue="">
 <div class=<<class>>>
