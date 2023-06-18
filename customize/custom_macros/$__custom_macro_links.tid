@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20230520195411611
+modified: 20230618100244730
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -57,10 +57,12 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[all[current]get[belongs.to]]"><div class="external-links" style="background:#fff3c9;">
 <$set name="direct-open" value="yes"><$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
-<$list filter="[[$(modal)$]!match[yes]]"><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/></$list>
+<$list filter="[[$(modal)$]!match[yes]]"><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/></$list>&#11180;
+</$button></$set>
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:#2b8a2b;[{{!!note}}]@@</$list>
-</$button></$set>
+</$button>
 <$list filter="[all[current]get[belongs.to]getAllParents[]]">&lt;
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$transclude field="caption"><$view field="title"/></$transclude>
