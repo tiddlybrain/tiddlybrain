@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230615221304949
+modified: 20230622203802319
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -14,13 +14,15 @@ type: text/vnd.tiddlywiki
 .description {color: #aaa;}
 
 /* For Macro: display */
-.tips, .warning, .danger {display: inline-block; border-radius: 0.2rem; padding: 0 0.75rem 0 0.55rem;}
+.tips, .warning, .danger, .question {display: inline-block; border-radius: 0.2rem; padding: 0 0.75rem 0 0.55rem;}
 .tips {color: #31708f; background-color: #d9edf7; border-color: #bce8f1;}
 .tips::before {content: '💡 ';}
 .warning {color: #8a6d3b; background-color: #ffef9b; border-color: #faebcc;}
 .warning::before {content: '⚠️ ';}
 .danger {color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
 .danger::before {content: '⛔ ';}
+.question {color: #0f8c91; background-color: #b0fcff; border-color: #6ebabd;}
+.question::before {content: '❓ ';}
 .code-wrap {background-color: #f8f8f8; border: 1px solid #ccc; border-radius: 3px; padding: 1em;}
 .code-wrap pre {border: none; background-color: transparent; margin: 0; padding: 0 !important; line-height: 22px;}
 .code-wrap .highlight pre .hljs {background-color: #ffe5f5;}
