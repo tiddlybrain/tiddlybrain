@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230623115043441
+modified: 20230623125324906
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -61,11 +61,11 @@ type: text/vnd.tiddlywiki
 
 \define editor-display()
 <$tiddler tiddler=<<draft>>><<editor-title>>
-<div class="editor-display"><$tiddler tiddler={{!!draft.of}}>
+<div class="editor-display">
 <$transclude tiddler="$:/core/ui/ViewTemplate/tags"/>
 <$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
 <$transclude tiddler="$:/core/ui/ViewTemplate/body"/>
-</$tiddler></div>
+</div>
 </$tiddler>
 \end
 
@@ -96,7 +96,9 @@ type: text/vnd.tiddlywiki
 <$reveal type="match" state="$:/state/editor-display" text="show">
 <$button set="$:/state/editor-display" setTo="hide">{{$:/core/images/preview-open}}</$button>
 </$reveal>
-<$list filter="[<draft>!has[draft.of]]" emptyMessage=<<editor-display>>>
+<$list filter="[<draft>!has[draft.of]]" emptyMessage="""<$list filter="[<draft>get[draft.of]]" variable="draft-title">
+<$set name="draft" filter="[{$:/state/editor-display}match[show]]" value=<<draft-title>> emptyValue=<<draft>>><<editor-display>></$set>
+</$list>""">
 <$reveal type="nomatch" state="$:/state/editor-display" text="show"><<editor-title>>
 <$set name="edit-area-class" filter="[[$:/temp/Draft]!has[draft]]" value="edit-area tc-edit-texteditor" emptyValue="edit-area tc-edit-texteditor red">
 <$list filter="[all[current]!has[_canonical_uri]!is[image]!tag[customized]]" variable="NONE"><$edit-text tag="textarea" autoHeight="no" class=<<edit-area-class>>>
