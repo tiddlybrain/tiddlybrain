@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230616114601281
+modified: 20230623115043441
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -60,13 +60,12 @@ type: text/vnd.tiddlywiki
 \end
 
 \define editor-display()
-<$tiddler tiddler=<<draft>>>
-<<editor-title>>
-<div class="editor-display">
+<$tiddler tiddler=<<draft>>><<editor-title>>
+<div class="editor-display"><$tiddler tiddler={{!!draft.of}}>
 <$transclude tiddler="$:/core/ui/ViewTemplate/tags"/>
 <$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
 <$transclude tiddler="$:/core/ui/ViewTemplate/body"/>
-</div>
+</$tiddler></div>
 </$tiddler>
 \end
 
