@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230609214623439
+modified: 20230624092118209
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -113,7 +113,7 @@ type: text/vnd.tiddlywiki
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
 <$droppable actions=<<task-list-droppable-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
-<$set name="date-style" filter="[<dt>match<today>]" value="color:red;" emptyValue="color:#333;">
+<$set name="date-style" filter="[<dt>match<today>]" value="color:red;font-size:large;" emptyValue="color:#333;">
 <$button set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible" style=<<date-style>>>
 <$action-setfield $tiddler="$:/state/tasks-924879352" text="Tasks/Actions"/><<date-title>>
 </$button>

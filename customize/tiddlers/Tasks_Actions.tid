@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230610134328447
+modified: 20230624091451015
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -24,18 +24,19 @@ type: text/vnd.tiddlywiki
 
 <div style="text-align:center;margin-bottom:10px;">
 <$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
-<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible">{{$:/core/images/chevron-left}}</$button>
+<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="padding-right:4px;">{{$:/core/images/chevron-left}}</$button>
 </$set>
-@@color:#333;<$macrocall $name="format-date" date=<<curDate>> template="ddd"/>@@
-<$edit-text tiddler="$:/temp/plan/date" default=<<now YYYY0MM0DD>> tag="input" size="5"/>
-<$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]" emptyMessage="<$button disabled=yes>Today</$button>">
-<$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
+<$button to=<<journal-title>> class="tc-btn-invisible"><$tiddler tiddler=<<journal-title>>><$transclude field="caption"/></$tiddler></$button>
+<$edit-text tiddler="$:/temp/plan/temp-date" default=<<now YYYY0MM0DD>> tag="input" size="5"/>
+<$list filter="[[$:/temp/plan/temp-date]is[tiddler]get[text]regexp<date-pattern>]">
+<$button set="$:/temp/plan/date" setTo={{$:/temp/plan/temp-date}}><$action-deletetiddler $tiddler="$:/temp/plan/temp-date"/>Set</$button>
 </$list>
+<$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Add Date
 <$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" date=<<curDate>> caption="<$macrocall $name=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" text="日记: <<bl>>" kw="10em"/>
 </$button></$list>
 <$set name="right" filter="[<curDate>nextDay[1]]" select="0">
-<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible">{{$:/core/images/chevron-right}}</$button>
+<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="padding-left:6px;">{{$:/core/images/chevron-right}}</$button>
 </$set>
 </div>
 
@@ -56,7 +57,6 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 
 <$list filter="[<journal-title>is[tiddler]]"><$droppable actions=<<droppable-date-action>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
-<h2><$button to=<<journal-title>> class="tc-btn-invisible" style="font-weight:500;">Review (<$transclude tiddler=<<journal-title>> field="caption"/>)</$button></h2>
 <table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>规划任务</th><th>执行情况</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:24px;"><$set name="currTask" value=<<task>>>
