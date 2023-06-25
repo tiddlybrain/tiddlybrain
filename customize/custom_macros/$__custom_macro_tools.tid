@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230611210216664
+modified: 20230625113444579
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -228,7 +228,6 @@ type: text/vnd.tiddlywiki
 \define tiddler-open(tiddler)
 <$list filter="[<__tiddler__>is[tiddler]]"><$action-navigate $to=<<__tiddler__>>/>
 <$action-deletetiddler $filter="[<__tiddler__>addprefix[$:/state/folded/]is[tiddler]]"/>
-<$action-deletetiddler $filter="[prefix[$:/state/snippet-limit/]] [prefix[$:/state/snippet-accordion/]] [prefix[$:/state/bl-limit/]]"/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<__tiddler__>] +[putfirst[]]"/>
 </$list>
 \end
