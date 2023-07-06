@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20230516121632516
+modified: 20230706174823401
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -55,8 +55,12 @@ type: text/vnd.tiddlywiki
 </$button>
 </$reveal>
 <$tiddler tiddler={{$:/HistoryList!!current-tiddler}}>
-<$button to="$:/AdvancedSearch" dragTiddler={{!!title}} tooltip={{!!caption}} class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">
-<<advanced-search-actions>>{{$:/core/images/advanced-search-button}}
+<$button class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">{{$:/core/images/advanced-search-button}}
+<$list filter="[{$:/state/tab/search-results/sidebar}!match[$:/custom/search/ExternalSearchResultList]]" emptyMessage=<<advanced-search-actions>>>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
+</$list>
 </$button>
 </$tiddler>
 </span>
