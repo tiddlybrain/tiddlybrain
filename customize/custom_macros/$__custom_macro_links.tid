@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20230618115643079
+modified: 20230708145848383
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -19,11 +19,6 @@ type: text/vnd.tiddlywiki
 </$set></$list>
 <$list filter="[all[current]get[dir]]" variable="path"><$set name="path-prefix" value={{$:/config/index-tree!!path}}>
 <$button class="tc-btn-invisible links" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>{{$:/core/images/folder}}</$button>
-</$set></$list>
-<$list filter="[all[current]code-body[yes]]"><$set name="code-style" filter="[tag[Comment]belongs.to<currentTiddler>]" value="fill:red;" emptyValue="">
-<$button class="tc-btn-invisible links" style=<<code-style>>>{{$:/core/images/mono-block}}
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mTitle={{!!title}} mContent={{!!text}}/>
-</$button>
 </$set></$list>
 \end
 
