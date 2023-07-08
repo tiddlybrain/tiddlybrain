@@ -13,26 +13,25 @@
     ],
     "build": {
         "index": [
-            "--rendertiddler",
+            "--render",
             "$:/plugins/tiddlywiki/tiddlyweb/save/offline",
             "index.html",
             "text/plain"
         ],
         "static": [
-            "--rendertiddler",
+            "--render",
             "$:/core/templates/static.template.html",
             "static.html",
             "text/plain",
-            "--rendertiddler",
+            "--render",
             "$:/core/templates/alltiddlers.template.html",
             "alltiddlers.html",
             "text/plain",
-            "--rendertiddlers",
+            "--render",
             "[!is[system]]",
-            "$:/core/templates/static.tiddler.html",
-            "static",
+            "[encodeuricomponent[]addprefix[static/]addsuffix[.html]]",
             "text/plain",
-            "--rendertiddler",
+            "--render",
             "$:/core/templates/static.template.css",
             "static/static.css",
             "text/plain"

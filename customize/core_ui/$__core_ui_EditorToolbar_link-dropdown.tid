@@ -1,4 +1,4 @@
-modified: 20230516121818903
+modified: 20230708195027977
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -57,12 +57,12 @@ type: text/vnd.tiddlywiki
 </$keyboard>
 &#32;
 <$reveal tag="span" state=<<storeTitle>> type="nomatch" text="">
-<$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-3px);">
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-2px);">
 <$macrocall $name="new-link-actions" template={{$:/config/defaultTemplate}}/>
 {{$:/core/images/new-button}}
 </$button>
 &#32;
-<$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-3px);">
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-2px);">
 <<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
 {{$:/core/images/close-button}}
 </$button>
