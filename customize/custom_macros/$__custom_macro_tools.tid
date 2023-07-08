@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230629173551028
+modified: 20230708151538264
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -158,9 +158,11 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;"><$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
 <$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>><<mTitle>></$button> &middot;
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="""<$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mContent>>>copy content</$button>""">
 <$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue=<<content>> select="0">
 <$button message="tm-copy-to-clipboard" param=<<step-template>> tooltip="Copy as a step" class="tc-btn-invisible">STEP</$button>
 </$set>
+</$list>
 </$let></div>
 </$list>
 \end
