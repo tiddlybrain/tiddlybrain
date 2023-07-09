@@ -1,26 +1,15 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20230503073935765
+modified: 20230708234817167
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
 type: text/vnd.tiddlywiki
 
-\define search-google() https://www.google.com/search?q=$(search)$
-\define search-google-map() https://www.google.com/maps/search/$(search)$?hl=en&source=opensearch
-\define search-youtube() https://www.youtube.com/results?search_query=$(search)$
-\define search-it-en() https://www.wordreference.com/iten/$(search)$
-\define coniugazione() https://www.coniugazione.it/cerca/index.php?l=it&q=$(search)$
-\define search-thelocal() https://feeds.thelocal.com/app/ios/article.php?id=$(search)$
-
 Search for ''“{{$:/temp/menubarsearch/input}}”''
+<small><$button class="search-tool" message="tm-new-tiddler" param="$:/custom/search/ExternalLink/Google">Add New Search</$button></small>
 
-<$set name="search" filter="[[$:/temp/menubarsearch/input]get[text]]" select="0">
-<a href=<<search-google>> target="_blank" rel="noopener noreferrer" style="display:block;">Google Web Search</a>
-<a href=<<search-google-map>> target="_blank" rel="noopener noreferrer" style="display:block;">Google Map</a>
-<a href=<<search-youtube>> target="_blank" rel="noopener noreferrer" style="display:block;">Youtube</a>
-<a href=<<search-it-en>> target="_blank" rel="noopener noreferrer" style="display:block;">Italian Dictionary</a>
-<a href=<<coniugazione>> target="_blank" rel="noopener noreferrer" style="display:block;">Coniugazione.it</a>
-<a href=<<search-thelocal>> target="_blank" rel="noopener noreferrer" style="display:block;">TheLocal.it Feed</a>
-</$set>
+<$let search={{$:/temp/menubarsearch/input}}>
+<$list filter="[prefix[$:/custom/search/ExternalLink/]sort[order]]">{{!!text}}</$list>
+</$let>

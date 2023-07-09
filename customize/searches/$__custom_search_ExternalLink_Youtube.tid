@@ -1,0 +1,10 @@
+caption: Youtube Search
+created: 20230708231505202
+creator: yuzijie
+modified: 20230708233312375
+modifier: yuzijie
+tags: customized
+title: $:/custom/search/ExternalLink/Youtube
+type: text/vnd.tiddlywiki
+
+<a href=`https://www.youtube.com/results?search_query=$(search)$` target="_blank" rel="noopener noreferrer" style="display:block;margin-bottom:5px;">{{!!caption}}</a>
