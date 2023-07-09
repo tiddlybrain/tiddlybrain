@@ -1,4 +1,4 @@
-modified: 20221122130934663
+modified: 20230709184651067
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/core/macros/tag
@@ -24,7 +24,7 @@ color:$(foregroundColor)$;
 >
 	<<__actions__>>
 	<$transclude tiddler=<<__icon__>>/>
-	<$view tiddler=<<__tag__>> field="title" format="text" />
+	<$transclude tiddler=<<__tag__>> field=caption><$view tiddler=<<__tag__>> field=title/></$transclude>
 </$element-tag$>
 \end
 
