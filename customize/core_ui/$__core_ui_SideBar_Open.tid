@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20230616124359256
+modified: 20230727201909634
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -67,8 +67,8 @@ $button$
 <$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button>
 </span>
 </$list>
-<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button>
-<$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">close others</$button>"""/>
+<$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">close others</$button>
+<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button>"""/>
 </div>
 </$tiddler>
 </div>
