@@ -1,6 +1,7 @@
 caption: {{$:/core/images/export-button}} {{$:/language/Buttons/ExportTiddler/Caption}}
 description: {{$:/language/Buttons/ExportTiddler/Hint}}
-modified: 20220910150753846
+list-after: $:/core/ui/Buttons/delete
+modified: 20230808172540606
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/export-tiddler

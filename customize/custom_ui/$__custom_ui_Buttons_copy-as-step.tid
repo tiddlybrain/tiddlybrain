@@ -2,8 +2,8 @@ caption: Copy as a step
 created: 20220118202607895
 creator: yuzijie
 description: Copy current tiddler as a step to the clipboard
-list-after: $:/core/ui/Buttons/fold
-modified: 20230609204448629
+list-after: $:/custom/ui/Buttons/external-search
+modified: 20230808172436167
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/copy-as-step

@@ -2,8 +2,8 @@ caption: External Search
 created: 20230427183739492
 creator: yuzijie
 description: Search External Websites
-list-before: $:/custom/ui/Buttons/copy-as-step
-modified: 20230428154121953
+list-after: $:/core/ui/Buttons/fold
+modified: 20230808172419600
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized $:/tags/EditToolbar
 title: $:/custom/ui/Buttons/external-search

@@ -1,7 +1,7 @@
 caption: {{$:/core/images/clone-button}} {{$:/language/Buttons/Clone/Caption}}
 description: {{$:/language/Buttons/Clone/Hint}}
-list-before: $:/core/ui/Buttons/delete
-modified: 20221001075943374
+list-after: $:/custom/ui/Buttons/copy-as-step
+modified: 20230808172453762
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/clone
