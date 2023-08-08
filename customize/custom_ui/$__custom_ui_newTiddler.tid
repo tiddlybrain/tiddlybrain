@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230708234319241
+modified: 20230808202141779
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -32,46 +32,47 @@ type: text/vnd.tiddlywiki
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]]"><$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>>/></$list>
 </$button></$list>
 <p><$keyboard key="alt+enter" actions="<$macrocall $name=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}} scroll=no/>" tag="div">
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="30" class="new-tiddler-input-box" placeholder="Caption" default="" focus="yes"/>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="caption" default="" focus="yes"/>
 <$set name="newValue" filter="[[$:/temp/newTiddler]get[text]] [<now YYYY-0MM-0DD>] +[join[ ]]" select="0">
 <$button set="$:/temp/newTiddler" setTo=<<newValue>> tabindex="-1" class="tc-btn-invisible">📆</$button>
 </$set>
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" class="tc-btn-invisible" tooltip="Edit Configurations" tabindex="-1">⚙️</$button><br>
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="30" class="new-tiddler-input-box" placeholder="Description/path/url/dir/attachment" field="description"/>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="desc./path/url/dir/att." field="description"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
 <$button class="tc-btn-invisible"><$macrocall $name=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}} scroll=no/>➕</$button>
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
 </$keyboard></p>
 <$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>
-<p style="margin-top:-6px;">
+<p style="margin-top:-3px;">
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" content=<<content>> text="Name: {{!!caption}}
 Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> edit="yes"/>New Record</$button>
-<$button><$macrocall $name="newTaskAction" template=<<template>> caption=<<caption>>/>New Task</$button>
+<$button><$macrocall $name="newTaskAction" template=<<template>> caption=<<caption>>/>Task</$button>
+<$button><$macrocall $name="newCodeAction" template=<<template>> caption=<<caption>>/>Code</$button>
 </p>
 <p style="margin-top:-10px;">
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> scroll="no" popup="close"/>New File</$button>
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> scroll="no" popup="close"/>New Link</$button>
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> scroll="no" popup="close"/>New Dir</$button>
-<$button><$macrocall $name="newCodeAction" template=<<template>> caption=<<caption>>/>New Code</$button>
 </p>
 <p style="margin-top:-10px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
 <p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Attachments</p>
-<p style="margin-top:-6px;">
-<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/jpeg" note="JPG"/>New JPG</$button>
-<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/png" note="PNG"/>New PNG</$button>
-<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/gif" note="GIF"/>New GIF</$button>
-<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/svg+xml" note="SVG"/>New SVG</$button>
+<p style="margin-top:-3px;">
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/jpeg" note="JPG"/>JPG</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/png" note="PNG"/>PNG</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/gif" note="GIF"/>GIF</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/svg+xml" note="SVG"/>SVG</$button>
 </p>
 <p style="margin-top:-10px;">
-<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="text/html" note="HTML"/>New HTML</$button>
-<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="application/pdf" note="PDF"/>New PDF</$button>
-<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="audio/mp3" note="MP3"/>New MP3</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="text/html" note="HTML"/>HTML</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="application/pdf" note="PDF"/>PDF</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="audio/mp3" note="MP3"/>MP3</$button>
+<$button><$macrocall $name="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="video/mp4" note="MP4"/>MP4</$button>
 </p>
 </$vars>
 <p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Configurations</p>
-<p style="margin-top:-6px;">{{$:/custom/ui/path-prefix}}</p>
+<p style="margin-top:-3px;">{{$:/custom/ui/path-prefix}}</p>
 <p style="margin-top:-10px;">
 <$button message="tm-edit-tiddler" param="$:/config/defaultTemplate" class="tc-btn-invisible">Default Template: @@color:red;{{$:/config/defaultTemplate}}@@</$button>
 </p>
