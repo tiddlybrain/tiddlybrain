@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20230727201909634
+modified: 20230808165131858
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -46,7 +46,10 @@ $button$
 </$button>
 <span class="sidebar-open-tools">
 <$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button> &middot;
-<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button> &middot;
+<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
+<$action-deletetiddler $tiddler="$:/temp/Draft"/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-navigate/>
+</$button> &middot;</$list>
 <$button class="tc-btn-invisible sidebar-tab-open-btn"><$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>close</$button>
 </span>"""/>
 </div>
@@ -63,8 +66,11 @@ $button$
 </$let>
 </$button>
 <span class="sidebar-open-tools">
-<$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button> &middot;
-<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button>
+<$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
+<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible sidebar-tab-open-btn">edit
+<$action-deletetiddler $tiddler="$:/temp/Draft"/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-navigate/>
+</$button></$list>
 </span>
 </$list>
 <$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">close others</$button>
