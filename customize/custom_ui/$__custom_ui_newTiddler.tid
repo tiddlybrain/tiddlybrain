@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230808202141779
+modified: 20230809070728757
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
-<$reveal type="match" state="$:/status/IsReadOnly" text="yes" tag="div">The Wiki is Read Only</$reveal>
+<$reveal type="match" state="$:/status/IsReadOnly" text="yes" tag="div">This Wiki is Read Only</$reveal>
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes" tag="div">
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]limit[1]]"><$button class="tc-btn-invisible">Save All
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]]"><$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>>/></$list>

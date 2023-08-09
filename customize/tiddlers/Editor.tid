@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230808183809543
+modified: 20230809070715371
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -75,6 +75,7 @@ type: text/vnd.tiddlywiki
 </$tiddler>
 \end
 
+<$reveal type="match" state="$:/status/IsReadOnly" text="yes">This Wiki is Read Only</$reveal>
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
 <$set name="draft" filter="[[$:/temp/Draft]get[draft]]" emptyValue={{$:/HistoryList!!current-tiddler}} select="0">
 <$reveal type="nomatch" state="$:/state/editor-toolbar" text="show" tag="div">
