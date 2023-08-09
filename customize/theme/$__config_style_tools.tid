@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230622203802319
+modified: 20230809104611624
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -233,10 +233,13 @@ a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
 
 /* For Macro: links, modal code viewer, highlight.js */
 .code-viewer {border: 1px solid #cccccc; display: flex;}
-.code-viewer pre {flex: 1 0 62%; margin: 0; border: none; border-radius: 0;}
-.code-viewer pre code {font-size: 1em;}
-.code-viewer textarea {flex: 0 0 38%; border: none; white-space: pre; font-size: 1em; line-height: 23px; padding: 12px 8px 0; height: 2000px !important; border-radius: 0;}
-.code-viewer textarea.heightless {height: unset !important;}
+.code-viewer > pre {flex: 1 0 62%; margin: 0; border: none; border-radius: 0;}
+.code-viewer > pre code {font-size: 1em;}
+.code-viewer > textarea {flex: 0 0 38%; border: none; white-space: pre; font-size: 1em; line-height: 23px; padding: 12px 8px 0; height: 2000px !important; border-radius: 0;}
+.code-viewer > textarea.heightless {height: unset !important;}
+.code-viewer > .comment {flex: 0 0 38%; overflow: auto;}
+.code-viewer > .comment pre {margin: 0; border: none; border-radius: 0; background: transparent;}
+.code-viewer > .comment pre code {font-size: 1em; background: transparent;}
 
 /* For Macro: filter-options */
 .select-filter {vertical-align: bottom; height: 18px; width: 14px; border: none; background: transparent;}

@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230809070715371
+modified: 20230809110218351
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -132,6 +132,8 @@ type: text/vnd.tiddlywiki
 <$button message="tm-copy-to-clipboard" param=<<now YYYY-0MM-0DD>>>📋TO-DAY</$button>
 </$edit-text></$list>
 </$set>
+</$reveal>
+<$reveal type="match" state="$:/state/editor-display" text="show" tag="div"><<editor-display>></$reveal>
 <table style="width:100%;margin:0;"><tbody>
 <$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] note date path url dir interval order kw question shortcap" variable="fieldName"><tr>
 <td style="width:100px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
@@ -140,8 +142,6 @@ type: text/vnd.tiddlywiki
 </$list></td>
 </tr></$list>
 </tbody></table>
-</$reveal>
-<$reveal type="match" state="$:/state/editor-display" text="show" tag="div"><<editor-display>></$reveal>
 </$list>
 </div>
 </$droppable>
@@ -158,6 +158,6 @@ type: text/vnd.tiddlywiki
 .edit-area.red {color: brown;}
 .tc-sidebar-lists .tc-editor-toolbar {margin: 4px 0;}
 input.tc-edit-texteditor {padding:0 5px;margin:5px 0;}
-.editor-display {margin:1em 0 30em 0;background:white;padding:10px 20px;line-height:26px;border-radius:3px;box-shadow:0 1px 1px rgb(0 0 0 / 8%), 0 0px 0px 1px rgb(0 0 0 / 2%);}
+.editor-display {margin:1em 0;background:white;padding:10px 20px;line-height:26px;border-radius:3px;box-shadow:0 1px 1px rgb(0 0 0 / 8%), 0 0px 0px 1px rgb(0 0 0 / 2%);}
 .tc-sidebar-header .editor-display {color:#333;}
 </style>
