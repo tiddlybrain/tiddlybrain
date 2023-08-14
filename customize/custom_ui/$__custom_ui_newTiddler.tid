@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230809070728757
+modified: 20230814162825758
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -52,9 +52,9 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$macrocall $name="newCodeAction" template=<<template>> caption=<<caption>>/>Code</$button>
 </p>
 <p style="margin-top:-10px;">
-<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> scroll="no" popup="close"/>New File</$button>
-<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> scroll="no" popup="close"/>New Link</$button>
-<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> scroll="no" popup="close"/>New Dir</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New File</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New Link</$button>
+<$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New Dir</$button>
 </p>
 <p style="margin-top:-10px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
 <p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Attachments</p>
