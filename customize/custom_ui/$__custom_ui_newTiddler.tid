@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230814162825758
+modified: 20230819204712211
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -39,7 +39,8 @@ type: text/vnd.tiddlywiki
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" class="tc-btn-invisible" tooltip="Edit Configurations" tabindex="-1">⚙️</$button><br>
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="desc./path/url/dir/att." field="description"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
-<$button class="tc-btn-invisible"><$macrocall $name=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}} scroll=no/>➕</$button>
+<$button class="tc-btn-invisible"><$macrocall $name=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} text="Name: {{!!caption}}
+Description: {{!!description}}" type="application/x-tiddler-dictionary" content={{$:/temp/newTiddler!!description}} scroll=no/>➕</$button>
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
 </$keyboard></p>

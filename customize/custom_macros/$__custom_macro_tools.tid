@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230808194015717
+modified: 20230819222530474
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -125,6 +125,12 @@ type: text/vnd.tiddlywiki
 \end
 
 \define format-date(date, template:"YYYY-0MM-0DD") <$set name="output" filter="[[$date$]format:date[$template$]]" select="0"><<output>></$set>
+
+\define last-day(field, template)
+<$set name="style" filter="[<currentTiddler>!days:$field$[-1]]" value="color:red;" emptyValue="">
+<span style=<<style>>><$macrocall $name="format-date" date={{!!$field$}} template="$template$"/></span>
+</$set>
+\end
 
 \define timeline-title() <<icons>> @@color:#333;<$view field=title/>@@ <$transclude field="caption"/>
 
@@ -342,6 +348,10 @@ type: text/vnd.tiddlywiki
 # ''将日期转换成指定的格式''
 #> `<<format-date
   date:"20200102"
+  template:"YYYY-0MM-0DD">>`
+# ''提醒是否过期, 超过了最后一天, 如果超过则显示红色''
+#> `<<last-day
+  field:"储存日期的字段"
   template:"YYYY-0MM-0DD">>`
 # ''修改 timeline macro 的 tidder links 的样式''
 #> `<<timeline-title>>`
