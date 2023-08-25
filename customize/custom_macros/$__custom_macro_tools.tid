@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230824094640822
+modified: 20230825022847426
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -129,6 +129,7 @@ type: text/vnd.tiddlywiki
 \define last-day(field:"finish", template)
 <$set name="style" filter="[<currentTiddler>!days:$field$[-1]]" value="color:red;" emptyValue="">
 <span style=<<style>>><$macrocall $name="format-date" date={{!!$field$}} template="$template$"/></span>
+(<$macrocall $name="days-left" deadline={{!!$field$}}/>)
 </$set>
 \end
 
