@@ -1,16 +1,19 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20230825004722074
+modified: 20230825020335635
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
 type: text/vnd.tiddlywiki
 
 \define folded-state() $:/state/folded/$(currentTiddler)$
+\define drop-actions() <<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter='+[insertbefore<actionTiddler>,<currentTiddler>]'/>
 
 <div class="tc-sidebar-tab-open sidebar-segments-open" style="font-size:small;margin-top:1.4em;">
-<$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
-<$droppable actions="<<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter='+[insertbefore<actionTiddler>,<currentTiddler>]'/>" tag="div">
+<$set name="sidebar-list" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="[list<tv-story-list>sortan[note]]" emptyValue="[list<tv-story-list>]">
+<$set name="tv-allow-drag-and-drop" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="no" emptyValue="yes">
+<$list filter=<<sidebar-list>> history=<<tv-history-list>> storyview="pop">
+<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>> tag="div">
 <div class="tc-droppable-placeholder">{{$:/core/images/blank}}</div>
 <div class="tc-sidebar-tab-open-item" style="white-space:nowrap;overflow:hidden;">
 <$set name="current" filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]" value="fill:green;" emptyValue="fill:#aaa;">
@@ -43,7 +46,7 @@ type: text/vnd.tiddlywiki
 </div>
 </$droppable>
 </$list>
-<$droppable actions="<<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter='[<actionTiddler>]'/>" tag="div">
+<$droppable actions="<<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter='[<actionTiddler>]'/>" enable=<<tv-allow-drag-and-drop>> tag="div">
 <div class="tc-droppable-placeholder">{{$:/core/images/blank}}</div>
 <$list filter="[recentlyClosed[]!is[missing]!{$:/temp/index-tree}limit[1]]">
 <div class="tc-sidebar-tab-open-item" style="white-space:nowrap;overflow:hidden;">
@@ -68,7 +71,8 @@ type: text/vnd.tiddlywiki
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible" style="color:#999;">Close all</$button> &middot;
 <$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible" style="color:#999;">Close others</$button> &middot;
 <$button class="tc-btn-invisible" style="color:#999;"><$tiddler tiddler={{$:/HistoryList!!current-tiddler}}><$action-sendmessage $message="tm-fold-other-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/></$tiddler>Fold others</$button> &middot;
-<$macrocall $name="exportButton" exportFilter="[[$:/StoryList]get[list]enlist-input[]]" lingoBase="$:/custom/language/Buttons/ExportTiddler/"/>
+<$macrocall $name="exportButton" exportFilter="[[$:/StoryList]get[list]enlist-input[]]" lingoBase="$:/custom/language/Buttons/ExportTiddler/"/> &middot;
+<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">Sort by note</$checkbox>
 <$list filter="[prefix[$:/state/folded/]text[hide]limit[1]]">&middot;
 <$button class="tc-btn-invisible" dragFilter="[is[system]text[hide]removeprefix[$:/state/folded/]]" style="color:#999;">
 Unfold All (<$count filter="[prefix[$:/state/folded/]text[hide]]"/>)
@@ -77,4 +81,6 @@ Unfold All (<$count filter="[prefix[$:/state/folded/]text[hide]]"/>)
 </$list>
 </$let></div>
 </$droppable>
+</$set>
+</$set>
 </div>

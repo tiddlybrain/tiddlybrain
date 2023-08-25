@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20230825005950407
+modified: 20230825022137307
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -110,7 +110,10 @@ table.task-info {width: 100%; font-size: small; text-align: center; table-layout
 /* For Checkbox widget */
 label.checkbox {cursor: pointer;}
 label.checkbox input {display: none;}
-label.checkbox input[type=checkbox]:checked + span {color: red;}
+label.checkbox input[type=checkbox]:checked + span {color: brown;}
+.tc-sidebar-tab-open-item label.checkbox {color: #999;}
+.tc-sidebar-tab-open-item label.checkbox input[type=checkbox]:checked + span {color: brown;}
+.tc-menubar .tc-sidebar-tab-open-item label.checkbox {display: block; padding: 0 14px 0 14px; font-size: small; font-variant: all-small-caps; color: #333;}
 
 /* For Macro: linkIfExists */
 .link-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; margin: 4px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}

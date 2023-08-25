@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20230825005613873
+modified: 20230825021550971
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -39,7 +39,9 @@ $button$
 \end
 
 <div class="tc-sidebar-tab-open">
-<$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
+<$set name="sidebar-list" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="[list<tv-story-list>sortan[note]]" emptyValue="[list<tv-story-list>]">
+<$set name="tv-allow-drag-and-drop" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="no" emptyValue="yes">
+<$list filter=<<sidebar-list>> history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
 <$macrocall $name="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn">
 <$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/sidebar" text="no"/>
@@ -82,7 +84,10 @@ $button$
 <$list filter="[prefix[$:/state/folded/]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>unfold all
 </$button></$list>
 <$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">close others</$button>
-<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button>"""/>
+<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button>
+<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">sort by note</$checkbox>"""/>
 </div>
 </$tiddler>
+</$set>
+</$set>
 </div>
