@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20230418194308258
+modified: 20230825004945260
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -95,6 +95,10 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
+\define sidebar-open-actions()
+<$action-navigate $to=<<actionTiddler>>/><$list filter="[<actionTiddler>addprefix[$:/state/folded/]is[tiddler]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
+\end
+
 # ''复制 Tiddler 的 action''
 #> `<<droppable-clone-action>>`
 # ''修改 index tree 列表 action''
@@ -126,3 +130,5 @@ type: text/vnd.tiddlywiki
 # ''给 Data Tiddler 添加空白键''
 #> `<<droppable-add-empty-indexes
   indexes:"键值列表">>`
+# ''给 `$:/core/ui/SideBar/Open` 和 `$:/custom/ui/SideBarSegments/open` 使用''
+#> `<<sidebar-open-actions>>`

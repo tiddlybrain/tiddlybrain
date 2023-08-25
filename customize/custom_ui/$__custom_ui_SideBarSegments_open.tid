@@ -1,13 +1,12 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20230616124104589
+modified: 20230825004722074
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
 type: text/vnd.tiddlywiki
 
 \define folded-state() $:/state/folded/$(currentTiddler)$
-\define sidebar-open-actions() <$action-navigate $to=<<actionTiddler>>/><$list filter="[<actionTiddler>addprefix[$:/state/folded/]is[tiddler]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
 
 <div class="tc-sidebar-tab-open sidebar-segments-open" style="font-size:small;margin-top:1.4em;">
 <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">

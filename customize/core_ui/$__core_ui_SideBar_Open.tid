@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20230809065655346
+modified: 20230825005613873
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 \define folded-state() $:/state/folded/$(currentTiddler)$
 
 \define drop-actions()
-<$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
+<<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
 \define placeholder()
@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
 <<placeholder>>
 <div>
 <$list filter="[<folded-state>text[hide]]" variable="NONE" emptyMessage="""<$list filter="[all[current]match{$:/HistoryList!!current-tiddler}]">
-<$button style="position:absolute;top:6px;fill:#666;font-size:x-small;" class="tc-btn-invisible" tag="span">{{$:/core/images/chevron-right}}
+<$button style="position:absolute;top:6px;fill:#666;font-size:x-small;" class="tc-btn-invisible current" tag="span">{{$:/core/images/chevron-right}}
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState="$:/state/folded/$(currentTiddler)$"/>
 <$macrocall $name="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>
