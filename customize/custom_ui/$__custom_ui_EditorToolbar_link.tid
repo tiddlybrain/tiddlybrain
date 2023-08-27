@@ -4,8 +4,9 @@ created: 20221101141524058
 creator: yuzijie
 description: Turn title into a link
 icon: $:/core/images/permalink-button
-modified: 20230408000356536
+modified: 20230827194110630
 modifier: yuzijie
+shortcuts: ctrl-H
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/link
 type: text/vnd.tiddlywiki

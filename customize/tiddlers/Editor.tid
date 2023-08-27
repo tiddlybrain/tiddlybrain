@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230809110218351
+modified: 20230827192346567
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -50,6 +50,9 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[<draft>is[tiddler]!tag[Task]]"><$fieldmangler>
 <$button set="!!celltpl" setTo="customized-template-task" message="tm-add-tag" param="Task" style="margin-left:5px;" tooltip="Make it a task">Task</$button>
+</$fieldmangler></$list>
+<$list filter="[<draft>is[tiddler]!code-body[yes]]"><$fieldmangler>
+<$button style="margin-left:5px;" tooltip="Code Template"><$action-setfield code-body="yes" type="text/vnd.tiddlywiki"/>Code</$button>
 </$fieldmangler></$list>
 <$list filter="[<draft>is[tiddler]!tag[Flashcard]]"><$fieldmangler>
 <$button message="tm-add-tag" param="Flashcard" style="margin-left:5px;" tooltip="Make it a Flashcard">Flashcard</$button>
