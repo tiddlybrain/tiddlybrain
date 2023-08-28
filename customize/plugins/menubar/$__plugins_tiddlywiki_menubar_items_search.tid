@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20230727201053321
+modified: 20230828130429016
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 \define cancel-search-actions()
 <$set name="userInput" value={{{ [<__storeTitle__>get[text]] }}}>
-<$list filter="[<__tiddler__>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>] $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter"/><$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]limit[10]]"/>""">
+<$list filter="[<__tiddler__>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>] $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter"/><$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]tag[Snippet]limit[10]]"/>""">
 <$action-setfield $tiddler=<<__tiddler__>> text=<<userInput>>/><$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 </$set>
@@ -46,7 +46,7 @@ type: text/vnd.tiddlywiki
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
 <$button class="tc-btn-invisible" style="margin-left:7px;" tabindex="-1">
 <$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/subtopic/filter $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter"/>
-<$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]limit[10]]"/>
+<$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]tag[Snippet]limit[10]]"/>
 <$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input"/>{{$:/core/images/close-button}}
 </$button>
 <$button class="tc-btn-invisible" style="margin-left:7px;" popup="$:/state/popup/menubar/NewTiddler">
