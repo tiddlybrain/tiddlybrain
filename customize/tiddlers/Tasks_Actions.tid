@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230624091451015
+modified: 20230829125759118
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -41,12 +41,12 @@ type: text/vnd.tiddlywiki
 </div>
 
 <$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="ol" class="actions-task-list">
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[waiting]contains:plan<curDate>]"><li><<task-list-waiting>></li></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]!has[category]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]!has[category]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[waiting]]"><li><<task-list-waiting>></li></$list>
 </$droppable>
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>!filter<task-filter>]" columns="优先 次要" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
+<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]contains:plan<curDate>!filter<task-filter>]" columns="优先 次要" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
 
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
