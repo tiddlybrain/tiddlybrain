@@ -1,12 +1,13 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230829125926268
+modified: 20230829132304938
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
 type: text/vnd.tiddlywiki
 
 \define task-state-prefix() $:/task-state/$(currentTiddler)$/
+\define task-filter() [all[current]split[/]nth[3]!enlist<tasks>]
 
 \define tasks-today(style:"font-size:smaller;font-weight:500;color:#333;")
 <span style="$style$"><$list filter="[prefix<task-state-prefix>limit[1]]" variable="NONE">
@@ -85,18 +86,6 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define task-filter() [all[current]split[/]nth[3]!enlist<tasks>]
-
-\define task-list-droppable-actions()
-<$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
-<$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
-<$list filter="[<actionTiddler>!text[open]]">
-<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>
-</$list>
-</$set>
-</$set>
-\end
-
 \define task-list()
 <$list filter="[[$:/temp/task-list]is[tiddler]]">
 <$button><$action-deletetiddler $tiddler="$:/temp/task-list"/>&times; <$transclude tiddler={{$:/temp/task-list}} field="caption"/></$button>
@@ -111,7 +100,7 @@ type: text/vnd.tiddlywiki
 </dd></$list>
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
-<$droppable actions=<<task-list-droppable-actions>> tag="dt">
+<$droppable actions="<$action-listops $tiddler=<<actionTiddler>> $field='plan' $subfilter='[<dt>]'/>" tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
 <$set name="date-style" filter="[<dt>match<today>]" value="color:red;font-size:large;" emptyValue="color:#333;">
 <$button set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible" style=<<date-style>>>
