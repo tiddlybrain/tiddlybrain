@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230829125759118
+modified: 20230830101609901
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -27,7 +27,7 @@ type: text/vnd.tiddlywiki
 <$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="padding-right:4px;">{{$:/core/images/chevron-left}}</$button>
 </$set>
 <$button to=<<journal-title>> class="tc-btn-invisible"><$tiddler tiddler=<<journal-title>>><$transclude field="caption"/></$tiddler></$button>
-<$edit-text tiddler="$:/temp/plan/temp-date" default=<<now YYYY0MM0DD>> tag="input" size="5"/>
+<$edit-text tiddler="$:/temp/plan/temp-date" default=<<curDate>> tag="input" size="5"/>
 <$list filter="[[$:/temp/plan/temp-date]is[tiddler]get[text]regexp<date-pattern>]">
 <$button set="$:/temp/plan/date" setTo={{$:/temp/plan/temp-date}}><$action-deletetiddler $tiddler="$:/temp/plan/temp-date"/>Set</$button>
 </$list>

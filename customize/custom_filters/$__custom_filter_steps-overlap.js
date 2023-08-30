@@ -187,7 +187,7 @@ exports.getDDate = function(source,operator,options) {
 };
 
 exports.finishedStepNames = function(source,operator,options) {
-	var results = [], pattern_step = /<<(a|w|d|c)\s.+?>>/g;
+	var results = [], pattern_step = /<<(a|d)\s.+?>>/g;
 	if (operator.operand) {
 		source(function(tiddler,title) {
 			if (tiddler) {
