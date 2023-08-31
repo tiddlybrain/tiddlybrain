@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230831110512826
+modified: 20230831113622271
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -86,6 +86,10 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
+\define droppable-task-list-actions()
+<$list filter="[<actionTiddler>prefix[$:/task-state/]]"><$action-listops $field='plan' $subfilter='[<dt>]'/></$list>
+\end
+
 \define task-list()
 <$list filter="[[$:/temp/task-list]is[tiddler]]">
 <$button><$action-deletetiddler $tiddler="$:/temp/task-list"/>&times; <$transclude tiddler={{$:/temp/task-list}} field="caption"/></$button>
@@ -95,12 +99,12 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/doing" field="text" checked="yes" unchecked="no" default="yes"> Doing</$checkbox>
 <$checkbox tiddler="$:/temp/task/waiting" field="text" checked="yes" unchecked="no" default="yes"> Waiting</$checkbox>
 <$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd>
-<$button set="!!plan" setTo=<<today>> dragTiddler={{!!title}} class="tc-btn-invisible" style="white-space:nowrap;color:red;">NO PLAN: ''{{!!caption}}''</$button>
-</dd></$list>
+<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]"><dd><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:red;" message="tm-copy-to-clipboard" param={{!!caption}}>NO PLAN: ''{{!!caption}}''</$button>
+</$set></dd></$list>
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
-<$droppable actions="<$action-listops $tiddler=<<actionTiddler>> $field='plan' $subfilter='[<dt>]'/>" tag="dt">
+<$droppable actions=<<droppable-task-list-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
 <$set name="date-style" filter="[<dt>match<today>]" value="color:red;font-size:large;" emptyValue="color:#333;">
 <$button set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible" style=<<date-style>>>
