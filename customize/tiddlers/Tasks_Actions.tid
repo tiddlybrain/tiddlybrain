@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230831153855345
+modified: 20230831220815223
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -33,20 +33,20 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Add Date
-<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" date=<<curDate>> caption="<$macrocall $name=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" text="日记: <<bl>>" kw="10em"/>
+<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" text="日记: <<bl>>
+--: 任务回顾" date=<<curDate>> caption="<$macrocall $name=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>"  kw="10em"/>
 </$button></$list>
 <$set name="right" filter="[<curDate>nextDay[1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="padding-left:6px;">{{$:/core/images/chevron-right}}</$button>
 </$set>
 </div>
 
-<$droppable actions="""<$action-setfield $tiddler=<<actionTiddler>> category=""/>""" tag="ol" class="actions-task-list">
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]!has[category]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
+<ol style="color:#333;padding-left:15px;line-height:22px;">
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]!has[category]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
+<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[waiting]]"><li><<task-list-waiting>></li></$list>
-</$droppable>
-<$macrocall $name="kanban" filter="[prefix[$:/task-state/]!text[waiting]contains:plan<curDate>!filter<task-filter>]" columns="优先 次要" status="category" waiting-lane="no" actions="""<$action-listops $tiddler=<<actionTiddler>> $field="plan" $subfilter="[<dt>]"/>"""/>
+</ol>
 
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
@@ -60,7 +60,7 @@ type: text/vnd.tiddlywiki
 <table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>规划任务</th><th>执行情况</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:24px;"><$set name="currTask" value=<<task>>>
-<td><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:4px 0;">
+<td style="vertical-align:baseline;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:4px 0;">
 @@color:#d300cc;<$transclude tiddler=<<task>> field="title"/>@@ <$transclude tiddler=<<task>> field="caption"/>
 </$button></td>
 <td><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
@@ -85,7 +85,3 @@ type: text/vnd.tiddlywiki
 <$list filter="[has[interval]date<today>]"><div><$macrocall $name="l" title={{!!title}}/></div></$list>
 </$list>
 </div></$droppable>
-
-<style>
-.actions-task-list {color: #333; padding-left: 15px;}
-</style>
