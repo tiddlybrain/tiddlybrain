@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230829132304938
+modified: 20230831042016952
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -141,8 +141,6 @@ type: text/vnd.tiddlywiki
 </dl></$set>
 \end
 
-\define priority-dot() <span class="dot" style="background-color:$(color)$;padding:2px 8px 3px;"><$transclude field="status"><$view field="title"/></$transclude></span>
-
 \define weekly-link(date)
 <$set name="year" filter="[[$date$]format:date[YYYY]]" select="0">
 <$set name="week" filter="[[$date$]format:date[WeekWW]]" select="0">
@@ -151,6 +149,22 @@ type: text/vnd.tiddlywiki
 </$set>
 </$set>
 </$set>
+\end
+
+\define task-pill(color:"#c9fffe")
+<div style="white-space:nowrap;margin:7px 0;">
+<$button set="$:/temp/task-list" setTo={{!!title}} class="tc-btn-invisible">
+<span class="dot" style="background-color:$color$;padding:2px 8px 3px;"><$transclude field="status"><$view field="title"/></$transclude></span>
+</$button>
+<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">{{!!caption}}<span style="color:green;">
+<$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
+- ☠️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
+</$list>
+<$list filter="[prefix[$:/task-state/]text[open]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
+- ⚔️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
+</$list>
+</span></$button>
+</div>
 \end
 
 \define planner(date)
@@ -167,25 +181,12 @@ type: text/vnd.tiddlywiki
 </h2>
 <div style="margin:15px 0 20px 0;"><<task-list>></div>
 <div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;">
-<$list filter="[tag[Task]!status[Closed]sort[status]]">
-<div style="white-space:nowrap;margin:7px 0;">
-<$set name="color" filter="[all[current]status[Doing]]" value="#ffbea1" emptyValue="#c9fffe">
-<$set name="color" filter="[all[current]status[Onhold]]" value="#fff38a" emptyValue=<<color>>>
-<$set name="color" filter="[all[current]status[Review]]" value="#c3ffa2" emptyValue=<<color>>>
-<$button set="$:/temp/task-list" setTo={{!!title}} class="tc-btn-invisible"><<priority-dot>></$button>
-</$set>
-</$set>
-</$set>
-<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">{{!!caption}}<span style="color:green;">
-<$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
-- ☠️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
-</$list>
-<$list filter="[prefix[$:/task-state/]text[open]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
-- ⚔️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
-</$list>
-</span></$button>
-</div>
-</$list>
+<$list filter="[tag[Task]status[Urgent]sort[date]]"><<task-pill color:"#ffc1ed">></$list>
+<$list filter="[tag[Task]status[Non-urgent]sort[date]]"><<task-pill color:"#ffbea1">></$list>
+<$list filter="[tag[Task]status[Onhold]sort[date]]"><<task-pill color:"#fff38a">></$list>
+<$list filter="[tag[Task]status[Review]sort[date]]"><<task-pill color:"#c3ffa2">></$list>
+<$list filter="[tag[Task]status[Todo]sort[date]]"><<task-pill>></$list>
+<$list filter="[tag[Task]!has[status]sort[date]]"><<task-pill>></$list>
 </div>
 \end
 
@@ -240,6 +241,9 @@ type: text/vnd.tiddlywiki
   style:"css 样式">>`
 # ''所有任务清单''
 #> `<<task-list>>`
+# ''显示某个任务的状态''
+#> `<<task-pill
+  color:"pill 的颜色">>`
 # ''按照日期, 列出每天的任务''
 #> `<<planner
   date:"基准日期">>`
