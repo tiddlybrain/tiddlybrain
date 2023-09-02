@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20230831222320612
+modified: 20230902230033490
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -103,8 +103,8 @@ type: text/vnd.tiddlywiki
 <$droppable actions=<<droppable-task-list-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
 <$set name="date-style" filter="[<dt>match<today>]" value="color:red;font-size:large;" emptyValue="color:#333;">
-<$button set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible" style=<<date-style>>>
-<$action-setfield $tiddler="$:/state/tasks-1742033064" text="Tasks/Actions"/><<date-title>>
+<$button set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible" style=<<date-style>>><<date-title>>
+<$list filter="[<dt>match<today>]"><$action-navigate $to=<<journal-title>>/></$list>
 </$button>
 </$set>
 </$set>
@@ -179,6 +179,9 @@ type: text/vnd.tiddlywiki
 <h2 style="margin-bottom:10px;color:#666;font-weight:500;"><<weekly-link "$date$">>
 <$set name="left" filter="[[$date$]nextDay[-1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-left}}</$button>
+</$set>
+<$set name="curDate" filter="[[$:/temp/plan/date]get[text]else<now YYYY0MM0DD>]" select="0">
+<$edit-text tiddler="$:/temp/plan/temp-date" default=<<curDate>> tag="input" size="5"/>
 </$set>
 <$set name="right" filter="[[$date$]nextDay[1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-right}}</$button>
