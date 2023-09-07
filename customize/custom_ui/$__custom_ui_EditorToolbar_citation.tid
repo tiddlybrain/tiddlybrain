@@ -4,8 +4,9 @@ created: 20230526113255517
 creator: yuzijie
 description: Turn text into citation link
 icon: $:/core/images/quote
-modified: 20230526113726752
+modified: 20230907120914690
 modifier: yuzijie
+shortcuts: ctrl-shift-C
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/citation
 type: text/vnd.tiddlywiki
