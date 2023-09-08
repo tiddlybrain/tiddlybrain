@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20230831114546261
+modified: 20230908095729886
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -50,7 +50,11 @@ type: text/vnd.tiddlywiki
 
 \define step-open(step,comments,t)
 @@color:brown;font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
-<$button class="tc-btn-invisible" set=<<task-state>> setTo="doing">@@color:orange;&#11044;@@</$button>
+<$button class="tc-btn-invisible" set=<<task-state>> setTo="doing">@@color:orange;&#11044;@@
+<$set name="journal-title" filter="[[$t$]format:date[YYYY-0MM-0DD]]" select="0">
+<$list filter="[<journal-title>is[tiddler]!has:index<currTask>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currTask>> $value=""/></$list>
+</$set>
+</$button>
 <$reveal default="$t$" type="nomatch" text="">
 <$macrocall $name="days-button" value="$t$" days="""<$macrocall $name="days-left" deadline="$t$"/>""" step="$step$"/>
 </$reveal>
