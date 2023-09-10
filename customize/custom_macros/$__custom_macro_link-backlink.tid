@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20230907112338866
+modified: 20230910201034036
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -29,6 +29,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#aaa;-&#32;{{!!description}}@@</$list>
 </$list>
 </$button>
+<$list filter="[all[current]untagged[]]">⚠️</$list>
 </$set></span></$list>
 <$list filter="[<__mode__>match[tr]]" variable="NONE"><div class=<<__class__>> style=<<__style__>>>
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
