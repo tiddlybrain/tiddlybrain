@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230916132249707
+modified: 20230918141422016
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -13,7 +13,9 @@ type: text/vnd.tiddlywiki
 <$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
 
-<div style="text-align:center;margin-bottom:10px;">
+<div style="text-align:center;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
+<$action-setfield $tiddler='$:/temp/plan/date' text={{{[<actionTiddler>split[-]join[]]}}}/>
+</$list>" tag="div">
 <$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="padding-right:4px;">{{$:/core/images/chevron-left}}</$button>
 </$set>
@@ -30,7 +32,7 @@ type: text/vnd.tiddlywiki
 <$set name="right" filter="[<curDate>nextDay[1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="padding-left:6px;">{{$:/core/images/chevron-right}}</$button>
 </$set>
-</div>
+</$droppable></div>
 
 <$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:22px;">
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
