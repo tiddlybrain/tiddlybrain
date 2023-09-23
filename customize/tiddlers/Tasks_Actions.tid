@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20230918141422016
+modified: 20230923162621374
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -35,19 +35,18 @@ type: text/vnd.tiddlywiki
 </$droppable></div>
 
 <$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:22px;">
+<$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
+<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
+Done: <<currentTiddler>><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
+</$button></li></$list>
+</$set>
+</$list></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
 </ol></$droppable>
-
-<$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
-<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
-<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
-<<currentTiddler>><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
-</$button><br></$list>
-</$set>
-</$list></$list>
 
 <$list filter="[<journal-title>is[tiddler]]"><$droppable actions=<<droppable-date-action>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
 <table style="width:100%;background:white;table-layout:fixed;"><tbody>
