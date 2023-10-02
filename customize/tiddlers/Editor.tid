@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20230916220737815
+modified: 20231002153650787
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -131,7 +131,7 @@ type: text/vnd.tiddlywiki
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Description: {{!!description}}"/>""">Description</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$macrocall $name=format-date date={{!!date}}/>"/>""">Date</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' rheader:'ID' sort:'!sort[date]' tags:'Task' celltpl:'customized-template-task' has-filter:'yes'>>"/>""">Task</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$details summary='More'><<snippet>></$details>"/>""">More</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix="<$details summary='" suffix="'><<snippet key:'' limit:'20'>></$details>"/>""">More</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY-0MM-0DD>>/>""">Today</$button>
 <$set name="today" value=<<now YYYY0MM0DD>>><$list filter="[all[current]!date<today>]">
 <$button set="!!date" setTo=<<today>>><$action-setfield $field="last-date" $value={{!!date}}/>Set to today</$button>
