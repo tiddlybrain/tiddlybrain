@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20230908095729886
+modified: 20231003043528469
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -83,7 +83,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define a(step,comments,t,d)
-<$reveal default="$t$" type="nomatch" text="" style="color:green;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$reveal>
+<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:green;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
 <$vars currTask={{!!title}} currStep="$step$"><$set name="format-d" filter="[[$d$]format:date[YYYY-0MM-0DD]]" select="0">
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage="<<step-done '$step$' '$comments$' '$t$' '$d$'>>" variable="NONE">
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="""''<<linkIfExists "$step$" "$comments$">>''
@@ -98,7 +98,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define c(step,comments,t)
-<$reveal default="$t$" type="nomatch" text="" style="color:#aaa;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$reveal>
+<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#aaa;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
 <span style="color:#aaa;"><<linkIfExists "$step$" "$comments$">></span>
 <$set name="currTask" value={{!!title}}><$set name="currStep" value="$step$">
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="@@color:red;&#10005;@@">
@@ -133,7 +133,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define w(step,comments,t,d)
-<$reveal default="$t$" type="nomatch" text="" style="color:#009dd9;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$reveal>
+<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#009dd9;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
 <$vars currTask={{!!title}} currStep="$step$"><$set name="format-d" filter="[[$d$]format:date[YYYY-0MM-0DD]]" select="0">
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage=<<waiting-done "$step$" "$comments$" "$t$" "$d$">> variable="NONE">
 <$macrocall $name="waiting-undone" step="$step$" comments="$comments$" t="$t$" symbol="&#10148;" days="""<$macrocall $name="days-passed" start="$t$"/>"""/>
@@ -142,8 +142,8 @@ type: text/vnd.tiddlywiki
 \end
 
 \define d(step,comments,t,d)
-<$reveal default="$d$" type="match" text="" style="color:#cd23d8;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$reveal>
-<$reveal default="$d$" type="nomatch" text="" style="color:#cd23d8;font-size:small;">(<<format-date "$d$" "YYYY-0MM-0DD">>)</$reveal>
+<$reveal default="$d$" type="match" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#cd23d8;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
+<$reveal default="$d$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:#cd23d8;font-size:small;">(<<format-date "$d$" "YYYY-0MM-0DD">>)</$button></$reveal>
 <$vars currTask={{!!title}} currStep="$step$"><$set name="format-d" filter="[[$d$]format:date[YYYY-0MM-0DD]]" select="0">
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage=<<waiting-done "$step$" "$comments$" "$t$" "$d$" "#93005f">> variable="NONE">
 <$macrocall $name="waiting-undone" step="$step$" comments="$comments$" t="$t$" symbol="&#11044;" days="""<$macrocall $name="days-left" deadline="$t$"/>""" color="#cd23d8" type="deadline"/>
