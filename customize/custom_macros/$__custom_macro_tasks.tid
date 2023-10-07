@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231003041256949
+modified: 20231007044740136
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -205,10 +205,10 @@ type: text/vnd.tiddlywiki
 <div style="margin:15px 0 20px 0;"><<task-list>></div>
 <div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;">
 <$list filter="[tag[Task]!has[status]sort[date]]"><<task-pill>></$list>
+<$list filter="[tag[Task]status[Regularly]sort[date]]"><<task-pill color:"#c3ffa2">></$list>
 <$list filter="[tag[Task]status[Top]sort[date]]"><<task-pill color:"#edff3f">></$list>
 <$list filter="[tag[Task]status[Urgent]sort[date]]"><<task-pill color:"#ffc1ed">></$list>
 <$list filter="[tag[Task]status[Non-urgent]sort[date]]"><<task-pill color:"#ffbea1">></$list>
-<$list filter="[tag[Task]status[Regularly]sort[date]]"><<task-pill color:"#c3ffa2">></$list>
 <$list filter="[tag[Task]status[Onhold]sort[date]]"><<task-pill color:"#fff38a">></$list>
 <$list filter="[tag[Task]status[Review]sort[date]]"><<task-pill color:"#c3ffa2">></$list>
 <$list filter="[tag[Task]status[Todo]sort[date]]"><<task-pill>></$list>
