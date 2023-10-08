@@ -2,15 +2,15 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20231003041317776
+modified: 20231008052905553
 modifier: yuzijie
 order: 3
 tags: Tasks customized
 title: Tasks/Actions
 type: text/vnd.tiddlywiki
 
-<$set name="curDate" filter="[[$:/temp/plan/date]get[text]else<now YYYY0MM0DD>]" select="0"><$vars today=<<curDate>> dt=<<curDate>>>
-<$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
+<$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
+<$vars today=<<curDate>> dt=<<curDate>>><$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
 
 <div style="text-align:center;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
@@ -20,10 +20,7 @@ type: text/vnd.tiddlywiki
 <$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="padding-right:4px;">{{$:/core/images/chevron-left}}</$button>
 </$set>
 <$button to=<<journal-title>> class="tc-btn-invisible"><$tiddler tiddler=<<journal-title>>><$transclude field="caption"/></$tiddler></$button>
-<$edit-text tiddler="$:/temp/plan/temp-date" default=<<curDate>> tag="input" size="5"/>
-<$list filter="[[$:/temp/plan/temp-date]is[tiddler]get[text]regexp<date-pattern>]">
-<$button set="$:/temp/plan/date" setTo={{$:/temp/plan/temp-date}}><$action-deletetiddler $tiddler="$:/temp/plan/temp-date"/>Set</$button>
-</$list>
+<$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="15em" text="日记: <<bl>>

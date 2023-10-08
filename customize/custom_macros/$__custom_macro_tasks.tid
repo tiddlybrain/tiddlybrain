@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231007044740136
+modified: 20231008053211296
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -189,12 +189,9 @@ type: text/vnd.tiddlywiki
 <$set name="left" filter="[[$date$]nextDay[-1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-left}}</$button>
 </$set>
-<$set name="curDate" filter="[[$:/temp/plan/date]get[text]else<now YYYY0MM0DD>]" select="0">
-<$edit-text tiddler="$:/temp/plan/temp-date" default=<<curDate>> tag="input" size="5"/>
+<$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
+<$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
 </$set>
-<$list filter="[[$:/temp/plan/temp-date]is[tiddler]get[text]regexp<date-pattern>]">
-<$button set="$:/temp/plan/date" setTo={{$:/temp/plan/temp-date}}><$action-deletetiddler $tiddler="$:/temp/plan/temp-date"/>Set</$button>
-</$list>
 <$set name="right" filter="[[$date$]nextDay[1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-right}}</$button>
 </$set>
@@ -217,7 +214,7 @@ type: text/vnd.tiddlywiki
 
 \define task-top()
 <div style="position:relative;">
-<$reveal type="popup" state="$:/state/popup/task/$(currentTiddler)$" position="aboveleft" tag="div">
+<$reveal type="popup" state="$:/state/popup/task/$(currentTiddler)$" position="aboveleft" tag="div" style="transform:translateX(50%);">
 <div class="record-drop-down tc-popup-keep" style="line-height:26px;padding:8px;margin:auto;">
 <$macrocall $name="sort-by-filter" item-filter="tag[Tasks/Journal]has:index<currentTiddler>" sort="sort[date]" cat-prefix="BR/Journals/" cfilter="Day [[$(currentTiddler)$]]" rheader="Date"/>
 </div>
@@ -233,9 +230,7 @@ type: text/vnd.tiddlywiki
 <$set name="pattern" value="<<[d]\s.+>>">''<$count filter="[{!!text}matches<pattern>]"/>'' targets</$set>,
 <$set name="pattern" value="<<[aw]\s.+>>">''<$count filter="[{!!text}matches<pattern>]"/>'' steps</$set>
 </$list></td>
-<td><<tasks-today>>
-<$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible">📅</$button>
-</td>
+<td><<tasks-today>><$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible">📅</$button></td>
 <td><$view field="finish" format="date" template="YYYY-0MM-0DD">
 <$button set="!!finish" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">
 <$action-setfield $tiddler=<<currentTiddler>> status="Closed"/>
