@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231008053211296
+modified: 20231008054208417
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -230,7 +230,9 @@ type: text/vnd.tiddlywiki
 <$set name="pattern" value="<<[d]\s.+>>">''<$count filter="[{!!text}matches<pattern>]"/>'' targets</$set>,
 <$set name="pattern" value="<<[aw]\s.+>>">''<$count filter="[{!!text}matches<pattern>]"/>'' steps</$set>
 </$list></td>
-<td><<tasks-today>><$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible">📅</$button></td>
+<td><<tasks-today>>
+<$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible" style="font-size:smaller;font-weight:500;">📅 <$count filter="[tag[Tasks/Journal]has:index<currentTiddler>]"/></$button>
+</td>
 <td><$view field="finish" format="date" template="YYYY-0MM-0DD">
 <$button set="!!finish" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">
 <$action-setfield $tiddler=<<currentTiddler>> status="Closed"/>
