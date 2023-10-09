@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20230923202713307
+modified: 20231009050820671
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -90,14 +90,9 @@ type: text/vnd.tiddlywiki
 \end
 
 \define shortcut-linked()
-<li class="toc-item">
-<$button dragTiddler={{!!title}} to=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink">
-<$transclude field=caption><$view field=title/></$transclude>
-</$button>
-<div class="sidebar-item-hover">
-<$button class="tc-btn-invisible" style="padding:0;font-size:smaller;"><<open-in-sidebar close:"no">>{{$:/core/images/open-window}}</$button>
-</div>
-</li>
+<li class="toc-item"><$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<<open-in-sidebar close:"no">><$transclude field=caption><$view field=title/></$transclude>
+</$button></li>
 \end
 
 \define shortcut-unlinked(sort)
