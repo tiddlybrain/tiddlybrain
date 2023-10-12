@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20231007190236658
+modified: 20231011104951813
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -54,11 +54,7 @@ type: text/vnd.tiddlywiki
 
 \define step-open(step,comments,t)
 @@color:brown;font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
-<$button class="tc-btn-invisible" set=<<task-state>> setTo="doing">@@color:orange;&#11044;@@
-<$set name="journal-title" filter="[[$t$]format:date[YYYY-0MM-0DD]]" select="0">
-<$list filter="[<journal-title>is[tiddler]!has:index<currTask>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currTask>> $value=""/></$list>
-</$set>
-</$button>
+<$button class="tc-btn-invisible" set=<<task-state>> setTo="doing">@@color:orange;&#11044;@@</$button>
 <$reveal default="$t$" type="nomatch" text="">
 <$macrocall $name="days-button" value="$t$" days="""<$macrocall $name="days-left" deadline="$t$"/>""" step="$step$"/>
 </$reveal>
@@ -90,9 +86,10 @@ type: text/vnd.tiddlywiki
 <$vars currTask={{!!title}} currStep="$step$">
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage="<<step-done '$step$' '$comments$' '$t$' '$d$'>>" variable="NONE">
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="""''<<linkIfExists "$step$" "$comments$">>''
-<$button class="tc-btn-invisible" set=<<task-state>> setTo="open">
+<$button class="tc-btn-invisible" set=<<task-state>> setTo="open"><$set name="journal-title" filter="[[$t$]format:date[YYYY-0MM-0DD]]" select="0">
+<$list filter="[<journal-title>is[tiddler]!has:index<currTask>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currTask>> $value=""/></$list>
 <$action-setfield $tiddler=<<task-state>> date="$t$" plan="$t$" caption="$step$"/>@@color:orange;&#11096;@@
-</$button>""" variable="NONE">
+</$set></$button>""" variable="NONE">
 <$reveal state=<<task-state>> type="match" text="open"><<step-open "$step$" "$comments$" "$t$">></$reveal>
 <$reveal state=<<task-state>> type="nomatch" text="open"><<step-doing "$step$" "$comments$" "$t$">></$reveal>
 </$list>
