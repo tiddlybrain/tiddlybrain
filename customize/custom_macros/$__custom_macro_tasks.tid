@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231008054208417
+modified: 20231012063103799
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -39,6 +39,7 @@ type: text/vnd.tiddlywiki
 \define task-list-doing()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$list filter="[<dt>match<today>]" variable="NONE"><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/></$list>
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
 </$button>
 <$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Done for today">
@@ -69,16 +70,10 @@ type: text/vnd.tiddlywiki
 \define task-list-deadline()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$list filter="[<dt>match<today>]" variable="NONE"><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/></$list>
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
 </$button>
-<$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Done for today">
-<$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
-<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/plus-button}}
-</$button></$list>
-<$list filter="[<dt>!match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Cancel">
-<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/cancel-button}}
-</$button></$list>
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#cd23d8;" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#cd23d8;" message="tm-copy-to-clipboard" param={{!!caption}}>
 ''{{!!caption}}'' <$macrocall $name="days-left" deadline={{!!date}}/>
 </$button>
 <$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
@@ -102,9 +97,8 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/doing" field="text" checked="yes" unchecked="no" default="yes"> Doing</$checkbox>
 <$checkbox tiddler="$:/temp/task/deadline" field="text" checked="yes" unchecked="no" default="yes"> Deadline</$checkbox>
 <$checkbox tiddler="$:/temp/task/open" field="text" checked="yes" unchecked="no" default="yes"> Open</$checkbox>
-<$checkbox tiddler="$:/temp/task/waiting" field="text" checked="yes" unchecked="no" default="yes"> Waiting</$checkbox>
 <$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
+<$list filter="[prefix[$:/task-state/]!text[waiting]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
 <$droppable actions=<<droppable-task-list-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
@@ -131,11 +125,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/task/doing]!text[no]]" variable="NONE">
 <$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[doing]contains:plan<dt>sortan[title]]">
 <dd><<task-list-doing>></dd>
-</$list>
-</$list>
-<$list filter="[[$:/temp/task/waiting]!text[no]]" variable="NONE">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[waiting]contains:plan<dt>sortan[title]]">
-<dd><<task-list-waiting>></dd>
 </$list>
 </$list>
 <$list filter="[[$:/temp/task/deadline]!text[no]]" variable="NONE">
@@ -173,7 +162,7 @@ type: text/vnd.tiddlywiki
 </$button>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">{{!!caption}}<span style="color:green;">
-- <$macrocall $name="days-passed" start={{!!date}}/>
+- <$macrocall $name="days-passed" start={{!!modified}}/>
 <$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
 - ☠️ <$macrocall $name="days-left" deadline=<<currentTiddler>>/>
 </$list>
@@ -201,14 +190,14 @@ type: text/vnd.tiddlywiki
 </h2>
 <div style="margin:15px 0 20px 0;"><<task-list>></div>
 <div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;">
-<$list filter="[tag[Task]!has[status]sort[date]]"><<task-pill>></$list>
-<$list filter="[tag[Task]status[Regularly]sort[date]]"><<task-pill color:"#c3ffa2">></$list>
-<$list filter="[tag[Task]status[Top]sort[date]]"><<task-pill color:"#edff3f">></$list>
-<$list filter="[tag[Task]status[Urgent]sort[date]]"><<task-pill color:"#ffc1ed">></$list>
-<$list filter="[tag[Task]status[Non-urgent]sort[date]]"><<task-pill color:"#ffbea1">></$list>
-<$list filter="[tag[Task]status[Onhold]sort[date]]"><<task-pill color:"#fff38a">></$list>
-<$list filter="[tag[Task]status[Review]sort[date]]"><<task-pill color:"#c3ffa2">></$list>
-<$list filter="[tag[Task]status[Todo]sort[date]]"><<task-pill>></$list>
+<$list filter="[tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
+<$list filter="[tag[Task]status[Regularly]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
+<$list filter="[tag[Task]status[Top]sort[modified]]"><<task-pill color:"#edff3f">></$list>
+<$list filter="[tag[Task]status[Urgent]sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
+<$list filter="[tag[Task]status[Non-urgent]sort[modified]]"><<task-pill color:"#ffbea1">></$list>
+<$list filter="[tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
+<$list filter="[tag[Task]status[Review]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
+<$list filter="[tag[Task]status[Todo]sort[modified]]"><<task-pill>></$list>
 </div>
 \end
 
@@ -236,6 +225,7 @@ type: text/vnd.tiddlywiki
 <td><$view field="finish" format="date" template="YYYY-0MM-0DD">
 <$button set="!!finish" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">
 <$action-setfield $tiddler=<<currentTiddler>> status="Closed"/>
+<$vars currTask=<<currentTiddler>>><$action-deletetiddler $filter="[prefix<task-state>]"/></$vars>
 <$list filter="[all[current]has[deadline]]" emptyMessage="N.A."><$macrocall $name="days-left" deadline={{!!deadline}}/></$list>
 </$button>
 </$view></td>
