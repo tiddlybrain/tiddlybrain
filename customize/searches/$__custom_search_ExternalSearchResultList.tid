@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20230708234817167
+modified: 20231011084544853
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -11,5 +11,5 @@ Search for ''“{{$:/temp/menubarsearch/input}}”''
 <small><$button class="search-tool" message="tm-new-tiddler" param="$:/custom/search/ExternalLink/Google">Add New Search</$button></small>
 
 <$let search={{$:/temp/menubarsearch/input}}>
-<$list filter="[prefix[$:/custom/search/ExternalLink/]sort[order]]">{{!!text}}</$list>
+<$list filter="[prefix[$:/custom/search/ExternalLink/]sort[caption]]">{{!!text}}</$list>
 </$let>
