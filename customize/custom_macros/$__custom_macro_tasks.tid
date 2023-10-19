@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231012063103799
+modified: 20231019050656993
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -80,6 +80,20 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
+\define task-list-blocked()
+<$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
+<$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
+</$button>
+<$button class="tc-btn-invisible" tooltip="Cancel">
+<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[[blocked]]"/>{{$:/core/images/cancel-button}}
+</$button>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:green;" message="tm-copy-to-clipboard" param={{!!caption}}>
+''{{!!caption}}'' <$macrocall $name="days-passed" start={{!!date}}/>
+</$button>
+</$set>
+\end
+
 \define droppable-task-list-actions()
 <$list filter="[<actionTiddler>prefix[$:/task-state/]]"><$action-listops $field='plan' $subfilter='[<dt>]'/>
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
@@ -98,6 +112,14 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/deadline" field="text" checked="yes" unchecked="no" default="yes"> Deadline</$checkbox>
 <$checkbox tiddler="$:/temp/task/open" field="text" checked="yes" unchecked="no" default="yes"> Open</$checkbox>
 <$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
+<$droppable actions="""<$list filter='[<actionTiddler>prefix[$:/task-state/]]'><$action-listops $field='plan' $subfilter='[[blocked]]'/></$list>""" tag="dt">
+<span style="color:brown;">Blocked (<$count filter="[prefix[$:/task-state/]contains:plan[blocked]]"/>)</span>
+</$droppable>
+<$list filter="[[$:/temp/task/doing]!text[no]]" variable="NONE">
+<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[doing]contains:plan[blocked]sortan[title]]">
+<dd><<task-list-blocked>></dd>
+</$list>
+</$list>
 <$list filter="[prefix[$:/task-state/]!text[waiting]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
 <$droppable actions=<<droppable-task-list-actions>> tag="dt">
@@ -190,14 +212,15 @@ type: text/vnd.tiddlywiki
 </h2>
 <div style="margin:15px 0 20px 0;"><<task-list>></div>
 <div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;">
-<$list filter="[tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
-<$list filter="[tag[Task]status[Regularly]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
-<$list filter="[tag[Task]status[Top]sort[modified]]"><<task-pill color:"#edff3f">></$list>
-<$list filter="[tag[Task]status[Urgent]sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
-<$list filter="[tag[Task]status[Non-urgent]sort[modified]]"><<task-pill color:"#ffbea1">></$list>
-<$list filter="[tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
-<$list filter="[tag[Task]status[Review]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
-<$list filter="[tag[Task]status[Todo]sort[modified]]"><<task-pill>></$list>
+<$list filter="[tag[Task]!has[status]!sort[modified]]"><<task-pill>></$list>
+<$list filter="[tag[Task]status[Regular]!sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
+<$list filter="[tag[Task]status[Escalating]!sort[modified]]"><<task-pill color:"#ffd668">></$list>
+<$list filter="[tag[Task]status[High-risk]!sort[modified]]"><<task-pill color:"#edff3f">></$list>
+<$list filter="[tag[Task]status[Urgent]!sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
+<$list filter="[tag[Task]status[No-time]!sort[modified]]"><<task-pill color:"#b3ebe8">></$list>
+<$list filter="[tag[Task]status[Onhold]!sort[modified]]"><<task-pill color:"#fff38a">></$list>
+<$list filter="[tag[Task]status[Review]!sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
+<$list filter="[tag[Task]status[Todo]!sort[modified]]"><<task-pill>></$list>
 </div>
 \end
 
