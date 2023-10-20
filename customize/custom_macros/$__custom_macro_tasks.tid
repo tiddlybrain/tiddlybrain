@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231019050656993
+modified: 20231019175437051
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -88,7 +88,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" tooltip="Cancel">
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[[blocked]]"/>{{$:/core/images/cancel-button}}
 </$button>
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:green;" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#a19d00;" message="tm-copy-to-clipboard" param={{!!caption}}>
 ''{{!!caption}}'' <$macrocall $name="days-passed" start={{!!date}}/>
 </$button>
 </$set>
@@ -157,7 +157,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<dt>match<today>]"><$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><dd>
 <$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""<$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:green;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>""" variable="NONE">
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>""" variable="NONE">
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button> @@color:green;&#10003;@@
 </$list>
 </dd></$set></$set>
