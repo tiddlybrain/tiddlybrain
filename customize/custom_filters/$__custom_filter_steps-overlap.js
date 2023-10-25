@@ -8,6 +8,7 @@ overlap: 判断给定的时间段和任务的执行时间是否重叠, e.g. [[$:
 percent: 计算任务完成率, e.g. percent[a]
 getTDate: 获取开始时间
 getDDate: 获取结束时间
+getTypeStep: 获取步骤的类型
 finishedStepNames: 获取某天完成的 Steps 的名称
 
 \*/
@@ -20,7 +21,7 @@ finishedStepNames: 获取某天完成的 Steps 的名称
 /*
 Helper functions
 */
-var getStepName = function(task) {
+var getName = function(task) {
 	var pattern = /^<<(a|w|d|c)\s+["'](.+?)["']\s+/;
 	var result = task.match(pattern);
 	if(result) {
@@ -30,16 +31,16 @@ var getStepName = function(task) {
 	}
 }
 
-var getStepType = function(task) {
+var getType = function(task) {
 	switch (task.substring(0, task.indexOf(' '))) {
 		case "<<a":
-			return "📝普通";
+			return "Normal";
 		case "<<w":
-			return "📅跟踪";
+			return "Waiting";
 		case "<<d":
-			return "⏱️目标";
+			return "Deadline";
 		case "<<c":
-			return "❌取消";
+			return "Cancelled";
 		default:
 			return null;
 	}
@@ -186,6 +187,28 @@ exports.getDDate = function(source,operator,options) {
 	return results;
 };
 
+exports.getTypeStep = function(source,operator,options) {
+	var results = [], pattern_step = /<<(a|w|d|c)\s.+?>>/g;
+	if (operator.operand) {
+		source(function(tiddler,title) {
+			if (tiddler) {
+				var content = tiddler.getFieldString("text");
+				var steps = content.match(pattern_step);
+				steps.every(step => {
+					if (step.indexOf(operator.operand) !== -1) {
+						var t = getType(step);
+						if (t) results.push(t);
+						return false;
+					} else {
+						return true;
+					}
+				});
+			}
+		});
+	}
+	return results;
+};
+
 exports.finishedStepNames = function(source,operator,options) {
 	var results = [], pattern_step = /<<(a|d)\s.+?>>/g;
 	if (operator.operand) {
@@ -195,7 +218,7 @@ exports.finishedStepNames = function(source,operator,options) {
 				var steps = content.match(pattern_step);
 				if (steps) steps.forEach(step => {
 					var d = getEndTime(step);
-					if (d && d === operator.operand) results.push(getStepName(step));
+					if (d && d === operator.operand) results.push(getName(step));
 				});
 			}
 		});
