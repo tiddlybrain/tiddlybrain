@@ -1,1 +1,0 @@
-Day: <$macrocall $name=format-date date={{!!date}} template='DDD'/>
