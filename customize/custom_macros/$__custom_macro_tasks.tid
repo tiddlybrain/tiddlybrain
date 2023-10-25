@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231022100833089
+modified: 20231025152418324
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -166,7 +166,7 @@ type: text/vnd.tiddlywiki
 <$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
 """ variable="NONE">
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button> @@color:green;&#10003;@@
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button> @@color:green;&#10132;@@
 </$list>
 </dd></$set></$set>
 </$list></$list>
