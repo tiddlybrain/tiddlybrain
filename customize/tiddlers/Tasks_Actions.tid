@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20231025152430262
+modified: 20231027123640271
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -42,7 +42,7 @@ Done: <<currentTiddler>><$macrocall $name="add-to-cell-action" title=<<journal-t
 <$list filter="[prefix[$:/task-state/]contains:plan[blocked]limit[1]]" variable="NONE"><li style="color:brown;">Blocked<ul>
 <$list filter="[prefix[$:/task-state/]contains:plan[blocked]sortan[title]]"><li><<task-list-blocked>></li></$list>
 </ul></li></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
+<$list filter="[prefix[$:/task-state/]text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
