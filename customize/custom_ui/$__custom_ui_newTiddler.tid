@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20230924194342288
+modified: 20231029101832451
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -8,11 +8,6 @@ type: text/vnd.tiddlywiki
 
 \define newTaskAction(template, caption)
 <$action-sendmessage $message="tm-new-tiddler" $param="$template$" celltpl="customized-template-task" tags="Task" caption=<<__caption__>>/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newCodeAction(template, caption)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__caption__>> language="" code-body="yes"/>
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
 \end
 
@@ -49,8 +44,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" content=
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" content=<<content>> text="Name: {{!!caption}}
 Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> edit="yes"/>New Record</$button>
-<$button><$macrocall $name="newTaskAction" template=<<template>> caption=<<caption>>/>Task</$button>
-<$button><$macrocall $name="newCodeAction" template=<<template>> caption=<<caption>>/>Code</$button>
+<$button><$macrocall $name="newTaskAction" template=<<template>> caption=<<caption>>/>New Task</$button>
 </p>
 <p style="margin-top:-10px;">
 <$button><$macrocall $name="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New File</$button>
