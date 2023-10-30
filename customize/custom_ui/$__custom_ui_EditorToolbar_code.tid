@@ -4,7 +4,7 @@ created: 20171211204042433
 creator: yuzijie
 description: Show Texts as Code Snippets
 icon: $:/core/images/mono-block
-modified: 20230407162252443
+modified: 20231030153638877
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/code
@@ -14,5 +14,5 @@ type: text/vnd.tiddlywiki
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix='<<code """'
-	suffix='""" language:"" copy:"yes" ref:"">>'
+	suffix='""" language:"text" copy:"yes" ref:"">>'
 />
