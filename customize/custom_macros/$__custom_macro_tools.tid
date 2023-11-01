@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20231009050820671
+modified: 20231101130700965
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -160,12 +160,23 @@ type: text/vnd.tiddlywiki
 <<verification-notice>>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;"><$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
-<$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mTitle>>><<mTitle>></$button> &middot;
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="""<$button message="tm-copy-to-clipboard" class="tc-btn-invisible" param=<<mContent>>>copy content</$button>""">
+<$button class="tc-btn-invisible"><<mTitle>>
+<$action-sendmessage $message="tm-close-tiddler"/>
+<$action-deletetiddler $tiddler="$:/state/modal/history"/>
+<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mTitle>>/>
+</$button> &middot;
+<$button class="tc-btn-invisible">
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="""copy content
+<$action-sendmessage $message="tm-close-tiddler"/>
+<$action-deletetiddler $tiddler="$:/state/modal/history"/>
+<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mContent>>/>""">STEP
 <$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue=<<content>> select="0">
-<$button message="tm-copy-to-clipboard" param=<<step-template>> tooltip="Copy as a step" class="tc-btn-invisible">STEP</$button>
+<$action-sendmessage $message="tm-close-tiddler"/>
+<$action-deletetiddler $tiddler="$:/state/modal/history"/>
+<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<step-template>>/>
 </$set>
 </$list>
+</$button>
 </$let></div>
 </$list>
 \end
