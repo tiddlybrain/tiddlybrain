@@ -2,13 +2,13 @@ caption: 日记模板
 created: 20230910211155631
 creator: yuzijie
 keywords: 
-modified: 20231025185800163
+modified: 20231104132611642
 modifier: yuzijie
 tags: customized
 title: customized-template-journal
 type: text/vnd.tiddlywiki
 
 <$list filter="[<key>match[Day]]" variable="NONE"><$macrocall $name=format-date date={{!!date}} template='DDD'/></$list>
-<$list filter="[<key>is[tiddler]]" emptyMessage=<<value>>><$list filter="[<value>split[;;]]" variable="step">
+<$list filter="[<key>is[tiddler]]" emptyMessage=<<cell-value-normal>>><$list filter="[<value>split[;;]]" variable="step">
 <$set name="style" filter="[<key>getTypeStep<step>match[Deadline]]" value="color:#cd23d8" emptyValue=""><div style=<<style>>><<step>></div></$set>
 </$list></$list>
