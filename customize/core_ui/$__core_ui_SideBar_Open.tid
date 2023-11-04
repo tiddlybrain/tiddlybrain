@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20230825021550971
+modified: 20231104154034785
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -48,7 +48,7 @@ $button$
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot; </$list><$view field="title"/>
-<$list filter="[all[current]get[belongs.to]]">@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+<$list filter="[all[current]get[belongs.to]]">@@color:#c24949;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$let>
 </$button>
 <span class="sidebar-open-tools">

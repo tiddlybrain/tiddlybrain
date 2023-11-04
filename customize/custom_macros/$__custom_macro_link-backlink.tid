@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20231027113906979
+modified: 20231104153944518
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
 </$list>
 <$list filter="[<__parent__>match[yes]]" variable="NONE">&#32;
-<$list filter="[all[current]get[belongs.to]]">@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+<$list filter="[all[current]get[belongs.to]]">@@color:#c24949;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$list>
 <$list filter="[<__date__>match[yes]]" variable="NONE">&#32;<span style="color:#666;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)

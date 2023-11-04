@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20230825020335635
+modified: 20231104153835326
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot; </$list><$view field="title"/>
-<$list filter="[all[current]get[belongs.to]]">@@color:#e75109;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+<$list filter="[all[current]get[belongs.to]]">@@color:#c24949;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$let>
 </$button>
 <div class="sidebar-item-hover">
