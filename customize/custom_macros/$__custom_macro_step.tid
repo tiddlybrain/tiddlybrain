@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20231011104951813
+modified: 20231104172736198
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -74,11 +74,9 @@ type: text/vnd.tiddlywiki
 
 \define step-done(step,comments,t,d)
 <<linkIfExists "$step$" "$comments$">>
-<$set name="taskName" value={{!!caption}}><$set name="today" value=<<now "YYYY0MM0DD">>>
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:green;&#10003;@@</$button><<date-dropdown "$step$">>
 <$reveal default="$t$" type="lt" text="$d$" style="font-size:small;"><$macrocall $name="days-passed" start="$t$" end="$d$"/></$reveal>
 <$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
-</$set></$set>
 \end
 
 \define a(step,comments,t,d)
@@ -97,14 +95,14 @@ type: text/vnd.tiddlywiki
 </$vars>
 \end
 
-\define c(step,comments,t)
-<$reveal default="$t$" type="nomatch" text=""><$macrocall $name="step-date" t="$t$" color="#aaa"/></$reveal>
+\define c(step,comments,t,d)
+<$reveal default="$t$" type="nomatch" text=""><$macrocall $name="step-date" t="$t$" d="$d$" color="#aaa"/></$reveal>
 <span style="color:#aaa;"><<linkIfExists "$step$" "$comments$">></span>
-<$set name="currTask" value={{!!title}}><$set name="currStep" value="$step$">
-<$list filter="[<task-state>is[tiddler]]" emptyMessage="@@color:red;&#10005;@@">
-<$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button>
-</$list>
-</$set></$set>
+<$vars currTask={{!!title}} currStep="$step$">
+<$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:red;&#10005;@@</$button><<date-dropdown "$step$">>
+<$reveal default="$t$" type="lt" text="$d$" style="font-size:small;"><$macrocall $name="days-passed" start="$t$" end="$d$"/></$reveal>
+<$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
+</$vars>
 \end
 
 \define waiting-undone(step,comments,t,symbol,days,color:"#009dd9",type:"waiting")
@@ -181,7 +179,8 @@ type: text/vnd.tiddlywiki
 #> `<<c
   step:"下一步"
   comments:"注释信息"
-  t:"20190102(start)">>`
+  t:"20190102(start)"
+  d:"20190201(end)">>`
 # ''Waiting Undone 等待之中''
 #> `<<waiting-undone
   step:"下一步"
