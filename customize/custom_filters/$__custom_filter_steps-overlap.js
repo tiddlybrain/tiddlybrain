@@ -149,7 +149,7 @@ exports.getTDate = function(source,operator,options) {
 		source(function(tiddler,title) {
 			if (tiddler) {
 				var content = tiddler.getFieldString("text");
-				var steps = content.match(pattern_step);
+				var steps = content.match(pattern_step) || [];
 				steps.every(step => {
 					if (step.indexOf(operator.operand) !== -1) {
 						var t = getStartTime(step);
@@ -171,7 +171,7 @@ exports.getDDate = function(source,operator,options) {
 		source(function(tiddler,title) {
 			if (tiddler) {
 				var content = tiddler.getFieldString("text");
-				var steps = content.match(pattern_step);
+				var steps = content.match(pattern_step) || [];
 				steps.every(step => {
 					if (step.indexOf(operator.operand) !== -1) {
 						var d = getEndTime(step);
@@ -193,7 +193,7 @@ exports.getTypeStep = function(source,operator,options) {
 		source(function(tiddler,title) {
 			if (tiddler) {
 				var content = tiddler.getFieldString("text");
-				var steps = content.match(pattern_step);
+				var steps = content.match(pattern_step) || [];
 				steps.every(step => {
 					if (step.indexOf(operator.operand) !== -1) {
 						var t = getType(step);
@@ -215,8 +215,8 @@ exports.finishedStepNames = function(source,operator,options) {
 		source(function(tiddler,title) {
 			if (tiddler) {
 				var content = tiddler.getFieldString("text");
-				var steps = content.match(pattern_step);
-				if (steps) steps.forEach(step => {
+				var steps = content.match(pattern_step) || [];
+				steps.forEach(step => {
 					var d = getEndTime(step);
 					if (d && d === operator.operand) results.push(getName(step));
 				});
