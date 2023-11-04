@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20230928040340160
+modified: 20231104130149866
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -52,6 +52,8 @@ type: text/vnd.tiddlywiki
 </$list></$button>
 \end
 
+\define belongs-display-state() $:/state/belongs/display/$(currentTiddler)$/$(key)$
+
 \define categories(tags-filter, cat-prefix, filter, cat-filter, tag-caption, search-title:"Search here")
 <div class="categories">
 <div class="categories-caption">
@@ -70,7 +72,7 @@ type: text/vnd.tiddlywiki
 </$button>
 </$reveal>
 <div class="categories-display"><$button class="tc-btn-invisible">
-<$list filter="[<belongs-display-state>is[tiddler]]" emptyMessage="""&#9776;<$action-setfield $tiddler=<<belongs-display-state>> text="list"/>""" variable="NONE">&#9783;<$action-deletetiddler $filter="[<belongs-display-state>]"/></$list>
+<$list filter="[<belongs-display-state>is[tiddler]]" emptyMessage="""&#9782;<$action-setfield $tiddler=<<belongs-display-state>> text="list"/>""" variable="NONE">&#9776;<$action-deletetiddler $filter="[<belongs-display-state>]"/></$list>
 </$button></div>
 <div class="categories-toggle">
 <$macrocall $name="toggle-tags-button" tags-filter=<<__tags-filter__>>/>
@@ -82,19 +84,18 @@ type: text/vnd.tiddlywiki
 \end
 
 \define belongs-sort-state(title) $:/state/sort/$(currentTiddler)$/$title$/$(sbb)$
-\define belongs-display-state() $:/state/belongs/display/$(currentTiddler)$/$(key)$
 
 \define belongs-display(filter, cfilter, rheader, title, checkbox, sort-order)
 <$reveal default="$cfilter$" type="match" text="" tag="div" class="belongs-display"><$macrocall $name="record" filter=<<__filter__>> uid=<<__title__>>/></$reveal>
 <$reveal default="$cfilter$" type="nomatch" text="" tag="div"><$macrocall $name="table" rfilter=<<__filter__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/></$reveal>
 \end
 
-\define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default", has-filter:"yes", checkbox, sort-order)
+\define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default", has-filter:"yes", mode, checkbox, sort-order)
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options">
 filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">> cfilter=<<__cfilter__>>/>
 </div></$list>
-<$list filter="[<belongs-display-state>text[list]]" emptyMessage="""<$macrocall $name="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
+<$list filter="[<__mode__>!match[list]]" emptyMessage="""<$macrocall $name="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]limit[1]]">> variable="NONE">
 <div style="margin-top:1em;">
 <$macrocall $name="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
@@ -102,13 +103,13 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 </$list>
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]each:value[]$sort$]">> variable="sbb">
 <div style="margin-top:1em;" class="parent-title">
-<$reveal type="match" state=<<belongs-sort-state "$title$">> text="close">
-<$button dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">> class="tc-btn-invisible links" style="fill:#999;">
+<$reveal type="nomatch" state=<<belongs-sort-state "$title$">> text="open">
+<$button dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">> class="tc-btn-invisible links" style="fill:#999;font-size:small;">
 <$action-setfield $tiddler=<<belongs-sort-state "$title$">> text="open"/>{{$:/core/images/right-arrow}}
 </$button>
 </$reveal>
-<$reveal type="nomatch" state=<<belongs-sort-state "$title$">> text="close">
-<$button dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">> class="tc-btn-invisible links" style="fill:#999;">
+<$reveal type="match" state=<<belongs-sort-state "$title$">> text="open">
+<$button dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">> class="tc-btn-invisible links" style="fill:#999;font-size:small;">
 <$action-setfield $tiddler=<<belongs-sort-state "$title$">> text="close"/>{{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
@@ -122,7 +123,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 </$button>
 </$tiddler>
 </div>
-<$reveal type="nomatch" state=<<belongs-sort-state "$title$">> text="close" tag="div" style="margin-top:1em;">
+<$reveal type="match" state=<<belongs-sort-state "$title$">> text="open" tag="div" style="margin-top:1em;">
 <$macrocall $name="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </$reveal>
 </$list>
@@ -152,7 +153,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 <span style="color:#aaa;">(<$count filter=<<__belongs-filter__>>/>)</span>
 </$button>
 <div style="padding-left:0.8em;margin:1em 0;" class="sort-by-belongs"><$set name="tab" value=<<sb>>>
-<$macrocall $name="sort-by-belongs" filter=<<__belongs-filter__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<sb>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$macrocall $name="sort-by-belongs" filter=<<__belongs-filter__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<sb>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </$set></div>
 </$reveal>
 </$list>
@@ -167,7 +168,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 </$droppable>
 <$macrocall $name="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 <$list filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
-<$macrocall $name="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no" checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$macrocall $name="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no" mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div></$list>
 </$vars></$set>
 \end
@@ -177,7 +178,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 <$macrocall $name="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}tagging[]$item-filter$] [$item-filter$!filter<tagged>]'/> items"/>
 <$macrocall $name="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 <$list filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
-<$macrocall $name="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no" checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$macrocall $name="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no" mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div></$list>
 </$vars></$set>
 \end
@@ -231,6 +232,7 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
   rheader:"如果是 Table, 可以选填"
   title:"Unique ID"
   has-filter:"是否显示 filter"
+  mode:"显示模式, 是否按照 parents 来收起"
   checkbox:"table 模式下是否显示复选框"
   sort-order:"Table 按照列排序的顺序">>`
 # ''分类显示通用模板''
