@@ -1,4 +1,4 @@
-modified: 20231104153719753
+modified: 20231105201423428
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -12,10 +12,12 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 </$let>
 <$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/close-others-button}}
-<$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
+<$set name="target" filter="[all[current]get[belongs.to]else<currentTiddler>]" select="0">
+<$action-setfield $tiddler="$:/temp/index/filter" text=<<target>>/><<searchbar-focus-action>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/IndexSearchResultList"/>
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/IndexSearchResultList"/>
 <$action-deletetiddler $filter="[<searchTiddler>] [[$:/temp/menubarsearch]]"/>
+</$set>
 </$button>
 <div class="sidebar-item-hover">
 <$button class="tc-btn-invisible search-dropdown-button"><<open-in-sidebar close:"no">>{{$:/core/images/open-window}}</$button>
