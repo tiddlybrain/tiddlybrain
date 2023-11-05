@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20230708202334929
+modified: 20231105214609098
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -161,6 +161,7 @@ input[type=text].new-tiddler-input-box, input:not([type]).new-tiddler-input-box 
 .tc-drop-down .tc-menu-list-item button.search-dropdown-button {background: transparent; transform: translateY(-2px); font-size: smaller;}
 .tc-tags-wrapper .tc-drop-down .tc-menu-list-item button.search-dropdown-button {display: none;}
 button.search-dropdown-button {font-size: small;}
+button.search-dropdown-button svg {fill: white;}
 
 /* Beautify Checkbox and Radio Buttons */
 label.tc-check-btn, button.tc-check-btn {cursor: pointer; margin-bottom: 5px;}
