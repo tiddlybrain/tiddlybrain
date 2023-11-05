@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20231104153944518
+modified: 20231105195228992
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -63,21 +63,21 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-\define bl-filter(item-filter, uid, sort:"sortan[caption]", cfilter, rheader, limit:"8", note:"yes", description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents)
+\define bl-filter(item-filter, item-filter-2, uid, sort:"sortan[caption]", cfilter, rheader, limit:"8", note:"yes", description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents)
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
-<$list filter="[<__group-by-parents__>!match[yes]]" emptyMessage="""<$macrocall $name="sort-by-belongs" filter="[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" title="$uid$" has-filter="$has-filter$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
-<$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
-<$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$count[]]">> select="0">
+<$list filter="[<__group-by-parents__>!match[yes]]" emptyMessage="""<$macrocall $name="sort-by-belongs" filter="[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" title="$uid$" has-filter="$has-filter$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
+<$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
+<$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
-<$set name="links" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$addprefix[<<l ']addsuffix['>>]join[, ]]">> select="0">
-<$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>>(<$count filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">>/>)</$button>
+<$set name="links" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$addprefix[<<l ']addsuffix['>>]join[, ]]">> select="0">
+<$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">>>(<$count filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">>/>)</$button>
 </$set>
-filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
+filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
-<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE"><$list filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>]" "+[$sort$limit<limit>]">>><<bl-item "$note$" "$date$" """$caption$""" "$description$" "$parent$">></$list></$list>
+<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE"><$list filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$limit<limit>]">>><<bl-item "$note$" "$date$" """$caption$""" "$description$" "$parent$">></$list></$list>
 <$list filter="[<bl-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item" style="margin:-3px 0 3px 0;">
 <$button class="tc-btn-invisible fold-text">-- <<limit>> of <<bl-qty>> shown --
 <$list filter="[<bl-limit-state '$uid$'>is[missing]]" emptyMessage="<$action-deletetiddler $tiddler=<<bl-limit-state '$uid$'>>/>">
@@ -108,6 +108,8 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 </$set>
 \end
 
+\define bl-sub-note(note, item-filter, sort, cfilter, rheader, limit, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents) <$macrocall $name="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]$item-filter$" item-filter-2="getAllTiddlers:note[$note$]" uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
+
 # ''一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title''
 #> `<<l
   title:"tiddler title"
@@ -128,7 +130,8 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
   text:"alternative text">>`
 # ''按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filter
-  item-filter:"所有需要反查的 Tiddlers"
+  item-filter:"主要筛选条件, 在 bl-pattern 之前"
+  item-filter-2:"次要筛选条件, 在 bl-pattern 之后, 用于二次查找"
   uid:"给 bl 一个唯一的 id"
   sort:"结果排序"
   cfilter:"table 列"
@@ -208,6 +211,25 @@ filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build 
 # ''反查指向当前 Tiddler 且相同 note 的所有 Tiddlers''
 #> `<<bl-note
   note:"角色"
+  item-filter:"额外筛选条件"
+  sort:"结果排序"
+  cfilter:"table 列"
+  rheader:"table 标题列"
+  limit:"最大显示行数"
+  description:"是否显示 Description"
+  parent:"是否显示 belongs.to"
+  date:"是否显示 date"
+  caption:"按照 caption 来显示结果条目"
+  has-filter:"是否显示 filter"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption"
+  checkbox:"table 模式下是否显示复选框"
+  sort-order:"Table 按照列排序的顺序"
+  group-by-parents:"按照 belongs.to 分类排序">>`
+# ''反查指向当前 Tiddler 的所有 Tiddlers 里面具有特定 note 的 Tiddlers''
+#> `<<bl-sub-note
+  note:"bl-pattern 后面的 note, 二次搜索的 Tiddlers 的角色"
   item-filter:"额外筛选条件"
   sort:"结果排序"
   cfilter:"table 列"
