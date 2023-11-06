@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20231104153835326
+modified: 20231106164244205
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -36,11 +36,11 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <div class="sidebar-item-hover">
-&middot; <$button class="tc-btn-invisible" style="color:#999;" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
 &middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#999;">popup</$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#999;">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button></$list>
+&middot; <$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar>>sidebar</$button>
 &middot; <$button class="tc-btn-invisible" style="color:#999;"><$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>close</$button>
 </div>
 </div>
@@ -59,11 +59,11 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <div class="sidebar-item-hover">
-&middot; <$button class="tc-btn-invisible" style="color:#bbb;" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
 &middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#bbb;">popup</$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#bbb;">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button></$list>
+&middot; <$button class="tc-btn-invisible" style="color:#bbb;"><<open-in-sidebar close:"no">>sidebar</$button>
 </div>
 </div>
 </$list>
