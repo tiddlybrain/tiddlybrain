@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20231106092254456
+modified: 20231106130646676
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -233,7 +233,7 @@ button.l {line-height: inherit;}
 .tc-sidebar-lists button.l {color: #5778d8;}
 .modal-buttons button.l svg {vertical-align: middle; font-size: smaller; fill:#5778d8;}
 .l > button.collapse-title {padding: 0; background: transparent; border: none;}
-.l > button.collapse-title > svg {font-size: small; transform: translateY(-2px);}
+.l > button.collapse-title > svg {font-size: small; transform: translateY(-1px);}
 .snippet-content .l > button.collapse-title > svg {font-size: smaller;}
 
 /* For Macro: links */
