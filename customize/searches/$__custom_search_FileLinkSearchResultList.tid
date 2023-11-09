@@ -1,11 +1,11 @@
 caption: Link/File
 created: 20201226195733046
 creator: yuzijie
-first-search-filter: [!is[system]has[url]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap,url<userInput>sort[title]limit[100]]
+first-search-filter: [!is[system]has[url]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap,url<userInput>sort[title]]
 list-after: $:/custom/search/MultipleSearchResultList
-modified: 20221017185430647
+modified: 20231109032817344
 modifier: yuzijie
-second-search-filter: [!is[system]has[path]] [!is[system]has[dir]] +[search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap,path,dir<userInput>sort[title]limit[100]]
+second-search-filter: [!is[system]has[path]] [!is[system]has[dir]] +[search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap,path,dir<userInput>sort[title]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/FileLinkSearchResultList
 type: text/vnd.tiddlywiki

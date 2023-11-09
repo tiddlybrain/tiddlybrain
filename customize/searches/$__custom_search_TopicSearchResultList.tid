@@ -3,9 +3,9 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]fieldInsensitive:caption<userInput>sort[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20231104154244923
+modified: 20231109033134430
 modifier: yuzijie
-second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sort[note]limit[80]]
+second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>] +[sort[note]limit[80]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 </$button></small></$list>
 
 <$list filter="[[$:/temp/note/filter]!is[tiddler]]">
-<$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]] }}}><<note-filters>></$set>
+<$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]split[ ]first[]] }}}><<note-filters>></$set>
 </$list>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">

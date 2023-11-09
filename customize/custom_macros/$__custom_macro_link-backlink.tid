@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20231107153702428
+modified: 20231109025554952
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -72,7 +72,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
-<$set name="links" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$addprefix[<<l ']addsuffix['>>]join[, ]]">> select="0">
+<$set name="links" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" '+[$sort$addprefix[<<l "]addsuffix[">>]join[ ]]'>> select="0">
 <$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">>>(<$count filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">>/>)</$button>
 </$set>
 filter <$macrocall $name="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">> cfilter=<<__cfilter__>>/>

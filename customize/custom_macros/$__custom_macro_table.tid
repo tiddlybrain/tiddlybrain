@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20230618120208699
+modified: 20231109025918161
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -141,7 +141,7 @@ type: text/vnd.tiddlywiki
 \define tables(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"tables", sort-order, first-col, checkbox)
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <div class="filter-options">
-<$set name="links" filter=<<filter-build "$rfilter$ +[!has[draft.of]]" "+[addprefix[<<l ']addsuffix['>>]join[, ]]">> select="0">
+<$set name="links" filter=<<filter-build "$rfilter$ +[!has[draft.of]]" '+[addprefix[<<l "]addsuffix[">>]join[ ]]'>> select="0">
 <$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "$rfilter$ +[!has[draft.of]]">>>(<$count filter=<<filter-build "$rfilter$ +[!has[draft.of]]">>/>)</$button>
 </$set>
 filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$rfilter$ +[!has[draft.of]]">> cfilter=<<__cfilter__>>/>
