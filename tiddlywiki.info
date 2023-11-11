@@ -5,7 +5,8 @@
         "tiddlywiki/filesystem",
         "tiddlywiki/highlight",
         "tiddlywiki/menubar",
-        "tiddlywiki/mobiledragdrop"
+        "tiddlywiki/mobiledragdrop",
+        "tiddlywiki/codemirror"
     ],
     "themes": [
         "tiddlywiki/vanilla",
