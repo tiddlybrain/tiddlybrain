@@ -9,7 +9,7 @@ externallink:<<colour external-link-foreground>>
 internallink:<<colour tiddler-title-foreground>>
 link:<<colour tiddler-title-foreground>>
 transclude:<<colour tiddler-title-foreground>>
-monospace:<<colour foreground>>
+monospace:<<colour code-foreground>>
 list1:<<colour primary>>
 list2:<<colour primary>>
 list3:<<colour primary>>
