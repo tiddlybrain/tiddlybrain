@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20231109025918161
+modified: 20231112191121975
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -130,12 +130,10 @@ type: text/vnd.tiddlywiki
 </tr>
 \end
 
-\define fill-empty-cell(content)
-<$list filter="[<value>is[blank]]" emptyMessage=<<cell-value-normal>> variable="NONE">
-<$button>Fill the cell value
-<$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<__content__>> $timestamp="no"/>
-</$button>
-</$list>
+\define fill-empty-cell(content, button:"Fill the cell")
+<$list filter="[<current>has[celltpl]]"><$list filter="[<value>is[blank]]" emptyMessage=<<cell-value-normal>> variable="NONE">
+<$button><<__button__>><$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<__content__>> $timestamp="no"/></$button>
+</$list></$list>
 \end
 
 \define tables(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"tables", sort-order, first-col, checkbox)
@@ -181,7 +179,8 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 #> `<<table-row-edit>>`
 # ''如果 cell 里面没有值, 则按照内容来填充 cell''
 #> `<<fill-empty-cell
-content:"cell 的内容">>`
+  content:"cell 的内容"
+  button:"name of the empty button">>`
 # ''带 filters 的 table''
 #> `<<tables
   cfilter:"[[A]] [[B]] [[C]] 输入键值"
