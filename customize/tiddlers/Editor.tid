@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20231113202212007
+modified: 20231113214457108
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -90,6 +90,14 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler=<<draft>>>{{!!title}} - {{!!caption}}</$tiddler>
 <$action-sendmessage $message="tm-edit-tiddler" $param=<<draft>>/>
 </$button>
+<$list filter="[all[tiddlers]belongs.to<draft>limit[1]]" variable="NONE">
+<$button popup="$:/state/popup/editor/snippet">Children</$button>
+<$reveal type="popup" state="$:/state/popup/editor/snippet" tag="div"><div class="record-drop-down tc-popup-keep" style="padding:5px 10px;min-width:200px;">
+<$list filter="[all[tiddlers]belongs.to<draft>sortan[caption]]"><$button class="tc-btn-invisible" style="display:block;padding:3px 0;">
+@@color:#5778d8;{{!!title}}@@ {{!!caption}}<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/>
+</$button></$list>
+</div></$reveal>
+</$list>
 <$button>{{$:/core/images/cancel-button}}
 <$macrocall $name="tiddler-close" tiddler=<<draft>>/>
 <$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]">
