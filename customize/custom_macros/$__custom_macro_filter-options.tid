@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20230426213304712
+modified: 20231114205024269
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -49,6 +49,7 @@ type: text/vnd.tiddlywiki
 <$list filter="$filter$ +[type[text/vnd.tiddlywiki]limit[1]]" variable="NONE">
 <option value=<<filter-by-category-value>> style="color:#c78420;">Categories</option>
 </$list>
+<option value="+[!has[belongs.to]]" style="color:#205bc7;">No Parent</option>
 <$list filter="$filter$ +[get[belongs.to]each:value[]]">
 <option value=<<filter-by-belongs-value>> style="color:#205bc7;">Belongs to: <$transclude field=caption><$view field=title/></$transclude></option>
 </$list>
@@ -60,7 +61,7 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler=<<select-value>>/><<select-value-content>> &times;
 </$button>""" variable="NONE">
 <$select tiddler=<<select-value>> tooltip="Pickup a value"><option value="*">Has Value</option><option value="#">No Value</option>
-<$list filter="$filter$ +[getindexParsedList<index>each:value[]]"><option value={{!!title}}>{{!!title}}</option></$list>
+<$list filter="$filter$ +[getindexParsedList<index>each:value[]!is[blank]]"><option value={{!!title}}>{{!!title}}</option></$list>
 </$select>
 </$list>
 </$set>
