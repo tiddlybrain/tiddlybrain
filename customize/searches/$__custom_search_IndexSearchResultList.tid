@@ -3,7 +3,7 @@ created: 20220920181640150
 creator: yuzijie
 first-search-filter: [all[tiddlers]!tag[Ignore]contains:parents{$:/temp/index/filter}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>subfilter<subtopic-subfilter>sortsub<topic-level>]
 list-after: $:/custom/search/CurrentSearchResultList
-modified: 20230515113527864
+modified: 20231114175935966
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/IndexSearchResultList
@@ -22,9 +22,14 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
 </$button></small></$list>
 
-<div style="text-align:center;"><$tiddler tiddler={{$:/temp/index/filter}}><$button class="tc-btn-invisible" style="text-decoration:underline;">
+<div style="text-align:center;"><$tiddler tiddler={{$:/temp/index/filter}}>
+<$button class="tc-btn-invisible" style="text-decoration:underline;">
 Search within: <$transclude field="caption"><$view field="title"/></$transclude><$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
-</$button></$tiddler></div>
+</$button>
+<$list filter="[all[current]get[belongs.to]]">
+<$button class="tc-btn-invisible">⬆️<$action-setfield $tiddler="$:/temp/index/filter" text={{!!title}}/><<searchbar-focus-action>></$button>
+</$list>
+</$tiddler></div>
 
 <$list filter="[[$:/temp/note/filter]!is[tiddler]]">
 <$set name="search-filter" value={{{ [<configTiddler>get[first-search-filter]] }}}><<note-filters>></$set>

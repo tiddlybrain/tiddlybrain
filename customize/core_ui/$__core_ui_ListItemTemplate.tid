@@ -1,4 +1,4 @@
-modified: 20231105215329881
+modified: 20231114180517652
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -16,7 +16,6 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<target>>/><<searchbar-focus-action>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/IndexSearchResultList"/>
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/IndexSearchResultList"/>
-<$action-deletetiddler $filter="[<searchTiddler>] [[$:/temp/menubarsearch]] [<storeTitle>]"/>
 </$set>
 </$button>
 <div class="sidebar-item-hover">
