@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20231112191121975
+modified: 20231114191954288
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -130,9 +130,9 @@ type: text/vnd.tiddlywiki
 </tr>
 \end
 
-\define fill-empty-cell(content, button:"Fill the cell")
+\define fill-empty-cell(content, button:"Fill the cell", class, style)
 <$list filter="[<current>has[celltpl]]"><$list filter="[<value>is[blank]]" emptyMessage=<<cell-value-normal>> variable="NONE">
-<$button><<__button__>><$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<__content__>> $timestamp="no"/></$button>
+<$button class="$class$" style="$style$"><<__button__>><$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<__content__>> $timestamp="no"/></$button>
 </$list></$list>
 \end
 
@@ -180,7 +180,9 @@ filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-buil
 # ''如果 cell 里面没有值, 则按照内容来填充 cell''
 #> `<<fill-empty-cell
   content:"cell 的内容"
-  button:"name of the empty button">>`
+  button:"name of the empty button"
+  class:"button class"
+  style:"button style">>`
 # ''带 filters 的 table''
 #> `<<tables
   cfilter:"[[A]] [[B]] [[C]] 输入键值"
