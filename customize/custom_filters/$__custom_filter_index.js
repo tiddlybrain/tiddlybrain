@@ -61,12 +61,14 @@ var getResults = function(data,options,currTiddlerTitle) {
 
 var getCellData = function(tiddler,index,options) {
 	var data = options.wiki.extractTiddlerDataItem(tiddler,index) || "";
+	/*
 	if(data === "") {
 		var celltpl = tiddler.getFieldString("celltpl");
 		if(options.wiki.tiddlerExists(celltpl)) {
 			data = options.wiki.extractTiddlerDataItem(celltpl,index) || "";
 		}
 	}
+	*/
 	return data;
 }
 
