@@ -28,14 +28,16 @@ var getResult = function(data,options,currTiddlerTitle) {
 			parseAsInline: true,
 			variables: {
 				currentTiddler: data
-			}
+			},
+			parentWidget: options.widget
 		});
 	} else {
 		return options.wiki.renderText("text/plain","text/vnd.tiddlywiki",data,{
 			parseAsInline: true,
 			variables: {
 				currentTiddler: currTiddlerTitle
-			}
+			},
+			parentWidget: options.widget
 		});
 	}
 }
@@ -241,7 +243,8 @@ exports.slash = function(source,operator,options) {
 							parseAsInline: true,
 							variables: {
 								currentTiddler: match
-							}
+							},
+							parentWidget: options.widget
 						});
 						source(function(tiddler,title) {
 							results.push(title + "/" + result);
