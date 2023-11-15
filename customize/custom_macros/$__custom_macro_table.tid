@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20231114191954288
+modified: 20231115143959954
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -54,7 +54,7 @@ type: text/vnd.tiddlywiki
 <$set name="cfilter" filter="$cfilter$"><$set name="rheader" value="$rheader$">
 <$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>""">
 <$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
-<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]$sort-order$]" variable="index-value">
+<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]!is[blank]$sort-order$]" variable="index-value">
 <$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>
 </$list>
 <$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>
@@ -109,7 +109,7 @@ type: text/vnd.tiddlywiki
 <$set name="cfilter" filter="$cfilter$"><$set name="ffilter" filter="$ffilter$">
 <$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row-edit>></$list>""">
 <$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
-<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]$sort-order$]" variable="index-value">
+<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]!is[blank]$sort-order$]" variable="index-value">
 <$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row-edit>></$list>
 </$list>
 <$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row-edit>></$list>
