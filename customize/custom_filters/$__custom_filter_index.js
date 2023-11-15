@@ -37,7 +37,7 @@ var getResult = function(data,options,currTiddlerTitle) {
 			variables: {
 				currentTiddler: currTiddlerTitle
 			},
-			parentWidget: options.widget
+			//parentWidget: options.widget
 		});
 	}
 }
