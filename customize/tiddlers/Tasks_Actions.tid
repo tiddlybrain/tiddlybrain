@@ -2,9 +2,9 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20231030160708309
+modified: 20231117221259936
 modifier: yuzijie
-order: 3
+order: 2
 tags: Tasks customized
 title: Tasks/Actions
 type: text/vnd.tiddlywiki
@@ -13,25 +13,29 @@ type: text/vnd.tiddlywiki
 <$vars today=<<curDate>> dt=<<curDate>>><$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
 
-<div style="margin:20px 0 18px 20px;font-size:15px;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
+<h2 style="margin:20px 0 18px 20px;font-weight:500;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
 <$action-setfield $tiddler='$:/temp/plan/date' text={{{[<actionTiddler>split[-]join[]]}}}/>
 </$list>" tag="div">
-<$set name="left" filter="[<curDate>nextDay[-1]]" select="0"><$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible">{{$:/core/images/chevron-left}}</$button></$set>
-<$set name="right" filter="[<curDate>nextDay[1]]" select="0"><$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible">{{$:/core/images/chevron-right}}</$button></$set>
-<$button to=<<journal-title>> class="tc-btn-invisible"><$tiddler tiddler=<<journal-title>>><$transclude field="caption"/></$tiddler></$button>
+<$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-left}}</$button>
+</$set>
+<$set name="right" filter="[<curDate>nextDay[1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-right}}</$button>
+</$set>
+<$button to=<<journal-title>> class="tc-btn-invisible tc-tiddlylink l"><$tiddler tiddler=<<journal-title>>><$transclude field="caption"/></$tiddler></$button>
 <$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="日记: <<bl>>
 --: 任务回顾" date=<<curDate>> caption="<$macrocall $name=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="customized-template-journal"/>
 </$button></$list>
-</$droppable></div>
+</$droppable></h2>
 
 <$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:22px;">
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
-Done: <<currentTiddler>><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
+Done: <<currentTiddler>><$list filter="[<journal-title>is[tiddler]]"><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
 </$button></li></$list>
 </$set>
 </$list></$list>
@@ -40,7 +44,7 @@ Done: <<currentTiddler>><$macrocall $name="add-to-cell-action" title=<<journal-t
 </ul></li></$list>
 <$list filter="[prefix[$:/task-state/]text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
-<$list filter="[prefix[$:/task-state/]!filter<task-filter>text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
+<$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
 <$list filter="[prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li>
 <$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
