@@ -2,15 +2,16 @@ caption: Copy tiddler title
 created: 20200423235601123
 creator: yuzijie
 description: Copy tiddler title to the clipboard
-list-after: $:/custom/ui/Buttons/open-in-sidebar
-modified: 20231106163028778
+list-after: $:/core/ui/Buttons/info
+modified: 20231119174523477
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/copy-title
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-<$button message="tm-copy-to-clipboard" param=<<currentTiddler>> tooltip="Copy tiddler title to the clipboard" aria-label="copy title" class=<<tv-config-toolbar-class>>>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value="""<<l "$(currentTiddler)$" "">>""" emptyValue=<<currentTiddler>>>
+<$button message="tm-copy-to-clipboard" param=<<link-text>> tooltip="Copy tiddler title to the clipboard" aria-label="copy title" class=<<tv-config-toolbar-class>>>
 <$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/copy-clipboard}}
@@ -19,3 +20,4 @@ type: text/vnd.tiddlywiki
 <span class="tc-btn-text"><$text text="copy title"/></span>
 </$list>
 </$button>
+</$set>
