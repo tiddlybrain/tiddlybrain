@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20231117082236844
+modified: 20231119144122609
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -75,6 +75,14 @@ dl.task-list dd {white-space: nowrap;}
 .tc-sidebar-header .tc-sidebar-lists .tc-drop-down p {margin-top: 1em; margin-bottom: 1em;}
 .tc-sidebar-lists .tc-editor-toolbar button {margin: 0; border: 1px solid #ccc;}
 .tc-sidebar-lists .tc-editor-toolbar button.tc-btn-invisible {border: none;}
+
+/* For Editor */
+.edit-area {width: 100%; line-height: 24px; white-space: pre; padding: 8px 10px;}
+.edit-area.red {color: brown;}
+.tc-sidebar-lists .tc-editor-toolbar {margin: 4px 0;}
+input.tc-edit-texteditor {padding:0 5px; margin:5px 0;}
+.editor-display {margin:1em 0; background:white; padding:10px 20px; line-height:26px; border-radius:3px; box-shadow:0 1px 1px rgb(0 0 0 / 8%), 0 0px 0px 1px rgb(0 0 0 / 2%);}
+.tc-sidebar-header .editor-display {color:#333;}
 
 /* For $:/custom/ui/SideBarSegments/open */
 .sidebar-item-hover {display: none;}
@@ -181,6 +189,7 @@ nav.tc-menubar .tc-drop-down .tc-table-of-contents button.tc-tiddlylink:hover {c
 nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #aaa; background: transparent; cursor: default;}
 nav.tc-menubar .tc-menu-list-item .tc-menu-list-subitem {padding-left: 0px;}
 nav.tc-menubar .tc-sidebar-tab-open-item {overflow: hidden;}
+@media (max-width: 1400px) {.menubar-recent {display: none;}}
 
 /* For CodeMirror Plugin */
 pre.CodeMirror-line {padding-top: 0 !important; padding-bottom: 0 !important;}
