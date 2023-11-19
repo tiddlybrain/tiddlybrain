@@ -1,7 +1,8 @@
 created: 20220217150254473
 creator: yuzijie
+keywords: 
 list-after: $:/core/ui/SideBar/More
-modified: 20220910153443347
+modified: 20231119175642713
 modifier: yuzijie
 tags: customized $:/tags/SideBar
 title: Inbox
@@ -9,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$list filter="[all[tiddlers]tags[]is[missing]!is[system]] [untagged[]!is[system]]
 [tag[Snippet]get[belongs.to]is[missing]] [tag[Comment]get[belongs.to]is[missing]]
--Task -Comment -Snippet -Ignore -customized -[{$:/config/defaultTemplate}]">
+-Task -Comment -Snippet -Ignore -CodeMirror -customized -[{$:/config/defaultTemplate}]">
 <div><$button tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
 <$transclude field="caption"><$view field="title"/></$transclude>
