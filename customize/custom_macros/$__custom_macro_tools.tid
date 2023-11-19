@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20231112221819421
+modified: 20231119125742151
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -199,6 +199,9 @@ type: text/vnd.tiddlywiki
 <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><<open-in-sidebar close:"no">>SIDEBAR</$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]">
 <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$set name="actionTiddler" value=<<mTitle>>><<droppable-clone-action>></$set>CLONE</$button>
+<$list filter="[<mTitle>!has[_canonical_uri]!is[image]]">
+<$button message="tm-close-tiddler"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/editor-modal" mTitle=<<mTitle>>/>QuickEDIT</$button>
+</$list>
 <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>EDIT</$button>
 <$list filter="[<mTitle>code-body[yes]]"><<modal-edit-comment>></$list>
 </$list>
