@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20231119171349895
+modified: 20231121203616481
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -64,8 +64,8 @@ type: text/vnd.tiddlywiki
 </$button>
 </$tiddler>
 <span class="menubar-recent" style="margin-left:10px;">
-<$list filter="[[$:/config/index-tree]get[list]enlist-input[]limit[4]]">
-<$button class="tc-btn-invisible" style="color:white;margin-left:10px;">
+<$list filter="[[$:/config/index-tree]get[list]enlist-input[]limit[5]]">
+<$button class="tc-btn-invisible" style="color:white;margin-left:11px;">
 <$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>

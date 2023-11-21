@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20231117221259936
+modified: 20231121134145722
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -35,8 +35,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
-Done: <<currentTiddler>><$list filter="[<journal-title>is[tiddler]]"><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
-</$button></li></$list>
+<$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
+Done: <<currentTiddler>></$button></li></$list>
 </$set>
 </$list></$list>
 <$list filter="[prefix[$:/task-state/]contains:plan[blocked]limit[1]]" variable="NONE"><li style="color:brown;">Blocked<ul>
