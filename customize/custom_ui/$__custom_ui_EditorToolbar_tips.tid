@@ -4,7 +4,7 @@ created: 20200108235724304
 creator: yuzijie
 description: Show Content as Tips
 icon: $:/core/images/tip
-modified: 20211208213144010
+modified: 20231201154953029
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/tips
@@ -14,5 +14,5 @@ type: text/vnd.tiddlywiki
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix='<<display content:"""'
-	suffix='""" mode:"tips">>'
+	suffix='""" mode:"question">>'
 />
