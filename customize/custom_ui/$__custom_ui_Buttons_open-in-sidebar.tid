@@ -2,8 +2,7 @@ caption: Open in sidebar
 created: 20201031110107265
 creator: yuzijie
 description: Open tiddler in the sidebar
-list-after: $:/custom/ui/Buttons/copy-title
-modified: 20231119174144146
+modified: 20231204152031581
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/open-in-sidebar

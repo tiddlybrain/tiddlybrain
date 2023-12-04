@@ -1,7 +1,6 @@
 caption: {{$:/core/images/fold-button}} {{$:/language/Buttons/Fold/Caption}}
 description: {{$:/language/Buttons/Fold/Hint}}
-list-after: $:/custom/ui/Buttons/copy-title
-modified: 20230808172359446
+modified: 20231204152031581
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/fold

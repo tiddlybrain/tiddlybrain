@@ -2,8 +2,7 @@ caption: Copy as a step
 created: 20220118202607895
 creator: yuzijie
 description: Copy current tiddler as a step to the clipboard
-list-after: $:/custom/ui/Buttons/external-search
-modified: 20230808172436167
+modified: 20231204152031581
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/copy-as-step
@@ -13,6 +12,7 @@ type: text/vnd.tiddlywiki
 <$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
 <$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue=<<content>> select="0">
 <$button message="tm-copy-to-clipboard" param=<<step-template>> tooltip="Copy current tiddler as a step" aria-label="copy as a step" class=<<tv-config-toolbar-class>>>
+<$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/copy-clipboard}}
 </$list>

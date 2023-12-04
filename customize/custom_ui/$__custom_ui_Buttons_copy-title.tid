@@ -2,8 +2,7 @@ caption: Copy tiddler title
 created: 20200423235601123
 creator: yuzijie
 description: Copy tiddler title to the clipboard
-list-after: $:/core/ui/Buttons/info
-modified: 20231119183655363
+modified: 20231204152031581
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/copy-title

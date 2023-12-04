@@ -1,7 +1,6 @@
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
-list-after: $:/core/ui/Buttons/clone
-modified: 20230808172509242
+modified: 20231204152031581
 modifier: yuzijie
 tags: $:/tags/EditToolbar $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/delete
