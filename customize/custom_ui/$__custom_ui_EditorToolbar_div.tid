@@ -4,7 +4,7 @@ created: 20230915213231062
 creator: yuzijie
 description: Wrap div tag around the texts
 icon: $:/core/images/tag-button
-modified: 20230915213437946
+modified: 20231205104743877
 modifier: yuzijie
 shortcuts: ctrl-shift-D
 tags: $:/tags/EditorToolbar customized
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
-	prefix='<div>
+	prefix='<div class="tag">
 
 '
 	suffix='
