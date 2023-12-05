@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20231205105129447
+modified: 20231205232727222
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -41,6 +41,7 @@ button.img {border: 1px solid #ddd; box-shadow: 0px 0px 2px 1px #f5f5f5;}
 button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis; line-height: 30px;}
 .snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
 .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table, .tc-sidebar-lists .index-tree-view .snippet-content p {margin: 10px 20px;}
+.snippet-content > .tag > p, .tc-sidebar-lists .index-tree-view .snippet-content > .tag > p {margin: 10px 22px;}
 .snippet-content > h2, .snippet-content > h3, .snippet-content > details {margin-left: 20px;}
 .snippet-content > h3 {margin-top: 15px; margin-bottom: 15px;}
 .snippet-external {margin: 1em 0; line-height: 0;}
