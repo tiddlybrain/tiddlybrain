@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20231201154237509
+modified: 20231207093634193
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -49,7 +49,9 @@ type: text/vnd.tiddlywiki
 </$set>
 </$list>
 <$list filter="[<draft>is[tiddler]!tag[Task]]"><$fieldmangler>
-<$button set="!!celltpl" setTo="customized-template-task" message="tm-add-tag" param="Task" style="margin-left:5px;" tooltip="Make it a task">Task</$button>
+<$button message="tm-add-tag" param="Task" style="margin-left:5px;" tooltip="Make it a task">Task
+<$list filter="[all[current]!has[celltpl]]"><$action-setfield celltpl="customized-template-task"/></$list>
+</$button>
 </$fieldmangler></$list>
 <$list filter="[<draft>is[tiddler]!code-body[yes]]"><$fieldmangler>
 <$button style="margin-left:5px;" tooltip="Code Template"><$action-setfield code-body="yes" type="text/vnd.tiddlywiki"/>Code</$button>

@@ -1,5 +1,5 @@
 caption: {{$:/language/TiddlerInfo/References/Caption}}
-modified: 20230429030007527
+modified: 20231207092119469
 modifier: yuzijie
 tags: $:/tags/TiddlerInfo customized
 title: $:/core/ui/TiddlerInfo/References
@@ -18,5 +18,5 @@ type: text/vnd.tiddlywiki
 <div style="margin-bottom:10px;">
 <$list filter="[all[tiddlers]!is[current]!is[system]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>get[note]unique[]]" variable="key"><<backlink-note-button>></$list>
 </div>
-<$list filter="[all[tiddlers]!is[current]!is[system]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sort[title]]" emptyMessage=<<lingo References/Empty>> template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[all[tiddlers]!is[current]!is[system]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sort[note]]" emptyMessage=<<lingo References/Empty>> template="$:/core/ui/ListItemTemplate"/>
 </$set>
