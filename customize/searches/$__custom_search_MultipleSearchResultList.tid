@@ -1,9 +1,9 @@
 caption: Multiple
 created: 20221017175243378
 creator: yuzijie
-first-search-filter: [!is[system]!tag[Ignore]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap:some<userInput>sort[title]limit[500]]
+first-search-filter: [!is[system]!tag[Ignore]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap:some<userInput>sortan[title]limit[500]]
 list-after: $:/custom/search/IndexSearchResultList
-modified: 20221017185730826
+modified: 20231208230057885
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/MultipleSearchResultList

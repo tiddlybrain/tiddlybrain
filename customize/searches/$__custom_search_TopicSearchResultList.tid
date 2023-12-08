@@ -1,11 +1,11 @@
 caption: Topics
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sort[title]]
+first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20231207114505802
+modified: 20231208230040873
 modifier: yuzijie
-second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>] +[sort[belongs.to]limit[80]]
+second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>] +[sortan[belongs.to]limit[80]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TopicSearchResultList
 type: text/vnd.tiddlywiki

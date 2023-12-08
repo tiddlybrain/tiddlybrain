@@ -1,6 +1,6 @@
 created: 20211001045719765
 creator: yuzijie
-modified: 20230923170307035
+modified: 20231208230151609
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/ref
@@ -27,7 +27,7 @@ type: text/vnd.tiddlywiki
 
 \define ref-prefix-filter() [removeprefix[$(ref-title)$]!search:title:literal[/]]
 
-\define ref-prefix(prefix, sort:"sort[title]", mode:"tabs", external-links:"yes")
+\define ref-prefix(prefix, sort:"sortan[title]", mode:"tabs", external-links:"yes")
 <$set name="ref-title" filter="[<__prefix__>is[blank]]" value="$(currentTiddler)$/" emptyValue=<<__prefix__>>>
 <$reveal default="$mode$" type="match" text="tabs" tag="div">
 <$macrocall $name="tabs" tabsList="[prefix<ref-title>filter<ref-prefix-filter>$sort$]" default={{{[prefix<ref-title>filter<ref-prefix-filter>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>

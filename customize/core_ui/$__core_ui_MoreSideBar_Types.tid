@@ -1,5 +1,5 @@
 caption: {{$:/language/SideBar/Types/Caption}}
-modified: 20221026082006820
+modified: 20231208230228010
 modifier: yuzijie
 tags: $:/tags/MoreSideBar customized
 title: $:/core/ui/MoreSideBar/Types
@@ -9,6 +9,6 @@ type: text/vnd.tiddlywiki
 <$set name="direct-open" value="yes"><$tiddler tiddler="$:/core/ui/MoreSideBar/Types"><<snippet>></$tiddler></$set>
 <$list filter={{$:/core/Filters/TypedTiddlers!!filter}}>
 <$list filter="[all[current]get[type]!match[application/x-tiddler-dictionary]]" variable="type">
-<$details summary=<<type>>><<list-links "[type<type>!is[system]sort[title]]">></$details>
+<$details summary=<<type>>><<list-links "[type<type>!is[system]sortan[title]]">></$details>
 </$list>
 </$list>

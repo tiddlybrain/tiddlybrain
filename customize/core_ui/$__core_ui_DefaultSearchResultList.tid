@@ -1,6 +1,6 @@
 caption: All
-first-search-filter: [!is[system]!tag[Ignore]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap<userInput>sort[title]limit[500]]
-modified: 20220920182453908
+first-search-filter: [!is[system]!tag[Ignore]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap<userInput>sortan[title]limit[500]]
+modified: 20231208230307850
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/core/ui/DefaultSearchResultList

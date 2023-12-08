@@ -1,4 +1,4 @@
-modified: 20221218095034196
+modified: 20231208230255471
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ImportListing
@@ -56,7 +56,7 @@ type: text/vnd.tiddlywiki
 
 \define select-all-actions()
 \whitespace trim
-<$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
+<$list filter="[all[current]plugintiddlers[]sortan[title]]" variable="payloadTiddler">
 <$action-setfield $field={{{ [<payloadTiddler>addprefix[selection-]] }}} $value={{$:/state/import/select-all}}/>
 </$list>
 \end
@@ -78,7 +78,7 @@ type: text/vnd.tiddlywiki
 <<lingo Listing/Status/Caption>>
 </th>
 </tr>
-<$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
+<$list filter="[all[current]plugintiddlers[]sortan[title]]" variable="payloadTiddler">
 <tr class={{{[<currentTiddler>has<suppressedField>then[tc-row-disabled]] ~[subfilter<payloadTitleFilter>is[tiddler]then[tc-row-warning]] }}}>
 <td>
 <$checkbox field=<<selectionField>> checked="checked" unchecked="unchecked" default="checked" disabled={{{[<currentTiddler>has<suppressedField>then[yes]else[no]]}}}/>
