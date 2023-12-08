@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20231121134145722
+modified: 20231208223607686
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -74,5 +74,3 @@ Done: <<currentTiddler>></$button></li></$list>
 </tbody></table>
 <<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]]">>
 </div></$droppable></$list>
-
-<$list filter="[tag[Tasks/Actions]]"><$macrocall $name="collapse" title=<<currentTiddler>>/></$list>
