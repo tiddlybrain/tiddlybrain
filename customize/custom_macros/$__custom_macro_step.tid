@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20231204151859919
+modified: 20231209160348464
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 \define task-state() $:/task-state/$(currTask)$/$(currStep)$
 \define date-dropdown-state(step) $:/state/date-dropdown/$step$
 \define date-pattern() ^20[0-9]{2}[01][0-9]{3}$
-\define step-template() <<w "$(content)$" "$(tiddler)$" t:$(date)$>>
+\define step-template() <<a "$(content)$" "$(tiddler)$" t:$(date)$>>
 
 \define s(step,comments,field:"steps")
 <$list filter="[all[current]contains:$field$[$step$]]" emptyMessage="""''<<linkIfExists "$step$" "$comments$">>''
