@@ -2,8 +2,8 @@ caption: Link/File
 created: 20201226195733046
 creator: yuzijie
 first-search-filter: [!is[system]has[url]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap,url<userInput>sortan[title]]
-list-after: $:/custom/search/MultipleSearchResultList
-modified: 20231208230118253
+list-after: $:/custom/search/TaskSearchResultList
+modified: 20231210205914418
 modifier: yuzijie
 second-search-filter: [!is[system]has[path]] [!is[system]has[dir]] +[search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap,path,dir<userInput>sortan[title]]
 tags: $:/tags/SearchResults customized
