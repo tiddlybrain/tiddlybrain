@@ -2,7 +2,7 @@ created: 20220217150254473
 creator: yuzijie
 keywords: 
 list-after: $:/core/ui/SideBar/More
-modified: 20231208223831733
+modified: 20231215142214413
 modifier: yuzijie
 tags: customized $:/tags/SideBar
 title: Inbox
@@ -23,11 +23,11 @@ type: text/vnd.tiddlywiki
 
 !!! Untagged Tiddlers
 
-<<list-links "[!is[system]untagged[]!sort[modified]limit[100]]">>
+<<list-links "[!is[system]untagged[]!sort[modified]limit[100]] -[{$:/config/defaultTemplate}]">>
 
 !!! Non-existent Tags
 
-<<list-links "[all[tiddlers]tags[]is[missing]!is[system]] -Task -Comment -Snippet -Ignore -CodeMirror -customized -[{$:/config/defaultTemplate}]">>
+<<list-links "[all[tiddlers]tags[]is[missing]!is[system]] -Task -Comment -Snippet -Ignore -CodeMirror -customized">>
 
 !!! Non-existent Parents
 

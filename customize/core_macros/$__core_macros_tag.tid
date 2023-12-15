@@ -1,4 +1,4 @@
-modified: 20230709184651067
+modified: 20231215150849721
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/core/macros/tag
@@ -13,7 +13,7 @@ color:$(foregroundColor)$;
 <!-- This has no whitespace trim to avoid modifying $actions$. Closing tags omitted for brevity. -->
 \define tag-pill-inner(tag,icon,colour,fallbackTarget,colourA,colourB,element-tag,element-attributes,actions)
 \whitespace trim
-<$vars
+<$let
 	foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>
 	backgroundColor=<<__colour__>>
 >
@@ -26,6 +26,7 @@ color:$(foregroundColor)$;
 	<$transclude tiddler=<<__icon__>>/>
 	<$transclude tiddler=<<__tag__>> field=caption><$view tiddler=<<__tag__>> field=title/></$transclude>
 </$element-tag$>
+</$let>
 \end
 
 \define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions)
