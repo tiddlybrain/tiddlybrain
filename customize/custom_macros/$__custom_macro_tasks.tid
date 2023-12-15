@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231124170225830
+modified: 20231214202541552
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -27,7 +27,8 @@ type: text/vnd.tiddlywiki
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$list filter="[all[current]plan<today>]"><$button class="tc-btn-invisible" tooltip="Start" set=<<currentTiddler>> setTo="doing">{{$:/core/images/timestamp-on}}</$button></$list>
 <$list filter="[all[current]!plan<today>]"><$button class="tc-btn-invisible" tooltip="Change Date" message="tm-copy-to-clipboard" param={{!!caption}}>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/cancel-button}}
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-navigate $to=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/cancel-button}}
 </$button></$list>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
 ''{{!!caption}}'' <$macrocall $name="days-left" deadline={{!!date}}/>
@@ -40,7 +41,8 @@ type: text/vnd.tiddlywiki
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
 <$list filter="[<dt>match<today>]" variable="NONE"><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/></$list>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-navigate $to=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
 <$list filter="[<dt>match<today>]" variable="NONE">
 <$button class="tc-btn-invisible" tooltip="Done for today">
@@ -66,7 +68,8 @@ type: text/vnd.tiddlywiki
 \define task-list-waiting()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-navigate $to=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#009dd9;" message="tm-copy-to-clipboard" param={{!!caption}}>
 ''{{!!caption}}'' <$macrocall $name="days-passed" start={{!!date}}/>
@@ -78,7 +81,8 @@ type: text/vnd.tiddlywiki
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
 <$list filter="[<dt>match<today>]" variable="NONE"><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/></$list>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-navigate $to=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#cd23d8;" message="tm-copy-to-clipboard" param={{!!caption}}>
 ''{{!!caption}}'' <$macrocall $name="days-left" deadline={{!!date}}/>
@@ -90,7 +94,8 @@ type: text/vnd.tiddlywiki
 \define task-list-blocked()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>{{$:/core/images/save-button}}
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-navigate $to=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
 <$button class="tc-btn-invisible" tooltip="Cancel">
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[[blocked]]"/>{{$:/core/images/cancel-button}}
