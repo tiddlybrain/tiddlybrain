@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20231216194833799
+modified: 20231216230434733
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -76,7 +76,7 @@ $button$
 <$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible sidebar-tab-open-btn">edit
 <$action-deletetiddler $tiddler="$:/temp/Draft"/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-navigate/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
 </$button></$list>
 </span>
 </$list>
