@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20231119122731242
+modified: 20231216153511222
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -37,6 +37,7 @@ type: text/vnd.tiddlywiki
 <$button style="color:red;">{{!!title}} - {{!!caption}} &times;
 <$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
+<$button to={{$:/temp/Draft!!draft}} class="tc-btn-invisible" style="fill:#5778d8;font-size:small;">{{$:/core/images/open-window}}</$button>
 </$list>
 <$list filter="[<draft>!has[draft.of]]" emptyMessage="""<$list filter="[<draft>get[draft.of]]" variable="draft-title">
 <$set name="draft" filter="[{$:/state/editor-display}match[show]]" value=<<draft-title>> emptyValue=<<draft>>><<editor-display>></$set>
