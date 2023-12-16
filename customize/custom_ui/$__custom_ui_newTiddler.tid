@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20231029101832451
+modified: 20231216142613831
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -26,7 +26,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]limit[1]]"><$button class="tc-btn-invisible">Save All
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]]"><$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>>/></$list>
 </$button></$list>
-<p><$keyboard key="alt+enter" actions="<$macrocall $name=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}} scroll=no/>" tag="div">
+<p><$keyboard key="ctrl+enter" actions="""<$macrocall $name=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} text="Name: {{!!caption}}
+Description: {{!!description}}" type="application/x-tiddler-dictionary" content={{$:/temp/newTiddler!!description}} scroll=no/>""" tag="div">
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="caption" default="" focus="yes"/>
 <$set name="newValue" filter="[[$:/temp/newTiddler]get[text]] [<now YYYY-0MM-0DD>] +[join[ ]]" select="0">
 <$button set="$:/temp/newTiddler" setTo=<<newValue>> tabindex="-1" class="tc-btn-invisible">📆</$button>
