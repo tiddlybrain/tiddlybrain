@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20231214095640542
+modified: 20231217125551922
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -89,6 +89,7 @@ input.tc-edit-texteditor {padding:0 5px; margin:5px 0;}
 .sidebar-item-hover {display: none;}
 .tc-sidebar-tab-open-item:hover .sidebar-item-hover, .toc-item:hover > a > .sidebar-item-hover, .toc-item:hover > .sidebar-item-hover, .tc-menu-list-item:hover > a > .sidebar-item-hover {display: inline-block;}
 .tc-sidebar-tab-open-item code {white-space: nowrap;}
+.sidebar-item-hover > button:hover {text-decoration: underline;}
 
 /* For $:/core/ui/SideBar/Open */
 .tc-sidebar-tab-open-item .tc-dragover .current {display: none;}

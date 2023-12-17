@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20231107150136994
+modified: 20231217125140158
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -17,15 +17,19 @@ type: text/vnd.tiddlywiki
 <div class="tc-droppable-placeholder">{{$:/core/images/blank}}</div>
 <div class="tc-sidebar-tab-open-item" style="white-space:nowrap;overflow:hidden;">
 <$set name="current" filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]" value="fill:green;" emptyValue="fill:#aaa;">
+<$set name="current" filter="[<folded-state>text[hide]]" value="fill:darkorange;" emptyValue=<<current>>>
+<$set name="current" filter="[{$:/temp/Draft!!draft}match<currentTiddler>]" value="fill:red;" emptyValue=<<current>>>
 <$button class="tc-btn-invisible" style=<<current>>>
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
 <$list filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]">
 <$macrocall $name="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
 </$list>
-<$list filter="[<folded-state>!text[hide]]" variable="NONE" emptyMessage="""@@fill:brown;<$transclude tiddler="$:/core/images/chevron-right"/>@@""">
+<$list filter="[<folded-state>!text[hide]]" variable="NONE" emptyMessage={{$:/core/images/chevron-right}}>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>{{$:/core/images/chevron-left}}
 </$list>
 </$button>
+</$set>
+</$set>
 </$set>
 <$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink" tooltip={{!!description}}>
 <$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
