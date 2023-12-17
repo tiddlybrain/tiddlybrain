@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20231217125140158
+modified: 20231217134707922
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -40,12 +40,14 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <div class="sidebar-item-hover">
-&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#999;">popup</$button>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=`<<l "$(currentTiddler)$" "">>` emptyValue=<<currentTiddler>>>
+&middot; <$button message="tm-copy-to-clipboard" param=<<link-text>> class="tc-btn-invisible" style="color:#999;">copy</$button>
+</$set>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#999;">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button></$list>
+&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#999;">popup</$button>
 &middot; <$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar>>sidebar</$button>
-&middot; <$button class="tc-btn-invisible" style="color:#999;"><$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>close</$button>
 </div>
 </div>
 </$droppable>
@@ -63,10 +65,13 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <div class="sidebar-item-hover">
-&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#bbb;">popup</$button>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=`<<l "$(currentTiddler)$" "">>` emptyValue=<<currentTiddler>>>
+&middot; <$button message="tm-copy-to-clipboard" param=<<link-text>> class="tc-btn-invisible" style="color:#bbb;">copy</$button>
+</$set>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#bbb;">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button></$list>
+&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#bbb;">popup</$button>
 &middot; <$button class="tc-btn-invisible" style="color:#bbb;"><<open-in-sidebar close:"no">>sidebar</$button>
 </div>
 </div>
