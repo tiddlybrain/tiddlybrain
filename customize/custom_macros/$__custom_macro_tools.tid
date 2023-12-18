@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20231211000326209
+modified: 20231218121640201
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -227,14 +227,14 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define relationships(name, filter, direct-open:"yes")
+\define relationships(name, filter, direct-open:"yes", mode)
 <$list filter="$filter$ +[limit[1]]" variable="NONE"><$set name="state" value="$:/state/relationships/$(currentTiddler)$/$name$">
 <$reveal type="match" state=<<state>> text="close" tag="div" style="padding-top:1em;">
 <$button set=<<state>> setTo="open" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$'' (<$count filter="$filter$"/>)</$button>
 </$reveal>
 <$reveal type="nomatch" state=<<state>> text="close" tag="div" style="padding-top:1em;">
 <$button set=<<state>> setTo="close" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$''</$button>
-<$set name="direct-open" value="$direct-open$"><<sort-by-belongs filter:"$filter$" title:"$name$" has-filter:"no" mode:"list">></$set>
+<$set name="direct-open" value="$direct-open$"><<sort-by-belongs filter:"$filter$" title:"$name$" has-filter:"no" mode:"$mode$">></$set>
 </$reveal>
 </$set></$list>
 \end
@@ -395,7 +395,8 @@ type: text/vnd.tiddlywiki
 #> `<<relationships
   name:"关系名称"
   filter:"关系对应的 Filter"
-  direct-open:"是否直接打开">>`
+  direct-open:"是否直接打开"
+  mode:"sort-by-belongs 的模式, list">>`
 # ''检查通知, 同时可以修改日期''
 #> `<<verification-notice>>`
 # ''关闭 Tiddler 的同时, 修改 HistoryList 里面的 current-tiddler''
