@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20231208223607686
+modified: 20231218230629697
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -42,18 +42,25 @@ Done: <<currentTiddler>></$button></li></$list>
 <$list filter="[prefix[$:/task-state/]contains:plan[blocked]limit[1]]" variable="NONE"><li style="color:brown;">Blocked<ul>
 <$list filter="[prefix[$:/task-state/]contains:plan[blocked]sortan[title]]"><li><<task-list-blocked>></li></$list>
 </ul></li></$list>
+<$list filter="[prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li>
+<$list filter="[all[current]text[doing]]" emptyMessage="""
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#c67b48;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
+<$button message="tm-copy-to-clipboard" param={{!!caption}}>Set Plan
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$macrocall $name='tiddler-open' tiddler=<<task-id>>/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+</$button>""">
+<$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
+<$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
+""" variable="NONE">
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button> @@color:green;&#10132;@@
+</$list>
+</$list>
+</li></$set></$list>
 <$list filter="[prefix[$:/task-state/]text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
-<$list filter="[prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li>
-<$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
-<$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
-""" variable="NONE">
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button> @@color:green;&#10132;@@
-</$list>
-</li></$set></$list>
 </ol></$droppable>
 
 <$list filter="[<journal-title>is[tiddler]]"><$droppable actions=<<droppable-date-action>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
