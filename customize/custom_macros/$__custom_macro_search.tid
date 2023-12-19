@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20221108144149893
+modified: 20231219155951871
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -30,10 +30,10 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$let tv-wikilinks="no"><span class="subtopic">
 <$list filter="[all[current]get[parents]enlist-input[]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:x-small;background:#ccc;color:#fff;"><<keyword>>
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:x-small;background:#ffeaea;color:#333;font-weight:bold;">
 <$set name="subtopic-filter-chain" filter="[{$:/temp/subtopic/filter}] [<subtopic-filter>] +[join[]]" select="0">
 <$action-setfield $tiddler="$:/temp/subtopic/filter" text=<<subtopic-filter-chain>>/>
-</$set><<searchbar-focus-action>>
+</$set><<searchbar-focus-action>><<keyword>>
 </$button>
 </$wikify></$list>
 </span></$let>
