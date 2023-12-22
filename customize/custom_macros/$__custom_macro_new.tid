@@ -1,6 +1,6 @@
 created: 20161118103029230
 creator: yuzijie
-modified: 20230501140801112
+modified: 20231222092124975
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/new
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 \define newTiddlerAction(template, caption, type:"text/vnd.tiddlywiki", field:"description", content, text, edit:"no", scroll:"yes", popup)
 <$action-createtiddler $basetitle=<<unusedtitle "$template$">> date=<<now YYYY0MM0DD>> caption=<<__caption__>> type=<<__type__>> text=<<__text__>>>
 <$list filter="[<__content__>!is[blank]]"><$action-setfield $tiddler=<<createTiddler-title>> $field=<<__field__>> $value=<<__content__>>/></$list>
-<$list filter="[<__edit__>!match[yes]]" emptyMessage="<$action-sendmessage $message=tm-edit-tiddler $param=<<createTiddler-title>>/>">
+<$list filter="[<__edit__>!match[yes]]" emptyMessage="<$action-sendmessage $message=tm-edit-tiddler $param=<<createTiddler-title>>/><$action-setfield $tiddler='$:/state/tab/sidebar--595412856' text=Editor/>">
 <$action-navigate $to=<<createTiddler-title>> $scroll=<<__scroll__>>/>
 <$list filter="[<__scroll__>match[yes]] :else[<__popup__>match[close]]">
 <$action-deletetiddler $filter="[[$:/state/popup/menubar/NewTiddler]] [[$:/state/popup/NewTiddlerWindow]]"/>

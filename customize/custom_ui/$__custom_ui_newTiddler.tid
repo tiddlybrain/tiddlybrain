@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20231216142613831
+modified: 20231222092005480
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 \define newTaskAction(template, caption)
 <$action-sendmessage $message="tm-new-tiddler" $param="$template$" celltpl="customized-template-task" tags="Task" caption=<<__caption__>>/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
+<$action-deletetiddler $tiddler="$:/temp/newTiddler"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 \end
 
 \define newExtFileActionCopy() <<l title:'$(title)$' mode:cl date:no>>
