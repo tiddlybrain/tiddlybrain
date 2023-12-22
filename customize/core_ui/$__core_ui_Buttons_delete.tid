@@ -1,6 +1,6 @@
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
-modified: 20231204152031581
+modified: 20231222010538378
 modifier: yuzijie
 tags: $:/tags/EditToolbar $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/delete
@@ -8,6 +8,7 @@ type: text/vnd.tiddlywiki
 
 \whitespace trim
 <$button to={{{ [all[current]next[$:/StoryList]] :else[all[current]previous[$:/StoryList]] }}} actions=<<cancel-delete-tiddler-actions "delete">> tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/delete-button}}
 </$list>
