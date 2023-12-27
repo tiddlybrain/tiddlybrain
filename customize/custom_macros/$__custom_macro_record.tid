@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20231109030053717
+modified: 20231227000555111
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -9,8 +9,8 @@ type: text/vnd.tiddlywiki
 \define record-item-no-caption()
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><div><$transclude mode="block"/></div></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
-<$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
+<$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
+<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
 <cite style="font-style:normal;text-align:right;">
 <<links>> <<tag-list>>
@@ -72,8 +72,8 @@ type: text/vnd.tiddlywiki
 <div class="record-content">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
-<$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
+<$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
+<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
 </div>
 </div></$reveal>
@@ -85,10 +85,10 @@ type: text/vnd.tiddlywiki
 <$set name="links" filter=<<filter-build "$filter$ +[!has[draft.of]]" '+[$sort$addprefix[<<l "]addsuffix[">>]join[ ]]'>> select="0">
 <$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>>(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>)</$button>
 </$set>
-filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
+filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
 </div>
 <div style="margin-top:1em;">
-<$macrocall $name="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
+<$transclude $variable="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
 </div>
 </$vars>
 \end

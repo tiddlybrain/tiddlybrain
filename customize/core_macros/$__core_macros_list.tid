@@ -1,4 +1,4 @@
-modified: 20231215153940059
+modified: 20231227002124714
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/core/macros/list
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 <$genesis $type=<<__type__>> class=<<__class__>>>
 	<$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
 		<$genesis $type=<<__subtype__>>>
-			<$macrocall $name="l" title={{!!title}} text=<<__text__>> note=no date=no parent=no/>
+			<$transclude $variable="l" title={{!!title}} text=<<__text__>> note=no date=no parent=no/>
 		</$genesis>
 	</$list>
 </$genesis>
@@ -33,7 +33,7 @@ type: text/vnd.tiddlywiki
 					<div class="tc-droppable-placeholder"/>
 					<div>
 						<$transclude tiddler="""$itemTemplate$""">
-							<$macrocall $name="l" title={{!!title}} class="tc-popup-keep" text=<<__text__>> note=no date=no parent=no/>
+							<$transclude $variable="l" title={{!!title}} class="tc-popup-keep" text=<<__text__>> note=no date=no parent=no/>
 						</$transclude>
 					</div>
 				</$droppable>
@@ -89,13 +89,13 @@ type: text/vnd.tiddlywiki
 		>
 			<$genesis $type=<<__elementTag__>> class="tc-menu-list-item">
 				<$droppable
-					actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>"""
+					actions="""<$transclude $variable="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>"""
 					enable=<<tv-enable-drag-and-drop>>
 				>
 					<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
 					<$genesis $type=<<__elementTag__>>>
 						<$transclude tiddler="""$itemTemplate$""">
-							<$macrocall $name="l" title={{!!title}} class="tc-popup-keep" links=no/>
+							<$transclude $variable="l" title={{!!title}} class="tc-popup-keep" links=no/>
 						</$transclude>
 					</$genesis>
 				</$droppable>
@@ -103,7 +103,7 @@ type: text/vnd.tiddlywiki
 		</$list>
 		<$tiddler tiddler="">
 			<$droppable
-				actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>"""
+				actions="""<$transclude $variable="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>"""
 				enable=<<tv-enable-drag-and-drop>>
 			>
 				<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>

@@ -1,12 +1,12 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20231209160107332
+modified: 20231227001045557
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
 type: text/vnd.tiddlywiki
 
-\define editor-tab() <$macrocall $name="tabs" tabsList="[tag[Editor]!has[draft.of]]" default="Editor/Keywords" state="$:/state/tab/editor"/>
+\define editor-tab() <$transclude $variable="tabs" tabsList="[tag[Editor]!has[draft.of]]" default="Editor/Keywords" state="$:/state/tab/editor"/>
 \define editor-caption-status() $:/state/editor/caption/$(currentTiddler)$
 \define editor-caption-inputActions() <$list filter="[<editor-caption-status>get[list]enlist-input[]]"><$action-setfield $tiddler=<<currentTiddler>> caption=<<actionValue>>/></$list>
 
@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 <$edit-text field="caption" class="edit-area tc-edit-texteditor" inputActions=<<editor-caption-inputActions>>/>
 <$list filter="[all[current]has[caption]]"><$list filter="[caption{!!caption}!note{!!note}!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]" variable="tag">
 <div style="white-space:nowrap;overflow:auto;width:290px;font-size:small;">
-<$checkbox tiddler=<<editor-caption-status>> listField="list" checked=<<tag>>> <$macrocall $name="l" title=<<tag>> text="{{!!title}} - {{!!caption}}"/></$checkbox><br>
+<$checkbox tiddler=<<editor-caption-status>> listField="list" checked=<<tag>>> <$transclude $variable="l" title=<<tag>> text="{{!!title}} - {{!!caption}}"/></$checkbox><br>
 </div>
 </$list></$list>
 </td>

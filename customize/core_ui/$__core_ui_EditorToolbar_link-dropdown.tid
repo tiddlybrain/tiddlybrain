@@ -1,4 +1,4 @@
-modified: 20231216141613414
+modified: 20231227005707099
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 
 \define cancel-search-actions() <$list filter="[<storeTitle>!has[text]] +[<searchTiddler>!has[text]]" emptyMessage="<<cancel-search-actions-inner>>"><$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/></$list>
 
-\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<nextTab>>/>"/>
+\define set-next-input-tab(beforeafter:"after") <$transclude $variable="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<nextTab>>/>"/>
 
 \define new-link-actions(template)
 <$set name="title" value=<<unusedtitle "$template$">>><$set name="caption" filter="[<searchTiddler>get[text]]" select="0">
@@ -48,7 +48,7 @@ type: text/vnd.tiddlywiki
 <$vars linkTiddler=<<searchTiddler>>>
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">> class="tc-create-wikitext-link">
-<$macrocall $name="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>>
+<$transclude $variable="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>>
 		selectionStateTitle=<<searchListState>> refreshTitle=<<refreshTitle>> type="search" filterMinLength="1"
 		tag="input" focus="true" class="tc-popup-handle" inputCancelActions=<<cancel-search-actions>>
 		inputAcceptActions=<<add-link-actions>> placeholder={{$:/language/Search/Search}} default=""
@@ -58,7 +58,7 @@ type: text/vnd.tiddlywiki
 &#32;
 <$reveal tag="span" state=<<storeTitle>> type="nomatch" text="">
 <$button class="tc-btn-invisible" style="width: auto; display: inline-block; padding: 0; transform: translateY(-2px);">
-<$macrocall $name="new-link-actions" template={{$:/config/defaultTemplate}}/>
+<$transclude $variable="new-link-actions" template={{$:/config/defaultTemplate}}/>
 {{$:/core/images/new-button}}
 </$button>
 &#32;
@@ -91,4 +91,4 @@ type: text/vnd.tiddlywiki
 
 \end
 
-<$macrocall $name="body" config-title=<<qualify "$:/state/Link/">>/>
+<$transclude $variable="body" config-title=<<qualify "$:/state/Link/">>/>

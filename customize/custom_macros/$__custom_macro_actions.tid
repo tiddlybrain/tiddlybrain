@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20231222091814366
+modified: 20231227001202382
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -18,13 +18,13 @@ type: text/vnd.tiddlywiki
 \end
 
 \define droppable-index-tree()
-<$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
+<$transclude $variable="tiddler-close" tiddler=<<actionTiddler>>/>
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<actionTiddler>] +[putfirst[]]"/>
 <$action-setfield $tiddler="$:/temp/index-tree" text=<<actionTiddler>>/>
 \end
 
 \define droppable-delete-action()
-<$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
+<$transclude $variable="tiddler-close" tiddler=<<actionTiddler>>/>
 <$action-deletetiddler $tiddler=<<actionTiddler>>/>
 <$list filter="[all[tiddlers]belongs.to<actionTiddler>]"><$action-setfield belongs.to="" $timestamp="no"/></$list>
 <$list filter="[all[tiddlers]tag<actionTiddler>]"><$action-listops $field="tags" $subfilter="-[<actionTiddler>]" $timestamp="no"/></$list>

@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20230507215011306
+modified: 20231227000932204
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -14,11 +14,11 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]get[belongs.to]]"><div style="margin-bottom:5px;font-size:smaller;color:green;">
 <$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </div></$list>
-<$macrocall $name="l" title={{!!title}} note="no" style="display:block;"/>
+<$transclude $variable="l" title={{!!title}} note="no" style="display:block;"/>
 <$list filter="[all[current]get[question]]"><div style="color:#666;margin-top:8px;">Q: <<currentTiddler>></div></$list>
 <div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1">
 <$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙁<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level="1"/></$button>
-<$list filter="[belongs.to[Flashcard]level{!!level}]" emptyMessage="Level 0"><$button class="tc-btn-invisible">{{!!caption}}<$macrocall $name="tiddler-open" tiddler={{!!title}}/></$button></$list>
+<$list filter="[belongs.to[Flashcard]level{!!level}]" emptyMessage="Level 0"><$button class="tc-btn-invisible">{{!!caption}}<$transclude $variable="tiddler-open" tiddler={{!!title}}/></$button></$list>
 <$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙂<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level=<<up>>/></$button>
 </$set></div>
 </div></div>

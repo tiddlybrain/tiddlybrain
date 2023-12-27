@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20231221171238315
+modified: 20231227001912093
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<folded-state>text[hide]]" variable="NONE" emptyMessage="""<$list filter="[all[current]match{$:/HistoryList!!current-tiddler}]">
 <$button style="position:absolute;top:6px;fill:#666;font-size:x-small;" class="tc-btn-invisible current" tag="span">{{$:/core/images/chevron-right}}
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState="$:/state/folded/$(currentTiddler)$"/>
-<$macrocall $name="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
+<$transclude $variable="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>
 </$button>
 </$list>""">
@@ -43,8 +43,8 @@ $button$
 <$set name="tv-allow-drag-and-drop" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="no" emptyValue="yes">
 <$list filter=<<sidebar-list>> history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
-<$macrocall $name="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn">
-<$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
+<$transclude $variable="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn">
+<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot; </$list><$view field="title"/>
@@ -59,9 +59,9 @@ $button$
 </$list>
 <$tiddler tiddler="">
 <div class="tc-sidebar-tab-open-item" style="margin-bottom:5px;">
-<$macrocall $name="droppable-item" button="""<$list filter="[recentlyClosed[]!is[missing]!{$:/temp/index-tree}limit[1]]">
+<$transclude $variable="droppable-item" button="""<$list filter="[recentlyClosed[]!is[missing]!{$:/temp/index-tree}limit[1]]">
 <$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:#bbb;margin:0 0 5px 0;">
-<$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
+<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>

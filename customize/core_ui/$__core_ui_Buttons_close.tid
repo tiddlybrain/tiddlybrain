@@ -1,6 +1,6 @@
 caption: {{$:/core/images/close-button}} {{$:/language/Buttons/Close/Caption}}
 description: {{$:/language/Buttons/Close/Hint}}
-modified: 20220831185722688
+modified: 20231227005518579
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/close
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" default="show">
 <$button tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tv-config-toolbar-class>>>
-<$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>
+<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/close-button}}
 </$list>

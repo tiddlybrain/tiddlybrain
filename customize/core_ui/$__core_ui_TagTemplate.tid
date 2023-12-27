@@ -1,4 +1,4 @@
-modified: 20230304194938946
+modified: 20231227005608492
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/TagTemplate
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <span class="tc-tag-list-item" data-tag-title=<<currentTiddler>>>
 <$set name="transclusion" value=<<currentTiddler>>>
-	<$macrocall $name="tag-pill-body"
+	<$transclude $variable="tag-pill-body"
 		tag=<<currentTiddler>>
 		icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
 		colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 			<$transclude tiddler=<<listItem>>/>
 		</$list>
 		<hr>
-		<$macrocall $name="list-tagged-draggable" tag=<<currentTiddler>> subFilter="sortan[caption]limit[100]"/>
+		<$transclude $variable="list-tagged-draggable" tag=<<currentTiddler>> subFilter="sortan[caption]limit[100]"/>
 	</$reveal>
 </$set>
 </span>

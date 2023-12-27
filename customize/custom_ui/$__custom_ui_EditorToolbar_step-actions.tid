@@ -4,7 +4,7 @@ created: 20220924050654294
 creator: yuzijie
 description: Step Actions
 icon: $:/core/images/timestamp-on
-modified: 20230325100136376
+modified: 20231227005200504
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/step-actions
@@ -19,4 +19,4 @@ type: text/vnd.tiddlywiki
 />
 \end
 
-<$macrocall $name="toolbar-action" date=<<now "YYYY0MM0DD">>/>
+<$transclude $variable="toolbar-action" date=<<now "YYYY0MM0DD">>/>

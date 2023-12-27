@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20231219153253136
+modified: 20231226235333064
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 \define date-dropdown(step)
 <$reveal class="date-dropdown" type="popup" state=<<date-dropdown-state "$step$">>><div class="record-drop-down tc-popup-keep"><div class="record-content">
 <$set name="key" value=<<currentTiddler>>><$vars date-filter="[getindex<key>splitregexp[\s*;;\s*]match[$step$]]"><ol style="padding-left:20px;">
-<$list filter="[tag[Tasks/Journal]filter<date-filter>]"><li><$macrocall $name="l" title=<<currentTiddler>>/></li></$list>
+<$list filter="[tag[Tasks/Journal]filter<date-filter>]"><li><$transclude $variable="l" title=<<currentTiddler>>/></li></$list>
 </ol></$vars></$set>
 </div></div></$reveal>
 \end
@@ -61,7 +61,7 @@ type: text/vnd.tiddlywiki
 </$list>
 </$button>
 <$reveal default="$t$" type="nomatch" text="">
-<$macrocall $name="days-button" value="$t$" days="""<$macrocall $name="days-left" deadline="$t$"/>""" step="$step$"/>
+<$transclude $variable="days-button" value="$t$" days="""<$transclude $variable="days-left" deadline="$t$"/>""" step="$step$"/>
 </$reveal>
 \end
 
@@ -70,17 +70,17 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">
 @@color:green;&#10148;@@<$action-deletetiddler $tiddler=<<task-state>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/><$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/></$list>
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/></$list>
 </$button>
 <$reveal default="$t$" type="nomatch" text="">
-<$macrocall $name="days-button" value="$t$" days="""<$macrocall $name="days-passed" start="$t$"/>""" step="$step$"/>
+<$transclude $variable="days-button" value="$t$" days="""<$transclude $variable="days-passed" start="$t$"/>""" step="$step$"/>
 </$reveal>
 \end
 
 \define step-done(step,comments,t,d)
 <<linkIfExists "$step$" "$comments$">>
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:green;&#10003;@@</$button><<date-dropdown "$step$">>
-<$reveal default="$t$" type="lt" text="$d$" style="font-size:small;"><$macrocall $name="days-passed" start="$t$" end="$d$"/></$reveal>
+<$reveal default="$t$" type="lt" text="$d$" style="font-size:small;"><$transclude $variable="days-passed" start="$t$" end="$d$"/></$reveal>
 <$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 \end
 
@@ -106,7 +106,7 @@ type: text/vnd.tiddlywiki
 <span style="color:#aaa;"><<linkIfExists "$step$" "$comments$">></span>
 <$vars currTask={{!!title}} currStep="$step$">
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:red;&#10005;@@</$button><<date-dropdown "$step$">>
-<$reveal default="$t$" type="lt" text="$d$" style="font-size:small;"><$macrocall $name="days-passed" start="$t$" end="$d$"/></$reveal>
+<$reveal default="$t$" type="lt" text="$d$" style="font-size:small;"><$transclude $variable="days-passed" start="$t$" end="$d$"/></$reveal>
 <$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 </$vars>
 <$reveal default="$d$" type="gt" text="$t$"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:#aaa;font-size:small;">(<<format-date "$d$" "YYYY-0MM-0DD">>)</$button></$reveal>
@@ -119,7 +119,7 @@ type: text/vnd.tiddlywiki
 </$button>""" variable="NONE">
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:$color$;$symbol$@@<$action-deletetiddler $tiddler=<<task-state>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/><$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/></$list>
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/></$list>
 </$button>
 <$button class="tc-btn-invisible" style="font-size:small;" dragTiddler=<<task-state>> popup=<<date-dropdown-state "$step$">>><<__days__>></$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>!date[$t$]]">
@@ -132,7 +132,7 @@ type: text/vnd.tiddlywiki
 <<linkIfExists "$step$" "$comments$">>
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:$color$;&#10003;@@</$button><<date-dropdown "$step$">>
 <$list filter="[[$type$]!match[deadline]]">
-<$reveal default="$t$" type="lt" text="$d$" style="font-size:small;"><$macrocall $name="days-passed" start="$t$" end="$d$"/></$reveal>
+<$reveal default="$t$" type="lt" text="$d$" style="font-size:small;"><$transclude $variable="days-passed" start="$t$" end="$d$"/></$reveal>
 </$list>
 <$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 \end
@@ -141,17 +141,17 @@ type: text/vnd.tiddlywiki
 <$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#009dd9;font-size:small;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
 <$vars currTask={{!!title}} currStep="$step$">
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage=<<waiting-done "$step$" "$comments$" "$t$" "$d$">> variable="NONE">
-<$macrocall $name="waiting-undone" step="$step$" comments="$comments$" t="$t$" symbol="&#10148;" days="""<$macrocall $name="days-passed" start="$t$"/>"""/>
+<$transclude $variable="waiting-undone" step="$step$" comments="$comments$" t="$t$" symbol="&#10148;" days="""<$transclude $variable="days-passed" start="$t$"/>"""/>
 </$list>
 </$vars>
 <$reveal default="$d$" type="gt" text="$t$"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:#009dd9;font-size:small;">(<<format-date "$d$" "YYYY-0MM-0DD">>)</$button></$reveal>
 \end
 
 \define d(step,comments,t,d)
-<$reveal default="$t$" type="nomatch" text=""><$macrocall $name="step-date" t="$t$" d="$d$" color="#cd23d8"/></$reveal>
+<$reveal default="$t$" type="nomatch" text=""><$transclude $variable="step-date" t="$t$" d="$d$" color="#cd23d8"/></$reveal>
 <$vars currTask={{!!title}} currStep="$step$">
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage=<<waiting-done "$step$" "$comments$" "$t$" "$d$" "#93005f" "deadline">> variable="NONE">
-<$macrocall $name="waiting-undone" step="$step$" comments="$comments$" t="$t$" symbol="&#11044;" days="""<$macrocall $name="days-left" deadline="$t$"/>""" color="#cd23d8" type="deadline"/>
+<$transclude $variable="waiting-undone" step="$step$" comments="$comments$" t="$t$" symbol="&#11044;" days="""<$transclude $variable="days-left" deadline="$t$"/>""" color="#cd23d8" type="deadline"/>
 </$list>
 </$vars>
 \end

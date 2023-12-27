@@ -1,8 +1,9 @@
 caption: Branches
 created: 20211207121501210
 creator: yuzijie
+keywords: 
 list-before: $:/core/ui/MoreSideBar/All
-modified: 20220916225113877
+modified: 20231227004013718
 modifier: yuzijie
 tags: customized $:/tags/MoreSideBar Ignore
 title: BR
@@ -18,7 +19,7 @@ type: text/vnd.tiddlywiki
 <$button><$list filter="[prefix[BR/]search:title,caption,shortcap,keywords,note,status,description{$:/temp/menubarsearch}!sortan[title]]"><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button>
 <$list filter="[prefix[BR/]search:title,caption,shortcap,keywords,note,status,description{$:/temp/menubarsearch}sortan[title]]" variable="result"><div>
 <$button class="tc-btn-invisible tc-tiddlylink" dragTiddler=<<result>> to=<<result>>>
-<$macrocall $name="tree-opener" tiddler=<<result>> prefix="BR/"/><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>
+<$transclude $variable="tree-opener" tiddler=<<result>> prefix="BR/"/><$action-deletetiddler $filter="[[$:/temp/menubarsearch]] [[$:/temp/menubarsearch/input]]"/>
 <$tiddler tiddler=<<result>>><<icons>> {{!!title}} <$list filter="[all[current]has[note]]">({{!!note}})</$list></$tiddler>
 </$button>
 </div></$list>

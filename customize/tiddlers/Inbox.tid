@@ -2,7 +2,7 @@ created: 20220217150254473
 creator: yuzijie
 keywords: 
 list-after: $:/core/ui/SideBar/More
-modified: 20231215142214413
+modified: 20231227003638082
 modifier: yuzijie
 tags: customized $:/tags/SideBar
 title: Inbox
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 !!! Things to be Checked (Has Interval)
 
 <ol><$list filter="[has[interval]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
-<$list filter="[all[current]!days:date<interval>]"><li><$macrocall $name="l" title={{!!title}}/></li></$list>
+<$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}}/></li></$list>
 </$set></$list></ol>
 <$set name="today" value=<<now YYYY0MM0DD>>><$list filter="[has[interval]date<today>limit[1]]" variable="NONE">
 <$details summary="Verified Today"><<list-links "[has[interval]date<today>]">></$details>
@@ -36,5 +36,5 @@ type: text/vnd.tiddlywiki
 !!! Branch Tiddlers Without Tags
 
 <ol><$list filter="[!is[system]search:title:literal[/]]"><$set name="tag" filter="[all[current]split[/]first[]]" select="0">
-<$list filter="[all[current]!tag<tag>]"><li><$macrocall $name="l" title={{!!title}}/></li></$list>
+<$list filter="[all[current]!tag<tag>]"><li><$transclude $variable="l" title={{!!title}}/></li></$list>
 </$set></$list></ol>

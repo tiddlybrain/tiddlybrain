@@ -1,4 +1,4 @@
-modified: 20231215150849721
+modified: 20231227002045281
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/core/macros/tag
@@ -31,7 +31,7 @@ color:$(foregroundColor)$;
 
 \define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions)
 \whitespace trim
-<$macrocall $name="tag-pill-inner"
+<$transclude $variable="tag-pill-inner"
 	tag=<<__tag__>>
 	icon=<<__icon__>>
 	colour=<<__colour__>>
@@ -48,7 +48,7 @@ color:$(foregroundColor)$;
 \whitespace trim
 <span class="tc-tag-list-item" data-tag-title=<<__tag__>>>
 	<$let currentTiddler=<<__tag__>>>
-		<$macrocall $name="tag-pill-body"
+		<$transclude $variable="tag-pill-body"
 			tag=<<__tag__>>
 			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
 			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}

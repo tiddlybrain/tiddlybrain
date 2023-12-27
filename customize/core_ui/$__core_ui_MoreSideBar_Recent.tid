@@ -1,6 +1,6 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
 list-before: $:/core/ui/MoreSideBar/All
-modified: 20231007045103877
+modified: 20231227001930688
 modifier: yuzijie
 tags: $:/tags/MoreSideBar customized
 title: $:/core/ui/MoreSideBar/Recent
@@ -29,4 +29,4 @@ type: text/vnd.tiddlywiki
 </div></$list>
 
 <h2 style="color:#5778d8;">Recently Modified</h2>
-<$macrocall $name="timeline" limit="50" format={{$:/language/RecentChanges/DateFormat}}/>
+<$transclude $variable="timeline" limit="50" format={{$:/language/RecentChanges/DateFormat}}/>

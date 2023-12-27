@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20231109030001804
+modified: 20231227000047690
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 <$action-listops $tiddler=<<createTiddler-title>> $field="tags" $subfilter="Snippet $tags$"/>
 <$list filter="[<__celltpl__>is[tiddler]]"><$set name="actionTiddler" value=<<createTiddler-title>>>
 <$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>> $timestamp="no"/>
-<$list filter="[<__celltpl__>get[required]]"><$macrocall $name="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
+<$list filter="[<__celltpl__>get[required]]"><$transclude $variable="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
 </$set></$list>
 <$action-navigate $to=<<createTiddler-title>> $scroll="no"/>
 </$action-createtiddler>
@@ -27,9 +27,9 @@ type: text/vnd.tiddlywiki
 <$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="Snippet $tags$" $timestamp="no"/>
 <$list filter="[<__celltpl__>is[tiddler]]">
 <$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>> $timestamp="no"/>
-<$list filter="[<__celltpl__>get[required]]"><$macrocall $name="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
+<$list filter="[<__celltpl__>get[required]]"><$transclude $variable="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
 </$list>
-<$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/>
+<$transclude $variable="tiddler-close" tiddler=<<actionTiddler>>/>
 </$list>
 <<__actions__>>
 </$set>
@@ -39,7 +39,7 @@ type: text/vnd.tiddlywiki
 
 \define snippet-modal-actions()
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$action-navigate/>" variable="NONE">
-<$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
+<$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
@@ -65,9 +65,9 @@ type: text/vnd.tiddlywiki
 <$set name="links" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" '+[$sort$addprefix[<<l "]addsuffix[">>]join[ ]]'>> select="0">
 <$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">>>(<$count filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">>/>)</$button>
 </$set>
-filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
+filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
-<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
+<$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
 <$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]">@@color:red;Drop Tiddler Here@@</$list>"""><div class="snippet">
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="fill:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[fill:]addsuffix[;]] }}}>
 <$button actions=<<snippet-accordion-actions>> class="tc-btn-invisible links accordion" style=<<style>>>
@@ -88,8 +88,8 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table copy:no>>>
 <$set name="class" filter="[all[current]has[_canonical_uri]] [all[current]is[image]]" value="snippet-external" emptyValue="snippet-content"><div class=<<class>>><$transclude mode="block"/>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE"><div style="margin:10px 20px;">
-<$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
-<$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
+<$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
+<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </div></$list>
 </div></$set>
 </$list>
@@ -116,7 +116,7 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 <$list filter="[belongs.to<current>tag[Snippet]note<key>type[application/x-tiddler-dictionary]]">
 <$action-setfield celltpl=<<__celltpl__>> $timestamp="no"/>
 <$set name="actionTiddler" value=<<currentTiddler>>><$list filter="[<__celltpl__>get[required]]">
-<$macrocall $name="droppable-add-empty-indexes" indexes=<<currentTiddler>>/>
+<$transclude $variable="droppable-add-empty-indexes" indexes=<<currentTiddler>>/>
 </$list></$set>
 </$list>
 </$button>
@@ -131,12 +131,12 @@ filter <$macrocall $name="list-filters" title=<<key>> filter=<<filter-build "[be
 </$button>
 </$list>
 </$list>
-<$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$macrocall $name="sort-by-filter" item-filter="belongs.to<current>tag[Snippet]note<key>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$"/>""" variable="NONE">
+<$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$transclude $variable="sort-by-filter" item-filter="belongs.to<current>tag[Snippet]note<key>" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$"/>""" variable="NONE">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<key>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
 <$set name="snippet-qty" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$count[]]">> select="0">
 <$set name="limit" filter="[<snippet-limit-state>get[text]]" emptyValue=<<__limit__>> select="0">
-<$macrocall $name="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> no-drop=<<__no-drop__>> has-filter=<<__has-filter__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> no-drop=<<__no-drop__>> has-filter=<<__has-filter__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </$set>
 </$set>
 </$vars>

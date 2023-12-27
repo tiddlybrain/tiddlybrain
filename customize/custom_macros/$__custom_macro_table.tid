@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20231115143959954
+modified: 20231226235220708
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
 <$list filter="[<datum>!search:title:regexp[<<snippet|<<bl]]" emptyMessage=<<datum>> variable="NONE">
 <div><$list filter="[field:title<datum>]" emptyMessage=<<cell-value-iterator>>>
-<$macrocall $name="l" title={{!!title}} class="normal-weight" links="yes" note="yes" style="display:block;white-space:nowrap;overflow:hidden;"/>
+<$transclude $variable="l" title={{!!title}} class="normal-weight" links="yes" note="yes" style="display:block;white-space:nowrap;overflow:hidden;"/>
 </$list></div>
 </$list>
 </$list>
@@ -82,7 +82,7 @@ type: text/vnd.tiddlywiki
 </$reveal>
 </$set>
 <$set name="current" value={{!!title}}><$list filter="$(cfilter)$" variable="key">
-<td><$set name="value" tiddler=<<current>> index=<<key>>><$macrocall $name="cell-value"/></$set></td>
+<td><$set name="value" tiddler=<<current>> index=<<key>>><$transclude $variable="cell-value"/></$set></td>
 </$list></$set>
 </tr></$set>
 \end
@@ -98,7 +98,7 @@ type: text/vnd.tiddlywiki
 
 \define tableE(cfilter, ffilter, rfilter:"[tag<currentTiddler>]", title:"default", fields, tag, sort-order:"sortan[]")
 <$set name="current" value=<<currentTiddler>>>
-<h2><$button class="tc-btn-invisible"><$macrocall $name="table-edit-new-action" template={{$:/config/defaultTemplate}} tag="$tag$" fields="$fields$"/>Add New Row</$button></h2>
+<h2><$button class="tc-btn-invisible"><$transclude $variable="table-edit-new-action" template={{$:/config/defaultTemplate}} tag="$tag$" fields="$fields$"/>Add New Row</$button></h2>
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
 <tr class="heading">
 <th>Title</th><$list filter="$ffilter$"><th><<currentTiddler>></th></$list>
@@ -142,10 +142,10 @@ type: text/vnd.tiddlywiki
 <$set name="links" filter=<<filter-build "$rfilter$ +[!has[draft.of]]" '+[addprefix[<<l "]addsuffix[">>]join[ ]]'>> select="0">
 <$button style="font-size:small;" class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<links>> dragFilter=<<filter-build "$rfilter$ +[!has[draft.of]]">>>(<$count filter=<<filter-build "$rfilter$ +[!has[draft.of]]">>/>)</$button>
 </$set>
-filter <$macrocall $name="list-filters" title=<<__title__>> filter=<<filter-build "$rfilter$ +[!has[draft.of]]">> cfilter=<<__cfilter__>>/>
+filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$rfilter$ +[!has[draft.of]]">> cfilter=<<__cfilter__>>/>
 </div>
 <div style="margin-top:1em;">
-<$macrocall $name="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "$rfilter$ +[!has[draft.of]]">> rheader=<<__rheader__>> title=<<__title__>> sort-order=<<__sort-order__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>>/>
+<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "$rfilter$ +[!has[draft.of]]">> rheader=<<__rheader__>> title=<<__title__>> sort-order=<<__sort-order__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>>/>
 </div>
 </$vars>
 \end

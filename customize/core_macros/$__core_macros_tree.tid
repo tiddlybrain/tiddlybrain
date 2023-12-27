@@ -1,4 +1,4 @@
-modified: 20220806173523204
+modified: 20231227005450042
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/core/macros/tree
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 <li>
 <$list filter="[<__prefix__>addsuffix<__chunk__>is[shadow]] [<__prefix__>addsuffix<__chunk__>is[tiddler]]" variable="full-title">
 <$list filter="[<full-title>removeprefix<__prefix__>]" variable="chunk">
-<span>{{$:/core/images/list}}</span>&#32;<$macrocall $name="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
+<span>{{$:/core/images/list}}</span>&#32;<$transclude $variable="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
 <$tiddler tiddler=<<full-title>>>
 <$list filter="[all[current]has[note]]"><span>({{!!note}})</span></$list>
 </$tiddler>
@@ -43,7 +43,7 @@ type: text/vnd.tiddlywiki
 &#32;
 <span>(<$count filter="[all[shadows+tiddlers]removeprefix<__prefix__>removeprefix<__chunk__>] -[<__prefix__>addsuffix<__chunk__>]"/>)</span>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
-<$macrocall $name="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>> sort="$sort$"/>
+<$transclude $variable="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>> sort="$sort$"/>
 </$reveal>
 </$set>
 </$set>
@@ -54,10 +54,10 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <ol>
 <$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>$sort$!suffix<__separator__>]" variable="chunk">
-<$macrocall $name="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
+<$transclude $variable="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
 </$list>
 <$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>$sort$suffix<__separator__>]" variable="chunk">
-<$macrocall $name="branch-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>> sort="$sort$"/>
+<$transclude $variable="branch-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>> sort="$sort$"/>
 </$list>
 </ol>
 \end
@@ -69,8 +69,8 @@ type: text/vnd.tiddlywiki
 <$reveal default="$prefix$" type="match" text=""><$link to={{!!title}} class="tree-root"><$text text=<<tree-prefix-builder "$separator$">>/></$link></$reveal>
 <div>
 <$set name="tree-parent" value={{!!title}}>
-<$reveal default="$prefix$" type="nomatch" text=""><$macrocall $name="tree-node" prefix=<<__prefix__>> separator=<<__separator__>> sort="$sort$"/></$reveal>
-<$reveal default="$prefix$" type="match" text=""><$macrocall $name="tree-node" prefix=<<tree-prefix-builder "$separator$">> separator=<<__separator__>> sort="$sort$"/></$reveal>
+<$reveal default="$prefix$" type="nomatch" text=""><$transclude $variable="tree-node" prefix=<<__prefix__>> separator=<<__separator__>> sort="$sort$"/></$reveal>
+<$reveal default="$prefix$" type="match" text=""><$transclude $variable="tree-node" prefix=<<tree-prefix-builder "$separator$">> separator=<<__separator__>> sort="$sort$"/></$reveal>
 </$set>
 </div>
 </div>

@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20231218121640201
+modified: 20231226234425050
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__tiddler__>removeprefix<__prefix__>split<__separator__>butlast[]join<__separator__>]" variable="new-branch">
 <$set name="target" filter="[<__prefix__>addsuffix<new-branch>]" select="0">
 <$action-setfield $tiddler={{{ [<target>addprefix<__state-prefix__>addsuffix[/]] }}} text="show"/>
-<$macrocall $name="tree-opener" tiddler=<<target>> prefix=<<__prefix__>> separator=<<__separator__>> state-prefix=<<__state-prefix__>>/>
+<$transclude $variable="tree-opener" tiddler=<<target>> prefix=<<__prefix__>> separator=<<__separator__>> state-prefix=<<__state-prefix__>>/>
 </$set>
 </$list>
 \end
@@ -30,7 +30,7 @@ type: text/vnd.tiddlywiki
 </div>
 
 <$list filter="[[$:/temp/diff]has[A]has[B]]">
-<$macrocall $name="diff-title" source={{$:/temp/diff!!A}} dest={{$:/temp/diff!!B}}/>
+<$transclude $variable="diff-title" source={{$:/temp/diff!!A}} dest={{$:/temp/diff!!B}}/>
 </$list>
 \end
 
@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
 <div class="code-macro">
 <$set name="lang" filter="[<__language__>is[blank]]" value=<<language>> emptyValue=<<__language__>>><$codeblock code=<<__content__>> language=<<lang>>/></$set>
 <div style="font-size:small;margin-top:-2px;opacity:70%;">
-<$list filter="[<__copy__>match[yes]]"><$macrocall $name="copy-to-clipboard" src=<<__content__>>/></$list>
+<$list filter="[<__copy__>match[yes]]"><$transclude $variable="copy-to-clipboard" src=<<__content__>>/></$list>
 <$list filter="[<__ref__>regexp[^http]]" variable="url">
 <a href=<<url>> target="_blank" title=<<url>> class="links" rel="noopener noreferrer" style="text-decoration:none;color:#333;fill:#5778d8;">{{$:/core/images/open-window}} reference</a>
 </$list>
@@ -77,8 +77,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links belongs-to:"no">></$list>
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<$list filter="[all[current]has[cat-filter]]"><$macrocall $name="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
-<$macrocall $name="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
+<$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
+<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
 </$tiddler></$tag$>
 </$reveal>
@@ -106,21 +106,21 @@ type: text/vnd.tiddlywiki
 \define shortcut-unlinked(sort)
 <li class="toc-item">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible unlink"><$transclude field=caption><$view field=title/></$transclude></$button>
-<$macrocall $name="shortcut" root=<<currentTiddler>> sort=<<__sort__>>/>
+<$transclude $variable="shortcut" root=<<currentTiddler>> sort=<<__sort__>>/>
 </li>
 \end
 
 \define shortcut(root:"Index", sort:"!sort[order]")
 <ol class="tc-toc toc-selective-expandable"><$list filter="[<__root__>taggingOrPrefixed[]!has[draft.of]!tag[Ignore]$sort$] -[<__root__>]">
 <$list filter="[all[current]toc-link[no]]" variable="NONE" emptyMessage=<<shortcut-linked>>>
-<$macrocall $name="shortcut-unlinked" sort=<<__sort__>>/>
+<$transclude $variable="shortcut-unlinked" sort=<<__sort__>>/>
 </$list>
 </$list></ol>
 \end
 
 \define open-in-sidebar(close:"yes")
 <$list filter="[<__close__>match[yes]]" variable="NONE">
-<$macrocall $name="tiddler-close" tiddler=<<currentTiddler>>/>
+<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
 </$list>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
@@ -132,8 +132,8 @@ type: text/vnd.tiddlywiki
 
 \define last-day(field:"finish", template)
 <$set name="style" filter="[<currentTiddler>!days:$field$[-1]]" value="color:red;" emptyValue="">
-<span style=<<style>>><$macrocall $name="format-date" date={{!!$field$}} template="$template$"/></span>
-(<$macrocall $name="days-left" deadline={{!!$field$}}/>)
+<span style=<<style>>><$transclude $variable="format-date" date={{!!$field$}} template="$template$"/></span>
+(<$transclude $variable="days-left" deadline={{!!$field$}}/>)
 </$set>
 \end
 
@@ -151,7 +151,7 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
 </$list>
 <$list filter="[[$(modal)$]!match[yes]]" variable="NONE">
-<$list filter="[<direct-open>!match[yes]]" emptyMessage="<$macrocall $name='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
+<$list filter="[<direct-open>!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
@@ -202,10 +202,10 @@ type: text/vnd.tiddlywiki
 </$button>
 </span></$list>
 <$list filter="[<mTitle>has[date]]"><span style="color:green;margin-right:8px;">
-<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$macrocall $name=days-passed start={{!!date}}/>">Today</$list>
+<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$transclude $variable=days-passed start={{!!date}}/>">Today</$list>
 </span></$list>
 <$list filter="[<mTitle>!is[missing]]">
-<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$macrocall $name="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button>
+<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button>
 <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><<open-in-sidebar close:"no">>SIDEBAR</$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]">
 <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$set name="actionTiddler" value=<<mTitle>>><<droppable-clone-action>></$set>CLONE</$button>
@@ -248,7 +248,7 @@ type: text/vnd.tiddlywiki
 \define tiddler-close(tiddler)
 <$list filter="[[$(modal)$]!match[yes]]">
 <$list filter="[{$:/HistoryList!!current-tiddler}match<__tiddler__>]">
-<$macrocall $name="tiddler-open" tiddler={{{ [<__tiddler__>next[$:/StoryList]] :else[<__tiddler__>previous[$:/StoryList]] }}}/>
+<$transclude $variable="tiddler-open" tiddler={{{ [<__tiddler__>next[$:/StoryList]] :else[<__tiddler__>previous[$:/StoryList]] }}}/>
 </$list>
 <$action-sendmessage $message="tm-close-tiddler" $param=<<__tiddler__>>/>
 </$list>
@@ -270,7 +270,7 @@ type: text/vnd.tiddlywiki
 </$select>
 </$list>
 <$list filter="[<value>!is[blank]]" variable="NONE">
-<$list filter="[<value>is[tiddler]]" emptyMessage=<<value>> variable="NONE"><$macrocall $name="l" title=<<value>> class='normal-weight' note='no'/></$list>
+<$list filter="[<value>is[tiddler]]" emptyMessage=<<value>> variable="NONE"><$transclude $variable="l" title=<<value>> class='normal-weight' note='no'/></$list>
 </$list>
 </$list>
 \end
@@ -280,7 +280,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<current>has[celltpl]]" emptyMessage="No Value Selected">
 <$list filter="[<value>!is[blank]]"><$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
 <span style="border-bottom:1px solid #78bb4e;margin-right:5px;">
-<$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$macrocall $name="l" title=<<datum>> class="normal-weight" note="no"/></$list>
+<$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$transclude $variable="l" title=<<datum>> class="normal-weight" note="no"/></$list>
 </span>
 </$list></$list>
 <$list filter="[<value>is[blank]]" variable="NONE">
@@ -315,7 +315,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]tags[]!match<current>type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]">
 <$set name="style" filter="[all[current]get[color]] :else[all[current]colorize[]] +[addprefix[background:]]" select="0">
 <$button tooltip={{!!caption}} class="tc-btn-invisible tc-tag-label tag-list" style=<<style>>>
-<$transclude field="caption"><$view field="title"/></$transclude><$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
+<$transclude field="caption"><$view field="title"/></$transclude><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 </$button>
 </$set>
 </$list>

@@ -1,10 +1,10 @@
 caption: Tabs macro
 created: 20210524093515745
 creator: yuzijie
-modified: 20211208213227291
+modified: 20231227005406305
 modifier: yuzijie
 tags: $:/tags/TextEditor/Snippet customized
 title: $:/custom/snippet/tabs
 type: text/vnd.tiddlywiki
 
-<$macrocall $name="tabs" tabsList="[enlist{!!list}]" default={{{[enlist{!!list}first[]]}}} state="$:/state/tab3" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button" class="tc-vertical"/>
+<$transclude $variable="tabs" tabsList="[enlist{!!list}]" default={{{[enlist{!!list}first[]]}}} state="$:/state/tab3" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button" class="tc-vertical"/>

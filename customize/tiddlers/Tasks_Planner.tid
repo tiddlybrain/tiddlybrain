@@ -2,7 +2,7 @@ caption: Planner
 created: 20210112195245238
 creator: yuzijie
 keywords: 
-modified: 20231117220855806
+modified: 20231227003436919
 modifier: yuzijie
 order: 3
 tags: Tasks customized
@@ -10,5 +10,5 @@ title: Tasks/Planner
 type: text/vnd.tiddlywiki
 
 <$set name="date" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>>
-<$macrocall $name="planner" date=<<date>>/>
+<$transclude $variable="planner" date=<<date>>/>
 </$set>

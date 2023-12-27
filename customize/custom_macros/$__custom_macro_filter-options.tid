@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20231114205024269
+modified: 20231227000959317
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -88,12 +88,12 @@ type: text/vnd.tiddlywiki
 \define calculator-result(filter) <$text text={{{ $filter$ $(search-filter)$ }}}/>
 
 \define list-filters(title, filter, cfilter)
-<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="1" cfilter=<<__cfilter__>>/>
+<$transclude $variable="filter-options" title=<<__title__>> filter=<<__filter__>> uid="1" cfilter=<<__cfilter__>>/>
 <$list filter="[[$:/state/select/$(currentTiddler)$/$title$/1]has[text]] :else[[$:/state/select/$(currentTiddler)$/$title$/2]has[text]]" variable="NONE">
-<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="2" cfilter=<<__cfilter__>>/>
+<$transclude $variable="filter-options" title=<<__title__>> filter=<<__filter__>> uid="2" cfilter=<<__cfilter__>>/>
 </$list>
 <$list filter="[[$:/state/select/$(currentTiddler)$/$title$/2]has[text]] :else[[$:/state/select/$(currentTiddler)$/$title$/3]has[text]]" variable="NONE">
-<$macrocall $name="filter-options" title=<<__title__>> filter=<<__filter__>> uid="3" cfilter=<<__cfilter__>>/>
+<$transclude $variable="filter-options" title=<<__title__>> filter=<<__filter__>> uid="3" cfilter=<<__cfilter__>>/>
 </$list>
 <$list filter="[<__cfilter__>!is[blank]]" variable="NONE"><span class="calculator">
 <$select tiddler="$:/temp/calculator/$(currentTiddler)$/$title$" field="note" default='analysis'>
@@ -106,7 +106,7 @@ type: text/vnd.tiddlywiki
 </$select>
 </$list>
 <$list filter="[[$:/temp/calculator/$(currentTiddler)$/$title$]get[text]]" variable="search-filter">is
-<span style="border-bottom:1px dotted #ccc;padding:0 3px;"><$macrocall $name="calculator-result" filter=<<__filter__>>/></span>
+<span style="border-bottom:1px dotted #ccc;padding:0 3px;"><$transclude $variable="calculator-result" filter=<<__filter__>>/></span>
 </$list>
 <$list filter="[[$:/temp/calculator/$(currentTiddler)$/$title$]is[tiddler]]">
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<currentTiddler>>/>&times;</$button>

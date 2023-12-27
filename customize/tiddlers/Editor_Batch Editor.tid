@@ -1,7 +1,8 @@
 caption: Batch Editor
 created: 20200425125950200
 creator: yuzijie
-modified: 20220829192843855
+keywords: 
+modified: 20231227003819609
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Batch Editor
@@ -56,10 +57,10 @@ type: text/vnd.tiddlywiki
 </$list>
 <div>
 <$list filter="[[$:/temp/tools/batch-edit/param]has[note]]">''Old Prefix:''<br>
-<$list filter="[prefix{$:/temp/tools/batch-edit/param!!note}]" emptyMessage="No results<br>"><$macrocall $name="l" title={{!!title}}/><br></$list>
+<$list filter="[prefix{$:/temp/tools/batch-edit/param!!note}]" emptyMessage="No results<br>"><$transclude $variable="l" title={{!!title}}/><br></$list>
 </$list>
 <$list filter="[[$:/temp/tools/batch-edit/param2]has[note]]">''New Prefix:''<br>
-<$list filter="[prefix{$:/temp/tools/batch-edit/param2!!note}]" emptyMessage="No results"><$macrocall $name="l" title={{!!title}}/><br></$list>
+<$list filter="[prefix{$:/temp/tools/batch-edit/param2!!note}]" emptyMessage="No results"><$transclude $variable="l" title={{!!title}}/><br></$list>
 </$list>
 </div>
 </$list>
@@ -78,7 +79,7 @@ type: text/vnd.tiddlywiki
 </$list>
 <div>
 <$list filter="[[$:/temp/tools/batch-edit/param]has[note]]">
-<$list filter="[prefix{$:/temp/tools/batch-edit/param!!note}]" emptyMessage="No results<br>"><$macrocall $name="l" title={{!!title}}/><br></$list>
+<$list filter="[prefix{$:/temp/tools/batch-edit/param!!note}]" emptyMessage="No results<br>"><$transclude $variable="l" title={{!!title}}/><br></$list>
 </$list>
 </div>
 </$list>
@@ -174,7 +175,7 @@ type: text/vnd.tiddlywiki
 </$list>
 
 <$list filter="[[$:/temp/tools/batch-edit/action]get[note]!match[change-prefix]!match[add-tiddler-prefix]] [[$:/temp/tools/batch-edit/action]!has[note]]">
-<div><$list filter={{$:/temp/tools/batch-edit/filter!!note}} emptyMessage="No results"><$macrocall $name="l" title={{!!title}}/><br></$list></div>
+<div><$list filter={{$:/temp/tools/batch-edit/filter!!note}} emptyMessage="No results"><$transclude $variable="l" title={{!!title}}/><br></$list></div>
 </$list>
 
 </$list>

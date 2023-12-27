@@ -1,12 +1,12 @@
 created: 20221218162626472
 creator: yuzijie
 list-after: $:/core/ui/ViewTemplate/subtitle/modifier
-modified: 20221218213808799
+modified: 20231227004111857
 modifier: yuzijie
 tags: $:/tags/ViewTemplate/Subtitle customized
 title: $:/custom/ui/subtitle
 type: text/vnd.tiddlywiki
 
 <$list filter="[all[current]has[date]]"><span style="color:#6db68d;">''date''
-<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$macrocall $name=days-passed start={{!!date}}/>">today</$list>
+<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$transclude $variable=days-passed start={{!!date}}/>">today</$list>
 </span></$list>

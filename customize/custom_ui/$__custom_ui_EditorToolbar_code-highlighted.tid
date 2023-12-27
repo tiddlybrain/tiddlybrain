@@ -4,7 +4,7 @@ created: 20210530134637560
 creator: yuzijie
 description: Show Texts as Code with Highlighting
 icon: $:/core/images/mono-line
-modified: 20220106140347354
+modified: 20231227005237588
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/code-highlighted
@@ -13,6 +13,6 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
-	prefix='<$macrocall $name="display" state="$:/state/display/❓" mode="code" content="""'
+	prefix='<$transclude $variable="display" state="$:/state/display/❓" mode="code" content="""'
 	suffix='"""/>'
 />

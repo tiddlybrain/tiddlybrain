@@ -141,13 +141,9 @@ Check all open signals, state fields/tiddlers get priority
 */
 DetailsWidget.prototype.getOpenState = function() {
 	var result = "";
-	if((this.detailsOpenDefault !== "" && this.detailsOpenDefault !== "no") 
-	    || this.detailsState === "open") {
+	if(this.detailsState === "open") {
 		result = "open";
 	 } 
-	if(this.detailsStateTitle !=="" && this.detailsState !== "open") {
-		result = "";
-	}
 	return result;
 };
 
@@ -213,9 +209,8 @@ DetailsWidget.prototype.execute = function() {
 	this.summaryTitle = this.myTiddler ? tryTiddler : "Tiddler not found";
 	this.summaryField = this.getAttribute("field","");
 	this.detailsSummary = this.getAttribute("summary") || this.getSummary();
-	this.detailsStateTitle = this.getAttribute("state","");
+	this.detailsStateTitle = this.getAttribute("state","") || "$:/state/details/" + this.getVariable("currentTiddler") + "/" + this.detailsSummary;
 	this.detailsState = this.getStateFromReference();
-	this.detailsOpenDefault = this.getAttribute("open","");
 	this.detailsOpen = this.getOpenState();
 	this.detailsClass = this.getAttribute("class","");
 	// Construct the child widgets

@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20231217152129561
+modified: 20231227004141835
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" style=<<current>>>
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
 <$list filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]">
-<$macrocall $name="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
+<$transclude $variable="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
 </$list>
 <$list filter="[<folded-state>!text[hide]]" variable="NONE" emptyMessage={{$:/core/images/chevron-right}}>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>{{$:/core/images/chevron-left}}
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 </$set>
 </$set>
 <$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink" tooltip={{!!description}}>
-<$macrocall $name="tiddler-open" tiddler=<<currentTiddler>>/>
+<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot; </$list><$view field="title"/>
@@ -80,7 +80,7 @@ type: text/vnd.tiddlywiki
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible" style="color:#999;">Close all</$button> &middot;
 <$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible" style="color:#999;">Close others</$button> &middot;
 <$button class="tc-btn-invisible" style="color:#999;"><$tiddler tiddler={{$:/HistoryList!!current-tiddler}}><$action-sendmessage $message="tm-fold-other-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/></$tiddler>Fold others</$button> &middot;
-<$macrocall $name="exportButton" exportFilter="[[$:/StoryList]get[list]enlist-input[]]" lingoBase="$:/custom/language/Buttons/ExportTiddler/"/> &middot;
+<$transclude $variable="exportButton" exportFilter="[[$:/StoryList]get[list]enlist-input[]]" lingoBase="$:/custom/language/Buttons/ExportTiddler/"/> &middot;
 <$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">Sort by note</$checkbox>
 <$list filter="[prefix[$:/state/folded/]text[hide]limit[1]]">&middot;
 <$button class="tc-btn-invisible" dragFilter="[is[system]text[hide]removeprefix[$:/state/folded/]]" style="color:#999;">

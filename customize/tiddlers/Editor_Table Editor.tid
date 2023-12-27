@@ -1,7 +1,8 @@
 caption: Table Editor
 created: 20220127101156094
 creator: yuzijie
-modified: 20220906143833069
+keywords: 
+modified: 20231227003654292
 modifier: yuzijie
 tags: customized Editor
 title: Editor/Table Editor
@@ -10,7 +11,7 @@ type: text/vnd.tiddlywiki
 <$button to="Editor/Table Editor">Open</$button>
 <$vars folding="[addprefix[$:/state/folded/]text[hide]]">
 <$set name="rfilter" filter="[[$:/temp/batch-edit]get[rfilter]]" emptyValue="[enlist{$:/StoryList!!list}type[application/x-tiddler-dictionary]!filter<folding>]" select="0">
-<$macrocall $name="tableE" cfilter={{$:/temp/batch-edit!!cfilter}} ffilter={{$:/temp/batch-edit!!ffilter}} rfilter=<<rfilter>> fields="text='Name: {{!!caption}}
+<$transclude $variable="tableE" cfilter={{$:/temp/batch-edit!!cfilter}} ffilter={{$:/temp/batch-edit!!ffilter}} rfilter=<<rfilter>> fields="text='Name: {{!!caption}}
 Description: {{!!description}}' caption='' description=''"/>
 </$set>
 </$vars>

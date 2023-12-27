@@ -1,6 +1,6 @@
 caption: {{$:/core/images/export-button}} {{$:/language/Buttons/ExportTiddler/Caption}}
 description: {{$:/language/Buttons/ExportTiddler/Hint}}
-modified: 20231204152031581
+modified: 20231227001947956
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/export-tiddler
@@ -9,4 +9,4 @@ type: text/vnd.tiddlywiki
 \define makeExportFilter()
 [[$(currentTiddler)$]] [all[tiddlers]contains:parents[$(currentTiddler)$]]
 \end
-<$macrocall $name="exportButton" exportFilter=<<makeExportFilter>> lingoBase="$:/language/Buttons/ExportTiddler/" baseFilename=<<currentTiddler>>/>
+<$transclude $variable="exportButton" exportFilter=<<makeExportFilter>> lingoBase="$:/language/Buttons/ExportTiddler/" baseFilename=<<currentTiddler>>/>

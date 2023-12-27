@@ -36,8 +36,7 @@ var getResult = function(data,options,currTiddlerTitle) {
 			parseAsInline: true,
 			variables: {
 				currentTiddler: currTiddlerTitle
-			},
-			//parentWidget: options.widget
+			}
 		});
 	}
 }

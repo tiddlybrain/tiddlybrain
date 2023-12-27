@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20231218230629697
+modified: 20231227003518587
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -27,7 +27,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="日记: <<bl>>
---: 任务回顾" date=<<curDate>> caption="<$macrocall $name=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="customized-template-journal"/>
+--: 任务回顾" date=<<curDate>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="customized-template-journal"/>
 </$button></$list>
 </$droppable></h2>
 
@@ -35,7 +35,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
-<$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$macrocall $name="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
+<$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
 Done: <<currentTiddler>></$button></li></$list>
 </$set>
 </$list></$list>
@@ -46,7 +46,7 @@ Done: <<currentTiddler>></$button></li></$list>
 <$list filter="[all[current]text[doing]]" emptyMessage="""
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#c67b48;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
 <$button message="tm-copy-to-clipboard" param={{!!caption}}>Set Plan
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$macrocall $name='tiddler-open' tiddler=<<task-id>>/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>""">
 <$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
@@ -73,7 +73,7 @@ Done: <<currentTiddler>></$button></li></$list>
 <td><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
 <$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div>
 <$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>>
-<$button class="tc-btn-invisible"><$macrocall $name="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&times;</$button>
+<$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&times;</$button>
 </$button>
 </div></$set>
 </$list></td>

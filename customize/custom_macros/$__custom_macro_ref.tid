@@ -1,6 +1,6 @@
 created: 20211001045719765
 creator: yuzijie
-modified: 20231208230151609
+modified: 20231227000511954
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/ref
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 \define ref(title, sort)
 <$set name="ref-title" filter="[[$title$]is[blank]]" value="$(currentTiddler)$/" emptyValue="$title$">
 <$set name="ref-title" filter="[<ref-title>suffix[/]]" value=<<ref-title>> emptyValue="$title$/">
-<$list filter="[<ref-title>split[/]first[]]"><$macrocall $name="tree" prefix=<<ref-title>> sort="$sort$"/></$list>
+<$list filter="[<ref-title>split[/]first[]]"><$transclude $variable="tree" prefix=<<ref-title>> sort="$sort$"/></$list>
 </$set>
 </$set>
 \end
@@ -17,10 +17,10 @@ type: text/vnd.tiddlywiki
 \define ref-tag(tag, sort, mode:"tabs", external-links:"yes")
 <$set name="ref-title" filter="[<__tag__>is[blank]]" value=<<currentTiddler>> emptyValue=<<__title__>>>
 <$reveal default="$mode$" type="match" text="tabs" tag="div">
-<$macrocall $name="tabs" tabsList="[tag<ref-title>$sort$]" default={{{[tag<ref-title>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+<$transclude $variable="tabs" tabsList="[tag<ref-title>$sort$]" default={{{[tag<ref-title>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </$reveal>
 <$reveal default="$mode$" type="nomatch" text="tabs" tag="div">
-<$list filter="[tag<ref-title>$sort$]"><$macrocall $name="collapse" title=<<currentTiddler>> external-links=<<__external-links__>>/></$list>
+<$list filter="[tag<ref-title>$sort$]"><$transclude $variable="collapse" title=<<currentTiddler>> external-links=<<__external-links__>>/></$list>
 </$reveal>
 </$set>
 \end
@@ -30,23 +30,23 @@ type: text/vnd.tiddlywiki
 \define ref-prefix(prefix, sort:"sortan[title]", mode:"tabs", external-links:"yes")
 <$set name="ref-title" filter="[<__prefix__>is[blank]]" value="$(currentTiddler)$/" emptyValue=<<__prefix__>>>
 <$reveal default="$mode$" type="match" text="tabs" tag="div">
-<$macrocall $name="tabs" tabsList="[prefix<ref-title>filter<ref-prefix-filter>$sort$]" default={{{[prefix<ref-title>filter<ref-prefix-filter>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+<$transclude $variable="tabs" tabsList="[prefix<ref-title>filter<ref-prefix-filter>$sort$]" default={{{[prefix<ref-title>filter<ref-prefix-filter>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </$reveal>
 <$reveal default="$mode$" type="nomatch" text="tabs" tag="div">
-<$list filter="[prefix<ref-title>filter<ref-prefix-filter>$sort$]"><$macrocall $name="collapse" title=<<currentTiddler>> external-links=<<__external-links__>>/></$list>
+<$list filter="[prefix<ref-title>filter<ref-prefix-filter>$sort$]"><$transclude $variable="collapse" title=<<currentTiddler>> external-links=<<__external-links__>>/></$list>
 </$reveal>
 </$set>
 \end
 
 \define ref-list(title, sort)
 <$set name="ref-title" filter="[[$title$]is[blank]]" value="$(currentTiddler)$" emptyValue="$title$">
-<$macrocall $name="tabs" tabsList="[list<ref-title>$sort$]" default={{{[list<ref-title>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+<$transclude $variable="tabs" tabsList="[list<ref-title>$sort$]" default={{{[list<ref-title>$sort$first[]]}}} template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </$set>
 \end
 
 \define ref-toc(title, sort)
 <$set name="ref-title" filter="[[$title$]is[blank]]" value="$(currentTiddler)$" emptyValue="$title$">
-<div class="tc-table-of-contents"><$macrocall $name="custom-toc" root=<<ref-title>> sort="$sort$"/></div>
+<div class="tc-table-of-contents"><$transclude $variable="custom-toc" root=<<ref-title>> sort="$sort$"/></div>
 </$set>
 \end
 

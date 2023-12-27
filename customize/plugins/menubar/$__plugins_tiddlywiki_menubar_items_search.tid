@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20231124164818023
+modified: 20231227004035377
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -19,7 +19,7 @@ type: text/vnd.tiddlywiki
 
 \define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
 
-\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
+\define set-next-input-tab(beforeafter:"after") <$transclude $variable="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 
 \define advanced-search-actions()
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/menubarsearch/input}}/>
@@ -35,7 +35,7 @@ type: text/vnd.tiddlywiki
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <form class="tc-form-inline">
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/menubarsearch" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> 
+<$transclude $variable="keyboard-driven-input" tiddler="$:/temp/menubarsearch" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> 
 		refreshTitle="$:/temp/menubarsearch/refresh" tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" 
 		class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default="" cancelPopups="yes" size="27"
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> inputCancelActions=<<cancel-search-actions>> 
