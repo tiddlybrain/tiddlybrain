@@ -4,7 +4,7 @@ created: 20221101141524058
 creator: yuzijie
 description: Turn title into a link
 icon: $:/core/images/permalink-button
-modified: 20230827194110630
+modified: 20231229144452564
 modifier: yuzijie
 shortcuts: ctrl-H
 tags: $:/tags/EditorToolbar customized
@@ -18,5 +18,5 @@ type: text/vnd.tiddlywiki
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix='<<l "'
-	suffix='" "">>'
+	suffix='" description:"">>'
 />

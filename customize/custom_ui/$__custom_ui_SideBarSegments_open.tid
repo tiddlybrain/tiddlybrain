@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20231228094810234
+modified: 20231229144342644
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -40,7 +40,7 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <div class="sidebar-item-hover">
-<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=`<<l "$(currentTiddler)$" "">>` emptyValue=<<currentTiddler>>>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=`<<l "$(currentTiddler)$" description:"">>` emptyValue=<<currentTiddler>>>
 &middot; <$button message="tm-copy-to-clipboard" param=<<link-text>> class="tc-btn-invisible" style="color:#999;">copy</$button>
 </$set>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#999;">edit
@@ -64,7 +64,7 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <div class="sidebar-item-hover">
-<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=`<<l "$(currentTiddler)$" "">>` emptyValue=<<currentTiddler>>>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=`<<l "$(currentTiddler)$" description:"">>` emptyValue=<<currentTiddler>>>
 &middot; <$button message="tm-copy-to-clipboard" param=<<link-text>> class="tc-btn-invisible" style="color:#bbb;">copy</$button>
 </$set>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#bbb;">edit

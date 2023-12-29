@@ -1,4 +1,4 @@
-modified: 20231227005707099
+modified: 20231229144900536
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 \define lingo-base() $:/language/Buttons/Link/
 
-\define link-maker() <<l "$(title)$" "">>
+\define link-maker() <<l "$(title)$" description:"">>
 
 \define add-link-actions()
 \whitespace trim
