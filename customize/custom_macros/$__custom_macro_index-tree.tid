@@ -1,14 +1,15 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20231227000830840
+modified: 20231231141743110
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
 type: text/vnd.tiddlywiki
 
 \define index-tree-breadcrumb-filter(sort:"sortan[title]")
-[all[current]next[$:/config/index-tree]] [all[current]tags[]!is[system]] [all[current]listed[]!is[system]]
-[all[current]parentPath[valid]] [all[current]get[belongs.to]] -[{$:/temp/index-tree}] +[is[tiddler]!toc-link[no]!tag[Ignore]$sort$]
+[all[current]next[$:/config/index-tree]] [all[current]next[$:/config/index-tree]next[$:/config/index-tree]]
+[all[current]tags[]!is[system]] [all[current]listed[]!is[system]] [all[current]parentPath[valid]]
+[all[current]get[belongs.to]] -[{$:/temp/index-tree}] +[is[tiddler]!toc-link[no]!tag[Ignore]$sort$]
 \end
 
 \define index-tree-pill()
