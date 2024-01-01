@@ -1,70 +1,17 @@
 created: 20220218120710994
 creator: yuzijie
-modified: 20220823172243889
+modified: 20240101231457722
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler/Templates
 type: text/vnd.tiddlywiki
 
-\define newInvoiceAction(template, content)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption="{{##Period}}" text="Total(EUR): 0.00
-Period: $content$
-Address: Piazza Ragusa 36
-Date: <$macrocall $name=format-date date={{!!date}}/>
-City: Roma
-Company: " type="application/x-tiddler-dictionary" tags="BR/分类/年/2022"/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
-<$action-setfield $tiddler="$:/config/index-tree" text="X 29"/>
+\define newTiddlerFromTemplate(name,template,field:"description")
+<$button><<__name__>>
+<$list filter="[<content>!is[blank]]" emptyMessage="<$action-sendmessage $message='tm-new-tiddler' $param=<<__template__>> title=<<unusedtitle $(template)$>> caption=<<caption>> date=<<now YYYY0MM0DD>>/>"><$action-sendmessage $message="tm-new-tiddler" $param=<<__template__>> title=<<unusedtitle $(template)$>> caption=<<caption>> $field$=<<content>> date=<<now YYYY0MM0DD>>/></$list>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
+</$button>
 \end
 
-\define newSeriesAction(template, content)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> text="Name: {{!!caption}}
-季数: 
-状态: 
-评价: 
-出品方: " type="application/x-tiddler-dictionary"/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newReimburseAction(template, content)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> title=<<__content__>> text="路程: {{!!caption}}
-日期: <$macrocall $name=format-date date={{!!date}}/>
-时间: 
-价格 (€): " type="application/x-tiddler-dictionary" caption="" path=""/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newItalianAction(template, content)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> text="Name: {{!!caption}}
-Description: {{!!description}}
-Remarks: " type="application/x-tiddler-dictionary" description="" default="B" side-b="{{!!description}} 意大利语"/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newSpaceAction(template, content, description, note)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption=<<__content__>> type="application/x-tiddler-dictionary" text="Space: " description=<<__description__>> note=<<__note__>> celltpl="customized-template-space"/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-\define newThingAction(template, content, description, note)
-<$action-sendmessage $message="tm-new-tiddler" $param="$template$" date=<<now 'YYYY0MM0DD'>> caption="{{##Name}}" type="application/x-tiddler-dictionary" tags="BR/根目录/常用/财产" description="" text="Name: $content$
-Description: {{!!description}}
-Brand: 
-Qty: 1
-Remarks:
-Accessories: <<bl>>" description=<<__description__>> note=<<__note__>>/>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
-\end
-
-<div style="margin-bottom:5px;">
-<$button><$macrocall $name="newInvoiceAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}}/>新账单 2022</$button>
-<$button><$macrocall $name="newSeriesAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}}/>电视剧</$button>
-<$button><$macrocall $name="newReimburseAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}}/>打车报销</$button>
-</div>
-<div>
-<$button><$macrocall $name="newItalianAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}}/>新 IT 单词/短语</$button>
-<$button><$macrocall $name="newSpaceAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}} note={{$:/temp/newTiddler!!note}}/>新空间</$button>
-<$button><$macrocall $name="newThingAction" template={{$:/config/defaultTemplate}} content={{$:/temp/newTiddler}} description={{$:/temp/newTiddler!!description}} note={{$:/temp/newTiddler!!note}}/>新财产</$button>
-<$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler/Templates">⚙️</$button>
-</div>
+<$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler/Templates" tooltip="Edit Buttons">⚙️</$button>
+<<newTiddlerFromTemplate "物品" "X 2536">>
