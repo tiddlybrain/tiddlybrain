@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20231231155450293
+modified: 20240101085719468
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -64,13 +64,14 @@ type: text/vnd.tiddlywiki
 </$button>
 </$tiddler>
 <span class="menubar-recent">
-<$list filter="[enlist{$:/config/index-tree!!list}] -[{$:/temp/index-tree}] -[{$:/temp/index-tree}get[parents]enlist-input[]] +[limit[5]]">
+<$list filter="[enlist{$:/config/index-tree!!list}] -[{$:/temp/index-tree}] -[{$:/temp/index-tree}get[parents]enlist-input[]] +[limit[4]]">
 <$button class="tc-btn-invisible" style="color:white;margin-left:11px;">
 <$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
 <$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[note]]">-[{{!!note}}]</$list>
 </$button>
 </$list>
 </span>
