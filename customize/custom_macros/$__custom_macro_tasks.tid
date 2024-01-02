@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20231226235144594
+modified: 20240102092926824
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -189,7 +189,7 @@ type: text/vnd.tiddlywiki
 
 \define weekly-link(date)
 <$set name="year" filter="[[$date$]format:date[YYYY]]" select="0">
-<$set name="week" filter="[[$date$]format:date[WeekWW]]" select="0">
+<$set name="week" filter="[[$date$]format:date[Week0WW]]" select="0">
 <$set name="BR" filter="[[BR/Journals]] [<year>] [<week>] +[join[/]]" select="0">
 <$transclude $variable="l" title=<<BR>> text=<<format-date "$date$" "Week WW, DDD">>/>
 </$set>

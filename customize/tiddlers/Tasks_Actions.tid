@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20231227003518587
+modified: 20240102093517848
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -60,7 +60,9 @@ Done: <<currentTiddler>></$button></li></$list>
 <$list filter="[prefix[$:/task-state/]text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
+<li><$details summary="Waiting List"><ol>
 <$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
+</ol></$details></li>
 </ol></$droppable>
 
 <$list filter="[<journal-title>is[tiddler]]"><$droppable actions=<<droppable-date-action>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
