@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20231227000752333
+modified: 20240103150515264
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -94,21 +94,11 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
 </$set></$set>
 \end
 
-\define bl(item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]$item-filter$" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
+\define bl(sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
 
-\define bl-topic(topic, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]contains:parents[$topic$]$item-filter$" uid=<<__topic__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
+\define bl-note(param, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]note[$param$]!is[current]" uid=<<__param__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
 
-\define bl-tag(tag, item-filter, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents) <$transclude $variable="bl-filter" item-filter="[$tag$]tagging[]$item-filter$" uid=<<__tag__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
-
-\define bl-note-filter(item-filter) note[$(note)$]!is[current]$item-filter$
-
-\define bl-note(note, item-filter, sort, cfilter, rheader, limit, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents)
-<$set name="note" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
-<$transclude $variable="bl-filter" item-filter=<<bl-note-filter """$item-filter$""">> uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note="no" description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
-</$set>
-\end
-
-\define bl-sub-note(note, item-filter, sort, cfilter, rheader, limit, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]$item-filter$" item-filter-2="getAllTiddlers:note[$note$]" uid=<<note>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
+\define bl-sub-note(param, sort, cfilter, rheader, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" item-filter-2="getAllTiddlers:note[$param$]" uid=<<__param__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> group-by-parents=<<__group-by-parents__>>/>
 
 # ''一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title''
 #> `<<l
@@ -151,47 +141,6 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
   group-by-parents:"按照 belongs.to 分类排序">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl
-  item-filter:"额外筛选条件"
-  sort:"结果排序"
-  cfilter:"table 列"
-  rheader:"table 标题列"
-  limit:"最大显示行数"
-  note:"是否显示 note"
-  description:"是否显示 Description"
-  parent:"是否显示 belongs.to"
-  date:"是否显示 date"
-  caption:"按照 caption 来显示结果条目"
-  has-filter:"是否显示 filter"
-  cat-prefix:"Category 的前缀"
-  cat-filter:"如何生成 tag 的 filter"
-  tag-caption:"tag 的 caption"
-  checkbox:"table 模式下是否显示复选框"
-  sort-order:"Table 按照列排序的顺序"
-  group-by-parents:"按照 belongs.to 分类排序">>`
-# ''反查指向当前 Tiddler 且属于某个 topic 的所有 Tiddlers''
-#> `<<bl-topic
-  topic:"主题"
-  item-filter:"额外筛选条件"
-  sort:"结果排序"
-  cfilter:"table 列"
-  rheader:"table 标题列"
-  limit:"最大显示行数"
-  note:"是否显示 note"
-  description:"是否显示 Description"
-  parent:"是否显示 belongs.to"v
-  date:"是否显示 date"
-  caption:"按照 caption 来显示结果条目"
-  has-filter:"是否显示 filter"
-  cat-prefix:"Category 的前缀"
-  cat-filter:"如何生成 tag 的 filter"
-  tag-caption:"tag 的 caption"
-  checkbox:"table 模式下是否显示复选框"
-  sort-order:"Table 按照列排序的顺序"
-  group-by-parents:"按照 belongs.to 分类排序">>`
-# ''反查指向当前 Tiddler 且标记了某个 tag 的所有 Tiddlers''
-#> `<<bl-tag
-  tag:"标签"
-  item-filter:"额外筛选条件"
   sort:"结果排序"
   cfilter:"table 列"
   rheader:"table 标题列"
@@ -210,8 +159,7 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
   group-by-parents:"按照 belongs.to 分类排序">>`
 # ''反查指向当前 Tiddler 且相同 note 的所有 Tiddlers''
 #> `<<bl-note
-  note:"角色"
-  item-filter:"额外筛选条件"
+  param:"角色"
   sort:"结果排序"
   cfilter:"table 列"
   rheader:"table 标题列"
@@ -229,8 +177,7 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
   group-by-parents:"按照 belongs.to 分类排序">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers 里面具有特定 note 的 Tiddlers''
 #> `<<bl-sub-note
-  note:"bl-pattern 后面的 note, 二次搜索的 Tiddlers 的角色"
-  item-filter:"额外筛选条件"
+  param:"bl-pattern 后面的 note, 二次搜索的 Tiddlers 的角色"
   sort:"结果排序"
   cfilter:"table 列"
   rheader:"table 标题列"
