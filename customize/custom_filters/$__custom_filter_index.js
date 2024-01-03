@@ -21,6 +21,16 @@ module-type: filteroperator
 /*
 Helper functions
 */
+var backlinkTester = {};
+
+backlinkTester["note"] = function(tiddler,text) {
+	if ($tw.utils.hop(tiddler.fields,'note') && tiddler.fields['note'] === text) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 var getResult = function(data,options,currTiddlerTitle) {
 	if(options.wiki.tiddlerExists(data)) {
 		var content = options.wiki.getTiddler(data).getFieldString("caption") || data;
@@ -41,16 +51,36 @@ var getResult = function(data,options,currTiddlerTitle) {
 	}
 }
 
+var getBacklinksParsed = function(data,options,currTiddlerTitle,results) {
+	var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|^)" + currTiddlerTitle + "(\\]\\]|;;|\"|\'|:|\\n|$)", re = new RegExp(pattern);
+	var re_filter = /<<bl-(.+?)\s+param:["'](.+?)["']/, filter = data.match(re_filter), tester = null, content;
+	if(filter !== null && filter[1] in backlinkTester) {
+		tester = backlinkTester[filter[1]];
+	}
+	options.wiki.each(function(newTiddler,newTitle) {
+		if(tester === null || tester(newTiddler, filter[2])) {
+			content = newTiddler.getFieldString("text");
+			if(re.test(content)) {
+				results.push(getResult(newTitle,options,currTiddlerTitle));
+			}
+		}
+	});
+}
+
 var getResults = function(data,options,currTiddlerTitle) {
 	var result, results = [], re = /\s*(?:;;|$)\s*/;
 	data.split(re).forEach(datum => {
 		if(datum !== "") {
-			result = getResult(datum,options,currTiddlerTitle);
-			if(result !== null) {
-				if(result.indexOf(";;") === -1) {
-					results.push(result);
-				} else {
-					results = results.concat(getResults(result,options,currTiddlerTitle));
+			if(datum.indexOf("<<bl") !== -1) {
+				getBacklinksParsed(datum,options,currTiddlerTitle,results);
+			} else {
+				result = getResult(datum,options,currTiddlerTitle);
+				if(result !== null) {
+					if(result.indexOf(";;") === -1) {
+						results.push(result);
+					} else {
+						results = results.concat(getResults(result,options,currTiddlerTitle));
+					}
 				}
 			}
 		}
