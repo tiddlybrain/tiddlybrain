@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20231229144603081
+modified: 20240104100620471
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -54,7 +54,7 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define collapse(title, text, class, tag:"p", style, external-links)
+\define collapse(title, text, class, tag:"p", style, external-links, belongs-to:"no")
 <$set name="state" value=<<qualify "$:/state/collapse/$title$">>>
 <$reveal type="nomatch" state=<<state>> text="open" tag="div" class=<<__class__>>>
 <$button actions=<<collapse-title-actions "$title$">> dragTiddler="$title$" class="tc-btn-invisible collapse-title collapse-close" tooltip=<<__title__>>>
@@ -74,7 +74,7 @@ type: text/vnd.tiddlywiki
 </$tiddler>
 </$button>
 <$tag$ class="collapse-content" style=<<__style__>>><$tiddler tiddler="$title$">
-<$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links belongs-to:"no">></$list>
+<$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links belongs-to:"$belongs-to$">></$list>
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
@@ -351,7 +351,8 @@ type: text/vnd.tiddlywiki
   class:"自定义 class"
   tag:"自定义 DOM 元素的类型"
   style:"自定义 DOM 元素的样式"
-  external-links:"显示 external-links">>`
+  external-links:"是否显示 external-links"
+  belongs-to:"是否显示 external-links 里面的 belongs.to">>`
 # ''用父 Tiddler 的名字组成 tree 的 prefix''
 #> `<<tree-prefix-builder
   separator:"/">>`
