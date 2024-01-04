@@ -3,7 +3,7 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20231211104915013
+modified: 20240104074056389
 modifier: yuzijie
 second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>] +[!sortan[belongs.to]limit[60]]
 tags: $:/tags/SearchResults customized
@@ -12,18 +12,21 @@ type: text/vnd.tiddlywiki
 
 \define searchResultList()
 <$set name="note-subfilter" filter="[[$:/temp/note/filter]get[text]]" emptyValue="[is[tiddler]]" select="0">
+<$list filter="[<userInput>minlength[2]]" variable="ignore">
+
+<<root-topics>>
 
 //<small>Title matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
 
-<<root-topics>>
-<$list filter="[<userInput>minlength[2]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
+
 </$list>
+<$list filter="[<userInput>minlength[3]]" variable="ignore">
 
 //<small>All matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
@@ -35,12 +38,12 @@ type: text/vnd.tiddlywiki
 <$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]split[ ]first[]] }}}><<note-filters>></$set>
 </$list>
 
-<$list filter="[<userInput>minlength[2]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
 <span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
+
 </$list>
 
 </$set>
