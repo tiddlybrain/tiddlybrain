@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240104101754914
+modified: 20240106084354556
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -52,7 +52,7 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New Link</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New Dir</$button>
 </p>
-<p style="margin-top:-10px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
+<p style="margin-top:-10px;white-space:normal;line-height:30px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
 <p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Attachments</p>
 <p style="margin-top:-3px;">
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/jpeg" note="JPG"/>JPG</$button>
