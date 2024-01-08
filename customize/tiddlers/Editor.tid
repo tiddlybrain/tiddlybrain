@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240108142248144
+modified: 20240108144139468
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -38,10 +38,10 @@ type: text/vnd.tiddlywiki
 <$button style="color:red;">{{!!title}} - {{!!caption}} &times;
 <$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
-<$button class="tc-btn-invisible" style="fill:#5778d8;padding-left:3px;">{{$:/core/images/open-window}}
+<$button class="tc-btn-invisible" style="fill:red;padding-left:4px;">{{$:/core/images/open-window}}
 <$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
-<$button class="tc-btn-invisible" style="fill:#5778d8;">{{$:/core/images/right-arrow}}
+<$button class="tc-btn-invisible" style="fill:red;">{{$:/core/images/right-arrow}}
 <<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
 </$list>
