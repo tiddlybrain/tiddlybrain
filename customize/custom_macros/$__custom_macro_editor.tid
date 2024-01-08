@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20231227001045557
+modified: 20240108141316666
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -10,8 +10,8 @@ type: text/vnd.tiddlywiki
 \define editor-caption-status() $:/state/editor/caption/$(currentTiddler)$
 \define editor-caption-inputActions() <$list filter="[<editor-caption-status>get[list]enlist-input[]]"><$action-setfield $tiddler=<<currentTiddler>> caption=<<actionValue>>/></$list>
 
-\define editor-title()
-<table style="width:100%;"><tbody>
+\define editor-title(style)
+<table style="$style$"><tbody>
 <tr>
 <td style="width:100px;">caption</td>
 <td>
@@ -70,8 +70,8 @@ type: text/vnd.tiddlywiki
 </tbody></table>
 \end
 
-\define editor-display()
-<$tiddler tiddler=<<draft>>><<editor-title>>
+\define editor-display(style)
+<$tiddler tiddler=<<draft>>><<editor-title style:"$style$">>
 <div class="editor-display">
 <$transclude tiddler="$:/core/ui/ViewTemplate/tags"/>
 <$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
@@ -81,6 +81,8 @@ type: text/vnd.tiddlywiki
 \end
 
 # ''用来编辑 Tiddler 的 Title, Caption, Note 等''
-#> `<<editor-title>>`
+#> `<<editor-title
+  style:"table 样式">>`
 # ''用来显示 Tiddler 编辑好的效果''
-#> `<<editor-display>>`
+#> `<<editor-display
+  style:"table 样式">>`

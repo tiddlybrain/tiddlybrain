@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20231231141845235
+modified: 20240108142248144
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -14,6 +14,7 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" state="$:/state/editor-toolbar" text="show" tag="div">
 <$droppable actions="""<$action-setfield $tiddler="$:/temp/Draft" draft=<<actionTiddler>>/>""" tag="div">
 <div class="tc-droppable-placeholder" style="display:block;">
+<div style="margin-bottom:5px;">
 <$button set="$:/state/editor-toolbar" setTo="show">Toolbar</$button>
 <$button to="$:/Draft"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft</$button>
 <$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button style="color:green;">
@@ -37,12 +38,21 @@ type: text/vnd.tiddlywiki
 <$button style="color:red;">{{!!title}} - {{!!caption}} &times;
 <$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
-<$button class="tc-btn-invisible" style="fill:#5778d8;font-size:small;"><$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/>{{$:/core/images/open-window}}</$button>
+<$button class="tc-btn-invisible" style="fill:#5778d8;padding-left:3px;">{{$:/core/images/open-window}}
+<$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+</$button>
+<$button class="tc-btn-invisible" style="fill:#5778d8;">{{$:/core/images/right-arrow}}
+<<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+</$button>
 </$list>
+</div>
+<$set name="edit-table-style" filter="[[$:/temp/Draft]has[draft]]" value="width:100%;margin:0;color:brown;" emptyValue="width:100%;margin:0;">
 <$list filter="[<draft>!has[draft.of]]" emptyMessage="""<$list filter="[<draft>get[draft.of]]" variable="draft-title">
-<$set name="draft" filter="[{$:/state/editor-display}match[show]]" value=<<draft-title>> emptyValue=<<draft>>><<editor-display>></$set>
+<$set name="draft" filter="[{$:/state/editor-display}match[show]]" value=<<draft-title>> emptyValue=<<draft>>>
+<$transclude $variable="editor-display" style=<<edit-table-style>>/>
+</$set>
 </$list>""">
-<$reveal type="nomatch" state="$:/state/editor-display" text="show"><<editor-title>>
+<$reveal type="nomatch" state="$:/state/editor-display" text="show"><$transclude $variable="editor-title" style=<<edit-table-style>>/>
 <$set name="edit-area-class" filter="[[$:/temp/Draft]!has[draft]]" value="edit-area tc-edit-texteditor" emptyValue="edit-area tc-edit-texteditor red">
 <$list filter="[all[current]!has[_canonical_uri]!is[image]]" variable="NONE"><$edit-text tag="textarea" autoHeight="no" focus="yes" class=<<edit-area-class>>>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
@@ -78,8 +88,10 @@ type: text/vnd.tiddlywiki
 </$edit-text></$list>
 </$set>
 </$reveal>
-<$reveal type="match" state="$:/state/editor-display" text="show" tag="div"><<editor-display>></$reveal>
-<$reveal type="nomatch" state="$:/state/editor-display" text="show" tag="table" style="width:100%;margin:0;"><tbody>
+<$reveal type="match" state="$:/state/editor-display" text="show" tag="div">
+<$transclude $variable="editor-display" style=<<edit-table-style>>/>
+</$reveal>
+<$reveal type="nomatch" state="$:/state/editor-display" text="show" tag="table" style=<<edit-table-style>>><tbody>
 <$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] note date path url dir interval finish order kw question shortcap" variable="fieldName"><tr>
 <td style="width:100px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
 <td style="width:10px;"><$list filter="[all[current]has:field<fieldName>]">
@@ -88,6 +100,7 @@ type: text/vnd.tiddlywiki
 </tr></$list>
 </tbody></$reveal>
 </$list>
+</$set>
 </div>
 </$droppable>
 </$reveal>
