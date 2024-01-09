@@ -1,7 +1,7 @@
 created: 20231119105825349
 creator: yuzijie
 footer: <$tiddler tiddler=<<mTitle>>><$button message="tm-close-tiddler"><$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/></$list>BACK</$button></$tiddler> <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>EDIT</$button> <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/>CLOSE</$button>
-modified: 20231227105336282
+modified: 20240109093306466
 modifier: yuzijie
 subtitle: <$tiddler tiddler=<<mTitle>>><$button class="tc-btn-invisible" message="tm-close-tiddler">&larr; <$view field="title"/><$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/></$list></$button></$tiddler>
 tags: customized
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$reveal type="match" state="$:/status/IsReadOnly" text="yes">This Wiki is Read Only</$reveal>
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes"><$tiddler tiddler=<<mTitle>>>
-<$let draft=<<mTitle>>><<editor-title>></$let>
+<$let draft=<<mTitle>>><<editor-title style:"width:100%;">></$let>
 <$edit-text tiddler=<<currentTiddler>> tag="textarea" autoHeight="no" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin: 0.5em 0;"><tbody>
 <$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] note date path url dir interval finish order kw question shortcap" variable="fieldName"><tr>
