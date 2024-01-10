@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240102092926824
+modified: 20240110163003442
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -27,7 +27,7 @@ type: text/vnd.tiddlywiki
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$list filter="[all[current]plan<today>]"><$button class="tc-btn-invisible" tooltip="Start" set=<<currentTiddler>> setTo="doing">{{$:/core/images/timestamp-on}}</$button></$list>
 <$list filter="[all[current]!plan<today>]"><$button class="tc-btn-invisible" tooltip="Change Date" message="tm-copy-to-clipboard" param={{!!caption}}>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/cancel-button}}
 </$button></$list>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
@@ -41,7 +41,7 @@ type: text/vnd.tiddlywiki
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
 <$list filter="[<dt>match<today>]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/></$list>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
 <$list filter="[<dt>match<today>]" variable="NONE">
@@ -68,7 +68,7 @@ type: text/vnd.tiddlywiki
 \define task-list-waiting()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#009dd9;" message="tm-copy-to-clipboard" param={{!!caption}}>
@@ -81,7 +81,7 @@ type: text/vnd.tiddlywiki
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
 <$list filter="[<dt>match<today>]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/></$list>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#cd23d8;" message="tm-copy-to-clipboard" param={{!!caption}}>
@@ -94,7 +94,7 @@ type: text/vnd.tiddlywiki
 \define task-list-blocked()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
 <$button class="tc-btn-invisible" tooltip="Cancel">
@@ -171,7 +171,7 @@ type: text/vnd.tiddlywiki
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#c67b48;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
 <$button message="tm-copy-to-clipboard" param={{!!caption}}>Set Plan
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button>""">
 <$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>

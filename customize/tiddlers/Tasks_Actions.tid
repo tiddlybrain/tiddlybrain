@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240102093517848
+modified: 20240110161929644
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -47,7 +47,7 @@ Done: <<currentTiddler>></$button></li></$list>
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#c67b48;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
 <$button message="tm-copy-to-clipboard" param={{!!caption}}>Set Plan
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button>""">
 <$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
