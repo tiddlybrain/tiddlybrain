@@ -2,20 +2,11 @@ created: 20220217150254473
 creator: yuzijie
 keywords: 
 list-after: $:/core/ui/SideBar/More
-modified: 20231227003638082
+modified: 20240111140927794
 modifier: yuzijie
 tags: customized $:/tags/SideBar
 title: Inbox
 type: text/vnd.tiddlywiki
-
-!!! Things to be Checked (Has Interval)
-
-<ol><$list filter="[has[interval]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
-<$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}}/></li></$list>
-</$set></$list></ol>
-<$set name="today" value=<<now YYYY0MM0DD>>><$list filter="[has[interval]date<today>limit[1]]" variable="NONE">
-<$details summary="Verified Today"><<list-links "[has[interval]date<today>]">></$details>
-</$list></$set>
 
 !!! Not in the Position
 
@@ -24,6 +15,10 @@ type: text/vnd.tiddlywiki
 !!! Untagged Tiddlers
 
 <<list-links "[!is[system]untagged[]!sort[modified]limit[100]] -[{$:/config/defaultTemplate}]">>
+
+!!! Not Finished
+
+<<list-links "[status[未完待续]sort[modified]]">>
 
 !!! Non-existent Tags
 

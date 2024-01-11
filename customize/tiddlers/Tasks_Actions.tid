@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240110161929644
+modified: 20240111230744782
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -26,8 +26,9 @@ type: text/vnd.tiddlywiki
 <$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
-<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="日记: <<bl>>
---: 任务回顾" date=<<curDate>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="customized-template-journal"/>
+<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="Journals: <<bl>>
+TBC:
+--: Tasks Review" date=<<curDate>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="customized-template-journal"/>
 </$button></$list>
 </$droppable></h2>
 
@@ -63,6 +64,12 @@ Done: <<currentTiddler>></$button></li></$list>
 <li><$details summary="Waiting List"><ol>
 <$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
 </ol></$details></li>
+<$list filter="[has[interval]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
+<$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
+</$set></$list>
+<$list filter="[has[interval]date<today>limit[1]]" variable="NONE"><li>
+<$details summary="Checked Today"><<list-links "[has[interval]date<today>]">></$details>
+</li></$list>
 </ol></$droppable>
 
 <$list filter="[<journal-title>is[tiddler]]"><$droppable actions=<<droppable-date-action>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
@@ -81,5 +88,5 @@ Done: <<currentTiddler>></$button></li></$list>
 </$list></td>
 </$set></tr></$list>
 </tbody></table>
-<<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]]">>
+<<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]">>
 </div></$droppable></$list>
