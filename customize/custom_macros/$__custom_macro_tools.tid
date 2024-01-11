@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240110161725870
+modified: 20240111170252423
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -245,8 +245,11 @@ type: text/vnd.tiddlywiki
 \end
 
 \define verification-notice()
+\whitespace trim
 <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">
-<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible tc-tag-label verification-notice"><$action-setfield $field="last-date" $value={{!!date}}/>Outdated</$button>
+<$button message="tm-edit-tiddler" class="tc-btn-invisible tc-tag-label verification-notice">Outdated
+<$list filter="[[$(modal)$]!match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+</$button>
 </$list></$list>
 \end
 
