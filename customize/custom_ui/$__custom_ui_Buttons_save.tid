@@ -1,0 +1,29 @@
+caption: Save and Update Date
+created: 20240111170600561
+creator: yuzijie
+description: Save This Tiddler and Update Date Field
+modified: 20240111173855905
+modifier: yuzijie
+tags: customized $:/tags/EditToolbar
+title: $:/custom/ui/Buttons/save
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\define save-tiddler-button()
+\whitespace trim
+<$fieldmangler><$set name="today" value=<<now YYYY0MM0DD>>>
+<$button tooltip="Save This Tiddler and Update Date Field" aria-label="save tiddler and update date field" class=<<tv-config-toolbar-class>>>
+<$list filter="[all[current]has[date]!date<today>]">
+<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>
+</$list>
+<<save-tiddler-actions>><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/new-journal-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="save and update date"/></span>
+</$list>
+</$button>
+</$set></$fieldmangler>
+\end
+<<save-tiddler-button>>
