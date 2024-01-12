@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20231226235908543
+modified: 20240112143318386
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -92,7 +92,7 @@ type: text/vnd.tiddlywiki
 
 \define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default", has-filter:"yes", mode, checkbox, sort-order)
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
-<$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options">
+<$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">> cfilter=<<__cfilter__>>/>
 </div></$list>
 <$list filter="[<__mode__>!match[list]]" emptyMessage="""<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
@@ -102,7 +102,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 </div>
 </$list>
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]each:value[]$sort$]">> variable="sbb">
-<div style="margin-top:1em;" class="parent-title">
+<div class="parent-title">
 <$reveal type="nomatch" state=<<belongs-sort-state "$title$">> text="open">
 <$button dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">> class="tc-btn-invisible links" style="fill:#999;font-size:small;">
 <$action-setfield $tiddler=<<belongs-sort-state "$title$">> text="open"/>{{$:/core/images/right-arrow}}
