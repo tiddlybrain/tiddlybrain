@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240111170252423
+modified: 20240112103324506
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -165,7 +165,7 @@ type: text/vnd.tiddlywiki
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <<status-selector>>
-<<verification-notice>>
+<<verification-notice>> <<tbc-notice>>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;"><$let content={{!!caption}} tiddler={{!!title}} date=<<now YYYY0MM0DD>>>
 <$button class="tc-btn-invisible"><<mTitle>>
@@ -251,6 +251,31 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$(modal)$]!match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 </$button>
 </$list></$list>
+\end
+
+\define tbc()
+<$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
+<$list filter="[enlist{!!tbc}]" variable="tbc" emptyMessage="Nothing to be checked">
+<div style="white-space:nowrap;overflow:hidden;">
+<$button><$action-listops $field="tbc" $subfilter="-[<tbc>]"/>&times;</$button>
+<$transclude $variable="l" title=<<tbc>> status="no"/>
+</div>
+</$list>
+</$droppable>
+\end
+
+\define tbc-notice()
+\whitespace trim
+<$vars today=<<now "YYYY0MM0DD">> comparefilter="[get[date]compare:date:lteq<today>]">
+<$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>get[date]compare:date:lteq<today>limit[1]]" variable="NONE">
+<$button class="tc-btn-invisible tc-tag-label verification-notice">To be checked
+<$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>filter<comparefilter>]">
+<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>
+</$list>
+<$list filter="[[$(modal)$]!match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+</$button>
+</$list>
+</$vars>
 \end
 
 \define tiddler-close(tiddler)
@@ -407,8 +432,12 @@ type: text/vnd.tiddlywiki
   filter:"关系对应的 Filter"
   direct-open:"是否直接打开"
   mode:"sort-by-belongs 的模式, list">>`
-# ''检查通知, 同时可以修改日期''
+# ''Outdated 过期通知''
 #> `<<verification-notice>>`
+# ''用在 Journal 里面, 用于管理当天的 TBC 列表''
+#> `<<tbc>>`
+# ''To be checked 待检查通知''
+#> `<<tbc-notice>>`
 # ''关闭 Tiddler 的同时, 修改 HistoryList 里面的 current-tiddler''
 #> `<<tiddler-close
   tiddler:"关闭的 tiddler">>`

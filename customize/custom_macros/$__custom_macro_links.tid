@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20240104101814481
+modified: 20240112090722697
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 \define whole-path() $(path-prefix)$$(path)$
 
 \define links()
-<<verification-notice>>
+<<verification-notice>> <<tbc-notice>>
 <$list filter="[all[current]tag[Task]!has[finish]]"><<tasks-today>></$list>
 <$list filter="[all[current]get[url]]" variable="url">
 <a href=<<url>> target="_blank" title=<<url>> class="links" rel="noopener noreferrer">{{$:/core/images/link}}</a>
