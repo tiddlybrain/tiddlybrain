@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240109101019317
+modified: 20240112094404950
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -301,8 +301,9 @@ button.collapse-close {background: #f4f4f4; font-weight: normal;}
 .cat-filter-updater input {flex-grow: 1; background: transparent; border: none; margin-left: 5px; color: #999; text-decoration: underline;}
 .cat-filter-updater button {padding: 0 5px; color: #999;}
 
-/* For Macro: verification-notice */
-button.verification-notice {background: red;}
+/* For Macro: verification-notice & tbc-notice */
+button.verification-notice {background: red; white-space: normal;}
+.tc-tags-wrapper button.verification-notice {margin-right: 7px;}
 
 /* For Macro: tag-list */
 button.tc-tag-label.tag-list {font-size: smaller; margin: 0 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; width: 15px; padding: 0 3px;}
