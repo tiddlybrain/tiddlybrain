@@ -1,47 +1,59 @@
 caption: Sidebar
 created: 20231125050253383
 creator: yuzijie
-first-search-filter: [all[tiddlers]!tag[Ignore]contains:parents{$:/temp/index-tree}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>subfilter<subtopic-subfilter>sortsub<topic-level>]
+first-search-filter: [{$:/temp/index-tree}getAllTiddlers[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] [{$:/temp/index-tree}blsearch:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[!tag[Ignore]!is[system]subfilter<note-subfilter>sortsub<topic-level>]
 list-after: $:/custom/search/CurrentSearchResultList
-modified: 20231125051215716
+modified: 20240116222541136
 modifier: yuzijie
+second-search-filter: [!tag[Ignore]contains:parents{$:/temp/index-tree}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortsub<topic-level>limit[100]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/SidebarSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
 <$set name="note-subfilter" filter="[[$:/temp/note/filter]get[text]]" emptyValue="[is[tiddler]]" select="0">
-<$set name="subtopic-subfilter" filter="[[$:/temp/subtopic/filter]get[text]addprefix<lb>addsuffix<rb>]" emptyValue="[is[tiddler]]" select="0">
 
-//<small>Sidebar matches:</small>//
+<div style="text-align:center;text-decoration:underline;">
+<$transclude tiddler={{$:/temp/index-tree}} field="caption"><$view tiddler={{$:/temp/index-tree}} field="title"/></$transclude>
+</div>
+
+//<small>Link and Backlink matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
-<$list filter="[[$:/temp/subtopic/filter]is[tiddler]]"><small><$button class="search-tool">
-<$action-deletetiddler $tiddler="$:/temp/subtopic/filter"/><<searchbar-focus-action>>Remove Sub-Filter
-</$button></small></$list>
 <$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
 <$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
 </$button></small></$list>
-
-<div style="text-align:center;text-decoration:underline;">Search within:
-<$transclude tiddler={{$:/temp/index-tree}} field="caption"><$view tiddler={{$:/temp/index-tree}} field="title"/></$transclude>
-</div>
 
 <$list filter="[[$:/temp/note/filter]!is[tiddler]]">
 <$set name="search-filter" value={{{ [<configTiddler>get[first-search-filter]] }}}><<note-filters>></$set>
 </$list>
 
-<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter="[<userInput>minlength[2]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
-<<parent-topics>><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
 </$list>
 
-</$set>
-</$set>
-\end
+//<small>Child matches:</small>//
+<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
+<$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
+</$button></small></$list>
 
+<$list filter="[[$:/temp/note/filter]!is[tiddler]]">
+<$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]] }}}><<note-filters>></$set>
+</$list>
+
+<$list filter="[<userInput>minlength[2]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+\end
 <$list filter="[{$:/temp/index-tree}is[tiddler]]">
 
 <<searchResultList>>

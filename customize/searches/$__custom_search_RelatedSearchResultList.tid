@@ -1,21 +1,26 @@
-caption: Current
-created: 20221213151332719
+caption: Related
+created: 20220920181640150
 creator: yuzijie
-first-search-filter: [{$:/HistoryList!!current-tiddler}getAllTiddlers[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] [{$:/HistoryList!!current-tiddler}blsearch:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[!tag[Ignore]!is[system]subfilter<note-subfilter>sortsub<topic-level>]
-list-after: $:/custom/search/DefaultSearchResultList
-modified: 20240116222525954
+first-search-filter: [{$:/temp/index/filter}getAllTiddlers[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] [{$:/temp/index/filter}blsearch:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[!tag[Ignore]!is[system]subfilter<note-subfilter>sortsub<topic-level>]
+list-after: $:/custom/search/SidebarSearchResultList
+modified: 20240116222601772
 modifier: yuzijie
-second-search-filter: [!tag[Ignore]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortsub<topic-level>limit[100]]
+second-search-filter: [!tag[Ignore]contains:parents{$:/temp/index/filter}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortsub<topic-level>limit[100]]
 tags: $:/tags/SearchResults customized
-title: $:/custom/search/CurrentSearchResultList
+title: $:/custom/search/RelatedSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
 <$set name="note-subfilter" filter="[[$:/temp/note/filter]get[text]]" emptyValue="[is[tiddler]]" select="0">
 
-<div style="text-align:center;text-decoration:underline;">
-<$transclude tiddler={{$:/HistoryList!!current-tiddler}} field="caption"><$view tiddler={{$:/HistoryList!!current-tiddler}} field="title"/></$transclude>
-</div>
+<div style="text-align:center;"><$tiddler tiddler={{$:/temp/index/filter}}>
+<$list filter="[all[current]get[belongs.to]]">
+<$button class="tc-btn-invisible" style="display:inline-block;width:auto;">⬆️<$action-setfield $tiddler="$:/temp/index/filter" text={{!!title}}/><<searchbar-focus-action>></$button>
+</$list>
+<$button class="tc-btn-invisible" style="text-decoration:underline;display:inline-block;">
+<$transclude field="caption"><$view field="title"/></$transclude><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
+</$button>
+</$tiddler></div>
 
 //<small>Link and Backlink matches:</small>//
 <small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
@@ -54,8 +59,4 @@ type: text/vnd.tiddlywiki
 </$list>
 
 \end
-<$list filter="[{$:/HistoryList!!current-tiddler}is[tiddler]]">
-
 <<searchResultList>>
-
-</$list>

@@ -1,13 +1,13 @@
-caption: Topics
+caption: General
 created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20240109095621855
+modified: 20240114003032425
 modifier: yuzijie
-second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>] +[sortan[belongs.to]limit[100]]
+second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortsub<topic-level>limit[100]]
 tags: $:/tags/SearchResults customized
-title: $:/custom/search/TopicSearchResultList
+title: $:/custom/search/DefaultSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
