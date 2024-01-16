@@ -18,12 +18,13 @@ module-type: filteroperator
 Export our filter function
 */
 exports.getAllTiddlers = function(source,operator,options) {
-	var results = [], matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g;
+	var results = [], matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g, re = /\s*(?:;;|$)\s*/;
 	var suffixes = operator.suffixes || [], field = (suffixes[0] || [])[0], value = operator.operand || null;
 	source(function(tiddler,title) {
 		if(tiddler) {
-			let content = tiddler.getFieldString("caption") + tiddler.getFieldString("description") + tiddler.getFieldString("text");
-			while(matches = pattern.exec(content)) {
+			//Match as a normal tiddler
+			let text = tiddler.getFieldString("text");
+			while(matches = pattern.exec(text)) {
 				matches.shift();
 				matches.forEach(match => {
 					if(match !== undefined && options.wiki.tiddlerExists(match)) {
@@ -37,6 +38,25 @@ exports.getAllTiddlers = function(source,operator,options) {
 					}
 				});
 			}
+			//Match as a dictionary tiddler
+			if(tiddler.fields.type === "application/x-tiddler-dictionary") {
+				let data = options.wiki.getTiddlerDataCached(title) || [];
+				Object.keys(data).forEach(index => {
+					data[index].split(re).forEach(datum => {
+						if (datum !== "" && options.wiki.tiddlerExists(datum)) {
+							let content = options.wiki.getTiddler(datum).getFieldString("caption") || datum;
+							let result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",content,{
+								parseAsInline: true,
+								variables: {
+									currentTiddler: datum
+								},
+								parentWidget: options.widget
+							});
+							results.push(result);
+						}
+					});
+				});
+			}
 		}
 	});
 	return results;
@@ -47,7 +67,7 @@ exports.hasTiddler = function(source,operator,options) {
 	source(function(tiddler,title) {
 		if(tiddler) {
 			if(options.wiki.tiddlerExists(value)) {
-				let content = tiddler.getFieldString("caption") + tiddler.getFieldString("description") + tiddler.getFieldString("text");
+				let content = tiddler.getFieldString("text");
 				while(matches = pattern.exec(content)) {
 					let result = undefined;
 					matches.shift();
