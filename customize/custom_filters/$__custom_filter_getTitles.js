@@ -47,7 +47,7 @@ exports.getAllTitles = function(source,operator,options) {
 	var results = [], matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g;
 	source(function(tiddler,title) {
 		if (tiddler) {
-			let content = tiddler.getFieldString("caption") + tiddler.getFieldString("description") + tiddler.getFieldString("text");
+			let content = tiddler.getFieldString("text");
 			while (matches = pattern.exec(content)) {
 				matches.shift();
 				matches.forEach(match => {
