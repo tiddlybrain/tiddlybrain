@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20231227000959317
+modified: 20240116230738883
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -12,7 +12,6 @@ type: text/vnd.tiddlywiki
 \define filter-by-note-value() +[note[$(currentTiddler)$]]
 \define filter-by-index-value() +[indexSearch:$(index)${$(select-value)$}]
 \define filter-by-belongs-value() +[belongs.to[$(currentTiddler)$]]
-\define filter-by-category-value() +[hasTiddler{$(select-value)$}]
 \define filter-build(f1,f5) $f1$ $(f2)$ $(f3)$ $(f4)$ $f5$
 
 \define filter-options-actions(title, uid)
@@ -46,9 +45,6 @@ type: text/vnd.tiddlywiki
 <$list filter="$cfilter$" variable="index">
 <option value=<<filter-by-index-value>> style="color:#762597;">Index: <<index>></option>
 </$list>
-<$list filter="$filter$ +[type[text/vnd.tiddlywiki]limit[1]]" variable="NONE">
-<option value=<<filter-by-category-value>> style="color:#c78420;">Categories</option>
-</$list>
 <option value="+[!has[belongs.to]]" style="color:#205bc7;">No Parent</option>
 <$list filter="$filter$ +[get[belongs.to]each:value[]]">
 <option value=<<filter-by-belongs-value>> style="color:#205bc7;">Belongs to: <$transclude field=caption><$view field=title/></$transclude></option>
@@ -65,20 +61,6 @@ type: text/vnd.tiddlywiki
 </$select>
 </$list>
 </$set>
-</$list>
-<$list filter="[<select-state>search:text:literal[hasTiddler]]" variable="NONE">
-<$list filter="[<select-value>!is[tiddler]]" emptyMessage="""<$list filter="[<select-value>get[text]]"><$button class="tc-btn-invisible">
-<$transclude field=caption><$view field=title/></$transclude> &times;<$action-deletetiddler $tiddler=<<select-value>>/>
-</$button></$list>""" variable="NONE">
-<$select tiddler=<<select-value>> tooltip="Pickup a value">
-<$list filter="$filter$ +[getAllTiddlers[]each:value[]!sortan[belongs.to]]">
-<option value={{!!title}} style={{{ [all[current]get[belongs.to]] [all[current]get[note]] +[join[]colorize[]addprefix[color:]] }}}>
-[<$transclude field='caption' tiddler={{!!belongs.to}}><$view field='title' tiddler={{!!belongs.to}}/></$transclude>] 
-<$transclude field='caption'><$view field='title'/></$transclude>
-</option>
-</$list>
-</$select>
-</$list>
 </$list>
 </$set>
 </$set>
