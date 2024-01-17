@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240111170425718
+modified: 20240117170548978
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -89,7 +89,7 @@ type: text/vnd.tiddlywiki
 <$transclude $variable="editor-display" style=<<edit-table-style>>/>
 </$reveal>
 <$reveal type="nomatch" state="$:/state/editor-display" text="show" tag="table" style=<<edit-table-style>>><tbody>
-<$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] note date path url dir interval finish order kw question shortcap" variable="fieldName"><tr>
+<$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] note date path url dir interval finish fold order kw question shortcap" variable="fieldName"><tr>
 <td style="width:100px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
 <td style="width:10px;"><$list filter="[all[current]has:field<fieldName>]">
 <$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field=<<fieldName>>/>{{$:/core/images/delete-button}}</$button>
