@@ -1,4 +1,4 @@
-modified: 20231211111010137
+modified: 20240116210016636
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -13,11 +13,9 @@ type: text/vnd.tiddlywiki
 </$let>
 <div class="sidebar-item-hover">
 <$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/close-others-button}}
-<$set name="target" filter="[all[current]get[belongs.to]else<currentTiddler>]" select="0">
-<$action-setfield $tiddler="$:/temp/index/filter" text=<<target>>/><<searchbar-focus-action>>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/IndexSearchResultList"/>
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/IndexSearchResultList"/>
-</$set>
+<$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
 </$button>
 <$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/open-window}}
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
