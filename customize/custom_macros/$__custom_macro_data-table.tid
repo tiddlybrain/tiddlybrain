@@ -1,14 +1,21 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20231227001138751
+modified: 20240117122110950
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
 type: text/vnd.tiddlywiki
 
+\define data-table-column-width() width:$(width)$;
+\define data-table-folding-state() $:/state/data-table/$(current)$/$(key)$
+
 \define data-key-cell()
 <td class="data-key">
-<$list filter="[<key>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible" dragFilter="[belongs.to<current>tag[Snippet]note<key>]" message="tm-copy-to-clipboard" param=<<key>>><<key>><$list filter="[prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]text[open]limit[1]]" emptyMessage="<$list filter='[belongs.to<current>tag[Snippet]note<key>]'><$action-setfield $tiddler=<<snippet-accordion-state>> text='open'/></$list>"><$action-deletetiddler $filter="[prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]]"/></$list></$button>""">
+<$list filter="[<key>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible" dragFilter="[belongs.to<current>tag[Snippet]note<key>]"><<key>>
+<$set name="state" filter="[<folding-state>!match[fold]]" value="fold" emptyValue="unfold">
+<$action-setfield $tiddler=<<data-table-folding-state>> text=<<state>>/>
+</$set>
+</$button>""">
 <$button actions=<<modal-actions>> tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$button>
@@ -17,14 +24,14 @@ type: text/vnd.tiddlywiki
 \end
 
 \define data-value-cell()
+<$list filter="[<folding-state>!match[fold]]" emptyMessage='<td class="data-value fold-text">-- folded --</td>'>
 <$list filter="[<current>getindex<key>] :else[<current>get[celltpl]is[tiddler]has:index<key>]" emptyMessage="""<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<actionTiddler>>/>" tag="td" class="data-value"><div class="tc-droppable-placeholder">drop here</div></$droppable>""">
 <$tiddler tiddler=<<current>>><$list filter="[<value>suffix[;;]]" emptyMessage="""<td class="data-value"><$transclude $variable="cell-value"/></td>""" variable="NONE">
 <$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{[<value>removeprefix[;;]else<value>addsuffix<actionTiddler>addsuffix[;;]]}}}/>" tag="td" class="data-value"><div class="tc-droppable-placeholder" style="display:block;"><$transclude $variable="cell-value"/></div></$droppable>
 </$list></$tiddler>
 </$list>
+</$list>
 \end
-
-\define data-table-column-width() width:$(width)$;
 
 \define data-table(template, filter:"[all[current]indexes:non-empty[]]", copy:"yes", columns, style)
 <$list filter="[all[current]!has[template]] [all[current]template<__template__>]" emptyMessage="<$transclude tiddler={{!!template}} mode=block/>">
@@ -45,6 +52,7 @@ type: text/vnd.tiddlywiki
 </tr>
 <$set name="current" value=<<currentTiddler>>>
 <$list filter="$filter$ :except[enlist{!!hide}]" variable="key" counter="rowid"><$set name="value" tiddler=<<current>> index=<<key>>>
+<$set name="folding-state" filter="[<data-table-folding-state>get[text]] :else[<current>contains:fold<key>then[fold]]" select="0">
 <$set name="tr-class" filter="[<rowid>remainder[2]match[0]]" value="evenRow" emptyValue="oddRow"><tr class=<<tr-class>>>
 <$list filter="[<key>prefix[--]]" emptyMessage=<<data-key-cell>> variable="NONE"><$set name="other" filter="[[$copy$]match[yes]]" value="3" emptyValue="2">
 <$set name="colspan" filter="$columns$ [<current>get[columns]enlist-input[]] +[count[]add<other>]" select="0">
@@ -62,6 +70,7 @@ type: text/vnd.tiddlywiki
 </$reveal>
 </$list>
 </tr></$set>
+</$set>
 </$set></$list>
 </$set>
 </$set></table>
