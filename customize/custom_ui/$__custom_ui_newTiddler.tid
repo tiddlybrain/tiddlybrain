@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240110164432328
+modified: 20240118125435118
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler="$:/temp/newTiddler"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 \end
 
-\define newExtFileActionCopy() <<l title:'$(title)$' mode:cl belongs-to:no>>
+\define newExtFileActionCopy() <<l '$(title)$' mode:cl belongs-to:no>>
 
 \define newExtFileAction(template, caption, type, path, note)
 <$set name="title" value=<<unusedtitle "$template$">>><$set name="uri" filter="[[$path$]prefix[http]]" value="$path$" emptyValue="./files/$path$">
