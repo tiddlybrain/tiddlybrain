@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240112001616934
+modified: 20240118201753513
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -148,7 +148,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" kw="20em" text="Journals: <<bl>>
 TBC: <<tbc>>
---: Tasks Review" date=<<dt>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="customized-template-journal"/>
+--: Tasks Review" date=<<dt>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="custom-template-journal"/>
 </$button></$list>
 </$droppable>
 <$list filter="[[$:/temp/task/open]!text[no]]" variable="NONE">

@@ -1,11 +1,11 @@
-caption: Journal Template
+caption: Template for Journal
 created: 20230910211155631
 creator: yuzijie
 keywords: 
-modified: 20240111134322933
+modified: 20240118201658471
 modifier: yuzijie
 tags: customized
-title: customized-template-journal
+title: custom-template-journal
 type: text/vnd.tiddlywiki
 
 <$list filter="[<key>match[Day]]" variable="NONE"><$transclude $variable=format-date date={{!!date}} template='DDD'/></$list>

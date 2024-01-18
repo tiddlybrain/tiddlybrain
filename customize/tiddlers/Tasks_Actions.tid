@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240112101428736
+modified: 20240118201728033
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -28,7 +28,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="Journals: <<bl>>
 TBC: <<tbc>>
---: Tasks Review" date=<<curDate>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="customized-template-journal"/>
+--: Tasks Review" date=<<curDate>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="custom-template-journal"/>
 </$button></$list>
 </$droppable></h2>
 
