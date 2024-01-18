@@ -2,4 +2,4 @@ Name: {{!!caption}}
 Start: <$view field="date" format="date" template="YYYY-0MM-0DD">N.A.</$view>
 Finish: <$view field="finish" format="date" template="YYYY-0MM-0DD"><$transclude $variable="days-passed" start={{!!date}}/></$view>
 Progress: <$text text={{{[all[current]percent[d]]}}}/>
-Parent: <$transclude $variable="l" title={{!!belongs.to}}/>
+Parent: {{{ [all[current]get[belongs.to]] || custom-template-link }}}
