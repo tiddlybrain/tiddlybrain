@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240117140601393
+modified: 20240118124053507
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -70,7 +70,10 @@ type: text/vnd.tiddlywiki
 filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
-<$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]">@@color:red;Drop Tiddler Here@@</$list>"""><div class="snippet">
+<$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]" variable="NONE"><$button class="tc-btn-invisible" style="color:red;">Drop Tiddlers Here
+<$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} belongs.to=<<currentTiddler>> note=<<key>> tags="Snippet" caption={{!!caption}}/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+</$button></$list>"""><div class="snippet">
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="fill:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[fill:]addsuffix[;]] }}}>
 <$button actions=<<snippet-accordion-actions>> class="tc-btn-invisible links accordion" style=<<style>>>
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}">{{$:/core/images/right-arrow}}</$list>
@@ -168,7 +171,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
   caption:"自定义显示条目的内容"
   cfilter:"如果填写自动切换到 Table 模式"
   rheader:"如果是 Table 模式可以选填"
-  no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here"
+  no-drop:"没有 snippet 情况下, 不显示 Drop Tiddlers Here"
   has-filter:"是否显示 filter"
   checkbox:"table 模式下是否显示复选框"
   sort-order:"Table 按照列排序的顺序">>`
@@ -183,7 +186,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
   rheader:"如果是 Table 模式可以选填"
   actions:"Tiddler 被放置时的额外动作"
   tags:"为 ActionTiddler 添加的额外标签"
-  no-drop:"没有 snippet 情况下, 不显示 Drop Tiddler Here"
+  no-drop:"没有 snippet 情况下, 不显示 Drop Tiddlers Here"
   cat-prefix:"Category 的前缀"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
