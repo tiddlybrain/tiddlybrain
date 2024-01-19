@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240118200748484
+modified: 20240119112628820
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -57,6 +57,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!has[_canonical_uri]!is[image]]" variable="NONE"><$edit-text tag="textarea" autoHeight="no" focus="yes" class=<<edit-area-class>>>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/tips"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/code"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/snippet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/bold"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
@@ -64,7 +65,6 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$:/core/ui/EditorToolbar/linkify"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/list-bullet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/list-number"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/code"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/details"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/citation"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/brackets"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>

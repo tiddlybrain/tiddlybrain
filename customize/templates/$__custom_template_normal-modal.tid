@@ -1,7 +1,7 @@
 created: 20210516172453585
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20231227001718327
+modified: 20240119113809069
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
@@ -18,9 +18,7 @@ type: text/vnd.tiddlywiki
 <$set name="direct-open" value="yes"><$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/></$set>
 </$list>
 <$list filter="[all[current]!search:title:literal[/]]">
-<$set name="mode" filter="[has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]count[]compare:number:lt[4]]" value="list" emptyValue="">
-<$transclude $variable="relationships" name="Twins" filter="[has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]" mode=<<mode>>/>
-</$set>
+<$set name="mode" filter="[has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]count[]compare:number:lt[4]]" value="list" emptyValue=""><$transclude $variable="relationships" name="Twins" filter="[has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]" mode=<<mode>>/></$set>
 </$list>
 <<relationships name:"Related Topics" filter:"[all[current]tags[]type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]" mode:"list">>
 </$tiddler>

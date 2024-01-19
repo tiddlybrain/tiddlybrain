@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240117153236658
+modified: 20240119114503897
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 
 /* For Macro: display */
 .tips, .warning, .danger, .question {display: inline-block; border-radius: 0.2rem; padding: 0 0.75rem 0 0.55rem;}
-.tips {color: #31708f; background-color: #d9edf7; border-color: #bce8f1;}
+.tips {color: #828500; background-color: #eaff6a; border-color: #667700;}
 .tips::before {content: '💡 ';}
 .warning {color: #8a6d3b; background-color: #ffef9b; border-color: #faebcc;}
 .warning::before {content: '⚠️ ';}
@@ -162,10 +162,10 @@ button.sort-by-belongs-title span {color: #aaa; font-weight: normal;}
 .categories-update button:disabled {color: #ddd; cursor: not-allowed;}
 
 /* For Macro: record-popup */
-.record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 3px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}
+.record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 4px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}
 .record-title {margin: 9px 10px 9px 15px; display: block;}
 .record-content {color: initial; font-weight: initial; display: block; margin: 10px 15px;}
-.record-copy {margin: 5px; position: absolute; right: 0; display: none;}
+.record-copy {margin: 5px; position: absolute; right: 3px; display: none; font-size: small;}
 .record-drop-down:hover .record-copy {display: block;}
 .popup-bottom {font-size: small; background: #fff3c9; text-align: center; border-radius: 0 0 3px 3px; padding: 3px;}
 .date-dropdown .record-drop-down {min-width: 200px;}

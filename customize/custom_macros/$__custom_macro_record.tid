@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20240117133415029
+modified: 20240119114911329
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -63,7 +63,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
 </$button>
 <$reveal type="popup" state="$:/state/popup/$(currentTiddler)$/$uid$"><div class="record-drop-down tc-popup-keep">
-<div class="record-copy"><$button message="tm-copy-to-clipboard" param={{!!title}}>Copy title</$button> <$button message="tm-copy-to-clipboard" param={{!!caption}}>Copy caption</$button></div>
+<div class="record-copy"><$button message="tm-copy-to-clipboard" param={{!!title}}>copy title</$button> <$button message="tm-copy-to-clipboard" param={{!!caption}}>copy caption</$button></div>
 <$set name="direct-open" value="yes"><$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible record-title">
 {{!!caption}} <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
