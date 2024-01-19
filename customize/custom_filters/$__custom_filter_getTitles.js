@@ -19,7 +19,7 @@ module-type: filteroperator
 Export our filter function
 */
 exports.getAllIndexTitles = function(source,operator,options) {
-	var results = [], result, data, re = /\s*(?:;;|$)\s*/;
+	var results = [], result, data, re = /\s*(?:;;)\s*/;
 	source(function(tiddler,title) {
 		if (tiddler) {
 			data = options.wiki.getTiddlerDataCached(title) || [];

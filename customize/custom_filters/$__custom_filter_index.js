@@ -68,7 +68,7 @@ var getBacklinksParsed = function(data,options,currTiddlerTitle,results) {
 }
 
 var getResults = function(data,options,currTiddlerTitle) {
-	var result, results = [], re = /\s*(?:;;|$)\s*/;
+	var result, results = [], re = /\s*(?:;;)\s*/;
 	data.split(re).forEach(datum => {
 		if(datum !== "") {
 			if(datum.indexOf("<<bl") !== -1) {
@@ -232,7 +232,7 @@ exports.getindexParsedList = function(source,operator,options) {
 };
 
 exports.slash = function(source,operator,options) {
-	var results = [], result, key = operator.operand || "", data, currTiddler, re = /\s*(?:;;|$)\s*/;
+	var results = [], result, key = operator.operand || "", data, currTiddler;
 	var suffixes = operator.suffixes || [], mode = (suffixes[0] || [])[0], flags = suffixes[1] || [];
 	var currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
 	if(currTiddlerTitle) switch(mode) {

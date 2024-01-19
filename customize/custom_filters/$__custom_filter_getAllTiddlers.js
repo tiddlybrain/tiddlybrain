@@ -18,7 +18,7 @@ module-type: filteroperator
 Export our filter function
 */
 exports.getAllTiddlers = function(source,operator,options) {
-	var results = [], matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g, re = /\s*(?:;;|$)\s*/;
+	var results = [], matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g, re = /\s*(?:;;)\s*/;
 	var suffixes = operator.suffixes || [], field = (suffixes[0] || [])[0], value = operator.operand || null;
 	source(function(tiddler,title) {
 		if(tiddler) {
