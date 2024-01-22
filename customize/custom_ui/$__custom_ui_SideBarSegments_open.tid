@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20231229144342644
+modified: 20240122222148746
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -46,7 +46,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#999;">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button></$list>
-&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#999;">popup</$button>
+&middot; <$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar>>sidebar</$button>
 </div>
 </div>
 </$droppable>
@@ -70,7 +70,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#bbb;">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button></$list>
-&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#bbb;">popup</$button>
+&middot; <$button class="tc-btn-invisible" style="color:#bbb;"><<open-in-sidebar close:"no">>sidebar</$button>
 </div>
 </div>
 </$list>

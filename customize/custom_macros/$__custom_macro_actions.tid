@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20231231145215874
+modified: 20240122223601560
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -67,12 +67,6 @@ type: text/vnd.tiddlywiki
 </$tiddler>
 \end
 
-\define droppable-date-action()
-<$list filter="[<journal-title>is[tiddler]!has:index<actionTiddler>]"><$list filter="[<actionTiddler>tag[Task]]">
-<$action-setfield $tiddler=<<journal-title>> $index=<<actionTiddler>> $value=""/>
-</$list></$list>
-\end
-
 \define add-to-cell-action(title, index, content)
 <$set name="cell-content" filter="[<__title__>getindex<__index__>splitregexp[\s*;;\s*]!is[blank]] [<__content__>] +[join[;;]]" select="0">
 <$action-setfield $tiddler=<<__title__>> $index=<<__index__>> $value=<<cell-content>>/>
@@ -114,8 +108,6 @@ type: text/vnd.tiddlywiki
 # ''将旧 Tiddler 按照标准重命名''
 #> `<<droppable-rename-set-caption-action
   template:"新 Tiddler 模板">>`
-# ''修改 Tasks Journal 的 action''
-#> `<<droppable-date-action>>`
 # ''将内容写入表格内, 用 `;;` 分隔''
 #> `<<add-to-cell-action
   title:"data tiddler 标题"

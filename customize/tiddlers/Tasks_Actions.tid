@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240118201728033
+modified: 20240122223753476
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -72,7 +72,8 @@ Done: <<currentTiddler>></$button></li></$list>
 </$list></$list>
 </ol></$droppable>
 
-<$list filter="[<journal-title>is[tiddler]]"><$droppable actions=<<droppable-date-action>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
+<$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
+<div class="tc-droppable-placeholder" style="display:block;">
 <table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>规划任务</th><th>执行情况</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:24px;"><$set name="currTask" value=<<task>>>
@@ -89,4 +90,5 @@ Done: <<currentTiddler>></$button></li></$list>
 </$set></tr></$list>
 </tbody></table>
 <<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]">>
-</div></$droppable></$list>
+</div>
+</$droppable></$list>
