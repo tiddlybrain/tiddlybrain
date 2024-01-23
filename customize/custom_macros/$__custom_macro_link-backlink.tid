@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20240117133942111
+modified: 20240123220619747
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -68,7 +68,7 @@ type: text/vnd.tiddlywiki
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
-<$list filter="[<__group-by-parents__>!match[yes]]" emptyMessage="""<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" title="$uid$" has-filter="$has-filter$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
+<div class="bl-container"><$list filter="[<__group-by-parents__>!match[yes]]" emptyMessage="""<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" title="$uid$" has-filter="$has-filter$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
 <$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$transclude $variable="sort-by-filter" item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
@@ -85,7 +85,7 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
 </div></$list>
 </$set>
 </$list>
-</$list>
+</$list></div>
 </$vars>
 </$set>
 </$set>
