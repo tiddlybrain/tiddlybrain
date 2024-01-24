@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20240118125533106
+modified: 20240124164715153
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -40,7 +40,8 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>Copy Directory Path</$button>
 </div></$list>
 <$list filter="[all[current]get[_canonical_uri]]" variable="uri"><div class="external-links" style="background:#ffe9e3;">
-<$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param="<<l '$(currentTiddler)$' mode:cl belongs-to:no>>">Copy and Paste it to other tiddlers</$button> &middot;
+<$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param="<<l '$(currentTiddler)$' mode:cl belongs-to:no>>">Copy as a Link</$button> &middot;
+<$set name="filename" filter="[<uri>split[/]last[]]" select="0"><$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<filename>> tooltip=<<filename>>>Copy Name</$button></$set> &middot;
 <a href=<<uri>> target="_blank" title=<<uri>> class="light-color" rel="noopener noreferrer">Open in a New Window</a>
 </div></$list>
 <$list filter="[[$(modal)$]!match[yes]]" variable="NONE">

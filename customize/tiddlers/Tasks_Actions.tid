@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240122223753476
+modified: 20240124163921126
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 <$vars today=<<curDate>> dt=<<curDate>>><$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
 
-<h2 style="margin:20px 0 18px 20px;font-weight:500;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
+<h2 style="margin:20px 0 15px;font-weight:500;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
 <$action-setfield $tiddler='$:/temp/plan/date' text={{{[<actionTiddler>split[-]join[]]}}}/>
 </$list>" tag="div">
 <$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
