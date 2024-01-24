@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240123220804184
+modified: 20240124000403933
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -52,6 +52,7 @@ button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis;
 .data-table .snippet > pre {line-height: 20px;}
 .snippet-accordion {box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 6px 0px; background: white;}
 .snippet-accordion > * {margin-top: 10px;}
+.snippet-accordion > table.data-table {margin-bottom: 1em;}
 .snippet .data-table {white-space: normal;}
 .snippet button code {white-space: nowrap;}
 .fold-text {font-size: small; color: #999; font-variant: small-caps;}
