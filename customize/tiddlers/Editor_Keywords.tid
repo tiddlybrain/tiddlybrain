@@ -2,7 +2,7 @@ caption: 关键词
 created: 20200908201842064
 creator: yuzijie
 keywords: 
-modified: 20230501074631091
+modified: 20240125164727048
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Keywords
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 </$set>
 </$set>
 </$list>
-<$action-deletetiddler $filter="[prefix[$:/temp/]] [prefix[$:/state/]]"/>
+<$action-deletetiddler $tiddler="$:/state/editor-toolbar"/>
 </$button>
 
 <hr style="margin-top:16px;">
