@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240119112628820
+modified: 20240126125803397
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -14,28 +14,20 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" state="$:/state/editor-toolbar" text="show" tag="div">
 <$droppable actions="""<$action-setfield $tiddler="$:/temp/Draft" draft=<<actionTiddler>>/>""" tag="div">
 <div class="tc-droppable-placeholder" style="display:block;">
-<div style="margin-bottom:5px;">
+<div style="margin-bottom:5px;"><$set name="tv-wikilinks" value="no">
 <$button set="$:/state/editor-toolbar" setTo="show">Toolbar</$button>
-<$button to="$:/Draft"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft</$button>
+<$button set="$:/temp/Draft!!draft" setTo="$:/Draft">Draft</$button>
 <$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button style="color:green;">
-<$tiddler tiddler=<<draft>>>{{!!title}} - {{!!caption}}</$tiddler>
+<$tiddler tiddler=<<draft>>>{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list></$tiddler>
 <$action-sendmessage $message="tm-edit-tiddler" $param=<<draft>>/>
 </$button>
-<$list filter="[all[tiddlers]belongs.to<draft>limit[1]]" variable="NONE">
-<$button popup="$:/state/popup/editor/snippet">Children</$button>
-<$reveal type="popup" state="$:/state/popup/editor/snippet" tag="div"><div class="record-drop-down" style="padding:5px 10px;min-width:200px;">
-<$list filter="[all[tiddlers]belongs.to<draft>sortan[caption]]"><$button class="tc-btn-invisible" style="display:block;padding:3px 0;">
-@@color:#5778d8;{{!!title}}@@ {{!!caption}}<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/>
-</$button></$list>
-</div></$reveal>
-</$list>
 <$button>{{$:/core/images/cancel-button}}
 <$transclude $variable="tiddler-close" tiddler=<<draft>>/>
 <$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]">
 <$action-setfield $tiddler="$:/HistoryList" current-tiddler=""/>
 </$list>
 </$button>""">
-<$button style="color:red;">{{!!title}} - {{!!caption}} &times;
+<$button style="color:red;">{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &times;
 <$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
 <$button class="tc-btn-invisible" style="fill:red;padding-left:4px;">{{$:/core/images/open-window}}
@@ -45,14 +37,15 @@ type: text/vnd.tiddlywiki
 <<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
 </$list>
-</div>
+</$set></div>
 <$set name="edit-table-style" filter="[[$:/temp/Draft]has[draft]]" value="width:100%;margin:0;color:brown;" emptyValue="width:100%;margin:0;">
 <$list filter="[<draft>!has[draft.of]]" emptyMessage="""<$list filter="[<draft>get[draft.of]]" variable="draft-title">
 <$set name="draft" filter="[{$:/state/editor-display}match[show]]" value=<<draft-title>> emptyValue=<<draft>>>
 <$transclude $variable="editor-display" style=<<edit-table-style>>/>
 </$set>
 </$list>""">
-<$reveal type="nomatch" state="$:/state/editor-display" text="show"><$transclude $variable="editor-title" style=<<edit-table-style>>/>
+<$reveal type="nomatch" state="$:/state/editor-display" text="show">
+<$list filter="[{$:/temp/Draft!!draft}!match[$:/Draft]]" variable="NONE"><$transclude $variable="editor-title" style=<<edit-table-style>>/></$list>
 <$set name="edit-area-class" filter="[[$:/temp/Draft]!has[draft]]" value="edit-area tc-edit-texteditor" emptyValue="edit-area tc-edit-texteditor red">
 <$list filter="[all[current]!has[_canonical_uri]!is[image]]" variable="NONE"><$edit-text tag="textarea" autoHeight="no" focus="yes" class=<<edit-area-class>>>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
