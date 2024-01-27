@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240118201333285
+modified: 20240127212716161
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -35,8 +35,6 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" content=
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" class="tc-btn-invisible" tooltip="Edit Configurations" tabindex="-1">⚙️</$button><br>
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="desc./path/url/dir/att." field="description"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
-<$button class="tc-btn-invisible"><$transclude $variable=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} text="Name: {{!!caption}}
-Description: {{!!description}}" type="application/x-tiddler-dictionary" content={{$:/temp/newTiddler!!description}} scroll=no/>➕</$button>
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
 </$keyboard></p>
@@ -48,9 +46,11 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$transclude $variable="newTaskAction" template=<<template>> caption=<<caption>>/>New Task</$button>
 </p>
 <p style="margin-top:-10px;">
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New File</$button>
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New Link</$button>
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> text="Name: {{!!caption}}" type="application/x-tiddler-dictionary" scroll="no" popup="close"/>New Dir</$button>
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}
+Description: {{!!description}}" scroll="no" popup="close"/>➕</$button>
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}" scroll="no" popup="close"/>New Link</$button>
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> type="text/vnd.tiddlywiki" scroll="no" popup="close"/>New File</$button>
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> type="text/vnd.tiddlywiki" scroll="no" popup="close"/>New Dir</$button>
 </p>
 <p style="margin-top:-10px;white-space:normal;line-height:30px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
 <p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Attachments</p>
