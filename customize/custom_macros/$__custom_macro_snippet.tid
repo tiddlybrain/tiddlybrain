@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240123104520936
+modified: 20240128122642818
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>> $timestamp="no"/>
 <$list filter="[<__celltpl__>get[required]]"><$transclude $variable="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
 </$set></$list>
-<$action-navigate $to=<<createTiddler-title>> $scroll="no"/>
+<$action-navigate $to=<<createTiddler-title>> $scroll="no"/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<createTiddler-title>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$action-createtiddler>
 \end
