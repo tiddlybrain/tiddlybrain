@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20240128124132071
+modified: 20240128125801701
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -20,7 +20,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct {background: transparent; font-size: large;}
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct:hover {background: #444;}
 
-.tc-tiddler-frame .tc-tiddler-body {line-height: 28px; overflow-x: clip;}
+.tc-tiddler-frame .tc-tiddler-body {line-height: 28px;}
 .tc-tiddler-frame {box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08),0 0px 0px 1px rgba(0, 0, 0, 0.02); margin-bottom: 18px;}
 .tc-tiddler-frame iframe.tc-edit-texteditor {background-color: transparent;}
 .tc-tiddler-frame td svg {max-width: fit-content;}
