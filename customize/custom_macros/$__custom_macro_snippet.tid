@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240128122642818
+modified: 20240129224020576
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -102,7 +102,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
 </$set></$reveal>
 </div></$list>
 </$list>
-<$list filter="[<snippet-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item" style="margin:-4px 0 0 0;">
+<$list filter="[<snippet-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item">
 <$button class="tc-btn-invisible fold-text">-- <<limit>> of <<snippet-qty>> shown --
 <$list filter="[<snippet-limit-state>is[missing]]" emptyMessage="<$action-deletetiddler $tiddler=<<snippet-limit-state>>/>">
 <$action-setfield $tiddler=<<snippet-limit-state>> text=<<snippet-qty>>/>

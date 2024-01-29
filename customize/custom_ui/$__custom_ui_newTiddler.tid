@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240127212716161
+modified: 20240129221343376
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler=<<title>> date=<<now YYYY0MM0DD>> belongs.to="Attachments" note="$note$" tags="Snippet" caption="$caption$" type="$type$" _canonical_uri=<<uri>>/>
 <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<newExtFileActionCopy>>/>
 </$set></$set>
-<$action-deletetiddler $tiddler="$:/temp/newTiddler"/>
+<$action-deletetiddler $filter="[[$:/temp/newTiddler]] [[$:/state/popup/menubar/NewTiddler]] [[$:/state/popup/NewTiddlerWindow]]"/>
 \end
 
 <$reveal type="match" state="$:/status/IsReadOnly" text="yes" tag="div">This Wiki is Read Only</$reveal>
@@ -52,16 +52,16 @@ Description: {{!!description}}" scroll="no" popup="close"/>➕</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> type="text/vnd.tiddlywiki" scroll="no" popup="close"/>New File</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> type="text/vnd.tiddlywiki" scroll="no" popup="close"/>New Dir</$button>
 </p>
-<p style="margin-top:-10px;white-space:normal;line-height:30px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
+<p style="margin-top:-10px;white-space:normal;line-height:30px;max-width:300px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
 <p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Attachments</p>
 <p style="margin-top:-3px;">
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/jpeg" note="JPG"/>JPG</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/png" note="PNG"/>PNG</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/gif" note="GIF"/>GIF</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/svg+xml" note="SVG"/>SVG</$button>
+<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="text/html" note="HTML"/>HTML</$button>
 </p>
 <p style="margin-top:-10px;">
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="text/html" note="HTML"/>HTML</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="application/pdf" note="PDF"/>PDF</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="audio/mp3" note="MP3"/>MP3</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="video/mp4" note="MP4"/>MP4</$button>
