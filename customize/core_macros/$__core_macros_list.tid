@@ -1,4 +1,4 @@
-modified: 20231227002124714
+modified: 20240129132943363
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/core/macros/list
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 <$genesis $type=<<__type__>> class=<<__class__>>>
 	<$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
 		<$genesis $type=<<__subtype__>>>
-			<$transclude $variable="l" title={{!!title}} text=<<__text__>> note=no date=no parent=no/>
+			<$transclude $variable="l" title={{!!title}} text=<<__text__>> note=no date=no parent=no status=no/>
 		</$genesis>
 	</$list>
 </$genesis>
@@ -33,7 +33,7 @@ type: text/vnd.tiddlywiki
 					<div class="tc-droppable-placeholder"/>
 					<div>
 						<$transclude tiddler="""$itemTemplate$""">
-							<$transclude $variable="l" title={{!!title}} class="tc-popup-keep" text=<<__text__>> note=no date=no parent=no/>
+							<$transclude $variable="l" title={{!!title}} class="tc-popup-keep" text=<<__text__>> note=no date=no parent=no status=no/>
 						</$transclude>
 					</div>
 				</$droppable>
@@ -95,7 +95,7 @@ type: text/vnd.tiddlywiki
 					<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
 					<$genesis $type=<<__elementTag__>>>
 						<$transclude tiddler="""$itemTemplate$""">
-							<$transclude $variable="l" title={{!!title}} class="tc-popup-keep" links=no/>
+							<$transclude $variable="l" title={{!!title}} class="tc-popup-keep" links=no status=no/>
 						</$transclude>
 					</$genesis>
 				</$droppable>
