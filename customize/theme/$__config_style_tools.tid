@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240130104159347
+modified: 20240130195834906
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -191,7 +191,10 @@ nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #
 nav.tc-menubar .tc-menu-list-item .tc-menu-list-subitem {padding-left: 0px;}
 nav.tc-menubar .tc-sidebar-tab-open-item {overflow: hidden;}
 .menubar-recent {font-size: small;}
-@media (max-width: 950px) {.menubar-recent {display: none;}}
+@media (max-width: 950px) {
+.menubar-recent {display: none;}
+.tc-sidebar-tab-open {max-height: 35vh; overflow: auto;}
+}
 
 /* For CodeMirror Plugin */
 pre.CodeMirror-line {padding-top: 0 !important; padding-bottom: 0 !important;}
