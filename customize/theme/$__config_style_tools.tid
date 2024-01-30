@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240130090137004
+modified: 20240130104159347
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -146,7 +146,7 @@ blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #
 button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; width: 88%; text-overflow: ellipsis;}
 button.sort-by-belongs-title span {color: #aaa; font-weight: normal;}
 .belongs-display {margin: 1em 0;}
-.parent-title {margin-top: 0.5em;}
+.parent-title {margin-top: 0.3em;}
 
 /* For Macro: sort-by-tags */
 .categories {display: block; margin-bottom: 5px; background: #ccc; padding: 2px 10px 0; border: 1px solid #ddd; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); line-height: 1.5em; position: relative; max-height: 30px; overflow: hidden; font-size: small; transition: max-height 1s ease-in-out;}
