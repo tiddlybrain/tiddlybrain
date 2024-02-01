@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240130105816125
+modified: 20240201140840121
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -237,7 +237,7 @@ type: text/vnd.tiddlywiki
 <$reveal type="match" state=<<state>> text="close" tag="div" style="padding-top:1em;">
 <$button set=<<state>> setTo="open" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$'' (<$count filter="$filter$"/>)</$button>
 </$reveal>
-<$reveal type="nomatch" state=<<state>> text="close" tag="div" style="padding:1em 0;">
+<$reveal type="nomatch" state=<<state>> text="close" tag="div" style="padding-top:1em;">
 <$button set=<<state>> setTo="close" style="display:block;margin:0 auto 1em;font-variant:small-caps;" class="tc-btn-invisible">''$name$''</$button>
 <$set name="direct-open" value="$direct-open$"><<sort-by-belongs filter:"$filter$" title:"$name$" has-filter:"no" mode:"$mode$">></$set>
 </$reveal>
