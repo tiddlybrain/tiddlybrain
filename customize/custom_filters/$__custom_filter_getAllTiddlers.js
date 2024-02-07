@@ -44,15 +44,7 @@ exports.getAllTiddlers = function(source,operator,options) {
 				Object.keys(data).forEach(index => {
 					data[index].split(re).forEach(datum => {
 						if (datum !== "" && options.wiki.tiddlerExists(datum)) {
-							let content = options.wiki.getTiddler(datum).getFieldString("caption") || datum;
-							let result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",content,{
-								parseAsInline: true,
-								variables: {
-									currentTiddler: datum
-								},
-								parentWidget: options.widget
-							});
-							results.push(result);
+							results.push(datum);
 						}
 					});
 				});
