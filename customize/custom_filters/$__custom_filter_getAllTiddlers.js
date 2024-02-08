@@ -4,7 +4,7 @@ type: application/javascript
 tags: customized
 module-type: filteroperator
 
-1. Find all tiddlers inside of normal tiddlers, e.g. [[tiddlers]getAllTiddlers:note[abc]]
+1. Find all linked tiddlers inside of tiddlers, e.g. [[tiddlers]getAllTiddlers:note[abc]]
 2. Return tiddlers that have specific tiddler in its content, e.g. [[tiddlers]hasTiddler[abc]]
 
 \*/

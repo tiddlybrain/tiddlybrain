@@ -7,6 +7,7 @@ module-type: filteroperator
 1. Find all tiddler titles inside of a data tiddler content, e.g. [[tiddlers]getAllIndexTitles[]]
 2. Find all tiddler titles inside of a normal tiddler content, e.g. [[tiddlers]getAllTitles[]]
 3. Find all tiddler titles of tags, e.g. [[tiddlers]getAllTagTitles[]]
+4. Find all backlink titles of the current tiddler, e.g. [[tiddlers]getBacklinkTitles[]]
 
 \*/
 (function(){
@@ -88,6 +89,28 @@ exports.getAllTagTitles = function(source,operator,options) {
 				}
 			});
 		}
+	});
+	return results;
+};
+
+exports.getBacklinkTitles = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|^)" + title + "(\\]\\]|;;|\"|\'|:|\\n|$)", re = new RegExp(pattern);
+		options.wiki.each(function(newTiddler,newTitle) {
+			let content = newTiddler.getFieldString("text");
+			if(re.test(content)) {
+				let caption = options.wiki.getTiddler(newTitle).getFieldString("caption") || newTitle;
+				let result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",caption,{
+					parseAsInline: true,
+					variables: {
+						currentTiddler: newTitle
+					},
+					parentWidget: options.widget
+				});
+				results.push(result);
+			}
+		});
 	});
 	return results;
 };
