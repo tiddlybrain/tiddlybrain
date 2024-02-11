@@ -1,16 +1,16 @@
-caption: 删除
+caption: Delete
 created: 20200425125759884
 creator: yuzijie
 keywords: 
-modified: 20230501074705729
+modified: 20240211120648778
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Delete Tiddlers
 type: text/vnd.tiddlywiki
 
-<$button><$action-deletetiddler $filter="[prefix[$:/temp/]] [prefix[$:/state/]]"/>删除临时 Tiddlers</$button>
 <$droppable actions=<<droppable-delete-action>> tag="div">
 <div class="tc-droppable-placeholder" style="display:inline-block;padding:5px 0 10px 0;border-radius:15px;">
 <<display content:"☠️ ''Warning, use with caution!'' Drag the tiddler over to delete it, reset all snippets belongs to it, and tagging/listing information" mode:"danger">>
 </div>
 </$droppable>
+<$button><$action-deletetiddler $filter="[prefix[$:/temp/]] [prefix[$:/state/]]"/>Delete All Temporary Tiddlers</$button>

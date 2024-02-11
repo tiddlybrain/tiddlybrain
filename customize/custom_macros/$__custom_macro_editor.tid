@@ -1,12 +1,12 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240208122348345
+modified: 20240211120232667
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
 type: text/vnd.tiddlywiki
 
-\define editor-tab() <$transclude $variable="tabs" tabsList="[tag[Editor]!has[draft.of]]" default="Editor/Keywords" state="$:/state/tab/editor"/>
+\define editor-tab() <$transclude $variable="tabs" tabsList="[tag[Editor]!has[draft.of]]" default="Editor/Delete Tiddlers" state="$:/state/tab/editor"/>
 \define editor-caption-status() $:/state/editor/caption/$(currentTiddler)$
 \define editor-caption-inputActions() <$list filter="[<editor-caption-status>get[list]enlist-input[]]"><$action-setfield $tiddler=<<currentTiddler>> caption=<<actionValue>>/></$list>
 \define editor-backlink-button() <$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;"><<key>><$action-sendmessage $message="tm-copy-to-clipboard" $param='<<bl-note param:"$(key)$" date:"no">>'/></$button>
@@ -38,17 +38,6 @@ type: text/vnd.tiddlywiki
 <td colspan="2" style="position:relative;">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>&nbsp;
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
-<$list filter="[<draft>is[tiddler]!tag[Comment]]">
-<$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
-<$set name="keywords" filter="[{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]]" select="0">
-<$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE">
-<$button style="margin-left:5px;background:red;" tooltip="Update Keywords">Keywords
-<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
-</$button>
-</$list>
-</$set>
-</$set>
-</$list>
 <$list filter="[<draft>type[text/vnd.tiddlywiki]!has[celltpl]!tag[Task]]"><$fieldmangler>
 <$button set="!!celltpl" setTo="custom-template-task" message="tm-add-tag" param="Task" style="margin-left:5px;" tooltip="Make it a task">Task</$button>
 </$fieldmangler></$list>
