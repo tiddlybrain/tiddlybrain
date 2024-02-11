@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240211124803396
+modified: 20240211125501117
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -15,7 +15,6 @@ type: text/vnd.tiddlywiki
 <$droppable actions="""<$action-setfield $tiddler="$:/temp/Draft" draft=<<actionTiddler>>/>""" tag="div">
 <div class="tc-droppable-placeholder" style="display:block;">
 <div style="margin-bottom:5px;"><$set name="tv-wikilinks" value="no">
-<$button set="$:/temp/Draft!!draft" setTo="$:/Draft">Draft</$button>
 <$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button style="color:green;">
 <$tiddler tiddler=<<draft>>>{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list></$tiddler>
 <$action-sendmessage $message="tm-edit-tiddler" $param=<<draft>>/>
@@ -36,6 +35,7 @@ type: text/vnd.tiddlywiki
 <<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
 </$list>
+<$button set="$:/temp/Draft!!draft" setTo="$:/Draft">Draft</$button>
 <$button set="$:/state/editor-toolbar" setTo="keywords">Regenerate Keywords</$button>
 <$button set="$:/state/editor-toolbar" setTo="toolbar">Toolbar</$button>
 </$set></div>
