@@ -2,7 +2,7 @@ caption: Keywords
 created: 20200908201842064
 creator: yuzijie
 keywords: 
-modified: 20240211124627450
+modified: 20240211182853354
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Keywords
@@ -18,17 +18,12 @@ type: text/vnd.tiddlywiki
 </$list>
 <$action-deletetiddler $tiddler="$:/state/editor-toolbar"/>
 </$button>
-
 <hr style="margin-top:16px;">
-
-To be updated:
-
+<h3 style="color:#333;">To be updated:</h3>
 <$list filter="[has[belongs.to]!tag[Comment]]">
 <$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
 <$set name="keywords" filter="[{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]]" select="0">
-<$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE">
-<$view field="title"/><br>
-</$list>
+<$list filter="[{!!keywords}!match<keywords>] :else[{!!parents}!match<parents>]" variable="NONE"><$view field="title"/><br></$list>
 </$set>
 </$set>
 </$list>
