@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240124163921126
+modified: 20240212224205729
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -32,7 +32,7 @@ TBC: <<tbc>>
 </$button></$list>
 </$droppable></h2>
 
-<$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:22px;">
+<$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:24px;">
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
@@ -61,15 +61,15 @@ Done: <<currentTiddler>></$button></li></$list>
 <$list filter="[prefix[$:/task-state/]text[deadline]contains:plan<curDate>]"><li><<task-list-deadline>></li></$list>
 <$list filter="[prefix[$:/task-state/]!filter<task-filter>text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
-<li><$details summary="Waiting List"><ol>
-<$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
-</ol></$details></li>
 <$list filter="[has[interval]!has[draft.of]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
 <$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 </$set></$list>
 <$list filter="[tag[Tasks/Journal]has[tbc]]"><$list filter="[all[current]get[date]compare:date:lteq<today>]" variable="NONE">
 <$list filter="[enlist{!!tbc}]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 </$list></$list>
+<$set name="wl" filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>count[]addprefix[Waiting List ]]" select="0"><li><$details summary=<<wl>>><ol>
+<$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
+</ol></$details></li></$set>
 </ol></$droppable>
 
 <$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
