@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240118201753513
+modified: 20240213123235948
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -192,7 +192,7 @@ TBC: <<tbc>>
 <$set name="year" filter="[[$date$]format:date[YYYY]]" select="0">
 <$set name="week" filter="[[$date$]format:date[Week0WW]]" select="0">
 <$set name="BR" filter="[[BR/Journals]] [<year>] [<week>] +[join[/]]" select="0">
-<$transclude $variable="l" title=<<BR>> text=<<format-date "$date$" "Week WW, DDD">>/>
+<$transclude $variable="l" title=<<BR>> text=<<format-date "$date$" "Week WW, YYYY-0MM-0DD DDD">>/>
 </$set>
 </$set>
 </$set>
@@ -232,8 +232,17 @@ TBC: <<tbc>>
 <$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
 </$set>
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]">
-<$button style="font-size:small;transform:translateY(-2px);" set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
+<$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
 </$list>
+<$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
+<$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
+<$list filter="[<journal-title>is[missing]]"><$button>Create Date
+<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="Journals: <<bl>>
+TBC: <<tbc>>
+--: Tasks Review" date=<<curDate>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="custom-template-journal"/>
+</$button></$list>
+</$set>
+</$set>
 </h2>
 <div style="margin:15px 0 20px 0;"><<task-list>></div>
 <div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;">
