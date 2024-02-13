@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240208162635002
+modified: 20240213114457705
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -307,7 +307,7 @@ button.collapse-close {background: #f4f4f4; font-weight: normal;}
 .cat-filter-updater button {padding: 0 5px; color: #999;}
 
 /* For Macro: verification-notice & tbc-notice */
-button.verification-notice {background: red; white-space: normal;}
+button.verification-notice {background: red; white-space: nowrap;}
 .tc-tags-wrapper button.verification-notice {margin-right: 7px;}
 
 /* For Macro: tag-list */
