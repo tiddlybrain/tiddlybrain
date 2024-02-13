@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240213123235948
+modified: 20240213124125849
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -274,7 +274,7 @@ TBC: <<tbc>>
 <$button set="!!date" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">N.A.</$button>
 </$view></td>
 <td><$transclude $variable="days-passed" start={{!!date}} end={{!!finish}}/></td>
-<td><$list filter="[all[current]has[finish]]" emptyMessage="<$text text={{{[all[current]percent[d]]}}}/>">
+<td><$list filter="[all[current]has[finish]]" emptyMessage="<$text text={{{ [all[current]percent[dw]] }}}/>">
 @@font-size:smaller;white-space:nowrap;
 <$set name="pattern" value="<<[d]\s.+>>">🚩<$count filter="[{!!text}matches<pattern>]"/></$set>
 <$set name="pattern" value="<<[a]\s.+>>">⚔️<$count filter="[{!!text}matches<pattern>]"/></$set>

@@ -121,6 +121,9 @@ exports.percent = function(source,operator,options) {
 		case "w":
 			pattern = '<<w\\s.+?>>';
 			break;
+		case "dw":
+			pattern = '<<[dw]\\s.+?>>';
+			break;
 		default:
 			pattern = '<<[adw]\\s.+?>>';
 	}
