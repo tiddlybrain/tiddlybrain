@@ -2,7 +2,7 @@ created: 20220217150254473
 creator: yuzijie
 keywords: 
 list-after: $:/core/ui/SideBar/More
-modified: 20240214113030205
+modified: 20240214114332839
 modifier: yuzijie
 tags: customized $:/tags/SideBar
 title: Inbox
@@ -12,10 +12,10 @@ type: text/vnd.tiddlywiki
 <li><$details summary="Has Interval"><<sort-by-filter item-filter:"has[interval]!prefix[Flashcard]">></$details></li>
 <li><$details summary="Untagged Tiddlers"><<list-links "[!is[system]untagged[]!sort[modified]limit[100]] -[{$:/config/defaultTemplate}]">></$details></li>
 <li><$details summary="Not Finished"><<list-links "[status[未完待续]!sort[modified]]">></$details></li>
-<li>Non-existent Tags<ul><$list filter="[all[tiddlers]tags[]is[missing]!is[system]] -Task -Comment -Snippet -Ignore -CodeMirror -customized">
+<li>Non-existent Tags<ul><$list filter="[all[tiddlers]tags[]is[missing]unique[]!is[system]] -Task -Comment -Snippet -Ignore -CodeMirror -customized">
 <li>{{!!title}}<<list-links "[all[tiddlers]tag{!!title}]">></li>
 </$list></ul></li>
-<li>Non-existent Parents<ul><$list filter="[all[tiddlers]get[belongs.to]is[missing]]">
+<li>Non-existent Parents<ul><$list filter="[all[tiddlers]get[belongs.to]is[missing]unique[]]">
 <li>{{!!title}}<<list-links "[all[tiddlers]belongs.to{!!title}]">></li>
 </$list></ul></li>
 <li>Branch Tiddlers Without Tags<div><ol>
