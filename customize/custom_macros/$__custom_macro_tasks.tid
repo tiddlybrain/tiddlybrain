@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240213124125849
+modified: 20240213224211661
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -44,23 +44,16 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
 </$button>
-<$list filter="[<dt>match<today>]" variable="NONE">
-<$button class="tc-btn-invisible" tooltip="Done for today">
+<$list filter="[<dt>match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Done for today">
 <$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/plus-button}}
-</$button>
-<$list filter="[all[current]!contains:plan[blocked]]"><$button class="tc-btn-invisible" tooltip="Blocked">
-<$action-listops $field='plan' $subfilter='[[blocked]]'/>{{$:/core/images/close-others-button}}
 </$button></$list>
-</$list>
-<$list filter="[<dt>!match<today>]" variable="NONE"><$button class="tc-btn-invisible" tooltip="Cancel">
+<$button class="tc-btn-invisible" tooltip="Cancel">
 <$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[<dt>]"/>{{$:/core/images/cancel-button}}
-</$button></$list>
-<$set name="style" filter="[all[current]contains:plan[blocked]]" value="white-space:nowrap;color:#a19d00;" emptyValue="white-space:nowrap;color:green;">
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style=<<style>> message="tm-copy-to-clipboard" param={{!!caption}}>
+</$button>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:green;" message="tm-copy-to-clipboard" param={{!!caption}}>
 ''{{!!caption}}'' <$transclude $variable="days-passed" start={{!!date}}/>
 </$button>
-</$set>
 <$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
 </$set>
 \end
@@ -91,22 +84,6 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define task-list-blocked()
-<$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
-<$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/save-button}}
-</$button>
-<$button class="tc-btn-invisible" tooltip="Cancel">
-<$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="-[[blocked]]"/>{{$:/core/images/cancel-button}}
-</$button>
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#a19d00;" message="tm-copy-to-clipboard" param={{!!caption}}>
-''{{!!caption}}'' <$transclude $variable="days-passed" start={{!!date}}/>
-</$button>
-<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
-</$set>
-\end
-
 \define droppable-task-list-actions()
 <$list filter="[<actionTiddler>prefix[$:/task-state/]]"><$action-listops $field='plan' $subfilter='[<dt>]'/>
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
@@ -125,13 +102,7 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/deadline" field="text" checked="yes" unchecked="no" default="yes"> Deadline</$checkbox>
 <$checkbox tiddler="$:/temp/task/open" field="text" checked="yes" unchecked="no" default="yes"> Open</$checkbox>
 <$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
-<$list filter="[prefix[$:/task-state/]contains:plan[blocked]limit[1]]" variable="NONE"><$list filter="[[$:/temp/task/doing]!text[no]]" variable="NONE">
-<dt style="color:red;font-size:large;">Blocked</dt>
-<$set name="journal-title" filter="[<today>format:date[YYYY-0MM-0DD]]" select="0">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}contains:plan[blocked]sortan[title]]"><dd><<task-list-blocked>></dd></$list>
-</$set>
-</$list></$list>
-<$list filter="[prefix[$:/task-state/]!text[waiting]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]!match[blocked]] [<today>] +[sort[]]" variable="dt">
+<$list filter="[prefix[$:/task-state/]!text[waiting]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
 <$droppable actions=<<droppable-task-list-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
