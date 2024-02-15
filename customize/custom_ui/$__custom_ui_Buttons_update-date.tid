@@ -2,17 +2,14 @@ caption: Update Date to Today
 created: 20240111170600561
 creator: yuzijie
 description: Update Date Field
-modified: 20240205091203189
+modified: 20240215112956651
 modifier: yuzijie
 tags: customized $:/tags/EditToolbar
-title: $:/custom/ui/Buttons/save
+title: $:/custom/ui/Buttons/update-date
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-\define save-tiddler-button()
-\whitespace trim
-<$fieldmangler><$set name="today" value=<<now YYYY0MM0DD>>>
-<$list filter="[all[current]has[date]!date<today>]" variable="NONE">
+<$set name="today" value=<<now YYYY0MM0DD>>><$list filter="[all[current]has[date]!date<today>]" variable="NONE">
 <$button tooltip="Update Date Field to Today" aria-label="update date field to today" class=<<tv-config-toolbar-class>>>
 <$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
@@ -22,7 +19,4 @@ type: text/vnd.tiddlywiki
 <span class="tc-btn-text"><$text text="save and update date"/></span>
 </$list>
 </$button>
-</$list>
-</$set></$fieldmangler>
-\end
-<<save-tiddler-button>>
+</$list></$set>
