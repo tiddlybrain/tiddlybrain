@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20240123214746299
+modified: 20240215143828718
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -118,9 +118,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible sort-by-belongs-title">
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<span><$list filter="[<currentTiddler>get[belongs.to]getAllParents[]]" variable="parent">&lt;
-<$tiddler tiddler=<<parent>>><$transclude field="caption"><$view field="title"/></$transclude></$tiddler>
-</$list></span>
 </$button>
 </$tiddler>
 </div>
