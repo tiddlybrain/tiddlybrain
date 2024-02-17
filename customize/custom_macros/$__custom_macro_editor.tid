@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240217152220668
+modified: 20240217161544272
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 
 \define editor-title(style)
 <table style="$style$"><tbody>
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><tr><td colspan="3" style="text-align:center;"><$set name="tv-wikilinks" value="no">
+<$list filter="[[$(modal)$]!match[yes]]" variable="NONE"><tr><td colspan="3" style="text-align:center;"><$set name="tv-wikilinks" value="no">
 <$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<span style="color:green;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list>
 </span>

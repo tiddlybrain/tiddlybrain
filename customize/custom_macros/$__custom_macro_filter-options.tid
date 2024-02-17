@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20240116230738883
+modified: 20240217162127762
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -43,7 +43,9 @@ type: text/vnd.tiddlywiki
 <option value=<<filter-by-note-value>> style="color:green;">Note: {{!!title}}</option>
 </$list>
 <$list filter="$cfilter$" variable="index">
-<option value=<<filter-by-index-value>> style="color:#762597;">Index: <<index>></option>
+<option value=<<filter-by-index-value>> style="color:#762597;">
+Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
+</option>
 </$list>
 <option value="+[!has[belongs.to]]" style="color:#205bc7;">No Parent</option>
 <$list filter="$filter$ +[get[belongs.to]each:value[]]">
