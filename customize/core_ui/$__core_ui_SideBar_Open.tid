@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20231227001912093
+modified: 20240217005409363
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 \define folded-state() $:/state/folded/$(currentTiddler)$
 
 \define drop-actions()
-<<sidebar-open-actions>><$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
+<$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
 \define placeholder()
