@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240202164608861
+modified: 20240217165352401
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -52,8 +52,7 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> edit="yes"/>New Record</$button>
 <$button><$transclude $variable="newTaskAction" template=<<template>> caption=<<caption>>/>New Task</$button>
 </p>
-<p style="margin-top:-10px;white-space:normal;line-height:30px;max-width:300px;"><$transclude tiddler="$:/custom/ui/newTiddler/Templates" mode="inline"/></p>
-<p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Attachments</p>
+<p style="font-variant:all-petite-caps;margin:-5px 0 10px;">Attachments</p>
 <p style="margin-top:-3px;">
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/jpeg" note="JPG"/>JPG</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/png" note="PNG"/>PNG</$button>
@@ -67,7 +66,7 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="video/mp4" note="MP4"/>MP4</$button>
 </p>
 </$vars>
-<p style="font-variant:all-petite-caps;margin:-7px 0 13px;">Configurations</p>
+<p style="font-variant:all-petite-caps;margin:-5px 0 10px;">Configurations</p>
 <p style="margin-top:-3px;">{{$:/custom/ui/path-prefix}}</p>
 <p style="margin-top:-10px;">
 <$button message="tm-edit-tiddler" param="$:/config/defaultTemplate" class="tc-btn-invisible">Default Template: @@color:red;{{$:/config/defaultTemplate}}@@</$button>
