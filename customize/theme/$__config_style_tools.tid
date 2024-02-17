@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240217090254542
+modified: 20240217214929574
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -85,7 +85,8 @@ dl.task-list dd {white-space: nowrap;}
 .edit-area.red {color: brown;}
 .tc-sidebar-lists .tc-editor-toolbar {margin: 4px 0;}
 input.tc-edit-texteditor {padding: 0 5px; margin: 5px 0;}
-.editor-display {margin: 5px 0 20vw 0; background: white; padding: 10px 20px; line-height: 26px; border: 1px solid #ccc;}
+.editor-display {margin: 5px 0; background: white; padding: 10px 20px; line-height: 26px; border: 1px solid #ccc;}
+@media (min-width: 1400px) {.editor-display {margin-bottom: 20vw;}}
 .tc-sidebar-header .editor-display {color:#333;}
 
 /* For $:/custom/ui/SideBarSegments/open */
