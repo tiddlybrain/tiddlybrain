@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240217163138927
+modified: 20240218113714834
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -15,8 +15,11 @@ type: text/vnd.tiddlywiki
 <$droppable actions="""<$action-setfield $tiddler="$:/temp/Draft" draft=<<actionTiddler>>/>""" tag="div">
 <div class="tc-droppable-placeholder" style="display:block;">
 <div style="margin-bottom:5px;">
-<$list filter="[{$:/temp/Draft!!draft}!match[$:/Draft]]" emptyMessage="""<$button to="$:/Draft" style="color:red;">Draft</$button>""" variable="NONE">
-<$button set="$:/temp/Draft!!draft" setTo="$:/Draft">Draft</$button>
+<$list filter="[{$:/temp/Draft!!draft}match[$:/Draft]]" emptyMessage="""<$button set="$:/temp/Draft!!draft" setTo="$:/Draft">Draft</$button>""">
+<$button style="color:red;"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft</$button>
+<$button class="tc-btn-invisible" style="fill:red;padding-left:2px;">{{$:/core/images/open-window}}
+<$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/>
+</$button>
 </$list>
 <$button set="$:/state/editor-toolbar" setTo="toolbar">Toolbar</$button>
 <$list filter="[<draft>is[tiddler]!tag[Comment]]">
