@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240219103901000
+modified: 20240219113100514
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -65,7 +65,7 @@ Done: <<currentTiddler>></$button></li></$list>
 <$list filter="[enlist{!!tbc}]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 </$list></$list>
 <$list filter="[tag[Task]status[Blocked]]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
-<$set name="wl" filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>count[]addprefix[Waiting List ]]" select="0"><li><$details summary=<<wl>>><ol>
+<$set name="wl" filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>count[]addprefix[Waiting Steps: ]]" select="0"><li><$details summary=<<wl>>><ol>
 <$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>!sort[date]]"><li><<task-list-waiting>><$button set="!!pause" setTo=<<curDate>>>Pause</$button></li></$list>
 </ol></$details></li></$set>
 </ol></$droppable>

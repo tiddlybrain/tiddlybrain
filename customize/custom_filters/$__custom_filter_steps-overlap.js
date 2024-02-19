@@ -5,7 +5,6 @@ tags: customized
 module-type: filteroperator
 
 overlap: 判断给定的时间段和任务的执行时间是否重叠, e.g. [[$:/temp/done]overlap[20200902:20200910]]
-percent: 计算任务完成率, e.g. percent[a]
 getTDate: 获取开始时间
 getDDate: 获取结束时间
 getTypeStep: 获取步骤的类型
@@ -106,43 +105,6 @@ exports.overlap = function(source,operator,options) {
 			}
 		});
 	}
-	return results;
-};
-
-exports.percent = function(source,operator,options) {
-	var results = [], pattern;
-	switch (operator.operand) {
-		case "a":
-			pattern = '<<a\\s.+?>>';
-			break;
-		case "d":
-			pattern = '<<d\\s.+?>>';
-			break;
-		case "w":
-			pattern = '<<w\\s.+?>>';
-			break;
-		case "dw":
-			pattern = '<<[dw]\\s.+?>>';
-			break;
-		default:
-			pattern = '<<[adw]\\s.+?>>';
-	}
-	var regexp = new RegExp(pattern, 'g');
-	source(function(tiddler,title) {
-		if (tiddler) {
-			var content = tiddler.getFieldString("text");
-			var matches = content.match(regexp) || [];
-			var total = 0, totalDone = 0;
-			matches.forEach(function(match) {
-				total += 1;
-				var start_time = getStartTime(match);
-				var end_time = getEndTime(match);
-				if (start_time && end_time) totalDone += 1;
-			})
-			var percentage = total === 0 ? "N/A" : Math.round(totalDone / total * 100) + "%";
-			results.push(percentage);
-		}
-	});
 	return results;
 };
 
