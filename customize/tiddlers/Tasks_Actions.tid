@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240220142235413
+modified: 20240220144919925
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -75,7 +75,7 @@ Done: <<currentTiddler>></$button></li></$list>
 <table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:24px;"><$set name="currTask" value=<<task>>>
-<td style="vertical-align:baseline;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:4px 0;">
+<td style="vertical-align:baseline;white-space:nowrap;overflow:hidden;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:4px 0;">
 @@color:#d300cc;<$transclude tiddler=<<task>> field="title"/>@@ <$transclude tiddler=<<task>> field="caption"/>
 </$button></td>
 <td><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
