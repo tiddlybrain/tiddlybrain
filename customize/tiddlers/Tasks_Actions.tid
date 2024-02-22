@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240221082132350
+modified: 20240222122934667
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -57,15 +57,15 @@ Done: <<currentTiddler>></$button></li></$list>
 </li></$set></$list>
 <$list filter="[prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
-<$list filter="[prefix[$:/task-state/]text[deadline]!pause<curDate>!sort[date]]"><li>
+<$list filter="[prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li>
 <<task-list-deadline>><$button set="!!pause" setTo=<<curDate>>>Pause</$button>
 </li></$list>
 <$list filter="[has[interval]!has[draft.of]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
 <$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 </$set></$list>
-<$list filter="[tag[Tasks/Journal]has[tbc]]"><$list filter="[all[current]get[date]compare:date:lteq<today>]" variable="NONE">
-<$list filter="[enlist{!!tbc}]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
-</$list></$list>
+<$vars comparefilter="[get[date]compare:date:lteq<today>]"><$list filter="[tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
+<li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
+</$list></$vars>
 <$list filter="[tag[Task]status[Blocked]]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 <$set name="wl" filter="[prefix[$:/task-state/]text[waiting]count[]addprefix[Waiting Steps: ]]" select="0"><li><$details summary=<<wl>>><ol>
 <$list filter="[prefix[$:/task-state/]text[waiting]!sort[date]]"><li><<task-list-waiting>></li></$list>

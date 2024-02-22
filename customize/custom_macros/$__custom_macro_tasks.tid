@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240219114810424
+modified: 20240222122843591
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -26,10 +26,10 @@ type: text/vnd.tiddlywiki
 \define task-list-open()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$list filter="[all[current]plan<today>]"><$button class="tc-btn-invisible" tooltip="Start" set=<<currentTiddler>> setTo="doing">{{$:/core/images/timestamp-on}}</$button></$list>
-<$list filter="[all[current]!plan<today>]"><$button class="tc-btn-invisible" tooltip="Change Date" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$button class="tc-btn-invisible" tooltip="Change Date" message="tm-copy-to-clipboard" param={{!!caption}}>
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>{{$:/core/images/cancel-button}}
-</$button></$list>
+</$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
 ''{{!!caption}}'' <$transclude $variable="days-left" deadline={{!!date}}/>
 </$button>

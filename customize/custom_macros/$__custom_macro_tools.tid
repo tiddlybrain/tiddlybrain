@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240220023041252
+modified: 20240222122316437
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -277,7 +277,7 @@ type: text/vnd.tiddlywiki
 <$vars today=<<now "YYYY0MM0DD">> comparefilter="[get[date]compare:date:lteq<today>]">
 <$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>get[date]compare:date:lteq<today>limit[1]]" variable="NONE">
 <$button class="tc-btn-invisible tc-tag-label verification-notice">To be checked
-<$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>filter<comparefilter>]">
+<$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>filter<comparefilter>!sortan[]]">
 <$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>
 </$list>
 <$list filter="[[$(modal)$]match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>

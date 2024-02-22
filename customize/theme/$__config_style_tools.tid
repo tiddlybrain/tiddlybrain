@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240219115721551
+modified: 20240222123605640
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -42,7 +42,6 @@ button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis;
 .snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
 .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table, .tc-sidebar-lists .index-tree-view .snippet-content p {margin: 10px 20px;}
 .snippet-content > blockquote {margin-left: 35px;}
-.snippet-content > .tag > p, .tc-sidebar-lists .index-tree-view .snippet-content > .tag > p {margin: 10px 22px;}
 .snippet-content > h2, .snippet-content > h3, .snippet-content > details {margin-left: 20px;}
 .snippet-content > h3 {margin-top: 15px; margin-bottom: 15px;}
 .snippet-external {margin: 1em 0; line-height: 0;}
@@ -253,8 +252,6 @@ button.l {line-height: inherit;}
 .l > button.collapse-title:hover {text-decoration: underline;}
 .l > button.collapse-title > svg {font-size: small; transform: translateY(-1px);}
 .snippet-content .l > button.collapse-title > svg {font-size: smaller;}
-div.tag > .l, div.tag > p > .l {margin-left: 10px;}
-div.tag > p {margin: 0;}
 .tc-tiddler-frame .tc-tiddler-body button.l {overflow-x: clip; max-width: 100%;}
 
 /* For Macro: links */
