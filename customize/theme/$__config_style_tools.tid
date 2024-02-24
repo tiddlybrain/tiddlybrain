@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240222123605640
+modified: 20240224100938536
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -261,10 +261,12 @@ a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
 
 /* For Macro: links, modal code viewer, highlight.js */
 .code-viewer {border: 1px solid #cccccc; display: flex;}
-.code-viewer > pre {flex: 1 0 62%; margin: 0; border: none; border-radius: 0;}
+.code-viewer > pre {flex: 1 0 65%; margin: 0; border: none; border-radius: 0;}
 .code-viewer > pre code {font-size: 1em;}
-.code-viewer > textarea {flex: 0 0 38%; border: none; white-space: pre; font-size: 1em; line-height: 23px; padding: 12px 8px 0; height: 2000px !important; border-radius: 0;}
+.code-viewer > textarea {flex: 0 0 35%; border: none; white-space: pre; font-size: 1em; line-height: 23px; padding: 12px 8px 0; height: 2000px !important; border-radius: 0; overflow: hidden; transition: flex-basis 500ms ease-in-out;}
 .code-viewer > textarea.heightless {height: unset !important;}
+.code-viewer > textarea:hover {flex-basis: 65%; overflow: auto;}
+.code-viewer > textarea:hover + pre {flex-basis: 35%;}
 .code-viewer > .comment {flex: 0 0 38%; overflow: auto;}
 .code-viewer > .comment pre {margin: 0; border: none; border-radius: 0; background: transparent;}
 .code-viewer > .comment pre code {font-size: 1em; background: transparent;}

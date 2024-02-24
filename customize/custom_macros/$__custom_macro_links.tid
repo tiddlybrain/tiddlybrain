@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20240124164715153
+modified: 20240224094005797
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -20,6 +20,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]get[dir]]" variable="path"><$set name="path-prefix" value={{$:/config/index-tree!!path}}>
 <$button class="tc-btn-invisible links" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>{{$:/core/images/folder}}</$button>
 </$set></$list>
+<$list filter="[all[current]code-body[yes]]">
+<$button actions=<<modal-actions>> tooltip="View Code" class="tc-btn-invisible links">{{$:/core/images/permalink-button}}</$button>
+</$list>
 \end
 
 \define icons(style:"font-weight:normal;") <span style=<<__style__>>><$list filter="[all[current]is[missing]!is[system]]">☹️</$list><$list filter="[all[current]!is[system]search:title:literal[/]]">🌿</$list><$list filter="[all[current]has[url]]">🔗</$list><$list filter="[all[current]has[path]]">📄</$list><$list filter="[all[current]tag[Task]]">🏆</$list></span>
