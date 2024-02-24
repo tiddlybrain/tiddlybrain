@@ -3,8 +3,8 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]
 created: 20220924050654294
 creator: yuzijie
 description: Step Actions
-icon: $:/core/images/timestamp-on
-modified: 20231227005200504
+icon: $:/core/images/save-button
+modified: 20240224150036564
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/step-actions
