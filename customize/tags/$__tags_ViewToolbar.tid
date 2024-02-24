@@ -1,7 +1,7 @@
 created: 20231204152031582
 creator: yuzijie
-list: $:/core/ui/Buttons/more-tiddler-actions $:/core/ui/Buttons/info $:/custom/ui/Buttons/copy-title $:/custom/ui/Buttons/open-in-sidebar $:/custom/ui/Buttons/copy-as-step $:/custom/ui/Buttons/external-search $:/core/ui/Buttons/fold $:/core/ui/Buttons/clone $:/core/ui/Buttons/delete $:/core/ui/Buttons/export-tiddler $:/core/ui/Buttons/edit $:/core/ui/Buttons/permalink $:/core/ui/Buttons/permaview $:/core/ui/Buttons/open-window $:/core/ui/Buttons/close-others $:/core/ui/Buttons/close $:/core/ui/Buttons/fold-others $:/core/ui/Buttons/fold-bar $:/custom/ui/Buttons/edit-cell-template $:/custom/ui/Buttons/edit-template
-modified: 20231204152048493
+list: $:/core/ui/Buttons/more-tiddler-actions $:/core/ui/Buttons/info $:/custom/ui/Buttons/copy-title $:/custom/ui/Buttons/open-in-sidebar $:/custom/ui/Buttons/copy-as-step $:/core/ui/Buttons/fold $:/core/ui/Buttons/clone $:/core/ui/Buttons/delete $:/core/ui/Buttons/export-tiddler $:/core/ui/Buttons/edit $:/core/ui/Buttons/permalink $:/core/ui/Buttons/permaview $:/core/ui/Buttons/open-window $:/core/ui/Buttons/close-others $:/core/ui/Buttons/close $:/core/ui/Buttons/fold-others $:/core/ui/Buttons/fold-bar $:/custom/ui/Buttons/external-search $:/custom/ui/Buttons/edit-cell-template $:/custom/ui/Buttons/edit-template
+modified: 20240224134435587
 modifier: yuzijie
 title: $:/tags/ViewToolbar
 type: text/vnd.tiddlywiki
