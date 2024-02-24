@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20240217162127762
+modified: 20240224091657039
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -35,11 +35,11 @@ type: text/vnd.tiddlywiki
 <option value=<<filter-by-tags-value>> style="color:#ebb000;">Tag: <$transclude field=caption><$view field=title/></$transclude></option>
 </$list>
 <option value="+[!has[status]]" style="color:#a33434;">No Status</option>
-<$list filter="$filter$ +[get[status]each:value[]]">
+<$list filter="$filter$ +[get[status]unique[]]">
 <option value=<<filter-by-status-value>> style="color:#ff5a5a;">Status: {{!!title}}</option>
 <option value=<<filter-by-not-status-value>> style="color:#a33434;">Not status: {{!!title}}</option>
 </$list>
-<$list filter="$filter$ +[get[note]each:value[]]">
+<$list filter="$filter$ +[get[note]unique[]]">
 <option value=<<filter-by-note-value>> style="color:green;">Note: {{!!title}}</option>
 </$list>
 <$list filter="$cfilter$" variable="index">
@@ -48,7 +48,7 @@ Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wiki
 </option>
 </$list>
 <option value="+[!has[belongs.to]]" style="color:#205bc7;">No Parent</option>
-<$list filter="$filter$ +[get[belongs.to]each:value[]]">
+<$list filter="$filter$ +[get[belongs.to]unique[]]">
 <option value=<<filter-by-belongs-value>> style="color:#205bc7;">Belongs to: <$transclude field=caption><$view field=title/></$transclude></option>
 </$list>
 </$select>
@@ -59,7 +59,16 @@ Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wiki
 <$action-deletetiddler $tiddler=<<select-value>>/><<select-value-content>> &times;
 </$button>""" variable="NONE">
 <$select tiddler=<<select-value>> tooltip="Pickup a value"><option value="*">Has Value</option><option value="#">No Value</option>
-<$list filter="$filter$ +[getindexParsedList<index>each:value[]!is[blank]]"><option value={{!!title}}>{{!!title}}</option></$list>
+<$set name="results" filter="$filter$ +[getindexList<index>each:value[]!is[blank]]">
+<$list filter="[<results>enlist-input[]!has[belongs.to]]">
+<$set name="value" filter="[all[current]has[caption]]" value={{!!caption}} emptyValue={{!!title}}><option value=<<value>>><<value>></option></$set>
+</$list>
+<$list filter="[<results>enlist-input[]get[belongs.to]unique[]]"><optgroup label={{!!caption}}>
+<$list filter="[<results>enlist-input[]belongs.to<currentTiddler>]">
+<$set name="value" filter="[all[current]has[caption]]" value={{!!caption}} emptyValue={{!!title}}><option value=<<value>>><<value>></option></$set>
+</$list>
+</optgroup></$list>
+</$set>
 </$select>
 </$list>
 </$set>
