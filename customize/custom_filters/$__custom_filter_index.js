@@ -8,8 +8,7 @@ module-type: filteroperator
 2. Filter tiddlers by the given key and value, e.g. [[tiddlers]indexSearch:key[value]]
 3. Filter tiddlers by the given key and regex pattern, e.g. [[tiddlers]indexreg:key[regexp]]
 4. Return the value of a given index, value parsed, e.g. [[tiddlers]getindexParsed[key]]
-5. Return the value of a given index, value parsed, e.g. [[tiddlers]getindexParsedList[key]]
-6. Branch Tiddler Constructor Filter, e.g. [slash:index[a]slash:field[b]]
+5. Branch Tiddler Constructor Filter, e.g. [slash:index[a]slash:field[b]]
 
 \*/
 (function(){
@@ -51,30 +50,31 @@ var getResult = function(data,options,currTiddlerTitle) {
 	}
 }
 
-var getBacklinksParsed = function(data,options,currTiddlerTitle,results) {
+var getBacklinksParsed = function(data,options,currTiddlerTitle) {
 	var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|^)" + currTiddlerTitle + "(\\]\\]|;;|\"|\'|:|\\n|$)", re = new RegExp(pattern);
-	var re_filter = /<<bl-(.+?)\s+param:["'](.+?)["']/, filter = data.match(re_filter), tester = null, content;
+	var re_filter = /<<bl-(.+?)\s+param:["'](.+?)["']/, filter = data.match(re_filter), tester = null, results = [];
 	if(filter !== null && filter[1] in backlinkTester) {
 		tester = backlinkTester[filter[1]];
 	}
 	options.wiki.each(function(newTiddler,newTitle) {
 		if(tester === null || tester(newTiddler, filter[2])) {
-			content = newTiddler.getFieldString("text");
+			let content = newTiddler.getFieldString("text");
 			if(re.test(content)) {
 				results.push(getResult(newTitle,options,currTiddlerTitle));
 			}
 		}
 	});
+	return results;
 }
 
 var getResults = function(data,options,currTiddlerTitle) {
-	var result, results = [], re = /\s*(?:;;)\s*/;
+	var results = [], re = /\s*(?:;;)\s*/;
 	data.split(re).forEach(datum => {
 		if(datum !== "") {
 			if(datum.indexOf("<<bl") !== -1) {
-				getBacklinksParsed(datum,options,currTiddlerTitle,results);
+				results = results.concat(getBacklinksParsed(datum,options,currTiddlerTitle));
 			} else {
-				result = getResult(datum,options,currTiddlerTitle);
+				let result = getResult(datum,options,currTiddlerTitle);
 				if(result !== null) {
 					if(result.indexOf(";;") === -1) {
 						results.push(result);
@@ -210,21 +210,6 @@ exports.getindexParsed = function(source,operator,options) {
 					data = getResults(data,options,title).join(s);
 					results.push(data);
 				}
-			}
-		});
-	}
-	return results;
-};
-
-exports.getindexParsedList = function(source,operator,options) {
-	var results = [], data, index = operator.operand || null;
-	if(index !== null) {
-		source(function(tiddler,title) {
-			if(tiddler) {
-				data = getCellData(tiddler,index,options);
-				if(data) getResults(data,options,title).forEach(item => {
-					results.push(item);
-				});
 			}
 		});
 	}
