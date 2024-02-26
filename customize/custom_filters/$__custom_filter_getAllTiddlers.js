@@ -44,7 +44,13 @@ exports.getAllTiddlers = function(source,operator,options) {
 				Object.keys(data).forEach(index => {
 					data[index].split(re).forEach(datum => {
 						if (datum !== "" && options.wiki.tiddlerExists(datum)) {
-							results.push(datum);
+							if(field) {
+								if(options.wiki.getTiddler(datum).getFieldString(field) === value) {
+									results.push(datum);
+								}
+							} else {
+								results.push(datum);
+							}
 						}
 					});
 				});
