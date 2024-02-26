@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20240215143828718
+modified: 20240226141333816
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -104,22 +104,25 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]each:value[]$sort$]">> variable="sbb">
 <div class="parent-title">
 <$reveal type="nomatch" state=<<belongs-sort-state "$title$">> text="open">
-<$button dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">> class="tc-btn-invisible links" style="fill:#999;font-size:small;">
+<$button class="tc-btn-invisible links" style="fill:#999;font-size:small;">
 <$action-setfield $tiddler=<<belongs-sort-state "$title$">> text="open"/>{{$:/core/images/right-arrow}}
 </$button>
 </$reveal>
 <$reveal type="match" state=<<belongs-sort-state "$title$">> text="open">
-<$button dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">> class="tc-btn-invisible links" style="fill:#999;font-size:small;">
+<$button class="tc-btn-invisible links" style="fill:#999;font-size:small;">
 <$action-setfield $tiddler=<<belongs-sort-state "$title$">> text="close"/>{{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
 <span>(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">>/>)</span>
+<$button dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>]">> class="tc-btn-invisible sort-by-belongs-title">
+<$set name="belongs-sort-state-value" filter="[<belongs-sort-state '$title$'>get[text]match[open]]" value="close" emptyValue="open">
+<$action-setfield $tiddler=<<belongs-sort-state "$title$">> text=<<belongs-sort-state-value>>/>
+</$set>
 <$tiddler tiddler=<<sbb>>>
-<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> tooltip=<<currentTiddler>> class="tc-btn-invisible sort-by-belongs-title">
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-</$button>
 </$tiddler>
+</$button>
 </div>
 <$reveal type="match" state=<<belongs-sort-state "$title$">> text="open" tag="div" style="margin-top:1em;">
 <$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>

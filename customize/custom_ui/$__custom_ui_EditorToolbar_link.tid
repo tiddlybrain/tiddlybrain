@@ -3,8 +3,8 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]
 created: 20221101141524058
 creator: yuzijie
 description: Turn title into a link
-icon: $:/core/images/permalink-button
-modified: 20231229144452564
+icon: $:/core/images/import-button
+modified: 20240225191207112
 modifier: yuzijie
 shortcuts: ctrl-H
 tags: $:/tags/EditorToolbar customized
