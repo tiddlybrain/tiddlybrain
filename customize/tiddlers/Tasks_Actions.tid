@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240228141118079
+modified: 20240228141424452
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -60,6 +60,9 @@ Done: <<currentTiddler>></$button></li></$list>
 <$list filter="[prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li>
 <<task-list-deadline>><$button set="!!pause" setTo=<<curDate>>>Pause</$button>
 </li></$list>
+<$set name="wl" filter="[prefix[$:/task-state/]text[waiting]count[]addprefix[Waiting Steps: ]]" select="0"><li><$details summary=<<wl>>><ol>
+<$list filter="[prefix[$:/task-state/]text[waiting]!sort[date]]"><li><<task-list-waiting>></li></$list>
+</ol></$details></li></$set>
 <$list filter="[has[interval]!has[draft.of]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
 <$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 </$set></$list>
@@ -67,9 +70,6 @@ Done: <<currentTiddler>></$button></li></$list>
 <li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
 </$list></$vars>
 <$list filter="[tag[Task]status[Blocked]]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
-<$set name="wl" filter="[prefix[$:/task-state/]text[waiting]count[]addprefix[Waiting Steps: ]]" select="0"><li><$details summary=<<wl>>><ol>
-<$list filter="[prefix[$:/task-state/]text[waiting]!sort[date]]"><li><<task-list-waiting>></li></$list>
-</ol></$details></li></$set>
 </ol></$droppable>
 
 <$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
