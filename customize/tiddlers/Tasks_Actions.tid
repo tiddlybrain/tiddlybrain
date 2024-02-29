@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240228141424452
+modified: 20240229111607980
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -76,11 +76,11 @@ Done: <<currentTiddler>></$button></li></$list>
 <div class="tc-droppable-placeholder" style="display:block;">
 <table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
-<$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr style="line-height:24px;"><$set name="currTask" value=<<task>>>
-<td style="vertical-align:baseline;white-space:nowrap;overflow:hidden;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:4px 0;">
+<$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr><$set name="currTask" value=<<task>>>
+<td style="vertical-align:baseline;white-space:nowrap;overflow:hidden;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:7px 0;">
 @@color:#d300cc;<$transclude tiddler=<<task>> field="title"/>@@ <$transclude tiddler=<<task>> field="caption"/>
 </$button></td>
-<td><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
+<td style="padding:5px;"><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
 <$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div>
 <$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>>
 <$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&times;</$button>
