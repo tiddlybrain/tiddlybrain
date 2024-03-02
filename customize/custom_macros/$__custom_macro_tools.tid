@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240302153924329
+modified: 20240302162207444
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -234,7 +234,7 @@ type: text/vnd.tiddlywiki
 
 \define modal-edit-comment()
 <$list filter="[belongs.to<mTitle>note[Comment]]" emptyMessage="""<$button message="tm-close-tiddler">Create Comment
-<$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} note="Comment" type="text/plain" belongs.to="$(mTitle)$" caption="Comment of [[$(mTitle)$]]"/>
+<$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} tags="Snippet" note="Comment" type="text/plain" belongs.to="$(mTitle)$"/>
 <$action-deletetiddler $tiddler="$:/state/modal/history"/></$button>""">
 <$button message="tm-close-tiddler">Edit Comment
 <$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-sendmessage $message="tm-edit-tiddler" $param={{!!title}}/>
