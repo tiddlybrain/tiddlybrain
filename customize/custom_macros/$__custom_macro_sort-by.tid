@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20240226141333816
+modified: 20240302192106044
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -168,7 +168,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 <$transclude $variable="categories" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[tag<currentTiddler>]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}tagging[]tag<currentTiddler>] [tag<currentTiddler>!filter<tagged>]'/> items"/>
 </$droppable>
 <$transclude $variable="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
-<$list filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
+<$list filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div class="sort-by-belongs" style="margin-top:1em;">
 <$transclude $variable="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no" mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div></$list>
 </$vars></$set>
@@ -178,7 +178,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 <$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>><$vars tagged="[tags[]prefix<cat-prefix>]" tagsearch="$:/temp/tagsearch/$(currentTiddler)$">
 <$transclude $variable="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}tagging[]$item-filter$] [$item-filter$!filter<tagged>]'/> items"/>
 <$transclude $variable="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
-<$list filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div style="margin-top:1em;">
+<$list filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div class="sort-by-belongs" style="margin-top:1em;">
 <$transclude $variable="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no" mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div></$list>
 </$vars></$set>
