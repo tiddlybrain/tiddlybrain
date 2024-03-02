@@ -2,25 +2,12 @@ created: 20220217150254473
 creator: yuzijie
 keywords: 
 list-after: $:/core/ui/SideBar/More
-modified: 20240214114332839
+modified: 20240302145833219
 modifier: yuzijie
-tags: customized $:/tags/SideBar
+tags: customized $:/tags/SideBar Ignore
 title: Inbox
 type: text/vnd.tiddlywiki
 
-<ul style="line-height:2em;">
-<li><$details summary="Has Interval"><<sort-by-filter item-filter:"has[interval]!prefix[Flashcard]">></$details></li>
-<li><$details summary="Untagged Tiddlers"><<list-links "[!is[system]untagged[]!sort[modified]limit[100]] -[{$:/config/defaultTemplate}]">></$details></li>
-<li><$details summary="Not Finished"><<list-links "[status[未完待续]!sort[modified]]">></$details></li>
-<li>Non-existent Tags<ul><$list filter="[all[tiddlers]tags[]is[missing]unique[]!is[system]] -Task -Comment -Snippet -Ignore -CodeMirror -customized">
-<li>{{!!title}}<<list-links "[all[tiddlers]tag{!!title}]">></li>
-</$list></ul></li>
-<li>Non-existent Parents<ul><$list filter="[all[tiddlers]get[belongs.to]is[missing]unique[]]">
-<li>{{!!title}}<<list-links "[all[tiddlers]belongs.to{!!title}]">></li>
-</$list></ul></li>
-<li>Branch Tiddlers Without Tags<div><ol>
-<$list filter="[!is[system]search:title:literal[/]]"><$set name="tag" filter="[all[current]split[/]first[]]" select="0">
-<$list filter="[all[current]!tag<tag>]"><li><$transclude $variable="l" title={{!!title}}/></li></$list>
-</$set></$list>
-</ol></div></li>
-</ul>
+<div style="font-size:small;margin-top:-5px;">
+<$transclude $variable="tabs" tabsList="[tag[Inbox]!has[draft.of]sort[order]]" default="Inbox/Abnormal" state="$:/state/inbox" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+</div>
