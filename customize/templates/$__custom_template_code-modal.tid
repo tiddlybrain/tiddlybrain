@@ -1,7 +1,7 @@
 created: 20190216164326004
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20230809103909081
+modified: 20240302153502232
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$tiddler tiddler=<<mTitle>>><div style="margin-top:15px;"><$let modal="yes"><<external-links>></$let></div></$tiddler>
 <section class="code-viewer" style="margin:15px 0;">
-<$list filter="[tag[Comment]belongs.to<mTitle>]">
+<$list filter="[belongs.to<mTitle>note[Comment]]">
 <$list filter="[{$:/status/IsReadOnly}match[yes]]" emptyMessage="<$edit-text class='tc-edit-texteditor heightless'/>" variable="NONE">
 <div class="comment"><$codeblock code={{!!text}} language="text"/></div>
 </$list>

@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20240217005151447
+modified: 20240302153152030
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -30,22 +30,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[tiddlers]belongs.to<actionTiddler>]"><$action-setfield belongs.to="" $timestamp="no"/></$list>
 <$list filter="[all[tiddlers]tag<actionTiddler>]"><$action-listops $field="tags" $subfilter="-[<actionTiddler>]" $timestamp="no"/></$list>
 <$list filter="[all[tiddlers]contains<actionTiddler>]"><$action-listops $field="list" $subfilter="-[<actionTiddler>]" $timestamp="no"/></$list>
-\end
-
-\define droppable-remove-tags-action()
-<$list filter="[<actionTiddler>get[tags]enlist-input[]] -Task -Comment -Snippet -Ignore -customized" variable="theTag">
-<$action-listops $tiddler=<<actionTiddler>> $tags="-[<theTag>]"/>
-</$list>
-\end
-
-\define droppable-remove-snippet-action()
-<$fieldmangler tiddler=<<actionTiddler>>>
-<$action-sendmessage $message="tm-remove-field" $param="belongs.to"/>
-<$action-sendmessage $message="tm-remove-field" $param="note"/>
-<$action-sendmessage $message="tm-remove-field" $param="parents"/>
-<$action-sendmessage $message="tm-remove-field" $param="keywords"/>
-<$action-sendmessage $message="tm-remove-tag" $param="Snippet"/>
-</$fieldmangler>
 \end
 
 \define droppable-rename-set-caption-action(template)
@@ -97,10 +81,6 @@ type: text/vnd.tiddlywiki
 #> `<<droppable-index-tree>>`
 # ''删除 Tiddler 的 action''
 #> `<<droppable-delete-action>>`
-# ''删除 Tiddler 的 Tags 的 action''
-#> `<<droppable-remove-tags-action>>`
-# ''将 Snippet 变为普通 tiddler''
-#> `<<droppable-remove-snippet-action>>`
 # ''将旧 Tiddler 按照标准重命名''
 #> `<<droppable-rename-set-caption-action
   template:"新 Tiddler 模板">>`
