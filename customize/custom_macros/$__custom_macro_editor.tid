@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240224162843614
+modified: 20240304085344314
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -69,21 +69,6 @@ type: text/vnd.tiddlywiki
 <td colspan="2" style="position:relative;">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>&nbsp;
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
-<$list filter="[<draft>type[text/vnd.tiddlywiki]!has[celltpl]!tag[Task]]"><$fieldmangler>
-<$button set="!!celltpl" setTo="custom-template-task" message="tm-add-tag" param="Task" style="margin-left:5px;" tooltip="Make it a task">Task</$button>
-</$fieldmangler></$list>
-<$list filter="[<draft>is[tiddler]!code-body[yes]]"><$fieldmangler>
-<$button style="margin-left:5px;" tooltip="Code Template"><$action-setfield code-body="yes" type="text/vnd.tiddlywiki"/>Code</$button>
-</$fieldmangler></$list>
-<$list filter="[<draft>is[tiddler]!tag[Flashcard]]"><$fieldmangler>
-<$button message="tm-add-tag" param="Flashcard" style="margin-left:5px;" tooltip="Make it a Flashcard">Flashcard</$button>
-</$fieldmangler></$list>
-<$list filter="[<draft>blsearch[]has[note]limit[1]]" variable="NONE">
-<$button style="margin-left:5px;" popup="$:/state/popup/editor/backlinks">Backlinks</$button>
-<$reveal type="popup" state="$:/state/popup/editor/backlinks" tag="div"><div class="record-drop-down" style="padding:10px 15px;line-height:2em;min-width:auto;">
-<$list filter="[<draft>blsearch[]get[note]unique[]]" variable="key"><<editor-backlink-button>><br></$list>
-</div></$reveal>
-</$list>
 <$list filter="[<mTitle>is[blank]]">
 <$reveal type="nomatch" state="$:/state/editor-display" text="show">
 <$button set="$:/state/editor-display" setTo="show" style="margin-left:5px;">{{$:/core/images/preview-closed}}</$button>
@@ -92,6 +77,29 @@ type: text/vnd.tiddlywiki
 <$button set="$:/state/editor-display" setTo="hide" style="margin-left:5px;">{{$:/core/images/preview-open}}</$button>
 </$reveal>
 </$list>
+<$list filter="[<draft>type[text/vnd.tiddlywiki]!has[celltpl]!tag[Task]]"><$fieldmangler>
+<$button set="!!celltpl" setTo="custom-template-task" message="tm-add-tag" param="Task" style="margin-left:2px;" tooltip="Make it a task">Task</$button>
+</$fieldmangler></$list>
+<$list filter="[<draft>is[tiddler]!code-body[yes]]"><$fieldmangler>
+<$button style="margin-left:2px;" tooltip="Code Template"><$action-setfield code-body="yes" type="text/vnd.tiddlywiki"/>Code</$button>
+</$fieldmangler></$list>
+<$list filter="[<draft>is[tiddler]!tag[Flashcard]]"><$fieldmangler>
+<$button message="tm-add-tag" param="Flashcard" style="margin-left:2px;" tooltip="Make it a Flashcard">Flashcard</$button>
+</$fieldmangler></$list>
+<$list filter="[<draft>blsearch[]has[note]limit[1]]" variable="NONE">
+<$button style="margin-left:2px;" popup="$:/state/popup/editor/backlinks">Backlinks</$button>
+<$reveal type="popup" state="$:/state/popup/editor/backlinks" tag="div"><div class="record-drop-down" style="padding:10px 15px;line-height:2em;min-width:auto;">
+<$list filter="[<draft>blsearch[]get[note]unique[]]" variable="key"><<editor-backlink-button>><br></$list>
+</div></$reveal>
+</$list>
+<$set name="today" value=<<now YYYY0MM0DD>>>
+<$list filter="[<mTitle>is[blank]]"><$list filter="[<draft>!tag[Task]has[date]!date<today>]">
+<$button style="margin-left:2px;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
+</$list></$list>
+<$list filter="[<mTitle>!is[blank]]"><$list filter="[all[current]!tag[Task]has[date]!date<today>]">
+<$button style="margin-left:2px;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
+</$list></$list>
+</$set>
 </td>
 </tr>
 </tbody></table>

@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240225082551563
+modified: 20240304084127470
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -24,9 +24,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[{$:/temp/Draft!!draft}!match[$:/Draft]]">
 <$button set="$:/temp/Draft!!draft" setTo="$:/Draft">Draft</$button>
 <$button set="$:/state/editor-toolbar" setTo="toolbar">Toolbar</$button>
-<$set name="today" value=<<now YYYY0MM0DD>>><$list filter="[<draft>!tag[Task]has[date]!date<today>]">
-<$button><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
-</$list></$set>
 <$button set="$:/state/editor-toolbar" setTo="keywords" style=<<style>>>Regenerate Keywords</$button>
 </$list>
 </div>
