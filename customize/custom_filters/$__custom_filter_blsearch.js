@@ -19,7 +19,7 @@ Helper functions
 var getBacklinksIterator = function(source,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|^)" + title + "(\\]\\]|;;|\"|\'|:|\\n|$)", re = new RegExp(pattern);
+		var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|^)" + title + "(\\]\\]|;;|\"|\'|:|\\s|\\n|$)", re = new RegExp(pattern);
 		options.wiki.each(function(newTiddler,newTitle) {
 			let content = newTiddler.getFieldString("text");
 			if(re.test(content)) {
