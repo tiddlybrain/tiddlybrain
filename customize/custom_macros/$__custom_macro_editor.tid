@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240304090617578
+modified: 20240304101909283
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -66,8 +66,8 @@ type: text/vnd.tiddlywiki
 </tr></$list>
 <tr>
 <td style="width:100px;padding:6px 7px;">type</td>
-<td colspan="2" style="position:relative;">
-<$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>&nbsp;
+<td colspan="2" style="position:relative;font-size:small;">
+<$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
 <$list filter="[<mTitle>is[blank]]">
 <$reveal type="nomatch" state="$:/state/editor-display" text="show">
