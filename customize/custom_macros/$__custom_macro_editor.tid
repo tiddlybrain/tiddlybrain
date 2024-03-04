@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240304085344314
+modified: 20240304090617578
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -71,10 +71,10 @@ type: text/vnd.tiddlywiki
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
 <$list filter="[<mTitle>is[blank]]">
 <$reveal type="nomatch" state="$:/state/editor-display" text="show">
-<$button set="$:/state/editor-display" setTo="show" style="margin-left:5px;">{{$:/core/images/preview-closed}}</$button>
+<$button set="$:/state/editor-display" setTo="show" style="margin-left:2px;">{{$:/core/images/preview-closed}}</$button>
 </$reveal>
 <$reveal type="match" state="$:/state/editor-display" text="show">
-<$button set="$:/state/editor-display" setTo="hide" style="margin-left:5px;">{{$:/core/images/preview-open}}</$button>
+<$button set="$:/state/editor-display" setTo="hide" style="margin-left:2px;">{{$:/core/images/preview-open}}</$button>
 </$reveal>
 </$list>
 <$list filter="[<draft>type[text/vnd.tiddlywiki]!has[celltpl]!tag[Task]]"><$fieldmangler>
