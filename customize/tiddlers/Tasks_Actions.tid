@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240229111607980
+modified: 20240305035733649
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -22,9 +22,9 @@ type: text/vnd.tiddlywiki
 <$set name="right" filter="[<curDate>nextDay[1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-right}}</$button>
 </$set>
+<$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$button to=<<journal-title>> class="tc-btn-invisible tc-tiddlylink l"><$tiddler tiddler=<<journal-title>>><$transclude field="caption"/></$tiddler></$button>
 <$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
-<$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="Journals: <<bl>>
 TBC: <<tbc>>
@@ -55,8 +55,8 @@ Done: <<currentTiddler>></$button></li></$list>
 </$list>
 </$list>
 </li></$set></$list>
-<$list filter="[prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>]"><li><<task-list-doing>></li></$list>
+<$list filter="[prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li>
 <<task-list-deadline>><$button set="!!pause" setTo=<<curDate>>>Pause</$button>
 </li></$list>
