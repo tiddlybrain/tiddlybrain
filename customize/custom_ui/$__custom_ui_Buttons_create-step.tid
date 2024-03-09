@@ -1,0 +1,20 @@
+caption: Create a new step
+created: 20220118202607895
+creator: yuzijie
+description: Create a new step based on the current tiddler
+modified: 20240309091157380
+modifier: yuzijie
+tags: $:/tags/ViewToolbar customized
+title: $:/custom/ui/Buttons/create-step
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$button tooltip="Create a new step" aria-label="Create a new step" class=<<tv-config-toolbar-class>>>
+<$transclude $variable="step-action" template={{$:/config/defaultTemplate}}/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/save-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="create a new step"/></span>
+</$list>
+</$button>
