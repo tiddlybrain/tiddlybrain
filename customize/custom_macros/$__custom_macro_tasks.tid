@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240305035536931
+modified: 20240309223157479
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -95,7 +95,7 @@ type: text/vnd.tiddlywiki
 
 \define task-list()
 <$list filter="[[$:/temp/task-list]is[tiddler]]">
-<$button><$action-deletetiddler $tiddler="$:/temp/task-list"/>&times; <$transclude tiddler={{$:/temp/task-list}} field="caption"/></$button>
+<$button><$action-deletetiddler $tiddler="$:/temp/task-list"/>&#10005; <$transclude tiddler={{$:/temp/task-list}} field="caption"/></$button>
 </$list>
 <$checkbox tiddler="$:/temp/task/doing" field="text" checked="yes" unchecked="no" default="yes"> Doing</$checkbox>
 <$checkbox tiddler="$:/temp/task/deadline" field="text" checked="yes" unchecked="no" default="yes"> Deadline</$checkbox>

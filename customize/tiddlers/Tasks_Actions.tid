@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240307141539028
+modified: 20240309222941396
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -83,7 +83,7 @@ Done: <<currentTiddler>></$button></li></$list>
 <td style="padding:5px;"><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
 <$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div>
 <$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>>
-<$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&times;</$button>
+<$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&#10005;</$button>
 </$button>
 </div></$set>
 </$list></td>

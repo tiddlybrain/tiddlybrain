@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20240224091657039
+modified: 20240309223136378
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -56,7 +56,7 @@ Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wiki
 <$list filter="[<select-state>search:text:literal[indexSearch:]]" variable="NONE">
 <$set name="index" filter="[<select-state>get[text]splitregexp[:|{]nth[2]]" select="0">
 <$list filter="[<select-value>!is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">
-<$action-deletetiddler $tiddler=<<select-value>>/><<select-value-content>> &times;
+<$action-deletetiddler $tiddler=<<select-value>>/><<select-value-content>> &#10005;
 </$button>""" variable="NONE">
 <$select tiddler=<<select-value>> tooltip="Pickup a value"><option value="*">Has Value</option><option value="#">No Value</option>
 <$set name="results" filter="$filter$ +[getindexList<index>each:value[]!is[blank]]">
@@ -102,7 +102,7 @@ Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wiki
 <span style="border-bottom:1px dotted #ccc;padding:0 3px;"><$transclude $variable="calculator-result" filter=<<__filter__>>/></span>
 </$list>
 <$list filter="[[$:/temp/calculator/$(currentTiddler)$/$title$]is[tiddler]]">
-<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<currentTiddler>>/>&times;</$button>
+<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<currentTiddler>>/>&#10005;</$button>
 </$list>
 </span></$list>
 \end
