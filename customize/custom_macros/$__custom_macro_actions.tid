@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20240302153152030
+modified: 20240309094010508
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -75,6 +75,15 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
+\define step-action(template)
+<$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue={{!!caption}} select="0">
+<$action-createtiddler $basetitle=<<unusedtitle '$template$'>> caption={{{ [<content>addprefix[STEP: ]] }}} date=<<now YYYY0MM0DD>> text="<<l '$(currentTiddler)$' description:'yes' mode:'cl'>>">
+<$let date=<<now YYYY0MM0DD>> tiddler=<<createTiddler-title>>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<step-template>>/></$let>
+<$action-sendmessage $message="tm-close-tiddler"/><$action-navigate $to=<<createTiddler-title>> $scroll="no"/>
+</$action-createtiddler>
+</$set>
+\end
+
 # ''复制 Tiddler 的 action''
 #> `<<droppable-clone-action>>`
 # ''修改 index tree 列表 action''
@@ -100,3 +109,6 @@ type: text/vnd.tiddlywiki
 # ''给 Data Tiddler 添加空白键''
 #> `<<droppable-add-empty-indexes
   indexes:"键值列表">>`
+# ''复制 Step 并创建一个新的 Tiddler''
+#> `<<step-action
+  template:"新 Tiddler 的标题模板">>`
