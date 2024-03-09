@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240304101909283
+modified: 20240309220307493
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -14,34 +14,23 @@ type: text/vnd.tiddlywiki
 \define editor-title(style)
 <table style="$style$"><tbody>
 <$list filter="[[$(modal)$]!match[yes]]" variable="NONE"><tr><td colspan="3" style="text-align:center;"><$set name="tv-wikilinks" value="no">
-<$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<span style="color:green;">
+<$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<span style="color:green;margin-right:10px;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list>
 </span>
 <$list filter="[all[current]!has[draft.of]]">
-<$button class="tc-btn-invisible">{{$:/core/images/edit-button}}
-<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/>
-</$button>
-<$button class="tc-btn-invisible">{{$:/core/images/cancel-button}}
-<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
-<$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]">
-<$action-setfield $tiddler="$:/HistoryList" current-tiddler=""/>
-</$list>
+<$button style="color:green;">edit<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/></$button>
+<$button style="color:green;">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
+<$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]"><$action-setfield $tiddler="$:/HistoryList" current-tiddler=""/></$list>
 </$button>
 </$list>""">
-<$button class="tc-btn-invisible" style="color:brown;">{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &times;
-<$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$button class="tc-btn-invisible" style="color:brown;margin-right:10px;">
+{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
 <$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value="""<<l "$(currentTiddler)$" description:"">>""" emptyValue=<<currentTiddler>>>
-<$button class="tc-btn-invisible" style="fill:red;">{{$:/core/images/copy-clipboard}}
-<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<link-text>>/>
-</$button>
+<$button style="color:brown;">copy<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<link-text>>/></$button>
 </$set>
-<$button class="tc-btn-invisible" style="fill:red;">{{$:/core/images/open-window}}
-<$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/>
-</$button>
-<$button class="tc-btn-invisible" style="fill:red;">{{$:/core/images/right-arrow}}
-<<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/>
-</$button>
+<$button style="color:brown;">open<$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/></$button>
+<$button style="color:brown;">sidebar<<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/></$button>
 </$list>
 </$set></td></tr></$list>
 <tr>

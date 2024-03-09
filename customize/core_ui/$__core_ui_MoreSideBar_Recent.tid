@@ -1,6 +1,6 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
 list-before: $:/core/ui/MoreSideBar/All
-modified: 20240131232205182
+modified: 20240309221030755
 modifier: yuzijie
 tags: $:/tags/MoreSideBar customized
 title: $:/core/ui/MoreSideBar/Recent
@@ -19,8 +19,8 @@ type: text/vnd.tiddlywiki
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$button>
-<$list filter="[[$:/config/sidebar/pinned]contains<currentTiddler>]" emptyMessage="""<$button class="tc-btn-invisible">
-<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>&times;
+<$list filter="[[$:/config/sidebar/pinned]contains<currentTiddler>]" emptyMessage="""<$button class="tc-btn-invisible" style="color:#5778d8;">
+<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>&#10005;
 </$button>""" variable="NONE"><$button class="tc-btn-invisible">
 <$action-listops $tiddler="$:/config/sidebar/pinned" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>&#128204;
 </$button></$list>

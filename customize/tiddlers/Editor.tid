@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240304084127470
+modified: 20240309221444863
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -16,14 +16,14 @@ type: text/vnd.tiddlywiki
 <div class="tc-droppable-placeholder" style="display:block;">
 <div style="margin-bottom:5px;">
 <$list filter="[{$:/temp/Draft!!draft}match[$:/Draft]]">
-<$button style="color:red;"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft&times;</$button>
+<$button style="color:red;"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft &#10005;</$button>
 <$button class="tc-btn-invisible" style="fill:red;padding-left:2px;">{{$:/core/images/open-window}}
 <$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/>
 </$button>
 </$list>
 <$list filter="[{$:/temp/Draft!!draft}!match[$:/Draft]]">
-<$button set="$:/temp/Draft!!draft" setTo="$:/Draft">Draft</$button>
 <$button set="$:/state/editor-toolbar" setTo="toolbar">Toolbar</$button>
+<$button set="$:/temp/Draft!!draft" setTo="$:/Draft">Draft</$button>
 <$button set="$:/state/editor-toolbar" setTo="keywords" style=<<style>>>Regenerate Keywords</$button>
 </$list>
 </div>

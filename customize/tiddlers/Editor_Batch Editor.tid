@@ -2,7 +2,7 @@ caption: Batch Editor
 created: 20200425125950200
 creator: yuzijie
 keywords: 
-modified: 20231227003819609
+modified: 20240309220629505
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Batch Editor
@@ -39,7 +39,7 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[[$:/temp/tools/batch-edit/filter]has[note]]" emptyMessage="""<$button set="$:/temp/tools/batch-edit/filter!!note" setTo="[enlist{$:/StoryList!!list}]">StoryList</$button>""">
 <$button><$list filter={{$:/temp/tools/batch-edit/filter!!note}}><$action-navigate $to=<<currentTiddler>>/></$list>Open All</$button>
-<$button class="tc-btn-invisible tc-tiddlylink"><$action-deletetiddler $tiddler=<<currentTiddler>>/>&times;</$button>
+<$button class="tc-btn-invisible tc-tiddlylink"><$action-deletetiddler $tiddler=<<currentTiddler>>/>&#10005;</$button>
 </$list>
 </$droppable>
 
