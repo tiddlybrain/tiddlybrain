@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240302192354799
+modified: 20240311102915757
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -327,7 +327,7 @@ details[open] > *:last-child {margin-bottom: 0 !important;}
 details > summary {padding: 0 0 0 1.1em; background: white; margin: 0 -0.5em 0 -1em;}
 details > summary:hover {text-decoration: underline;}
 .tc-sidebar-lists details > summary {background: #f4f4f4;}
-details details > summary, .tc-sidebar-lists details details > summary {background: #f8f8f8;}
+details details > summary, .tc-sidebar-lists details details > summary, .tc-sidebar-lists .snippet-content details details > summary {background: #f8f8f8;}
 details details[open] {border: none;}
 .tc-sidebar-lists .editor-display details > summary, .tc-sidebar-lists .snippet-content details > summary {background: white;}
 details > .snippet-container, details > .bl-container, details > p > .snippet-container, details > p > .bl-container {padding-left: 10px;}
