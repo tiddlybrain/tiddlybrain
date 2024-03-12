@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20240309094010508
+modified: 20240312153814864
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -75,13 +75,17 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
+\define step-action-template() <<a "$(content)$" "$(createTiddler-title)$;;$(currentTiddler)$" t:$(date)$>>
+
 \define step-action(template)
-<$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue={{!!caption}} select="0">
-<$action-createtiddler $basetitle=<<unusedtitle '$template$'>> caption={{{ [<content>addprefix[STEP: ]] }}} date=<<now YYYY0MM0DD>> text="<<l '$(currentTiddler)$' description:'yes' mode:'cl'>>">
-<$let date=<<now YYYY0MM0DD>> tiddler=<<createTiddler-title>>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<step-template>>/></$let>
+<$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue={{!!caption}}><$let date=<<now YYYY0MM0DD>>>
+<$action-createtiddler $basetitle=<<unusedtitle '$template$'>> caption={{{ [<content>addprefix[STEP: ]] }}} date=<<date>> text="!!! References
+
+<<l '$(currentTiddler)$' description:'yes' mode:'cl'>>" type="text/vnd.tiddlywiki">
+<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<step-action-template>>/>
 <$action-sendmessage $message="tm-close-tiddler"/><$action-navigate $to=<<createTiddler-title>> $scroll="no"/>
 </$action-createtiddler>
-</$set>
+</$let></$set>
 \end
 
 # ''复制 Tiddler 的 action''
