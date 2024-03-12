@@ -3,12 +3,12 @@ created: 20200321191916029
 creator: yuzijie
 keywords: 
 list-before: Inbox
-modified: 20240312144848539
+modified: 20240312222310656
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Tasks
 type: text/vnd.tiddlywiki
 
-<div style="font-size:small;margin-top:-5px;">
+<div style="font-size:small;margin-top:-5px;"><$set name="direct-open" value="yes">
 <$transclude $variable="tabs" tabsList="[tag[Tasks]!has[draft.of]sort[order]]" default="Tasks/Actions" state="$:/state/tasks" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
-</div>
+</$set></div>

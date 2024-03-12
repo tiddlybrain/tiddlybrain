@@ -2,12 +2,12 @@ created: 20220217150254473
 creator: yuzijie
 keywords: 
 list-before: Index
-modified: 20240312150407412
+modified: 20240312222642454
 modifier: yuzijie
 tags: customized $:/tags/SideBar Ignore
 title: Inbox
 type: text/vnd.tiddlywiki
 
-<div class="inbox" style="font-size:small;margin-top:-5px;"><$set name="direct-open" value="yes">
+<div style="font-size:small;margin-top:-5px;"><$set name="direct-open" value="yes">
 <$transclude $variable="tabs" tabsList="[tag[Inbox]!has[draft.of]sort[order]]" default="Inbox/Abnormal" state="$:/state/inbox" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </$set></div>
