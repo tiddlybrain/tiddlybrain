@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20240302192106044
+modified: 20240314131233293
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -45,13 +45,6 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
-\define toggle-tags-button(tags-filter)
-<$button class="tc-btn-invisible"><$list filter="[prefix[$:/state/sort/$(currentTiddler)$/]text[open]limit[1]]" emptyMessage="""Open all
-<$list filter=<<__tags-filter__>> variable="sb"><$action-setfield $tiddler=<<sb-sort-state>> text="open"/></$list>""" variable="NONE">Close all
-<$action-deletetiddler $filter="[prefix[$:/state/sort/$(currentTiddler)$/]]"/>
-</$list></$button>
-\end
-
 \define belongs-display-state() $:/state/belongs/display/$(currentTiddler)$/$(key)$
 
 \define categories(tags-filter, cat-prefix, filter, cat-filter, tag-caption, search-title:"Search here")
@@ -74,9 +67,6 @@ type: text/vnd.tiddlywiki
 <div class="categories-display"><$button class="tc-btn-invisible">
 <$list filter="[<belongs-display-state>is[tiddler]]" emptyMessage="""&#9782;<$action-setfield $tiddler=<<belongs-display-state>> text="list"/>""" variable="NONE">&#9776;<$action-deletetiddler $filter="[<belongs-display-state>]"/></$list>
 </$button></div>
-<div class="categories-toggle">
-<$transclude $variable="toggle-tags-button" tags-filter=<<__tags-filter__>>/>
-</div>
 <div class="categories-update">
 <$transclude $variable="update-tags-button" cat-prefix=<<__cat-prefix__>> filter=<<__filter__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
 </div>
@@ -93,6 +83,10 @@ type: text/vnd.tiddlywiki
 \define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default", has-filter:"yes", mode, checkbox, sort-order)
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
+<$button style="font-size:smaller;color:unset;" class="tc-btn-invisible">
+<$list filter="[prefix[$:/state/sort/$(currentTiddler)$/$title$/]text[open]limit[1]]" emptyMessage="<$list filter=<<filter-build '$filter$ +[!has[draft.of]]' '+[get[belongs.to]each:value[]]'>> variable='sbb'><$action-setfield $tiddler=<<belongs-sort-state '$title$'>> text='open'/></$list>"><$action-deletetiddler $filter="[prefix[$:/state/sort/$(currentTiddler)$/$title$/]]"/></$list>
+(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]each:value[]]">>/>)
+</$button>
 filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">> cfilter=<<__cfilter__>>/>
 </div></$list>
 <$list filter="[<__mode__>!match[list]]" emptyMessage="""<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
@@ -169,7 +163,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 </$droppable>
 <$transclude $variable="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 <$list filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div class="sort-by-belongs" style="margin-top:1em;">
-<$transclude $variable="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no" mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div></$list>
 </$vars></$set>
 \end
@@ -179,7 +173,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 <$transclude $variable="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}tagging[]$item-filter$] [$item-filter$!filter<tagged>]'/> items"/>
 <$transclude $variable="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 <$list filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div class="sort-by-belongs" style="margin-top:1em;">
-<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> has-filter="no" mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div></$list>
 </$vars></$set>
 \end

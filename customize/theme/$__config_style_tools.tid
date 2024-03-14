@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240312223501893
+modified: 20240314132110993
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -151,22 +151,20 @@ blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #
 /* For Macro: sort-by-belongs */
 button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 button.sort-by-belongs-title:hover {text-decoration: underline;}
-.belongs-display {margin: 1em 0 1em 3px;}
+.data-table .sort-by-belongs .macro-table {margin-top: 10px;}
+.belongs-display, .sort-by-belongs .macro-table {margin: 1em 0 1em 3px;}
 .parent-title {margin-top: 0.3em; white-space: nowrap;}
 
 /* For Macro: sort-by-tags */
 .categories {display: block; margin-bottom: 5px; background: #ccc; padding: 2px 10px 0; border: 1px solid #ddd; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); line-height: 1.5em; position: relative; max-height: 30px; overflow: hidden; font-size: small; transition: max-height 1s ease-in-out;}
 .categories:hover {max-height: 1000px;}
-.categories-clear {position: absolute; top: 2px; right: 130px;}
-.categories-toggle {position: absolute; top: 2px; right: 76px;}
+.categories-clear {position: absolute; top: 2px; right: 76px;}
 .categories-update {position: absolute; top: 2px; right: 28px;}
 .categories-display {position: absolute; top: 2px; right: 10px;}
-.sort-by-belongs .macro-table {margin-bottom: 0;}
-.data-table .sort-by-belongs .macro-table {margin-top: 10px;}
 .categories-caption {margin-bottom: 0.2em;}
 .categories-caption input {background: transparent; border: none; border-bottom: 1px solid white; width: 60%; color: white;}
 .categories-caption button svg {fill: white; filter: drop-shadow(0 1px 1px rgb(150 150 150 / 50%));}
-.categories-caption button, .categories-clear button, .categories-update button, .categories-toggle button, .categories-display button {color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%);}
+.categories-caption button, .categories-clear button, .categories-update button, .categories-display button {color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%);}
 .categories-update button:disabled {color: #ddd; cursor: not-allowed;}
 
 /* For Macro: record-popup */
