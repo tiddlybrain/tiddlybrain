@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240309220307493
+modified: 20240314154602668
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -66,6 +66,12 @@ type: text/vnd.tiddlywiki
 <$button set="$:/state/editor-display" setTo="hide" style="margin-left:2px;">{{$:/core/images/preview-open}}</$button>
 </$reveal>
 </$list>
+<$list filter="[<draft>blsearch[]has[note]limit[1]]" variable="NONE">
+<$button style="margin-left:2px;" popup="$:/state/popup/editor/backlinks">Backlinks</$button>
+<$reveal type="popup" state="$:/state/popup/editor/backlinks" tag="div"><div class="record-drop-down" style="padding:10px 15px;line-height:2em;min-width:auto;">
+<$list filter="[<draft>blsearch[]get[note]unique[]]" variable="key"><<editor-backlink-button>><br></$list>
+</div></$reveal>
+</$list>
 <$list filter="[<draft>type[text/vnd.tiddlywiki]!has[celltpl]!tag[Task]]"><$fieldmangler>
 <$button set="!!celltpl" setTo="custom-template-task" message="tm-add-tag" param="Task" style="margin-left:2px;" tooltip="Make it a task">Task</$button>
 </$fieldmangler></$list>
@@ -75,18 +81,12 @@ type: text/vnd.tiddlywiki
 <$list filter="[<draft>is[tiddler]!tag[Flashcard]]"><$fieldmangler>
 <$button message="tm-add-tag" param="Flashcard" style="margin-left:2px;" tooltip="Make it a Flashcard">Flashcard</$button>
 </$fieldmangler></$list>
-<$list filter="[<draft>blsearch[]has[note]limit[1]]" variable="NONE">
-<$button style="margin-left:2px;" popup="$:/state/popup/editor/backlinks">Backlinks</$button>
-<$reveal type="popup" state="$:/state/popup/editor/backlinks" tag="div"><div class="record-drop-down" style="padding:10px 15px;line-height:2em;min-width:auto;">
-<$list filter="[<draft>blsearch[]get[note]unique[]]" variable="key"><<editor-backlink-button>><br></$list>
-</div></$reveal>
-</$list>
 <$set name="today" value=<<now YYYY0MM0DD>>>
 <$list filter="[<mTitle>is[blank]]"><$list filter="[<draft>!tag[Task]has[date]!date<today>]">
-<$button style="margin-left:2px;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
+<$button style="margin-left:10px;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
 </$list></$list>
 <$list filter="[<mTitle>!is[blank]]"><$list filter="[all[current]!tag[Task]has[date]!date<today>]">
-<$button style="margin-left:2px;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
+<$button style="margin-left:10px;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
 </$list></$list>
 </$set>
 </td>
