@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240311205008426
+modified: 20240314134540842
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -39,7 +39,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define snippet-modal-actions()
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$action-navigate/>" variable="NONE">
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[[$(direct-open)$]match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
 <$list filter="[[$(direct-open)$]!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>

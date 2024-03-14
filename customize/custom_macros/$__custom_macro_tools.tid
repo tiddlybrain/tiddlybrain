@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240312151344479
+modified: 20240314134549012
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -150,7 +150,7 @@ type: text/vnd.tiddlywiki
 \define brcap(levels:"2", new:" - ", old:"/") <$text text={{{ [all[current]split<__old__>butfirst<__levels__>join<__new__>] }}}/>
 
 \define modal-actions()
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$action-navigate/>" variable="NONE">
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[[$(direct-open)$]match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
