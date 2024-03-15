@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: Inbox
-modified: 20240313134634990
+modified: 20240315210926290
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -34,7 +34,7 @@ type: text/vnd.tiddlywiki
 </$set>
 </$list>""">
 <$reveal type="nomatch" state="$:/state/editor-display" text="show">
-<$list filter="[{$:/temp/Draft!!draft}!match[$:/Draft]]" variable="NONE"><$transclude $variable="editor-title" style=<<edit-table-style>>/></$list>
+<$list filter="[<draft>!match[$:/Draft]]" variable="NONE"><$transclude $variable="editor-title" style=<<edit-table-style>>/></$list>
 <$set name="edit-area-class" filter="[[$:/temp/Draft]!has[draft]]" value="edit-area tc-edit-texteditor" emptyValue="edit-area tc-edit-texteditor red">
 <$list filter="[all[current]!has[_canonical_uri]!is[image]]" variable="NONE"><$edit-text tag="textarea" autoHeight="no" focus="yes" class=<<edit-area-class>>>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
@@ -70,7 +70,7 @@ type: text/vnd.tiddlywiki
 <$reveal type="match" state="$:/state/editor-display" text="show" tag="div">
 <$transclude $variable="editor-display" style=<<edit-table-style>>/>
 </$reveal>
-<$list filter="[{$:/temp/Draft!!draft}!match[$:/Draft]]" variable="NONE">
+<$list filter="[<draft>!match[$:/Draft]]" variable="NONE">
 <$reveal type="nomatch" state="$:/state/editor-display" text="show" tag="table" style=<<edit-table-style>>><tbody>
 <$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] note date path url dir interval finish fold order kw question shortcap" variable="fieldName"><tr>
 <td style="width:100px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
