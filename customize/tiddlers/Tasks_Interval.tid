@@ -2,11 +2,11 @@ caption: Has Interval
 created: 20240302151400875
 creator: yuzijie
 keywords: 
-modified: 20240302190259975
+modified: 20240325032131384
 modifier: yuzijie
-order: 4
-tags: customized Inbox
-title: Inbox/Interval
+order: 5
+tags: customized Tasks
+title: Tasks/Interval
 type: text/vnd.tiddlywiki
 
 <<sort-by-filter item-filter:"has[interval]!prefix[Flashcard]">>
