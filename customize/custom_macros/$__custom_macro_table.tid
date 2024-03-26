@@ -1,31 +1,31 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20240117133017854
+modified: 20240326010407937
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
 type: text/vnd.tiddlywiki
 
-\define cell-value-iterator()
+\define cell-value-iterator(description)
 <$wikify name="content" text=<<datum>>>
-<$list filter="[<content>search:title:literal[;;]]" emptyMessage=<<datum>> variable="value"><<cell-value-normal>></$list>
+<$list filter="[<content>search:title:literal[;;]]" emptyMessage=<<datum>> variable="value"><<cell-value-normal description:"$description$">></$list>
 </$wikify>
 \end
 
-\define cell-value-normal()
+\define cell-value-normal(description)
 <$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
 <$list filter="[<datum>!search:title:regexp[<<snippet|<<bl]]" emptyMessage=<<datum>> variable="NONE">
-<div><$list filter="[field:title<datum>]" emptyMessage=<<cell-value-iterator>>>
-<$transclude $variable="l" title={{!!title}} class="normal-weight" links="yes" note="yes" style="display:block;white-space:nowrap;overflow:hidden;"/>
+<div><$list filter="[field:title<datum>]" emptyMessage=<<cell-value-iterator description:"$description$">>>
+<$transclude $variable="l" title={{!!title}} class="normal-weight" links="yes" note="yes" description="$description$" style="display:block;white-space:nowrap;overflow:hidden;"/>
 </$list></div>
 </$list>
 </$list>
 \end
 
-\define cell-value()
-<$list filter="[<current>get[celltpl]is[tiddler]]" emptyMessage=<<cell-value-normal>> variable="tpl">
+\define cell-value(description)
+<$list filter="[<current>get[celltpl]is[tiddler]]" emptyMessage=<<cell-value-normal description:"$description$">> variable="tpl">
 <$list filter="[<tpl>type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude tiddler=<<tpl>>/>" variable="tpl">
-<$list filter="[<tpl>getindex<key>]" emptyMessage=<<cell-value-normal>> variable="cell"><<cell>></$list>
+<$list filter="[<tpl>getindex<key>]" emptyMessage=<<cell-value-normal description:"$description$">> variable="cell"><<cell>></$list>
 </$list>
 </$list>
 \end
@@ -130,8 +130,8 @@ type: text/vnd.tiddlywiki
 </tr>
 \end
 
-\define fill-empty-cell(content, button:"Fill the cell", class, style)
-<$list filter="[<current>has[celltpl]]"><$list filter="[<value>is[blank]]" emptyMessage=<<cell-value-normal>> variable="NONE">
+\define fill-empty-cell(content, button:"Fill the cell", class, style, description)
+<$list filter="[<current>has[celltpl]]"><$list filter="[<value>is[blank]]" emptyMessage=<<cell-value-normal description:"$description$">> variable="NONE">
 <$button class="$class$" style="$style$"><<__button__>><$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<__content__>> $timestamp="no"/></$button>
 </$list></$list>
 \end
@@ -149,7 +149,8 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 \end
 
 # ''显示单元格内容, 环境变量: `current` - data Tiddler, `key` - data index, `value` - data value''
-#> `<<cell-value>>`
+#> `<<cell-value
+  description:"l 是否显示 description">>`
 # ''把 Data-Dictionary 用 Table 的形式展示出来, 每个 Tiddler 相当于一行''
 #> `<<table
   cfilter:"[[A]] [[B]] [[C]] 输入键值"
@@ -180,7 +181,8 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   content:"cell 的内容"
   button:"name of the empty button"
   class:"button class"
-  style:"button style">>`
+  style:"button style"
+  description:"cell-value-normal 是否显示 description">>`
 # ''带 filters 的 table''
 #> `<<tables
   cfilter:"[[A]] [[B]] [[C]] 输入键值"
