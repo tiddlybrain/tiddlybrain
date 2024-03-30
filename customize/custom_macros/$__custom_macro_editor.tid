@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240314154602668
+modified: 20240330005353433
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -14,16 +14,14 @@ type: text/vnd.tiddlywiki
 \define editor-title(style)
 <table style="$style$"><tbody>
 <$list filter="[[$(modal)$]!match[yes]]" variable="NONE"><tr><td colspan="3" style="text-align:center;"><$set name="tv-wikilinks" value="no">
-<$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<span style="color:green;margin-right:10px;">
-{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list>
-</span>
-<$list filter="[all[current]!has[draft.of]]">
-<$button style="color:green;">edit<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/></$button>
-<$button style="color:green;">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
+<$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button class="tc-btn-invisible" style="color:green;margin-right:5px;">
+{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
 <$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]"><$action-setfield $tiddler="$:/HistoryList" current-tiddler=""/></$list>
 </$button>
+<$list filter="[all[current]!has[draft.of]]">
+<$button style="color:green;">edit<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/></$button>
 </$list>""">
-<$button class="tc-btn-invisible" style="color:brown;margin-right:10px;">
+<$button class="tc-btn-invisible" style="color:brown;margin-right:5px;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
 <$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value="""<<l "$(currentTiddler)$" description:"">>""" emptyValue=<<currentTiddler>>>
