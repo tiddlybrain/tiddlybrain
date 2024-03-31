@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20240330064211332
+modified: 20240331135511096
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -23,15 +23,12 @@ type: text/vnd.tiddlywiki
 \end
 
 \define filter-options-search-button(search, value)
+\whitespace trim
 <$list filter="[[$search$]get[text]match{$value$}]">
-<$button class="tc-btn-invisible" style="font-size:small;">{{$:/core/images/close-button}}
-<$action-deletetiddler $filter="[[$search$]] [[$value$]]"/>
-</$button>
+<$button class="tc-btn-invisible">&#10005;<$action-deletetiddler $filter="[[$search$]] [[$value$]] [[$(select-state)$]]"/></$button>
 </$list>
 <$list filter="[[$search$]is[tiddler]get[text]!match{$value$}]">
-<$button class="tc-btn-invisible">{{$:/core/images/advanced-search-button}}
-<$action-setfield $tiddler=<<__value__>> text={{$search$}}/>
-</$button>
+<$button class="tc-btn-invisible">{{$:/core/images/advanced-search-button}}<$action-setfield $tiddler="$value$" text={{$search$}}/></$button>
 </$list>
 \end
 
@@ -67,8 +64,8 @@ Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wiki
 </$set>
 <$list filter="[<select-state>search:text:literal[indexSearch:]]" variable="NONE">
 <$set name="index" filter="[<select-state>get[text]splitregexp[:|{]nth[2]]" select="0">
-<$list filter="[<select-value>!is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">
-<$action-deletetiddler $tiddler=<<select-value>>/><<select-value-content>> &#10005;
+<$list filter="[<select-value>!is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible" style="border-bottom:1px solid #ccc;padding-bottom:1px;">
+<$action-deletetiddler $filter="[<select-value>] [<select-state>]"/><<select-value-content>>&#10005;
 </$button>""" variable="NONE">
 <$select tiddler=<<select-value>> tooltip="Pickup a value"><option value="*">Has Value</option><option value="#">No Value</option>
 <$set name="results" filter="$filter$ +[getindexList<index>each:value[]!is[blank]]">
@@ -87,8 +84,7 @@ Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wiki
 </$list>
 <$list filter="[<select-state>search:text:literal[search:title]]" variable="NONE">
 <$set name="select-value-draft" value="$:/temp/select/draft/$(currentTiddler)$/$title$/$uid$">
-<$edit-text tiddler=<<select-value-draft>> tag="input" size="20" focus="yes" class="filter-options-search"/>
-<$transclude $variable="filter-options-search-button" search=<<select-value-draft>> value=<<select-value>>/>
+<span style="border-bottom:1px solid #ccc;padding-bottom:1px;"><$edit-text tiddler=<<select-value-draft>> tag="input" size="20" focus="yes" class="filter-options-search"/><$transclude $variable="filter-options-search-button" search=<<select-value-draft>> value=<<select-value>>/></span>
 </$set>
 </$list>
 </$set>
