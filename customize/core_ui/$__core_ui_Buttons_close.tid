@@ -1,6 +1,6 @@
 caption: {{$:/core/images/close-button}} {{$:/language/Buttons/Close/Caption}}
 description: {{$:/language/Buttons/Close/Hint}}
-modified: 20231227005518579
+modified: 20240401210955015
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/close
@@ -16,19 +16,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Close/Caption}}/>
-</span>
-</$list>
-</$button>
-</$reveal>
-<$reveal type="match" stateTitle=<<folded-state>> text="hide" default="show">
-<$button tooltip={{$:/language/Buttons/Unfold/Hint}} aria-label={{$:/language/Buttons/Unfold/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
-{{$:/core/images/unfold-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Unfold/Caption}}/>
 </span>
 </$list>
 </$button>
