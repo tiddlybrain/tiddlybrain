@@ -1,0 +1,24 @@
+caption: Interval/Notification
+created: 20240302151400875
+creator: yuzijie
+keywords: 
+modified: 20240402074309556
+modifier: yuzijie
+order: 5
+tags: customized Tasks
+title: Tasks/Notification
+type: text/vnd.tiddlywiki
+
+<$details summary="Has Time Interval">
+
+<<sort-by-filter item-filter:"has[interval]!prefix[Flashcard]">>
+
+</$details>
+<$details summary="Notification List">
+
+<ul><$list filter="[tag[Tasks/Journal]has[tbc]]"><li><$link to={{!!title}}>{{!!title}}</$link>
+@@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
+<ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
+</li></$list></ul>
+
+</$details>
