@@ -1,6 +1,6 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
 list-before: $:/core/ui/MoreSideBar/All
-modified: 20240309221030755
+modified: 20240403134432656
 modifier: yuzijie
 tags: $:/tags/MoreSideBar customized
 title: $:/core/ui/MoreSideBar/Recent
@@ -8,8 +8,13 @@ type: text/vnd.tiddlywiki
 
 <h2 style="color:#5778d8;margin-top:0;">Sidebar Opened</h2>
 <$droppable actions="<$action-listops $tiddler='$:/config/sidebar/pinned' $field='list' $subfilter='[<actionTiddler>]'/>" tag="div">
-<$list filter="[enlist{$:/config/sidebar/pinned!!list}] [enlist{$:/config/index-tree!!list}tag[Snippet]remove{$:/temp/index-tree}limit[8]] +[sortan[note]]">
+<$list filter="[enlist{$:/config/sidebar/pinned!!list}] [enlist{$:/config/index-tree!!list}limit[8]] -[{$:/temp/index-tree}] +[sortan[note]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
+<$list filter="[[$:/config/sidebar/pinned]contains<currentTiddler>]" emptyMessage="""<$button class="tc-btn-invisible" style="color:#5778d8;">
+<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>❎
+</$button>""" variable="NONE"><$button class="tc-btn-invisible">
+<$action-listops $tiddler="$:/config/sidebar/pinned" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>📌
+</$button></$list>
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
@@ -19,11 +24,6 @@ type: text/vnd.tiddlywiki
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$button>
-<$list filter="[[$:/config/sidebar/pinned]contains<currentTiddler>]" emptyMessage="""<$button class="tc-btn-invisible" style="color:#5778d8;">
-<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>&#10005;
-</$button>""" variable="NONE"><$button class="tc-btn-invisible">
-<$action-listops $tiddler="$:/config/sidebar/pinned" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>&#128204;
-</$button></$list>
 </div>
 </$list>
 </$droppable>
