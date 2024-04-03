@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240402211313607
+modified: 20240403073305438
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -104,8 +104,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix[$:/task-state/]!text[waiting]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
 <$droppable actions=<<droppable-task-list-actions>> tag="dt">
-<$list filter="[<dt>!match<today>]"><div style="margin-bottom:-2px;color:green;">
-<$list filter="[<dt>compare:number:lt<today>]"><$transclude $variable="days-passed" start=<<dt>> end=<<today>>/></$list>
+<$list filter="[<dt>!match<today>]"><div style="margin-bottom:-2px;color:#666;">
+<$list filter="[<dt>compare:number:lt<today>]"><$transclude $variable="days-passed" start=<<dt>> end=<<today>>/> ''OVERDUE''</$list>
 <$list filter="[<dt>compare:number:gt<today>]"><$transclude $variable="days-left" begin=<<today>> deadline=<<dt>>/></$list>
 </div></$list>
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
