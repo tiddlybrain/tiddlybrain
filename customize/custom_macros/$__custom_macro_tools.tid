@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240314134549012
+modified: 20240404103248152
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -183,7 +183,7 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-close-tiddler"/><$action-deletetiddler $tiddler="$:/state/modal/history"/>
 </$button>
 <$list filter="[all[current]!code-body[yes]]">&middot; <$button class="tc-btn-invisible">new step
-<$transclude $variable="step-action" template={{$:/config/defaultTemplate}}/><$action-deletetiddler $tiddler="$:/state/modal/history"/>
+<$transclude $variable="step-action"/><$action-deletetiddler $tiddler="$:/state/modal/history"/>
 </$button></$list>
 <$list filter="[all[current]code-body[yes]]">&middot; <$button class="tc-btn-invisible">copy content
 <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mContent>>/>

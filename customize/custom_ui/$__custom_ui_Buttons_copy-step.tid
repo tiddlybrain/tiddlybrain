@@ -1,0 +1,20 @@
+caption: Copy as a step
+created: 20220118202607895
+creator: yuzijie
+description: Copy the current tiddler like a step to the clipboard
+modified: 20240404103709542
+modifier: yuzijie
+tags: $:/tags/ViewToolbar customized
+title: $:/custom/ui/Buttons/copy-step
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$button tooltip="Copy as a step" aria-label="Copy as a step" class=<<tv-config-toolbar-class>>>
+<$transclude $variable="step-action"/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/save-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="Copy as a step"/></span>
+</$list>
+</$button>
