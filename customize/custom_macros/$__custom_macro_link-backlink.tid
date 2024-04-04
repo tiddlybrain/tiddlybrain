@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20240402145628161
+modified: 20240404233250487
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -45,14 +45,7 @@ type: text/vnd.tiddlywiki
 </$tiddler>
 \end
 
-\define ct(title, text)
-\whitespace trim
-<sup><$list filter="[<__title__>regexp[^http]split[/]nth[3]]" emptyMessage="<$transclude $variable='l' title=<<__title__>>/>">
-<a href="$title$" target="_blank" title="$title$" rel="noopener noreferrer">
-<$list filter="[<__text__>!is[blank]]" emptyMessage=<<currentTiddler>>><<__text__>></$list>
-</a>
-</$list></sup>
-\end
+\define ct(url) <sup><a href="$url$" target="_blank" title="$url$" class="links" rel="noopener noreferrer" style="text-decoration:none;fill:#5778d8;margin-left:3px;">{{$:/core/images/open-window}}</a></sup>
 
 \define bl-pattern() (\[\[|\||;;|"|'|:|\s|^)$(search)$(\]\]|;;|"|'|:|\s|\n|$)
 \define bl-limit-state(uid) $:/state/bl-limit/$(current)$/$uid$
@@ -113,10 +106,9 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
   status:"是否显示 status"
   external-links:"是否显示 external-links"
   belongs-to:"是否显示 external-links 里面的 belongs.to">>`
-# ''cite, 显示文字段落的出处''
+# ''cite, 显示网络出处''
 #> `<<ct
-  source:"url or tiddler title"
-  text:"alternative text">>`
+  url:"web link">>`
 # ''按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filter
   item-filter:"主要筛选条件, 在 bl-pattern 之前"

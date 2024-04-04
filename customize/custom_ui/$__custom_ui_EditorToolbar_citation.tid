@@ -4,7 +4,7 @@ created: 20230526113255517
 creator: yuzijie
 description: Turn text into citation link
 icon: $:/core/images/quote
-modified: 20230907120914690
+modified: 20240404233425023
 modifier: yuzijie
 shortcuts: ctrl-shift-C
 tags: $:/tags/EditorToolbar customized
@@ -15,5 +15,5 @@ type: text/vnd.tiddlywiki
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix='<<ct "'
-	suffix='" "">>'
+	suffix='">>'
 />
