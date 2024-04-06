@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240406163243049
+modified: 20240406170636244
 modifier: yuzijie
 order: 3
 shortcap: 2️⃣Actions
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 </$set>
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
 <$tiddler tiddler=<<journal-title>>><$button to={{!!title}} class="tc-btn-invisible tc-tiddlylink l">
-<$transclude $variable="format-date" date={{!!date}} template="Week WW, YYYY-0MM-0DD DDD"/>
+<$transclude $variable="format-date" date={{!!date}} template="YYYY-0MM-0DD DDD"/>
 </$button></$tiddler>
 <$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
