@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240403130622520
+modified: 20240406163243049
 modifier: yuzijie
 order: 3
 shortcap: 2️⃣Actions
@@ -24,12 +24,14 @@ type: text/vnd.tiddlywiki
 <$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-right}}</$button>
 </$set>
 <$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
-<$button to=<<journal-title>> class="tc-btn-invisible tc-tiddlylink l"><$tiddler tiddler=<<journal-title>>><$transclude field="caption"/></$tiddler></$button>
+<$tiddler tiddler=<<journal-title>>><$button to={{!!title}} class="tc-btn-invisible tc-tiddlylink l">
+<$transclude $variable="format-date" date={{!!date}} template="Week WW, YYYY-0MM-0DD DDD"/>
+</$button></$tiddler>
 <$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
-<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="Journals: <<bl>>
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
 TBC: <<tbc>>
---: Tasks Review" date=<<curDate>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="custom-template-journal"/>
+--: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="20em" caption="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>
 </$droppable></h2>
 

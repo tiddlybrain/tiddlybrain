@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240403073305438
+modified: 20240406163217718
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -117,9 +117,9 @@ type: text/vnd.tiddlywiki
 </$set>
 </$set>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
-<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" kw="20em" text="Journals: <<bl>>
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
 TBC: <<tbc>>
---: Tasks Review" date=<<dt>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="custom-template-journal"/>
+--: Tasks Review" date=<<dt>> celltpl="custom-template-journal" kw="20em" caption="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>
 </$droppable>
 <$list filter="[[$:/temp/task/open]!text[no]]" variable="NONE">
@@ -208,9 +208,9 @@ TBC: <<tbc>>
 <$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
 <$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
-<$action-createtiddler $basetitle=<<journal-title>> type="application/x-tiddler-dictionary" tags="Tasks/Journal Ignore" kw="20em" text="Journals: <<bl>>
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
 TBC: <<tbc>>
---: Tasks Review" date=<<curDate>> caption="<$transclude $variable=format-date date={{!!date}} template='YYYY-0MM-0DD DDD'/>" celltpl="custom-template-journal"/>
+--: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="20em" caption="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>
 </$set>
 </$set>
