@@ -1,8 +1,8 @@
-caption: Edit template
+caption: {{$:/core/images/palette}} edit template
 created: 20210106224414388
 creator: yuzijie
 description: Edit the template of the tiddler
-modified: 20220102121637932
+modified: 20240407205446988
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/edit-template

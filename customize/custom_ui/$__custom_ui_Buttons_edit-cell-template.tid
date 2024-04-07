@@ -1,8 +1,8 @@
-caption: Edit cell template
+caption: {{$:/core/images/palette}} edit cell template
 created: 20220102120916734
 creator: yuzijie
 description: Edit the template of the cell of the data tiddler
-modified: 20220102121608892
+modified: 20240407205408450
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/edit-cell-template

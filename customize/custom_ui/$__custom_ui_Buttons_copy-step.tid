@@ -1,8 +1,8 @@
-caption: Copy as a step
+caption: {{$:/core/images/save-button}} copy as a step
 created: 20220118202607895
 creator: yuzijie
 description: Copy the current tiddler like a step to the clipboard
-modified: 20240404103709542
+modified: 20240407205232152
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/copy-step
@@ -15,6 +15,6 @@ type: text/vnd.tiddlywiki
 {{$:/core/images/save-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text="Copy as a step"/></span>
+<span class="tc-btn-text"><$text text="copy as a step"/></span>
 </$list>
 </$button>
