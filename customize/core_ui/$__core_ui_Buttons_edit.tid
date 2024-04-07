@@ -1,13 +1,14 @@
 caption: {{$:/core/images/edit-button}} {{$:/language/Buttons/Edit/Caption}}
 description: {{$:/language/Buttons/Edit/Hint}}
-modified: 20231219153529185
+modified: 20240407111814058
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/edit
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-<span><$button message="tm-edit-tiddler" tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
+<span class="edit-button-wide">
+<$button message="tm-edit-tiddler" tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/edit-button}}
@@ -17,4 +18,19 @@ type: text/vnd.tiddlywiki
 <$text text={{$:/language/Buttons/Edit/Caption}}/>
 </span>
 </$list>
-</$button></span>
+</$button>
+</span>
+<span class="edit-button-narrow">
+<$button tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/edit-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Edit/Caption}}/>
+</span>
+</$list>
+</$button>
+</span>
