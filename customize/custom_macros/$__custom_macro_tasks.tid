@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240408152933327
+modified: 20240408185142161
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -119,7 +119,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
 TBC: <<tbc>>
---: Tasks Review" date=<<dt>> celltpl="custom-template-journal" kw="20em" caption="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
+--: Tasks Review" date=<<dt>> celltpl="custom-template-journal" kw="20em" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>
 </$droppable>
 <$list filter="[[$:/temp/task/open]!text[no]]" variable="NONE">
@@ -210,7 +210,7 @@ TBC: <<tbc>>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
 TBC: <<tbc>>
---: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="20em" caption="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
+--: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="20em" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>
 </$set>
 </$set>
