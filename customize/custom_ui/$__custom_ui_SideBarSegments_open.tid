@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20240323034056137
+modified: 20240408134734344
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -79,7 +79,7 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">Sort by note</$checkbox>
 <$list filter="[prefix[$:/state/folded/]text[hide]limit[1]]">&middot;
 <$button class="tc-btn-invisible" dragFilter="[is[system]text[hide]removeprefix[$:/state/folded/]]" style="color:#999;">
-Unfold All (<$count filter="[prefix[$:/state/folded/]text[hide]]"/>)<$list filter="[prefix[$:/state/folded/]]"><$action-deletetiddler $tiddler=<<currentTiddler>>/></$list>
+Unfold All (<$count filter="[prefix[$:/state/folded/]text[hide]]"/>)<$action-deletetiddler $filter="[prefix[$:/state/folded/]]"/>
 </$button>
 </$list>
 </$let></div>
