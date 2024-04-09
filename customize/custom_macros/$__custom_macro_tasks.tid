@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240408185142161
+modified: 20240409082355016
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -219,12 +219,16 @@ TBC: <<tbc>>
 <div style="border:1px solid #f4f4f4;padding:10px 20px;background:white;border-radius:7px;">
 <$list filter="[tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
 <$list filter="[tag[Task]status[Blocked]sort[modified]]"><<task-pill color:"#ff605d">></$list>
-<$list filter="[tag[Task]status[Regular]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
 <$list filter="[tag[Task]status[Escalating]sort[modified]]"><<task-pill color:"#ffd668">></$list>
 <$list filter="[tag[Task]status[Urgent]sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
 <$list filter="[tag[Task]status[Progressing]sort[modified]]"><<task-pill color:"#8aff49">></$list>
-<$list filter="[tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
+<hr style="margin:15px 0;">
+<$list filter="[tag[Task]status[Regular]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
+<hr style="margin:15px 0;">
+<$list filter="[tag[Task]status[Side]sort[modified]]"><<task-pill color:"#aee2ff">></$list>
+<hr style="margin:15px 0;">
 <$list filter="[tag[Task]status[Review]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
+<$list filter="[tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
 <$list filter="[tag[Task]status[Todo]sort[modified]]"><<task-pill>></$list>
 </div>
 \end
