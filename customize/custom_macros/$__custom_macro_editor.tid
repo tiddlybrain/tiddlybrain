@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240404150353088
+modified: 20240410094220269
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -57,7 +57,7 @@ type: text/vnd.tiddlywiki
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
 <$list filter="[<draft>blsearch[]has[note]limit[1]]" variable="NONE">
-<$button style="margin-left:2px;" popup="$:/state/popup/editor/backlinks">Backlinks</$button>
+<$button style="margin-left:2px;" popup="$:/state/popup/editor/backlinks">''Backlinks''</$button>
 <$reveal type="popup" state="$:/state/popup/editor/backlinks" tag="div"><div class="record-drop-down" style="padding:10px 15px;line-height:2em;min-width:auto;">
 <$list filter="[<draft>blsearch[]get[note]unique[]]" variable="key"><<editor-backlink-button>><br></$list>
 </div></$reveal>
@@ -79,32 +79,21 @@ type: text/vnd.tiddlywiki
 <$button style="margin-left:10px;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
 </$list></$list>
 </$set>
-<$list filter="[<mTitle>is[blank]]">
-<$reveal type="nomatch" state="$:/state/editor-display" text="show">
-<$button set="$:/state/editor-display" setTo="show" style="margin-left:10px;">{{$:/core/images/preview-closed}}</$button>
-</$reveal>
-<$reveal type="match" state="$:/state/editor-display" text="show">
-<$button set="$:/state/editor-display" setTo="hide" style="margin-left:10px;">{{$:/core/images/preview-open}}</$button>
-</$reveal>
-</$list>
 </td>
 </tr>
 </tbody></table>
 \end
 
-\define editor-display(style)
-<$tiddler tiddler=<<draft>>><<editor-title style:"$style$">>
-<div class="editor-display">
+\define editor-display()
+<$tiddler tiddler=<<draft>>><div class="editor-display">
 <$transclude tiddler="$:/core/ui/ViewTemplate/tags"/>
 <$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
 <$transclude tiddler="$:/core/ui/ViewTemplate/body"/>
-</div>
-</$tiddler>
+</div></$tiddler>
 \end
 
 # ''用来编辑 Tiddler 的 Title, Caption, Note 等''
 #> `<<editor-title
   style:"table 样式">>`
 # ''用来显示 Tiddler 编辑好的效果''
-#> `<<editor-display
-  style:"table 样式">>`
+#> `<<editor-display>>`
