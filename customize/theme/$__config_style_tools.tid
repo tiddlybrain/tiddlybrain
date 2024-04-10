@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240410111804770
+modified: 20240410114626786
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -92,10 +92,9 @@ input.tc-edit-texteditor {padding: 0 5px; margin: 5px 0;}
 .editor-display {margin: 5px 0; background: white; padding: 10px 20px; line-height: 26px; border: 1px solid #ccc;}
 .tc-sidebar-header .editor-display {color: #333;}
 .edit-area-container {display: flex; align-content: space-between; gap: 5px;}
-.edit-area-container .editor-edit {flex: 1 0 60%;}
-.edit-area-container .editor-display {flex: 1 0 40%; height: 450px; overflow: scroll;}
+.edit-area-container > .editor-edit {flex: 1 0 60%;}
+.edit-area-container .editor-display {height: 450px; overflow: scroll;}
 @media (min-width: 1400px) {.edit-area-container .editor-display {display: none;}}
-@media (max-width: 950px) {.edit-area-container .editor-display {display: none;}}
 
 /* For $:/custom/ui/SideBarSegments/open */
 .sidebar-item-hover {display: none;}
