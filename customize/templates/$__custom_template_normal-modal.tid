@@ -1,17 +1,20 @@
 created: 20210516172453585
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20240410230312482
+modified: 20240410231718550
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
 title: $:/custom/template/normal-modal
 type: text/vnd.tiddlywiki
 
-<$tiddler tiddler=<<mTitle>>><div style="margin-top:15px;"><$let modal="yes"><<external-links>></$let></div></$tiddler>
-<div class="tc-tiddler-body"><$vars modal="yes" direct-open="yes"><$list filter="[<mTitle>is[tiddler]]" emptyMessage=<<mTitle>>>
+<$let modal="yes">
+<$tiddler tiddler=<<mTitle>>><div style="margin-top:15px;"><<external-links>></div></$tiddler>
+<div class="tc-tiddler-body"><$list filter="[<mTitle>is[tiddler]]" emptyMessage=<<mTitle>>>
 <$list filter="[<mTitle>tag[Task]]"><<task-top>></$list>
-<$list filter="[<mTitle>!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude tiddler=<<mTitle>> mode="block"/></$list>
+<$list filter="[<mTitle>!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>>
+<$let direct-open="yes"><$transclude tiddler=<<mTitle>> mode="block"/></$let>
+</$list>
 <$list filter="[<mTitle>tag[Tasks/Journal]]" variable="journal-title"><$set name="curDate" filter="[<journal-title>split[-]join[]]" select="0">
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
@@ -24,7 +27,7 @@ Done: <<currentTiddler>><$transclude $variable="add-to-cell-action" title=<<jour
 <$tiddler tiddler=<<mTitle>>>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
-<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
+<$let direct-open="yes"><$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/></$let>
 </$list>
 <$list filter="[all[current]!search:title:literal[/]]">
 <$set name="mode" filter="[has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]count[]compare:number:lt[4]]" value="list" emptyValue="">
@@ -33,4 +36,5 @@ Done: <<currentTiddler>><$transclude $variable="add-to-cell-action" title=<<jour
 </$list>
 <<relationships name:"Related Topics" filter:"[all[current]tags[]type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]" mode:"list">>
 </$tiddler>
-</$list></$vars></div>
+</$list></div>
+</$let>
