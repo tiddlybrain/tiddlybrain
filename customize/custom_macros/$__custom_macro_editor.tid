@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240410113510815
+modified: 20240410141616798
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -80,10 +80,10 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 </$set>
 <$list filter="[<mTitle>is[blank]]">
-<$reveal type="nomatch" state="$:/state/editor-display" text="show">
+<$reveal type="nomatch" state="$:/state/editor-display" text="show" class="editor-preview-closed">
 <$button set="$:/state/editor-display" setTo="show" style="margin-left:10px;">{{$:/core/images/preview-closed}}</$button>
 </$reveal>
-<$reveal type="match" state="$:/state/editor-display" text="show">
+<$reveal type="match" state="$:/state/editor-display" text="show" class="editor-preview-open">
 <$button set="$:/state/editor-display" setTo="hide" style="margin-left:10px;">{{$:/core/images/preview-open}}</$button>
 </$reveal>
 </$list>
