@@ -1,18 +1,15 @@
-caption: Interval/Notification
-created: 20240302151400875
+created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20240402074309556
+modified: 20240410213021203
 modifier: yuzijie
-order: 5
 tags: customized Tasks
-title: Tasks/Notification
+title: Tracking
 type: text/vnd.tiddlywiki
 
+<div style="margin-bottom:15px;">
 <$details summary="Has Time Interval">
-
 <<sort-by-filter item-filter:"has[interval]!prefix[Flashcard]">>
-
 </$details>
 <$details summary="Notification List">
 
@@ -22,3 +19,4 @@ type: text/vnd.tiddlywiki
 </li></$list></ul>
 
 </$details>
+</div>
