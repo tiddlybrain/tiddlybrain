@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240409082355016
+modified: 20240411081436139
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -174,18 +174,14 @@ TBC: <<tbc>>
 <$button set="$:/temp/task-list" setTo={{!!title}} class="tc-btn-invisible">
 <span class="dot" style="background-color:$color$;padding:2px 8px 3px;"><$transclude field="status"><$view field="title"/></$transclude></span>
 </$button>
-<span style="color:green;"><$transclude $variable="days-passed" start={{!!modified}}/></span>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">
+<$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
+☠️ ''<$transclude $variable="days-left" deadline=<<currentTiddler>>/>'' -
+</$list>
 <$set name="style" filter="[prefix[$:/task-state/]search:title:literal<currentTiddler>limit[1]]" value="font-weight:bold;" emptyValue="color:red;">
 <span style=<<style>>>{{!!caption}}</span>
 </$set>
-<$list filter="[prefix[$:/task-state/]text[doing]search:title:literal<currentTiddler>limit[1]]">
-- ⚔️ @@color:green;font-weight:bold;<$count filter="[prefix[$:/task-state/]text[doing]search:title:literal<currentTiddler>]"/>@@
-</$list>
-<$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
-- ☠️ <$transclude $variable="days-left" deadline=<<currentTiddler>>/>
-</$list>
 </$button>
 </div>
 \end
