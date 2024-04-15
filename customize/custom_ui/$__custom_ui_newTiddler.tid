@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240217165352401
+modified: 20240414082212195
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -41,7 +41,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" content=
 <$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>
 <p style="margin-top:-3px;">
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}
-Description: {{!!description}}" scroll="no" popup="close"/>➕</$button>
+Description: {{!!description}}" popup="close"/>➕</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}" scroll="no" popup="close"/>New Link</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> type="text/vnd.tiddlywiki" scroll="no" popup="close"/>New File</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> type="text/vnd.tiddlywiki" scroll="no" popup="close"/>New Dir</$button>
