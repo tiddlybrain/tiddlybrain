@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240407075224864
+modified: 20240419130903512
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -38,12 +38,12 @@ type: text/vnd.tiddlywiki
 \end
 
 \define snippet-modal-actions()
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[[$(direct-open)$]match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
-<$list filter="[[$(direct-open)$]!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[<direct-open>match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
+<$list filter="[<direct-open>!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE">
+<$list filter="[<modal>match[yes]]" variable="NONE">
 <$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<current>]"/>
 <$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
 </$list>
@@ -75,7 +75,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
 <$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} belongs.to=<<currentTiddler>> note=<<key>> text="Name: {{!!caption}}
 Description: {{!!description}}" tags="Snippet" caption={{!!caption}} type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+<$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 </$button></$list>"""><div class="snippet">
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="fill:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[fill:]addsuffix[;]] }}}>
 <$button actions=<<snippet-accordion-actions>> class="tc-btn-invisible links accordion" style=<<style>>>

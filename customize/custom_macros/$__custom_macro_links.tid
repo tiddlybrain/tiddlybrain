@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20240302154044415
+modified: 20240419131013637
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -47,7 +47,7 @@ type: text/vnd.tiddlywiki
 <$set name="filename" filter="[<uri>split[/]last[]]" select="0"><$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<filename>> tooltip=<<filename>>>Copy Name</$button></$set> &middot;
 <a href=<<uri>> target="_blank" title=<<uri>> class="light-color" rel="noopener noreferrer">Open in a New Window</a>
 </div></$list>
-<$list filter="[[$(modal)$]!match[yes]]" variable="NONE">
+<$list filter="[<modal>!match[yes]]" variable="NONE">
 <$list filter="[all[current]code-body[yes]]"><div class="external-links" style="background:#c9ffee;">
 <$button class="tc-btn-invisible light-color"><$list filter="[belongs.to{!!title}note[Comment]]" emptyMessage="Show code">@@color:red;Show comments@@</$list>
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mContent={{!!text}} mTitle={{!!title}}/>
@@ -60,9 +60,9 @@ type: text/vnd.tiddlywiki
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:#2b8a2b;[{{!!note}}]@@</$list>
 </$button>
-<$list filter="[[$(modal)$]!match[yes]]" variable="NONE"><$set name="direct-open" value="yes">
+<$list filter="[<modal>!match[yes]]" variable="NONE"><$set name="direct-open" value="yes">
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
-<$list filter="[[$(modal)$]!match[yes]]"><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/></$list>&#129093;
+<$list filter="[<modal>!match[yes]]"><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/></$list>&#129093;
 </$button>
 </$set></$list>
 <$list filter="[all[current]get[belongs.to]getAllParents[]]">&lt;

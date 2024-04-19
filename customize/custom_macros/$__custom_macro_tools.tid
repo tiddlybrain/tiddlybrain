@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240404110317971
+modified: 20240419130809745
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -48,7 +48,7 @@ type: text/vnd.tiddlywiki
 
 \define collapse-title-actions(title)
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage="""<$tiddler tiddler=<<__title__>>>
-<$list filter="[[$(modal)$]match[yes]]" emptyMessage="<$action-navigate $to=<<currentTiddler>> $scroll=no/>" variable="NONE">
+<$list filter="[<modal>match[yes]]" emptyMessage="<$action-navigate $to=<<currentTiddler>> $scroll=no/>" variable="NONE">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
@@ -150,15 +150,15 @@ type: text/vnd.tiddlywiki
 \define brcap(levels:"2", new:" - ", old:"/") <$text text={{{ [all[current]split<__old__>butfirst<__levels__>join<__new__>] }}}/>
 
 \define modal-actions()
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[[$(direct-open)$]match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE">
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[<direct-open>match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
+<$list filter="[<modal>match[yes]]" variable="NONE">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
 <$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<current>]"/>
 <$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
 </$list>
-<$list filter="[[$(modal)$]!match[yes]]" variable="NONE">
+<$list filter="[<modal>!match[yes]]" variable="NONE">
 <$list filter="[<direct-open>!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
@@ -251,7 +251,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$list filter="[all[current]get[interval]negate[]]" variable="interval"><$list filter="[all[current]!days:date<interval>]">
 <$button message="tm-edit-tiddler" class="tc-btn-invisible tc-tag-label verification-notice">Outdated
-<$list filter="[[$(modal)$]!match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+<$list filter="[<modal>!match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 </$button>
 </$list></$list>
 \end
@@ -275,14 +275,14 @@ type: text/vnd.tiddlywiki
 <$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>filter<comparefilter>!sortan[]]">
 <$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>
 </$list>
-<$list filter="[[$(modal)$]match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+<$list filter="[<modal>match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 </$button>
 </$list>
 </$vars>
 \end
 
 \define tiddler-close(tiddler)
-<$list filter="[[$(modal)$]!match[yes]]">
+<$list filter="[<modal>!match[yes]]">
 <$list filter="[{$:/HistoryList!!current-tiddler}match<__tiddler__>]">
 <$transclude $variable="tiddler-open" tiddler={{{ [<__tiddler__>next[$:/StoryList]] :else[<__tiddler__>previous[$:/StoryList]] }}}/>
 </$list>
