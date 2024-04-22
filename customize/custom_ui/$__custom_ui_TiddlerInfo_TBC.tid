@@ -1,0 +1,11 @@
+caption: Reminders
+created: 20240421190244638
+creator: yuzijie
+list-after: $:/custom/ui/TiddlerInfo/Snippets
+modified: 20240421190708537
+modifier: yuzijie
+tags: $:/tags/TiddlerInfo customized
+title: $:/custom/ui/TiddlerInfo/TBC
+type: text/vnd.tiddlywiki
+
+<$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>sort[date]]" emptyMessage="No reminders" template="$:/core/ui/ListItemTemplate"/>
