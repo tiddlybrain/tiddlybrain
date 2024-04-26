@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240424110007136
+modified: 20240426090024676
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -143,16 +143,16 @@ TBC: <<tbc>>
 <$list filter="[<dt>match<today>]"><$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}!has[plan]]">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><dd>
 <$list filter="[all[current]text[doing]]" emptyMessage="""
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#c67b48;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#c67b48;" message="tm-copy-to-clipboard" param={{!!caption}}><$transclude tiddler=<<task-id>> field="caption"/> - ''{{!!caption}}''</$button>
 <$button message="tm-copy-to-clipboard" param={{!!caption}}>Set Plan
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button>""">
 <$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}><$transclude tiddler=<<task-id>> field="caption"/> - ''{{!!caption}}''</$button>
 <$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
 """ variable="NONE">
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button> @@color:green;&#10132;@@
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}><$transclude tiddler=<<task-id>> field="caption"/> - ''{{!!caption}}''</$button> @@color:green;&#10132;@@
 </$list>
 </$list>
 </dd></$set></$set>
