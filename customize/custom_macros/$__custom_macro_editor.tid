@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240410141616798
+modified: 20240430085915417
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -94,7 +94,7 @@ type: text/vnd.tiddlywiki
 
 \define editor-display()
 <$tiddler tiddler=<<draft>>><div class="editor-display">
-<$transclude tiddler="$:/core/ui/ViewTemplate/tags"/>
+@@float:right;font-weight:bold;font-size:small;{{!!caption}}@@ <$transclude tiddler="$:/core/ui/ViewTemplate/tags"/>
 <$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
 <$transclude tiddler="$:/core/ui/ViewTemplate/body"/>
 </div></$tiddler>
