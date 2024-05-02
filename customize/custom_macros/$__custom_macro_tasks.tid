@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240502195002338
+modified: 20240502224318248
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -189,6 +189,8 @@ TBC: <<tbc>>
 \end
 
 \define planner(date)
+<$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
+<$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">
 <$set name="left" filter="[[$date$]nextDay[-1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-left}}</$button>
@@ -200,19 +202,22 @@ TBC: <<tbc>>
 <$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
 </$list>
 <<weekly-link "$date$">>
-<$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
 <$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
-</$set>
-<$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
-<$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
 TBC: <<tbc>>
 --: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="22em" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>
-</$set>
-</$set>
 </h2>
+<$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
+<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><div><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
+<$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
+</$button></div></$list>
+</$set>
+</$list></$list>
+</$set>
+</$set>
 <$list filter="[tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
 <$list filter="[tag[Task]status[Blocked]sort[modified]]"><<task-pill color:"#ffa6a5">></$list>
 <$list filter="[tag[Task]status[Escalating]sort[modified]]"><<task-pill color:"#ffd668">></$list>

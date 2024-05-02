@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240502195015835
+modified: 20240502222652704
 modifier: yuzijie
 order: 3
 shortcap: 2️⃣Actions
@@ -38,9 +38,9 @@ TBC: <<tbc>>
 <$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:24px;">
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
-<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
+<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
 <$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
-Done: <<currentTiddler>></$button></li></$list>
+</$button></li></$list>
 </$set>
 </$list></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>]"><li style="white-space:nowrap;"><<task-list-doing>></li></$list>
