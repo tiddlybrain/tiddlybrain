@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20240426135501161
+modified: 20240502194820838
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 
 \define date-dropdown(step)
 <$reveal class="date-dropdown" type="popup" state=<<date-dropdown-state "$step$">>><div class="record-drop-down tc-popup-keep"><div class="record-content">
-<$set name="key" value=<<currentTiddler>>><$vars date-filter="[getindex<key>splitregexp[\s*;;\s*]match[$step$]]"><ol style="padding-left:20px;">
+<$set name="key" value=<<currentTiddler>>><$vars date-filter="[tag[Tasks/Journal]getindex<key>splitregexp[\s*;;\s*]match[$step$]]"><ol style="padding-left:20px;">
 <$list filter="[tag[Tasks/Journal]filter<date-filter>]" emptyMessage="NOT AVAILABLE"><li><$transclude $variable="l" title=<<currentTiddler>>/></li></$list>
 </ol></$vars></$set>
 </div></div></$reveal>
@@ -79,7 +79,9 @@ type: text/vnd.tiddlywiki
 \define step-done(step,comments,t,d)
 <<linkIfExists "$step$" "$comments$">>
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:green;&#10003;@@
-<$reveal default="$t$" type="lt" text="$d$"><$transclude $variable="days-passed" start="$t$" end="$d$"/></$reveal>
+<$set name="numdays" filter="[tag[Tasks/Journal]getindex<currentTiddler>splitregexp[\s*;;\s*]match[$step$]count[]]" select="0" emptyValue="0">
+<$list filter="[<numdays>compare:number:ne[1]]" emptyMessage="1 day"><<numdays>> days</$list>
+</$set>
 </$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 \end
