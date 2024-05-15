@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20240502194820838
+modified: 20240514210033607
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -134,10 +134,11 @@ type: text/vnd.tiddlywiki
 \end
 
 \define waiting-done(step,comments,t,d,color:"#009dd9",type:"waiting")
-<<linkIfExists "$step$" "$comments$">>
-<$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:$color$;&#10003;@@<$list filter="[[$type$]!match[deadline]]">
+<<linkIfExists "$step$" "$comments$">> <$button class="tc-btn-invisible">@@color:$color$;&#10003;@@</$button>
+<$list filter="[[$type$]!match[deadline]]">
 <$reveal default="$t$" type="lt" text="$d$"><$transclude $variable="days-passed" start="$t$" end="$d$"/></$reveal>
-</$list></$button><<date-dropdown "$step$">>
+<$reveal default="$t$" type="match" text="$d$">1 day</$reveal><$reveal default="$t$" type="gt" text="$d$">⚠️</$reveal>
+</$list>
 <$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 \end
 
