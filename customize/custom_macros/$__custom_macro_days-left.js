@@ -57,7 +57,7 @@ exports.run = function(begin, deadline) {
     if (diff > 5) {
         return diff + " days left";
     } else if (diff > 3) {
-	return "@@color:magenta;" + diff + " days left@@";
+	return "@@color:#ff6c00;" + diff + " days left@@";
     } else if (diff == 1) {
 	return "@@color:red;" + diff + " day left@@";
     } else if (diff > 0) {

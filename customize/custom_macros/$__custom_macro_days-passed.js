@@ -61,7 +61,7 @@ exports.run = function(start, end) {
     } else if (diff < 4) {
         return diff + " days";
     } else if (diff < 8) {
-        return "@@color:fuchsia;" + diff + " days@@";
+        return "@@color:#ff6c00;" + diff + " days@@";
     } else {
 	return "@@color:red;" + diff + " days@@";
     }
