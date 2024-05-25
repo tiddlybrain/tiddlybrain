@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240419130903512
+modified: 20240525124210118
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -85,7 +85,7 @@ Description: {{!!description}}" tags="Snippet" caption={{!!caption}} type="appli
 <<links>>
 <$button actions=<<snippet-modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-<$list filter="[<__caption__>!is[blank]]" variable="NONE" emptyMessage="<$transclude field='caption'><$transclude field='text' mode='inline'/></$transclude>"><<__caption__>></$list>
+<$list filter="[<__caption__>!is[blank]]" variable="NONE" emptyMessage="<$transclude field='caption'><$view field='title'/></$transclude>"><<__caption__>></$list>
 <$reveal default="$date$" type="match" text="yes" style="color:#666;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
 </$reveal>
