@@ -2,11 +2,11 @@ caption: Untagged <$count filter="[!is[system]untagged[]] -[{$:/config/defaultTe
 created: 20240302144634136
 creator: yuzijie
 keywords: 
-modified: 20240302151327367
+modified: 20240603084619244
 modifier: yuzijie
 order: 2
 tags: customized Inbox
 title: Inbox/Untagged
 type: text/vnd.tiddlywiki
 
-<<list-links "[!is[system]untagged[]!sort[modified]limit[200]] -[{$:/config/defaultTemplate}]">>
+<<list-links "[!is[system]untagged[]!sort[modified]limit[200]] -[{$:/config/defaultTemplate}] -A -R -H -I">>
