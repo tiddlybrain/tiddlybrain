@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: Inbox
-modified: 20240410113917473
+modified: 20240603145742090
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -58,7 +58,7 @@ type: text/vnd.tiddlywiki
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Description: {{!!description}}"/>""">Description</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$transclude $variable=format-date date={{!!date}}/>"/>""">Date</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' rheader:'ID' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix="<$details summary='" suffix="'><<snippet key:'' limit:'20'>></$details>"/>""">More</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix="<<more key:'" suffix="'>>"/>""">More</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY-0MM-0DD>>/>""">Today</$button>
 </$edit-text></div>
 <$reveal type="match" state="$:/state/editor-display" text="show" tag="div"><$transclude $variable="editor-display" style=<<edit-table-style>>/></$reveal>
