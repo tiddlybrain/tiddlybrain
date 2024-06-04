@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240414082212195
+modified: 20240604154449222
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -28,25 +28,20 @@ type: text/vnd.tiddlywiki
 </$button></$list>
 <p><$keyboard key="ctrl+enter" actions="""<$transclude $variable=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} text="Name: {{!!caption}}
 Description: {{!!description}}" type="application/x-tiddler-dictionary" content={{$:/temp/newTiddler!!description}} scroll=no/>""" tag="div">
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="caption" default="" focus="yes"/>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="Tiddler Caption" default="" focus="yes"/>
 <$set name="newValue" filter="[[$:/temp/newTiddler]get[text]] [<now YYYY-0MM-0DD>] +[join[ ]]" select="0">
 <$button set="$:/temp/newTiddler" setTo=<<newValue>> tabindex="-1" class="tc-btn-invisible">📆</$button>
 </$set>
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" class="tc-btn-invisible" tooltip="Edit Configurations" tabindex="-1">⚙️</$button><br>
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="desc./path/url/dir/att." field="description"/>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="20" class="new-tiddler-input-box" placeholder="Description/Attachments" field="description"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
 </$keyboard></p>
 <$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>
 <p style="margin-top:-3px;">
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}
-Description: {{!!description}}" popup="close"/>➕</$button>
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="url" content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}" scroll="no" popup="close"/>New Link</$button>
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="path" content=<<content>> type="text/vnd.tiddlywiki" scroll="no" popup="close"/>New File</$button>
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="dir" content=<<content>> type="text/vnd.tiddlywiki" scroll="no" popup="close"/>New Dir</$button>
-</p>
-<p style="margin-top:-10px;">
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> field="description" content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}
+Description: {{!!description}}" popup="close" scroll="yes"/>➕</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" content=<<content>> text="Name: {{!!caption}}
 Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> edit="yes"/>New Record</$button>
@@ -59,8 +54,6 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/gif" note="GIF"/>GIF</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/svg+xml" note="SVG"/>SVG</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="text/html" note="HTML"/>HTML</$button>
-</p>
-<p style="margin-top:-10px;">
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="application/pdf" note="PDF"/>PDF</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="audio/mp3" note="MP3"/>MP3</$button>
 <$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="video/mp4" note="MP4"/>MP4</$button>
