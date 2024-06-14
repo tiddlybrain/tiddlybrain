@@ -1,26 +1,14 @@
 created: 20210809065454577
 creator: yuzijie
-modified: 20231226234743063
+modified: 20240614084015547
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/toc
 type: text/vnd.tiddlywiki
 
-\define custom-toc-caption()
-<$set name="tv-wikilinks" value="no">
-<$transclude field=caption>
-<$view field=title/>
-</$transclude>
-<div class="sidebar-item-hover" style="margin-left:5px;">
-<$button class="tc-btn-invisible" style="color:#999;font-size:smaller;"><<open-in-sidebar close:"no">>{{$:/core/images/open-window}}</$button>
-</div>
-</$set>
-\end
-
 \define custom-toc-linked(sort, itemClassFilter, path)
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
 <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item"><li class=<<toc-item-class>>>
-<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
 <$list filter="[all[current]taggingOrPrefixed[]$sort$limit[1]]" variable="NONE" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
 <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
 <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">{{$:/core/images/right-arrow}}</$button>
@@ -29,8 +17,9 @@ type: text/vnd.tiddlywiki
 <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">{{$:/core/images/down-arrow}}</$button>
 </$reveal>
 </$list>
-<<custom-toc-caption>>
-</$link>
+<$button tag="a" class="tc-tiddlylink tc-tiddlylink-shadow tc-tiddlylink-resolves"><<open-in-sidebar close:"no">>
+<$set name="tv-wikilinks" value="no"><$transclude field=caption><$view field=title/></$transclude></$set>
+</$button>
 <$reveal type="match" stateTitle=<<toc-state>> text="open">
 <$transclude $variable="custom-toc" root=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path=<<__path__>>/>
 </$reveal>
@@ -72,12 +61,6 @@ type: text/vnd.tiddlywiki
 </$vars>
 \end
 
-# ''自定义的 Table of Contents 目录, 修改自 toc-selective-expandable macro''
-#> `<<custom-toc
-  root:"根目录 Tiddler"
-  sort:"Tiddler 排序的方法"
-  itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class"
-  path:"目录展开需要的 state tiddler 的部分路径">>`
 # ''custom-toc 目录, 点击后可以打开 Tiddler''
 #> `<<custom-toc-linked
   sort:"Tiddler 排序的方法"
@@ -88,5 +71,9 @@ type: text/vnd.tiddlywiki
   sort:"Tiddler 排序的方法"
   itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class"
   path:"目录展开需要的 state tiddler 的部分路径">>`
-# ''custom-toc 的目录名字''
-#> `<<custom-toc-caption>>`
+# ''自定义的 Table of Contents 目录, 修改自 toc-selective-expandable macro''
+#> `<<custom-toc
+  root:"根目录 Tiddler"
+  sort:"Tiddler 排序的方法"
+  itemClassFilter:"筛选一些 tiddler 使用 toc-item-selected class"
+  path:"目录展开需要的 state tiddler 的部分路径">>`

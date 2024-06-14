@@ -1,13 +1,14 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20240520141026831
+modified: 20240614083936417
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
 type: text/vnd.tiddlywiki
 
 .tc-btn-mini {border-radius: 2px; font-size: small;}
-a.tc-tiddlylink {text-align: left;}
+
+a.tc-tiddlylink {text-align: left; cursor: pointer;}
 
 .tc-view-field-name {width: auto; white-space: nowrap;}
 

@@ -2,19 +2,19 @@ caption: Open in sidebar
 created: 20201031110107265
 creator: yuzijie
 description: Open tiddler in the sidebar
-modified: 20240403210421486
+modified: 20240614083242668
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/custom/ui/Buttons/open-in-sidebar
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-<span style="margin-left:3px;"><$button tooltip="Open tiddler in the sidebar" aria-label="open in sidebar" class=<<tv-config-toolbar-class>>>
+<$button tooltip="Open tiddler in the sidebar" aria-label="open in sidebar" style="margin:0 -9px 0 6px;" class=<<tv-config-toolbar-class>>>
 <<open-in-sidebar>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/core/images/open-window}}
+{{$:/core/images/right-arrow}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text="open in sidebar"/></span>
 </$list>
-</$button></span>
+</$button>
