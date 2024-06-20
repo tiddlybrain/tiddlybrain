@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20240408135145256
+modified: 20240620121057437
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -48,14 +48,12 @@ $button$
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
-<$list filter="[all[current]get[belongs.to]]">@@color:#c24949;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 </$let>
 </$button>
 <span class="sidebar-open-tools">
 <$button class="tc-btn-invisible sidebar-tab-open-btn tc-popup-keep">close
 <$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
 </$button> &middot;
-<$button class="tc-btn-invisible sidebar-tab-open-btn"><<open-in-sidebar close:"no">>sidebar</$button> &middot;
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/></$button> &middot;</$list>
@@ -65,36 +63,15 @@ $button$
 </$list>
 <$tiddler tiddler="">
 <div class="tc-sidebar-tab-open-item" style="margin-bottom:5px;">
-<$transclude $variable="droppable-item" button="""<$list filter="[recentlyClosed[]!is[missing]!{$:/temp/index-tree}limit[1]]"><div style="margin-bottom:5px;">
+<$transclude $variable="droppable-item" button="""<$list filter="[recentlyClosed[]!is[missing]limit[1]]"><div style="margin-bottom:5px;">
 <$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:#bbb;">
 <$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
-<$list filter="[all[current]get[belongs.to]]">[<$transclude field=caption><$view field=title/></$transclude>]</$list>
 </$let>
 </$button>
 <span class="sidebar-open-tools">
-<$button class="tc-btn-invisible sidebar-tab-open-btn"><<open-in-sidebar close:"no">>sidebar</$button> &middot;
-<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
-<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/></$button> &middot;</$list>
-<$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
-</span>
-</div></$list>
-<$list filter="[[$:/temp/index-tree]get[text]]"><div style="margin-bottom:5px;">
-<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:#bbb;">
-<<open-in-sidebar close:"no">>
-<$let tv-wikilinks="no">
-<$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
-<$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
-<$list filter="[all[current]get[belongs.to]]">[<$transclude field=caption><$view field=title/></$transclude>]</$list>
-</$let>
-</$button>
-<span class="sidebar-open-tools">
-<$button class="tc-btn-invisible sidebar-tab-open-btn">open
-<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/sidebar" text="no"/>
-</$button> &middot;
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/></$button> &middot;</$list>
