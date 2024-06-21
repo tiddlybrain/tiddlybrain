@@ -1,5 +1,5 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
-modified: 20240621104855904
+modified: 20240621131924339
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/SideBar/Recent
@@ -14,11 +14,7 @@ type: text/vnd.tiddlywiki
 </$button>""" variable="NONE"><$button class="tc-btn-invisible">
 <$action-listops $tiddler="$:/config/sidebar/pinned" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>📌
 </$button></$list>
-<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
-<$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
-<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
-<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink"><<open-in-sidebar close:"no">>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
@@ -27,18 +23,24 @@ type: text/vnd.tiddlywiki
 </$list>
 </$droppable>
 
-<h2 style="color:#5778d8;">Currently Opened</h2>
-<$list filter="[list<tv-story-list>sortan[note]] -[{$:/HistoryList!!current-tiddler}]" emptyMessage="No results"><div class="tc-sidebar-tab-open-item">
-<$link to={{!!title}}>
+<h2 style="color:#5778d8;">Currently Open</h2>
+<$list filter="[list<tv-story-list>sortan[note]] -[{$:/HistoryList!!current-tiddler}]" emptyMessage="@@padding:0 10px;NA@@">
+<div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
+<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$list filter="[all[current]has[caption]]">@@color:#555;{{!!caption}}@@ &middot; </$list><$view field="title"/>
-</$link>
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$button>
 </div></$list>
 
 <h2 style="color:#5778d8;">Recently Closed</h2>
-<$list filter="[recentlyClosed[]!is[missing]sortan[note]]" emptyMessage="No results"><div class="tc-sidebar-tab-open-item">
-<$link to={{!!title}}>
+<$list filter="[recentlyClosed[]!is[missing]sortan[note]]" emptyMessage="@@padding:0 10px;NA@@">
+<div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
+<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$list filter="[all[current]has[caption]]">@@color:#555;{{!!caption}}@@ &middot; </$list><$view field="title"/>
-</$link>
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$button>
 </div></$list>
