@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20240621094704110
+modified: 20240621103810114
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -82,7 +82,7 @@ type: text/vnd.tiddlywiki
 
 <div class="tc-block-dropdown tc-search-drop-down">
 
-<$list filter="[<searchTiddler>get[text]minlength[1]]" emptyMessage="""<div style="margin:6px 17px 0 17px;"><$transclude tiddler="$:/core/ui/MoreSideBar/Recent" mode="block"/></div>""" variable="ignore">
+<$list filter="[<searchTiddler>get[text]minlength[1]]" emptyMessage="""<div style="margin:6px 17px 0 17px;"><$transclude tiddler="$:/core/ui/SideBar/Recent" mode="block"/></div>""" variable="ignore">
 
 <$list filter="[<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 

@@ -1,3 +1,44 @@
+caption: {{$:/language/SideBar/Recent/Caption}}
+modified: 20240621104855904
+modifier: yuzijie
 tags: customized
 title: $:/core/ui/SideBar/Recent
 type: text/vnd.tiddlywiki
+
+<h2 style="color:#5778d8;margin-top:0;">Sidebar</h2>
+<$droppable actions="<$action-listops $tiddler='$:/config/sidebar/pinned' $field='list' $subfilter='[<actionTiddler>]'/>" tag="div">
+<$list filter="[enlist{$:/config/sidebar/pinned!!list}] [enlist{$:/config/index-tree!!list}limit[10]] +[sortan[note]]">
+<div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
+<$list filter="[[$:/config/sidebar/pinned]contains<currentTiddler>]" emptyMessage="""<$button class="tc-btn-invisible" style="color:#5778d8;">
+<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>❎
+</$button>""" variable="NONE"><$button class="tc-btn-invisible">
+<$action-listops $tiddler="$:/config/sidebar/pinned" $field="list" $subfilter="-[{!!title}]"/><<searchbar-focus-action>>📌
+</$button></$list>
+<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
+<$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$button>
+</div>
+</$list>
+</$droppable>
+
+<h2 style="color:#5778d8;">Currently Opened</h2>
+<$list filter="[list<tv-story-list>sortan[note]] -[{$:/HistoryList!!current-tiddler}]" emptyMessage="No results"><div class="tc-sidebar-tab-open-item">
+<$link to={{!!title}}>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[caption]]">@@color:#555;{{!!caption}}@@ &middot; </$list><$view field="title"/>
+</$link>
+</div></$list>
+
+<h2 style="color:#5778d8;">Recently Closed</h2>
+<$list filter="[recentlyClosed[]!is[missing]sortan[note]]" emptyMessage="No results"><div class="tc-sidebar-tab-open-item">
+<$link to={{!!title}}>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[caption]]">@@color:#555;{{!!caption}}@@ &middot; </$list><$view field="title"/>
+</$link>
+</div></$list>
