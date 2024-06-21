@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20240620121057437
+modified: 20240621143404998
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
 <<placeholder>>
 <div>
 <$list filter="[<folded-state>text[hide]]" variable="NONE" emptyMessage="""<$list filter="[all[current]match{$:/HistoryList!!current-tiddler}]">
-<$button style="position:absolute;top:6px;fill:#5778d8;font-size:x-small;" class="tc-btn-invisible current" tag="span">{{$:/core/images/chevron-right}}
+<$button style="position:absolute;top:4px;fill:#5778d8;font-size:smaller;" class="tc-btn-invisible current" tag="span">{{$:/core/images/permalink-button}}
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState="$:/state/folded/$(currentTiddler)$"/>
 <$transclude $variable="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>
@@ -39,6 +39,9 @@ $button$
 \end
 
 <div class="tc-sidebar-tab-open">
+@@font-variant:all-small-caps;color:gray;
+<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">sort by note</$checkbox>
+@@
 <$set name="sidebar-list" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="[list<tv-story-list>sortan[note]]" emptyValue="[list<tv-story-list>]">
 <$set name="tv-allow-drag-and-drop" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="no" emptyValue="yes">
 <$list filter=<<sidebar-list>> history=<<tv-history-list>> storyview="pop">
@@ -64,7 +67,7 @@ $button$
 <$tiddler tiddler="">
 <div class="tc-sidebar-tab-open-item" style="margin-bottom:5px;">
 <$transclude $variable="droppable-item" button="""<$list filter="[recentlyClosed[]!is[missing]limit[1]]"><div style="margin-bottom:5px;">
-<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:#bbb;">
+<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:gray;">
 <$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
@@ -78,7 +81,6 @@ $button$
 <$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
 </span>
 </div></$list>
-<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">sort by note</$checkbox>
 <$button class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">
 <$list filter="[prefix[$:/state/folded/]text[hide]limit[1]]" emptyMessage="<$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/>fold all">
 <$action-deletetiddler $filter="[prefix[$:/state/folded/]]"/>unfold all (<$count filter="[prefix[$:/state/folded/]text[hide]]"/>)
