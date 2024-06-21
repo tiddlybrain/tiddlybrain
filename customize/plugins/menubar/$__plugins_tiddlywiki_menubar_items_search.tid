@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20240403133113088
+modified: 20240621094704110
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -70,6 +70,7 @@ type: text/vnd.tiddlywiki
 <$action-listops $tiddler="$:/config/index-tree" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">-[{{!!note}}]</$list>
 </$button>
