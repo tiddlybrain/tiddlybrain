@@ -2,9 +2,9 @@ caption: Template for Tasks
 created: 20221026195223207
 creator: yuzijie
 keywords: 
-modified: 20240419153824097
+modified: 20240621160403325
 modifier: yuzijie
-status-options: Blocked Escalating Urgent Progressing LowPriority Onhold Review Todo Regular Side Closed
+status-options: Blocked Escalating Urgent Progressing LowPriority Onhold Review Todo Closed
 tags: customized
 title: custom-template-task
 type: application/x-tiddler-dictionary
