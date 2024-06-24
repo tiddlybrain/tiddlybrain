@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: Inbox
-modified: 20240611133620345
+modified: 20240624121042311
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<draft>!match[$:/Draft]]" variable="NONE"><$transclude $variable="editor-title" style=<<edit-table-style>>/></$list>
 <$set name="edit-area-class" filter="[[$:/temp/Draft]!has[draft]]" value="edit-area tc-edit-texteditor" emptyValue="edit-area tc-edit-texteditor red">
 <$list filter="[all[current]!has[_canonical_uri]!is[image]!match[Editor]]" variable="NONE"><div class="edit-area-container">
-<div class="editor-edit"><$edit-text tag="textarea" autoHeight="no" focus="yes" class=<<edit-area-class>>>
+<div class="editor-edit"><$edit-text tag="textarea" autoHeight="no" class=<<edit-area-class>>>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/tips"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/code"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
