@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240430085915417
+modified: 20240624233708693
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -24,9 +24,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" style="color:brown;margin-right:5px;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
-<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value="""<<l "$(currentTiddler)$" description:"">>""" emptyValue=<<currentTiddler>>>
-<$button style="color:brown;">copy<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<link-text>>/></$button>
-</$set>
+<$button style="color:brown;">copy<$action-sendmessage $message="tm-copy-to-clipboard" $param={{$:/temp/Draft!!draft}}/></$button>
 <$button style="color:brown;">open<$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/></$button>
 <$button style="color:brown;">sidebar<<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/></$button>
 </$list>
