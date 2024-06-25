@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20240621131636565
+modified: 20240625132610302
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -22,11 +22,15 @@ type: text/vnd.tiddlywiki
 \define set-next-input-tab(beforeafter:"after") <$transclude $variable="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 
 \define advanced-search-actions()
-<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/menubarsearch/input}}/>
-<$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/menubarsearch/input}}/>
+<$list filter="[{$:/temp/menubarsearch/input}is[blank]]">
 <$action-navigate $to="$:/AdvancedSearch"/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
 <$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/>
-<$action-deletetiddler $filter="$:/temp/menubarsearch $:/temp/menubarsearch/input $:/temp/menubarsearch/refresh [<searchListState>] $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter"/>
+</$list>
+<$list filter="[{$:/temp/menubarsearch/input}!is[blank]]">
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
+</$list>
 \end
 
 \whitespace trim
@@ -54,22 +58,7 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $filter="[<searchListState>] [<searchTiddler>] $:/temp/menubarsearch $:/temp/menubarsearch/refresh $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter"/>
 </$button>
 </$reveal>
-<$tiddler tiddler={{$:/HistoryList!!current-tiddler}}>
-<$button class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">{{$:/core/images/advanced-search-button}}
-<$list filter="[{$:/state/tab/search-results/sidebar}!match[$:/custom/search/ExternalSearchResultList]]" emptyMessage=<<advanced-search-actions>>>
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
-</$list>
-</$button>
-</$tiddler>
-<span class="menubar-recent">
-<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]] -[{$:/temp/index-tree}] +[limit[4]]">
-<$button dragTiddler={{!!title}} class="tc-btn-invisible" style="color:white;margin-left:12px;"><<open-in-sidebar close:"no">>
-<$transclude field="caption"><$view field="title"/></$transclude><$list filter="[all[current]has[note]]">-[{{!!note}}]</$list>
-</$button>
-</$list>
-</span>
+<$button class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">{{$:/core/images/advanced-search-button}}<<advanced-search-actions>></$button>
 </span>
 
 <$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/state/popup/menubar-search-dropdown" type="nomatch" text="" default="">
