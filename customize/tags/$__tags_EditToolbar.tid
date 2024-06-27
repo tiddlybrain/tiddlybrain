@@ -1,7 +1,7 @@
 created: 20240111223605783
 creator: yuzijie
-list: $:/core/ui/Buttons/delete $:/custom/ui/Buttons/update-date $:/core/ui/Buttons/cancel $:/core/ui/Buttons/save $:/custom/ui/Buttons/external-search
-modified: 20240215112956653
+list: $:/core/ui/Buttons/delete $:/custom/ui/Buttons/update-date $:/core/ui/Buttons/cancel $:/core/ui/Buttons/save
+modified: 20240627123103930
 modifier: yuzijie
 tags: customized
 title: $:/tags/EditToolbar
