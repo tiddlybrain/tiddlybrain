@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240628091313200
+modified: 20240628111635600
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -29,11 +29,17 @@ type: text/vnd.tiddlywiki
 
 \end call-api
 
+\define insert-as-text()
+<$action-sendmessage $message=tm-edit-text-operation $param=replace-selection text={{$:/temp/api/response}}/>
+<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
+\end
+
 \define insert-as-tiddler()
 <$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> caption={{{ [<storeTitle>get[text]] }}} type="text/vnd.tiddlywiki" text={{$:/temp/api/response}}>
 <$set name="title" value=<<createTiddler-title>>>
 <$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
+<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
 </$set>
 </$set>
 <$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
@@ -52,7 +58,7 @@ type: text/vnd.tiddlywiki
 </$reveal>
 <$reveal type="nomatch" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center">
 <$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask AI</$button>">
-<$button actions="<$action-sendmessage $message=tm-edit-text-operation $param=replace-selection text={{$:/temp/api/response}}/>">Insert as Text</$button>
+<$button actions=<<insert-as-text>>>Insert as Text</$button>
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler>>>Insert as New Tiddler</$button></$let>
 <$button message="tm-copy-to-clipboard" param={{$:/temp/api/response}}>Copy to Clipboard</$button>
 <$button actions='<<call-api>><<searchbar-focus-action>>'>Ask Again</$button>

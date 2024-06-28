@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240627161510071
+modified: 20240628112333901
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -337,3 +337,4 @@ details .snippet-content pre, details .snippet-content .hljs {background-color: 
 section.ai h3 {font-weight: bold; margin-bottom: 0;}
 section.ai button {display: inline-block; width: unset;}
 section.ai.center {text-align: center;}
+section.ai textarea {text-wrap: balance;}
