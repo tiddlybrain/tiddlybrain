@@ -1,11 +1,71 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20231011084544853
+modified: 20240628091313200
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
 type: text/vnd.tiddlywiki
+
+\procedure call-api()
+
+\procedure completion-get-json()
+<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE">
+<$set name="message" filter="[<data>jsonget[choices],[0],[message],[content]]" select="0">
+<$action-setfield $tiddler="$:/temp/api/response" text=<<message>>/>
+</$set>
+</$list>
+\end completion-get-json
+
+<$let api-key={{$:/config/openaiApiKey}} userInput={{$:/temp/api/request}}>
+<$action-setfield $tiddler="$:/temp/api/response" text="Waiting for response..."/>
+<$action-sendmessage $message="tm-http-request" url="https://api.openai.com/v1/chat/completions" method="POST"
+  oncompletion=<<completion-get-json>>
+  header-Content-Type='application/json'
+  header-Authorization=`Bearer $(api-key)$`
+	body=`{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"$(userInput)$"}]}`
+/>
+</$let>
+
+\end call-api
+
+\define insert-as-tiddler()
+<$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> caption={{{ [<storeTitle>get[text]] }}} type="text/vnd.tiddlywiki" text={{$:/temp/api/response}}>
+<$set name="title" value=<<createTiddler-title>>>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
+<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
+</$set>
+</$set>
+<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
+</$action-createtiddler>
+\end
+
+<$reveal default=<<link-dropdown>> type="match" text="yes" tag="div">
+
+<section class="ai">
+<h3>Instructions</h3>
+<$edit-text tiddler="$:/temp/api/request" tag="textarea" class="edit-area tc-edit-texteditor"/>
+</section>
+
+<$reveal type="match" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center">
+<$button disabled="yes">Please Wait...</$button>
+</$reveal>
+<$reveal type="nomatch" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center">
+<$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask AI</$button>">
+<$button actions="<$action-sendmessage $message=tm-edit-text-operation $param=replace-selection text={{$:/temp/api/response}}/>">Insert as Text</$button>
+<$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler>>>Insert as New Tiddler</$button></$let>
+<$button message="tm-copy-to-clipboard" param={{$:/temp/api/response}}>Copy to Clipboard</$button>
+<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask Again</$button>
+</$list>
+</$reveal>
+
+<section class="ai">
+<h3>Results</h3>
+<$edit-text tiddler="$:/temp/api/response" tag="textarea" class="edit-area tc-edit-texteditor"/>
+</section>
+
+</$reveal>
+<$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="div">
 
 Search for ''“{{$:/temp/menubarsearch/input}}”''
 <small><$button class="search-tool" message="tm-new-tiddler" param="$:/custom/search/ExternalLink/Google">Add New Search</$button></small>
@@ -13,3 +73,5 @@ Search for ''“{{$:/temp/menubarsearch/input}}”''
 <$let search={{$:/temp/menubarsearch/input}}>
 <$list filter="[prefix[$:/custom/search/ExternalLink/]sort[caption]]">{{!!text}}</$list>
 </$let>
+
+</$reveal>

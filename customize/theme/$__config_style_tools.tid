@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240626100650455
+modified: 20240627161510071
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -332,3 +332,8 @@ details > blockquote {margin-left: 10px;}
 li > details {margin: 0}
 details pre, details .hljs {background: white;}
 details .snippet-content pre, details .snippet-content .hljs {background-color: #f5f5f5;}
+
+/* For ExternalSearchResultList - AI */
+section.ai h3 {font-weight: bold; margin-bottom: 0;}
+section.ai button {display: inline-block; width: unset;}
+section.ai.center {text-align: center;}
