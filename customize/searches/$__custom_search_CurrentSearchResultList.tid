@@ -3,7 +3,7 @@ created: 20221213151332719
 creator: yuzijie
 first-search-filter: [{$:/HistoryList!!current-tiddler}getAllTiddlers[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] [{$:/HistoryList!!current-tiddler}blsearch:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[!tag[Ignore]!is[system]subfilter<note-subfilter>sortsub<topic-level>]
 list-after: $:/custom/search/DefaultSearchResultList
-modified: 20240116222525954
+modified: 20240629222719105
 modifier: yuzijie
 second-search-filter: [!tag[Ignore]contains:parents{$:/HistoryList!!current-tiddler}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortsub<topic-level>limit[100]]
 tags: $:/tags/SearchResults customized
@@ -18,7 +18,9 @@ type: text/vnd.tiddlywiki
 </div>
 
 //<small>Link and Backlink matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
+</$button></$reveal>
 <$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
 <$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
 </$button></small></$list>
@@ -36,7 +38,9 @@ type: text/vnd.tiddlywiki
 </$list>
 
 //<small>Child matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
+</$button></$reveal>
 <$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
 <$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
 </$button></small></$list>

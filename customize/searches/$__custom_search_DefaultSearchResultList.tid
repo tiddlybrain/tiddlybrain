@@ -3,7 +3,7 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20240114003032425
+modified: 20240629222615444
 modifier: yuzijie
 second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortsub<topic-level>limit[100]]
 tags: $:/tags/SearchResults customized
@@ -17,7 +17,9 @@ type: text/vnd.tiddlywiki
 <<root-topics>>
 
 //<small>Title matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
+</$button></$reveal>
 
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
@@ -29,7 +31,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[<userInput>minlength[3]]" variable="ignore">
 
 //<small>All matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
+</$button></$reveal>
 <$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
 <$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
 </$button></small></$list>

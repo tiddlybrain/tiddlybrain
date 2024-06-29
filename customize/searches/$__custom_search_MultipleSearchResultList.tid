@@ -3,7 +3,7 @@ created: 20221017175243378
 creator: yuzijie
 first-search-filter: [!is[system]!tag[Ignore]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap:some<userInput>sortan[title]limit[500]]
 list-after: $:/custom/search/RelatedSearchResultList
-modified: 20240113232718902
+modified: 20240629222427318
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/MultipleSearchResultList
@@ -11,7 +11,9 @@ type: text/vnd.tiddlywiki
 
 \define searchResultList()
 //<small>Multiple matches:</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
+</$button></$reveal>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>

@@ -3,7 +3,7 @@ created: 20201225180152364
 creator: yuzijie
 first-search-filter: [prefix[$:/custom]search:title,caption<userInput>] [all[tiddlers]tag[customized]search:title,caption<userInput>] +[sortan[title]]
 list-after: $:/custom/search/FilterSearchResultList
-modified: 20231208230133958
+modified: 20240629222647700
 modifier: yuzijie
 second-search-filter: [prefix[$:/custom]search:*<userInput>] [all[tiddlers]tag[customized]search:*<userInput>] +[sortan[title]]
 tags: $:/tags/SearchResults customized
@@ -12,7 +12,9 @@ type: text/vnd.tiddlywiki
 
 \define searchResultList()
 //<small>{{$:/language/Search/Matches/Title}}</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
+</$button></$reveal>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
@@ -23,7 +25,9 @@ type: text/vnd.tiddlywiki
 </$list>
 
 //<small>{{$:/language/Search/Matches/All}}</small>//
-<small><$button class="search-tool"><$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>Open All</$button></small>
+<$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
+</$button></$reveal>
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
