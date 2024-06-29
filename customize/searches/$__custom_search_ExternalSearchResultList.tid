@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240628111635600
+modified: 20240629205328893
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -17,13 +17,13 @@ type: text/vnd.tiddlywiki
 </$list>
 \end completion-get-json
 
-<$let api-key={{$:/config/openaiApiKey}} userInput={{$:/temp/api/request}}>
+<$let api-key={{$:/config/openaiApiKey}} userInput={{$:/temp/api/request}} model={{$:/config/aiModels}} instructions={{{ [{$:/temp/instructions}get[text]] }}}>
 <$action-setfield $tiddler="$:/temp/api/response" text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url="https://api.openai.com/v1/chat/completions" method="POST"
   oncompletion=<<completion-get-json>>
   header-Content-Type='application/json'
   header-Authorization=`Bearer $(api-key)$`
-	body=`{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"$(userInput)$"}]}`
+	body=`{"model":"$(model)$","messages":[{"role":"system","content":"$(instructions)$"},{"role":"user","content":"$(userInput)$"}]}`
 />
 </$let>
 
@@ -51,6 +51,16 @@ type: text/vnd.tiddlywiki
 <section class="ai">
 <h3>Instructions</h3>
 <$edit-text tiddler="$:/temp/api/request" tag="textarea" class="edit-area tc-edit-texteditor"/>
+<div style="line-height:2em;">
+''Choose Model'': <$select tiddler='$:/config/aiModels'><$list filter="[list[$:/config/aiModels]]"><option>{{!!title}}</option></$list></$select>
+''Custom Instructions'': <$select tiddler="$:/temp/instructions" default="">
+<option value="">Nothing</option>
+<$list filter="[prefix[$:/custom/instructions/]]"><option value={{!!title}}>{{!!caption}}</option></$list>
+</$select>
+<$list filter="[{$:/temp/instructions}is[tiddler]]"><$button class="tc-btn-invisible tc-tiddlylink">View Content
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle={{$:/temp/instructions}}/>
+</$button></$list>
+</div>
 </section>
 
 <$reveal type="match" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center">
@@ -73,8 +83,7 @@ type: text/vnd.tiddlywiki
 </$reveal>
 <$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="div">
 
-Search for ''“{{$:/temp/menubarsearch/input}}”''
-<small><$button class="search-tool" message="tm-new-tiddler" param="$:/custom/search/ExternalLink/Google">Add New Search</$button></small>
+//<small>Search for ''“{{$:/temp/menubarsearch/input}}”'' in:</small>//
 
 <$let search={{$:/temp/menubarsearch/input}}>
 <$list filter="[prefix[$:/custom/search/ExternalLink/]sort[caption]]">{{!!text}}</$list>
