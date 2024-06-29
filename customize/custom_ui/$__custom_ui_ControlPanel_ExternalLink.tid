@@ -1,0 +1,23 @@
+caption: External Link Manager
+created: 20240629132223346
+creator: yuzijie
+modified: 20240629201423431
+modifier: yuzijie
+tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
+title: $:/custom/ui/ControlPanel/ExternalLink
+type: text/vnd.tiddlywiki
+
+\procedure newExternalSearch()
+<$set name="search" filter="[[$(]] [[search]] [[)$]] +[join[]]" select="0">
+<$action-sendmessage $message="tm-new-tiddler" $param="$:/custom/search/ExternalLink/InputNewTitleHere"
+  type="text/vnd.tiddlywiki"
+  tags="customized"
+  caption="New Search Title"
+  text="""<a href=`https://www.example.com/search?q=$(search)$` target="_blank" rel="noopener noreferrer" style="display:block;margin-bottom:5px;">{{!!caption}}</a>"""
+/>
+</$set>
+\end
+
+<$button actions=<<newExternalSearch>>>Add New External Search</$button>
+
+<<records filter:"[prefix[$:/custom/search/ExternalLink/]]">>
