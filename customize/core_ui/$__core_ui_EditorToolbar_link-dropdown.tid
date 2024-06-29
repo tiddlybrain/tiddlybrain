@@ -1,4 +1,4 @@
-modified: 20240628112022938
+modified: 20240629154448916
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -39,6 +39,13 @@ type: text/vnd.tiddlywiki
 </$set></$set>
 \end
 
+\define link-style-chooser()
+<span style="font-variant:all-small-caps;font-size:medium;margin-left:10px;">Insert as
+<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="title" unchecked="link" default="title" class="checkbox">Title</$checkbox> /
+<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="link" unchecked="title" default="title" class="checkbox">Macro</$checkbox>
+</span>
+\end
+
 \define body(config-title)
 \whitespace trim
 ''<<lingo Hint>>''
@@ -75,10 +82,7 @@ type: text/vnd.tiddlywiki
 <<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
 {{$:/core/images/close-button}}
 </$button>
-&#32;
-<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="link" unchecked="title" default="title"> Link Macro</$checkbox>
-&#32;
-<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="title" unchecked="link" default="title"> Title Only</$checkbox>
+<<link-style-chooser>>
 </$reveal>
 </$vars>
 
