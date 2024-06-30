@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240630181629947
+modified: 20240630194127783
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -202,8 +202,8 @@ type: text/vnd.tiddlywiki
 {{$:/core/images/left-arrow}}<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$button>
 </span></$list>
-<$list filter="[<mTitle>has[date]]"><span style="color:green;margin-right:8px;">
-<$list filter="[all[current]days:date[]]" emptyMessage="<$view field=date format=date template=YYYY-0MM-0DD/> <$transclude $variable=days-passed start={{!!date}}/>">Today</$list>
+<$list filter="[<mTitle>has[date]]"><span style="color:green;margin-right:8px;font-size:small;">Last Update -
+<$list filter="[all[current]days:date[]]" emptyMessage="<$transclude $variable=days-passed start={{!!date}}/>">Today</$list>
 </span></$list>
 <$list filter="[<mTitle>!is[missing]]">
 <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button>
