@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240701132023142
+modified: 20240701224214481
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -10,15 +10,15 @@ type: text/vnd.tiddlywiki
 \procedure call-api()
 
 \procedure completion-get-json()
-<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE" emptyMessage="""<$action-setfield $tiddler="$:/temp/api/response" text=<<status>>/>""">
+<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE" emptyMessage="""<$set name="message" filter="[<data>jsonget[error],[message]]" emptyValue="check your network" select="0"><$action-setfield $tiddler="$:/temp/api/response" text=`Error Code $(status)$ - $(message)$`/></$set>""">
 <$set name="message" filter="[<data>jsonget[choices],[0],[message],[content]]" select="0">
-<$action-setfield $tiddler="$:/temp/api/response" text=<<message>> caption=<<now "hh:0mm:0ss">>/>
+<$action-setfield $tiddler="$:/temp/api/response" text=<<message>> caption=<<now "0hh:0mm:0ss">>/>
 </$set>
 <$action-createtiddler $basetitle="$:/temp/api/history" $template="$:/temp/api/response">
 </$list>
 \end completion-get-json
 
-<$let api-key={{$:/config/openaiApiKey}} userInput={{$:/temp/api/request}} model={{$:/config/aiModels}} instructions={{{ [{$:/temp/instructions}get[text]] }}}>
+<$let api-key={{$:/config/openaiApiKey}} model={{$:/config/aiModels}} instructions={{{ [{$:/temp/instructions}get[text]jsonstringify[]] }}} userInput={{{ [{$:/temp/api/request}get[text]jsonstringify[]] }}}>
 <$action-setfield $tiddler="$:/temp/api/response" text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url="https://api.openai.com/v1/chat/completions" method="POST"
   oncompletion=<<completion-get-json>>
@@ -58,8 +58,12 @@ type: text/vnd.tiddlywiki
 <option value="">Nothing</option>
 <$list filter="[prefix[$:/custom/instructions/]]"><option value={{!!title}}>{{!!caption}}</option></$list>
 </$select>
-<$list filter="[{$:/temp/instructions}is[tiddler]]"><$button class="tc-btn-invisible tc-tiddlylink">View Content
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle={{$:/temp/instructions}}/>
+<$list filter="[{$:/temp/instructions}is[tiddler]]"><$button class="tc-btn-invisible tc-tiddlylink">View
+<$tiddler tiddler={{$:/temp/instructions}}>
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
+</$list>
+</$tiddler>
 </$button></$list>
 </div>
 </section>
