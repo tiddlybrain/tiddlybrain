@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20240621143404998
+modified: 20240701223820767
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -25,7 +25,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<folded-state>text[hide]]" variable="NONE" emptyMessage="""<$list filter="[all[current]match{$:/HistoryList!!current-tiddler}]">
 <$button style="position:absolute;top:4px;fill:#5778d8;font-size:smaller;" class="tc-btn-invisible current" tag="span">{{$:/core/images/permalink-button}}
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState="$:/state/folded/$(currentTiddler)$"/>
-<$transclude $variable="tiddler-open" tiddler={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
+<$transclude $variable="tiddler-open" tiddler={{{ [<currentTiddler>previous[$:/StoryList]] :else[<currentTiddler>next[$:/StoryList]] }}}/>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>
 </$button>
 </$list>""">
