@@ -1,7 +1,7 @@
 caption: Custom Instructions
 created: 20240629135931002
 creator: yuzijie
-modified: 20240629201324553
+modified: 20240701224411104
 modifier: yuzijie
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
 title: $:/custom/ui/ControlPanel/CustomInstructions
@@ -13,6 +13,7 @@ type: text/vnd.tiddlywiki
   tags="customized"
   caption="New Instructions Title"
   text="Input your instructions here."
+  code-body="yes"
 />
 \end
 

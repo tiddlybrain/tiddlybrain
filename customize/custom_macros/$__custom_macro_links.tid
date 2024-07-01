@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20240419131013637
+modified: 20240701225430564
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -49,7 +49,7 @@ type: text/vnd.tiddlywiki
 </div></$list>
 <$list filter="[<modal>!match[yes]]" variable="NONE">
 <$list filter="[all[current]code-body[yes]]"><div class="external-links" style="background:#c9ffee;">
-<$button class="tc-btn-invisible light-color"><$list filter="[belongs.to{!!title}note[Comment]]" emptyMessage="Show code">@@color:red;Show comments@@</$list>
+<$button class="tc-btn-invisible light-color"><$list filter="[belongs.to{!!title}note[Comment]]" emptyMessage="Show code viewer">@@color:red;Show comments@@</$list>
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mContent={{!!text}} mTitle={{!!title}}/>
 </$button> &middot; <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param={{!!text}}>Copy content</$button>
 </div></$list>

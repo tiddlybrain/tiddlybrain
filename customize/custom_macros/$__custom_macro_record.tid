@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20240419130304100
+modified: 20240701225318000
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -47,7 +47,11 @@ type: text/vnd.tiddlywiki
 </$button></$set>
 <hr style="margin:0;"><<external-links>>
 <div class="record-content">
-<$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
+<$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>>
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{!!language}}/>">
+<$transclude mode="block"/>
+</$list>
+</$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>

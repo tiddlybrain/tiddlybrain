@@ -1,4 +1,4 @@
-modified: 20240629154448916
+modified: 20240701171302686
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -56,7 +56,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" style="width: auto; display: inline-block; transform: translateY(-2px);">
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
-<$list filter="[<storeTitle>get[text]]" emptyMessage="""<$action-setfield $tiddler=<<storeTitle>> text="Unkown Title"/>""">
+<$list filter="[<storeTitle>get[text]]" emptyMessage="""<$action-setfield $tiddler=<<storeTitle>> text="Unknown Content"/>""">
 <$action-setfield $tiddler="$:/temp/api/request" text=<<currentTiddler>>/>
 </$list>
 {{$:/core/images/plugin-generic-language}}
