@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240630194127783
+modified: 20240701073037435
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -202,7 +202,7 @@ type: text/vnd.tiddlywiki
 {{$:/core/images/left-arrow}}<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$button>
 </span></$list>
-<$list filter="[<mTitle>has[date]]"><span style="color:green;margin-right:8px;font-size:small;">Last Update -
+<$list filter="[<mTitle>has[date]]"><span style="color:green;margin-right:8px;font-size:small;">Since Last -
 <$list filter="[all[current]days:date[]]" emptyMessage="<$transclude $variable=days-passed start={{!!date}}/>">Today</$list>
 </span></$list>
 <$list filter="[<mTitle>!is[missing]]">

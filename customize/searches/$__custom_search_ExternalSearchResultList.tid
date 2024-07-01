@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240629205328893
+modified: 20240701132023142
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -10,10 +10,11 @@ type: text/vnd.tiddlywiki
 \procedure call-api()
 
 \procedure completion-get-json()
-<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE">
+<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE" emptyMessage="""<$action-setfield $tiddler="$:/temp/api/response" text=<<status>>/>""">
 <$set name="message" filter="[<data>jsonget[choices],[0],[message],[content]]" select="0">
-<$action-setfield $tiddler="$:/temp/api/response" text=<<message>>/>
+<$action-setfield $tiddler="$:/temp/api/response" text=<<message>> caption=<<now "hh:0mm:0ss">>/>
 </$set>
+<$action-createtiddler $basetitle="$:/temp/api/history" $template="$:/temp/api/response">
 </$list>
 \end completion-get-json
 
@@ -64,7 +65,7 @@ type: text/vnd.tiddlywiki
 </section>
 
 <$reveal type="match" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center">
-<$button disabled="yes">Please Wait...</$button>
+<$button actions="""<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>""">Cancel Request</$button>
 </$reveal>
 <$reveal type="nomatch" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center">
 <$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask AI</$button>">
@@ -79,6 +80,19 @@ type: text/vnd.tiddlywiki
 <h3>Results</h3>
 <$edit-text tiddler="$:/temp/api/response" tag="textarea" class="edit-area tc-edit-texteditor"/>
 </section>
+
+<$list filter="[prefix[$:/temp/api/history]limit[1]]"><section class="ai">
+<h3>History</h3>
+<$list filter="[prefix[$:/temp/api/history]!sort[created]]">
+<$set name="summary" filter="[all[current]get[caption]] [all[current]get[text]] +[join[ ]]" select="0">
+<$details summary=<<summary>>>
+<$button set="$:/temp/api/request" setTo={{{ [all[current]get[text]] }}}>Add to Instructions</$button>
+<$button set="$:/temp/api/response" setTo={{{ [all[current]get[text]] }}}>Add to Results</$button>
+<div class="history"><$transclude tiddler={{!!title}} mode=block/></div>
+</$details>
+</$set>
+</$list>
+</section></$list>
 
 </$reveal>
 <$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="div">
