@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20240701223755709
+modified: 20240702093732925
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" style=<<current>>>
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
 <$list filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]">
-<$transclude $variable="tiddler-open" tiddler={{{ [<currentTiddler>previous[$:/StoryList]] :else[<currentTiddler>next[$:/StoryList]] }}}/>
+<$action-navigate $to={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
 </$list>
 <$list filter="[<folded-state>!text[hide]]" variable="NONE" emptyMessage={{$:/core/images/chevron-right}}>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>{{$:/core/images/chevron-left}}
