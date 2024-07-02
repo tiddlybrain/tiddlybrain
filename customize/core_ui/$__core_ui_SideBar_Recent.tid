@@ -1,12 +1,12 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
-modified: 20240625133328897
+modified: 20240702082506868
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/SideBar/Recent
 type: text/vnd.tiddlywiki
 
 <h2 style="color:#5778d8;margin-top:0;">Sidebar</h2>
-<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]] -[{$:/temp/index-tree}] +[limit[10]]">
+<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[10]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink"><<open-in-sidebar close:"no">>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
