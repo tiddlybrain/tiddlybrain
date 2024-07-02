@@ -1,6 +1,6 @@
 caption: {{$:/core/images/fold-button}} {{$:/language/Buttons/Fold/Caption}}
 description: {{$:/language/Buttons/Fold/Hint}}
-modified: 20240702093959917
+modified: 20240702163111025
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/fold
@@ -10,7 +10,9 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" default="show">
 <$button tooltip={{$:/language/Buttons/Fold/Hint}} aria-label={{$:/language/Buttons/Fold/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
-<$action-navigate $to={{{ [<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]] }}}/>
+<$list filter="[<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]]">
+<$action-navigate $to=<<currentTiddler>>/><$action-deletetiddler $filter="[<currentTiddler>addprefix[$:/state/folded/]is[tiddler]]"/>
+</$list>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
 {{$:/core/images/fold-button}}
