@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240701131741768
+modified: 20240702151352614
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -340,3 +340,6 @@ section.ai.center {text-align: center;}
 section.ai textarea {text-wrap: balance;}
 section.ai details summary {overflow: hidden; text-overflow: ellipsis; max-width: 671px;}
 section.ai details .history p {white-space: normal; max-width: 670px; padding: 0; margin-bottom: 0;}
+
+/* For editor-modal */
+.edit-area.editor-modal {white-space: normal;}

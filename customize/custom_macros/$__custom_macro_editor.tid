@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240624233708693
+modified: 20240702145357170
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -17,10 +17,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button class="tc-btn-invisible" style="color:green;margin-right:5px;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
 <$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]"><$action-setfield $tiddler="$:/HistoryList" current-tiddler=""/></$list>
-</$button>
-<$list filter="[all[current]!has[draft.of]]">
-<$button style="color:green;">edit<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/></$button>
-</$list>""">
+</$button>""">
 <$button class="tc-btn-invisible" style="color:brown;margin-right:5px;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>

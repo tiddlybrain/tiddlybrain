@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240702094708099
+modified: 20240702145829002
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -216,6 +216,7 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler="$:/state/modal/history"/>
 <$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[draft.title<mTitle>] +[putfirst[]]"/>
 <$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
 <$list filter="[<mTitle>code-body[yes]]"><<modal-edit-comment>></$list>
