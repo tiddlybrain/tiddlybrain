@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20240524091638779
+modified: 20240704145323579
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -12,10 +12,10 @@ type: text/vnd.tiddlywiki
 
 \define s(step,comments,field:"steps")
 <$list filter="[all[current]contains:$field$[$step$]]" emptyMessage="""
-''<$button class="tc-btn-invisible" style="color:coral;"><$action-listops $field="$field$" $subfilter="[[$step$]]"/>&#9744;</$button>
+''<$button class="tc-btn-invisible" style="color:red;"><$action-listops $field="$field$" $subfilter="[[$step$]]"/>&#9744;</$button>
 <<linkIfExists "$step$" "$comments$">>''""">
-<$button class="tc-btn-invisible" style="color:coral;"><$action-listops $field="$field$" $subfilter="-[[$step$]]"/>&#9746;</$button>
-<em><<linkIfExists "$step$" "$comments$">></em>
+<$button class="tc-btn-invisible" style="color:green;"><$action-listops $field="$field$" $subfilter="-[[$step$]]"/>&#9746;</$button>
+<<linkIfExists "$step$" "$comments$">>
 </$list>
 \end
 
@@ -50,7 +50,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define step-open(step,comments,t)
-@@font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
+@@font-weight:bold;color:orange;<<linkIfExists "$step$" "$comments$">>@@
 <$button class="tc-btn-invisible">@@color:orange;&#11044;@@
 <$list filter="[<__t__>is[blank]]" variable="NONE" emptyMessage="""<$action-setfield $tiddler=<<task-state>> text="doing"/>""">
 <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<__step__>>/><$action-deletetiddler $tiddler=<<task-state>>/>
@@ -63,7 +63,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define step-doing(step,comments,t)
-@@font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
+@@font-weight:bold;color:green;<<linkIfExists "$step$" "$comments$">>@@
 <$list filter="[<task-state>!has[plan]]">⚠️</$list>
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:green;&#10148;@@
 <$action-deletetiddler $tiddler=<<task-state>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
