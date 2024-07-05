@@ -1,4 +1,4 @@
-modified: 20240408192302701
+modified: 20240705142729104
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -12,11 +12,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 </$let>
 <div class="sidebar-item-hover">
-<$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/close-others-button}}
-<$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
-</$button>
 <$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/open-window}}
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
