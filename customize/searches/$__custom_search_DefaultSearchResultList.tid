@@ -3,7 +3,7 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20240705144205042
+modified: 20240705233951219
 modifier: yuzijie
 second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[subfilter<note-subfilter>sortan[belongs.to]limit[100]]
 tags: $:/tags/SearchResults customized
@@ -13,8 +13,6 @@ type: text/vnd.tiddlywiki
 \define searchResultList()
 <$set name="note-subfilter" filter="[[$:/temp/note/filter]get[text]]" emptyValue="[is[tiddler]]" select="0">
 <$list filter="[<userInput>minlength[2]]" variable="ignore">
-
-<<root-topics>>
 
 //<small>Title matches:</small>//
 <$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
@@ -37,19 +35,30 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
 <$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
 </$button></small></$list>
+<$reveal type="match" state="$:/state/search/showParents" text="show"><small><$button class="search-tool">
+<$action-deletetiddler $tiddler="$:/state/search/showParents"/><<searchbar-focus-action>>Hide Parents Cloud
+</$button></small></$reveal>
+<$reveal type="nomatch" state="$:/state/search/showParents" text="show"><small><$button class="search-tool">
+<$action-setfield $tiddler="$:/state/search/showParents" text="show"/><<searchbar-focus-action>>Show Parents Cloud
+</$button></small></$reveal>
 
 <$list filter="[[$:/temp/note/filter]!is[tiddler]]">
 <$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]split[ ]first[]] }}}><<note-filters>></$set>
 </$list>
 
+<$list filter="[[$:/state/search/showParents]is[tiddler]]">
+<$set name="search-filter" value={{{ [<configTiddler>get[second-search-filter]split[ ]first[]] }}}><<parents-cloud>></$set>
+</$list>
+
+<$list filter="[[$:/state/search/showParents]!is[tiddler]]">
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
 <span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
-
 </$list>
 
+</$list>
 </$set>
 \end
 <<searchResultList>>

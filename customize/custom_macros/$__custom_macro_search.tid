@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20240114001415614
+modified: 20240705161005146
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -8,17 +8,17 @@ type: text/vnd.tiddlywiki
 
 \define searchbar-focus-action() <$list filter="[<link-dropdown>match[yes]]" emptyMessage="""<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>"""><$action-sendmessage $message="tm-focus-selector" $param="input.link-dropdown" preventScroll="true"/></$list>
 
-\define root-topics()
+\define parents-cloud()
 \whitespace trim
-<div class="search-filters"><$let tv-wikilinks="no">
-<$list filter="[!is[system]!tag[Ignore]search:title,tags,caption,shortcap,keywords,text,note,status,description[$(userInput)$]get[parents]enlist-input[]!tag[Snippet]unique[]sortan[title]]"><$wikify name="keyword" text={{!!caption}} mode="inline">
+<div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[subfilter<note-subfilter>get[belongs.to]unique[]sortsub<topic-level>]">
+<$wikify name="keyword" text={{!!caption}} mode="inline">
 <$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#dbedff;color:#333;"><<keyword>>
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
 </$button>
-</$wikify></$list>
-</$let></div>
+</$wikify>
+</$list></$let></div>
 \end
 
 \define note-filter() [note[$(note)$]]
@@ -36,8 +36,8 @@ type: text/vnd.tiddlywiki
 
 # ''自动聚焦搜索框''
 #> `<<searchbar-focus-action>>`
-# ''显示搜索结果的根目录词条, 并且点击后, 跳转到 current search''
-#> `<<root-topics>>`
+# ''显示搜索结果的父级词条, 并且点击后, 跳转到 related search''
+#> `<<parents-cloud>>`
 # ''显示搜索结果的 note 字段, 并且点击后, 生成一个 filter, 过滤 note''
 #> `<<note-filters>>`
 # ''根据 tiddler 的 parents field 来计算 tiddler 的级别, 给 sortsub 使用''
