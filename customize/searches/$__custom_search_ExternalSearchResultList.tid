@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240706002847592
+modified: 20240706130338375
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -18,13 +18,13 @@ type: text/vnd.tiddlywiki
 </$list>
 \end completion-get-json
 
-<$let api-key={{$:/config/openaiApiKey}} model={{$:/config/aiModels}} instructions={{{ [{$:/temp/instructions}get[text]jsonstringify[]] }}} userInput={{{ [[$:/temp/api/request]get[text]jsonstringify[]] }}}>
+<$let api-key={{$:/config/openaiApiKey}} model={{$:/config/aiModels}} instructions={{{ [{$:/temp/instructions}get[text]jsonstringify[]] }}} userInput={{{ [[$:/temp/api/request]get[text]jsonstringify[]] }}} body=`{"model":"$(model)$","messages":[{"role":"system","content":"$(instructions)$"},{"role":"user","content":"$(userInput)$"}]}`>
 <$action-setfield $tiddler="$:/temp/api/response" text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url="https://api.openai.com/v1/chat/completions" method="POST"
   oncompletion=<<completion-get-json>>
   header-Content-Type='application/json'
   header-Authorization=`Bearer $(api-key)$`
-	body=`{"model":"$(model)$","messages":[{"role":"system","content":"$(instructions)$"},{"role":"user","content":"$(userInput)$"}]}`
+	body=<<body>>
 />
 </$let>
 
@@ -98,12 +98,14 @@ type: text/vnd.tiddlywiki
 </section>
 
 <$list filter="[prefix[$:/temp/api/history]limit[1]]"><section class="ai">
-<h3>History</h3>
+<h3>History <$button style="font-size:small;"><$action-deletetiddler $filter="[prefix[$:/temp/api/history]]"/>Clear History</$button></h3>
 <$list filter="[prefix[$:/temp/api/history]!sort[created]]">
 <$set name="summary" filter="[all[current]get[caption]] [all[current]get[text]] +[join[ ]]" select="0">
 <$details summary=<<summary>>>
 <$button set="$:/temp/api/request" setTo={{{ [all[current]get[text]] }}}>Add to Instructions</$button>
 <$button set="$:/temp/api/response" setTo={{{ [all[current]get[text]] }}}>Add to Results</$button>
+<$button><$action-sendmessage $message="tm-modal" $param="$:/custom/template/editor-modal" mTitle=<<currentTiddler>>/>Edit This</$button>
+<$button><$action-deletetiddler $tiddler=<<currentTiddler>>/>Delete This</$button>
 <div class="history"><$transclude tiddler={{!!title}} mode=block/></div>
 </$details>
 </$set>
