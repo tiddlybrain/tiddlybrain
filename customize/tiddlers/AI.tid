@@ -1,0 +1,13 @@
+created: 20240705234330956
+creator: yuzijie
+keywords: 
+list-before: $:/core/ui/SideBar/More
+modified: 20240706001357421
+modifier: yuzijie
+tags: customized $:/tags/SideBar Ignore
+title: AI
+type: text/vnd.tiddlywiki
+
+<$let link-dropdown="yes" sidebar="yes">
+<$transclude tiddler="$:/custom/search/ExternalSearchResultList" mode="block"/>
+</$let>

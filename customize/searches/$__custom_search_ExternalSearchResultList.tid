@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240703155327190
+modified: 20240706002847592
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -36,13 +36,20 @@ type: text/vnd.tiddlywiki
 \end
 
 \define insert-as-tiddler()
-<$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> caption={{{ [<storeTitle>get[text]] }}} type="text/vnd.tiddlywiki" text={{$:/temp/api/response}}>
+<$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> type="text/vnd.tiddlywiki" caption={{$:/temp/api/request}} text={{$:/temp/api/response}}>
 <$set name="title" value=<<createTiddler-title>>>
 <$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
 </$set>
 </$set>
+<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
+</$action-createtiddler>
+\end
+
+\define save-as-tiddler()
+<$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> type="text/vnd.tiddlywiki" caption={{$:/temp/api/request}} text={{$:/temp/api/response}}>
+<$action-navigate $to=<<createTiddler-title>>/>
 <$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
 </$action-createtiddler>
 \end
@@ -68,13 +75,18 @@ type: text/vnd.tiddlywiki
 </div>
 </section>
 
-<$reveal type="match" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center">
+<$reveal type="match" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
 <$button actions="""<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>""">Cancel Request</$button>
 </$reveal>
-<$reveal type="nomatch" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center">
+<$reveal type="nomatch" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
 <$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask AI</$button>">
+<$list filter="[<sidebar>!match[yes]]" variable="NONE">
 <$button actions=<<insert-as-text>>>Insert as Text</$button>
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler>>>Insert as New Tiddler</$button></$let>
+</$list>
+<$list filter="[<sidebar>match[yes]]" variable="NONE">
+<$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler>>>Save as New Tiddler</$button></$let>
+</$list>
 <$button message="tm-copy-to-clipboard" param={{$:/temp/api/response}}>Copy to Clipboard</$button>
 <$button actions='<<call-api>><<searchbar-focus-action>>'>Ask Again</$button>
 </$list>
