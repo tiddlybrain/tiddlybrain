@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20240706203942997
+modified: 20240707163413298
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -10,14 +10,14 @@ type: text/vnd.tiddlywiki
 
 \define parents-cloud()
 \whitespace trim
-<div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[subfilter<note-subfilter>get[belongs.to]unique[]sortsub<topic-level>]">
-<$wikify name="keyword" text={{!!caption}} mode="inline">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:unset;background:#dbedff;color:#333;"><<keyword>>
+<div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[subfilter<note-subfilter>get[belongs.to]unique[]sortsub<parents-reverse>]">
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:unset;background:#69b2ff;color:white;">
+<$list filter="[all[current]get[belongs.to]getAllParents[]reverse[]]"><$transclude field="caption"><$view field="title"/></$transclude>/</$list>
+@@color:#ffd600;<$transclude field="caption"><$view field="title"/></$transclude>@@
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
-</$button>
-</$wikify>
+</$button><br>
 </$list></$let></div>
 \end
 
@@ -34,6 +34,8 @@ type: text/vnd.tiddlywiki
 
 \define topic-level() [get[parents]enlist-input[]count[]]
 
+\define parents-reverse() [get[parents]enlist-input[]reverse[]join[]]
+
 # ''自动聚焦搜索框''
 #> `<<searchbar-focus-action>>`
 # ''显示搜索结果的父级词条, 并且点击后, 跳转到 related search''
@@ -42,3 +44,5 @@ type: text/vnd.tiddlywiki
 #> `<<note-filters>>`
 # ''根据 tiddler 的 parents field 来计算 tiddler 的级别, 给 sortsub 使用''
 #> `<<topic-level>>`
+# ''将 tiddler 的 parents field 倒序排列, 给 sortsub 使用''
+#> `<<parents-reverse>>`
