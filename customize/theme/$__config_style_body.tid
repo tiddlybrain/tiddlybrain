@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20240620123910409
+modified: 20240707111012147
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -130,7 +130,7 @@ input[type=text].new-tiddler-input-box, input:not([type]).new-tiddler-input-box 
 .tc-tab-buttons {margin-bottom: -4px; white-space: nowrap; padding-top: 0.8em; overflow-x: auto;}
 .tc-tab-buttons button {font-weight: bold; font-size: 1.1em; padding: .5em .8em; background: transparent; transition: background ease-in .2s; border: 0; border-radius: 0;}
 .tc-tab-buttons button.tc-tab-selected {border: 0; border-bottom: 4px solid #5778d8;}
-.tc-tab-buttons button:hover {background: rgba(0,0,0,.03);}
+.tc-tab-buttons button:hover {background: rgba(0,0,0,.03); color: #444;}
 .tc-tiddler-body .tc-tab-content .tc-tab-buttons {padding-top: 0;}
 
 .tc-sidebar-lists .tc-tab-buttons button {border-top-left-radius: 2px; border-top-right-radius: 2px;}
@@ -148,6 +148,8 @@ input[type=text].new-tiddler-input-box, input:not([type]).new-tiddler-input-box 
 .tc-more-sidebar .tc-tab-set > .tc-tab-buttons > button {border: 1px solid #ccc;}
 .tc-more-sidebar .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {border: 1px solid #d8d8d8; border-right: 1px solid #f4f4f4;}
 .tc-more-sidebar .tc-tab-set > .tc-tab-buttons.tc-vertical button {padding: .5em .926em;}
+
+.tc-drop-down .tc-tab-buttons button.tc-tab-selected {background-color: #f5f5f5; border-bottom: 0;}
 
 /* Dropdown */
 @keyframes pop {

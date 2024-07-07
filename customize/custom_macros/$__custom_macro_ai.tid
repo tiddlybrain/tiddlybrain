@@ -1,0 +1,38 @@
+created: 20240707103210561
+creator: yuzijie
+modified: 20240707104954500
+modifier: yuzijie
+tags: $:/tags/Macro customized
+title: $:/custom/macro/ai
+type: text/vnd.tiddlywiki
+
+\define insert-as-text()
+<$action-sendmessage $message=tm-edit-text-operation $param=replace-selection text={{$:/temp/api/response}}/>
+<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
+\end
+
+\define insert-as-tiddler()
+<$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> type="text/vnd.tiddlywiki" caption={{$:/temp/api/request}} text={{$:/temp/api/response}}>
+<$set name="title" value=<<createTiddler-title>>>
+<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
+<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
+<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
+</$set>
+</$set>
+<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
+</$action-createtiddler>
+\end
+
+\define save-as-tiddler()
+<$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> type="text/vnd.tiddlywiki" caption={{$:/temp/api/request}} text={{$:/temp/api/response}}>
+<$action-navigate $to=<<createTiddler-title>>/>
+<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
+</$action-createtiddler>
+\end
+
+# ''将 response 内容直接以文字的形式插入编辑框''
+#> `<<insert-as-text>>`
+# ''将 response 内容保存成一个 Tiddler, 并将标题插入编辑框''
+#> `<<insert-as-tiddler>>`
+# ''将 response 保存成新的 Tiddler''
+#> `<<save-as-tiddler>>`

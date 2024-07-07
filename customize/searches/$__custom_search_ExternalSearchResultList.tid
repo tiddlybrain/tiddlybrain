@@ -1,128 +1,15 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240706165611829
+modified: 20240707135810114
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
 type: text/vnd.tiddlywiki
 
-\procedure call-api()
+<$reveal default=<<link-dropdown>> type="match" text="yes" tag="div" style="font-size:small;margin:0 -14px;">
 
-\procedure completion-get-json()
-<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE" emptyMessage="""<$set name="message" filter="[<data>jsonget[error],[message]]" emptyValue="check your network" select="0"><$action-setfield $tiddler="$:/temp/api/response" text=`Error Code $(status)$ - $(message)$`/></$set>""">
-<$set name="message" filter="[<data>jsonget[choices],[0],[message],[content]]" select="0">
-<$action-setfield $tiddler="$:/temp/api/response" text=<<message>>/>
-<$let timestamp=<<now "0hh:0mm:0ss">>>
-<$action-createtiddler $basetitle="$:/temp/api/history" type="application/json" caption=<<timestamp>>>
-<$action-setfield $tiddler=<<createTiddler-title>> $index="role" $value="user"/>
-<$action-setfield $tiddler=<<createTiddler-title>> $index="content" $value={{$:/temp/api/request}}/>
-</$action-createtiddler>
-<$action-createtiddler $basetitle="$:/temp/api/history" type="application/json" caption=<<timestamp>>>
-<$action-setfield $tiddler=<<createTiddler-title>> $index="role" $value="assistant"/>
-<$action-setfield $tiddler=<<createTiddler-title>> $index="content" $value=<<message>>/>
-</$action-createtiddler>
-</$let>
-</$set>
-</$list>
-\end completion-get-json
-
-<$let api-key={{$:/config/openaiApiKey}} model={{$:/config/aiModels}} instructions={{{ [{$:/temp/instructions}get[text]jsonstringify[]] }}} userInput={{{ [[$:/temp/api/request]get[text]jsonstringify[]] }}}>
-<$set name="chatHistory" filter="[[$:/state/api/history]get[text]match[yes]]" value={{{ [prefix[$:/temp/api/history]get[text]] +[join[,]addsuffix[,]] }}} emptyValue="">
-<$action-setfield $tiddler="$:/temp/api/response" text="Waiting for response..."/>
-<$action-sendmessage $message="tm-http-request" url="https://api.openai.com/v1/chat/completions" method="POST"
-  oncompletion=<<completion-get-json>>
-  header-Content-Type='application/json'
-  header-Authorization=`Bearer $(api-key)$`
-  body=`{"model":"$(model)$","messages":[{"role":"system","content":"$(instructions)$"},$(chatHistory)${"role":"user","content":"$(userInput)$"}]}`
-/>
-</$set>
-</$let>
-
-\end call-api
-
-\define insert-as-text()
-<$action-sendmessage $message=tm-edit-text-operation $param=replace-selection text={{$:/temp/api/response}}/>
-<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
-\end
-
-\define insert-as-tiddler()
-<$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> type="text/vnd.tiddlywiki" caption={{$:/temp/api/request}} text={{$:/temp/api/response}}>
-<$set name="title" value=<<createTiddler-title>>>
-<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
-<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
-<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
-</$set>
-</$set>
-<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
-</$action-createtiddler>
-\end
-
-\define save-as-tiddler()
-<$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> type="text/vnd.tiddlywiki" caption={{$:/temp/api/request}} text={{$:/temp/api/response}}>
-<$action-navigate $to=<<createTiddler-title>>/>
-<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>
-</$action-createtiddler>
-\end
-
-<$reveal default=<<link-dropdown>> type="match" text="yes" tag="div">
-
-<section class="ai">
-<h3>Instructions</h3>
-<$edit-text tiddler="$:/temp/api/request" tag="textarea" class="edit-area tc-edit-texteditor"/>
-<div style="line-height:2em;">
-''Choose Model'': <$select tiddler='$:/config/aiModels'><$list filter="[list[$:/config/aiModels]]"><option>{{!!title}}</option></$list></$select>
-''Custom Instructions'': <$select tiddler="$:/temp/instructions" default="">
-<option value="">Nothing</option>
-<$list filter="[prefix[$:/custom/instructions/]]"><option value={{!!title}}>{{!!caption}}</option></$list>
-</$select>
-<$list filter="[{$:/temp/instructions}is[tiddler]]"><$button class="tc-btn-invisible tc-tiddlylink">View
-<$tiddler tiddler={{$:/temp/instructions}}>
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
-</$list>
-</$tiddler>
-</$button></$list>
-</div>
-</section>
-
-<$reveal type="match" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
-<$button actions="""<$action-deletetiddler $filter="[[$:/temp/api/response]]"/>""">Cancel Request</$button>
-</$reveal>
-<$reveal type="nomatch" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
-<$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask AI</$button>
-<$checkbox tiddler='$:/state/api/history' field='text' checked='yes' unchecked='no' default='no'> Chat History</$checkbox>">
-<$list filter="[<sidebar>!match[yes]]" variable="NONE">
-<$button actions=<<insert-as-text>>>Insert as Text</$button>
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler>>>Insert as New Tiddler</$button></$let>
-</$list>
-<$list filter="[<sidebar>match[yes]]" variable="NONE">
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler>>>Save as New Tiddler</$button></$let>
-</$list>
-<$button message="tm-copy-to-clipboard" param={{$:/temp/api/response}}>Copy to Clipboard</$button>
-<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask Again</$button>
-<$checkbox tiddler="$:/state/api/history" field="text" checked="yes" unchecked="no" default="no"> Chat History</$checkbox>
-</$list>
-</$reveal>
-
-<section class="ai">
-<h3>Results</h3>
-<$edit-text tiddler="$:/temp/api/response" tag="textarea" class="edit-area tc-edit-texteditor"/>
-</section>
-
-<$list filter="[prefix[$:/temp/api/history]limit[1]]"><section class="ai">
-<h3>History <$button style="font-size:small;"><$action-deletetiddler $filter="[prefix[$:/temp/api/history]]"/>Clear History</$button></h3>
-<$list filter="[prefix[$:/temp/api/history]!sort[created]]">
-<$set name="summary" filter="[all[current]get[caption]] [all[current]getindex[role]] [all[current]getindex[content]] +[join[ - ]]" select="0">
-<$details summary=<<summary>>>
-<$button set="$:/temp/api/request" setTo={{{ [all[current]getindex[content]] }}}>Set to Instructions</$button>
-<$button set="$:/temp/api/response" setTo={{{ [all[current]getindex[content]] }}}>Set to Results</$button>
-<$button><$action-deletetiddler $tiddler=<<currentTiddler>>/>Delete This</$button>
-<div class="history"><$transclude $tiddler={{!!title}} $index="content" $mode="block" $type="text/plain"/></div>
-</$details>
-</$set>
-</$list>
-</section></$list>
+<$transclude $variable="tabs" tabsList="[prefix[$:/custom/model/]!has[draft.of]sort[order]]" default="$:/custom/model/ChatGPT" state="$:/state/ai/models" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 
 </$reveal>
 <$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="div">

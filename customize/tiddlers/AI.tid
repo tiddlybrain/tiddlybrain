@@ -2,12 +2,12 @@ created: 20240705234330956
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240706001357421
+modified: 20240707135751920
 modifier: yuzijie
 tags: customized $:/tags/SideBar Ignore
 title: AI
 type: text/vnd.tiddlywiki
 
-<$let link-dropdown="yes" sidebar="yes">
-<$transclude tiddler="$:/custom/search/ExternalSearchResultList" mode="block"/>
-</$let>
+<div style="font-size:small;margin-top:-5px;"><$let sidebar="yes">
+<$transclude $variable="tabs" tabsList="[prefix[$:/custom/model/]!has[draft.of]sort[order]]" default="$:/custom/model/ChatGPT" state="$:/state/ai/models" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+</$let></div>
