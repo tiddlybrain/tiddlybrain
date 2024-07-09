@@ -1,0 +1,33 @@
+caption: Roles Manager
+created: 20240708161609441
+creator: yuzijie
+modified: 20240709110340588
+modifier: yuzijie
+tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
+title: $:/custom/ui/ControlPanel/Roles
+type: text/vnd.tiddlywiki
+
+\define newRole()
+<$action-sendmessage $message="tm-new-tiddler"
+  title="New Role Name"
+  type="application/x-tiddler-dictionary"
+  belongs.to="$:/custom/ui/ControlPanel/Roles"
+  description=""
+  keywords="Roles Manager"
+  note="Role"
+  parents="$:/custom/ui/ControlPanel/Roles"
+  tags="Snippet"
+  text="Description: {{!!description}}"
+/>
+\end
+
+<$button actions=<<newRole>>>Add New Role</$button>
+
+<$tiddler tiddler="$:/custom/ui/ControlPanel/Roles">
+
+;Lists
+:<<snippet key:"List">>
+;Roles
+:<<snippet key:"Role">>
+
+</$tiddler>

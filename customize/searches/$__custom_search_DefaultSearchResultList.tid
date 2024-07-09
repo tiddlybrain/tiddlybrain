@@ -3,7 +3,7 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20240706211058104
+modified: 20240709114218866
 modifier: yuzijie
 second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[subfilter<note-subfilter>sortan[belongs.to]limit[100]]
 tags: $:/tags/SearchResults customized
@@ -32,14 +32,15 @@ type: text/vnd.tiddlywiki
 <$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
 </$button></$reveal>
-<$list filter="[[$:/temp/note/filter]is[tiddler]]"><small><$button class="search-tool">
-<$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>Clear Note Filter: {{$:/temp/note/filter!!caption}}
-</$button></small></$list>
 <$reveal type="match" state="$:/state/search/showParents" text="show"><small><$button class="search-tool">
 <$action-deletetiddler $tiddler="$:/state/search/showParents"/><<searchbar-focus-action>>Hide Parents Cloud
 </$button></small></$reveal>
 <$reveal type="nomatch" state="$:/state/search/showParents" text="show"><small><$button class="search-tool">
 <$action-setfield $tiddler="$:/state/search/showParents" text="show"/><<searchbar-focus-action>>Show Parents Cloud
+</$button></small></$reveal>
+<$reveal type="nomatch" state="$:/temp/note/filter" text=""><small><$button class="search-tool">
+<$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>
+&#10005; {{$:/temp/note/filter!!caption}} @@color:#999;<$transclude $tiddler={{$:/temp/note/filter!!caption}} $field="description"/>@@
 </$button></small></$reveal>
 
 <$list filter="[[$:/temp/note/filter]!is[tiddler]]">

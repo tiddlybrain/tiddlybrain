@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20240707163413298
+modified: 20240708184728486
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -26,7 +26,8 @@ type: text/vnd.tiddlywiki
 \define note-filters()
 \whitespace trim
 <div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[get[note]unique[]sortan[title]]" variable="note">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#a7ffb4;"><<note>>
+<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#a7ffb4;">
+<$list filter="[<note>is[tiddler]]" emptyMessage=<<note>>>@@font-weight:bold;color:#12621e;<<note>>@@</$list>
 <$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption=<<note>>/><<searchbar-focus-action>>
 </$button>
 </$list></$let></div>
