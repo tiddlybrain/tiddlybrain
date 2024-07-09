@@ -1,22 +1,26 @@
 caption: Custom Instructions
 created: 20240629135931002
 creator: yuzijie
-modified: 20240701224411104
+modified: 20240708164811341
 modifier: yuzijie
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
 title: $:/custom/ui/ControlPanel/CustomInstructions
 type: text/vnd.tiddlywiki
 
-\procedure newInstructions()
-<$action-sendmessage $message="tm-new-tiddler" $param="$:/custom/instructions/InputNewTitleHere"
+\define newInstructions()
+<$action-sendmessage $message="tm-new-tiddler"
+  title=<<unusedtitle "$(template)$">>
   type="text/vnd.tiddlywiki"
-  tags="customized"
+  tags="$:/custom/ui/ControlPanel/CustomInstructions"
   caption="New Instructions Title"
   text="Input your instructions here."
+  date=<<now YYYY0MM0DD>>
   code-body="yes"
 />
 \end
 
+<$vars template={{$:/config/defaultTemplate}}>
 <$button actions=<<newInstructions>>>Add New Instructions</$button>
+</$vars>
 
-<<records filter:"[prefix[$:/custom/instructions/]]">>
+<<records filter:"[tag[$:/custom/ui/ControlPanel/CustomInstructions]]">>

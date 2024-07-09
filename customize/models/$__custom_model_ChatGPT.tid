@@ -1,7 +1,7 @@
 caption: ChatGPT
 created: 20240707102007118
 creator: yuzijie
-modified: 20240707135828734
+modified: 20240708162913449
 modifier: yuzijie
 tags: customized
 title: $:/custom/model/ChatGPT
@@ -49,7 +49,7 @@ type: text/vnd.tiddlywiki
 </$select>
 ''Custom Instructions'': <$select tiddler="$:/temp/instructions" default="">
 <option value="">No Instructions</option>
-<$list filter="[prefix[$:/custom/instructions/]]"><option value={{!!title}}>{{!!caption}}</option></$list>
+<$list filter="[tag[$:/custom/ui/ControlPanel/CustomInstructions]]"><option value={{!!title}}>{{!!caption}}</option></$list>
 </$select>
 <$button tag="span">⚙️
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/CustomInstructions"/>
@@ -62,7 +62,7 @@ type: text/vnd.tiddlywiki
 </$reveal>
 
 <$reveal type="nomatch" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
-<$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask ChatGPT</$button>
+<$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask ChatGPT</$button>
 <$checkbox tiddler='$:/state/api/history' field='text' checked='yes' unchecked='no' default='no'> Chat History</$checkbox>">
 <$list filter="[<sidebar>!match[yes]]" variable="NONE">
 <$button actions=<<insert-as-text>>>Insert as Text</$button>
@@ -72,7 +72,7 @@ type: text/vnd.tiddlywiki
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler>>>Save as New Tiddler</$button></$let>
 </$list>
 <$button message="tm-copy-to-clipboard" param={{$:/temp/api/response}}>Copy to Clipboard</$button>
-<$button actions='<<call-api>><<searchbar-focus-action>>'>Ask Again</$button>
+<$button actions=<<call-api>>>Ask Again</$button>
 <$checkbox tiddler="$:/state/api/history" field="text" checked="yes" unchecked="no" default="no"> Chat History</$checkbox>
 </$list>
 </$reveal>
