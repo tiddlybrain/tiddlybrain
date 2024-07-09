@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240702102511627
+modified: 20240709163100627
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -255,14 +255,7 @@ TBC: <<tbc>>
 </$view></td>
 <td><$transclude $variable="days-passed" start={{!!date}} end={{!!finish}}/></td>
 <td><$list filter="[all[current]has[finish]]" emptyMessage=<<tasks-today>>>
-@@font-size:smaller;white-space:nowrap;
-<$set name="pattern" value="<<[d]\s.+>>">🚩<$count filter="[{!!text}matches<pattern>]"/></$set>
-<$set name="pattern" value="<<[a]\s.+>>">⚔️<$count filter="[{!!text}matches<pattern>]"/></$set>
-@@
-@@font-size:smaller;white-space:nowrap;
-<$set name="pattern" value="<<[w]\s.+>>">⌛<$count filter="[{!!text}matches<pattern>]"/></$set>
-<$set name="pattern" value="<<[c]\s.+>>">🚫<$count filter="[{!!text}matches<pattern>]"/></$set>
-@@
+<$set name="pattern" value="<<[a]\s.+>>">⚔️ <$count filter="[{!!text}matches<pattern>]"/></$set>
 </$list></td>
 <td>
 <$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible">📅 <$count filter="[tag[Tasks/Journal]has:index<currentTiddler>]"/></$button>
