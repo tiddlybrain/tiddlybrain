@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240525124210118
+modified: 20240709071513184
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -52,7 +52,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define snippet-accordion-actions()
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<open-in-sidebar>> variable="NONE">
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage=<<open-in-sidebar close:'no'>> variable="NONE">
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="<$action-deletetiddler $tiddler=<<snippet-accordion-state>>/>" variable="NONE">
 <$action-setfield $tiddler=<<snippet-accordion-state>> text="open"/>
 </$list>
