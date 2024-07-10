@@ -1,8 +1,9 @@
 caption: External Link Manager
 created: 20240629132223346
 creator: yuzijie
-modified: 20240629201423431
+modified: 20240710202035040
 modifier: yuzijie
+order: 3
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
 title: $:/custom/ui/ControlPanel/ExternalLink
 type: text/vnd.tiddlywiki

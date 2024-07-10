@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20240710121329762
+modified: 20240710123001656
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -58,7 +58,7 @@ type: text/vnd.tiddlywiki
 </$button>
 <$list filter="[<is-data-table>match[yes]]" emptyMessage="""<$edit-text tiddler="$:/temp/search/sort-by/$(currentTiddler)$" tag="input" default="" focus="yes"/>""" variable="NONE">
 <$edit-text tiddler="$:/temp/search/sort-by/$(currentTiddler)$/draft" tag="input" default="" focus="yes"/>
-<$button class="tc-btn-invisible">Search
+<$button class="tc-btn-invisible" style="color:#d73737;">Search
 <$action-setfield $tiddler="$:/temp/search/sort-by/$(currentTiddler)$" text={{$:/temp/search/sort-by/$(currentTiddler)$/draft}}/>
 </$button>
 </$list>
@@ -66,7 +66,7 @@ type: text/vnd.tiddlywiki
 </div>
 <$set name="tags" filter=<<__tags-filter__>>><$transclude $variable="tags-tower"/></$set>
 <$reveal type="nomatch" state="$(tagsearch)$" text="" tag="div" class="categories-clear">
-<$button class="tc-btn-invisible" style="color:#ff2700;">Clear Filter
+<$button class="tc-btn-invisible" style="color:#d73737;">Clear Filter
 <$action-deletetiddler $filter="[[$(tagsearch)$]]"/><$action-deletetiddler $filter="[prefix[$:/state/sort/$(currentTiddler)$/]]"/>
 <$list filter="[<__cat-prefix__>suffix[/]]"><$vars tagging="[tagging[]]"><$action-deletetiddler $filter="[prefix<__cat-prefix__>!filter<tagging>]"/></$vars></$list>
 </$button>

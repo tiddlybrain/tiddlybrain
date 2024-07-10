@@ -1,8 +1,9 @@
 caption: Custom Instructions
 created: 20240629135931002
 creator: yuzijie
-modified: 20240708164811341
+modified: 20240710202018057
 modifier: yuzijie
+order: 2
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
 title: $:/custom/ui/ControlPanel/CustomInstructions
 type: text/vnd.tiddlywiki
