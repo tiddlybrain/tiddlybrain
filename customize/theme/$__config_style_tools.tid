@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240710062447293
+modified: 20240710103456600
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -164,11 +164,11 @@ button.sort-by-belongs-title:hover {text-decoration: underline;}
 .categories-update {position: absolute; top: 2px; right: 28px;}
 .categories-display {position: absolute; top: 2px; right: 10px;}
 .categories-caption {margin-bottom: 0.2em;}
-.categories-caption input {background: transparent; border: none; border-bottom: 1px solid white; width: 60%; color: white;}
+.categories-caption input {background: transparent; border: none; border-bottom: 1px solid white; width: 40%; color: white;}
 .categories-caption button svg {fill: white; filter: drop-shadow(0 1px 1px rgb(150 150 150 / 50%));}
 .categories-caption button, .categories-clear button, .categories-update button, .categories-display button {color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%);}
 .categories-update button:disabled {color: #ddd; cursor: not-allowed;}
-.data-value .categories {margin: 2px 0 -8px 0;}
+.data-value .categories {margin: 2px 0;}
 
 /* For Macro: record-popup */
 .record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 4px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}

@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240502222652704
+modified: 20240710095514846
 modifier: yuzijie
 order: 3
 shortcap: 2️⃣Actions
@@ -27,7 +27,10 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler=<<journal-title>>><$button to={{!!title}} class="tc-btn-invisible tc-tiddlylink l">
 <$transclude $variable="format-date" date={{!!date}} template="YYYY-0MM-0DD DDD"/>
 </$button></$tiddler>
-<$edit-text tiddler="$:/temp/plan/date" default=<<curDate>> tag="input" size="5"/>
+<$edit-text tiddler="$:/temp/plan/date/draft" default=<<curDate>> tag="input" size="5"/>
+<$list filter="[[$:/temp/plan/date/draft]get[text]]">
+<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Set</$button>
+</$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
 TBC: <<tbc>>
