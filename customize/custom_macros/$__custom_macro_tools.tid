@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240709071257977
+modified: 20240710075832221
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -168,11 +168,11 @@ type: text/vnd.tiddlywiki
 \end
 
 \define modal-subtitle()
-<$list filter="[<mTitle>!is[missing]]">
+<$list filter="[<mTitle>!is[missing]]"><$let modal="yes" current=<<mTitle>>>
 <$transclude field="caption"><$view field="title"/></$transclude>
-<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<<status-selector>>
-<$let modal="yes"><<verification-notice>> <<tbc-notice>></$let>
+<$list filter="[all[current]has[note]]"><$list filter="[{!!note}is[tiddler]]" emptyMessage="@@color:green;[{{!!note}}]@@">
+<$button actions=<<modal-actions>> tag="span" style="color:green;cursor:pointer;">[{{!!title}}]</$button>
+</$list></$list> <<status-selector>> <<verification-notice>> <<tbc-notice>>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
 <$button class="tc-btn-invisible"><<mTitle>>
@@ -187,7 +187,7 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-close-tiddler"/><$action-deletetiddler $tiddler="$:/state/modal/history"/>
 </$button></$list>
 </div>
-</$list>
+</$let></$list>
 \end
 
 \define modal-footer()
@@ -290,7 +290,7 @@ type: text/vnd.tiddlywiki
 </$list>
 <$action-sendmessage $message="tm-close-tiddler" $param=<<__tiddler__>>/>
 </$list>
-<$action-deletetiddler $filter="[prefix[$:/state/data-table/$tiddler$/]]"/>
+<$action-deletetiddler $filter="[prefix[$:/state/data-table/$tiddler$/]] [prefix[$:/state/sort/$tiddler$/]]"/>
 \end
 
 \define tiddler-open(tiddler)
