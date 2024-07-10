@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240710095514846
+modified: 20240710113629087
 modifier: yuzijie
 order: 3
 shortcap: 2️⃣Actions
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 <$vars today=<<curDate>> dt=<<curDate>>><$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
 
-<h2 style="margin:20px 0 15px;font-weight:500;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
+<h2 style="margin:20px 0;font-weight:500;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
 <$action-setfield $tiddler='$:/temp/plan/date' text={{{[<actionTiddler>split[-]join[]]}}}/>
 </$list>" tag="div">
 <$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 </$button></$tiddler>
 <$edit-text tiddler="$:/temp/plan/date/draft" default=<<curDate>> tag="input" size="5"/>
 <$list filter="[[$:/temp/plan/date/draft]get[text]]">
-<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Set</$button>
+<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
 </$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
@@ -37,6 +37,26 @@ TBC: <<tbc>>
 --: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="22em" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>
 </$droppable></h2>
+
+<$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
+<div class="tc-droppable-placeholder" style="display:block;">
+<table style="width:100%;background:white;table-layout:fixed;"><tbody>
+<tr><th>Tasks</th><th>Progress</th></tr>
+<$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr><$set name="currTask" value=<<task>>>
+<td style="vertical-align:baseline;white-space:nowrap;overflow:hidden;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:7px 0;">
+@@color:#d300cc;<$transclude tiddler=<<task>> field="title"/>@@ <$transclude tiddler=<<task>> field="caption"/>
+</$button></td>
+<td style="padding:5px;"><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
+<$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div style="white-space:nowrap;overflow:hidden;">
+<$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&#10005;</$button>
+<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>></$button>
+</div></$set>
+</$list></td>
+</$set></tr></$list>
+</tbody></table>
+<<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]">>
+</div>
+</$droppable></$list>
 
 <$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:24px;">
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
@@ -77,23 +97,3 @@ TBC: <<tbc>>
 </$list></$vars>
 <$list filter="[tag[Task]status[Blocked]]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 </ol></$droppable>
-
-<$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
-<div class="tc-droppable-placeholder" style="display:block;">
-<table style="width:100%;background:white;table-layout:fixed;"><tbody>
-<tr><th>Tasks</th><th>Progress</th></tr>
-<$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr><$set name="currTask" value=<<task>>>
-<td style="vertical-align:baseline;white-space:nowrap;overflow:hidden;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:7px 0;">
-@@color:#d300cc;<$transclude tiddler=<<task>> field="title"/>@@ <$transclude tiddler=<<task>> field="caption"/>
-</$button></td>
-<td style="padding:5px;"><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
-<$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div style="white-space:nowrap;overflow:hidden;">
-<$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&#10005;</$button>
-<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>></$button>
-</div></$set>
-</$list></td>
-</$set></tr></$list>
-</tbody></table>
-<<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]">>
-</div>
-</$droppable></$list>

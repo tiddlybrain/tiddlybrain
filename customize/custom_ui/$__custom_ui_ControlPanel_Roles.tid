@@ -1,7 +1,7 @@
 caption: Roles Manager
 created: 20240708161609441
 creator: yuzijie
-modified: 20240709110340588
+modified: 20240710112302523
 modifier: yuzijie
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
 title: $:/custom/ui/ControlPanel/Roles
@@ -17,7 +17,8 @@ type: text/vnd.tiddlywiki
   note="Role"
   parents="$:/custom/ui/ControlPanel/Roles"
   tags="Snippet"
-  text="Description: {{!!description}}"
+  text="""Description: {{!!description}}
+Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""
 />
 \end
 
