@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240702145357170
+modified: 20240710220726495
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -27,9 +27,18 @@ type: text/vnd.tiddlywiki
 </$list>
 </$set></td></tr></$list>
 <tr>
-<td style="width:100px;">caption</td>
+<td style="width:90px;">caption
+<$button class="tc-btn-invisible tc-tiddlylink">{{$:/core/images/fixed-height}}
+<$list filter="[[$:/state/editor/caption]!is[tiddler]]" emptyMessage="<$action-deletetiddler $tiddler='$:/state/editor/caption'/>"><$action-setfield $tiddler="$:/state/editor/caption" text="textarea"/></$list>
+</$button>
+</td>
 <td>
+<$reveal type="match" state="$:/state/editor/caption" text="textarea">
+<$edit-text field="caption" tag="textarea" class="edit-area tc-edit-texteditor" inputActions=<<editor-caption-inputActions>>/>
+</$reveal>
+<$reveal type="nomatch" state="$:/state/editor/caption" text="textarea">
 <$edit-text field="caption" class="edit-area tc-edit-texteditor" inputActions=<<editor-caption-inputActions>>/>
+</$reveal>
 <$list filter="[all[current]has[caption]]"><$list filter="[caption{!!caption}!note{!!note}!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]" variable="tag">
 <div style="white-space:nowrap;overflow:auto;width:290px;font-size:small;">
 <$checkbox tiddler=<<editor-caption-status>> listField="list" checked=<<tag>>> <$transclude $variable="l" title=<<tag>> text="{{!!title}} - {{!!caption}}"/></$checkbox><br>
@@ -41,13 +50,13 @@ type: text/vnd.tiddlywiki
 </$list></td>
 </tr>
 <$list filter="description status" variable="field"><tr>
-<td style="width:100px;"><<field>></td><td><$edit-text field=<<field>> class="edit-area tc-edit-texteditor"/></td>
+<td><<field>></td><td><$edit-text field=<<field>> class="edit-area tc-edit-texteditor"/></td>
 <td style="width:10px;"><$list filter="[all[current]has:field<field>]">
 <$button class="tc-btn-invisible tc-tiddlylink"><$action-deletefield $field=<<field>>/>{{$:/core/images/delete-button}}</$button>
 </$list></td>
 </tr></$list>
 <tr>
-<td style="width:100px;padding:6px 7px;">type</td>
+<td style="padding:6px 7px;">type</td>
 <td colspan="2" style="position:relative;font-size:small;">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
