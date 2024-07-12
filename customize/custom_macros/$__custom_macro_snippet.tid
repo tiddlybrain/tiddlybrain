@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240709071513184
+modified: 20240712143512108
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -71,12 +71,15 @@ type: text/vnd.tiddlywiki
 filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
-<$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]" variable="NONE"><$button class="tc-btn-invisible" style="color:red;">Drop Tiddlers Here
+<div class={{{ [<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
+<$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]" variable="NONE">
+<$button class="tc-btn-invisible" style="color:red;">Drop Tiddlers Here
 <$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} belongs.to=<<currentTiddler>> note=<<key>> text="Name: {{!!caption}}
 Description: {{!!description}}" tags="Snippet" caption={{!!caption}} type="application/x-tiddler-dictionary" date=<<now 'YYYY0MM0DD'>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
-</$button></$list>"""><div class="snippet">
+</$button>
+</$list>"""><div class="snippet">
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="fill:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[fill:]addsuffix[;]] }}}>
 <$button actions=<<snippet-accordion-actions>> class="tc-btn-invisible links accordion" style=<<style>>>
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}">{{$:/core/images/right-arrow}}</$list>
@@ -104,6 +107,7 @@ Description: {{!!description}}" tags="Snippet" caption={{!!caption}} type="appli
 </$list>
 </$set></$reveal>
 </div></$list>
+</div>
 </$list>
 <$list filter="[<snippet-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item">
 <$button class="tc-btn-invisible fold-text">-- <<limit>> of <<snippet-qty>> shown --

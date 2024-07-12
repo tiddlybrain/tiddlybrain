@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240710221718556
+modified: 20240712151007761
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -36,8 +36,8 @@ type: text/vnd.tiddlywiki
 /* For Macro: img */
 button.img {border: 1px solid #ddd; box-shadow: 0px 0px 2px 1px #f5f5f5;}
 
-/* For Macro: snippet */
-.snippet {white-space: nowrap;}
+/* For Macro: snippet & bl-filter */
+.snippet, .bl-title {white-space: nowrap; break-inside: avoid-column;}
 button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis; line-height: 30px; color: #5778d8;}
 button.snippet-title:hover {text-decoration: underline;}
 .snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
@@ -293,7 +293,7 @@ li .code-macro {margin: 4px 0;}
 .status-options select {border: none; color: red; font-weight: inherit; font-size: large;}
 
 /* For Macro: collapse */
-button.collapse-title {width: 100%; fill: #999; white-space: nowrap; overflow: hidden; padding: .7em 0 .7em .8em; background: #eee; border-bottom: 1px solid #ddd; border-radius: 0;}
+button.collapse-title {width: 100%; fill: #999; white-space: nowrap; overflow: hidden; padding: .7em 0 .7em .8em; background: #eee; border-bottom: 1px solid #ddd; border-radius: 0; text-overflow: ellipsis;}
 button.collapse-close {background: #f4f4f4; font-weight: normal;}
 .collapse-content {margin: 0.5em 0; border-radius: 3px; padding: 0 1em; border: 1px solid #efefef; border-bottom-color: #ccc; background: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;}
 .collapse-content > ul, .collapse-content > ol, .collapse-content > table {margin: 1em 0;}
