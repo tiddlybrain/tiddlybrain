@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20240415134811985
+modified: 20240712102906952
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#aaa;-&#32;{{!!description}}@@</$list>
 </$list>
 </$button>
-<$list filter="[all[current]untagged[]]">⚠️</$list>
+<$list filter="[all[current]untagged[]]"> ⚠️ </$list>
 </$set></span></$list>
 <$list filter="[<__mode__>match[tr]]" variable="NONE"><div class=<<__class__>> style=<<__style__>>>
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
@@ -41,7 +41,7 @@ type: text/vnd.tiddlywiki
 </$list>
 <div style="text-align:right;font-size:small;margin-top:-1em;">&#10033;&nbsp;<$transclude $variable="l" links="yes" title=<<currentTiddler>> description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status=<<__status__>>/></div>
 </div></$list>
-<$list filter="[<__mode__>match[cl]]" variable="NONE"><$transclude $variable="collapse" title=<<currentTiddler>> text=<<__text__>> class=<<__class__>> style=<<__style__>> external-links=<<__external-links__>> belongs-to=<<__belongs-to__>> more-text="""<$list filter="[<__date__>match[yes]]" variable="NONE">@@color:#666;(<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)@@</$list><$list filter="[<__description__>match[yes]]" variable="NONE"><$list filter="[all[current]has[description]]">@@color:#aaa; - {{!!description}}@@</$list></$list>"""/></$list>
+<$list filter="[<__mode__>match[cl]]" variable="NONE"><$transclude $variable="collapse" title=<<currentTiddler>> text=<<__text__>> class=<<__class__>> style=<<__style__>> external-links=<<__external-links__>> belongs-to=<<__belongs-to__>> more-text="""<$list filter="[<__date__>match[yes]]" variable="NONE">@@color:#666;(<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)@@</$list><$list filter="[all[current]untagged[]]"> ⚠️ </$list><$list filter="[<__description__>match[yes]]" variable="NONE"><$list filter="[all[current]has[description]]">@@color:#aaa; - {{!!description}}@@</$list></$list>"""/></$list>
 </$tiddler>
 \end
 
