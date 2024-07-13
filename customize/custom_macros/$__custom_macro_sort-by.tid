@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20240710123001656
+modified: 20240713122446116
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -83,7 +83,7 @@ type: text/vnd.tiddlywiki
 \define belongs-sort-state(title) $:/state/sort/$(currentTiddler)$/$title$/$(sbb)$
 
 \define belongs-display(filter, cfilter, rheader, title, checkbox, sort-order)
-<$reveal default="$cfilter$" type="match" text="" tag="div" class="belongs-display"><$transclude $variable="record" filter=<<__filter__>> uid=<<__title__>>/></$reveal>
+<$reveal default="$cfilter$" type="match" text="" tag="div" class="belongs-display"><$transclude $variable="record" filter=<<__filter__>>/></$reveal>
 <$reveal default="$cfilter$" type="nomatch" text="" tag="div"><$transclude $variable="table" rfilter=<<__filter__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/></$reveal>
 \end
 

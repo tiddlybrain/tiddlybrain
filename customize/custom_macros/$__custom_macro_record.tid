@@ -1,12 +1,13 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20240701225318000
+modified: 20240713132104585
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
 type: text/vnd.tiddlywiki
 
-\define record(filter:"[tag<currentTiddler>!sort[date]]", uid:"1")
+\define record(filter:"[tag<currentTiddler>!sort[date]]")
+<div class={{{ [<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
 <$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
 <$set name="border-color" filter="[<tv-story-list>contains<currentTiddler>]" value="border-left-color:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[border-left-color:]addsuffix[;]] }}}>
 <blockquote class="tc-quote record" style=<<border-color>>><div class="single-line-record">
@@ -14,13 +15,11 @@ type: text/vnd.tiddlywiki
 <span><<links>> <<tag-list>></span>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 </span>
-<span class="middle"><$list filter="[<direct-open>match[yes]] :else[<modal>match[yes]]" variable="NONE" emptyMessage=<<record-popup '$uid$'>>>
-<$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">
+<span class="middle"><$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink normal-weight">
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
-</$button>
-</$list></span>
+</$button></span>
 <span class="right"><$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#aaa;">
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 <$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>
@@ -28,36 +27,7 @@ type: text/vnd.tiddlywiki
 </div></blockquote>
 </$set>
 </$list></$set>
-\end
-
-\define record-popup-actions() <$list filter="[<modifier>match[ctrl]]" variable="NONE"><$action-navigate/><$action-popup $state="$:/state/popup/nopop"/></$list>
-
-\define record-popup(uid)
-<$button actions=<<record-popup-actions>> popup="$:/state/popup/$(currentTiddler)$/$uid$" dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink normal-weight">
-<$transclude field="caption"><$view field="title"/></$transclude>
-<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
-</$button>
-<$reveal type="popup" state="$:/state/popup/$(currentTiddler)$/$uid$"><div class="record-drop-down tc-popup-keep">
-<div class="record-copy"><$button message="tm-copy-to-clipboard" param={{!!title}}>copy title</$button></div>
-<$set name="direct-open" value="yes"><$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible record-title">
-<$transclude field="caption"><$view field="title"/></$transclude>
-<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
-</$button></$set>
-<hr style="margin:0;"><<external-links>>
-<div class="record-content">
-<$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>>
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{!!language}}/>">
-<$transclude mode="block"/>
-</$list>
-</$list>
-<$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
-<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
-</$list>
 </div>
-</div></$reveal>
 \end
 
 \define records(filter:"[tag<currentTiddler>]", title:"records", sort:"sortan[caption]")
@@ -74,11 +44,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 
 # ''使用列表方式显示 Tiddlers''
 #> `<<record
-  filter:"[tag<currentTiddler>!sort[date]]"
-  uid:"和其他 record 进行区分用的 id">>`
-# ''用 Popup 显示 record 条目的内容''
-#> `<<record-popup
-  uid:"和其他 record 进行区分用的 id">>`
+  filter:"[tag<currentTiddler>!sort[date]]">>`
 # ''带 filters 的 record''
 #> `<<records
   filter:"列表筛选规则"

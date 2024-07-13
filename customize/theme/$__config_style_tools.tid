@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240712151007761
+modified: 20240713132529221
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -13,6 +13,11 @@ type: text/vnd.tiddlywiki
 .underline {border: none; border-bottom: 1px solid #ccc;}
 .description {color: #aaa;}
 .nowrap {white-space: nowrap; overflow: auto;}
+
+/* For Dropdown */
+.record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 4px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}
+.record-content {color: initial; font-weight: initial; display: block; margin: 10px 15px;}
+.date-dropdown .record-drop-down {min-width: 200px;}
 
 /* For Macro: display */
 .tips, .warning, .danger, .question {display: inline-block; border-radius: 0.2rem; padding: 0 0.75rem 0 0.55rem;}
@@ -152,7 +157,6 @@ blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #
 
 /* For Macro: sort-by-belongs */
 button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
-button.sort-by-belongs-title:hover {text-decoration: underline;}
 .data-table .sort-by-belongs .macro-table {margin-top: 10px;}
 .belongs-display, .sort-by-belongs .macro-table {margin: 1em 0 1em 3px;}
 .parent-title {margin-top: 0.3em; white-space: nowrap;}
@@ -169,15 +173,6 @@ button.sort-by-belongs-title:hover {text-decoration: underline;}
 .categories-caption button, .categories-clear button, .categories-update button, .categories-display button {color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%);}
 .categories-update button:disabled {color: #ddd; cursor: not-allowed;}
 .data-value .categories {margin: 2px 0;}
-
-/* For Macro: record-popup */
-.record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 4px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}
-.record-title {margin: 9px 10px 9px 15px; display: block;}
-.record-content {color: initial; font-weight: initial; display: block; margin: 10px 15px;}
-.record-copy {margin: 5px; position: absolute; right: 3px; display: none; font-size: small;}
-.record-drop-down:hover .record-copy {display: block;}
-.popup-bottom {font-size: small; background: #fff3c9; text-align: center; border-radius: 0 0 3px 3px; padding: 3px;}
-.date-dropdown .record-drop-down {min-width: 200px;}
 
 /* For Macro: tree */
 .tc-tree button {color: #ccc;}
