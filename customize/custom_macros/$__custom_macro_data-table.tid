@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20240708161208335
+modified: 20240713172140789
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 \define data-key-cell()
 <td class="data-key">
 <$list filter="[<key>is[tiddler]]" emptyMessage="@@font-weight:bold;<<key>>@@">
-<$button actions=<<modal-actions>> dragTiddler={{!!title}} class="tc-btn-invisible" style="font-weight:bold;text-decoration:underline;">
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!description}} class="tc-btn-invisible role">
 <$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$button>
 </$list>
