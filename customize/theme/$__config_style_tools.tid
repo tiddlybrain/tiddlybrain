@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240713172101549
+modified: 20240713215149856
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -90,7 +90,7 @@ dl.task-list dd {white-space: nowrap;}
 .tc-sidebar-tabs .sort-by-belongs {line-height: 2em;}
 
 /* For Editor */
-.edit-area {width: 100%; line-height: 24px; white-space: pre; padding: 8px 10px;}
+.edit-area {width: 100%; line-height: 24px; padding: 8px 10px;}
 .edit-area.red {color: brown;}
 .tc-sidebar-lists .tc-editor-toolbar {margin: 4px 0;}
 input.tc-edit-texteditor, textarea.tc-edit-texteditor {padding: 0 5px; margin: 5px 0; white-space: pre-wrap;}
@@ -334,7 +334,6 @@ details .snippet-content pre, details .snippet-content .hljs {background-color: 
 section.ai h3 {font-weight: bold; margin-bottom: 5px;}
 section.ai button {display: inline-block; width: unset;}
 section.ai.center {text-align: center;}
-section.ai textarea {text-wrap: balance;}
 section.ai details summary {overflow: hidden; text-overflow: ellipsis; max-width: 671px; white-space: nowrap;}
 section.ai details .history pre {max-width: 670px; margin: 1em 0 0 0;}
 
