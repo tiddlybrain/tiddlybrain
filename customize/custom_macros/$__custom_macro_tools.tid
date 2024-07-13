@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240710075832221
+modified: 20240713055959541
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -235,7 +235,7 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define relationships(name, filter, direct-open:"yes", mode)
+\define relationships(name, filter, direct-open, mode)
 <$list filter="$filter$ +[limit[1]]" variable="NONE"><$set name="state" value="$:/state/relationships/$(currentTiddler)$/$name$">
 <$reveal type="match" state=<<state>> text="close" tag="div" style="padding-top:1em;">
 <$button set=<<state>> setTo="open" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$'' (<$count filter="$filter$"/>)</$button>
