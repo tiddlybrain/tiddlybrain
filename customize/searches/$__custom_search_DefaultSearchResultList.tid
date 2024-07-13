@@ -1,9 +1,9 @@
 caption: General
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [field:title<userInput>] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
+first-search-filter: [field:title<userInput>!tag[Ignore]] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20240709114218866
+modified: 20240713195314761
 modifier: yuzijie
 second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[subfilter<note-subfilter>sortan[belongs.to]limit[100]]
 tags: $:/tags/SearchResults customized

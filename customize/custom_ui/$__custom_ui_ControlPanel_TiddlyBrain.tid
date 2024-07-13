@@ -1,7 +1,7 @@
 caption: TiddlyBrain
 created: 20240626144905524
 creator: yuzijie
-modified: 20240710202113626
+modified: 20240713195613522
 modifier: yuzijie
 tags: $:/tags/ControlPanel/Info customized
 title: $:/custom/ui/ControlPanel/TiddlyBrain
@@ -13,5 +13,5 @@ type: text/vnd.tiddlywiki
 |<$link to="$:/config/aiModels">AI Models</$link> |<$edit-text tiddler="$:/config/aiModels" field="list" default="" tag="input"/> |
 
 <div class="tc-control-panel">
-<$macrocall $name="tabs" tabsList="[all[tiddlers]tag[$:/custom/ui/ControlPanel/TiddlyBrain]!has[draft.of]sort[order]]" default="$:/custom/ui/ControlPanel/Roles"/>
+<$transclude $variable="tabs" tabsList="[all[tiddlers]tag[$:/custom/ui/ControlPanel/TiddlyBrain]!has[draft.of]sort[order]]" default="$:/custom/ui/ControlPanel/Roles" state="$:/state/controlPanel/tiddlyBrain" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </div>

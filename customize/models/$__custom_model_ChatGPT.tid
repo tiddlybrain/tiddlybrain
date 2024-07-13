@@ -1,7 +1,7 @@
 caption: ChatGPT
 created: 20240707102007118
 creator: yuzijie
-modified: 20240708162913449
+modified: 20240713200623932
 modifier: yuzijie
 tags: customized
 title: $:/custom/model/ChatGPT
@@ -49,7 +49,9 @@ type: text/vnd.tiddlywiki
 </$select>
 ''Custom Instructions'': <$select tiddler="$:/temp/instructions" default="">
 <option value="">No Instructions</option>
-<$list filter="[tag[$:/custom/ui/ControlPanel/CustomInstructions]]"><option value={{!!title}}>{{!!caption}}</option></$list>
+<$list filter="[all[tiddlers]note[Instruction]get[belongs.to]]"><optgroup label={{!!caption}}>
+<$list filter='[all[tiddlers]note[Instruction]belongs.to{!!title}]'><option value={{!!title}}>{{!!caption}}</option></$list>
+</optgroup></$list>
 </$select>
 <$button tag="span">⚙️
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/CustomInstructions"/>

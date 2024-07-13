@@ -1,9 +1,10 @@
-caption: Custom Instructions
+caption: General Instructions
 created: 20240629135931002
 creator: yuzijie
-modified: 20240710202018057
+modified: 20240713195148642
 modifier: yuzijie
 order: 2
+shortcap: Custom Instructions
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
 title: $:/custom/ui/ControlPanel/CustomInstructions
 type: text/vnd.tiddlywiki
@@ -12,11 +13,15 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-new-tiddler"
   title=<<unusedtitle "$(template)$">>
   type="text/vnd.tiddlywiki"
-  tags="$:/custom/ui/ControlPanel/CustomInstructions"
+  tags="Snippet"
+  note="Instruction"
+  belongs.to="$:/custom/ui/ControlPanel/CustomInstructions"
   caption="New Instructions Title"
   text="Input your instructions here."
   date=<<now YYYY0MM0DD>>
   code-body="yes"
+  keywords="Custom Instructions"
+  parents="$:/custom/ui/ControlPanel/CustomInstructions"
 />
 \end
 
@@ -24,4 +29,11 @@ type: text/vnd.tiddlywiki
 <$button actions=<<newInstructions>>>Add New Instructions</$button>
 </$vars>
 
-<<records filter:"[tag[$:/custom/ui/ControlPanel/CustomInstructions]]">>
+<$tiddler tiddler="$:/custom/ui/ControlPanel/CustomInstructions">
+
+;Specific Instructions Lists
+:<<snippet key:"List">>
+;General Instructions
+:<<snippet key:"Instruction">>
+
+</$tiddler>
