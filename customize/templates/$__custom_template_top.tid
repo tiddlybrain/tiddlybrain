@@ -1,7 +1,7 @@
 created: 20190202192618583
 creator: yuzijie
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20240710072231569
+modified: 20240713190934146
 modifier: yuzijie
 tags: $:/tags/ViewTemplate customized
 title: $:/custom/template/top
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!search:title:literal[/]get[caption]!match[{{!!text}}]]" variable="NONE">
 <h1 style="margin:0;">{{!!caption}}
 <$list filter="[all[current]has[note]]"><$list filter="[{!!note}is[tiddler]]" emptyMessage="@@color:green;[{{!!note}}]@@">
-<$button actions=<<modal-actions>> tag="span" style="color:green;cursor:pointer;">[{{!!title}}]</$button>
+<$button actions=<<modal-actions>> tag="span" tooltip={{!!description}} style="color:green;cursor:pointer;">[{{!!title}}]</$button>
 </$list></$list> <<status-selector>>
 <$list filter="[all[current]has[description]]">@@color:#aaa;display:block;font-size:medium;margin-top:9px;{{!!description}}@@</$list>
 </h1>
