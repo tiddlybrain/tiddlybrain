@@ -1,6 +1,6 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20240625145146663
+modified: 20240714204911760
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
@@ -30,7 +30,7 @@ type: text/vnd.tiddlywiki
 <$transclude $variable="custom-toc" root="Index" sort="!sort[order]"/>
 </$reveal>
 <$reveal type="nomatch" state="$:/temp/index-tree" text="" default="" tag="div" class="index-tree-view"><$tiddler tiddler={{$:/temp/index-tree}}>
-<$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude mode=block/>"><<data-table>></$list>
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<div class='tc-tiddler-body'><$transclude mode=block/></div>"><<data-table>></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
