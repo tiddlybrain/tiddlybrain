@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240714211703392
+modified: 20240714212410486
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -235,7 +235,7 @@ table.data-table .data-splitter {text-align: center; font-weight: bold; backgrou
 .tc-sidebar-lists .index-tree-view p {margin: 16px 0;}
 .tc-sidebar-lists .index-tree-view .tgr-container p {margin: 0;}
 .tc-sidebar-lists .index-tree-view .categories {margin-top: 10px;}
-.tc-sidebar-lists .index-tree-view > .tc-tiddler-body {background: white; margin-top: 1em; line-height: 26px; overflow: hidden; border: 1px solid #ccc;}
+.tc-sidebar-lists .index-tree-view > .tc-tiddler-body {background: white; margin-top: 1em; padding: 0 15px; line-height: 26px; overflow: hidden; border: 1px solid #ccc;}
 
 /* For Macro: source-compare */
 .source-compare select {width: 40%;}
