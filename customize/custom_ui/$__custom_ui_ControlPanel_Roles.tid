@@ -1,7 +1,7 @@
 caption: Roles Manager
 created: 20240708161609441
 creator: yuzijie
-modified: 20240711140827852
+modified: 20240714170954157
 modifier: yuzijie
 order: 1
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
@@ -29,7 +29,7 @@ Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""
 <$tiddler tiddler="$:/custom/ui/ControlPanel/Roles">
 
 ;Specific Domain
-:<<snippet key:"List">>
+:<<snippet key:"Roles">>
 ;General Domain
 :<<snippet key:"Role">>
 
