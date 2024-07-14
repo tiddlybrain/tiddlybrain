@@ -1,7 +1,7 @@
 caption: ChatGPT
 created: 20240707102007118
 creator: yuzijie
-modified: 20240713200623932
+modified: 20240714153409769
 modifier: yuzijie
 tags: customized
 title: $:/custom/model/ChatGPT
@@ -43,11 +43,13 @@ type: text/vnd.tiddlywiki
 
 <section class="ai"><h3>Instructions</h3>
 <$edit-text tiddler="$:/temp/api/request" tag="textarea" class="edit-area tc-edit-texteditor"/>
-<div>
-''Choose Model'': <$select tiddler='$:/config/aiModels'>
+<table style="width:100%;margin:0;"><tbody>
+<tr><th>Choose Model</th><th>Custom Instructions</th></tr>
+<tr style="text-align:center;">
+<td><$select tiddler='$:/config/aiModels'>
 <$list filter="[list[$:/config/aiModels]]"><option>{{!!title}}</option></$list>
-</$select>
-''Custom Instructions'': <$select tiddler="$:/temp/instructions" default="">
+</$select></td>
+<td><$select tiddler="$:/temp/instructions" default="">
 <option value="">No Instructions</option>
 <$list filter="[all[tiddlers]note[Instruction]get[belongs.to]]"><optgroup label={{!!caption}}>
 <$list filter='[all[tiddlers]note[Instruction]belongs.to{!!title}]'><option value={{!!title}}>{{!!caption}}</option></$list>
@@ -56,7 +58,9 @@ type: text/vnd.tiddlywiki
 <$button tag="span">⚙️
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/CustomInstructions"/>
 </$button>
-</div>
+</td>
+</tr>
+</tbody></table>
 </section>
 
 <$reveal type="match" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
