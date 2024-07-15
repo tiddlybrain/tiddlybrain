@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240715103412561
+modified: 20240715120629584
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -39,16 +39,16 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" content=
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
 </$keyboard></p>
-<p style="margin-top:-5px;">
-<$select tiddler="$:/temp/newTiddler" field="note" default="" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
-<option value="">Choose a Role</option>
+<p style="margin-top:-10px;">
+<$select tiddler="$:/temp/newTiddler" field="note" default="" class="new-tiddler-input-box" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
+<option value="">Role</option>
 <$list filter="[all[tiddlers]note[Role]get[belongs.to]unique[]sortan[caption]]"><optgroup label={{!!caption}}>
 <$list filter='[all[tiddlers]note[Role]belongs.to{!!title}]'><option value={{!!title}}>{{!!title}}</option></$list>
 </optgroup></$list>
 </$select>
 <$list filter="[[$:/temp/newTiddler]get[note]]" variable="note">
-<$select tiddler="$:/temp/newTiddler" field="belongs.to" default="">
-<option value="">Choose a Parent</option>
+<$select tiddler="$:/temp/newTiddler" field="belongs.to" default="" class="new-tiddler-input-box">
+<option value="">Parent</option>
 <$set name="parents" filter="[list[$:/StoryList]] [list[$:/config/index-tree]] +[!is[system]]">
 <$list filter='[enlist<parents>!has[belongs.to]]'>
 <option value={{!!title}}><$transclude field=caption><$view field=title/></$transclude></option>

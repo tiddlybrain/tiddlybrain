@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20240713165832162
+modified: 20240715120032186
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -123,6 +123,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-sidebar-header .tc-sidebar-lists button.borderless {fill: #777; border: none; background-color: transparent; padding: 3px 15px 3px 0;}
 
 input[type=text].new-tiddler-input-box, input:not([type]).new-tiddler-input-box {border: none; border-bottom: 1px solid #ccc; font-size: 17px;}
+select.new-tiddler-input-box {border: none; border-bottom: 1px solid #ccc; font-size: 15px; color: #999;}
 
 /* For $:/core/ui/TagTemplate */
 .tc-tag-list-item button.copy, .tc-tag-list-item button.remove {width: auto; position: absolute; top: 6px; padding: 0 5px 2px 5px; font-variant: small-caps;}
