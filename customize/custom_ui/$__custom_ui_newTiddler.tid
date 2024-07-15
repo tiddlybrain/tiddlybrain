@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240715120629584
+modified: 20240715123006748
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -49,16 +49,12 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" content=
 <$list filter="[[$:/temp/newTiddler]get[note]]" variable="note">
 <$select tiddler="$:/temp/newTiddler" field="belongs.to" default="" class="new-tiddler-input-box">
 <option value="">Parent</option>
-<$set name="parents" filter="[list[$:/StoryList]] [list[$:/config/index-tree]] +[!is[system]]">
-<$list filter='[enlist<parents>!has[belongs.to]]'>
+<optgroup label="Open"><$list filter="[list[$:/StoryList]!is[system]!has[draft.of]]">
 <option value={{!!title}}><$transclude field=caption><$view field=title/></$transclude></option>
-</$list>
-<$list filter="[enlist<parents>get[belongs.to]unique[]sortan[caption]]"><optgroup label={{!!caption}}>
-<$list filter='[enlist<parents>belongs.to<currentTiddler>]'>
+</$list></optgroup>
+<optgroup label="Sidebar"><$list filter="[list[$:/config/index-tree]!is[system]!has[draft.of]]">
 <option value={{!!title}}><$transclude field=caption><$view field=title/></$transclude></option>
-</$list>
-</optgroup></$list>
-</$set>
+</$list></optgroup>
 </$select>
 <em style="font-size:small;display:block;">Only tiddlers that are open or were in the sidebar can be selected as parents.</em>
 </$list>
