@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240715125905723
+modified: 20240715130733176
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -31,7 +31,7 @@ Description: {{!!description}}" type="application/x-tiddler-dictionary" content=
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="34" class="new-tiddler-input-box" placeholder="Tiddler Caption" default="" focus="yes"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]"><$button class="tc-btn-invisible">➕
 <$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>
-<$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}" popup="close" scroll="yes"/>
+<$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}" popup="close" scroll="yes"/>
 </$vars>
 </$button></$list><br>
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="34" class="new-tiddler-input-box" placeholder="Description or Attachments Path" field="description"/>
