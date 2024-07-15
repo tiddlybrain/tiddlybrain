@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20240402203731899
+modified: 20240715212908362
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -28,7 +28,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible">&#10005;<$action-deletetiddler $filter="[[$search$]] [[$value$]] [[$(select-state)$]]"/></$button>
 </$list>
 <$list filter="[[$search$]is[tiddler]get[text]!match{$value$}]">
-<$button class="tc-btn-invisible">{{$:/core/images/advanced-search-button}}<$action-setfield $tiddler="$value$" text={{$search$}}/></$button>
+<$button class="tc-btn-invisible" style="font-variant:all-small-caps;">Search<$action-setfield $tiddler="$value$" text={{$search$}}/></$button>
 </$list>
 \end
 
@@ -84,7 +84,8 @@ Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wiki
 </$list>
 <$list filter="[<select-state>search:text:literal[search:title]]" variable="NONE">
 <$set name="select-value-draft" value="$:/temp/select/draft/$(currentTiddler)$/$title$/$uid$">
-<span style="border-bottom:1px solid #ccc;padding-bottom:1px;"><$edit-text tiddler=<<select-value-draft>> tag="input" size="20" focus="yes" class="filter-options-search"/><$transclude $variable="filter-options-search-button" search=<<select-value-draft>> value=<<select-value>>/></span>
+<$edit-text tiddler=<<select-value-draft>> tag="input" size="15" focus="yes" class="filter-options-search"/>
+<$transclude $variable="filter-options-search-button" search=<<select-value-draft>> value=<<select-value>>/>
 </$set>
 </$list>
 </$set>

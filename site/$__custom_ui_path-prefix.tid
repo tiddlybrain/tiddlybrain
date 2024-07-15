@@ -1,16 +1,10 @@
 created: 20190212203619173
 creator: yuzijie
-modified: 20240715151314750
+modified: 20240715210332434
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/path-prefix
 type: text/vnd.tiddlywiki
 
-<$select tiddler='$:/config/index-tree' field='path' class='new-tiddler-input-box'>
 <option>file://wsl.localhost/Debian/home/yu/personal-information-manager/brain/files/</option>
-<option>file://C:/Users/ms/Documents/Files/</option>
-<option>file://C:/Users/Zac/Documents/Files/</option>
-<option>file://D:/Samba/</option>
 <option>file://D:/EBG/</option>
-</$select>
-<$button message="tm-copy-to-clipboard" param={{$:/config/index-tree!!path}} class="tc-btn-invisible">{{$:/core/images/copy-clipboard}}</$button>

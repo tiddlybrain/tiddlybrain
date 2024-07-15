@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240715143823736
+modified: 20240715210305824
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -33,7 +33,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
 </$keyboard></p>
-<p style="margin-top:-10px;">
+<p style="margin-top:-7px;">
 <$select tiddler="$:/temp/newTiddler" field="note" default="" class="new-tiddler-input-box" tabindex="-1" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
 <option value="">Role</option>
 <$list filter="[all[tiddlers]note[Role]get[belongs.to]unique[]sortan[caption]]"><optgroup label={{!!caption}}>
@@ -83,5 +83,6 @@ Description: {{!!description}}" edit="yes"/>New Data</$button>
 <p style="margin:-5px 0 6px;">
 <$button to="$:/custom/ui/path-prefix" class="tc-btn-invisible" style="font-variant:all-petite-caps;color:#acacac;">File Path Prefix</$button>
 </p>
-{{$:/custom/ui/path-prefix}}
+<$select tiddler='$:/config/index-tree' field='path' class='new-tiddler-input-box'>{{$:/custom/ui/path-prefix}}</$select>
+<$button message="tm-copy-to-clipboard" param={{$:/config/index-tree!!path}} class="tc-btn-invisible">{{$:/core/images/copy-clipboard}}</$button>
 </$reveal>
