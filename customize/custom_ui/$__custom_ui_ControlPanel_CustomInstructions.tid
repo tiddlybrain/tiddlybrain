@@ -1,7 +1,7 @@
 caption: General Instructions
 created: 20240629135931002
 creator: yuzijie
-modified: 20240713195148642
+modified: 20240716185620675
 modifier: yuzijie
 order: 2
 shortcap: Custom Instructions
@@ -35,5 +35,8 @@ type: text/vnd.tiddlywiki
 :<<snippet key:"List">>
 ;General Instructions
 :<<snippet key:"Instruction">>
+;Default Instructions
+://Default instructions will be used in every request.//
+:$:/config/defaultInstructions/ChatGPT
 
 </$tiddler>
