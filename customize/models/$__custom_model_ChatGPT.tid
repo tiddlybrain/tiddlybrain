@@ -1,7 +1,7 @@
 caption: ChatGPT
 created: 20240707102007118
 creator: yuzijie
-modified: 20240714153409769
+modified: 20240716145119667
 modifier: yuzijie
 tags: customized
 title: $:/custom/model/ChatGPT
@@ -12,15 +12,17 @@ type: text/vnd.tiddlywiki
 \procedure completion-get-json()
 <$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE" emptyMessage="""<$set name="message" filter="[<data>jsonget[error],[message]]" emptyValue="check your network" select="0"><$action-setfield $tiddler="$:/temp/api/response" text=`Error Code $(status)$ - $(message)$`/></$set>""">
 <$set name="message" filter="[<data>jsonget[choices],[0],[message],[content]]" select="0">
-<$action-setfield $tiddler="$:/temp/api/response" text=<<message>>/>
+<$action-setfield $tiddler="$:/temp/api/response" text=<<message>> type="text/x-markdown"/>
 <$let timestamp=<<now "0hh:0mm:0ss">>>
 <$action-createtiddler $basetitle="$:/temp/api/history" type="application/json" caption=<<timestamp>>>
 <$action-setfield $tiddler=<<createTiddler-title>> $index="role" $value="user"/>
 <$action-setfield $tiddler=<<createTiddler-title>> $index="content" $value={{$:/temp/api/request}}/>
+<$action-setfield $tiddler=<<createTiddler-title>> $index="type" $value="text/vnd.tiddlywiki"/>
 </$action-createtiddler>
 <$action-createtiddler $basetitle="$:/temp/api/history" type="application/json" caption=<<timestamp>>>
 <$action-setfield $tiddler=<<createTiddler-title>> $index="role" $value="assistant"/>
 <$action-setfield $tiddler=<<createTiddler-title>> $index="content" $value=<<message>>/>
+<$action-setfield $tiddler=<<createTiddler-title>> $index="type" $value="text/x-markdown"/>
 </$action-createtiddler>
 </$let>
 </$set>
@@ -41,7 +43,7 @@ type: text/vnd.tiddlywiki
 
 \end call-api
 
-<section class="ai"><h3>Instructions</h3>
+<section class="ai"><h3>Instructions <$list filter="[[$:/temp/api/request]type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list></h3>
 <$edit-text tiddler="$:/temp/api/request" tag="textarea" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin:0;"><tbody>
 <tr><th>Choose Model</th><th>Custom Instructions</th></tr>
@@ -83,7 +85,7 @@ type: text/vnd.tiddlywiki
 </$list>
 </$reveal>
 
-<section class="ai"><h3>Results</h3>
+<section class="ai"><h3>Results <$list filter="[[$:/temp/api/response]type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list></h3>
 <$edit-text tiddler="$:/temp/api/response" tag="textarea" class="edit-area tc-edit-texteditor"/>
 </section>
 
@@ -92,8 +94,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix[$:/temp/api/history]!sort[created]]">
 <$set name="summary" filter="[all[current]get[caption]] [all[current]getindex[role]] [all[current]getindex[content]] +[join[ - ]]" select="0">
 <$details summary=<<summary>>>
-<$button set="$:/temp/api/request" setTo={{{ [all[current]getindex[content]] }}}>Set to Instructions</$button>
-<$button set="$:/temp/api/response" setTo={{{ [all[current]getindex[content]] }}}>Set to Results</$button>
+<$button set="$:/temp/api/request" setTo={{{ [all[current]getindex[content]] }}}><$action-setfield $tiddler="$:/temp/api/request" type={{{ [all[current]getindex[type]] }}}/>Set to Instructions</$button>
+<$button set="$:/temp/api/response" setTo={{{ [all[current]getindex[content]] }}}><$action-setfield $tiddler="$:/temp/api/response" type={{{ [all[current]getindex[type]] }}}/>Set to Results</$button>
 <$button><$action-deletetiddler $tiddler=<<currentTiddler>>/>Delete This</$button>
 <div class="history"><$transclude $tiddler={{!!title}} $index="content" $mode="block" $type="text/plain"/></div>
 </$details>
