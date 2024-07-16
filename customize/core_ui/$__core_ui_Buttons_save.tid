@@ -1,6 +1,6 @@
 caption: {{$:/core/images/done-button}} {{$:/language/Buttons/Save/Caption}}
 description: {{$:/language/Buttons/Save/Hint}}
-modified: 20231222010958256
+modified: 20240716115512036
 modifier: yuzijie
 tags: $:/tags/EditToolbar customized
 title: $:/core/ui/Buttons/save
@@ -26,4 +26,4 @@ type: text/vnd.tiddlywiki
 	</$button>
 </$fieldmangler>
 \end
-<<save-tiddler-button>>
+<$list filter="[all[current]!type[text/x-markdown]]"><<save-tiddler-button>></$list>

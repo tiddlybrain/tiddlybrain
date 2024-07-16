@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240710220726495
+modified: 20240716132239929
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -58,8 +58,10 @@ type: text/vnd.tiddlywiki
 <tr>
 <td style="padding:6px 7px;">type</td>
 <td colspan="2" style="position:relative;font-size:small;">
+<$list filter="[all[current]!type[text/x-markdown]]" emptyMessage="<$md-to-tid-button title={{!!title}} type={{!!type}}/>">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
+</$list>
 <$list filter="[<draft>blsearch[]has[note]limit[1]]" variable="NONE">
 <$button style="margin-left:2px;" popup="$:/state/popup/editor/backlinks">''Backlinks''</$button>
 <$reveal type="popup" state="$:/state/popup/editor/backlinks" tag="div"><div class="record-drop-down" style="padding:10px 15px;line-height:2em;min-width:auto;">

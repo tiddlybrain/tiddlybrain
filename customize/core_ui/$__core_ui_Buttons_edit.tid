@@ -1,6 +1,6 @@
 caption: {{$:/core/images/edit-button}} {{$:/language/Buttons/Edit/Caption}}
 description: {{$:/language/Buttons/Edit/Hint}}
-modified: 20240520143612846
+modified: 20240716121037505
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/edit
@@ -20,4 +20,4 @@ type: text/vnd.tiddlywiki
 </$list>
 </$button></span>
 \end
-<<edit-tiddler-button>>
+<$list filter="[all[current]!type[text/x-markdown]]"><<edit-tiddler-button>></$list>
