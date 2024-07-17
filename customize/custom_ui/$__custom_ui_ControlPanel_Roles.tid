@@ -1,10 +1,9 @@
-caption: General Roles
+caption: Roles Manager
 created: 20240708161609441
 creator: yuzijie
-modified: 20240715084823618
+modified: 20240717160009198
 modifier: yuzijie
 order: 1
-shortcap: Roles Manager
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
 title: $:/custom/ui/ControlPanel/Roles
 type: text/vnd.tiddlywiki

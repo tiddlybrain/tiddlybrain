@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240716122648589
+modified: 20240717155857363
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -36,7 +36,8 @@ type: text/vnd.tiddlywiki
 <p style="margin-top:-7px;">
 <$select tiddler="$:/temp/newTiddler" field="note" default="" class="new-tiddler-input-box" tabindex="-1" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
 <option value="">Role</option>
-<$list filter="[all[tiddlers]note[Role]get[belongs.to]unique[]sortan[caption]]"><optgroup label={{!!caption}}>
+<$list filter='[all[tiddlers]note[Role]belongs.to[$:/custom/ui/ControlPanel/Roles]]'><option value={{!!title}}>{{!!title}}</option></$list>
+<$list filter="[all[tiddlers]note[Role]get[belongs.to]!match[$:/custom/ui/ControlPanel/Roles]unique[]sortan[caption]]"><optgroup label={{!!caption}}>
 <$list filter='[all[tiddlers]note[Role]belongs.to{!!title}]'><option value={{!!title}}>{{!!title}}</option></$list>
 </optgroup></$list>
 </$select>
