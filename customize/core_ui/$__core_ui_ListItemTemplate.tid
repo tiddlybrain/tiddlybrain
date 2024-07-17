@@ -1,10 +1,12 @@
-modified: 20240705142729104
+modified: 20240717125358786
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
 type: text/vnd.tiddlywiki
 
-<div class="tc-menu-list-item"><$link to=<<currentTiddler>>><<icons>> <$view field="title"/>
+<div class="tc-menu-list-item">
+<$button actions="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" tag="a" class="tc-tiddlylink tc-tiddlylink-resolves">
+<<icons>> <$view field="title"/>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]get[belongs.to]]">@@color:#c24949;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
@@ -18,4 +20,5 @@ type: text/vnd.tiddlywiki
 </$list>
 </$button>
 </div>
-</$link></div>
+</$button>
+</div>
