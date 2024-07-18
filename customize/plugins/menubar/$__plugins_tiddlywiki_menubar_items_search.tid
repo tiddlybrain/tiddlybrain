@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20240706203227420
+modified: 20240718145104357
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -41,7 +41,7 @@ type: text/vnd.tiddlywiki
 <form class="tc-form-inline">
 <$transclude $variable="keyboard-driven-input" tiddler="$:/temp/menubarsearch" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> 
 		refreshTitle="$:/temp/menubarsearch/refresh" tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" 
-		class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default="" cancelPopups="yes" size="27"
+		class="tc-popup-handle tc-menu-show-when-wide menubar-search-input" placeholder="Search..." default="" cancelPopups="yes"
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> inputCancelActions=<<cancel-search-actions>> 
 		filterMinLength={{$:/config/Search/MinLength}} configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
 </form>
