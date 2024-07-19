@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240717155857363
+modified: 20240719151905078
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -35,25 +35,34 @@ type: text/vnd.tiddlywiki
 </$keyboard></p>
 <p style="margin-top:-7px;">
 <$select tiddler="$:/temp/newTiddler" field="note" default="" class="new-tiddler-input-box" tabindex="-1" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
-<option value="">Role</option>
+<option value="">Choose a Role</option>
 <$list filter='[all[tiddlers]note[Role]belongs.to[$:/custom/ui/ControlPanel/Roles]]'><option value={{!!title}}>{{!!title}}</option></$list>
-<$list filter="[all[tiddlers]note[Role]get[belongs.to]!match[$:/custom/ui/ControlPanel/Roles]unique[]sortan[caption]]"><optgroup label={{!!caption}}>
+<$list filter="[all[tiddlers]note[Role]get[belongs.to]note[Roles]unique[]sortan[caption]]"><optgroup label={{!!caption}}>
+<$list filter='[all[tiddlers]note[Role]belongs.to{!!title}]'><option value={{!!title}}>{{!!title}}</option></$list>
+</optgroup></$list>
+<$list filter="[all[tiddlers]note[Role]get[belongs.to]note[Role]unique[]sortan[caption]]"><optgroup label={{!!title}}>
 <$list filter='[all[tiddlers]note[Role]belongs.to{!!title}]'><option value={{!!title}}>{{!!title}}</option></$list>
 </optgroup></$list>
 </$select>
 <$list filter="[[$:/temp/newTiddler]get[note]]" variable="note">
 <$select tiddler="$:/temp/newTiddler" field="belongs.to" default="" class="new-tiddler-input-box" tabindex="-1">
-<option value="">Parent</option>
-<optgroup label="Open"><$list filter="[list[$:/StoryList]!is[system]!has[draft.of]]">
+<option value="">Choose a Parent</option>
+<optgroup label="Open"><$list filter="[list[$:/StoryList]!is[system]!has[draft.of]sortan[note]]">
 <option value={{!!title}}>
-<$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
 </option>
 </$list></optgroup>
-<optgroup label="Sidebar"><$list filter="[list[$:/config/index-tree]!is[system]!has[draft.of]]">
+<optgroup label="Sidebar"><$list filter="[list[$:/config/index-tree]!is[system]!has[draft.of]sortan[note]]">
 <option value={{!!title}}>
-<$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</option>
+</$list></optgroup>
+<optgroup label="Closed"><$list filter="[recentlyClosed[]!is[missing]!is[system]!has[draft.of]sortan[note]]">
+<option value={{!!title}}>
+<$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
 </option>
 </$list></optgroup>
 </$select>
