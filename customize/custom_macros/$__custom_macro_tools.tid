@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240718084139608
+modified: 20240720212838495
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -175,17 +175,9 @@ type: text/vnd.tiddlywiki
 </$list></$list> <<status-selector>> <<verification-notice>> <<tbc-notice>>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
-<$button class="tc-btn-invisible"><<mTitle>>
-<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mTitle>>/>
-<$action-sendmessage $message="tm-close-tiddler"/><$action-deletetiddler $tiddler="$:/state/modal/history"/>
-</$button>
-<$list filter="[all[current]!code-body[yes]]">&middot; <$button class="tc-btn-invisible">new step
-<$transclude $variable="step-action"/><$action-deletetiddler $tiddler="$:/state/modal/history"/>
-</$button></$list>
-<$list filter="[all[current]code-body[yes]]">&middot; <$button class="tc-btn-invisible">copy content
-<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mContent>>/>
-<$action-sendmessage $message="tm-close-tiddler"/><$action-deletetiddler $tiddler="$:/state/modal/history"/>
-</$button></$list>
+<$button class="tc-btn-invisible"><<mTitle>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mTitle>>/></$button> &middot;
+<$list filter="[all[current]!code-body[yes]]"><$button class="tc-btn-invisible" actions=<<step-action>>>new step</$button></$list>
+<$list filter="[all[current]code-body[yes]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<mContent>>>copy content</$button></$list>
 </div>
 </$let></$list>
 \end
@@ -205,7 +197,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]days:date[]]" emptyMessage="<$transclude $variable=days-passed start={{!!date}}/>">Today</$list>
 </span></$list>
 <$list filter="[<mTitle>!is[missing]]">
-<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>OPEN</$button>
+<$button message="tm-close-tiddler">OPEN<$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
+<$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+</$button>
 <$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><<open-in-sidebar close:"no">>SIDEBAR</$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]">
 <$list filter="[<mTitle>!has[_canonical_uri]!is[image]]">
