@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240719151905078
+modified: 20240720115323337
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -47,26 +47,14 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/newTiddler]get[note]]" variable="note">
 <$select tiddler="$:/temp/newTiddler" field="belongs.to" default="" class="new-tiddler-input-box" tabindex="-1">
 <option value="">Choose a Parent</option>
-<optgroup label="Open"><$list filter="[list[$:/StoryList]!is[system]!has[draft.of]sortan[note]]">
+<$list filter="[[$:/temp/index-tree]get[text]] [list[$:/StoryList]!is[system]!has[draft.of]sortan[note]]">
 <option value={{!!title}}>
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
 <$transclude field="caption"><$view field="title"/></$transclude>
 </option>
-</$list></optgroup>
-<optgroup label="Sidebar"><$list filter="[list[$:/config/index-tree]!is[system]!has[draft.of]sortan[note]]">
-<option value={{!!title}}>
-<$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
-<$transclude field="caption"><$view field="title"/></$transclude>
-</option>
-</$list></optgroup>
-<optgroup label="Closed"><$list filter="[recentlyClosed[]!is[missing]!is[system]!has[draft.of]sortan[note]]">
-<option value={{!!title}}>
-<$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
-<$transclude field="caption"><$view field="title"/></$transclude>
-</option>
-</$list></optgroup>
+</$list>
 </$select>
-<em style="font-size:small;display:block;">Only tiddlers that are open or were in the sidebar can be selected as parents.</em>
+<em style="font-size:small;display:block;">Only tiddlers that are open or in the sidebar can be selected as parents.</em>
 </$list>
 </p>
 <$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>

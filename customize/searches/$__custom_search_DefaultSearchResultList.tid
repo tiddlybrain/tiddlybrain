@@ -3,7 +3,7 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [field:title<userInput>!tag[Ignore]] [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20240713195314761
+modified: 20240720131411043
 modifier: yuzijie
 second-search-filter: [!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[subfilter<note-subfilter>sortan[belongs.to]limit[100]]
 tags: $:/tags/SearchResults customized
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 </$list>
 
 </$list>
-<$list filter="[<userInput>minlength[3]]" variable="ignore">
+<$list filter="[<userInput>minlength[2]]" variable="ignore">
 
 //<small>All matches:</small>//
 <$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="small"><$button class="search-tool">Open All
