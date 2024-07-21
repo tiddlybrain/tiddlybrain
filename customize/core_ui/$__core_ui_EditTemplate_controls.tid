@@ -1,0 +1,21 @@
+modified: 20240721193936931
+modifier: yuzijie
+tags: $:/tags/EditTemplate customized
+title: $:/core/ui/EditTemplate/controls
+type: text/vnd.tiddlywiki
+
+\define config-title() $:/config/EditToolbarButtons/Visibility/$(listItem)$
+\whitespace trim
+<div class="tc-tiddler-title tc-tiddler-edit-title">
+	<$link><$view field="title"/></$link>
+	<span class="tc-tiddler-controls tc-titlebar">
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem">
+			<$let tv-config-toolbar-class={{{ [enlist<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]] }}}>
+				<$reveal type="nomatch" state=<<config-title>> text="hide">
+					<$transclude $tiddler=<<listItem>>/>
+				</$reveal>
+			</$let>
+		</$list>
+	</span>
+	<div style="clear: both;"></div>
+</div>
