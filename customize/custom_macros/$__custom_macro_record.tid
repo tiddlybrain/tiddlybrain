@@ -1,13 +1,13 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20240713132104585
+modified: 20240721102650805
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
 type: text/vnd.tiddlywiki
 
 \define record(filter:"[tag<currentTiddler>!sort[date]]")
-<div class={{{ [<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
+<div class={{{ [<single-column>match[yes]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
 <$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
 <$set name="border-color" filter="[<tv-story-list>contains<currentTiddler>]" value="border-left-color:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[border-left-color:]addsuffix[;]] }}}>
 <blockquote class="tc-quote record" style=<<border-color>>><div class="single-line-record">
