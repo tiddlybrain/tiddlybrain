@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240710113629087
+modified: 20240721104934708
 modifier: yuzijie
 order: 3
 shortcap: 2️⃣Actions
@@ -32,9 +32,9 @@ type: text/vnd.tiddlywiki
 <$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
 </$list>
 <$list filter="[<journal-title>is[missing]]"><$button>Create Date
-<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <<bl>>
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <$let single-column=yes><<bl>></$let>
 TBC: <<tbc>>
---: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="22em" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
+--: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>
 </$droppable></h2>
 
