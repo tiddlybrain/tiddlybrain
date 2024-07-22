@@ -1,10 +1,10 @@
-caption: Chatbot
+caption: Deepbricks
 created: 20240707102007118
 creator: yuzijie
-modified: 20240722153236158
+modified: 20240722203019450
 modifier: yuzijie
 tags: customized
-title: $:/custom/model/Deepbricks
+title: $:/custom/ai/Deepbricks
 type: text/vnd.tiddlywiki
 
 \procedure call-api()
