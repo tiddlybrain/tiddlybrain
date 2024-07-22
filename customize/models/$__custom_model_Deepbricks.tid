@@ -1,10 +1,10 @@
-caption: ChatGPT
+caption: Chatbot
 created: 20240707102007118
 creator: yuzijie
-modified: 20240721225937347
+modified: 20240722153236158
 modifier: yuzijie
 tags: customized
-title: $:/custom/model/ChatGPT
+title: $:/custom/model/Deepbricks
 type: text/vnd.tiddlywiki
 
 \procedure call-api()
@@ -29,10 +29,10 @@ type: text/vnd.tiddlywiki
 </$list>
 \end completion-get-json
 
-<$let api-key={{$:/config/openaiApiKey}} model={{$:/config/aiModels}} instructions={{{ [{$:/temp/instructions}get[text]jsonstringify[]] }}} userInput={{{ [[$:/temp/api/request]get[text]jsonstringify[]] }}} default={{{ [[$:/config/defaultInstructions/ChatGPT]get[text]jsonstringify[]] }}}>
+<$let api-key={{$:/config/DeepbricksApiKey}} model={{$:/config/aiModels}} instructions={{{ [{$:/temp/instructions}get[text]jsonstringify[]] }}} userInput={{{ [[$:/temp/api/request]get[text]jsonstringify[]] }}} default={{{ [[$:/config/defaultInstructions]get[text]jsonstringify[]] }}}>
 <$set name="chatHistory" filter="[[$:/state/api/history]get[text]match[yes]]" value={{{ [prefix[$:/temp/api/history]get[text]] +[join[,]addsuffix[,]] }}} emptyValue="">
 <$action-setfield $tiddler="$:/temp/api/response" text="Waiting for response..."/>
-<$action-sendmessage $message="tm-http-request" url="https://api.openai.com/v1/chat/completions" method="POST"
+<$action-sendmessage $message="tm-http-request" url="https://api.deepbricks.ai/v1/chat/completions" method="POST"
   oncompletion=<<completion-get-json>>
   header-Content-Type='application/json'
   header-Authorization=`Bearer $(api-key)$`
@@ -49,7 +49,7 @@ type: text/vnd.tiddlywiki
 <tr><th>Choose Model</th><th>Custom Instructions</th></tr>
 <tr style="text-align:center;">
 <td><$select tiddler='$:/config/aiModels'>
-<$list filter="[list[$:/config/aiModels]]"><option>{{!!title}}</option></$list>
+<$list filter="[list[$:/config/DeepbricksApiKey]]"><option>{{!!title}}</option></$list>
 </$select></td>
 <td><$select tiddler="$:/temp/instructions" default="">
 <option value="">No Instructions</option>
@@ -70,7 +70,7 @@ type: text/vnd.tiddlywiki
 </$reveal>
 
 <$reveal type="nomatch" state="$:/temp/api/response" text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
-<$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask ChatGPT</$button>
+<$list filter="[{$:/temp/api/response}!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask AI</$button>
 <$checkbox tiddler='$:/state/api/history' field='text' checked='yes' unchecked='no' default='no'> Chat History</$checkbox>">
 <$list filter="[<sidebar>!match[yes]]" variable="NONE">
 <$button actions=<<insert-as-text>>>Insert as Text</$button>
@@ -80,7 +80,7 @@ type: text/vnd.tiddlywiki
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler>>>Save as New Tiddler</$button></$let>
 </$list>
 <$button message="tm-copy-to-clipboard" param={{$:/temp/api/response}}>Copy to Clipboard</$button>
-<$button actions=<<call-api>>>Ask Again</$button>
+<$button actions=<<call-api>> style="color:green;">Ask Again</$button>
 <$checkbox tiddler="$:/state/api/history" field="text" checked="yes" unchecked="no" default="no"> Chat History</$checkbox>
 </$list>
 </$reveal>
