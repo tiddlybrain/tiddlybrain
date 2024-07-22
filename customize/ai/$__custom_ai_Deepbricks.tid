@@ -1,7 +1,7 @@
 caption: Deepbricks
 created: 20240707102007118
 creator: yuzijie
-modified: 20240722212750647
+modified: 20240722214226887
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Deepbricks
@@ -59,7 +59,7 @@ type: text/vnd.tiddlywiki
 </optgroup></$list>
 </$select>
 <$set name="title" filter="[[$:/temp/instructions]get[text]is[tiddler]]" value={{$:/temp/instructions}} emptyValue="$:/custom/ui/ControlPanel/CustomInstructions">
-<$button tag="span">⚙️<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<title>>/></$button>
+<$button tag="span" style="cursor:pointer;">⚙️<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<title>>/></$button>
 </$set>
 </td>
 </tr>

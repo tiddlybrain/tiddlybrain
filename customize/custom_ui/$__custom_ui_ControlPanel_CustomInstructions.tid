@@ -1,7 +1,7 @@
 caption: General Instructions
 created: 20240629135931002
 creator: yuzijie
-modified: 20240722143140506
+modified: 20240722214344415
 modifier: yuzijie
 order: 2
 shortcap: Custom Instructions
@@ -23,6 +23,7 @@ type: text/vnd.tiddlywiki
   keywords="Custom Instructions"
   parents="$:/custom/ui/ControlPanel/CustomInstructions"
 />
+<$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 \end
 
 <$vars template={{$:/config/defaultTemplate}}>
