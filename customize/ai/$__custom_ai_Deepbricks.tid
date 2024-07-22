@@ -1,7 +1,7 @@
 caption: Deepbricks
 created: 20240707102007118
 creator: yuzijie
-modified: 20240722203019450
+modified: 20240722212750647
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Deepbricks
@@ -53,13 +53,14 @@ type: text/vnd.tiddlywiki
 </$select></td>
 <td><$select tiddler="$:/temp/instructions" default="">
 <option value="">No Instructions</option>
-<$list filter="[all[tiddlers]note[Instruction]get[belongs.to]unique[]]"><optgroup label={{!!caption}}>
-<$list filter='[all[tiddlers]note[Instruction]belongs.to{!!title}]'><option value={{!!title}}>{{!!caption}}</option></$list>
+<$list filter="[all[tiddlers]note[Instruction]belongs.to[$:/custom/ui/ControlPanel/CustomInstructions]]"><option value={{!!title}}>{{!!caption}}</option></$list>
+<$list filter="[all[tiddlers]note[Instruction]get[belongs.to]!match[$:/custom/ui/ControlPanel/CustomInstructions]unique[]]"><optgroup label={{!!caption}}>
+<$list filter="[all[tiddlers]note[Instruction]belongs.to{!!title}]"><option value={{!!title}}>{{!!caption}}</option></$list>
 </optgroup></$list>
 </$select>
-<$button tag="span">⚙️
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle={{$:/temp/instructions}}/>
-</$button>
+<$set name="title" filter="[[$:/temp/instructions]get[text]is[tiddler]]" value={{$:/temp/instructions}} emptyValue="$:/custom/ui/ControlPanel/CustomInstructions">
+<$button tag="span">⚙️<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<title>>/></$button>
+</$set>
 </td>
 </tr>
 </tbody></table>
