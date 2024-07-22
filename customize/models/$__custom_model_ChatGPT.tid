@@ -1,7 +1,7 @@
 caption: ChatGPT
 created: 20240707102007118
 creator: yuzijie
-modified: 20240716185257358
+modified: 20240721225937347
 modifier: yuzijie
 tags: customized
 title: $:/custom/model/ChatGPT
@@ -58,7 +58,7 @@ type: text/vnd.tiddlywiki
 </optgroup></$list>
 </$select>
 <$button tag="span">⚙️
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/CustomInstructions"/>
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle={{$:/temp/instructions}}/>
 </$button>
 </td>
 </tr>
