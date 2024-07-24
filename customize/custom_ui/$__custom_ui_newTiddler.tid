@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240724081545555
+modified: 20240724093419331
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -49,6 +49,7 @@ type: text/vnd.tiddlywiki
 </option>
 </$list>
 </$select>
+<$button class="tc-btn-invisible">⚙️<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/Roles"/></$button>
 <em style="font-size:small;display:block;">Only tiddlers that are open or in the sidebar can be selected as parents.</em>
 </$list>
 </p>
