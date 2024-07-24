@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240722203005675
+modified: 20240724075245172
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 <$reveal default=<<link-dropdown>> type="match" text="yes" tag="div" style="font-size:small;margin:0 -14px;">
 
-<$transclude $variable="tabs" tabsList="[prefix[$:/custom/ai/]!has[draft.of]sort[order]]" default="$:/custom/ai/Deepbricks" state="$:/state/ai/models" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+<$transclude $variable="tabs" tabsList="[prefix[$:/custom/ai/]!has[draft.of]sort[order]]" default="$:/custom/ai/Chat" state="$:/state/ai/session" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 
 </$reveal>
 <$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="div">
