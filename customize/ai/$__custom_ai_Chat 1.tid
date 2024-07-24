@@ -1,7 +1,7 @@
 caption: Chat (B)
 created: 20240724083447557
 creator: yuzijie
-modified: 20240724103416866
+modified: 20240724124106138
 modifier: yuzijie
 order: B
 tags: customized
@@ -95,7 +95,7 @@ type: text/vnd.tiddlywiki
 </section>
 
 <$list filter="[prefix<ai-history>limit[1]]"><section class="ai">
-<h3>History <$button style="font-size:small;"><$action-deletetiddler $filter="[prefix<ai-history>]"/>Clear History</$button></h3>
+<h3>History <$button style="font-size:small;"><$action-deletetiddler $filter="[prefix<ai-history>] [<ai-response>]"/>Clear History</$button></h3>
 <$list filter="[prefix<ai-history>!sort[created]]">
 <$set name="summary" filter="[all[current]get[caption]] [all[current]getindex[role]] [all[current]getindex[content]] +[join[ - ]]" select="0">
 <$details summary=<<summary>>>
