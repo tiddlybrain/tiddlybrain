@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240724093419331
+modified: 20240724094850429
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -39,6 +39,7 @@ type: text/vnd.tiddlywiki
 <$list filter='[all[tiddlers]note[Role]belongs.to{!!title}]'><option value={{!!title}}>{{!!title}}</option></$list>
 </optgroup></$list>
 </$select>
+<$button class="tc-btn-invisible">⚙️<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/Roles"/></$button>
 <$list filter="[[$:/temp/newTiddler]get[note]]" variable="note">
 <$select tiddler="$:/temp/newTiddler" field="belongs.to" default="" class="new-tiddler-input-box" tabindex="-1">
 <option value="">Choose a Parent</option>
@@ -49,7 +50,6 @@ type: text/vnd.tiddlywiki
 </option>
 </$list>
 </$select>
-<$button class="tc-btn-invisible">⚙️<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/Roles"/></$button>
 <em style="font-size:small;display:block;">Only tiddlers that are open or in the sidebar can be selected as parents.</em>
 </$list>
 </p>

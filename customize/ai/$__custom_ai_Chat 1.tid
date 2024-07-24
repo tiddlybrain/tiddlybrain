@@ -1,7 +1,7 @@
 caption: Chat (B)
 created: 20240724083447557
 creator: yuzijie
-modified: 20240724083616351
+modified: 20240724103416866
 modifier: yuzijie
 order: B
 tags: customized
@@ -59,7 +59,7 @@ type: text/vnd.tiddlywiki
 <option value="">No Instructions</option>
 <$list filter="[all[tiddlers]note[Instruction]belongs.to[$:/custom/ui/ControlPanel/CustomInstructions]]"><option value={{!!title}}>{{!!caption}}</option></$list>
 <$list filter="[all[tiddlers]note[Instruction]get[belongs.to]!match[$:/custom/ui/ControlPanel/CustomInstructions]unique[]]"><optgroup label={{!!caption}}>
-<$list filter="[all[tiddlers]note[Instruction]belongs.to{!!title}]"><option value={{!!title}}>{{!!caption}}</option></$list>
+<$list filter="[all[tiddlers]note[Instruction]belongs.to{!!title}sortan[caption]]"><option value={{!!title}}>{{!!caption}}</option></$list>
 </optgroup></$list>
 </$select>
 <$set name="title" filter="[<ai-instructions>get[text]is[tiddler]]" value={{{ [<ai-instructions>get[text]] }}} emptyValue="$:/custom/ui/ControlPanel/CustomInstructions">
