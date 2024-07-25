@@ -1,7 +1,7 @@
 caption: Chat (A)
 created: 20240707102007118
 creator: yuzijie
-modified: 20240724124125647
+modified: 20240724133451727
 modifier: yuzijie
 order: A
 tags: customized
@@ -84,7 +84,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<sidebar>match[yes]]" variable="NONE">
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Save as New Tiddler</$button></$let>
 </$list>
-<$button message="tm-copy-to-clipboard" param={{{ [<ai-request>get[text]] }}}>Copy to Clipboard</$button>
+<$button message="tm-copy-to-clipboard" param={{{ [<ai-response>get[text]] }}}>Copy to Clipboard</$button>
 <$button actions=<<call-api>> style="color:green;">Ask Again</$button>
 <$checkbox tiddler=<<ai-history-state>> field="text" checked="yes" unchecked="no" default="no"> Chat History</$checkbox>
 </$list>
