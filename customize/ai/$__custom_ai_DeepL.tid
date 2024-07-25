@@ -1,7 +1,7 @@
 caption: DeepL
 created: 20240724195946616
 creator: yuzijie
-modified: 20240725205423236
+modified: 20240725221720099
 modifier: yuzijie
 order: D
 tags: customized
@@ -42,16 +42,18 @@ type: text/vnd.tiddlywiki
 
 <$let
   api={{$:/config/DeepLApiKey!!url}}
-  formality={{{ [<ai-formality>get[text]] }}}
+  formality={{{ [<ai-formality>get[text]else[default]] }}}
   userInput={{{ [<ai-request>get[text]jsonstringify[]] }}}
-  source-lang={{{ [[$:/config/DeepL/sourceLanguages]getindex<ai-source-lang>] }}}
-  target-lang={{{ [[$:/config/DeepL/targetLanguages]getindex<ai-target-lang>else[Chinese]] }}}
+  source-lang-name = {{{ [<ai-source-lang>get[text]] }}}
+  source-lang={{{ [[$:/config/DeepL/sourceLanguages]getindex<source-lang-name>] }}}
+  target-lang-name = {{{ [<ai-target-lang>get[text]] }}}
+  target-lang={{{ [[$:/config/DeepL/targetLanguages]getindex<target-lang-name>else[ZH-HANS]] }}}
   context={{{ [<ai-instructions>get[text]jsonstringify[]] }}}>
 <$action-setfield $tiddler=<<ai-response>> text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url=<<api>> method="POST"
   oncompletion=<<completion-get-json>>
   header-Content-Type='application/json'
-  body=`{"text":["$(userInput)$"],"source_lang":"$(source-lang)$","target_lang":"$(target-lang)$","formality":"$(formality)$","context":"$(context)$"}`
+  body=`{"text":["$(userInput)$"],"source_lang":"$(source-lang)$","target_lang":"$(target-lang)$","options":{"formality":"$(formality)$","context":"$(context)$"}}`
 />
 </$let>
 
@@ -82,7 +84,7 @@ type: text/vnd.tiddlywiki
 <tr><th colspan="2">Context
 <$list filter="[<ai-instructions>get[text]!is[blank]]"><$button actions="""<$action-deletetiddler $filter="[<ai-instructions>]"/>""">Clear</$button></$list>
 </th></tr>
-<tr><td colspan="2"><$edit-text tiddler=<<ai-instructions>> tag="input" class="edit-area"/></td></tr>
+<tr><td colspan="2"><$edit-text tiddler=<<ai-instructions>> tag="input" class="edit-area" placeholder="Contextual information can affect translation results"/></td></tr>
 </tbody></table>
 </section>
 
