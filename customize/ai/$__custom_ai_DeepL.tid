@@ -1,7 +1,7 @@
 caption: DeepL
 created: 20240724195946616
 creator: yuzijie
-modified: 20240725221720099
+modified: 20240725232633358
 modifier: yuzijie
 order: D
 tags: customized
@@ -63,28 +63,25 @@ type: text/vnd.tiddlywiki
 <section class="ai"><h3>Enter text</h3>
 <$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin:0;"><tbody>
-<tr><th>From &rarr; To</th><th>Formality</th></tr>
+<tr><th colspan="2">From &#10140; To</th><th>Formality</th></tr>
 <tr style="text-align:center;">
-<td>
-<$select tiddler=<<ai-source-lang>> default="">
+<td><$select tiddler=<<ai-source-lang>> default="">
 <option value="">Auto</option>
 <$list filter="[[$:/config/DeepL/sourceLanguages]indexes[]]"><option>{{!!title}}</option></$list>
-</$select>
-<$button class="tc-btn-invisible" style="padding:0 10px;">&#8644;</$button>
-<$select tiddler=<<ai-target-lang>> default="Chinese">
+</$select></td>
+<td><$select tiddler=<<ai-target-lang>> default="Chinese">
 <$list filter="[[$:/config/DeepL/targetLanguages]indexes[]]"><option>{{!!title}}</option></$list>
-</$select>
-</td>
+</$select></td>
 <td><$select tiddler=<<ai-formality>> default="default">
 <option value="default">Default</option>
 <option value="prefer_more">Formal</option>
 <option value="prefer_less">Informal</option>
 </$select></td>
 </tr>
-<tr><th colspan="2">Context
+<tr><th colspan="3">Context
 <$list filter="[<ai-instructions>get[text]!is[blank]]"><$button actions="""<$action-deletetiddler $filter="[<ai-instructions>]"/>""">Clear</$button></$list>
 </th></tr>
-<tr><td colspan="2"><$edit-text tiddler=<<ai-instructions>> tag="input" class="edit-area" placeholder="Contextual information can affect translation results"/></td></tr>
+<tr><td colspan="3"><$edit-text tiddler=<<ai-instructions>> tag="input" class="edit-area" placeholder="Contextual information can affect translation results"/></td></tr>
 </tbody></table>
 </section>
 
