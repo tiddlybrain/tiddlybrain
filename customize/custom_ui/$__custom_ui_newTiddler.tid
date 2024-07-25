@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240724094850429
+modified: 20240725083857038
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -43,12 +43,18 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/temp/newTiddler]get[note]]" variable="note">
 <$select tiddler="$:/temp/newTiddler" field="belongs.to" default="" class="new-tiddler-input-box" tabindex="-1">
 <option value="">Choose a Parent</option>
-<$list filter="[[$:/temp/index-tree]get[text]] [list[$:/StoryList]!is[system]!has[draft.of]sortan[note]]">
-<option value={{!!title}}>
+<optgroup label="Open">
+<$list filter="[list[$:/StoryList]!is[system]!has[draft.of]sortan[note]]"><option value={{!!title}}>
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
 <$transclude field="caption"><$view field="title"/></$transclude>
-</option>
-</$list>
+</option></$list>
+</optgroup>
+<optgroup label="Sidebar">
+<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[10]]"><option value={{!!title}}>
+<$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</option></$list>
+</optgroup>
 </$select>
 <em style="font-size:small;display:block;">Only tiddlers that are open or in the sidebar can be selected as parents.</em>
 </$list>
