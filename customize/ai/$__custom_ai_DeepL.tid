@@ -1,7 +1,7 @@
 caption: DeepL
 created: 20240724195946616
 creator: yuzijie
-modified: 20240725232633358
+modified: 20240726001425151
 modifier: yuzijie
 order: D
 tags: customized
@@ -91,6 +91,7 @@ type: text/vnd.tiddlywiki
 
 <$reveal type="nomatch" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
 <$list filter="[<ai-response>get[text]!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Translate</$button>">
+<$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
 <$list filter="[<sidebar>!match[yes]]" variable="NONE">
 <$button actions=<<insert-as-text "$(ai-response)$">>>Insert as Text</$button>
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
@@ -98,6 +99,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<sidebar>match[yes]]" variable="NONE">
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Save as New Tiddler</$button></$let>
 </$list>
+</$reveal>
 <$button message="tm-copy-to-clipboard" param={{{ [<ai-response>get[text]] }}}>Copy to Clipboard</$button>
 <$button actions=<<call-api>> style="color:green;">Translate</$button>
 </$list>

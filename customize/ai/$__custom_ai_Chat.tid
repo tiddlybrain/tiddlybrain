@@ -1,7 +1,7 @@
 caption: Chat (A)
 created: 20240707102007118
 creator: yuzijie
-modified: 20240724133451727
+modified: 20240726001634821
 modifier: yuzijie
 order: A
 tags: customized
@@ -77,6 +77,7 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
 <$list filter="[<ai-response>get[text]!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask AI</$button>
 <$checkbox tiddler=<<ai-history-state>> field='text' checked='yes' unchecked='no' default='no'> Chat History</$checkbox>">
+<$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
 <$list filter="[<sidebar>!match[yes]]" variable="NONE">
 <$button actions=<<insert-as-text "$(ai-response)$">>>Insert as Text</$button>
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
@@ -84,6 +85,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<sidebar>match[yes]]" variable="NONE">
 <$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Save as New Tiddler</$button></$let>
 </$list>
+</$reveal>
 <$button message="tm-copy-to-clipboard" param={{{ [<ai-response>get[text]] }}}>Copy to Clipboard</$button>
 <$button actions=<<call-api>> style="color:green;">Ask Again</$button>
 <$checkbox tiddler=<<ai-history-state>> field="text" checked="yes" unchecked="no" default="no"> Chat History</$checkbox>
