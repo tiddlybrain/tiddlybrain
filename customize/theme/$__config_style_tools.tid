@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240725204207514
+modified: 20240726155903147
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -348,7 +348,7 @@ section.ai details .history pre {max-width: 50vw; margin: 1em 0 0 0;}
 section.ai select {border: none; background: transparent;}
 section.ai details summary {background-color: #f4f4f4;}
 .tc-drop-down section.ai details summary {background-color: white;}
-section.ai table td input.edit-area {margin: 5px 0;}
+section.ai table td input {padding: 3px; width: 100%; margin: 3px 0;}
 
 /* For editor-modal */
 .edit-area.editor-modal {white-space: normal;}

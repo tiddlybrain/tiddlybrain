@@ -1,6 +1,6 @@
 created: 20240707103210561
 creator: yuzijie
-modified: 20240725095333389
+modified: 20240727183915981
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/ai
@@ -12,8 +12,6 @@ type: text/vnd.tiddlywiki
 \define ai-history-state() $:/state/api/$(id)$/history
 \define ai-model() $:/config/ai/$(id)$/model
 \define ai-instructions() $:/temp/ai/$(id)$/instructions
-\define ai-source-lang() $:/temp/ai/$(id)$/source-lang
-\define ai-target-lang() $:/temp/ai/$(id)$/target-lang
 \define ai-formality() $:/temp/ai/$(id)$/formality
 
 \define insert-as-text(response)
