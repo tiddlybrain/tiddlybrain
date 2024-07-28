@@ -1,4 +1,4 @@
-modified: 20240724082724338
+modified: 20240728130256558
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -53,12 +53,15 @@ type: text/vnd.tiddlywiki
 <$vars searchTiddler="""$config-title$/search""" linkTiddler="""$config-title$/link""" linktext="" searchListState=<<qualify "$:/temp/link-search/selected-item">> refreshTitle=<<qualify "$:/temp/link-search/refresh">> storeTitle=<<qualify "$:/temp/link-search/input">>>
 
 <$vars linkTiddler=<<searchTiddler>>>
+<$list filter="[<storeTitle>get[text]!is[blank]]" variable="search">
 <$button class="tc-btn-invisible" style="width: auto; display: inline-block; transform: translateY(-2px);">
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-setfield $tiddler="$:/state/ai/session-254911044" text="$:/custom/ai/Chat"/>
+<$let id={{$:/custom/ai/Chat!!order}}><$action-setfield $tiddler=<<ai-request>> text=<<search>> type="text/vnd.tiddlywiki"/></$let>
 {{$:/core/images/plugin-generic-language}}
-</$button>
-&#32;
+</$button>&#32;
+</$list>
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">> class="tc-create-wikitext-link">
 <$transclude $variable="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>>
