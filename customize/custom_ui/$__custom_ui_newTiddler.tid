@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240726000934927
+modified: 20240727210918905
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -87,7 +87,7 @@ Description: {{!!description}}" edit="yes"/>Data</$button>
 </p>
 <$select tiddler='$:/config/index-tree' field='path' class='new-tiddler-input-box'>{{$:/custom/ui/path-prefix}}</$select>
 <$button message="tm-copy-to-clipboard" param={{$:/config/index-tree!!path}} class="tc-btn-invisible">{{$:/core/images/copy-clipboard}}</$button>
-<p style="margin-top:1px;">
+<p style="margin-top:2px;">
 <$button to="$:/config/defaultTemplate" class="tc-btn-invisible" style="font-variant:all-petite-caps;color:#acacac;">Default Title Prefix - @@color:green;{{$:/config/defaultTemplate}}@@</$button>
 </p>
 </$reveal>
