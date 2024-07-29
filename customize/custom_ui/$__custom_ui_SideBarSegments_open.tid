@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20240702162852851
+modified: 20240729102836896
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -41,8 +41,8 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <div class="sidebar-item-hover">
-&middot; <$button class="tc-btn-invisible" style="color:#999;">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/></$button>
 &middot; <$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar close:"no">>sidebar</$button>
+&middot; <$button class="tc-btn-invisible" style="color:#999;">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/></$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE">&middot; <$button class="tc-btn-invisible" style="color:#999;">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button></$list>
