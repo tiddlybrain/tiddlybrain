@@ -1,12 +1,13 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20240709152551311
+modified: 20240729154356378
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
 type: text/vnd.tiddlywiki
 
 h1, h2 {font-weight: 300;}
+h4 {font-weight: bold;}
 
 h1 > .tc-btn-invisible, h2 > .tc-btn-invisible, h3 > .tc-btn-invisible, td > .tc-btn-invisible {text-align: left;}
 
