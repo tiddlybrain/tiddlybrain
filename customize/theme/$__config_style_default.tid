@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20240729154356378
+modified: 20240731075908962
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -44,6 +44,7 @@ pre > code {white-space: pre; line-height: 23px; font-size: 14px;}
 ol, ul {padding-left: 30px;}
 
 li pre, li table {margin: 3px 0;}
+li > div > pre {margin: 1em 0;}
 
 li > blockquote > p, blockquote > div {margin: 3px 0;}
 

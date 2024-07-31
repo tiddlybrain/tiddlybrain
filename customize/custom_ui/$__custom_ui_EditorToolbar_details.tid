@@ -4,9 +4,9 @@ created: 20220226055106060
 creator: yuzijie
 description: Details Macro
 icon: $:/core/images/info-button
-modified: 20240710222225928
+modified: 20240731074759348
 modifier: yuzijie
-shortcuts: ctrl-D
+shortcuts: ctrl-shift-D
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/details
 type: text/vnd.tiddlywiki
