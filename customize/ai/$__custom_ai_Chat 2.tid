@@ -1,7 +1,7 @@
 caption: Chat (C)<<has-history "C">>
 created: 20240724083626551
 creator: yuzijie
-modified: 20240729141321109
+modified: 20240731090927129
 modifier: yuzijie
 order: C
 tags: customized
@@ -47,7 +47,14 @@ type: text/vnd.tiddlywiki
 \end call-api
 
 \procedure ai-gui(id)
-<section class="ai"><h3>Instructions <$list filter="[<ai-request>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list></h3>
+<section class="ai">
+<h3>Instructions
+<$list filter="[<ai-request>get[text]!is[blank]]" variable="content"><$button style="font-size:small;">Set to Searchbar
+<$action-setfield $tiddler="$:/temp/menubarsearch" text=<<content>>/>
+<$action-setfield $tiddler="$:/temp/menubarsearch/input" text=<<content>>/>
+</$button></$list>
+<$list filter="[<ai-request>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list>
+</h3>
 <$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin:0;"><tbody>
 <tr><th>Choose Model</th><th>Custom Instructions</th></tr>
