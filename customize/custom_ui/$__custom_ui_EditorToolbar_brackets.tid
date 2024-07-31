@@ -2,9 +2,9 @@ caption: Brackets
 condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
 created: 20230529091703419
 creator: yuzijie
-description: Brackets used in code tag
-icon: $:/core/images/transcludify
-modified: 20230529092647807
+description: Adding brackets inside of code snippets
+icon: $:/core/images/linkify
+modified: 20240730115148341
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/brackets

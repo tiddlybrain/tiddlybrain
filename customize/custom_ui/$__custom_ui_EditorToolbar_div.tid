@@ -1,0 +1,15 @@
+caption: Div Tag
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+created: 20240730114922124
+creator: yuzijie
+description: Adding div tag
+icon: $:/core/images/transcludify
+modified: 20240730115239442
+modifier: yuzijie
+tags: $:/tags/EditorToolbar customized
+title: $:/custom/ui/EditorToolbar/div
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<div>
+' suffix='
+</div>'/>
