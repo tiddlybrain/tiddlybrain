@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20240725102506636
+modified: 20240801083937898
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -188,7 +188,7 @@ label.tc-check-btn > span:hover, button.tc-check-btn:hover {background: #f5f5f5;
 label.tc-check-btn input:checked ~ span, button.tc-checked-btn {box-shadow: inset 1px 1px 1px rgb(0 0 0 / 15%); background: #f5f5f5;}
 
 /* Multi-Column Settings */
-.multi-column .multi-column, .tc-modal .multi-column .multi-column {column-count: 1;}
+.multi-column .col-span {column-span: all;}
 
 @media (max-width: 1399px) {
 .multi-column {column-count: 1;}
