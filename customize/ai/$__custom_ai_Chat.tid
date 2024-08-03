@@ -1,7 +1,7 @@
 caption: Chat (A)<<has-history "A">>
 created: 20240707102007118
 creator: yuzijie
-modified: 20240731090737794
+modified: 20240803164613299
 modifier: yuzijie
 order: A
 tags: customized
@@ -118,4 +118,4 @@ type: text/vnd.tiddlywiki
 </section></$list>
 \end ai-gui
 
-<<ai-gui "A">>
+<div style="min-height:800px;"><<ai-gui "A">></div>

@@ -1,7 +1,7 @@
 caption: DeepL<<has-history "D">>
 created: 20240724195946616
 creator: yuzijie
-modified: 20240729141810910
+modified: 20240803164640303
 modifier: yuzijie
 order: D
 tags: customized
@@ -139,4 +139,4 @@ type: text/vnd.tiddlywiki
 </section></$list>
 \end ai-gui
 
-<<ai-gui "D">>
+<div style="min-height:800px;"><<ai-gui "D">></div>
