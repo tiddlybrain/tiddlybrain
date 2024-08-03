@@ -1,6 +1,6 @@
 created: 20240707103210561
 creator: yuzijie
-modified: 20240729141144982
+modified: 20240803101349999
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/ai
@@ -21,12 +21,8 @@ type: text/vnd.tiddlywiki
 
 \define insert-as-tiddler(request, response)
 <$action-createtiddler $basetitle=<<unusedtitle "$(template)$">> date=<<now YYYY0MM0DD>> type={{$response$!!type}} caption={{$request$}} text={{$response$}}>
-<$set name="title" value=<<createTiddler-title>>>
-<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
-<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
-<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
-</$set>
-</$set>
+<$action-sendmessage $message="tm-edit-text-operation" $param="insert-link" title=<<createTiddler-title>>/>
+<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<createTiddler-title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
 <$action-deletetiddler $filter="[[$response$]]"/>
 </$action-createtiddler>
 \end
