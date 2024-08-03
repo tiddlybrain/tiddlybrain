@@ -1,0 +1,25 @@
+modified: 20240803113801865
+modifier: yuzijie
+tags: customized
+title: $:/core/ui/EditorToolbar/excise-dropdown
+type: text/vnd.tiddlywiki
+
+\define lingo-base() $:/language/Buttons/Excise/
+
+\define body(config-title, template)
+\whitespace trim
+''<<lingo Hint>>''
+
+<<lingo Caption/NewTitle>>&#32;<$edit-text tag="input" tiddler="$config-title$/new-title" default="" focus="true"/>
+
+<$button><$set name="title" value=<<unusedtitle "$template$">>>
+<$action-createtiddler $basetitle=<<title>> date=<<now YYYY0MM0DD>> caption={{$config-title$/new-title}} type="text/vnd.tiddlywiki"/>
+<$action-sendmessage $message="tm-edit-text-operation" $param="excise" title=<<title>> caption={{$config-title$/new-title}}/>
+<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
+<$action-deletetiddler $tiddler="$config-title$/new-title"/>
+<$action-deletetiddler $tiddler=<<dropdown-state>>/>
+<<lingo Caption/Excise>>
+</$set></$button>
+\end
+
+<$macrocall $name="body" config-title="$:/state/Excise" template={{$:/config/defaultTemplate}}/>

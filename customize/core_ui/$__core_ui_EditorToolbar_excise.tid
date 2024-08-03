@@ -1,0 +1,11 @@
+caption: {{$:/language/Buttons/Excise/Caption}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+description: {{$:/language/Buttons/Excise/Hint}}
+dropdown: $:/core/ui/EditorToolbar/excise-dropdown
+icon: $:/core/images/excise
+modified: 20240803105709331
+modifier: yuzijie
+shortcuts: ((excise))
+tags: $:/tags/EditorToolbar customized
+title: $:/core/ui/EditorToolbar/excise
+type: text/vnd.tiddlywiki
