@@ -1,4 +1,4 @@
-modified: 20240802131946092
+modified: 20240803095243810
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -6,15 +6,9 @@ type: text/vnd.tiddlywiki
 
 \define lingo-base() $:/language/Buttons/Link/
 
-\define link-maker() <<l "$(title)$" description:"">>
-
 \define add-link-actions()
 \whitespace trim
-<$set name="title" value={{$(linkTiddler)$}}>
-<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
-<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
-</$set>
-</$set>
+<$action-sendmessage $message="tm-edit-text-operation" $param="insert-link" title={{$(linkTiddler)$}}/>
 <$action-deletetiddler $filter="[<dropdown-state>] [<linkTiddler>] [<searchListState>]"/>
 \end
 
@@ -31,26 +25,17 @@ type: text/vnd.tiddlywiki
 \define new-link-actions(template)
 <$set name="title" value=<<unusedtitle "$template$">>><$set name="caption" filter="[<searchTiddler>get[text]]" select="0">
 <$action-createtiddler $basetitle=<<title>> date=<<now YYYY0MM0DD>> caption=<<caption>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}"/>
-<$set name="link-text" filter="[{$:/state/link-dropdown/mode}match[link]]" value=<<link-maker>> emptyValue=<<title>>>
-<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<link-text>>/>
-</$set>
+<$action-sendmessage $message="tm-edit-text-operation" $param="insert-link" title=<<title>>/>
 <$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>] $:/temp/note/filter $:/state/search/showParents"/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
 </$set></$set>
-\end
-
-\define link-style-chooser()
-<span style="font-variant:all-small-caps;font-size:medium;margin-left:10px;">Insert as
-<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="title" unchecked="link" default="title" class="checkbox">Title</$checkbox> /
-<$checkbox tiddler="$:/state/link-dropdown/mode" field="text" checked="link" unchecked="title" default="title" class="checkbox">Macro</$checkbox>
-</span>
 \end
 
 \define body(config-title)
 \whitespace trim
 ''<<lingo Hint>>''
 
-<$vars searchTiddler="""$config-title$/search""" linkTiddler="""$config-title$/link""" linktext="" searchListState=<<qualify "$:/temp/link-search/selected-item">> refreshTitle=<<qualify "$:/temp/link-search/refresh">> storeTitle=<<qualify "$:/temp/link-search/input">>>
+<$vars searchTiddler="""$config-title$/search""" linkTiddler="""$config-title$/link""" linktext="" searchListState="$:/temp/link-search/selected-item" refreshTitle="$:/temp/link-search/refresh" storeTitle="$:/temp/link-search/input">
 
 <$vars linkTiddler=<<searchTiddler>>>
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
@@ -87,8 +72,6 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/state/ai/session--1389458986" text="$:/custom/ai/DeepL"/>
 <$let id={{$:/custom/ai/DeepL!!order}}><$action-setfield $tiddler=<<ai-request>> text={{{ [<storeTitle>get[text]] }}} type="text/vnd.tiddlywiki"/></$let>
 </$button>
-&#32;
-<<link-style-chooser>>
 </$reveal>
 </$vars>
 
@@ -110,4 +93,4 @@ type: text/vnd.tiddlywiki
 
 \end
 
-<$transclude $variable="body" config-title=<<qualify "$:/state/Link/">>/>
+<$transclude $variable="body" config-title="$:/state/link-search"/>
