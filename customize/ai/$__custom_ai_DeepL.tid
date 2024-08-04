@@ -1,7 +1,7 @@
 caption: DeepL<<has-history "D">>
 created: 20240724195946616
 creator: yuzijie
-modified: 20240803164640303
+modified: 20240804082839842
 modifier: yuzijie
 order: D
 tags: customized
@@ -61,7 +61,8 @@ type: text/vnd.tiddlywiki
 \end call-api
 
 \procedure ai-gui(id)
-<section class="ai">
+<$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[text]] }}}/>""" tag="section" class="ai">
+<div class="tc-droppable-placeholder" style="display:block;">
 <h3>Enter text
 (<$select tiddler=<<ai-request>> field="language" default=""><option value="">Auto</option>
 <$list filter="[[$:/config/DeepL/sourceLanguages]indexes[]]"><$let source-lang-name={{{ [[$:/config/DeepL/sourceLanguages]getindex{!!title}] }}}>
@@ -88,7 +89,8 @@ type: text/vnd.tiddlywiki
 <td><$edit-text tiddler=<<ai-instructions>> tag="input" placeholder="Contextual information can affect translation results"/></td>
 </tr>
 </tbody></table>
-</section>
+</div>
+</$droppable>
 
 <$reveal type="match" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
 <$button actions="""<$action-deletetiddler $filter="[<ai-response>]"/>""">Cancel Request</$button>
@@ -139,4 +141,4 @@ type: text/vnd.tiddlywiki
 </section></$list>
 \end ai-gui
 
-<div style="min-height:800px;"><<ai-gui "D">></div>
+<div style="min-height:600px;"><<ai-gui "D">></div>

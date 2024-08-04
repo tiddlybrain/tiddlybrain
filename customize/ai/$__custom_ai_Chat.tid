@@ -1,7 +1,7 @@
 caption: Chat (A)<<has-history "A">>
 created: 20240707102007118
 creator: yuzijie
-modified: 20240803164613299
+modified: 20240804083119483
 modifier: yuzijie
 order: A
 tags: customized
@@ -47,7 +47,8 @@ type: text/vnd.tiddlywiki
 \end call-api
 
 \procedure ai-gui(id)
-<section class="ai">
+<$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[text]] }}}/>""" tag="section" class="ai">
+<div class="tc-droppable-placeholder" style="display:block;">
 <h3>Instructions
 <$list filter="[<ai-request>get[text]!is[blank]]" variable="content"><$button style="font-size:small;">Set to Searchbar
 <$action-setfield $tiddler="$:/temp/menubarsearch" text=<<content>>/>
@@ -75,7 +76,8 @@ type: text/vnd.tiddlywiki
 </td>
 </tr>
 </tbody></table>
-</section>
+</div>
+</$droppable>
 
 <$reveal type="match" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
 <$button actions="""<$action-deletetiddler $filter="[<ai-response>]"/>""">Cancel Request</$button>
@@ -118,4 +120,4 @@ type: text/vnd.tiddlywiki
 </section></$list>
 \end ai-gui
 
-<div style="min-height:800px;"><<ai-gui "A">></div>
+<div style="min-height:600px;"><<ai-gui "A">></div>
