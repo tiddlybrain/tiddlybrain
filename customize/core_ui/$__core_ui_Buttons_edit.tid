@@ -1,6 +1,6 @@
 caption: {{$:/core/images/edit-button}} {{$:/language/Buttons/Edit/Caption}}
 description: {{$:/language/Buttons/Edit/Hint}}
-modified: 20240520143612846
+modified: 20240805201217732
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/edit
@@ -10,8 +10,10 @@ type: text/vnd.tiddlywiki
 \define edit-tiddler-button()
 \whitespace trim
 <span><$button actions=<<core-ui-edit-actions>> tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/core/images/edit-button}}
+<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="NONE">
+<$list filter="[all[current]match{$:/HistoryList!!current-tiddler}]" emptyMessage={{$:/core/images/edit-button}}>
+<span class="btn-icon-color">{{$:/core/images/edit-button}}</span>
+</$list>
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text">

@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240805015154293
+modified: 20240805210222701
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -102,11 +102,13 @@ input.tc-edit-texteditor, textarea.tc-edit-texteditor {padding: 0 5px; margin: 5
 @media (min-width: 1400px) {.editor-preview-closed {display: none;}}
 @media (max-width: 600px) {.editor-preview-closed {display: none;}}
 
-/* For Editor Toolbar Button: Embed */
+/* For Editor Toolbar Buttons */
 table.embed textarea {width: 100%;}
 table.embed textarea, table.embed select {border: none;}
 .embedding-preview {margin: 1em 0;}
 .embedding-preview img {width: auto;}
+.tc-tiddler-controls button .btn-icon-color svg {fill: #e7b96b;}
+.tc-tiddler-controls .tc-drop-down button .btn-icon-color svg {fill: unset;}
 
 /* For $:/custom/ui/SideBarSegments/open */
 .sidebar-item-hover {display: none;}
