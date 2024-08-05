@@ -1,4 +1,4 @@
-modified: 20240803113801865
+modified: 20240805013559308
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/excise-dropdown
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 
 <<lingo Caption/NewTitle>>&#32;<$edit-text tag="input" tiddler="$config-title$/new-title" default="" focus="true"/>
 
-<$button><$set name="title" value=<<unusedtitle "$template$">>>
+<$button style="text-align:center;"><$set name="title" value=<<unusedtitle "$template$">>>
 <$action-createtiddler $basetitle=<<title>> date=<<now YYYY0MM0DD>> caption={{$config-title$/new-title}} type="text/vnd.tiddlywiki"/>
 <$action-sendmessage $message="tm-edit-text-operation" $param="excise" title=<<title>> caption={{$config-title$/new-title}}/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<title>] +[putafter{$:/HistoryList!!current-tiddler}]"/>
