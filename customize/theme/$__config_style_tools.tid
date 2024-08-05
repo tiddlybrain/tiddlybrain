@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240805210222701
+modified: 20240805211846422
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -107,7 +107,7 @@ table.embed textarea {width: 100%;}
 table.embed textarea, table.embed select {border: none;}
 .embedding-preview {margin: 1em 0;}
 .embedding-preview img {width: auto;}
-.tc-tiddler-controls button .btn-icon-color svg {fill: #e7b96b;}
+.tc-tiddler-controls button .btn-icon-color svg {fill: #db9494;}
 .tc-tiddler-controls .tc-drop-down button .btn-icon-color svg {fill: unset;}
 
 /* For $:/custom/ui/SideBarSegments/open */
