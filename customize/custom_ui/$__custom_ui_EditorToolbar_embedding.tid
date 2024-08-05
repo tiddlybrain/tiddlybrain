@@ -1,0 +1,13 @@
+caption: New embedding
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+created: 20240804100147546
+creator: yuzijie
+description: Embedding new external images, pdfs, etc.
+dropdown: $:/custom/ui/EditorToolbar/embedding-dropdown
+icon: $:/core/images/new-image-button
+modified: 20240804101131804
+modifier: yuzijie
+shortcuts: shift-alt-I
+tags: $:/tags/EditorToolbar customized
+title: $:/custom/ui/EditorToolbar/embedding
+type: text/vnd.tiddlywiki

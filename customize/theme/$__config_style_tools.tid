@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240801140836670
+modified: 20240805015154293
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -101,6 +101,12 @@ input.tc-edit-texteditor, textarea.tc-edit-texteditor {padding: 0 5px; margin: 5
 .edit-area-container .editor-display {height: 450px; overflow: scroll;}
 @media (min-width: 1400px) {.editor-preview-closed {display: none;}}
 @media (max-width: 600px) {.editor-preview-closed {display: none;}}
+
+/* For Editor Toolbar Button: Embed */
+table.embed textarea {width: 100%;}
+table.embed textarea, table.embed select {border: none;}
+.embedding-preview {margin: 1em 0;}
+.embedding-preview img {width: auto;}
 
 /* For $:/custom/ui/SideBarSegments/open */
 .sidebar-item-hover {display: none;}
@@ -298,9 +304,10 @@ li .code-macro {margin: 4px 0;}
 /* For Macro: collapse */
 button.collapse-title {width: 100%; fill: #999; white-space: nowrap; overflow: hidden; padding: .7em 0 .7em .8em; background: #eee; border-bottom: 1px solid #ddd; border-radius: 0; text-overflow: ellipsis;}
 button.collapse-close {background: #f4f4f4; font-weight: normal;}
-.collapse-content {margin: 0.5em 0; border-radius: 3px; padding: 0 1em; border: 1px solid #efefef; border-bottom-color: #ccc; background: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;}
+.collapse-content {width: fit-content; margin: 0.5em 0; border-radius: 3px; padding: 0 1em; border: 1px solid #efefef; border-bottom-color: #ccc; background: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;}
 .collapse-content > ul, .collapse-content > ol, .collapse-content > table {margin: 1em 0;}
-.collapse-content > .external-links:first-child {margin-top: 1em;}
+.collapse-content > .external-links:first-of-type {margin-top: 1em;}
+.collapse-content > .external-links:last-of-type {margin-bottom: 1em;}
 .collapse-content > iframe {margin-bottom: 0.5em;}
 
 /* For Macro: task-pill */

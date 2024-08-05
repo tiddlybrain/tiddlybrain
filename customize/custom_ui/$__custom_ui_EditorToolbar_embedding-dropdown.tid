@@ -1,0 +1,56 @@
+created: 20240804100058458
+creator: yuzijie
+modified: 20240805015119613
+modifier: yuzijie
+tags: customized
+title: $:/custom/ui/EditorToolbar/embedding-dropdown
+type: text/vnd.tiddlywiki
+
+\procedure caption-input-action() <$action-setfield $tiddler="$:/state/embedding" caption={{{ [[$:/state/embedding]get[_canonical_uri]split[/]last[]] }}}/>
+
+\define body()
+<$button style="margin:1em auto;font-weight:bold;">{{$:/core/images/import-button}} Show All Attachments
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="Attachments"/>
+</$button>
+
+''Embedding new images, pdfs, mp3, etc.''
+
+<table style="width:100%" class="embed"><tbody>
+<tr>
+<th>File Path</th>
+<td><$edit-text tag="textarea" tiddler="$:/state/embedding" field="_canonical_uri" default="./files/" focus="true" inputActions=<<caption-input-action>>/></td>
+</tr>
+<tr>
+<th>File Caption</th>
+<td><$edit-text tag="textarea" tiddler="$:/state/embedding" field="caption" default=""/></td>
+</tr>
+<tr>
+<th>File Type</th>
+<td><$select tiddler="$:/state/embedding" field="type">
+<option value="image/jpeg">JPG</option>
+<option value="image/png">PNG</option>
+<option value="image/gif">GIF</option>
+<option value="image/svg+xml">SVG</option>
+<option value="application/pdf">PDF</option>
+<option value="text/html">HTML</option>
+<option value="audio/mp3">MP3</option>
+<option value="video/mp4">MP4</option>
+</$select></td>
+</tr>
+</tbody></table>
+
+<$list filter="[[$:/state/embedding]has[_canonical_uri]has[type]]"><$button style="text-align:center;">Embed it
+<$action-sendmessage $message="tm-edit-text-operation" $param="embed"
+  uri={{$:/state/embedding!!_canonical_uri}}
+  caption={{$:/state/embedding!!caption}}
+  type={{$:/state/embedding!!type}}
+/>
+<$action-deletetiddler $tiddler="$:/state/embedding"/>
+<$action-deletetiddler $tiddler=<<dropdown-state>>/>
+</$button></$list>
+
+<div class="embedding-preview">''Preview''</div>
+<$list filter="[[$:/state/embedding]has[_canonical_uri]has[type]]"><div class="embedding-preview">{{$:/state/embedding}}</div></$list>
+\end
+
+<$macrocall $name="body"/>

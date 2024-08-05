@@ -1,20 +1,10 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240727210918905
+modified: 20240804095739325
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
 type: text/vnd.tiddlywiki
-
-\define newExtFileActionCopy() <<l '$(title)$' mode:cl belongs-to:no>>
-
-\define newExtFileAction(template, caption, type, path, note)
-<$set name="title" value=<<unusedtitle "$template$">>><$set name="uri" filter="[[$path$]prefix[http]]" value="$path$" emptyValue="./files/$path$">
-<$action-setfield $tiddler=<<title>> date=<<now YYYY0MM0DD>> belongs.to="Attachments" note="$note$" tags="Snippet" caption="$caption$" type="$type$" _canonical_uri=<<uri>>/>
-<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<newExtFileActionCopy>>/>
-</$set></$set>
-<$action-deletetiddler $filter="[[$:/temp/newTiddler]] [[$:/state/popup/menubar/NewTiddler]] [[$:/state/popup/NewTiddlerWindow]]"/>
-\end
 
 <$reveal type="match" state="$:/status/IsReadOnly" text="yes" tag="div">This Wiki is Read Only</$reveal>
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes" tag="div">
@@ -23,7 +13,7 @@ type: text/vnd.tiddlywiki
 </$button></$list>
 <p><$keyboard key="ctrl+enter" actions="""<$transclude $variable=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} text="Name: {{!!caption}}" content={{$:/temp/newTiddler!!description}} type="application/x-tiddler-dictionary" popup="close" scroll="yes"/>""" tag="div">
 <$edit-text tiddler="$:/temp/newTiddler" tag="input" size="22" class="new-tiddler-input-box" placeholder="Tiddler caption" default="" focus="yes"/><br>
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="22" class="new-tiddler-input-box" placeholder="Descriptions or Attachments" field="description"/>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="22" class="new-tiddler-input-box" placeholder="Tiddler Description" field="description"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
 </$list>
@@ -68,26 +58,14 @@ Description: {{!!description}}" edit="yes"/>Data</$button>
 <$button tooltip="Markdown"><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="text/x-markdown" edit="yes"/>Md</$button>
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" tooltip="Edit Configurations">⚙️</$button>
 </p>
-<p style="font-variant:all-petite-caps;margin:-5px 0 10px;color:#acacac;">Attachments</p>
-<p style="margin-top:-3px;">
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/jpeg" note="JPG"/>JPG</$button>
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/png" note="PNG"/>PNG</$button>
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/gif" note="GIF"/>GIF</$button>
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="image/svg+xml" note="SVG"/>SVG</$button>
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="application/pdf" note="PDF"/>PDF</$button>
-</p>
-<p style="margin-top:-10px;">
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="text/html" note="HTML"/>HTML</$button>
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="audio/mp3" note="MP3"/>MP3</$button>
-<$button><$transclude $variable="newExtFileAction" template=<<template>> caption=<<caption>> path=<<content>> type="video/mp4" note="MP4"/>MP4</$button>
-</p>
 </$vars>
-<p style="margin:-5px 0 5px;">
+<hr style="margin:-3px 0 0 0;">
+<p style="margin:5px 0;">
 <$button to="$:/custom/ui/path-prefix" class="tc-btn-invisible" style="font-variant:all-petite-caps;color:#acacac;">File Path Prefix</$button>
 </p>
 <$select tiddler='$:/config/index-tree' field='path' class='new-tiddler-input-box'>{{$:/custom/ui/path-prefix}}</$select>
 <$button message="tm-copy-to-clipboard" param={{$:/config/index-tree!!path}} class="tc-btn-invisible">{{$:/core/images/copy-clipboard}}</$button>
-<p style="margin-top:2px;">
+<p style="margin-top:1px;">
 <$button to="$:/config/defaultTemplate" class="tc-btn-invisible" style="font-variant:all-petite-caps;color:#acacac;">Default Title Prefix - @@color:green;{{$:/config/defaultTemplate}}@@</$button>
 </p>
 </$reveal>
