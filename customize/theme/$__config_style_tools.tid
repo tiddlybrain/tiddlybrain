@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240806130120573
+modified: 20240806132239824
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -46,7 +46,7 @@ button.img {border: 1px solid #ddd; box-shadow: 0px 0px 2px 1px #f5f5f5;}
 button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis; line-height: 30px; color: #5778d8;}
 button.snippet-title:hover {text-decoration: underline;}
 .snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
-.snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table, .tc-sidebar-lists .index-tree-view .snippet-content p {margin: 10px 20px;}
+.snippet-content > h4, .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table, .tc-sidebar-lists .index-tree-view .snippet-content p {margin: 10px 20px;}
 .snippet-content > blockquote {margin-left: 35px;}
 .snippet-content > h2, .snippet-content > h3, .snippet-content > details {margin-left: 20px;}
 .snippet-content > h3 {margin-top: 15px; margin-bottom: 15px;}
