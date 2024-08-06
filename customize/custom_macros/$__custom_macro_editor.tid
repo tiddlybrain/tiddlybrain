@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240803213043909
+modified: 20240806122940874
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -49,6 +49,9 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" tooltip="Set to Searchbar">{{$:/core/images/advanced-search-button}}
 <$action-setfield $tiddler="$:/temp/menubarsearch" text={{!!caption}}/>
 <$action-setfield $tiddler="$:/temp/menubarsearch/input" text={{!!caption}}/>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
 </$button>
 </$list></td>
 </tr>

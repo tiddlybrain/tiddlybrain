@@ -1,0 +1,10 @@
+modified: 20240806130013772
+modifier: yuzijie
+tags: customized
+title: $:/core/ui/ViewTemplate/title/default
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$set name="class" filter="[all[current]match{$:/HistoryList!!current-tiddler}]" value="tc-title tc-title-color" emptyValue="tc-title">
+<h2 class=<<class>>><$view field="title"/></h2>
+</$set>
