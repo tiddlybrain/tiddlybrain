@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240806132239824
+modified: 20240807052151524
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -299,7 +299,7 @@ li .code-macro {margin: 4px 0;}
 
 /* For Macro: status-selector */
 .status-options {color: red; display: inline-block;}
-.status-options select {border: none; color: red; font-weight: inherit; font-size: large;}
+.status-options select {border: none; color: red; font-weight: inherit; font-size: large; width: .85em;}
 
 /* For Macro: collapse */
 button.collapse-title {width: 100%; fill: #999; white-space: nowrap; overflow: hidden; padding: .7em 0 .7em .8em; background: #eee; border-bottom: 1px solid #ddd; border-radius: 0; text-overflow: ellipsis;}
