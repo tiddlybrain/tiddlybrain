@@ -1,4 +1,4 @@
-modified: 20240803095243810
+modified: 20240808135233382
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -55,22 +55,17 @@ type: text/vnd.tiddlywiki
 </$button>
 &#32;
 <$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0;transform:translateY(-2px);">
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
+<$list filter="[prefix[$:/custom/ai/]get[order]]" variable="id">
+<$action-setfield $tiddler=<<ai-request>> text={{{ [<storeTitle>get[text]] }}} type="text/vnd.tiddlywiki"/>
+</$list>
+{{$:/core/images/plugin-generic-language}}
+</$button>
+&#32;
+<$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0;transform:translateY(-2px);">
 <<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
 {{$:/core/images/close-button}}
-</$button>
-&#32;
-<$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0 3px;transform:translateY(-2px);">AI Chat
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-setfield $tiddler="$:/state/ai/session--1389458986" text="$:/custom/ai/Chat"/>
-<$let id={{$:/custom/ai/Chat!!order}}><$action-setfield $tiddler=<<ai-request>> text={{{ [<storeTitle>get[text]] }}} type="text/vnd.tiddlywiki"/></$let>
-</$button>
-&#32;
-<$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0 3px;transform:translateY(-2px);">DeepL
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-setfield $tiddler="$:/state/ai/session--1389458986" text="$:/custom/ai/DeepL"/>
-<$let id={{$:/custom/ai/DeepL!!order}}><$action-setfield $tiddler=<<ai-request>> text={{{ [<storeTitle>get[text]] }}} type="text/vnd.tiddlywiki"/></$let>
 </$button>
 </$reveal>
 </$vars>
