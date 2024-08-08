@@ -1,11 +1,11 @@
-caption: DeepL (A)<<has-history "D">>
-created: 20240724195946616
+caption: DeepL (B)<<has-history "E">>
+created: 20240808091306253
 creator: yuzijie
-modified: 20240808091403453
+modified: 20240808091423494
 modifier: yuzijie
-order: D
+order: E
 tags: customized
-title: $:/custom/ai/DeepL
+title: $:/custom/ai/DeepL 1
 type: text/vnd.tiddlywiki
 
 \procedure call-api()
@@ -141,4 +141,4 @@ type: text/vnd.tiddlywiki
 </section></$list>
 \end ai-gui
 
-<div style="min-height:600px;"><<ai-gui "D">></div>
+<div style="min-height:600px;"><<ai-gui "E">></div>
