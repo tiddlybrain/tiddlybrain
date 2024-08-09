@@ -1,7 +1,7 @@
 caption: Chat (A)<<has-history "A">>
 created: 20240707102007118
 creator: yuzijie
-modified: 20240809065754526
+modified: 20240809070311354
 modifier: yuzijie
 order: A
 tags: customized
@@ -76,7 +76,7 @@ type: text/vnd.tiddlywiki
 </td>
 </tr>
 <$list filter="[<ai-instructions>get[text]is[tiddler]]"><tr><td colspan="2">
-<pre style="margin:5px 0;"><$transclude $field="text" $output="text/plain"/></pre>
+<pre style="margin:5px 0;background:white;color:#666;"><$transclude $field="text" $output="text/plain"/></pre>
 </td></tr></$list>
 </tbody></table>
 </div>
