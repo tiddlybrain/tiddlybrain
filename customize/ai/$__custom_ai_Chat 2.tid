@@ -1,7 +1,7 @@
 caption: Chat (C)<<has-history "C">>
 created: 20240724083626551
 creator: yuzijie
-modified: 20240804082958198
+modified: 20240809065903554
 modifier: yuzijie
 order: C
 tags: customized
@@ -75,6 +75,9 @@ type: text/vnd.tiddlywiki
 </$set>
 </td>
 </tr>
+<$list filter="[<ai-instructions>get[text]is[tiddler]]"><tr><td colspan="2">
+<pre style="margin:5px 0;"><$transclude $field="text" $output="text/plain"/></pre>
+</td></tr></$list>
 </tbody></table>
 </div>
 </$droppable>
