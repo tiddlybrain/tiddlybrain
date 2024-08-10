@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20240809125856672
+modified: 20240810073741375
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -44,8 +44,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__mode__>match[cl]]" variable="NONE"><$transclude $variable="collapse" title=<<currentTiddler>> text=<<__text__>> class=<<__class__>> style=<<__style__>> external-links=<<__external-links__>> belongs-to=<<__belongs-to__>> more-text="""<$list filter="[<__date__>match[yes]]" variable="NONE">@@color:#666;(<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)@@</$list><$list filter="[all[current]untagged[]]"> ⚠️ </$list><$list filter="[<__description__>match[yes]]" variable="NONE"><$list filter="[all[current]has[description]]">@@color:#aaa; - {{!!description}}@@</$list></$list>"""/></$list>
 </$tiddler>
 \end
-
-\define ct(url) <sup><a href="$url$" target="_blank" title="$url$" class="links" rel="noopener noreferrer" style="text-decoration:none;fill:#5778d8;margin-left:3px;">{{$:/core/images/open-window}}</a></sup>
 
 \define bl-pattern() (\[\[|\||;;|"|'|:|\s|^)$(search)$(\]\]|;;|"|'|:|\s|\n|$)
 \define bl-limit-state(uid) $:/state/bl-limit/$(current)$/$uid$
@@ -110,9 +108,6 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
   status:"是否显示 status"
   external-links:"是否显示 external-links"
   belongs-to:"是否显示 external-links 里面的 belongs.to">>`
-# ''cite, 显示网络出处''
-#> `<<ct
-  url:"web link">>`
 # ''按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filter
   item-filter:"主要筛选条件, 在 bl-pattern 之前"
