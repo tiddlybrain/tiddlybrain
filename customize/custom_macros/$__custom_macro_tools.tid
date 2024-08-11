@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240722092232455
+modified: 20240811075636868
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -194,7 +194,7 @@ type: text/vnd.tiddlywiki
 </$button>
 </span></$list>
 <$list filter="[<mTitle>has[date]]"><span style="margin-right:5px;font-size:small;color:#999;">
-<$list filter="[all[current]days:date[]]" emptyMessage="Not reviewed for <$transclude $variable=days-passed start={{!!date}}/>">Reviewed today</$list>
+<$list filter="[all[current]days:date[]]" emptyMessage="Not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transclude $variable=format-date date={{!!date}} template='YYYY'/>)">Reviewed today</$list>
 </span></$list>
 <$list filter="[<mTitle>!is[missing]]">
 <$button message="tm-close-tiddler">OPEN<$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
