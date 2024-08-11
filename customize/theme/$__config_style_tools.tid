@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240809130057636
+modified: 20240811095525319
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -267,18 +267,19 @@ a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
 .links svg {transform: translateY(-1px);}
 
 /* For Macro: links, modal code viewer, highlight.js */
-.code-viewer {border: 1px solid #cccccc; display: flex;}
-.code-viewer > pre {flex: 1 0 80%; margin: 0; border: none; border-radius: 0;}
+.code-viewer {border: 1px solid #cccccc; display: flex; overflow: hidden;}
+.code-viewer > pre {flex: 1 0 70%; margin: 0; border: none; border-radius: 0;}
 .code-viewer > pre code {font-size: 1em;}
-.code-viewer > textarea {flex: 0 0 20%; border: none; white-space: pre; font-size: 1em; line-height: 23px; padding: 12px 8px 0; height: 2000px !important; border-radius: 0; overflow: hidden; transition: flex-basis 300ms ease-in-out;}
-.code-viewer > textarea.tc-edit-texteditor {margin: 0;}
+.code-viewer > textarea {flex: 0 0 30%; border: none; white-space: pre; font-size: 1em; line-height: 23px; padding: 12px 8px 0; height: 2000px !important; border-radius: 0; overflow: hidden; transition: flex-basis 800ms ease-in-out;}
+.code-viewer > textarea.tc-edit-texteditor {margin: 0; color: #888;}
 .code-viewer > textarea.heightless {height: unset !important;}
-.code-viewer > textarea:hover {flex-basis: 65%; overflow: auto;}
-.code-viewer > textarea:hover + pre {flex-basis: 35%;}
-.code-viewer > textarea:hover + pre > code {overflow: hidden;}
-.code-viewer > .comment {flex: 0 0 38%; overflow: auto;}
+.code-viewer > .comment {flex: 0 0 30%; overflow: hidden; transition: flex-basis 800ms ease-in-out;}
 .code-viewer > .comment pre {margin: 0; border: none; border-radius: 0; background: transparent;}
-.code-viewer > .comment pre code {font-size: 1em; background: transparent;}
+.code-viewer > .comment pre code {font-size: 1em; background: transparent; color: #888; overflow: hidden;}
+.code-viewer > .comment:hover pre code {overflow-x: auto;}
+.code-viewer > textarea:hover, .code-viewer > .comment:hover {flex-basis: 60%; overflow-x: auto;}
+.code-viewer > textarea:hover + pre, .code-viewer > .comment:hover + pre {flex-basis: 40%;}
+.code-viewer > textarea:hover + pre > code, .code-viewer > .comment:hover + pre > code {overflow: hidden;}
 .code-viewer-button {cursor: pointer;} .code-viewer-button > pre {border-color: red;}
 
 /* For Macro: filter-options */
