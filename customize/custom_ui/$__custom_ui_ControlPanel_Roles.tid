@@ -1,11 +1,12 @@
-caption: Roles Manager
+caption: Roles
 color: #a3ddff
 created: 20240708161609441
 creator: yuzijie
-modified: 20240810142654818
+modified: 20240811121840952
 modifier: yuzijie
 order: 1
-tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
+shortcap: Roles Manager
+tags: customized $:/custom/ui/ControlPanel/TiddlyBrain $:/tags/MoreSideBar
 title: $:/custom/ui/ControlPanel/Roles
 type: text/vnd.tiddlywiki
 
@@ -30,7 +31,7 @@ Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""/>
 <$tiddler tiddler="$:/custom/ui/ControlPanel/Roles">
 
 ;Specific Domain
-:<<snippet key:"Roles">>
+:<<snippet key:"Roles" limit:100>>
 ;General Domain
 :<<snippet key:"Role">>
 
