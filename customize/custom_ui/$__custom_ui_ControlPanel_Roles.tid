@@ -2,7 +2,7 @@ caption: Roles
 color: #a3ddff
 created: 20240708161609441
 creator: yuzijie
-modified: 20240811121840952
+modified: 20240811131105498
 modifier: yuzijie
 order: 1
 shortcap: Roles Manager
@@ -31,7 +31,7 @@ Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""/>
 <$tiddler tiddler="$:/custom/ui/ControlPanel/Roles">
 
 ;Specific Domain
-:<<snippet key:"Roles" limit:100>>
+:<<snippet key:"Roles" limit:100 has-filter:yes>>
 ;General Domain
 :<<snippet key:"Role">>
 
