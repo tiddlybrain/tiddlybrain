@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20231227000932204
+modified: 20240812101615375
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -16,11 +16,17 @@ type: text/vnd.tiddlywiki
 </div></$list>
 <$transclude $variable="l" title={{!!title}} note="no" style="display:block;"/>
 <$list filter="[all[current]get[question]]"><div style="color:#666;margin-top:8px;">Q: <<currentTiddler>></div></$list>
-<div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1">
-<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙁<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level="1"/></$button>
-<$list filter="[belongs.to[Flashcard]level{!!level}]" emptyMessage="Level 0"><$button class="tc-btn-invisible">{{!!caption}}<$transclude $variable="tiddler-open" tiddler={{!!title}}/></$button></$list>
-<$button set="!!date" setTo=<<now YYYY0MM0DD>> class="tc-btn-invisible">🙂<$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield level=<<up>>/></$button>
-</$set></div>
+<div class="tc-card-buttons"><$set name="up" filter="[all[current]get[level]add[1]]" select="0" emptyValue="1"><$let today=<<now YYYY0MM0DD>>>
+<$button class="tc-btn-invisible">🙁<$action-setfield level="1" $timestamp="no"/>
+<$action-setfield $field="last-date" $value={{!!date}} $timestamp="no"/><$action-setfield $field="date" $value=<<today>> $timestamp="no"/>
+</$button>
+<$list filter="[belongs.to[Flashcard]level{!!level}]" emptyMessage="Level 0">
+<$button class="tc-btn-invisible">{{!!caption}}<$transclude $variable="tiddler-open" tiddler={{!!title}}/></$button>
+</$list>
+<$button class="tc-btn-invisible">🙂<$action-setfield level=<<up>> $timestamp="no"/>
+<$action-setfield $field="last-date" $value={{!!date}} $timestamp="no"/><$action-setfield $field="date" $value=<<today>> $timestamp="no"/>
+</$button>
+</$let></$set></div>
 </div></div>
 </$set>
 \end

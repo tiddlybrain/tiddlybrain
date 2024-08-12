@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240806122940874
+modified: 20240812101201844
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -104,10 +104,14 @@ type: text/vnd.tiddlywiki
 </$fieldmangler></$list>
 <$set name="today" value=<<now YYYY0MM0DD>>>
 <$list filter="[<mTitle>is[blank]]"><$list filter="[<draft>!tag[Task]has[date]!date<today>]">
-<$button style="font-weight:bold;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
+<$button style="font-weight:bold;">Update Date
+<$action-setfield $field="last-date" $value={{!!date}} $timestamp="no"/><$action-setfield $field="date" $value=<<today>> $timestamp="no"/>
+</$button>
 </$list></$list>
 <$list filter="[<mTitle>!is[blank]]"><$list filter="[all[current]!tag[Task]has[date]!date<today>]">
-<$button style="font-weight:bold;"><$action-setfield $field="last-date" $value={{!!date}}/><$action-setfield $field="date" $value=<<today>>/>Update Date</$button>
+<$button style="font-weight:bold;">Update Date
+<$action-setfield $field="last-date" $value={{!!date}} $timestamp="no"/><$action-setfield $field="date" $value=<<today>> $timestamp="no"/>
+</$button>
 </$list></$list>
 </$set>
 <$list filter="[<mTitle>is[blank]]">
