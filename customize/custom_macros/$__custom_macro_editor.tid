@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240812101201844
+modified: 20240813005403812
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -111,6 +111,10 @@ type: text/vnd.tiddlywiki
 <$list filter="[<mTitle>!is[blank]]"><$list filter="[all[current]!tag[Task]has[date]!date<today>]">
 <$button style="font-weight:bold;">Update Date
 <$action-setfield $field="last-date" $value={{!!date}} $timestamp="no"/><$action-setfield $field="date" $value=<<today>> $timestamp="no"/>
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
+</$list>
+<$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="-[<currentTiddler>]"/><$action-sendmessage $message="tm-close-tiddler"/>
 </$button>
 </$list></$list>
 </$set>
