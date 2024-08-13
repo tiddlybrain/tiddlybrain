@@ -1,8 +1,7 @@
 caption: Roles
-color: #a3ddff
 created: 20240708161609441
 creator: yuzijie
-modified: 20240811131105498
+modified: 20240813145411667
 modifier: yuzijie
 order: 1
 shortcap: Roles Manager
@@ -28,11 +27,4 @@ Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""/>
 
 <$button actions=<<newRole>>>Add New Role</$button>
 
-<$tiddler tiddler="$:/custom/ui/ControlPanel/Roles">
-
-;Specific Domain
-:<<snippet key:"Roles" limit:100 has-filter:yes>>
-;General Domain
-:<<snippet key:"Role">>
-
-</$tiddler>
+<$tiddler tiddler="$:/custom/ui/ControlPanel/Roles"><<snippet key:"Roles" limit:100>></$tiddler>
