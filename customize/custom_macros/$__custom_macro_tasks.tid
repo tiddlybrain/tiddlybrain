@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20240721104919239
+modified: 20240821144549248
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -207,14 +207,13 @@ TBC: <<tbc>>
 </$list>
 <<weekly-link "$date$">>
 <$edit-text tiddler="$:/temp/plan/date/draft" default=<<curDate>> tag="input" size="5"/>
-<$list filter="[[$:/temp/plan/date/draft]get[text]]">
-<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
-</$list>
-<$list filter="[<journal-title>is[missing]]"><$button>Create Date
+<$list filter="[[$:/temp/plan/date/draft]get[text]]" emptyMessage="""<$list filter="[<journal-title>is[missing]]"><$button>Create Date
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <$let single-column=yes><<bl>></$let>
 TBC: <<tbc>>
 --: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
-</$button></$list>
+</$button></$list>""">
+<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
+</$list>
 </$droppable></h2>
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
