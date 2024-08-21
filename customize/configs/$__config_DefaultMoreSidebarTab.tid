@@ -1,9 +1,9 @@
 created: 20190706063840044
 creator: yuzijie
-modified: 20211208211622136
+modified: 20240820183859573
 modifier: yuzijie
 tags: customized
 title: $:/config/DefaultMoreSidebarTab
 type: text/vnd.tiddlywiki
 
-$:/core/ui/MoreSideBar/Recent
+$:/custom/ui/ControlPanel/Roles

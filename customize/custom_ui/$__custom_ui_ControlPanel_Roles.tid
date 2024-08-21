@@ -1,7 +1,7 @@
 caption: Roles
 created: 20240708161609441
 creator: yuzijie
-modified: 20240813145411667
+modified: 20240820183821930
 modifier: yuzijie
 order: 1
 shortcap: Roles Manager
@@ -13,12 +13,7 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-new-tiddler"
   title="New Role Name"
   type="application/x-tiddler-dictionary"
-  belongs.to="$:/custom/ui/ControlPanel/Roles"
   description=""
-  keywords="Roles Manager"
-  note="Role"
-  parents="$:/custom/ui/ControlPanel/Roles"
-  tags="Snippet"
   fold="Notes"
   text="""Description: {{!!description}}
 Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""/>
