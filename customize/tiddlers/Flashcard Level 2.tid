@@ -6,11 +6,11 @@ description: <<flashcards-count "2">>
 interval: -1
 keywords: Flashcards
 level: 2
-modified: 20230422132151400
+modified: 20240822151240000
 modifier: yuzijie
 note: Level
 parents: Flashcard
-tags: Snippet
+tags: Snippet customized
 title: Flashcard Level 2
 type: text/vnd.tiddlywiki
 
