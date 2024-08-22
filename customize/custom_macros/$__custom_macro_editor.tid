@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240813005403812
+modified: 20240822161049934
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -13,17 +13,16 @@ type: text/vnd.tiddlywiki
 
 \define editor-title(style)
 <table style="$style$"><tbody>
-<$list filter="[[$(modal)$]!match[yes]]" variable="NONE"><tr><td colspan="3" style="text-align:center;"><$set name="tv-wikilinks" value="no">
-<$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button class="tc-btn-invisible" style="color:green;margin-right:5px;">
-{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
-<$list filter="[enlist{$:/StoryList!!list}count[]compare:number:lteq[1]]"><$action-setfield $tiddler="$:/HistoryList" current-tiddler=""/></$list>
+<$list filter="[[$(modal)$]!match[yes]]" variable="NONE"><tr><td colspan="3" style="line-height:26px;"><$set name="tv-wikilinks" value="no">
+<$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button class="tc-btn-invisible" style="color:green;text-align:center;width:100%;">
+{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list><$action-navigate $to=<<currentTiddler>>/>
 </$button>""">
-<$button class="tc-btn-invisible" style="color:brown;margin-right:5px;">
-{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$action-deletetiddler $tiddler="$:/temp/Draft"/>
-</$button>
+<$button class="tc-btn-invisible" style="text-align:center;color:brown;width:100%;">
+{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;&nbsp;<$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$button style="color:brown;">copy<$action-sendmessage $message="tm-copy-to-clipboard" $param={{$:/temp/Draft!!draft}}/></$button>
 <$button style="color:brown;">open<$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/></$button>
 <$button style="color:brown;">sidebar<<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/></$button>
+</$button>
 </$list>
 </$set></td></tr></$list>
 <tr>
