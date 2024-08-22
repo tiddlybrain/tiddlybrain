@@ -1,10 +1,15 @@
 created: 20221218162626472
 creator: yuzijie
 list-after: $:/core/ui/ViewTemplate/subtitle/modifier
-modified: 20240811075654126
+modified: 20240822222727745
 modifier: yuzijie
 tags: $:/tags/ViewTemplate/Subtitle customized
 title: $:/custom/ui/subtitle
 type: text/vnd.tiddlywiki
 
-<$list filter="[all[current]has[date]]" emptyMessage="-">- <$list filter="[all[current]days:date[]]" emptyMessage="not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transclude $variable=format-date date={{!!date}} template='YYYY'/>)">reviewed today</$list> -</$list>
+<$list filter="[all[current]has[date]!tag[Task]]" emptyMessage="-">-
+<$list filter="[all[current]days:date[]]" emptyMessage="""<$button class="tc-btn-invisible" style="font-variant:inherit;font-variant-numeric:inherit;">
+<$action-setfield $field="last-date" $value={{!!date}} $timestamp="no"/><$action-setfield $field="date" $value=<<now YYYY0MM0DD>> $timestamp="no"/>
+not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transclude $variable=format-date date={{!!date}} template='YYYY'/>)
+</$button>""">reviewed today</$list>
+-</$list>

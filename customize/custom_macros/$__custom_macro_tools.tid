@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240821160018029
+modified: 20240822223511192
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -193,9 +193,12 @@ type: text/vnd.tiddlywiki
 {{$:/core/images/left-arrow}}<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$button>
 </span></$list>
-<$list filter="[<mTitle>has[date]]"><span style="margin-right:5px;font-size:small;color:#999;">
-<$list filter="[all[current]days:date[]]" emptyMessage="Not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transclude $variable=format-date date={{!!date}} template='YYYY'/>)">Reviewed today</$list>
-</span></$list>
+<$list filter="[<mTitle>has[date]!tag[Task]]">
+<$list filter="[all[current]days:date[]]" emptyMessage="""<$button class="tc-btn-invisible" style="margin-right:5px;font-size:small;">
+<$action-setfield $field="last-date" $value={{!!date}} $timestamp="no"/><$action-setfield $field="date" $value=<<now YYYY0MM0DD>> $timestamp="no"/>
+Not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transclude $variable=format-date date={{!!date}} template='YYYY'/>)
+</$button>""">@@margin-right:5px;font-size:small;color:#999;Reviewed today@@</$list>
+</$list>
 <$list filter="[<mTitle>!is[missing]]">
 <$button message="tm-close-tiddler">OPEN<$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
 <$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
