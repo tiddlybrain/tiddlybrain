@@ -1,21 +1,18 @@
 created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20240822151939191
+modified: 20240822153625443
 modifier: yuzijie
 order: 3
 tags: customized Tasks
 title: Tracking
 type: text/vnd.tiddlywiki
 
-<div style="margin-bottom:15px;">
-<$details summary="Has Time Interval">
-<<sort-by-filter item-filter:"has[interval]!prefix[Flashcard]">>
-</$details>
-<$details summary="Notification List">
+<h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">Notification List</h2>
+
 <ul><$list filter="[tag[Tasks/Journal]has[tbc]]"><li><$link to={{!!title}}>{{!!title}}</$link>
 @@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list></ul>
-</$details>
-</div>
+
+<h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">Tracking List</h2>
