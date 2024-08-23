@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20240701225430564
+modified: 20240823110851392
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -61,8 +61,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[note]]">@@color:#2b8a2b;[{{!!note}}]@@</$list>
 </$button>
 <$list filter="[<modal>!match[yes]]" variable="NONE"><$set name="direct-open" value="yes">
-<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
-<$list filter="[<modal>!match[yes]]"><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/></$list>&#129093;
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible" style="font-size:smaller;fill:#5778d8;">
+<$list filter="[<modal>!match[yes]]"><$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/></$list>{{$:/core/images/chevron-up}}
 </$button>
 </$set></$list>
 <$list filter="[all[current]get[belongs.to]getAllParents[]]">&lt;

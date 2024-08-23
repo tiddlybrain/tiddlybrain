@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240804095739325
+modified: 20240823112528198
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -12,11 +12,11 @@ type: text/vnd.tiddlywiki
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]]"><$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>>/></$list>
 </$button></$list>
 <p><$keyboard key="ctrl+enter" actions="""<$transclude $variable=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} text="Name: {{!!caption}}" content={{$:/temp/newTiddler!!description}} type="application/x-tiddler-dictionary" popup="close" scroll="yes"/>""" tag="div">
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="22" class="new-tiddler-input-box" placeholder="Tiddler caption" default="" focus="yes"/><br>
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="22" class="new-tiddler-input-box" placeholder="Tiddler Description" field="description"/>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="22" class="new-tiddler-input-box" placeholder="Tiddler caption" default="" focus="yes"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
-<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>❌</$button>
-</$list>
+<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>{{$:/core/images/close-button}}</$button>
+</$list><br>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="22" class="new-tiddler-input-box" placeholder="Tiddler description" field="description"/>
 </$keyboard></p>
 <p style="margin-top:-7px;">
 <$select tiddler="$:/temp/newTiddler" field="note" default="" class="new-tiddler-input-box" tabindex="-1" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
@@ -29,7 +29,9 @@ type: text/vnd.tiddlywiki
 <$list filter='[all[tiddlers]note[Role]belongs.to{!!title}]'><option value={{!!title}}>{{!!title}}</option></$list>
 </optgroup></$list>
 </$select>
-<$button class="tc-btn-invisible">⚙️<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/Roles"/></$button>
+<$button class="tc-btn-invisible">{{$:/core/images/options-button}}
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/Roles"/>
+</$button>
 <$list filter="[[$:/temp/newTiddler]get[note]]" variable="note">
 <$select tiddler="$:/temp/newTiddler" field="belongs.to" default="" class="new-tiddler-input-box" tabindex="-1">
 <option value="">Choose a Parent</option>
@@ -51,12 +53,12 @@ type: text/vnd.tiddlywiki
 </p>
 <$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>
 <p style="margin-top:-5px;">
-<$button>➕<$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}" popup="close" scroll="yes"/></$button>
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}" popup="close" scroll="yes"/>New</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" content=<<content>> text="Name: {{!!caption}}
 Description: {{!!description}}" edit="yes"/>Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> edit="yes"/>Record</$button>
 <$button tooltip="Markdown"><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="text/x-markdown" edit="yes"/>Md</$button>
-<$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" tooltip="Edit Configurations">⚙️</$button>
+<$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" tooltip="Edit Configurations">{{$:/core/images/edit-button}}</$button>
 </p>
 </$vars>
 <hr style="margin:-3px 0 0 0;">
