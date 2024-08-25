@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240823124354035
+modified: 20240825222008918
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -306,7 +306,7 @@ li .code-macro {margin: 4px 0;}
 /* For Macro: collapse */
 button.collapse-title {width: 100%; fill: #999; white-space: nowrap; overflow: hidden; padding: .7em 0 .7em .8em; background: #eee; border-bottom: 1px solid #ddd; border-radius: 0; text-overflow: ellipsis;}
 button.collapse-close {background: #f4f4f4; font-weight: normal;}
-.collapse-content {width: fit-content; margin: 0.5em 0; border-radius: 3px; padding: 0 1em; border: 1px solid #efefef; border-bottom-color: #ccc; background: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;}
+.collapse-content {width: fit-content; max-width: 100%; margin: 0.5em 0; border-radius: 3px; padding: 0 1em; border: 1px solid #efefef; border-bottom-color: #ccc; background: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;}
 .collapse-content > ul, .collapse-content > ol, .collapse-content > table {margin: 1em 0;}
 .collapse-content > .external-links:first-of-type {margin-top: 1em;}
 .collapse-content > .external-links:last-of-type {margin-bottom: 1em;}
