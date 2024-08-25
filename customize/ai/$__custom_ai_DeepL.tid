@@ -1,7 +1,7 @@
 caption: DeepL (A)<<has-history "D">>
 created: 20240724195946616
 creator: yuzijie
-modified: 20240808091403453
+modified: 20240825200505913
 modifier: yuzijie
 order: D
 tags: customized
@@ -133,7 +133,6 @@ type: text/vnd.tiddlywiki
 <$details summary=<<summary>>>
 <$button set=<<ai-request>> setTo={{{ [all[current]getindex[content]] }}}><$action-setfield $tiddler=<<ai-request>> language=""/>Set to Text</$button>
 <$button message="tm-copy-to-clipboard" param={{{ [all[current]getindex[content]] }}}>Copy to Clipboard</$button>
-<$button><$action-deletetiddler $tiddler=<<currentTiddler>>/>Delete This</$button>
 <div class="history"><$transclude $tiddler={{!!title}} $index="content" $mode="block" $type="text/plain"/></div>
 </$details>
 </$set>

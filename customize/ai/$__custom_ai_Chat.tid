@@ -1,7 +1,7 @@
 caption: Chat (A)<<has-history "A">>
 created: 20240707102007118
 creator: yuzijie
-modified: 20240809070311354
+modified: 20240825200424119
 modifier: yuzijie
 order: A
 tags: customized
@@ -113,7 +113,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix<ai-history>!sort[created]]">
 <$set name="summary" filter="[all[current]get[caption]] [all[current]getindex[role]] [all[current]getindex[content]] +[join[ - ]]" select="0">
 <$details summary=<<summary>>>
-<$button set=<<ai-request>> setTo={{{ [all[current]getindex[content]] }}}><$action-setfield $tiddler=<<ai-request>> type={{{ [all[current]getindex[type]] }}}/>Set to Instructions</$button>
 <$button set=<<ai-response>> setTo={{{ [all[current]getindex[content]] }}}><$action-setfield $tiddler=<<ai-response>> type={{{ [all[current]getindex[type]] }}}/>Set to Results</$button>
 <$button><$action-deletetiddler $tiddler=<<currentTiddler>>/>Delete This</$button>
 <div class="history"><$transclude $tiddler={{!!title}} $index="content" $mode="block" $type="text/plain"/></div>
