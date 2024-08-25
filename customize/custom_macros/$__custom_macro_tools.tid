@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240824135809341
+modified: 20240825211404995
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -202,10 +202,10 @@ Not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transc
 <$button message="tm-close-tiddler">OPEN<$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
 <$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button>
-<$button message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><<open-in-sidebar close:"no">>SIDEBAR</$button>
+<$button class="hide-mobile" message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><<open-in-sidebar close:"no">>SIDEBAR</$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]">
 <$list filter="[<mTitle>!has[_canonical_uri]!is[image]]">
-<$button message="tm-close-tiddler"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/editor-modal" mTitle=<<mTitle>>/>QuickEDIT</$button>
+<$button class="hide-mobile" message="tm-close-tiddler"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/editor-modal" mTitle=<<mTitle>>/>QuickEDIT</$button>
 </$list>
 <$button message="tm-close-tiddler">EDIT
 <$action-deletetiddler $tiddler="$:/state/modal/history"/>
