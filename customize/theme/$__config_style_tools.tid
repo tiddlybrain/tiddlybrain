@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240825222008918
+modified: 20240827141629833
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -12,7 +12,9 @@ type: text/vnd.tiddlywiki
 .fullwidth {width: 100%;}
 .underline {border: none; border-bottom: 1px solid #ccc;}
 .description {color: #aaa;}
-.nowrap {white-space: nowrap; overflow: auto;}
+.nowrap {white-space: nowrap !important; overflow: auto;}
+.font-red {color: red;}
+.font-bold {font-weight: bold;}
 
 /* For Dropdown */
 .record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 4px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}

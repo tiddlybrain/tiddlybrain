@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: Inbox
-modified: 20240810075006298
+modified: 20240827141824740
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -32,6 +32,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<draft>!has[draft.of]]" emptyMessage="""<$transclude $variable="editor-title" style=<<edit-table-style>>/><$transclude $variable="editor-display" style=<<edit-table-style>>/>""">
 <$list filter="[<draft>!match[$:/Draft]]" variable="NONE"><$transclude $variable="editor-title" style=<<edit-table-style>>/></$list>
 <$set name="edit-area-class" filter="[[$:/temp/Draft]!has[draft]]" value="edit-area tc-edit-texteditor" emptyValue="edit-area tc-edit-texteditor red">
+<$set name="edit-area-class" filter="[[$:/state/editor/wrap-line]get[text]match[nowrap]]" value={{{ [<edit-area-class>addsuffix[ nowrap]] }}} emptyValue=<<edit-area-class>>>
 <$list filter="[all[current]!has[_canonical_uri]!is[image]!match[Editor]]" variable="NONE"><div class="edit-area-container">
 <div class="editor-edit"><$edit-text tag="textarea" autoHeight="no" class=<<edit-area-class>>>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
@@ -60,9 +61,12 @@ type: text/vnd.tiddlywiki
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$transclude $variable=format-date date={{!!date}}/>"/>""">Date</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' rheader:'ID' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix="<<more key:'" suffix="'>>"/>""">More</$button>
+<$reveal type="match" state="$:/state/editor/wrap-line" text="nowrap"><$button set="$:/state/editor/wrap-line" setTo="wrap">Wrap</$button></$reveal>
+<$reveal type="nomatch" state="$:/state/editor/wrap-line" text="nowrap"><$button set="$:/state/editor/wrap-line" setTo="nowrap">NoWrap</$button></$reveal>
 </$edit-text></div>
 <$reveal type="match" state="$:/state/editor-display" text="show" tag="div"><$transclude $variable="editor-display" style=<<edit-table-style>>/></$reveal>
 </div></$list>
+</$set>
 </$set>
 <$list filter="[<draft>!match[$:/Draft]]" variable="NONE"><table style=<<edit-table-style>>><tbody>
 <$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] note date path url dir interval finish fold order kw question shortcap" variable="fieldName"><tr>
