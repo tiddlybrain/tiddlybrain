@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20240827125510668
+modified: 20240828083826234
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -80,6 +80,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-tiddler-frame {padding: 14px;}
 .tc-sidebar-header {margin-top: 30px;}
 .tc-site-subtitle, .hide-mobile {display: none;}
+.tc-unfold-banner {margin-left: -15px; bottom: -1px;}
 }
 
 /* Sidebar */
@@ -95,6 +96,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-page-controls {position: absolute; top: 10px; right: 0;}
 .tc-site-subtitle {margin-top: 3em;}
 .hide-narrow {display: none;}
+.tc-unfold-banner {position: absolute; width: calc(100% + 2px);}
 }
 
 @media (max-width: 1399px) {
