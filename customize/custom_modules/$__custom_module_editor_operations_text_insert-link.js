@@ -22,6 +22,8 @@ exports["insert-link"] = function(event,operation) {
 		if(tiddler) {
 			let title = event.paramObject.title, caption = operation.selection || tiddler.fields.caption;
 			operation.replacement = `<<l "${title}" "${caption}">>`;
+		} else {
+			operation.replacement = operation.selection;
 		}
 	}
 	operation.cutStart = operation.selStart;
