@@ -18,10 +18,11 @@ exports["insert-link"] = function(event,operation) {
 	if(editTiddlerType === "application/x-tiddler-dictionary") {
 		operation.replacement = event.paramObject.title;
 	} else {
-		let tiddler = this.wiki.getTiddler(event.paramObject.title),
-			title = event.paramObject.title,
-			caption = operation.selection || tiddler.fields.caption;
-		operation.replacement = `<<l "${title}" "${caption}">>`;
+		let tiddler = this.wiki.getTiddler(event.paramObject.title);
+		if(tiddler) {
+			let title = event.paramObject.title, caption = operation.selection || tiddler.fields.caption;
+			operation.replacement = `<<l "${title}" "${caption}">>`;
+		}
 	}
 	operation.cutStart = operation.selStart;
 	operation.cutEnd = operation.selEnd;
