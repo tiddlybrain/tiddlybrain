@@ -1,6 +1,6 @@
 created: 20180925155320737
 creator: Thomas Elmiger
-modified: 20200219093956600
+modified: 20240106124522075
 modifier: Thomas Elmiger
 tags: $:/tags/Stylesheet
 title: $:/plugins/telmiger/details/colours.css
@@ -9,17 +9,18 @@ type: text/vnd.tiddlywiki
 /* details and summary colours */
 
 details {
-   background-color: <<colour tiddler-info-tab-background>>;
-   color: <<colour foreground>>;
+   background-color: <<colour sidebar-tab-background-selected>>;
+   color: <<colour sidebar-tab-foreground-selected>>;
 }
 
 details summary {
-   background-color: <<colour dropdown-tab-background>>;
+   background-color: <<colour sidebar-tab-background>>;
+   color: <<colour sidebar-tab-foreground>>;
 }
 
 details.notification summary {
     background-color: <<colour notification-background>>;
-    /* TW leaves color undefined/uses foreground */
+   color: <<colour notification-foreground>>;
 }
 
 details.warning summary {

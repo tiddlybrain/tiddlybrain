@@ -1,0 +1,19 @@
+created: 20240101144054993
+creator: Thomas Elmiger
+modified: 20240106124706542
+modifier: Thomas Elmiger
+tags: 
+title: $:/plugins/telmiger/details/history
+type: text/vnd.tiddlywiki
+
+''Change Log''
+
+* ''0.8.0'' -- 2024-01-01 -- Colours update
+** more robust color definitions (use sidebar tab colours)
+
+* ''0.7.7'' -- 2024-01-01 -- Icon update
+** History added
+* ''0.7.6'' -- 2022-04-27 -- (?)
+* ''0.7.5'' -- 2020-06-04 -- (?)
+* ''0.7.4'' -- 2018-09-25 -- (?)
+
