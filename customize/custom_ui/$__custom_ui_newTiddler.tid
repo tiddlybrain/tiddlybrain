@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240829153054308
+modified: 20240830144310369
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -54,8 +54,7 @@ type: text/vnd.tiddlywiki
 <$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} content={{$:/temp/newTiddler!!description}}>
 <p style="margin-top:-5px;">
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}" popup="close" scroll="yes"/>New</$button>
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" content=<<content>> text="Name: {{!!caption}}
-Description: {{!!description}}" edit="yes"/>Data</$button>
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" content=<<content>> text="Name: {{!!caption}}" edit="yes"/>Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> edit="yes"/>Record</$button>
 <$button tooltip="Markdown"><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> content=<<content>> type="text/x-markdown" edit="yes"/>Md</$button>
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" tooltip="Edit Configurations">{{$:/core/images/edit-button}}</$button>
