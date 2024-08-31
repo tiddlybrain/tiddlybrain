@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240830103645093
+modified: 20240831144303882
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -313,6 +313,8 @@ Not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transc
 \define multi-selector(filter:"[belongs.to{!!belongs.to}note{!!note}getindex<key>splitregexp[\s*;;\s*]unique[]]", caption:"{{!!caption}}", class)
 \whitespace trim
 <$list filter="[<current>has[celltpl]]" emptyMessage="multi-selector">
+<$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{ [<value>splitregexp[\s*;;\s*]!is[blank]] [<actionTiddler>] +[join[;;]] }}}/>" tag="div">
+<div class="tc-droppable-placeholder" style="display:block;">
 <$list filter="[<value>!is[blank]]"><$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
 <span style="border-bottom:1px solid #78bb4e;margin-right:5px;">
 <$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$transclude $variable="l" title=<<datum>> class="normal-weight" note="no"/></$list>
@@ -332,6 +334,8 @@ Not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transc
 </$select>
 </$reveal>
 </$list>
+</div>
+</$droppable>
 </$list>
 \end
 
