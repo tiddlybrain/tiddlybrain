@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240830111022788
+modified: 20240901103510064
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -128,6 +128,7 @@ button.search-tool {display: inline-block; width: auto; padding: 0px 6px;}
 .external-links {text-align: center; padding: 3px 1em; line-height: 25px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .external-links button svg {vertical-align: middle; transform: translateY(-1px);}
 .single-line-record .record-drop-down .external-links button.tc-tiddlylink {width: auto;}
+.collapse-content > .external-links {font-size: small;}
 
 /* For Template Task */
 table.task-info {width: 100%; font-size: small; text-align: center; table-layout: fixed; line-height: 22px;}
