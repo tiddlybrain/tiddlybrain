@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20240824134121891
+modified: 20240903124728875
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -100,12 +100,14 @@ type: text/vnd.tiddlywiki
 \end
 
 \define date-update-actions()
+<$list filter="[all[current]!tag[Task]]">
 <$let today=<<now YYYY0MM0DD>> last-day={{{ [all[current]get[date]] }}}>
 <$list filter="[<last-day>!is[blank]!match<today>]" variable="NONE">
 <$action-setfield $field="last-date" $value=<<last-day>> $timestamp="no"/>
 </$list>
 <$action-setfield $field="date" $value=<<today>> $timestamp="no"/>
 </$let>
+</$list>
 \end
 
 # ''复制 Tiddler 的 action''
