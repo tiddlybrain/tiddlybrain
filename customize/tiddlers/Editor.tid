@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: Inbox
-modified: 20240904083115803
+modified: 20240905122209278
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -55,6 +55,8 @@ type: text/vnd.tiddlywiki
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">A</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">W</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">S</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "t:YYYY0MM0DD">>/>""">t</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "d:YYYY0MM0DD">>/>""">d</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY0MM0DD>>/>""">Today</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Name: {{!!caption}}"/>""">Name</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Description: {{!!description}}"/>""">Description</$button>
