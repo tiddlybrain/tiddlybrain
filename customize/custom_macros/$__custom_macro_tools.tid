@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240901085924052
+modified: 20240905124124143
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -338,7 +338,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define status-selector()
-<$list filter="[all[current]!has[status]]" emptyMessage="""@@color:red;[{{!!status}}]@@""">
+<$list filter="[all[current]!has[status]]" emptyMessage="""<$list filter="[all[current]get[celltpl]has[status-options]]" variable="NONE" emptyMessage='@@color:red;[{{!!status}}]@@'><$button set="!!status" setTo="" class="tc-btn-invisible" style="color:red;">[{{!!status}}]</$button></$list>""">
 <$list filter="[all[current]get[status-options]] :else[all[current]get[celltpl]get[status-options]]" variable="options">
 <span class="status-options">[<$select field="status" actions=<<date-update-actions>>><option disabled>Status</option>
 <$list filter="[<options>enlist-input[]]"><option>{{!!title}}</option></$list>
