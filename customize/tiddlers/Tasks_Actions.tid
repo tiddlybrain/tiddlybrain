@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240822150644595
+modified: 20240904143655276
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -55,6 +55,8 @@ TBC: <<tbc>>
 <<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]">>
 </div>
 </$droppable></$list>
+
+<h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">Todo</h2>
 
 <$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:24px;">
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
