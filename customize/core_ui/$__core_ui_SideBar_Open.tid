@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20240702163049070
+modified: 20240905135906045
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -60,8 +60,9 @@ $button$
 <$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
 </$button> &middot;
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
-<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/></$button> &middot;</$list>
+<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
+</$button> &middot;</$list>
 <$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
 </span>"""/>
 </div>
@@ -78,8 +79,9 @@ $button$
 </$button>
 <span class="sidebar-open-tools">
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
-<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/></$button> &middot;</$list>
+<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
+</$button> &middot;</$list>
 <$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
 </span>
 </div></$list>
