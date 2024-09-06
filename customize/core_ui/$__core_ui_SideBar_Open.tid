@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20240905135906045
+modified: 20240906135621839
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -41,9 +41,14 @@ $button$
 \end
 
 <div class="tc-sidebar-tab-open">
-@@font-variant:all-small-caps;color:gray;
-<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">sort by note</$checkbox>
-@@
+<div style="font-variant:all-small-caps;color:gray;">
+<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox tc-popup-keep">sort by note</$checkbox>
+<$button class="tc-btn-invisible" style="font-variant:all-small-caps;width:auto;padding:0 3px;float:right;color:gray;">index
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
+</$button>
+</div>
 <$set name="sidebar-list" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="[list<tv-story-list>sortan[note]]" emptyValue="[list<tv-story-list>]">
 <$set name="tv-allow-drag-and-drop" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="no" emptyValue="yes">
 <$list filter=<<sidebar-list>> history=<<tv-history-list>> storyview="pop">
