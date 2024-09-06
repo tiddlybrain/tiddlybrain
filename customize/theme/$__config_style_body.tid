@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20240828083826234
+modified: 20240906083236121
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -119,7 +119,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-sidebar-tab-open-item .tc-btn-text {margin: 0; color: #999;}
 .tc-sidebar-tab-open-item a.tc-tiddlylink-external {display: inline; padding: 0;}
 .tc-sidebar-tab-open-item .sidebar-tab-open-btn {display: inline-block; width: auto;}
-@media (max-width: 950px) {.tc-sidebar-tab-open-item .sidebar-tab-open-btn {max-width: 34vw; overflow: hidden; text-overflow: ellipsis; padding-right: 4px;}}
+@media (max-width: 950px) {.tc-sidebar-tab-open-item .sidebar-tab-open-btn {max-width: 46vw; overflow: hidden; text-overflow: ellipsis; padding-right: 4px;}}
 
 .sidebar-open-tools {color: #bbb; float: right; margin-right: 3px;}
 .sidebar-open-tools .sidebar-tab-open-btn {padding: 0; font-variant: all-small-caps; color: #bbb;}
