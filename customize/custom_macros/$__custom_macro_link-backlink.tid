@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20240907102400043
+modified: 20240908184717012
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -48,10 +48,10 @@ type: text/vnd.tiddlywiki
 \define bl-pattern() (\[\[|\||;;|"|'|:|\s|^)$(search)$(\]\]|;;|"|'|:|\s|\n|$)
 \define bl-limit-state(uid) $:/state/bl-limit/$(current)$/$uid$
 
-\define bl-item(note, date, caption, description, parent, mode)
-<div class="tc-menu-list-item" style="white-space:nowrap;overflow:hidden;">
+\define bl-item(note, date, caption, description, parent, mode, tag)
+<$tag$ class="tc-menu-list-item" style="white-space:nowrap;">
 <$transclude $variable="l" title={{!!title}} text=<<__caption__>> class="bl-title l" links="yes" description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status="yes" mode=<<__mode__>>/>
-</div>
+</$tag$>
 \end
 
 \define bl-filter(item-filter, item-filter-2, uid:"default", sort:"sortan[caption]", cfilter, rheader, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents, mode, parent-tag:"div", tag:"div")
@@ -59,7 +59,7 @@ type: text/vnd.tiddlywiki
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/]addsuffix<__uid__>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
-<$parent-tag$ class="bl-container"><$list filter="[<__group-by-parents__>!match[yes]]" emptyMessage="""<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" title="$uid$" has-filter="$has-filter$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
+<section class="bl-container"><$list filter="[<__group-by-parents__>!match[yes]]" emptyMessage="""<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" title="$uid$" has-filter="$has-filter$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
 <$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$transclude $variable="sort-by-filter" item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$" sort="$sort$" cfilter="$cfilter$" rheader="$rheader$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$" checkbox="$checkbox$" sort-order="$sort-order$"/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
@@ -67,9 +67,11 @@ type: text/vnd.tiddlywiki
 filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
-<$tag$ class={{{ [<single-column>match[yes]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
-<$list filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$limit<limit>]">>><<bl-item "$note$" "$date$" """$caption$""" "$description$" "$parent$" "$mode$">></$list>
-</$tag$>
+<$parent-tag$ class={{{ [<single-column>match[yes]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
+<$list filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$limit<limit>]">>>
+<$transclude $variable="bl-item" note=<<__note__>> date=<<__date__>> caption=<<__caption__>> description=<<__description__>> parent=<<__parent__>> mode=<<__mode__>> tag=<<__tag__>>/>
+</$list>
+</$parent-tag$>
 </$list>
 <$list filter="[<bl-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item" style="margin:-3px 0 3px 0;">
 <$button class="tc-btn-invisible fold-text">-- <<limit>> of <<bl-qty>> shown --
@@ -80,7 +82,7 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
 </div></$list>
 </$set>
 </$list>
-</$list></$parent-tag$>
+</$list></section>
 </$vars>
 </$set>
 </$set>
