@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240907095519644
+modified: 20240907202726608
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>{{$:/core/images/close-button}}</$button>
 </$list>
 </$keyboard></p>
-<p style="margin-top:-7px;">
+<p style="margin-top:-4px;">
 <$select tiddler="$:/temp/newTiddler" field="note" default="" class="new-tiddler-input-box" tabindex="-1" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
 <option value="">Choose a Role</option>
 <$list filter='[all[tiddlers]note[Role]belongs.to[$:/custom/ui/ControlPanel/Roles]]'><option value={{!!title}}>{{!!title}}</option></$list>

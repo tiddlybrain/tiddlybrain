@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240824134359997
+modified: 20240908094757377
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 \define editor-tab() <$transclude $variable="tabs" tabsList="[tag[Editor]!has[draft.of]]" default="Editor/Delete Tiddlers" state="$:/state/tab/editor"/>
 \define editor-caption-status() $:/state/editor/caption/$(currentTiddler)$
 \define editor-caption-inputActions() <$list filter="[<editor-caption-status>get[list]enlist-input[]]"><$action-setfield $tiddler=<<currentTiddler>> caption=<<actionValue>>/></$list>
-\define editor-backlink-button() <$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;"><<key>><$action-sendmessage $message="tm-copy-to-clipboard" $param='<<bl-note param:"$(key)$" date:"no">>'/></$button>
+\define editor-backlink-button() <$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;"><<key>><$action-sendmessage $message="tm-copy-to-clipboard" $param='<<bl-note param:"$(key)$" date:"no" parent-tag:ul tag:li>>'/></$button>
 
 \define editor-title(style)
 <table style="$style$"><tbody>
