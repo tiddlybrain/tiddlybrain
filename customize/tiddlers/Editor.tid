@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: Inbox
-modified: 20240907092910104
+modified: 20240909132455865
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -63,7 +63,6 @@ Description: {{!!description}}
 "/>""">Name&Desc</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$transclude $variable=format-date date={{!!date}}/>"/>""">Date</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' rheader:'ID' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix="<<more key:'" suffix="'>>"/>""">More</$button>
 <$reveal type="match" state="$:/state/editor/wrap-line" text="nowrap"><$button set="$:/state/editor/wrap-line" setTo="wrap">Wrap</$button></$reveal>
 <$reveal type="nomatch" state="$:/state/editor/wrap-line" text="nowrap"><$button set="$:/state/editor/wrap-line" setTo="nowrap">NoWrap</$button></$reveal>
 </$edit-text></div>

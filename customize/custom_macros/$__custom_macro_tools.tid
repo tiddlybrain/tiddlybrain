@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240905124124143
+modified: 20240909132432748
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -358,10 +358,13 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define more(key, limit:20)
-<$vars key={{{ [[$key$]!is[blank]else<key>!is[blank]else{!!note}] }}}>
-<$details summary=<<key>>><$transclude $variable="snippet" key=<<key>> limit=<<__limit__>>/></$details>
-</$vars>
+\define list-of(note)
+\whitespace trim
+<$set name="role" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
+<$list filter="[all[current]getAllTiddlers:note<role>]" variable="item"><span style="border-bottom:1px solid #78bb4e;margin-right:5px;">
+<$list filter="[<item>is[tiddler]]" emptyMessage=<<item>>><$transclude $variable="l" title=<<item>> class="normal-weight" note="no"/></$list>
+</span></$list>
+</$set>
 \end
 
 # ''将树形结构进行展开''
@@ -468,7 +471,6 @@ type: text/vnd.tiddlywiki
 #> `<<status-selector>>`
 # ''展示当前 Tiddler 的所有非 Branch tiddler 的 Tags''
 #> `<<tag-list>>`
-# ''details + snippet combo''
-#> `<<more
-  key:"Snippet 的 key"
-  limit:"Snippet 的 limit">>`
+# ''列出当前 Tiddler 内属于指定角色的所有链接''
+#> `<<list-of
+  note:"Tiddler 的角色">>`
