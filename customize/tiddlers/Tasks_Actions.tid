@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240904143655276
+modified: 20240909093206264
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -36,9 +36,8 @@ TBC: <<tbc>>
 </$list>
 </$droppable></h2>
 
-<$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
-<div class="tc-droppable-placeholder" style="display:block;">
-<table style="width:100%;background:white;table-layout:fixed;"><tbody>
+<$droppable actions=<<droppable-task-list-actions>> tag="div">
+<$list filter="[<journal-title>is[tiddler]]"><table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr><$set name="currTask" value=<<task>>>
 <td style="vertical-align:baseline;white-space:nowrap;overflow:hidden;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:7px 0;">
@@ -51,14 +50,8 @@ TBC: <<tbc>>
 </div></$set>
 </$list></td>
 </$set></tr></$list>
-</tbody></table>
-<<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]">>
-</div>
-</$droppable></$list>
-
-<h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">Todo</h2>
-
-<$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:24px;">
+</tbody></table></$list>
+<ol style="color:#333;line-height:24px;">
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
@@ -96,4 +89,11 @@ TBC: <<tbc>>
 <li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
 </$list></$vars>
 <$list filter="[tag[Task]status[Blocked]]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
-</ol></$droppable>
+</ol>
+</$droppable>
+
+<hr>
+
+<$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
+<div class="tc-droppable-placeholder" style="display:block;"><<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]">></div>
+</$droppable></$list>
