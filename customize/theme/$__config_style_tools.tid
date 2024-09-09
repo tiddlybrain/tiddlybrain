@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240906071617707
+modified: 20240909054733391
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -256,7 +256,7 @@ table.data-table .data-splitter {text-align: center; font-weight: bold; backgrou
 /* For Macro: source-compare */
 .source-compare select {width: 40%;}
 
-/* For Macro: l */
+/* For Macro: link-backlink */
 .l > embed {height: 600px;}
 .l > details:last-child {margin-bottom: 0;}
 .l > code {color: #5778d8;}
@@ -272,6 +272,7 @@ button.l {line-height: inherit;}
 .l > strong.collapse-title > svg {width: 10pt; height: 10pt; fill: #999; transform: translateY(2px);}
 .snippet-content .l > button.collapse-title > svg {font-size: smaller;}
 .tc-tiddler-frame .tc-tiddler-body button.l {overflow-x: clip; max-width: 100%;}
+.bl-container div.tc-menu-list-item {overflow: hidden;}
 
 /* For Macro: links */
 a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
