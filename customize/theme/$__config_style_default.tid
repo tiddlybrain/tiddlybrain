@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20240906071845224
+modified: 20240910144759527
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -68,11 +68,8 @@ label {display: inline-block;}
 
 button svg, button img, label svg, label img {vertical-align: bottom;}
 
-table {border-collapse: separate; border: none;}
+table {border-color: #ccc;}
 table td {overflow-wrap: anywhere;}
 table th, table td {border-color: #ccc; padding: 1px 7px;}
-table > tbody > tr > th:last-child, table > tbody > tr > td:last-child, table > thead > tr > td:last-child, table > tfoot > tr > td:last-child {border-right: 1px solid #ccc;}
-table > tbody > tr:last-child > th, table > tbody > tr:last-child > td, table > tfoot > tr:last-child > td {border-bottom: 1px solid #ccc;}
-table > tfoot > tr:first-child > td {border-top: none;}
 table tr.oddRow > td {background-color: #fff;}
 table tr.evenRow > td {background-color: #fafafa;}

@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240909054733391
+modified: 20240910144540390
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -224,7 +224,7 @@ table.data-table .macro-table {margin: 0; font-size: small; line-height: 26px;}
 td span a.tc-tiddlylink-resolves {font-weight: 400;}
 
 /* For Macro: data-table */
-table.data-table {background: white; line-height: 30px; table-layout: fixed;}
+table.data-table {background: white; line-height: 30px; table-layout: fixed; border: none;}
 table.data-table > tr > th, table.data-table > tr > td {border: none; padding: 4px 10px;}
 table.data-table > tr:last-child > th, table.data-table > tr:last-child > td {border-bottom: 1px solid #ccc;}
 table.data-table > tr > th {line-height: 23px; padding-top: 0; padding-bottom: 2px; white-space: nowrap; text-align: left; color: white; background-color: #ccc; font-variant: all-small-caps; font-weight: 500; text-shadow: 0 1px 1px rgb(150 150 150 / 50%);}
