@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20240909054123789
+modified: 20240912224155673
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]untagged[]]"> ⚠️ </$list>
 </$set></span></$list>
 <$list filter="[<__mode__>match[tr]]" variable="link-mode"><div class=<<__class__>> style="width:fit-content;$style$">
-<$transclude $variable="l" links="yes" title=<<currentTiddler>> description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status=<<__status__>> tag=<<__tag__>>/>
+<$transclude $variable="l" links="yes" title=<<currentTiddler>> text=<<__text__>> description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status=<<__status__>> tag=<<__tag__>>/>
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage="<<data-table>>"><$transclude mode="block"/></$list>
 </$list>
