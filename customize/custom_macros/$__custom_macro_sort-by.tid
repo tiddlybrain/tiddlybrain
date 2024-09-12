@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20240906091403086
+modified: 20240912100313536
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -124,6 +124,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 <$tiddler tiddler=<<sbb>>>
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$tiddler>
 </$button>
 </div>
