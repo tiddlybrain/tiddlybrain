@@ -1,6 +1,6 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20240903095737949
+modified: 20240912102900081
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
@@ -25,6 +25,9 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">&middot; @@color:#44ad44;{{!!note}}@@</$list>
+<$button class="tc-btn-invisible button-hover" style="fill:#5778d8;">{{$:/core/images/edit-button}}
+<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+</$button>
 </$button></span>
 </$list></div>
 <$reveal type="match" state="$:/temp/index-tree" text="" default="" tag="div" class="tc-table-of-contents" style="margin-top:20px;">
