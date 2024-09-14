@@ -5,6 +5,7 @@
         "tiddlywiki/filesystem",
         "tiddlywiki/highlight",
         "tiddlywiki/menubar",
+        "tiddlywiki/katex",
         "tiddlywiki/codemirror"
     ],
     "themes": [
