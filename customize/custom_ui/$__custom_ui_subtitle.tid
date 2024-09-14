@@ -1,14 +1,14 @@
 created: 20221218162626472
 creator: yuzijie
 list-after: $:/core/ui/ViewTemplate/subtitle/modifier
-modified: 20240901090417867
+modified: 20240914102106312
 modifier: yuzijie
 tags: $:/tags/ViewTemplate/Subtitle customized
 title: $:/custom/ui/subtitle
 type: text/vnd.tiddlywiki
 
 <$list filter="[all[current]has[date]!tag[Task]]" emptyMessage="-">-
-<$list filter="[all[current]days:date[]]" emptyMessage="""<$button class="tc-btn-invisible" style="font-variant:inherit;font-variant-numeric:inherit;" tooltip={{!!date}}>
+<$list filter="[all[current]days:date[]]" emptyMessage="""<$button class="tc-btn-invisible" style="font-variant:inherit;font-variant-numeric:inherit;color:#c0c0c0;" tooltip={{!!date}}>
 not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transclude $variable=format-date date={{!!date}} template='YYYY'/>)
 <<date-update-actions>><$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
 </$button>""">reviewed today</$list>
