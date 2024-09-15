@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240914102737214
+modified: 20240915194015094
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -330,7 +330,7 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$"/>Done
 </$button>
 <$select tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$" field="list" multiple class="$class$">
-<$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
+<$list filter=<<__filter__>>><$list filter="[all[current]is[tiddler]]" emptyMessage="<option><<currentTiddler>></option>"><option value=<<currentTiddler>>>$caption$</option></$list></$list>
 </$select>
 </$reveal>
 </$list>
