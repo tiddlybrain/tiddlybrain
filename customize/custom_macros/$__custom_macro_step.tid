@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20240913092901450
+modified: 20240916125958410
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -45,8 +45,8 @@ type: text/vnd.tiddlywiki
 \end
 
 \define step-date(t,d,color)
-<$reveal default="$d$" type="match" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:$color$;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
-<$reveal default="$d$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:$color$;">(<<format-date "$d$" "YYYY-0MM-0DD">>)</$button></$reveal>
+<$reveal default="$d$" type="match" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:$color$;"><<format-date "$t$" "YYYY-0MM-0DD -">></$button></$reveal>
+<$reveal default="$d$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:$color$;"><<format-date "$d$" "YYYY-0MM-0DD -">></$button></$reveal>
 \end
 
 \define step-open(step,comments,t)
@@ -87,7 +87,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define a(step,comments,t,d)
-<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:green;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
+<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:green;"><<format-date "$t$" "YYYY-0MM-0DD -">></$button></$reveal>
 <$vars currTask={{!!title}} currStep="$step$">
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage="<<step-done '$step$' '$comments$' '$t$' '$d$'>>" variable="NONE">
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="""''<<linkIfExists "$step$" "$comments$">>''
@@ -100,11 +100,11 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list>
 </$vars>
-<$reveal default="$d$" type="gteq" text="$t$"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:green;">(<<format-date "$d$" "YYYY-0MM-0DD">>)</$button></$reveal>
+<$reveal default="$d$" type="gteq" text="$t$"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:green;"><<format-date "$d$" "- YYYY-0MM-0DD">></$button></$reveal>
 \end
 
 \define c(step,comments,t,d)
-<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#aaa;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
+<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#aaa;"><<format-date "$t$" "YYYY-0MM-0DD -">></$button></$reveal>
 <span style="color:#aaa;"><<linkIfExists "$step$" "$comments$">></span>
 <$vars currTask={{!!title}} currStep="$step$">
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:red;&#10005;@@
@@ -112,7 +112,7 @@ type: text/vnd.tiddlywiki
 </$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 </$vars>
-<$reveal default="$d$" type="gteq" text="$t$"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:#aaa;">(<<format-date "$d$" "YYYY-0MM-0DD">>)</$button></$reveal>
+<$reveal default="$d$" type="gteq" text="$t$"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$d$" style="color:#aaa;"><<format-date "$d$" "- YYYY-0MM-0DD">></$button></$reveal>
 \end
 
 \define waiting-undone(step,comments,t,symbol,days,color:"#009dd9",type:"waiting")
@@ -143,7 +143,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define w(step,comments,t,d)
-<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#009dd9;">(<<format-date "$t$" "YYYY-0MM-0DD">>)</$button></$reveal>
+<$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#009dd9;"><<format-date "$t$" "YYYY-0MM-0DD -">></$button></$reveal>
 <$vars currTask={{!!title}} currStep="$step$">
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage=<<waiting-done "$step$" "$comments$" "$t$" "$d$">> variable="NONE">
 <$transclude $variable="waiting-undone" step="$step$" comments="$comments$" t="$t$" symbol="&#10148;" days="""<$transclude $variable="days-passed" start="$t$"/>"""/>
