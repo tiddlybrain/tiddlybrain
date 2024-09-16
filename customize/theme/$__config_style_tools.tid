@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20240915125242912
+modified: 20240916085512040
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -170,7 +170,7 @@ blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #
 /* For Macro: sort-by-belongs */
 button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 .data-table .sort-by-belongs .macro-table {margin-top: 10px;}
-.sort-by-belongs .belongs-display, .sort-by-belongs .macro-table {margin: 1em 0;}
+.belongs-display, .sort-by-belongs .macro-table {margin: 1em 0;}
 .parent-title {margin-top: 0.5em; white-space: nowrap;}
 
 /* For Macro: sort-by-tags */

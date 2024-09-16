@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20240907092759349
+modified: 20240916085437649
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -62,7 +62,7 @@ type: text/vnd.tiddlywiki
 \define snippet-limit-state() $:/state/snippet-limit/$(current)$/$(key)$
 \define snippet-accordion-state() $:/state/snippet-accordion/$(current)$/$(key)$/$(currentTiddler)$
 
-\define snippet-content(date, sort, limit, caption, cfilter, rheader, no-drop, has-filter, checkbox, sort-order)
+\define snippet-content(date, sort, limit, caption, cfilter, rheader, no-drop, has-filter, checkbox, sort-order, parent-tag:"div", tag:"div")
 <$list filter="[<snippet-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$]">>>
 <$list filter="[prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]text[open]limit[1]]" emptyMessage="<$list filter='[belongs.to<current>tag[Snippet]note<key>]'><$action-setfield $tiddler=<<snippet-accordion-state>> text='open'/></$list>"><$action-deletetiddler $filter="[prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]]"/></$list>
@@ -71,14 +71,14 @@ type: text/vnd.tiddlywiki
 filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
-<div class={{{ [<single-column>match[yes]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
+<$parent-tag$ class={{{ [<single-column>match[yes]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
 <$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]" variable="NONE">
 <$button class="tc-btn-invisible" style="color:red;">Drop Tiddlers Here
 <$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} belongs.to=<<currentTiddler>> note=<<key>> tags="Snippet" caption={{!!caption}} type="text/vnd.tiddlywiki" date=<<now 'YYYY0MM0DD'>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 </$button>
-</$list>"""><$set name="class" filter="[<snippet-accordion-state>is[missing]]" value="snippet" emptyValue="snippet col-span"><div class=<<class>>>
+</$list>"""><$set name="class" filter="[<snippet-accordion-state>is[missing]]" value="snippet" emptyValue="snippet col-span"><$tag$ class=<<class>>>
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="fill:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[fill:]addsuffix[;]] }}}>
 <$button actions=<<snippet-accordion-actions>> class="tc-btn-invisible links accordion" style=<<style>>>
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}">{{$:/core/images/right-arrow}}</$list>
@@ -105,8 +105,8 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
 </$list>
 </$list>
 </$set></$reveal>
-</div></$set></$list>
-</div>
+</$tag$></$set></$list>
+</$parent-tag$>
 </$list>
 <$list filter="[<snippet-qty>compare:number:gt<__limit__>]" variable="NONE"><div class="tc-menu-list-item">
 <$button class="tc-btn-invisible fold-text">-- <<limit>> of <<snippet-qty>> shown --
@@ -117,7 +117,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
 </div></$list>
 \end
 
-\define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, rheader, actions, tags, no-drop, cat-prefix, cat-filter, tag-caption, has-filter, celltpl, checkbox, sort-order)
+\define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, rheader, actions, tags, no-drop, cat-prefix, cat-filter, tag-caption, has-filter, celltpl, checkbox, sort-order, parent-tag, tag)
 <$vars key={{{ [[$key$]!is[blank]else<key>!is[blank]else{!!note}] }}} current=<<currentTiddler>>>
 <$droppable actions=<<snippet-drop-actions """$actions$""" """$tags$""" "$celltpl$">> tag="div" class="snippet-container">
 <div class="tc-droppable-placeholder" style="display:block;">
@@ -147,7 +147,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
 <$set name="snippet-qty" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$count[]]">> select="0">
 <$set name="limit" filter="[<snippet-limit-state>get[text]]" emptyValue=<<__limit__>> select="0">
-<$transclude $variable="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> no-drop=<<__no-drop__>> has-filter=<<__has-filter__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> no-drop=<<__no-drop__>> has-filter=<<__has-filter__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>>/>
 </$set>
 </$set>
 </$vars>
@@ -180,7 +180,9 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
   no-drop:"没有 snippet 情况下, 不显示 Drop Tiddlers Here"
   has-filter:"是否显示 filter"
   checkbox:"table 模式下是否显示复选框"
-  sort-order:"Table 按照列排序的顺序">>`
+  sort-order:"Table 按照列排序的顺序"
+  parent-tag:"snippet 元素的父级 HTML tag"
+  tag:"snippet 元素的 HTML tag">>`
 # ''创建一个新的 Snippet 或查看已创建的 Snippet''
 #> `<<snippet
   key:"index key"
@@ -199,4 +201,6 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
   has-filter:"是否显示 filter"
   celltpl:"设置 Snippet 的模板"
   checkbox:"table 模式下是否显示复选框"
-  sort-order:"Table 按照列排序的顺序">>`
+  sort-order:"Table 按照列排序的顺序"
+  parent-tag:"snippet 元素的父级 HTML tag"
+  tag:"snippet 元素的 HTML tag">>`
