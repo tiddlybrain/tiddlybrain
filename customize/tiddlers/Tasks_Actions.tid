@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240913121934915
+modified: 20240917153445458
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -71,7 +71,7 @@ TBC: <<tbc>>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button>""">
 <$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#1bb51b;" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#b58e1b;" message="tm-copy-to-clipboard" param={{!!caption}}>
 {{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
 </$button>
 <$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
