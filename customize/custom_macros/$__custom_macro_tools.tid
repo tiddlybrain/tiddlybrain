@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240915194015094
+modified: 20240921003959034
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -81,14 +81,14 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> <<__more-text__>>
 </$tiddler>
 </$button>
-<p class="collapse-content" style=<<__style__>>><$tiddler tiddler="$title$">
+<$tiddler tiddler="$title$"><$set name="sty" filter="[all[current]is[image]]" value="width:fit-content;$style$" emptyValue="$style$"><p class="collapse-content" style=<<sty>>>
 <$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links belongs-to:"$belongs-to$">></$list>
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
 </$list>
-</$tiddler></p>
+</p></$set></$tiddler>
 </$reveal>
 </$set>
 \end
