@@ -1,4 +1,4 @@
-modified: 20240725082939001
+modified: 20240924210000006
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -7,11 +7,14 @@ type: text/vnd.tiddlywiki
 <div class="tc-menu-list-item">
 <$button actions="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" tag="a" class="tc-tiddlylink tc-tiddlylink-resolves">
 <$list filter="[<link-dropdown>!match[yes]]"><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/></$list>
-<<icons>> <$view field="title"/>
 <$let tv-wikilinks="no">
-<$list filter="[all[current]get[belongs.to]]">@@color:#c24949;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+<$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+<<icons>> <$view field="title"/>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]">{{!!caption}}</$list>
+<$let search={{{ [<searchTiddler>get[text]] }}}>
+<$list filter="[all[current]search:caption,keywords,text,description:literal<search>]">@@color:#ff5b5b;^^Exact Match^^@@</$list>
+</$let>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 </$let>
 <div class="sidebar-item-hover">
