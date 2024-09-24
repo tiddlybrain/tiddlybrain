@@ -1,7 +1,7 @@
 caption: Chat (A)<<has-history "A">>
 created: 20240707102007118
 creator: yuzijie
-modified: 20240825200424119
+modified: 20240924194751419
 modifier: yuzijie
 order: A
 tags: customized
@@ -53,6 +53,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<ai-request>get[text]!is[blank]]" variable="content"><$button style="font-size:small;">Set to Searchbar
 <$action-setfield $tiddler="$:/temp/menubarsearch" text=<<content>>/>
 <$action-setfield $tiddler="$:/temp/menubarsearch/input" text=<<content>>/>
+<$action-setfield $tiddler="$:/temp/menubarsearch/refresh" text="yes"/>
 </$button></$list>
 <$list filter="[<ai-request>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list>
 </h3>
@@ -104,12 +105,18 @@ type: text/vnd.tiddlywiki
 </$list>
 </$reveal>
 
-<section class="ai"><h3>Results <$list filter="[<ai-response>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list></h3>
+<section class="ai">
+<h3>Results
+<$list filter="[<ai-response>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list>
+<$list filter="[<ai-response>has[text]]"><$button style="font-size:small;"><$action-deletetiddler $filter="[<ai-response>]"/>Clear Results</$button></$list>
+</h3>
 <$edit-text tiddler=<<ai-response>> tag="textarea" class="edit-area tc-edit-texteditor"/>
 </section>
 
 <$list filter="[prefix<ai-history>limit[1]]"><section class="ai">
-<h3>History <$button style="font-size:small;"><$action-deletetiddler $filter="[prefix<ai-history>] [<ai-response>]"/>Clear History</$button></h3>
+<h3>History
+<$button style="font-size:small;"><$action-deletetiddler $filter="[prefix<ai-history>] [<ai-response>]"/>Clear History</$button>
+</h3>
 <$list filter="[prefix<ai-history>!sort[created]]">
 <$set name="summary" filter="[all[current]get[caption]] [all[current]getindex[role]] [all[current]getindex[content]] +[join[ - ]]" select="0">
 <$details summary=<<summary>>>
