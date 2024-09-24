@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240921003959034
+modified: 20240924225111553
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -192,9 +192,6 @@ type: text/vnd.tiddlywiki
 <$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="-[<currentTiddler>]"/><$action-sendmessage $message="tm-close-tiddler"/>
 {{$:/core/images/left-arrow}}<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$button>
-</span></$list>
-<$list filter="[<mTitle>has[date]!tag[Task]]"><span style="margin-right:3px;font-size:small;color:#999;">
-<$list filter="[all[current]days:date[]]" emptyMessage="Not reviewed for <$transclude $variable=days-passed start={{!!date}}/> (<$transclude $variable=format-date date={{!!date}} template='YYYY'/>)">Reviewed today</$list>
 </span></$list>
 <div style="display:inline-block;vertical-align:middle;">
 <$list filter="[<mTitle>!is[missing]]">
