@@ -57,7 +57,7 @@ exports["embed"] = function(event,operation) {
 		tiddlerParams
 	));
 	var caption = operation.selection || tiddlerParams.caption;
-	operation.replacement = `<<l "${embedTitle}" "${caption}" mode:tr>>`;
+	operation.replacement = `<<l "${embedTitle}" "${caption}" mode:tr style:"text-align:center;">>`;
 	operation.cutStart = operation.selStart;
 	operation.cutEnd = operation.selEnd;
 	operation.newSelStart = operation.selStart;
