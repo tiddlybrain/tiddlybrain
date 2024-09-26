@@ -1,7 +1,7 @@
-caption: Chat (A)<<has-history "A">>
+caption: AI Chat<<has-history "A">>
 created: 20240707102007118
 creator: yuzijie
-modified: 20240924194751419
+modified: 20240926153419353
 modifier: yuzijie
 order: A
 tags: customized
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 </$let>
 \end completion-get-json
 
-<$let api={{$:/config/AIApiKey!!url}} api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [<ai-instructions>get[text]get[text]jsonstringify[]] }}} userInput={{{ [<ai-request>get[text]jsonstringify[]] }}} default={{{ [[$:/config/defaultInstructions]get[text]jsonstringify[]] }}}>
+<$let api={{$:/config/AIApiKey!!url}} api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [prefix<ai-instructions content>sort[title]get[text]join[ ]jsonstringify[]] }}} userInput={{{ [<ai-request>get[text]jsonstringify[]] }}} default={{{ [[$:/config/defaultInstructions]get[text]jsonstringify[]] }}}>
 <$set name="chatHistory" filter="[<ai-history-state>get[text]match[yes]]" value={{{ [prefix<ai-history>get[text]] +[join[,]addsuffix[,]] }}} emptyValue="">
 <$action-setfield $tiddler=<<ai-response>> text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url=<<api>> method="POST"
@@ -64,20 +64,31 @@ type: text/vnd.tiddlywiki
 <td><$select tiddler=<<ai-model>>>
 <$list filter="[list[$:/config/AIApiKey]]"><option>{{!!title}}</option></$list>
 </$select></td>
-<td><$select tiddler=<<ai-instructions>> default="">
-<option value="">No Instructions</option>
+<td>
+<$select tiddler=<<ai-instructions>> default="" actions="<$action-deletetiddler $filter='[prefix<ai-instructions content_>]'/><$action-setfield $tiddler=<<ai-instructions content>> text={{{ [<ai-instructions>get[text]getindex[Default]] }}}/>">
+<option value="">Without Instructions</option>
 <$list filter="[all[tiddlers]note[Instruction]belongs.to[$:/custom/ui/ControlPanel/CustomInstructions]]"><option value={{!!title}}>{{!!caption}}</option></$list>
 <$list filter="[all[tiddlers]note[Instruction]get[belongs.to]!match[$:/custom/ui/ControlPanel/CustomInstructions]unique[]]"><optgroup label={{!!caption}}>
 <$list filter="[all[tiddlers]note[Instruction]belongs.to{!!title}sortan[caption]]"><option value={{!!title}}>{{!!caption}}</option></$list>
 </optgroup></$list>
 </$select>
-<$set name="title" filter="[<ai-instructions>get[text]is[tiddler]]" value={{{ [<ai-instructions>get[text]] }}} emptyValue="$:/custom/ui/ControlPanel/CustomInstructions">
+<$set name="title" filter="[<ai-instructions>has[text]]" value={{{ [<ai-instructions>get[text]] }}} emptyValue="$:/custom/ui/ControlPanel/CustomInstructions">
 <$button tag="span" style="cursor:pointer;">⚙️<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<title>>/></$button>
 </$set>
 </td>
 </tr>
-<$list filter="[<ai-instructions>get[text]is[tiddler]]"><tr><td colspan="2">
-<pre style="margin:5px 0;background:white;color:#666;"><$transclude $field="text" $output="text/plain"/></pre>
+<$list filter="[<ai-instructions content>get[text]]" variable="instructions"><tr><td colspan="2">
+<pre style="margin:3px 0;background:white;color:#666;"><<instructions>></pre>
+<$list filter="[<ai-instructions>get[text]indexes[]] -Default" variable="key"><div style="margin:3px 0;border:1px solid #ccc;padding:5px 8px;border-radius:3px;">''<<key>>:''
+<$list filter="[<ai-instructions>get[text]getindex<key>search:title:literal[;;]]" variable="options">
+<$select tiddler=<<ai-instructions content_$(key)$>> default=""><option value="">No Value</option>
+<$list filter="[<options>splitregexp[\s*;;\s*]]" variable="option"><option><<option>></option></$list>
+</$select>
+</$list>
+<$list filter="[<ai-instructions>get[text]getindex<key>!search:title:literal[;;]]" variable="option">
+<$checkbox tiddler=<<ai-instructions content_$(key)$>> field="text" checked=<<option>> unchecked="" default=""><<option>></$checkbox>
+</$list>
+</div></$list>
 </td></tr></$list>
 </tbody></table>
 </div>
