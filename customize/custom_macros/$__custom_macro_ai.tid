@@ -1,6 +1,6 @@
 created: 20240707103210561
 creator: yuzijie
-modified: 20240926153010203
+modified: 20240927091659423
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/ai
@@ -34,7 +34,11 @@ type: text/vnd.tiddlywiki
 </$action-createtiddler>
 \end
 
-\procedure has-history(id) <$list filter="[prefix<ai-history>limit[1]]">*</$list>
+\procedure chat-title(id, default:"AI Chat")
+\whitespace trim
+<$list filter="[<ai-instructions>get[text]get[shortcap]]" emptyMessage=<<default>>><<currentTiddler>></$list>
+<$list filter="[prefix<ai-history>limit[1]]">*</$list>
+\end
 
 # ''将 response 内容直接以文字的形式插入编辑框''
 #> `<<insert-as-text
@@ -47,3 +51,7 @@ type: text/vnd.tiddlywiki
 #> `<<save-as-tiddler
   request:"API 的请求所保存的 Tiddler"
   response:"API 的回复所保存的 Tiddler">>`
+# ''根据 Prompt 改变 AI Chat 的 Tab 的标题文字''
+#> `<<chat-title
+  id:"聊天窗口的 ID"
+  default:"默认文字">>`

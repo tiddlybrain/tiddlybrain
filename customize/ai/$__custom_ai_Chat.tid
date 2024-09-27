@@ -1,7 +1,7 @@
-caption: AI Chat<<has-history "A">>
+caption: <<chat-title A>>
 created: 20240707102007118
 creator: yuzijie
-modified: 20240926153419353
+modified: 20240927091002058
 modifier: yuzijie
 order: A
 tags: customized
@@ -59,14 +59,14 @@ type: text/vnd.tiddlywiki
 </h3>
 <$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin:0;"><tbody>
-<tr><th>Choose Model</th><th>Custom Instructions</th></tr>
+<tr><th>Choose Model</th><th>Custom Prompts</th></tr>
 <tr style="text-align:center;">
 <td><$select tiddler=<<ai-model>>>
 <$list filter="[list[$:/config/AIApiKey]]"><option>{{!!title}}</option></$list>
 </$select></td>
 <td>
 <$select tiddler=<<ai-instructions>> default="" actions="<$action-deletetiddler $filter='[prefix<ai-instructions content_>]'/><$action-setfield $tiddler=<<ai-instructions content>> text={{{ [<ai-instructions>get[text]getindex[Default]] }}}/>">
-<option value="">Without Instructions</option>
+<option value="">No Custom Prompts</option>
 <$list filter="[all[tiddlers]note[Instruction]belongs.to[$:/custom/ui/ControlPanel/CustomInstructions]]"><option value={{!!title}}>{{!!caption}}</option></$list>
 <$list filter="[all[tiddlers]note[Instruction]get[belongs.to]!match[$:/custom/ui/ControlPanel/CustomInstructions]unique[]]"><optgroup label={{!!caption}}>
 <$list filter="[all[tiddlers]note[Instruction]belongs.to{!!title}sortan[caption]]"><option value={{!!title}}>{{!!caption}}</option></$list>
@@ -81,7 +81,7 @@ type: text/vnd.tiddlywiki
 <pre style="margin:3px 0;background:white;color:#666;"><<instructions>></pre>
 <$list filter="[<ai-instructions>get[text]indexes[]] -Default" variable="key"><div style="margin:3px 0;border:1px solid #ccc;padding:5px 8px;border-radius:3px;">''<<key>>:''
 <$list filter="[<ai-instructions>get[text]getindex<key>search:title:literal[;;]]" variable="options">
-<$select tiddler=<<ai-instructions content_$(key)$>> default=""><option value="">No Value</option>
+<$select tiddler=<<ai-instructions content_$(key)$>> default=""><option value="">--</option>
 <$list filter="[<options>splitregexp[\s*;;\s*]]" variable="option"><option><<option>></option></$list>
 </$select>
 </$list>
