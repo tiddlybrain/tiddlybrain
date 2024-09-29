@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20240917153445458
+modified: 20240927122935758
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -61,6 +61,7 @@ TBC: <<tbc>>
 </$list></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>]"><li style="white-space:nowrap;"><<task-list-doing>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li style="white-space:nowrap;"><<task-list-open>></li></$list>
+<hr style="margin-left:-1em;">
 <$list filter="[prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li style="white-space:nowrap;">
 <$list filter="[all[current]text[doing]]" emptyMessage="""
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#c67b48;" message="tm-copy-to-clipboard" param={{!!caption}}>
