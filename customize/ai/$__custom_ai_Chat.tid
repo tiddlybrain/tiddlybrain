@@ -1,9 +1,8 @@
-caption: <<chat-title A>>
+caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20240927091002058
+modified: 20240929120743499
 modifier: yuzijie
-order: A
 tags: customized
 title: $:/custom/ai/Chat
 type: text/vnd.tiddlywiki
@@ -139,5 +138,3 @@ type: text/vnd.tiddlywiki
 </$list>
 </section></$list>
 \end ai-gui
-
-<div style="min-height:600px;"><<ai-gui "A">></div>

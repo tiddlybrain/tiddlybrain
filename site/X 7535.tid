@@ -1,0 +1,14 @@
+caption: <<chat-title Z DeepL>>
+created: 20240929121054361
+creator: yuzijie
+keywords: DeepL
+modified: 20240929121137567
+modifier: yuzijie
+order: Z
+tags: AI
+title: X 7535
+type: text/vnd.tiddlywiki
+
+\import [[$:/custom/ai/DeepL]]
+
+<div style="min-height:600px;"><<ai-gui "Z">></div>

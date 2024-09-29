@@ -1,0 +1,14 @@
+caption: <<chat-title A "Chat (1)">>
+created: 20240929120759134
+creator: yuzijie
+keywords: AI Chat
+modified: 20240929121334267
+modifier: yuzijie
+order: A
+tags: AI
+title: X 7534
+type: text/vnd.tiddlywiki
+
+\import [[$:/custom/ai/Chat]]
+
+<div style="min-height:600px;"><<ai-gui "A">></div>
