@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20240924225111553
+modified: 20241001160624439
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -195,25 +195,27 @@ type: text/vnd.tiddlywiki
 </span></$list>
 <div style="display:inline-block;vertical-align:middle;">
 <$list filter="[<mTitle>!is[missing]]">
-<$button message="tm-close-tiddler">OPEN<$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
-<$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-</$button>
-<$button class="hide-mobile" message="tm-close-tiddler"><$action-deletetiddler $tiddler="$:/state/modal/history"/><<open-in-sidebar close:"no">>SIDEBAR</$button>
-<$list filter="[{$:/status/IsReadOnly}!match[yes]]">
-<$list filter="[<mTitle>!has[_canonical_uri]!is[image]]">
-<$button class="hide-mobile" message="tm-close-tiddler"><$action-sendmessage $message="tm-modal" $param="$:/custom/template/editor-modal" mTitle=<<mTitle>>/>QuickEDIT</$button>
-</$list>
-<$button message="tm-close-tiddler">EDIT
-<$action-deletetiddler $tiddler="$:/state/modal/history"/>
-<$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>
+<$button message="tm-close-tiddler">OPEN
+<$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
+<$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[draft.title<mTitle>] +[putfirst[]]"/>
-<$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$button>
+<$button message="tm-close-tiddler">SIDEBAR
+<<open-in-sidebar close:"no">>
+<$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
+</$button>
+<$list filter="[{$:/status/IsReadOnly}!match[yes]]">
+<$list filter="[<mTitle>!has[_canonical_uri]!is[image]]"><$button>
+<$list filter="[[$:/state/modal/editor]!is[tiddler]]">EDIT<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/></$list>
+<$list filter="[[$:/state/modal/editor]is[tiddler]]">''BACK''<$action-deletetiddler $tiddler="$:/state/modal/editor"/></$list>
+</$button></$list>
 <$list filter="[<mTitle>code-body[yes]]"><<modal-edit-comment>></$list>
 </$list>
 </$list>
-<$button><$transclude $variable="tiddler-close" tiddler=<<mTitle>>/>CLOSE</$button>
+<$button>CLOSE
+<$transclude $variable="tiddler-close" tiddler=<<mTitle>>/>
+<$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
+</$button>
 </div>
 </$let>
 \end
@@ -221,9 +223,9 @@ type: text/vnd.tiddlywiki
 \define modal-edit-comment()
 <$list filter="[belongs.to<mTitle>note[Comment]]" emptyMessage="""<$button message="tm-close-tiddler">Create Comment
 <$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} tags="Snippet" note="Comment" type="text/plain" belongs.to="$(mTitle)$"/>
-<$action-deletetiddler $tiddler="$:/state/modal/history"/></$button>""">
+<$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/></$button>""">
 <$button message="tm-close-tiddler">Edit Comment
-<$action-deletetiddler $tiddler="$:/state/modal/history"/><$action-sendmessage $message="tm-edit-tiddler" $param={{!!title}}/>
+<$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/><$action-sendmessage $message="tm-edit-tiddler" $param={{!!title}}/>
 </$button>
 </$list>
 \end
@@ -275,7 +277,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define tiddler-close(tiddler)
-<$list filter="[<modal>!match[yes]]" emptyMessage="<$action-sendmessage $message='tm-close-tiddler'/><$action-deletetiddler $tiddler='$:/state/modal/history'/>">
+<$list filter="[<modal>!match[yes]]" emptyMessage="<$action-sendmessage $message='tm-close-tiddler'/><$action-deletetiddler $filter='[[$:/state/modal/history]] [[$:/state/modal/editor]]'/>">
 <$list filter="[{$:/HistoryList!!current-tiddler}match<__tiddler__>]">
 <$list filter="[<__tiddler__>previous[$:/StoryList]] :else[<__tiddler__>next[$:/StoryList]]">
 <$action-navigate $to=<<currentTiddler>>/><$action-deletetiddler $filter="[<currentTiddler>addprefix[$:/state/folded/]is[tiddler]]"/>
