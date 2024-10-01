@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: Inbox
-modified: 20240909132455865
+modified: 20241001104545365
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -31,45 +31,10 @@ type: text/vnd.tiddlywiki
 <$set name="edit-table-style" filter="[[$:/temp/Draft]has[draft]]" value="width:100%;margin:0;color:brown;" emptyValue="width:100%;margin:0;">
 <$list filter="[<draft>!has[draft.of]]" emptyMessage="""<$transclude $variable="editor-title" style=<<edit-table-style>>/><$transclude $variable="editor-display" style=<<edit-table-style>>/>""">
 <$list filter="[<draft>!match[$:/Draft]]" variable="NONE"><$transclude $variable="editor-title" style=<<edit-table-style>>/></$list>
-<$set name="edit-area-class" filter="[[$:/temp/Draft]!has[draft]]" value="edit-area tc-edit-texteditor" emptyValue="edit-area tc-edit-texteditor red">
-<$set name="edit-area-class" filter="[[$:/state/editor/wrap-line]get[text]match[nowrap]]" value={{{ [<edit-area-class>addsuffix[ nowrap]] }}} emptyValue=<<edit-area-class>>>
 <$list filter="[all[current]!has[_canonical_uri]!is[image]!match[Editor]]" variable="NONE"><div class="edit-area-container">
-<div class="editor-edit"><$edit-text tag="textarea" autoHeight="no" class=<<edit-area-class>>>
-<$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/core/ui/EditorToolbar/excise"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/embedding"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/tips"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/code"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/snippet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/core/ui/EditorToolbar/bold"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/core/ui/EditorToolbar/mono-line"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/core/ui/EditorToolbar/linkify"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/core/ui/EditorToolbar/list-bullet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/core/ui/EditorToolbar/list-number"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/details"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/div"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$tiddler tiddler="$:/custom/ui/EditorToolbar/today"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<br>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">D</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">A</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">W</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">S</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "t:YYYY0MM0DD">>/>""">t</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "d:YYYY0MM0DD">>/>""">d</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY0MM0DD>>/>""">Today</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Name: {{!!caption}}
-Description: {{!!description}}
-"/>""">Name&Desc</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$transclude $variable=format-date date={{!!date}}/>"/>""">Date</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' rheader:'ID' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
-<$reveal type="match" state="$:/state/editor/wrap-line" text="nowrap"><$button set="$:/state/editor/wrap-line" setTo="wrap">Wrap</$button></$reveal>
-<$reveal type="nomatch" state="$:/state/editor/wrap-line" text="nowrap"><$button set="$:/state/editor/wrap-line" setTo="nowrap">NoWrap</$button></$reveal>
-</$edit-text></div>
+<div class="editor-edit"><<tiddler-editor>></div>
 <$reveal type="match" state="$:/state/editor-display" text="show" tag="div"><$transclude $variable="editor-display" style=<<edit-table-style>>/></$reveal>
 </div></$list>
-</$set>
-</$set>
 <$list filter="[<draft>!match[$:/Draft]]" variable="NONE"><table style=<<edit-table-style>>><tbody>
 <$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status]] date path url dir interval fold order kw question shortcap" variable="fieldName"><tr>
 <td style="width:102px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>

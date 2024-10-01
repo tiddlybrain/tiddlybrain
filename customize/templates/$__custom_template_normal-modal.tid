@@ -1,19 +1,20 @@
 created: 20210516172453585
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20240714173050471
+modified: 20241001154431480
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
 title: $:/custom/template/normal-modal
 type: text/vnd.tiddlywiki
 
-<$let modal="yes">
-<$tiddler tiddler=<<mTitle>>><div style="margin-top:15px;"><<external-links>></div></$tiddler>
+<$list filter="[[$:/state/modal/editor]!is[tiddler]]" emptyMessage={{$:/custom/template/editor-modal}}>
+<$let modal="yes"><$tiddler tiddler=<<mTitle>>>
+<div style="margin-top:15px;"><<external-links>></div>
 <div class="tc-tiddler-body"><$list filter="[<mTitle>is[tiddler]]" emptyMessage=<<mTitle>>>
-<$list filter="[<mTitle>tag[Task]]"><<task-top>></$list>
-<$list filter="[<mTitle>!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude tiddler=<<mTitle>> mode="block"/></$list>
-<$list filter="[<mTitle>tag[Tasks/Journal]]" variable="journal-title"><$set name="curDate" filter="[<journal-title>split[-]join[]]" select="0">
+<$list filter="[all[current]tag[Task]]"><<task-top>></$list>
+<$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
+<$list filter="[all[current]tag[Tasks/Journal]]" variable="journal-title"><$set name="curDate" filter="[<journal-title>split[-]join[]]" select="0">
 <$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><div><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
@@ -22,7 +23,6 @@ Done: <<currentTiddler>><$transclude $variable="add-to-cell-action" title=<<jour
 </$set>
 </$list></$list>
 </$set></$list>
-<$tiddler tiddler=<<mTitle>>>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
@@ -33,6 +33,6 @@ Done: <<currentTiddler>><$transclude $variable="add-to-cell-action" title=<<jour
 </$set>
 </$list>
 <<relationships name:"Related Lists" filter:"[all[current]tags[]type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]" mode:"list">>
-</$tiddler>
 </$list></div>
-</$let>
+</$tiddler></$let>
+</$list>

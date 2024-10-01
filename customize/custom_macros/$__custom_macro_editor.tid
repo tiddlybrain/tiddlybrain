@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20240910162237751
+modified: 20241001124407149
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -135,8 +135,50 @@ type: text/vnd.tiddlywiki
 </div></$tiddler>
 \end
 
+\define tiddler-editor()
+<$set name="wrap-state" value={{$:/config/codemirror/lineWrapping}}>
+<$edit autoHeight="no" cancelPopups="yes" class="tc-edit-texteditor"><$set name="targetTiddler" value=<<currentTiddler>>>
+<div style="margin-bottom:3px;">
+<$tiddler tiddler="$:/core/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/excise"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/embedding"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/tips"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/code"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/snippet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/bold"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/mono-line"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/linkify"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/list-bullet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/list-number"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/details"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/div"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/today"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+</div>
+<div style="margin-bottom:3px;">
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">D</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">A</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">W</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">S</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "t:YYYY0MM0DD">>/>""">t</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "d:YYYY0MM0DD">>/>""">d</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY0MM0DD>>/>""">Today</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Name: {{!!caption}}
+Description: {{!!description}}
+"/>""">Name&Desc</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$transclude $variable=format-date date={{!!date}}/>"/>""">Date</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' rheader:'ID' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
+<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="false"><$button set="$:/config/codemirror/lineWrapping" setTo="true">Wrap</$button></$reveal>
+<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="true"><$button set="$:/config/codemirror/lineWrapping" setTo="false">NoWrap</$button></$reveal>
+</div>
+</$set></$edit>
+</$set>
+\end
+
 # ''用来编辑 Tiddler 的 Title, Caption, Note 等''
 #> `<<editor-title
   style:"table 样式">>`
 # ''用来显示 Tiddler 编辑好的效果''
 #> `<<editor-display>>`
+# ''用来编辑 Tiddler 的编辑器, 用在 Sidebar 和 Modal 中''
+#> `<<tiddler-editor>>`
