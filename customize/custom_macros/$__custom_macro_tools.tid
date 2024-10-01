@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241001160624439
+modified: 20241001201409138
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -212,10 +212,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<mTitle>code-body[yes]]"><<modal-edit-comment>></$list>
 </$list>
 </$list>
-<$button>CLOSE
-<$transclude $variable="tiddler-close" tiddler=<<mTitle>>/>
-<$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
-</$button>
+<$button>CLOSE<$transclude $variable="tiddler-close" tiddler=<<mTitle>>/></$button>
 </div>
 </$let>
 \end
