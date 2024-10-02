@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20241001124407149
+modified: 20241002042114740
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -38,11 +38,13 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" state="$:/state/editor/caption" text="textarea">
 <$edit-text field="caption" class="edit-area tc-edit-texteditor" inputActions=<<editor-caption-inputActions>>/>
 </$reveal>
-<$list filter="[all[current]has[caption]]"><$list filter="[caption{!!caption}!note{!!note}!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]" variable="tag">
-<div style="white-space:nowrap;overflow:auto;width:290px;font-size:small;">
-<$checkbox tiddler=<<editor-caption-status>> listField="list" checked=<<tag>>> <$transclude $variable="l" title=<<tag>> text="{{!!title}} - {{!!caption}}"/></$checkbox><br>
-</div>
-</$list></$list>
+<$list filter="[all[current]has[caption]]"><$set name="tags" filter="[caption{!!caption}!note{!!note}!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]">
+<$list filter="[<tags>enlist-input[]limit[1]]" variable="NONE"><$details summary={{{ [<tags>enlist-input[]count[]addprefix[Twins ]] }}}>
+<$list filter="[<tags>enlist-input[]]" variable="tag"><div style="white-space:nowrap;overflow:auto;width:290px;font-size:small;">
+<$checkbox tiddler=<<editor-caption-status>> listField="list" checked=<<tag>>> <$transclude $variable="l" title=<<tag>> text="{{!!title}} - {{!!caption}}"/></$checkbox>
+</div></$list>
+</$details></$list>
+</$set></$list>
 </td>
 <td style="width:10px;"><$list filter="[all[current]has:field[caption]]">
 <$button class="tc-btn-invisible" tooltip="Set to Searchbar">{{$:/core/images/advanced-search-button}}
