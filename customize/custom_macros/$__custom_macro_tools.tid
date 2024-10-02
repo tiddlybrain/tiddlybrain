@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241002074600722
+modified: 20241002091010738
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -442,7 +442,7 @@ type: text/vnd.tiddlywiki
   name:"关系名称"
   filter:"关系对应的 Filter"
   direct-open:"是否直接打开"
-  mode:"sort-by-belongs 的模式, list">>`
+  mode:"sort-by-belongs 的 mode 选项">>`
 # ''Outdated 过期通知''
 #> `<<verification-notice>>`
 # ''用在 Journal 里面, 用于管理当天的 TBC 列表''
