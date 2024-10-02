@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20240915233816660
+modified: 20241002043338354
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -72,7 +72,7 @@ type: text/vnd.tiddlywiki
 </$button>
 </$reveal>
 <div class="categories-display"><$button class="tc-btn-invisible">
-<$list filter="[<belongs-display-state>is[tiddler]]" emptyMessage="""&#9782;<$action-setfield $tiddler=<<belongs-display-state>> text="list"/>""" variable="NONE">&#9776;<$action-deletetiddler $filter="[<belongs-display-state>]"/></$list>
+<$list filter="[<belongs-display-state>is[tiddler]]" emptyMessage="""&#9783;<$action-setfield $tiddler=<<belongs-display-state>> text="collapse"/>""" variable="NONE">&#9776;<$action-deletetiddler $filter="[<belongs-display-state>]"/></$list>
 </$button></div>
 <div class="categories-update">
 <$transclude $variable="update-tags-button" cat-prefix=<<__cat-prefix__>> filter=<<__filter__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>>/>
@@ -90,16 +90,16 @@ type: text/vnd.tiddlywiki
 \define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default", mode, checkbox, sort-order, has-filter:"yes")
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
-<$list filter="[<belongs-display-state>!is[tiddler]]" variable=NONE><$button style="font-size:smaller;color:unset;" class="tc-btn-invisible">
+<$list filter="[<belongs-display-state>get[text]match[collapse]]" variable=NONE><$button style="font-size:smaller;color:unset;" class="tc-btn-invisible">
 <$list filter="[prefix[$:/state/sort/$(currentTiddler)$/$title$/]text[open]limit[1]]" emptyMessage="<$list filter=<<filter-build '$filter$ +[!has[draft.of]]' '+[get[belongs.to]each:value[]]'>> variable='sbb'><$action-setfield $tiddler=<<belongs-sort-state '$title$'>> text='open'/></$list>"><$action-deletetiddler $filter="[prefix[$:/state/sort/$(currentTiddler)$/$title$/]]"/></$list>
 (<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]each:value[]]">>/>)
 </$button></$list>
-<$list filter="[<belongs-display-state>get[text]match[list]]" variable=NONE>
+<$list filter="[<belongs-display-state>!is[tiddler]]" variable=NONE>
 <$button style="font-size:smaller;color:unset;" class="tc-btn-invisible" dragFilter=<<filter-build "$filter$ +[!has[draft.of]]">>>(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]">>/>)</$button>
 </$list>
 filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">> cfilter=<<__cfilter__>>/>
 </div></$list>
-<$list filter="[<__mode__>!match[list]]" emptyMessage="""<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
+<$list filter="[<__mode__>match[collapse]]" emptyMessage="""<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]limit[1]]">> variable="NONE">
 <div style="margin-top:0.5em;">
 <$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
