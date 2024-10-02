@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20240910101715140
+modified: 20241002123013069
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -68,7 +68,7 @@ $button$
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 </$button> &middot;</$list>
-<$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
+<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button>
 </span>"""/>
 </div>
 </$list>
@@ -87,7 +87,7 @@ $button$
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 </$button> &middot;</$list>
-<$button class="tc-btn-invisible sidebar-tab-open-btn" message="tm-copy-to-clipboard" param=<<currentTiddler>>>copy</$button>
+<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button>
 </span>
 </div></$list>
 <$button class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">
