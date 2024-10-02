@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20240326010407937
+modified: 20241002050223752
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
 \define table-check-all(rfilter) <$action-listops $tiddler=<<table-row-selection>> $field="list" $filter=<<__rfilter__>>/>
 \define table-uncheck-all() <$action-deletetiddler $tiddler=<<table-row-selection>>/>
 
-\define table(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"default", sort-order:"sortan[]", first-col:"yes", checkbox)
+\define table(cfilter, rfilter:"[tag<currentTiddler>]", title:"default", sort-order:"sortan[]", first-col:"yes", checkbox)
 <$set name="current" value=<<currentTiddler>>><$set name="is-data-table" value="no">
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
 <tr class="heading">
@@ -46,41 +46,33 @@ type: text/vnd.tiddlywiki
 <$checkbox filter={{{ [list<table-row-selection>count[]] }}} checked={{{ $rfilter$ +[!has[draft.of]count[]] }}} unchecked="0" checkactions=<<table-check-all "$rfilter$ +[!has[draft.of]]">> uncheckactions=<<table-uncheck-all>> indeterminate="yes"/>
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<table-row-selection>> tooltip="Copy tiddler title contains all selections">{{$:/core/images/copy-clipboard}}</$button>
 </$list></$reveal>
-<$reveal default="$rheader$" type="nomatch" text="" tag="th">$rheader$</$reveal>
 <$list filter="$cfilter$" variable="property"><th>
 <$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property-title>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property-title>> &#8645;</$button></$list>
 </th></$list>
 </tr>
-<$set name="cfilter" filter="$cfilter$"><$set name="rheader" value="$rheader$">
-<$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>""">
+<$set name="cfilter" filter="$cfilter$">
+<$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$first-col$" "$checkbox$">></$list>""">
 <$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
 <$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]!is[blank]$sort-order$]" variable="index-value">
-<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$first-col$" "$checkbox$">></$list>
 </$list>
-<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$rheader$" "$first-col$" "$checkbox$">></$list>
+<$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$first-col$" "$checkbox$">></$list>
 </$tiddler></$set>
 </$list>
-</$set></$set>
+</$set>
 </$set></tbody></table></div>
 </$set></$set>
 \end
 
-\define table-row(rheader, first-col, checkbox)
+\define table-row(first-col, checkbox)
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="background:#fff3c9;" emptyValue={{{ [all[current]get[color]addprefix[background:]addsuffix[;]] }}}><tr style=<<style>>>
-<$set name="fdate" filter="[{!!date}format:date[YYYY-0MM-0DD]]">
 <$reveal default="$first-col$" type="match" text="yes" tag="td"><div class="table-links">
 <$list filter="[<__checkbox__>match[yes]]" variable="NONE"><$checkbox tiddler=<<table-row-selection>> listField="list" checked=<<currentTiddler>>/></$list>
-<$reveal default="$rheader$" type="match" text="">
-<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible links" style="fill:#5778d8;">{{$:/core/images/open-window}}</$button>
-</$reveal>
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">{{!!title}}</$button>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
 <<links>> <<tag-list>>
 </div></$reveal>
-<$reveal default="$rheader$" type="nomatch" text="" tag="td">
-<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip=<<fdate>> class="tc-btn-invisible tc-tiddlylink">{{!!title}}</$button>
-</$reveal>
-</$set>
 <$set name="current" value={{!!title}}><$list filter="$(cfilter)$" variable="key">
 <td><$set name="value" tiddler=<<current>> index=<<key>>><$transclude $variable="cell-value"/></$set></td>
 </$list></$set>
@@ -136,14 +128,14 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
-\define tables(cfilter, rfilter:"[tag<currentTiddler>]", rheader, title:"tables", sort-order, first-col, checkbox)
+\define tables(cfilter, rfilter:"[tag<currentTiddler>]", title:"tables", sort-order, first-col, checkbox)
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <div class="filter-options">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<filter-build "$rfilter$ +[!has[draft.of]]">>>(<$count filter=<<filter-build "$rfilter$ +[!has[draft.of]]">>/>)</$button>
 filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$rfilter$ +[!has[draft.of]]">> cfilter=<<__cfilter__>>/>
 </div>
 <div style="margin-top:1em;">
-<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "$rfilter$ +[!has[draft.of]]">> rheader=<<__rheader__>> title=<<__title__>> sort-order=<<__sort-order__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>>/>
+<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "$rfilter$ +[!has[draft.of]]">> title=<<__title__>> sort-order=<<__sort-order__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>>/>
 </div>
 </$vars>
 \end
@@ -155,14 +147,12 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 #> `<<table
   cfilter:"[[A]] [[B]] [[C]] 输入键值"
   rfilter:"[tag<currentTiddler>] 行标题过滤"
-  rheader:"Name of Row header"
   title:"表格 ID"
   sort-order:"按照列排序的顺序"
   first-col:"是否显示第一列"
   checkbox:"是否显示行复选框">>`
 # ''展示 Table 的行''
 #> `<<table-row
-  rheader:"Name of Row header"
   first-col:"是否显示第一列"
   checkbox:"是否显示行复选框">>`
 # ''使用 table 形式编辑 Data tiddlers 的值''
@@ -187,7 +177,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 #> `<<tables
   cfilter:"[[A]] [[B]] [[C]] 输入键值"
   rfilter:"[tag<currentTiddler>] 行标题过滤"
-  rheader:"Name of Row header"
   title:"表格 ID"
   sort-order:"按照列排序的顺序"
   first-col:"是否显示第一列"

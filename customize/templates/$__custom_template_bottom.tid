@@ -1,7 +1,7 @@
 created: 20181118150240560
 creator: yuzijie
 list-after: $:/core/ui/ViewTemplate/body
-modified: 20240714173059231
+modified: 20241002074408788
 modifier: yuzijie
 tags: $:/tags/ViewTemplate customized
 title: $:/custom/template/bottom
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes" class="tc-tiddler-body">
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
-<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} rheader={{!!rheader}} tag-caption={{!!tag-caption}}/>
+<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}}/>
 </$list>
 <$list filter="[all[current]!search:title:literal[/]]">
 <$set name="mode" filter="[has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]count[]compare:number:lt[4]]" value="list" emptyValue="">

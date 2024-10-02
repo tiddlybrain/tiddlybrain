@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20241002043338354
+modified: 20241002074843538
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -82,12 +82,12 @@ type: text/vnd.tiddlywiki
 
 \define belongs-sort-state(title) $:/state/sort/$(currentTiddler)$/$title$/$(sbb)$
 
-\define belongs-display(filter, cfilter, rheader, title, checkbox, sort-order)
+\define belongs-display(filter, cfilter, title, checkbox, sort-order)
 <$reveal default="$cfilter$" type="match" text="" tag="div" class="belongs-display"><$transclude $variable="record" filter=<<__filter__>>/></$reveal>
-<$reveal default="$cfilter$" type="nomatch" text="" tag="div"><$transclude $variable="table" rfilter=<<__filter__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/></$reveal>
+<$reveal default="$cfilter$" type="nomatch" text="" tag="div"><$transclude $variable="table" rfilter=<<__filter__>> cfilter=<<__cfilter__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/></$reveal>
 \end
 
-\define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, rheader, title:"default", mode, checkbox, sort-order, has-filter:"yes")
+\define sort-by-belongs(filter:"[tag<currentTiddler>]", sort:"sortan[caption]", cfilter, title:"default", mode, checkbox, sort-order, has-filter:"yes")
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 <$list filter="[<belongs-display-state>get[text]match[collapse]]" variable=NONE><$button style="font-size:smaller;color:unset;" class="tc-btn-invisible">
@@ -99,10 +99,10 @@ type: text/vnd.tiddlywiki
 </$list>
 filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$filter$">> cfilter=<<__cfilter__>>/>
 </div></$list>
-<$list filter="[<__mode__>match[collapse]]" emptyMessage="""<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
+<$list filter="[<__mode__>match[collapse]]" emptyMessage="""<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]$sort$]">> cfilter=<<__cfilter__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>""" variable="NONE">
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]limit[1]]">> variable="NONE">
 <div style="margin-top:0.5em;">
-<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">> cfilter=<<__cfilter__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div>
 </$list>
 <$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]each:value[]$sort$]">> variable="sbb">
@@ -130,7 +130,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 </$button>
 </div>
 <$reveal type="match" state=<<belongs-sort-state "$title$">> text="open" tag="div" style="margin-top:0.5em;">
-<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>$sort$]">> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[belongs.to<sbb>$sort$]">> cfilter=<<__cfilter__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </$reveal>
 </$list>
 </$list>
@@ -139,7 +139,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 
 \define sb-sort-state() $:/state/sort/$(currentTiddler)$/$(sb)$
 
-\define sort-by(tags-filter, belongs-filter, sort, cfilter, rheader, checkbox, sort-order)
+\define sort-by(tags-filter, belongs-filter, sort, cfilter, checkbox, sort-order)
 <$list filter=<<__tags-filter__>> variable="sb">
 <$reveal type="nomatch" state=<<sb-sort-state>> text="open" tag="div">
 <$button set=<<sb-sort-state>> setTo="open" dragFilter=<<__belongs-filter__>> class="tc-btn-invisible collapse-title collapse-close links" tooltip=<<sb>>>{{$:/core/images/right-arrow}}
@@ -159,7 +159,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 <span style="color:#aaa;">(<$count filter=<<__belongs-filter__>>/>)</span>
 </$button>
 <div class="sort-by-belongs" style="padding-left:0.8em;margin:1em 0;"><$set name="tab" value=<<sb>>>
-<$transclude $variable="sort-by-belongs" filter=<<__belongs-filter__>> sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> title=<<sb>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="sort-by-belongs" filter=<<__belongs-filter__>> sort=<<__sort__>> cfilter=<<__cfilter__>> title=<<sb>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </$set></div>
 </$reveal>
 </$list>
@@ -167,29 +167,29 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 
 \define filter-tags() [tags[]prefix[$(cat-prefix)$]] -[[$(currentTiddler)$]]
 
-\define sort-by-tags(cat-prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, cat-filter, tag-caption, checkbox, sort-order)
+\define sort-by-tags(cat-prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, cat-filter, tag-caption, checkbox, sort-order)
 <$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>><$vars tagged="[tags[]prefix<cat-prefix>]" tagsearch="$:/temp/tagsearch/$(currentTiddler)$">
 <$droppable actions="<$action-listops $tiddler=<<actionTiddler>> $tags='[<currentTiddler>]'/>" tag="div">
 <$transclude $variable="categories" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[tag<currentTiddler>]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}tagging[]tag<currentTiddler>] [tag<currentTiddler>!filter<tagged>]'/> items"/>
 </$droppable>
-<$transclude $variable="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="sort-by" tags-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 <$list filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div class="sort-by-belongs" style="margin-top:0.6em;">
-<$transclude $variable="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="sort-by-belongs" filter="[tag<currentTiddler>search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div></$list>
 </$vars></$set>
 \end
 
-\define sort-by-filter(item-filter:"all[current]", cat-prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, rheader, cat-filter, tag-caption, checkbox, sort-order)
+\define sort-by-filter(item-filter:"all[current]", cat-prefix, sort:"sortan[caption]", sort-tags:"sortan[title]", cfilter, cat-filter, tag-caption, checkbox, sort-order)
 <$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>><$vars tagged="[tags[]prefix<cat-prefix>]" tagsearch="$:/temp/tagsearch/$(currentTiddler)$">
 <$transclude $variable="categories" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]]" cat-prefix=<<cat-prefix>> filter="[$item-filter$]" cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> search-title="Search <$count filter='[prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}tagging[]$item-filter$] [$item-filter$!filter<tagged>]'/> items"/>
-<$transclude $variable="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="sort-by" tags-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tags[]prefix<cat-prefix>!is[current]search:title{$:/temp/tagsearch/$(currentTiddler)$}$sort-tags$]" belongs-filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}tag<sb>]" sort=<<__sort__>> cfilter=<<__cfilter__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 <$list filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>limit[1]]" variable="NONE"><div class="sort-by-belongs" style="margin-top:0.6em;">
-<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:title,tags,caption,shortcap,keywords,text,note,status,description{$:/temp/search/sort-by/$(currentTiddler)$}!filter<filter-tags>]" sort=<<__sort__>> cfilter=<<__cfilter__>> mode={{$:/state/belongs/display/$(currentTiddler)$/$(key)$}} checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div></$list>
 </$vars></$set>
 \end
 
-\define sort-by-topic(topic, note, cat-prefix, sort, sort-tags, cfilter, rheader, cat-filter, tag-caption, checkbox, sort-order) <$transclude $variable="sort-by-filter" item-filter="all[tiddlers]contains:parents[$topic$]note[$note$]" cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> sort-tags=<<__sort-tags__>> cfilter=<<__cfilter__>> rheader=<<__rheader__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
+\define sort-by-topic(topic, note, cat-prefix, sort, sort-tags, cfilter, cat-filter, tag-caption, checkbox, sort-order) <$transclude $variable="sort-by-filter" item-filter="all[tiddlers]contains:parents[$topic$]note[$note$]" cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> sort-tags=<<__sort-tags__>> cfilter=<<__cfilter__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 
 \define cat-filter-updater(cat-prefix, filter, tag-caption)
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><div class="cat-filter-updater"><span>current filter:</span>
@@ -226,7 +226,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 #> `<<belongs-display
   filter:"筛选条件"
   cfilter:"如果是 Table, 则需要填写"
-  rheader:"如果是 Table, 可以选填"
   title:"Unique ID"
   checkbox:"table 模式下是否显示复选框"
   sort-order:"Table 按照列排序的顺序">>`
@@ -235,7 +234,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   filter:"[tag<currentTiddler>]"
   sort:"对 record 列表排序"
   cfilter:"如果是 Table, 则需要填写"
-  rheader:"如果是 Table, 可以选填"
   title:"Unique ID"
   mode:"显示模式, 是否按照 parents 来收起"
   checkbox:"table 模式下是否显示复选框"
@@ -246,7 +244,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   belongs-filter:"sort-by-belongs 的 filter"
   sort:"sort-by-belongs 的 sort"
   cfilter:"sort-by-belongs 的 cfilter"
-  rheader:"sort-by-belongs 的 rheader"
   checkbox:"table 模式下是否显示复选框"
   sort-order:"Table 按照列排序的顺序">>`
 # ''按照 Tags 来进行分类展示''
@@ -255,7 +252,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   sort:"对列表排序"
   sort-tags:"对 tags 进行排序"
   cfilter:"如果是 Table, 则需要填写"
-  rheader:"如果是 Table, 可以选填"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
   checkbox:"table 模式下是否显示复选框"
@@ -267,7 +263,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   sort:"对列表排序"
   sort-tags:"对 tags 进行排序"
   cfilter:"如果是 Table, 则需要填写"
-  rheader:"如果是 Table, 可以选填"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
   checkbox:"table 模式下是否显示复选框"
@@ -280,7 +275,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   sort:"对列表排序"
   sort-tags:"对 tags 进行排序"
   cfilter:"如果是 Table, 则需要填写"
-  rheader:"如果是 Table, 可以选填"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"
   checkbox:"table 模式下是否显示复选框"

@@ -1,10 +1,10 @@
 caption: Table macro
 created: 20191030212405663
 creator: yuzijie
-modified: 20220811195314587
+modified: 20241002074439173
 modifier: yuzijie
 tags: $:/tags/TextEditor/Snippet customized
 title: $:/custom/snippet/table
 type: text/vnd.tiddlywiki
 
-<<table cfilter:"Name Description" rfilter:"[tag<currentTiddler>]" rheader:"">>
+<<table cfilter:"Name Description" rfilter:"[tag<currentTiddler>]">>
