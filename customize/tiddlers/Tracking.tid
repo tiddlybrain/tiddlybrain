@@ -1,7 +1,7 @@
 created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20240920094850921
+modified: 20241003065425614
 modifier: yuzijie
 order: 4
 tags: customized Tasks
@@ -22,8 +22,20 @@ type: text/vnd.tiddlywiki
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list>
 </ul></$details></$list>
-<$list filter="[tag[Tasks/Journal]has[tbc]!days:date[1]limit[1]]"><$details summary="FUTURE"><ul>
-<$list filter="[tag[Tasks/Journal]has[tbc]!days:date[1]]"><li><$link to={{!!title}}>{{!!title}}</$link>
+<$list filter="[tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]limit[1]]"><$details summary="IN 3 MONTH" class="success"><ul>
+<$list filter="[tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]"><li><$link to={{!!title}}>{{!!title}}</$link>
+@@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
+<ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
+</li></$list>
+</ul></$details></$list>
+<$list filter="[tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]limit[1]]"><$details summary="IN 1 YEAR" class="success"><ul>
+<$list filter="[tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]]"><li><$link to={{!!title}}>{{!!title}}</$link>
+@@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
+<ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
+</li></$list>
+</ul></$details></$list>
+<$list filter="[tag[Tasks/Journal]has[tbc]!days:date[360]limit[1]]"><$details summary="FUTURE"><ul>
+<$list filter="[tag[Tasks/Journal]has[tbc]!days:date[360]]"><li><$link to={{!!title}}>{{!!title}}</$link>
 @@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list>
