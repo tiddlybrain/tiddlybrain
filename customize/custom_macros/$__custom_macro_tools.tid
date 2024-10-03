@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241003070916609
+modified: 20241003082502978
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -46,6 +46,8 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
+\define collapse-state(title) $:/state/collapse/$title$
+
 \define collapse-title-actions(title)
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage="""<$tiddler tiddler=<<__title__>>>
 <$list filter="[<modal>match[yes]]" emptyMessage="<$action-navigate $to=<<currentTiddler>> $scroll=no/>" variable="NONE">
@@ -63,7 +65,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define collapse(title, text, class, tag:"button", style, external-links, belongs-to:"no", more-text)
-<$set name="state" value=<<qualify "$:/state/collapse/$title$">>>
+<$set name="state" value=<<collapse-state "$title$">>>
 <$reveal type="nomatch" state=<<state>> text="open" tag="div" class=<<__class__>>>
 <$button actions=<<collapse-title-actions "$title$">> dragTiddler="$title$" tag=<<__tag__>> class="tc-btn-invisible collapse-title collapse-close" tooltip=<<__title__>>>
 <$tiddler tiddler="$title$">{{$:/core/images/right-arrow}}
@@ -189,7 +191,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
-<$action-sendmessage $message="tm-close-tiddler"/><$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="-[<currentTiddler>]"/>
+<$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="-[<currentTiddler>]"/><$action-sendmessage $message="tm-close-tiddler"/>
 {{$:/core/images/left-arrow}}<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
 </$button>
 </span></$list></$list>

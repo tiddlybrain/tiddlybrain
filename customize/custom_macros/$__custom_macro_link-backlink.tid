@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20241002092436306
+modified: 20241003082957917
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -48,7 +48,11 @@ type: text/vnd.tiddlywiki
 \define bl-pattern() (\[\[|\||;;|"|'|:|\s|^)$(search)$(\]\]|;;|"|'|:|\s|\n|$)
 \define bl-limit-state(uid) $:/state/bl-limit/$(current)$/$uid$
 
-\define bl-item(note, date, caption, description, parent, mode, tag) <$tag$ class="tc-menu-list-item"><$transclude $variable="l" title={{!!title}} text=<<__caption__>> class="bl-title l" links="yes" description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status="yes" mode=<<__mode__>>/></$tag$>
+\define bl-item(note, date, caption, description, parent, mode, tag)
+<$set name="class" filter="[<collapse-state '$(currentTiddler)$'>is[missing]]" value="tc-menu-list-item" emptyValue="tc-menu-list-item col-span">
+<$tag$ class=<<class>>><$transclude $variable="l" title={{!!title}} text=<<__caption__>> class="bl-title l" links="yes" description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status="yes" mode=<<__mode__>>/></$tag$>
+</$set>
+\end
 
 \define bl-filter(item-filter, item-filter-2, uid:"default", sort:"sortan[caption]", cfilter, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, sort-order, group-by-parents, mode, parent-tag:"div", tag:"div")
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
