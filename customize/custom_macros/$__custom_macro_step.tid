@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20240919143046461
+modified: 20241003112646860
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -107,8 +107,10 @@ type: text/vnd.tiddlywiki
 <$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:#aaa;"><<format-date "$t$" "YYYY-0MM-0DD -">></$button></$reveal>
 <span style="color:#aaa;"><<linkIfExists "$step$" "$comments$">></span>
 <$vars currTask={{!!title}} currStep="$step$">
-<$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:red;&#10005;@@
-<$reveal default="$t$" type="lt" text="$d$"><$transclude $variable="days-passed" start="$t$" end="$d$"/></$reveal>
+<$button class="tc-btn-invisible" style="color:#aaa;" popup=<<date-dropdown-state "$step$">>>@@color:red;&#10005;@@
+<$set name="numdays" filter="[tag[Tasks/Journal]getindex<currentTiddler>splitregexp[\s*;;\s*]match[$step$]count[]]" select="0" emptyValue="0">
+<$list filter="[<numdays>compare:number:ne[1]]" emptyMessage="1 day"><<numdays>> days</$list>
+</$set>
 </$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>is[tiddler]]"><$button><$action-deletetiddler $tiddler=<<task-state>>/>?</$button></$list>
 </$vars>
