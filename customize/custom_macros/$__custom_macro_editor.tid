@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20241002075043554
+modified: 20241004135050880
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -165,9 +165,16 @@ type: text/vnd.tiddlywiki
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "t:YYYY0MM0DD">>/>""">t</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "d:YYYY0MM0DD">>/>""">d</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY0MM0DD>>/>""">Today</$button>
+<$list filter="[<targetTiddler>type[application/x-tiddler-dictionary]]">
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Name: {{!!caption}}
 Description: {{!!description}}
 "/>""">Name&Desc</$button>
+</$list>
+<$list filter="[<targetTiddler>type[text/vnd.tiddlywiki]]">
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="!!! Related Topics
+
+*"/>""">Related</$button>
+</$list>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$transclude $variable=format-date date={{!!date}}/>"/>""">Date</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
 <$reveal type="match" state="$:/config/codemirror/lineWrapping" text="false"><$button set="$:/config/codemirror/lineWrapping" setTo="true">Wrap</$button></$reveal>
