@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241003082502978
+modified: 20241006134434153
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -88,7 +88,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
-<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}}/>
+<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
 </$list>
 </p></$set></$tiddler>
 </$reveal>
@@ -236,7 +236,7 @@ type: text/vnd.tiddlywiki
 </$reveal>
 <$reveal type="nomatch" state=<<state>> text="close" tag="div" style="padding-top:1em;">
 <$button set=<<state>> setTo="close" style="display:block;margin:0 auto 1em;font-variant:small-caps;" class="tc-btn-invisible">''$name$''</$button>
-<$set name="direct-open" value="$direct-open$"><<sort-by-belongs filter:"$filter$" title:"$name$" has-filter:"no" mode:"$mode$">></$set>
+<$set name="direct-open" value="$direct-open$"><<sort-by-belongs filter:"$filter$" title:"$name$" list-parents:"0" has-filter:"no" mode:"$mode$">></$set>
 </$reveal>
 </$set></$list>
 \end
