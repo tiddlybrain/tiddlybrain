@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241006134434153
+modified: 20241006201100192
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -207,10 +207,21 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
 </$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]">
-<$list filter="[<mTitle>!has[_canonical_uri]!is[image]]"><$button>
-<$list filter="[[$:/state/modal/editor]!is[tiddler]]">EDIT<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/></$list>
-<$list filter="[[$:/state/modal/editor]is[tiddler]]">''BACK''<$action-deletetiddler $tiddler="$:/state/modal/editor"/></$list>
-</$button></$list>
+<$list filter="[<mTitle>!has[_canonical_uri]!is[image]]">
+<$list filter="[[$:/state/modal/editor]!is[tiddler]]">
+<$button set="$:/state/modal/editor" setTo="yes">EDIT</$button>
+</$list>
+<$list filter="[[$:/state/modal/editor]is[tiddler]]">
+<$button>''GO BACK''<$action-deletetiddler $tiddler="$:/state/modal/editor"/></$button>
+<$button message="tm-close-tiddler">EDIT
+<$action-deletetiddler $tiddler="$:/state/modal/history"/>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[draft.title<mTitle>] +[putfirst[]]"/>
+<$action-deletetiddler $tiddler="$:/temp/Draft"/>
+</$button>
+</$list>
+</$list>
 <$list filter="[<mTitle>code-body[yes]]"><<modal-edit-comment>></$list>
 </$list>
 </$list>
