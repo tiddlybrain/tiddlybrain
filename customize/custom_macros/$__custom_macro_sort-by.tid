@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20241006142853521
+modified: 20241006163535270
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -105,7 +105,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 <$transclude $variable="belongs-display" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[!has[belongs.to]$sort$]">> cfilter=<<__cfilter__>> title=<<__title__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>>/>
 </div>
 </$list>
-<$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]unique[]sortsub<parents-reverse>]">> variable="sbb">
+<$list filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]unique[]sortsub:alphanumeric<parents-reverse>]">> variable="sbb">
 <div class="parent-title">
 <$reveal type="nomatch" state=<<belongs-sort-state "$title$">> text="open">
 <$button class="tc-btn-invisible links" style="fill:#999;font-size:small;">
