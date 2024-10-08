@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20241004135050880
+modified: 20241008084647429
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -108,12 +108,7 @@ type: text/vnd.tiddlywiki
 <$button style="font-weight:bold;">Update Date<<date-update-actions>></$button>
 </$list></$list>
 <$list filter="[<mTitle>!is[blank]]"><$list filter="[all[current]!tag[Task]has[date]!date<today>]">
-<$button style="font-weight:bold;">Update Date<<date-update-actions>>
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}} mContent={{!!text}}/>">
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
-</$list>
-<$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="-[<currentTiddler>]"/><$action-sendmessage $message="tm-close-tiddler"/>
-</$button>
+<$button style="font-weight:bold;">Update Date<<date-update-actions>><$action-deletetiddler $tiddler="$:/state/modal/editor"/></$button>
 </$list></$list>
 </$set>
 <$list filter="[<mTitle>is[blank]]">
@@ -172,6 +167,10 @@ Description: {{!!description}}
 </$list>
 <$list filter="[<targetTiddler>type[text/vnd.tiddlywiki]]">
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="!!! Related Topics
+
+*
+
+!!! References
 
 *"/>""">Related</$button>
 </$list>
