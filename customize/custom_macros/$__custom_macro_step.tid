@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20241003112646860
+modified: 20241010062328676
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -52,9 +52,11 @@ type: text/vnd.tiddlywiki
 \define step-open(step,comments,t)
 @@font-weight:bold;color:orange;<<linkIfExists "$step$" "$comments$">>@@
 <$button class="tc-btn-invisible">@@color:orange;&#11044;@@
-<$list filter="[<__t__>is[blank]]" variable="NONE" emptyMessage="""<$action-setfield $tiddler=<<task-state>> text="doing"/>""">
-<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<__step__>>/><$action-deletetiddler $tiddler=<<task-state>>/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$list filter="[<__t__>is[blank]]" variable="NONE" emptyMessage="<$action-setfield $tiddler=<<task-state>> text=doing/>">
+<$action-deletetiddler $tiddler=<<task-state>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+<$transclude $variable="tiddler-open" tiddler=<<currTask>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<__step__>>/>
 </$list>
 </$button>
 <$reveal default="$t$" type="nomatch" text="">
@@ -67,9 +69,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[<task-state>!has[plan]]">⚠️</$list>
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:green;&#10148;@@
 <$action-deletetiddler $tiddler=<<task-state>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE" emptyMessage="""<$action-deletetiddler $tiddler="$:/temp/Draft"/>""">
-<$action-sendmessage $message="tm-close-tiddler"/><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
-</$list>
+<$transclude $variable="tiddler-open" tiddler=<<currTask>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 </$button>
 <$reveal default="$t$" type="nomatch" text="">
 <$transclude $variable="days-button" value="$t$" days="""<$transclude $variable="days-passed" start="$t$"/>""" step="$step$"/>
@@ -124,9 +125,8 @@ type: text/vnd.tiddlywiki
 </$button>""" variable="NONE">
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:$color$;$symbol$@@
 <$action-deletetiddler $tiddler=<<task-state>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE" emptyMessage="""<$action-deletetiddler $tiddler="$:/temp/Draft"/>""">
-<$action-sendmessage $message="tm-close-tiddler"/><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
-</$list>
+<$transclude $variable="tiddler-open" tiddler=<<currTask>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 </$button>
 <$button class="tc-btn-invisible" dragTiddler=<<task-state>> popup=<<date-dropdown-state "$step$">>><<__days__>></$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>!date[$t$]]">
