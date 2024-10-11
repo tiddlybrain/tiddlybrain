@@ -1,0 +1,11 @@
+caption: Template for displaying date field
+created: 20241011210017511
+creator: yuzijie
+keywords: 
+modified: 20241011220450271
+modifier: yuzijie
+tags: customized
+title: custom-template-date
+type: text/vnd.tiddlywiki
+
+<$let date={{{ [all[current]get[date]format:date[YYYY-0MM-0DD]] }}}><<date>></$let>

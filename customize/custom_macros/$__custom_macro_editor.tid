@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20241008084647429
+modified: 20241011215253380
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -174,7 +174,7 @@ Description: {{!!description}}
 
 *"/>""">Related</$button>
 </$list>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<$transclude $variable=format-date date={{!!date}}/>"/>""">Date</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="{{||custom-template-date}}"/>""">Date</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
 <$reveal type="match" state="$:/config/codemirror/lineWrapping" text="false"><$button set="$:/config/codemirror/lineWrapping" setTo="true">Wrap</$button></$reveal>
 <$reveal type="match" state="$:/config/codemirror/lineWrapping" text="true"><$button set="$:/config/codemirror/lineWrapping" setTo="false">NoWrap</$button></$reveal>
