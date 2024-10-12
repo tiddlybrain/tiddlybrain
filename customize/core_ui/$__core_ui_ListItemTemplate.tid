@@ -1,4 +1,4 @@
-modified: 20241004144125746
+modified: 20241012190230055
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -8,7 +8,12 @@ type: text/vnd.tiddlywiki
 <$button actions="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" tag="a" class="tc-tiddlylink tc-tiddlylink-resolves">
 <$list filter="[<link-dropdown>!match[yes]]"><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/></$list>
 <$let tv-wikilinks="no">
-<$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+<$list filter="[all[current]get[belongs.to]]"><$button tag="span" style="color:brown;">
+<$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
+[<$transclude field=caption><$view field=title/></$transclude>]
+</$button></$list>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> <<icons>> <$view field="title"/>
 <$list filter="[<searchTiddler>get[text]trim[]!is[blank]]" variable="search">
 <$list filter="[all[current]search:caption,keywords,text,description:literal<search>]" emptyMessage="-">@@color:#ffbda3;Exact@@</$list>
