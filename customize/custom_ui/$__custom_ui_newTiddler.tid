@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20240907202726608
+modified: 20241013202821443
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -12,12 +12,12 @@ type: text/vnd.tiddlywiki
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]]"><$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>>/></$list>
 </$button></$list>
 <p><$keyboard key="ctrl+enter" actions="""<$transclude $variable=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} type="text/vnd.tiddlywiki" popup="close" scroll="yes"/>""" tag="div">
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="26" class="new-tiddler-input-box" placeholder="Tiddler caption" default="" focus="yes"/>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="34" class="new-tiddler-input-box" placeholder="Tiddler caption" default="" focus="yes"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>{{$:/core/images/close-button}}</$button>
 </$list>
 </$keyboard></p>
-<p style="margin-top:-4px;">
+<p style="margin-top:-5px;">
 <$select tiddler="$:/temp/newTiddler" field="note" default="" class="new-tiddler-input-box" tabindex="-1" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
 <option value="">Choose a Role</option>
 <$list filter='[all[tiddlers]note[Role]belongs.to[$:/custom/ui/ControlPanel/Roles]]'><option value={{!!title}}>{{!!title}}</option></$list>
@@ -56,6 +56,7 @@ type: text/vnd.tiddlywiki
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}
 Description: {{!!description}}" edit="yes"/>Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> edit="yes"/>Record</$button>
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/vnd.drawio" edit="yes"/>Diagram</$button>
 <$button tooltip="Markdown"><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="text/x-markdown" edit="yes"/>Md</$button>
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" tooltip="Edit Configurations">{{$:/core/images/edit-button}}</$button>
 </p>
