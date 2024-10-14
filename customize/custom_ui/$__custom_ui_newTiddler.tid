@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20241013202821443
+modified: 20241014000509289
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<tv-story-list>get[list]enlist-input[]prefix[Draft of]]"><$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>>/></$list>
 </$button></$list>
 <p><$keyboard key="ctrl+enter" actions="""<$transclude $variable=newTiddlerAction template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}} type="text/vnd.tiddlywiki" popup="close" scroll="yes"/>""" tag="div">
-<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="34" class="new-tiddler-input-box" placeholder="Tiddler caption" default="" focus="yes"/>
+<$edit-text tiddler="$:/temp/newTiddler" tag="input" size="32" class="new-tiddler-input-box" placeholder="Tiddler caption" default="" focus="yes"/>
 <$list filter="[[$:/temp/newTiddler]is[tiddler]]">
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>{{$:/core/images/close-button}}</$button>
 </$list>
