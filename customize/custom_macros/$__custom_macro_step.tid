@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20241014081054278
+modified: 20241014082950063
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -53,8 +53,8 @@ type: text/vnd.tiddlywiki
 @@font-weight:bold;color:orange;<<linkIfExists "$step$" "$comments$">>@@
 <$button class="tc-btn-invisible">@@color:orange;&#11044;@@
 <$list filter="[<__t__>is[blank]]" variable="NONE" emptyMessage="<$action-setfield $tiddler=<<task-state>> text=doing/>">
-<$action-deletetiddler $tiddler=<<task-state>>/><$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
-<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
+<$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
 <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<__step__>>/>
 </$list>
 </$button>
@@ -67,8 +67,8 @@ type: text/vnd.tiddlywiki
 @@font-weight:bold;color:green;<<linkIfExists "$step$" "$comments$">>@@
 <$list filter="[<task-state>!has[plan]]">⚠️</$list>
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:green;&#10148;@@
-<$action-deletetiddler $tiddler=<<task-state>>/><$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
-<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
+<$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
 </$button>
 <$reveal default="$t$" type="nomatch" text="">
 <$transclude $variable="days-button" value="$t$" days="""<$transclude $variable="days-passed" start="$t$"/>""" step="$step$"/>
@@ -122,8 +122,8 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler=<<task-state>> text="$type$" date="$t$" plan="$t$" caption="$step$"/>
 </$button>""" variable="NONE">
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:$color$;$symbol$@@
-<$action-deletetiddler $tiddler=<<task-state>>/><$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
-<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
+<$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
 </$button>
 <$button class="tc-btn-invisible" dragTiddler=<<task-state>> popup=<<date-dropdown-state "$step$">>><<__days__>></$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>!date[$t$]]">

@@ -96,7 +96,7 @@ exports.getAllTagTitles = function(source,operator,options) {
 exports.getBacklinkTitles = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|^)" + title + "(\\]\\]|;;|\"|\'|:|\\s|\\n|$)", re = new RegExp(pattern);
+		var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|/#|^)" + title + "(\\]\\]|;;|\"|\'|:|\\s|\\n|$)", re = new RegExp(pattern);
 		options.wiki.each(function(newTiddler,newTitle) {
 			let content = newTiddler.getFieldString("text");
 			if(re.test(content)) {
