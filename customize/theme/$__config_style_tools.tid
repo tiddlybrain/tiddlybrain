@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241002042555757
+modified: 20241015100840888
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -70,7 +70,7 @@ button.links.accordion {fill: #999; font-size: small;}
 .snippet-container > .tc-droppable-placeholder > .macro-table {margin: 0;}
 
 /* For Macro: task-list */
-dl.task-list dt {border-bottom: 1px solid #ccc; margin-top: 10px;}
+dl.task-list dt {border-bottom: 1px solid #ccc; margin: 10px 0;}
 dl.task-list dd {white-space: nowrap;}
 
 /* For Macro: flashcard */
