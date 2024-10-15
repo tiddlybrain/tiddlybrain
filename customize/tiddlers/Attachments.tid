@@ -3,13 +3,15 @@ created: 20211222002004723
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/MoreSideBar/Recent
-modified: 20240811121716021
+modified: 20241015072954585
 modifier: yuzijie
 tags: customized $:/tags/MoreSideBar $:/custom/ui/ControlPanel/TiddlyBrain
 title: Attachments
 type: text/vnd.tiddlywiki
 
 <$tiddler tiddler="Attachments">
+
+<$details summary="Diagram"><<snippet key:'Diagram' date:'yes' sort:'!sort[modified]'>></$details>
 
 <$details summary="JPG"><<snippet key:'JPG' date:'yes' sort:'!sort[modified]'>></$details>
 
