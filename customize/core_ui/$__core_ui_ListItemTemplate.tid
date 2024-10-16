@@ -1,4 +1,4 @@
-modified: 20241013065840947
+modified: 20241016204330133
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -6,7 +6,6 @@ type: text/vnd.tiddlywiki
 
 <div class="tc-menu-list-item">
 <$button actions="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" tag="a" class="tc-tiddlylink tc-tiddlylink-resolves">
-<$list filter="[<link-dropdown>!match[yes]]"><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/></$list>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]get[belongs.to]]"><$button tag="span" style="color:brown;">
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>

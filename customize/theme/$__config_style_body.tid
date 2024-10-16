@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20241013202720755
+modified: 20241016203303743
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -45,7 +45,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-subtitle .tc-tiddlylink {margin: 0;}
 
 .tc-title {color: #888;}
-.tc-title-draft {color: #cf5656;}
+.tc-title-draft {color: #cf5656; font-weight: normal;}
 
 .tc-tiddler-title-icon {margin: 0;}
 
