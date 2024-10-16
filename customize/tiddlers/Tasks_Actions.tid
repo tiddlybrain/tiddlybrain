@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20241004081652450
+modified: 20241016081251615
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -62,27 +62,6 @@ TBC: <<tbc>>
 <$list filter="[prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li style="white-space:nowrap;"><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]"><li style="white-space:nowrap;"><<task-list-doing>></li></$list>
 <hr style="margin-left:-1em;">
-<$list filter="[prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li style="white-space:nowrap;">
-<$list filter="[all[current]text[doing]]" emptyMessage="""
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#c67b48;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
-</$button>
-<$button message="tm-copy-to-clipboard" param={{!!caption}}>Set Plan
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$transclude $variable='tiddler-open' tiddler=<<task-id>>/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-</$button>""">
-<$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
-<$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#b58e1b;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
-</$button>
-""" variable="NONE">
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
-</$button> @@color:green;&#10132;@@
-</$list>
-</$list>
-</li></$set></$list>
 <$list filter="[prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li style="white-space:nowrap;">
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><$list filter="[<task-id>has[status]]">
 <span class="tc-tag-label" style="background-color:#cd23d8;"><$view field="status"/></span>
@@ -95,6 +74,22 @@ TBC: <<tbc>>
 </$list></$set>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button><<task-list-waiting>>
 </li></$list>
+<$list filter="[prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li style="white-space:nowrap;">
+<$list filter="[all[current]text[doing]]" emptyMessage="""
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
+{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
+</$button>""">
+<$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
+<$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#b58e1b;" message="tm-copy-to-clipboard" param={{!!caption}}>
+{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
+</$button>""" variable="NONE">
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>
+{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
+</$button> @@color:green;&#10132;@@
+</$list>
+</$list>
+</li></$set></$list>
 <$list filter="[has[interval]!has[draft.of]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
 <$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 </$set></$list>
