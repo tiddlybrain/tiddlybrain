@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241017094649911
+modified: 20241018050642053
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -202,7 +202,6 @@ type: text/vnd.tiddlywiki
 <$button message="tm-close-tiddler">OPEN
 <$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
 <$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 </$button>
 <$button message="tm-close-tiddler">SIDEBAR
 <<open-in-sidebar close:"no">>
