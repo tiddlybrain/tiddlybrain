@@ -1,0 +1,16 @@
+created: 20241019125359955
+creator: yuzijie
+key: ((close-tiddler))
+modified: 20241019140416497
+modifier: yuzijie
+tags: $:/tags/KeyboardShortcut customized
+title: $:/custom/ui/KeyboardShortcuts/close-tiddler
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}><$list filter="[[$:/state/modal/history]!is[tiddler]]" variable="NONE">
+<$let current={{$:/HistoryList!!current-tiddler}} next={{{ [<current>previous[$:/StoryList]] :else[<current>next[$:/StoryList]] }}}>
+<$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$action-navigate $to=<<next>> $scroll="yes"/><$action-deletetiddler $filter="[<next>addprefix[$:/state/folded/]is[tiddler]]"/>
+</$let>
+</$list></$navigator>
