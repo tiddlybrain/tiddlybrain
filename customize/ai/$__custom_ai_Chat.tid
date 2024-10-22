@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20240929120743499
+modified: 20241022111058106
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -79,13 +79,15 @@ type: text/vnd.tiddlywiki
 <$list filter="[<ai-instructions content>get[text]]" variable="instructions"><tr><td colspan="2">
 <pre style="margin:3px 0;background:white;color:#666;"><<instructions>></pre>
 <$list filter="[<ai-instructions>get[text]indexes[]] -Default" variable="key"><div style="margin:3px 0;border:1px solid #ccc;padding:5px 8px;border-radius:3px;">''<<key>>:''
-<$list filter="[<ai-instructions>get[text]getindex<key>search:title:literal[;;]]" variable="options">
+<$list filter="[<ai-instructions>get[text]getindex<key>]" variable="value" emptyMessage="<$edit-text tiddler=<<ai-instructions content_$(key)$>>/>">
+<$list filter="[<value>search:title:literal[;;]]" variable="options">
 <$select tiddler=<<ai-instructions content_$(key)$>> default=""><option value="">--</option>
 <$list filter="[<options>splitregexp[\s*;;\s*]]" variable="option"><option><<option>></option></$list>
 </$select>
 </$list>
-<$list filter="[<ai-instructions>get[text]getindex<key>!search:title:literal[;;]]" variable="option">
+<$list filter="[<value>!search:title:literal[;;]]" variable="option">
 <$checkbox tiddler=<<ai-instructions content_$(key)$>> field="text" checked=<<option>> unchecked="" default=""><<option>></$checkbox>
+</$list>
 </$list>
 </div></$list>
 </td></tr></$list>
