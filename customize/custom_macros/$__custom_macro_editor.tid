@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20241011215253380
+modified: 20241025063336423
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -41,7 +41,13 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[caption]]"><$set name="tags" filter="[caption{!!caption}!note{!!note}!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]">
 <$list filter="[<tags>enlist-input[]limit[1]]" variable="NONE"><$details summary={{{ [<tags>enlist-input[]count[]addprefix[Twins ]] }}}>
 <$list filter="[<tags>enlist-input[]]" variable="tag"><div style="white-space:nowrap;overflow:auto;width:290px;font-size:small;">
-<$checkbox tiddler=<<editor-caption-status>> listField="list" checked=<<tag>>> <$transclude $variable="l" title=<<tag>> text="{{!!title}} - {{!!caption}}"/></$checkbox>
+<$checkbox tiddler=<<editor-caption-status>> listField="list" checked=<<tag>>>
+<$tiddler tiddler=<<tag>>><$button actions=<<modal-actions>> class="tc-btn-invisible tc-tiddlylink">
+<$action-deletetiddler $tiddler="$:/state/modal/editor"/>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list> {{!!caption}}
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$button></$tiddler>
+</$checkbox>
 </div></$list>
 </$details></$list>
 </$set></$list>
