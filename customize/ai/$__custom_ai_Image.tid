@@ -1,25 +1,20 @@
-caption: AI Chat
-created: 20240707102007118
+caption: Image Recognition
+created: 20241025211824739
 creator: yuzijie
-modified: 20241027080806929
+modified: 20241027152507368
 modifier: yuzijie
 tags: customized
-title: $:/custom/ai/Chat
+title: $:/custom/ai/Image
 type: text/vnd.tiddlywiki
 
 \procedure call-api()
 
 \define completion-get-json()
-<$let ai-request=`$(ai-request)$` ai-response=`$(ai-response)$` ai-history=`$(ai-history)$`>
+<$let ai-response=`$(ai-response)$` ai-history=`$(ai-history)$`>
 <$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE" emptyMessage="""<$set name="message" filter="[<data>jsonget[error],[message]]" emptyValue="check your network" select="0"><$action-setfield $tiddler=<<ai-response>> text={{{ [<error>] [<message>] +[join[, ]] }}}/></$set>""">
 <$set name="message" filter="[<data>jsonget[choices],[0],[message],[content]]" select="0">
 <$action-setfield $tiddler=<<ai-response>> text=<<message>> type="text/x-markdown"/>
 <$let timestamp=<<now "0hh:0mm:0ss">>>
-<$action-createtiddler $basetitle=<<ai-history>> type="application/json" caption=<<timestamp>>>
-<$action-setfield $tiddler=<<createTiddler-title>> $index="role" $value="user"/>
-<$action-setfield $tiddler=<<createTiddler-title>> $index="content" $value={{{ [<ai-request>get[text]] }}}/>
-<$action-setfield $tiddler=<<createTiddler-title>> $index="type" $value="text/vnd.tiddlywiki"/>
-</$action-createtiddler>
 <$action-createtiddler $basetitle=<<ai-history>> type="application/json" caption=<<timestamp>>>
 <$action-setfield $tiddler=<<createTiddler-title>> $index="role" $value="assistant"/>
 <$action-setfield $tiddler=<<createTiddler-title>> $index="content" $value=<<message>>/>
@@ -31,41 +26,34 @@ type: text/vnd.tiddlywiki
 </$let>
 \end completion-get-json
 
-<$let api={{$:/config/AIApiKey!!url}} api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [prefix<ai-instructions content>sort[title]get[text]join[ ]jsonstringify[]] }}} userInput={{{ [<ai-request>get[text]jsonstringify[]] }}} default={{{ [[$:/config/defaultInstructions]get[text]jsonstringify[]] }}}>
-<$set name="chatHistory" filter="[<ai-history-state>get[text]match[yes]]" value={{{ [prefix<ai-history>get[text]] +[join[,]addsuffix[,]] }}} emptyValue="">
+<$let api={{$:/config/AIApiKey!!url}} api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [prefix<ai-instructions content>sort[title]get[text]join[ ]jsonstringify[]] }}} image={{$:/temp/ai/image}} default={{{ [[$:/config/defaultInstructions]get[text]jsonstringify[]] }}}>
 <$action-setfield $tiddler=<<ai-response>> text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url=<<api>> method="POST"
   oncompletion=<<completion-get-json>>
   header-Content-Type='application/json'
   header-Authorization=`Bearer $(api-key)$`
-  body=`{"model":"$(model)$","messages":[{"role":"system","content":"$(instructions)$\n\n$(default)$"},$(chatHistory)${"role":"user","content":"$(userInput)$"}]}`
+  body=`{"model":"$(model)$","messages":[{"role":"user","content":[{"type":"text","text":"$(instructions)$\n\n$(default)$"},{"type":"image_url","image_url":{"url":"data:image/png;base64,$(image)$"}}]}]}`
 />
-</$set>
 </$let>
 
 \end call-api
 
-\procedure ai-gui(id)
-<$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[text]] }}}/>""" tag="section" class="ai">
-<div class="tc-droppable-placeholder" style="display:block;">
-<h3>Instructions
-<$list filter="[<ai-request>get[text]!is[blank]]" variable="content"><$button style="font-size:small;">Set to Searchbar
-<$action-setfield $tiddler="$:/temp/menubarsearch" text=<<content>>/>
-<$action-setfield $tiddler="$:/temp/menubarsearch/input" text=<<content>>/>
-<$action-setfield $tiddler="$:/temp/menubarsearch/refresh" text="yes"/>
-</$button></$list>
-<$list filter="[<ai-request>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list>
+\procedure ai-gui(id:"image")
+<$list filter="[[$:/temp/ai/image]is[tiddler]]" emptyMessage="No image to ask, use `Ctrl-V` to paste an image" variable="NONE">
+<section class="ai">
+<h3>Image
+<$button style="font-size:small;"><$action-deletetiddler $tiddler="$:/temp/ai/image"/>Remove Image</$button>
 </h3>
-<$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
+<p class="ai-img">[img[$:/temp/ai/image]]</p>
 <table style="width:100%;margin:0;"><tbody>
-<tr><th>Choose Model</th><th>Custom Prompts</th></tr>
+<tr><th>Choose Model</th><th>Instructions</th></tr>
 <tr style="text-align:center;">
 <td><$select tiddler=<<ai-model>>>
 <$list filter="[list[$:/config/AIApiKey]]"><option>{{!!title}}</option></$list>
 </$select></td>
 <td>
 <$select tiddler=<<ai-instructions>> default="" actions="<$action-deletetiddler $filter='[prefix<ai-instructions content_>]'/><$action-setfield $tiddler=<<ai-instructions content>> text={{{ [<ai-instructions>get[text]getindex[Default]] }}}/>">
-<option value="">No Custom Prompts</option>
+<option value="">No Instructions</option>
 <$list filter="[all[tiddlers]note[Instruction]belongs.to[$:/custom/ui/ControlPanel/CustomInstructions]]"><option value={{!!title}}>{{!!caption}}</option></$list>
 <$list filter="[all[tiddlers]note[Instruction]get[belongs.to]!match[$:/custom/ui/ControlPanel/CustomInstructions]unique[]]"><optgroup label={{!!caption}}>
 <$list filter="[all[tiddlers]note[Instruction]belongs.to{!!title}sortan[caption]]"><option value={{!!title}}>{{!!caption}}</option></$list>
@@ -92,28 +80,16 @@ type: text/vnd.tiddlywiki
 </div></$list>
 </td></tr></$list>
 </tbody></table>
-</div>
-</$droppable>
+</section>
 
 <$reveal type="match" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
 <$button actions="""<$action-deletetiddler $filter="[<ai-response>]"/>""">Cancel Request</$button>
 </$reveal>
 
 <$reveal type="nomatch" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
-<$list filter="[<ai-response>get[text]!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask AI</$button>
-<$checkbox tiddler=<<ai-history-state>> field='text' checked='yes' unchecked='no' default='no'> Chat History</$checkbox>">
-<$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
-<$list filter="[<sidebar>!match[yes]]" variable="NONE">
-<$button actions=<<insert-as-text "$(ai-response)$">>>Insert as Text</$button>
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
-</$list>
-<$list filter="[<sidebar>match[yes]]" variable="NONE">
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Save as New Tiddler</$button></$let>
-</$list>
-</$reveal>
+<$list filter="[<ai-response>get[text]!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask AI</$button>">
 <$button message="tm-copy-to-clipboard" param={{{ [<ai-response>get[text]] }}}>Copy to Clipboard</$button>
 <$button actions=<<call-api>> style="color:green;">Ask Again</$button>
-<$checkbox tiddler=<<ai-history-state>> field="text" checked="yes" unchecked="no" default="no"> Chat History</$checkbox>
 </$list>
 </$reveal>
 
@@ -132,11 +108,32 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix<ai-history>!sort[created]]">
 <$set name="summary" filter="[all[current]get[caption]] [all[current]getindex[role]] [all[current]getindex[content]] +[join[ - ]]" select="0">
 <$details summary=<<summary>> class={{{ [all[current]getindex[role]] }}}>
+<$list filter="[all[current]getindex[role]match[user]]" variable="NONE">
+<$button set="$:/temp/ai/image" setTo={{{ [all[current]getindex[img]] }}}>
+<$action-setfield $tiddler=<<ai-response>> type={{{ [all[current]getindex[type]] }}}/>Set Image
+<$action-createtiddler $basetitle=<<ai-history>> type="application/json" caption=<<now "0hh:0mm:0ss">>>
+<$action-setfield $tiddler=<<createTiddler-title>> $index="role" $value="user"/>
+<$action-setfield $tiddler=<<createTiddler-title>> $index="content" $value="Image"/>
+<$action-setfield $tiddler=<<createTiddler-title>> $index="type" $value={{{ [all[current]getindex[type]] }}}/>
+<$action-setfield $tiddler=<<createTiddler-title>> $index="img" $value={{{ [all[current]getindex[img]] }}}/>
+</$action-createtiddler>
+</$button>
+</$list>
+<$list filter="[all[current]getindex[role]match[assistant]]" variable="NONE">
 <$button set=<<ai-response>> setTo={{{ [all[current]getindex[content]] }}}><$action-setfield $tiddler=<<ai-response>> type={{{ [all[current]getindex[type]] }}}/>Set to Results</$button>
+</$list>
 <$button><$action-deletetiddler $tiddler=<<currentTiddler>>/>Delete This</$button>
-<div class="history"><$transclude $tiddler={{!!title}} $index="content" $mode="block" $type="text/plain"/></div>
+<div class="history">
+<$list filter="[all[current]getindex[role]match[user]]" variable="NONE">
+<$transclude $tiddler={{!!title}} $index="img" $mode="block" $type="image/png"/>
+</$list>
+<$list filter="[all[current]getindex[role]match[assistant]]" variable="NONE">
+<$transclude $tiddler={{!!title}} $index="content" $mode="block" $type="text/plain"/>
+</$list>
+</div>
 </$details>
 </$set>
 </$list>
 </section></$list>
+</$list>
 \end ai-gui
