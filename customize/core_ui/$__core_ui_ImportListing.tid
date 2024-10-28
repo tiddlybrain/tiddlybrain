@@ -1,4 +1,4 @@
-modified: 20241027145553948
+modified: 20241028063923262
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ImportListing
@@ -56,6 +56,7 @@ type: text/vnd.tiddlywiki
 
 \define askAI()
 \whitespace trim
+<$list filter="[tag[AI]search:text:literal,casesensitive[$:/custom/ai/Image]limit[1]]" variable="NONE">
 <$list filter="[<payloadTiddler>suffix[.png]]"><$button style="margin-left:5px;">Ask AI
 <$let type={{{ [{$:/Import}jsonget[tiddlers],<payloadTiddler>,[type]] }}} text={{{ [{$:/Import}jsonget[tiddlers],<payloadTiddler>,[text]] }}} id="image">
 <$action-setfield $tiddler="$:/temp/ai/image" type=<<type>> text=<<text>>/>
@@ -71,6 +72,7 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/state/ai/session-254911044" text={{{ [tag[AI]search:text:literal,casesensitive[$:/custom/ai/Image]first[]] }}}/>
 <$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 </$button></$list>
+</$list>
 \end
 
 \define select-all-actions()
