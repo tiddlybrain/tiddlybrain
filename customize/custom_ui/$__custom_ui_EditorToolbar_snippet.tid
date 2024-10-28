@@ -4,14 +4,16 @@ created: 20220303150757173
 creator: yuzijie
 description: Snippet Macro
 icon: $:/core/images/list
-modified: 20221101165639742
+modified: 20241028144909858
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/snippet
 type: text/vnd.tiddlywiki
 
+<$set name="replacement" filter="[<targetTiddler>type[application/x-tiddler-dictionary]]" value="<<snippet date:'no'>>" emptyValue="<<snippet date:'no' parent-tag:ul tag:li>>">
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="replace-selection"
-	text="<<snippet date:'no'>>"
+	text=<<replacement>>
 />
+</$set>
