@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20241024011702649
+modified: 20241028104635103
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -29,8 +29,9 @@ type: text/vnd.tiddlywiki
 <$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
 <$let direct-open="no"><$tiddler tiddler=<<task-id>>><<modal-actions>></$tiddler></$let>
 </$button>
+<$button set=<<currentTiddler>> setTo="doing" class="tc-btn-invisible" tooltip="Start doing it">{{$:/core/images/close-others-button}}</$button>
 <$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
-<$button set=<<currentTiddler>> setTo="doing" class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
 {{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>'' <$transclude $variable="days-left" deadline={{!!date}}/>
 </$button>
 </$set>
