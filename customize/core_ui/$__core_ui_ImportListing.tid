@@ -1,4 +1,4 @@
-modified: 20241028063923262
+modified: 20241028152224529
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ImportListing
@@ -67,7 +67,7 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler=<<createTiddler-title>> $index="img" $value=<<text>>/>
 </$action-createtiddler>
 </$let>
-<$action-sendmessage $message="tm-close-tiddler" $param="$:/Import"/><$action-setfield $tiddler="$:/Import" $index="tiddlers" $value=""/>
+<$transclude $variable="tiddler-close" tiddler="$:/Import"/><$action-setfield $tiddler="$:/Import" $index="tiddlers" $value=""/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
 <$action-setfield $tiddler="$:/state/ai/session-254911044" text={{{ [tag[AI]search:text:literal,casesensitive[$:/custom/ai/Image]first[]] }}}/>
 <$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>

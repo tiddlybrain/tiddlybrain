@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241027151554074
+modified: 20241028234845324
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -347,9 +347,8 @@ details[open] > *:last-child {margin-bottom: 0 !important;}
 details details[open] {border: none;}
 details > summary {padding: 0 0 0 1.1em; background: white; margin: 0 -0.5em 0 -1em; font-weight: bold; color: #444;}
 details > summary:hover {text-decoration: underline;}
-details details > summary, .tc-sidebar-lists details details > summary, .tc-sidebar-lists .snippet-content details details > summary, .tc-sidebar-lists .editor-display details details > summary {background: #f8f8f8;}
-.tc-sidebar-lists .tc-tab-content details > summary {background: #f4f4f4;}
-.tc-sidebar-lists .editor-display details > summary, .tc-sidebar-lists .snippet-content details > summary, details .snippet-accordion details > summary, .tc-sidebar-lists .tc-tiddler-body details > summary {background: white;}
+details details > summary, .tc-sidebar-lists .editor-display details details > summary, .tc-more-sidebar details > summary {background: #f4f4f4;}
+.tc-sidebar-lists .editor-display details > summary, .tc-sidebar-lists .snippet-content details > summary, details .snippet-accordion details > summary {background: white;}
 details > .snippet-container, details > .bl-container, details > p > .snippet-container, details > p > .bl-container {padding-left: 10px;}
 details > blockquote {margin-left: 10px;}
 li > details {margin: 0}
