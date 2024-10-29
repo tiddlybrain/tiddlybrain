@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241029154621012
+modified: 20241029172355572
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -201,6 +201,11 @@ type: text/vnd.tiddlywiki
 <div style="display:inline-block;vertical-align:middle;">
 <$list filter="[<mTitle>!is[missing]]">
 <$button message="tm-close-tiddler">OPEN
+<$tiddler tiddler=<<mTitle>>><$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
+<$let keywords={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}>
+<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
+</$let>
+</$set></$tiddler>
 <$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
 <$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
 </$button>
@@ -231,7 +236,14 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list></$list>
 </$list>
-<$button>CLOSE<$transclude $variable="tiddler-close" tiddler=<<mTitle>>/></$button>
+<$button>CLOSE
+<$tiddler tiddler=<<mTitle>>><$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
+<$let keywords={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}>
+<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
+</$let>
+</$set></$tiddler>
+<$transclude $variable="tiddler-close" tiddler=<<mTitle>>/>
+</$button>
 </div>
 </$let>
 \end
