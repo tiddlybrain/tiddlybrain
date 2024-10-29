@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241025064009469
+modified: 20241029154621012
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -214,7 +214,14 @@ type: text/vnd.tiddlywiki
 <$list filter="[<mTitle>code-body[yes]]"><$transclude $variable="modal-edit-comment" template={{$:/config/defaultTemplate}}/></$list>
 </$list>
 <$list filter="[[$:/state/modal/editor]is[tiddler]]">
-<$button>''GO BACK''<$action-deletetiddler $tiddler="$:/state/modal/editor"/></$button>
+<$button>''GO BACK''
+<$tiddler tiddler=<<mTitle>>><$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
+<$let keywords={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}>
+<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
+</$let>
+</$set></$tiddler>
+<$action-deletetiddler $tiddler="$:/state/modal/editor"/>
+</$button>
 <$button message="tm-close-tiddler">EDIT
 <$action-sendmessage $message="tm-edit-tiddler" $param=<<mTitle>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
