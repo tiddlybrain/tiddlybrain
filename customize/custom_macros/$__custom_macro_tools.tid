@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241101153911073
+modified: 20241101165041167
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -331,19 +331,19 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define selector(filter:"[belongs.to{!!belongs.to}note{!!note}getindex<key>splitregexp[\s*;;\s*]unique[]]", caption:"{{!!caption}}", class, disable-value)
+\define selector(filter:"[belongs.to{!!belongs.to}note{!!note}getindex<key>splitregexp[\s*;;\s*]unique[]]", caption:"{{!!caption}}", class, disable-value, actions)
 <$list filter="[<current>has[celltpl]]" emptyMessage="selector">
-<$list filter="[<value>!match<__disable-value__>]" emptyMessage=<<value>> variable="NONE">
-<$select index=<<key>> class="$class$" default="N/A"><option disabled>N/A</option>
+<$list filter="[<value>is[blank]] ~[<value>!match<__disable-value__>]" emptyMessage=<<value>> variable="NONE">
+<$select actions=<<__actions__>> index=<<key>> class="$class$" default="N/A"><option disabled>N/A</option>
 <$list filter=<<__filter__>>><option value=<<currentTiddler>>>$caption$</option></$list>
 </$select>
 </$list>
 </$list>
 \end
 
-\define multi-selector(filter:"[belongs.to{!!belongs.to}note{!!note}getindex<key>splitregexp[\s*;;\s*]unique[]]", caption:"{{!!caption}}", class, disable-value)
+\define multi-selector(filter:"[belongs.to{!!belongs.to}note{!!note}getindex<key>splitregexp[\s*;;\s*]unique[]]", caption:"{{!!caption}}", class, disable-value, actions)
 \whitespace trim
-<$list filter="[<current>has[celltpl]]" emptyMessage="multi-selector"><$list filter="[<value>!match<__disable-value__>]" emptyMessage=<<value>> variable="NONE">
+<$list filter="[<current>has[celltpl]]" emptyMessage="multi-selector"><$list filter="[<value>is[blank]] ~[<value>!match<__disable-value__>]" emptyMessage=<<value>> variable="NONE">
 <$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{ [<value>splitregexp[\s*;;\s*]!is[blank]] [<actionTiddler>] +[join[;;]] }}}/>" tag="div">
 <div class="tc-droppable-placeholder" style="display:block;">
 <$list filter="[<value>!is[blank]]"><$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
@@ -360,7 +360,7 @@ type: text/vnd.tiddlywiki
 <$set name="value" filter="[enlist{$:/state/multi-selector/$(currentTiddler)$/$(key)$!!list}join[;;]]" select="0"><$action-setfield $index=<<key>> $value=<<value>>/></$set>
 <$action-deletetiddler $tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$"/>Done
 </$button>
-<$select tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$" field="list" multiple class="$class$">
+<$select actions=<<__actions__>> tiddler="$:/state/multi-selector/$(currentTiddler)$/$(key)$" field="list" multiple class="$class$">
 <$list filter=<<__filter__>>><$list filter="[all[current]is[tiddler]]" emptyMessage="<option><<currentTiddler>></option>"><option value=<<currentTiddler>>>$caption$</option></$list></$list>
 </$select>
 </$reveal>
@@ -496,13 +496,15 @@ type: text/vnd.tiddlywiki
   filter:"tiddlers 筛选器"
   caption:"options 显示样式"
   class:"select widget 的 class"
-  disable-value:"当与该值相同时, 禁用 select widget 并且直接显示该值">>`
+  disable-value:"当与该值相同时, 禁用 select widget 并且直接显示该值"
+  actions:"选择后触发的额外动作">>`
 # ''从 tiddlers 列表中选择多个值赋给另一个 tiddler''
 #> `<<multi-selector
   filter:"tiddlers 筛选器"
   caption:"options 显示样式"
   class:"select widget 的 class"
-  disable-value:"当与该值相同时, 禁用 select widget 并且直接显示该值">>`
+  disable-value:"当与该值相同时, 禁用 select widget 并且直接显示该值"
+  actions:"选择后触发的额外动作">>`
 # ''从下拉菜单里面选择 status''
 #> `<<status-selector>>`
 # ''展示当前 Tiddler 的所有非 Branch tiddler 的 Tags''
