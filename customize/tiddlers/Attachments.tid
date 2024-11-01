@@ -3,30 +3,22 @@ created: 20211222002004723
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/MoreSideBar/Recent
-modified: 20241015072954585
+modified: 20241101055816426
 modifier: yuzijie
 tags: customized $:/tags/MoreSideBar $:/custom/ui/ControlPanel/TiddlyBrain
 title: Attachments
 type: text/vnd.tiddlywiki
 
-<$tiddler tiddler="Attachments">
+\procedure attachments-item()
+<$droppable actions=<<droppable-attms-action>> tag="section"><div class="tc-droppable-placeholder" style="display:block;">
+<$let qty={{{ [all[tiddlers]belongs.to[Attachments]note<key>count[]] }}} summary=`$(key)$ ($(qty)$)`>
+<$details summary=<<summary>>><ol><$list filter="[all[tiddlers]belongs.to[Attachments]note<key>!sort[modified]]">
+<li><$transclude $variable="l" title=<<currentTiddler>> date="yes" description="yes"/></li>
+</$list></ol></$details>
+</$let>
+</div></$droppable>
+\end
 
-<$details summary="Diagram"><<snippet key:'Diagram' date:'yes' sort:'!sort[modified]'>></$details>
-
-<$details summary="JPG"><<snippet key:'JPG' date:'yes' sort:'!sort[modified]'>></$details>
-
-<$details summary="PNG"><<snippet key:'PNG' date:'yes' sort:'!sort[modified]'>></$details>
-
-<$details summary="GIF"><<snippet key:'GIF' date:'yes' sort:'!sort[modified]'>></$details>
-
-<$details summary="SVG"><<snippet key:'SVG' date:'yes' sort:'!sort[modified]'>></$details>
-
-<$details summary="HTML"><<snippet key:'HTML' date:'yes' sort:'!sort[modified]'>></$details>
-
-<$details summary="PDF"><<snippet key:'PDF' date:'yes' sort:'!sort[modified]'>></$details>
-
-<$details summary="MP3"><<snippet key:'MP3' date:'yes' sort:'!sort[modified]'>></$details>
-
-<$details summary="MP4"><<snippet key:'MP4' date:'yes' sort:'!sort[modified]'>></$details>
-
-</$tiddler>
+<$tiddler tiddler="Attachments"><$let template={{$:/config/defaultTemplate}}>
+<$list filter="Diagram JPG PNG GIF SVG HTML PDF MP3 MP4" variable="key"><<attachments-item>></$list>
+</$let></$tiddler>

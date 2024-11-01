@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20241029171938206
+modified: 20241101063409861
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -29,6 +29,13 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[tiddlers]belongs.to<actionTiddler>]"><$action-setfield belongs.to="" tags="" $timestamp="no"/><$action-navigate $to={{!!title}} $scroll="no"/></$list>
 <$list filter="[all[tiddlers]tag<actionTiddler>]"><$action-listops $field="tags" $subfilter="-[<actionTiddler>]" $timestamp="no"/></$list>
 <$list filter="[all[tiddlers]contains<actionTiddler>]"><$action-listops $field="list" $subfilter="-[<actionTiddler>]" $timestamp="no"/></$list>
+\end
+
+\define droppable-attms-action()
+<$action-createtiddler $basetitle=<<unusedtitle $(template)$>> $template=<<actionTiddler>> date=<<now YYYY0MM0DD>> tags="Snippet" belongs.to="Attachments" note=<<key>> keywords="ATTMs" parents="Attachments" caption=<<actionTiddler>>>
+<$transclude $variable="tiddler-close" tiddler=<<actionTiddler>>/><$action-deletetiddler $tiddler=<<actionTiddler>>/>
+<$transclude $variable="tiddler-open" tiddler=<<createTiddler-title>>/>
+</$action-createtiddler>
 \end
 
 \define droppable-rename-set-caption-action(template)
@@ -119,6 +126,8 @@ type: text/vnd.tiddlywiki
 #> `<<droppable-index-tree>>`
 # ''删除 Tiddler 的 action''
 #> `<<droppable-delete-action>>`
+# ''将图片重命名, 并添加到 Attachments 下面''
+#> `<<droppable-attms-action>>`
 # ''将旧 Tiddler 按照标准重命名''
 #> `<<droppable-rename-set-caption-action
   template:"新 Tiddler 模板">>`

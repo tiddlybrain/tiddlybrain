@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20241018132424464
+modified: 20241030084957866
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -70,7 +70,7 @@ TBC: <<tbc>>
 </li></$list>
 <$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>!sort[date]]"><li style="white-space:nowrap;">
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><$list filter="[<task-id>has[status]]">
-<span class="tc-tag-label" style="background-color:#009dd9;"><$view field="status"/></span>
+<span class="tc-tag-label" style="background-color:#b366aa;"><$view field="status"/></span>
 </$list></$set>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button><<task-list-waiting>>
 </li></$list>
