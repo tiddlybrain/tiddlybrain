@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241101165041167
+modified: 20241102214732014
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -87,7 +87,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links belongs-to:"$belongs-to$">></$list>
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
 <$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<$list filter="[all[current]has[cat-filter]]"><$transclude $variable="cat-filter-updater" cat-prefix={{!!cat-prefix}} filter="[tag<currentTiddler>]" tag-caption={{!!tag-caption}}/></$list>
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
 </$list>
 </p></$set></$tiddler>
@@ -258,18 +257,22 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define relationships(name, filter, direct-open, mode)
-<$list filter="$filter$ +[limit[1]]" variable="NONE"><$set name="state" value="$:/state/relationships/$(currentTiddler)$/$name$">
-<$reveal type="match" state=<<state>> text="close" tag="div" style="padding-top:1em;">
-<$button set=<<state>> setTo="open" style="display:block;margin:0 auto;font-variant:small-caps;" class="tc-btn-invisible">''$name$'' (<$count filter="$filter$"/>)</$button>
-</$reveal>
-<$reveal type="nomatch" state=<<state>> text="close" tag="div" style="padding-top:1em;">
-<$button set=<<state>> setTo="close" style="display:block;margin:0 auto 1em;font-variant:small-caps;" class="tc-btn-invisible">''$name$''</$button>
-<$let direct-open=<<__direct-open__>> single-column="yes">
+\define relationships(name, filter, direct-open, mode, view:"list")
+\whitespace trim
+<$list filter="$filter$ +[limit[1]]" variable="NONE">
+<div style="text-align:center;margin:1em;font-variant:small-caps;">''$name$''</div>
+<$list filter="[<__view__>match[list]]" variable="NONE"><$let direct-open=<<__direct-open__>> single-column="yes">
 <<sort-by-belongs filter:"$filter$" title:"$name$" list-parents:"0" has-filter:"no" mode:"$mode$">>
-</$let>
-</$reveal>
-</$set></$list>
+</$let></$list>
+<$list filter="[<__view__>match[tags]]" variable="NONE"><$let current=<<currentTiddler>>><$list filter="$filter$">
+<$set name="style" filter="[all[current]get[color]] :else[all[current]colorize[]] +[addprefix[margin-right:7px;background:]]" select="0">
+<$button actions=<<modal-actions>> tooltip={{!!title}} class="tc-btn-invisible tc-tag-label" style=<<style>>>
+<$fieldmangler tiddler=<<current>>><$button style="fill:white;font-size:smaller;" class="tc-btn-invisible" message="tm-remove-tag" param={{!!title}}>{{$:/core/images/close-button}}</$button></$fieldmangler>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</$button>
+</$set>
+</$list></$let></$list>
+</$list>
 \end
 
 \define verification-notice()
@@ -384,8 +387,8 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$list filter="[all[current]tags[]!match<current>type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]">
 <$set name="style" filter="[all[current]get[color]] :else[all[current]colorize[]] +[addprefix[background:]]" select="0">
-<$button tooltip={{!!caption}} class="tc-btn-invisible tc-tag-label tag-list" style=<<style>>>
-<$transclude field="caption"><$view field="title"/></$transclude><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
+<$button actions=<<modal-actions>> tooltip={{!!caption}} class="tc-btn-invisible tc-tag-label tag-list" style=<<style>>>
+<$transclude field="caption"><$view field="title"/></$transclude>
 </$button>
 </$set>
 </$list>
@@ -478,7 +481,8 @@ type: text/vnd.tiddlywiki
   name:"关系名称"
   filter:"关系对应的 Filter"
   direct-open:"是否直接打开"
-  mode:"sort-by-belongs 的 mode 选项">>`
+  mode:"sort-by-belongs 的 mode 选项"
+  view:"显示形式, list 是 records, tags 是标签">>`
 # ''Outdated 过期通知''
 #> `<<verification-notice>>`
 # ''用在 Journal 里面, 用于管理当天的 TBC 列表''
