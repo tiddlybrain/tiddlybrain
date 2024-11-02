@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20241002050223752
+modified: 20241102145532724
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -66,13 +66,15 @@ type: text/vnd.tiddlywiki
 
 \define table-row(first-col, checkbox)
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="background:#fff3c9;" emptyValue={{{ [all[current]get[color]addprefix[background:]addsuffix[;]] }}}><tr style=<<style>>>
-<$reveal default="$first-col$" type="match" text="yes" tag="td"><div class="table-links">
+<$reveal default="$first-col$" type="match" text="yes" tag="td"><$fieldmangler tiddler={{!!title}}>
+<$droppable actions="<$action-sendmessage $message=tm-add-tag $param=<<actionTiddler>>/>" tag="div"><div class="table-links tc-droppable-placeholder" style="display:block;">
 <$list filter="[<__checkbox__>match[yes]]" variable="NONE"><$checkbox tiddler=<<table-row-selection>> listField="list" checked=<<currentTiddler>>/></$list>
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">{{!!title}}</$button>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
 <<links>> <<tag-list>>
-</div></$reveal>
+</div></$droppable>
+</$fieldmangler></$reveal>
 <$set name="current" value={{!!title}}><$list filter="$(cfilter)$" variable="key">
 <td><$set name="value" tiddler=<<current>> index=<<key>>><$transclude $variable="cell-value"/></$set></td>
 </$list></$set>
