@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20241006170324844
+modified: 20241102214810495
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -193,18 +193,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
 
 \define sort-by-topic(topic, note, cat-prefix, sort, sort-tags, cfilter, cat-filter, tag-caption, checkbox, sort-order, list-parents) <$transclude $variable="sort-by-filter" item-filter="all[tiddlers]contains:parents[$topic$]note[$note$]" cat-prefix=<<__cat-prefix__>> sort=<<__sort__>> sort-tags=<<__sort-tags__>> cfilter=<<__cfilter__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> sort-order=<<__sort-order__>> list-parents=<<__list-parents__>>/>
 
-\define cat-filter-updater(cat-prefix, filter, tag-caption)
-<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><div class="cat-filter-updater"><span>current filter:</span>
-<$edit-text tiddler="$:/temp/cat-filter/$(currentTiddler)$" tag="input" default={{{ [all[current]get[cat-filter]] }}}/>
-<$set name="cat-prefix" filter="[<__cat-prefix__>is[blank]]" value="BR/$(currentTiddler)$/" emptyValue=<<__cat-prefix__>>>
-<$list filter="[[$:/temp/cat-filter/$(currentTiddler)$]is[tiddler]]" variable="NONE">
-<$transclude $variable="update-tags-button" cat-prefix=<<cat-prefix>> filter=<<__filter__>> cat-filter={{$:/temp/cat-filter/$(currentTiddler)$}} tag-caption=<<__tag-caption__>> title="Update Filter" actions="<$action-setfield cat-filter={{$:/temp/cat-filter/$(currentTiddler)$}}/><$action-deletetiddler $tiddler='$:/temp/cat-filter/$(currentTiddler)$'/>"/>
-<$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/cat-filter/$(currentTiddler)$"/>Cancel</$button>
-</$list>
-</$set>
-</div></$list>
-\end
-
 # ''从 `/` 处, 将 branch Tiddler 的 title 切开, 并按 level 来分行显示, 像一座塔一样''
 #> `<<tags-tower
   start:"0">>`
@@ -286,8 +274,3 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   checkbox:"table 模式下是否显示复选框"
   sort-order:"Table 按照列排序的顺序"
   list-parents:"sort-by-belongs 的 list-parents 参数, 默认 -1">>`
-# ''collector 的字段 cat-filter 的修改框''
-#> `<<cat-filter-updater
-  cat-prefix:"tag 的前缀"
-  filter:"筛选出所有 Tiddlers 的 filter"
-  tag-caption:"tag 的 caption">>`
