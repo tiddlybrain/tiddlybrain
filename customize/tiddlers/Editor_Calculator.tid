@@ -1,0 +1,22 @@
+caption: Calculator
+created: 20241102130128457
+creator: yuzijie
+keywords: 
+modified: 20241102141342580
+modifier: yuzijie
+tags: Editor customized
+title: Editor/Calculator
+type: text/vnd.tiddlywiki
+
+!!!Rectangular Tank Volume Calculator
+
+<table><tbody>
+<tr><th>Length (cm)</th><td><$edit-text tiddler="$:/temp/calc" index="L" tag="input"/></td></tr>
+<tr><th>Width (cm)</th><td><$edit-text tiddler="$:/temp/calc" index="W" tag="input"/></td></tr>
+<tr><th>Height (cm)</th><td><$edit-text tiddler="$:/temp/calc" index="H" tag="input"/></td></tr>
+<$let result={{{ =[[$:/temp/calc]getindex[L]] =[[$:/temp/calc]getindex[W]] =[[$:/temp/calc]getindex[H]] +[product[]] }}}>
+<tr><th>Total (cm3)</th><td><$button message="tm-copy-to-clipboard" param=<<result>> class="tc-btn-invisible"><<result>></$button></td></tr>
+<tr><th><$edit-text tiddler="$:/temp/calc" index="Index" tag="input" size="8" placeholder="Index"/></th>
+<td><$list filter="[[$:/temp/calc]has:index[Index]] :and[{$:/HistoryList!!current-tiddler}type[application/x-tiddler-dictionary]]"><$button class="tc-btn-invisible tc-tiddlylink">Assign it to <$text text={{{ [{$:/HistoryList!!current-tiddler}get[caption]else{$:/HistoryList!!current-tiddler}] }}}/><$action-setfield $tiddler={{$:/HistoryList!!current-tiddler}} $index={{$:/temp/calc##Index}} $value=<<result>>/></$button></$list></td></tr>
+</$let>
+</tbody></table>
