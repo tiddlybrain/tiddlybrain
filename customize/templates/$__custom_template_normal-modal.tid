@@ -1,7 +1,7 @@
 created: 20210516172453585
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20241102214655250
+modified: 20241102215910378
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
@@ -33,7 +33,7 @@ Done: <<currentTiddler>><$transclude $variable="add-to-cell-action" title=<<jour
 </$set>
 </$set>
 </$list>
-<<relationships name:"Related Lists" filter:"[all[current]tags[]type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]" view:"tags">>
+<<relationships name:"Lists" filter:"[all[current]tags[]type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]" view:"tags">>
 </$list></div>
 </$tiddler></$let>
 </$list>
