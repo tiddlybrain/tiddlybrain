@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20241103092628697
+modified: 20241103103654403
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -48,13 +48,10 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<table-row-selection>> tooltip="Copy tiddler title contains all selections">{{$:/core/images/copy-clipboard}}</$button>
 </$list></$reveal>
 <$list filter="$cfilter$" variable="property"><th><$button class="tc-btn-invisible"><<property-title>>
-<$list filter="[<table-sort-option>!text<property>]" emptyMessage="""<span style="color:red;">
-<$list filter="[<table-sort-order>search:text:literal[!]]" emptyMessage="&#8638;">&#8642;</$list>
-</span><$action-deletetiddler $tiddler=<<table-sort-option>>/>""">
-<$action-setfield $tiddler=<<table-sort-option>> text=<<property>>/>
-<$set name="order" filter="[<table-sort-order>search:text:literal[!]]" value="[sortan[]]" emptyValue="[!sortan[]]">
-<$action-setfield $tiddler=<<table-sort-order>> text=<<order>>/>
-</$set>
+<$list filter="[<table-sort-option>text<property>]" emptyMessage="<$action-setfield $tiddler=<<table-sort-option>> text=<<property>>/><$action-setfield $tiddler=<<table-sort-order>> text='[sortan[]]'/>">
+<span style="color:red;"><$list filter="[<table-sort-order>search:text:literal[!]]" emptyMessage="&#8638;<$action-setfield $tiddler=<<table-sort-order>> text='[!sortan[]]'/>">
+&#8642;<$action-deletetiddler $filter="[<table-sort-option>] [<table-sort-order>]"/>
+</$list></span>
 </$list>
 </$button></th></$list>
 </tr>
@@ -105,13 +102,10 @@ type: text/vnd.tiddlywiki
 <tr class="heading">
 <th>Title</th><$list filter="$ffilter$"><th><<currentTiddler>></th></$list>
 <$list filter="$cfilter$" variable="property"><th><$button class="tc-btn-invisible"><<property-title>>
-<$list filter="[<table-sort-option>!text<property>]" emptyMessage="""<span style="color:red;">
-<$list filter="[<table-sort-order>search:text:literal[!]]" emptyMessage="&#8638;">&#8642;</$list>
-</span><$action-deletetiddler $tiddler=<<table-sort-option>>/>""">
-<$action-setfield $tiddler=<<table-sort-option>> text=<<property>>/>
-<$set name="order" filter="[<table-sort-order>search:text:literal[!]]" value="[sortan[]]" emptyValue="[!sortan[]]">
-<$action-setfield $tiddler=<<table-sort-order>> text=<<order>>/>
-</$set>
+<$list filter="[<table-sort-option>text<property>]" emptyMessage="<$action-setfield $tiddler=<<table-sort-option>> text=<<property>>/><$action-setfield $tiddler=<<table-sort-order>> text='[sortan[]]'/>">
+<span style="color:red;"><$list filter="[<table-sort-order>search:text:literal[!]]" emptyMessage="&#8638;<$action-setfield $tiddler=<<table-sort-order>> text='[!sortan[]]'/>">
+&#8642;<$action-deletetiddler $filter="[<table-sort-option>] [<table-sort-order>]"/>
+</$list></span>
 </$list>
 </$button></th></$list>
 </tr>
