@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20241102145532724
+modified: 20241103092628697
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -31,6 +31,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define table-sort-option() $:/state/table/$(current)$/$(tableTitle)$
+\define table-sort-order() $:/state/table/order/$(current)$/$(tableTitle)$
 \define table-row-selection() $:/temp/table/$(current)$/$(tableTitle)$
 \define table-subfilter() [index:$(property)$[$(index-value)$]]
 \define property-title() <$list filter="[<property>is[tiddler]]" emptyMessage=<<property>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
@@ -38,7 +39,7 @@ type: text/vnd.tiddlywiki
 \define table-check-all(rfilter) <$action-listops $tiddler=<<table-row-selection>> $field="list" $filter=<<__rfilter__>>/>
 \define table-uncheck-all() <$action-deletetiddler $tiddler=<<table-row-selection>>/>
 
-\define table(cfilter, rfilter:"[tag<currentTiddler>]", title:"default", sort-order:"sortan[]", first-col:"yes", checkbox)
+\define table(cfilter, rfilter:"[tag<currentTiddler>]", title:"default", first-col:"yes", checkbox)
 <$set name="current" value=<<currentTiddler>>><$set name="is-data-table" value="no">
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
 <tr class="heading">
@@ -46,18 +47,25 @@ type: text/vnd.tiddlywiki
 <$checkbox filter={{{ [list<table-row-selection>count[]] }}} checked={{{ $rfilter$ +[!has[draft.of]count[]] }}} unchecked="0" checkactions=<<table-check-all "$rfilter$ +[!has[draft.of]]">> uncheckactions=<<table-uncheck-all>> indeterminate="yes"/>
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<table-row-selection>> tooltip="Copy tiddler title contains all selections">{{$:/core/images/copy-clipboard}}</$button>
 </$list></$reveal>
-<$list filter="$cfilter$" variable="property"><th>
-<$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property-title>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property-title>> &#8645;</$button></$list>
-</th></$list>
+<$list filter="$cfilter$" variable="property"><th><$button class="tc-btn-invisible"><<property-title>>
+<$list filter="[<table-sort-option>!text<property>]" emptyMessage="""<span style="color:red;">
+<$list filter="[<table-sort-order>search:text:literal[!]]" emptyMessage="&#8638;">&#8642;</$list>
+</span><$action-deletetiddler $tiddler=<<table-sort-option>>/>""">
+<$action-setfield $tiddler=<<table-sort-option>> text=<<property>>/>
+<$set name="order" filter="[<table-sort-order>search:text:literal[!]]" value="[sortan[]]" emptyValue="[!sortan[]]">
+<$action-setfield $tiddler=<<table-sort-order>> text=<<order>>/>
+</$set>
+</$list>
+</$button></th></$list>
 </tr>
 <$set name="cfilter" filter="$cfilter$">
 <$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row "$first-col$" "$checkbox$">></$list>""">
-<$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
-<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]!is[blank]$sort-order$]" variable="index-value">
+<$let property={{{ [<table-sort-option>get[text]] }}} order={{{ [<table-sort-order>get[text]] }}}><$tiddler tiddler=<<current>>>
+<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]!is[blank]subfilter<order>]" variable="index-value">
 <$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$first-col$" "$checkbox$">></$list>
 </$list>
 <$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row "$first-col$" "$checkbox$">></$list>
-</$tiddler></$set>
+</$tiddler></$let>
 </$list>
 </$set>
 </$set></tbody></table></div>
@@ -90,24 +98,31 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define tableE(cfilter, ffilter, rfilter:"[tag<currentTiddler>]", title:"default", fields, tag, sort-order:"sortan[]")
+\define tableE(cfilter, ffilter, rfilter:"[tag<currentTiddler>]", title:"default", fields, tag)
 <$set name="current" value=<<currentTiddler>>>
 <h2><$button class="tc-btn-invisible"><$transclude $variable="table-edit-new-action" template={{$:/config/defaultTemplate}} tag="$tag$" fields="$fields$"/>Add New Row</$button></h2>
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
 <tr class="heading">
 <th>Title</th><$list filter="$ffilter$"><th><<currentTiddler>></th></$list>
-<$list filter="$cfilter$" variable="property"><th>
-<$list filter="[<table-sort-option>text<property>]" emptyMessage="""<$button set=<<table-sort-option>> setTo=<<property>> class="tc-btn-invisible"><<property-title>></$button>"""><$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<table-sort-option>>/><<property-title>> &#8645;</$button></$list>
-</th></$list>
+<$list filter="$cfilter$" variable="property"><th><$button class="tc-btn-invisible"><<property-title>>
+<$list filter="[<table-sort-option>!text<property>]" emptyMessage="""<span style="color:red;">
+<$list filter="[<table-sort-order>search:text:literal[!]]" emptyMessage="&#8638;">&#8642;</$list>
+</span><$action-deletetiddler $tiddler=<<table-sort-option>>/>""">
+<$action-setfield $tiddler=<<table-sort-option>> text=<<property>>/>
+<$set name="order" filter="[<table-sort-order>search:text:literal[!]]" value="[sortan[]]" emptyValue="[!sortan[]]">
+<$action-setfield $tiddler=<<table-sort-order>> text=<<order>>/>
+</$set>
+</$list>
+</$button></th></$list>
 </tr>
 <$set name="cfilter" filter="$cfilter$"><$set name="ffilter" filter="$ffilter$">
 <$list filter="[<table-sort-option>is[tiddler]]" emptyMessage="""<$list filter="$rfilter$ +[!has[draft.of]]"><<table-row-edit>></$list>""">
-<$set name="property" filter={{{[<table-sort-option>get[text]]}}}><$tiddler tiddler=<<current>>>
-<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]!is[blank]$sort-order$]" variable="index-value">
+<$let property={{{ [<table-sort-option>get[text]] }}} order={{{ [<table-sort-order>get[text]] }}}><$tiddler tiddler=<<current>>>
+<$list filter="$rfilter$ +[!has[draft.of]getindexParsed<property>each:value[]!is[blank]subfilter<order>]" variable="index-value">
 <$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row-edit>></$list>
 </$list>
 <$list filter="$rfilter$ +[!has[draft.of]subfilter<table-subfilter>]"><<table-row-edit>></$list>
-</$tiddler></$set>
+</$tiddler></$let>
 </$list>
 </$set></$set>
 </$set></tbody></table></div>
@@ -130,14 +145,14 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
-\define tables(cfilter, rfilter:"[tag<currentTiddler>]", title:"tables", sort-order, first-col, checkbox)
+\define tables(cfilter, rfilter:"[tag<currentTiddler>]", title:"tables", first-col, checkbox)
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <div class="filter-options">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<filter-build "$rfilter$ +[!has[draft.of]]">>>(<$count filter=<<filter-build "$rfilter$ +[!has[draft.of]]">>/>)</$button>
 filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$rfilter$ +[!has[draft.of]]">> cfilter=<<__cfilter__>>/>
 </div>
 <div style="margin-top:1em;">
-<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "$rfilter$ +[!has[draft.of]]">> title=<<__title__>> sort-order=<<__sort-order__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>>/>
+<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "$rfilter$ +[!has[draft.of]]">> title=<<__title__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>>/>
 </div>
 </$vars>
 \end
@@ -150,7 +165,6 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   cfilter:"[[A]] [[B]] [[C]] 输入键值"
   rfilter:"[tag<currentTiddler>] 行标题过滤"
   title:"表格 ID"
-  sort-order:"按照列排序的顺序"
   first-col:"是否显示第一列"
   checkbox:"是否显示行复选框">>`
 # ''展示 Table 的行''
@@ -164,8 +178,7 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   rfilter:"[tag<currentTiddler>] 行标题过滤"
   title:"表格 ID"
   fields:"新建词条的时候自定义的字段"
-  tag:"给新 Tiddler 添加额外的 tag"
-  sort-order:"按照列排序的顺序">>`
+  tag:"给新 Tiddler 添加额外的 tag">>`
 # ''tableE 的行''
 #> `<<table-row-edit>>`
 # ''如果 cell 里面没有值, 则按照内容来填充 cell''
@@ -180,6 +193,5 @@ filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter
   cfilter:"[[A]] [[B]] [[C]] 输入键值"
   rfilter:"[tag<currentTiddler>] 行标题过滤"
   title:"表格 ID"
-  sort-order:"按照列排序的顺序"
   first-col:"是否显示第一列"
   checkbox:"是否显示行复选框">>`
