@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241103114341923
+modified: 20241103155713012
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -387,7 +387,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$list filter="[all[current]tags[]!match<current>type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]">
 <$set name="style" filter="[all[current]get[color]] :else[all[current]colorize[]] +[addprefix[background:]]" select="0">
-<$button actions=<<modal-actions>> tooltip={{!!caption}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tag-label tag-list" style=<<style>>>
+<$button tooltip={{!!caption}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tag-label tag-list" style=<<style>>>
 <$transclude field="caption"><$view field="title"/></$transclude>
 </$button>
 </$set>
