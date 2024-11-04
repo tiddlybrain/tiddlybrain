@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20241103093735042
+modified: 20241104130549517
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -96,6 +96,8 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
 
 \define bl-sub-note(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, list-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" item-filter-2="getAllTiddlers:note[$param$]" uid=<<__param__>> sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> list-parents=<<__list-parents__>>/>
 
+\define bl-filters(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, list-parents) <$let filters=<<__param__>>><$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[current]subfilter<filters>" uid="filters" sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> list-parents=<<__list-parents__>>/></$let>
+
 # ''一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title''
 #> `<<l
   title:"tiddler title"
@@ -178,6 +180,26 @@ filter <$transclude $variable="list-filters" title=<<__uid__>> filter=<<filter-b
 # ''反查指向当前 Tiddler 的所有 Tiddlers 里面具有特定 note 的 Tiddlers''
 #> `<<bl-sub-note
   param:"bl-pattern 后面的 note, 二次搜索的 Tiddlers 的角色"
+  sort:"结果排序"
+  cfilter:"table 列"
+  limit:"最大显示行数"
+  description:"是否显示 Description"
+  parent:"是否显示 belongs.to"
+  date:"是否显示 date"
+  caption:"按照 caption 来显示结果条目"
+  has-filter:"是否显示 filter"
+  cat-prefix:"Category 的前缀"
+  cat-filter:"如何生成 tag 的 filter"
+  tag-caption:"tag 的 caption"
+  checkbox:"table 模式下是否显示复选框"
+  group-by-parents:"按照 belongs.to 分类排序"
+  mode:"l 的 mode"
+  parent-tag:"list 模式下父级的 HTML tag"
+  tag:"list 模式下子级条目的 HTML tag"
+  list-parents:"sort-by-belongs 的标题显示当前 tiddler 的所有 parents, 参数中的数字代表去掉的 parents 的个数">>`
+# ''按照多个 Filter 反查指向当前 Tiddler 的所有 Tiddlers''
+#> `<<bl-filters
+  param:"多个 Filter Expressions"
   sort:"结果排序"
   cfilter:"table 列"
   limit:"最大显示行数"
