@@ -1,7 +1,7 @@
 caption: Ask AI
 created: 20240728090858899
 creator: yuzijie
-modified: 20240930075429247
+modified: 20241105113228979
 modifier: yuzijie
 tags: customized
 title: $:/custom/search/ExternalLink/AI
@@ -10,5 +10,5 @@ type: text/vnd.tiddlywiki
 <$button tag="a" style="display:block;margin-bottom:5px;color:red;cursor:pointer;text-decoration:underline;">Ask AI Now!
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
-<$list filter="[tag[AI]get[order]]" variable="id"><$action-setfield $tiddler=<<ai-request>> text=<<search>> type="text/vnd.tiddlywiki"/></$list>
+<$list filter="[all[tiddlers]tag[AI]get[order]]" variable="id"><$action-setfield $tiddler=<<ai-request>> text=<<search>> type="text/vnd.tiddlywiki"/></$list>
 </$button>

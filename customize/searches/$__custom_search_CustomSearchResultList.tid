@@ -1,11 +1,11 @@
 caption: Custom
 created: 20201225180152364
 creator: yuzijie
-first-search-filter: [prefix[$:/custom]search:title,caption<userInput>] [all[tiddlers]tag[customized]search:title,caption<userInput>] +[sortan[title]]
+first-search-filter: [all[tiddlers]prefix[$:/custom]search:title,caption<userInput>] [all[tiddlers]tag[customized]search:title,caption<userInput>] +[sortan[title]]
 list-after: $:/custom/search/FilterSearchResultList
-modified: 20240629222647700
+modified: 20241105125032016
 modifier: yuzijie
-second-search-filter: [prefix[$:/custom]search:*<userInput>] [all[tiddlers]tag[customized]search:*<userInput>] +[sortan[title]]
+second-search-filter: [all[tiddlers]prefix[$:/custom]search:*<userInput>] [all[tiddlers]tag[customized]search:*<userInput>] +[sortan[title]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/CustomSearchResultList
 type: text/vnd.tiddlywiki

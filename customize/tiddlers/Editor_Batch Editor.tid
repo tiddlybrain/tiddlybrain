@@ -2,14 +2,14 @@ caption: Batch Editor
 created: 20200425125950200
 creator: yuzijie
 keywords: 
-modified: 20240309220629505
+modified: 20241105112903602
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Batch Editor
 type: text/vnd.tiddlywiki
 
 \define prefix-edit-tag() -[[$(current)$]] [[$(newTitle)$]]
-\define batch-edit-tag-filter() [tag[$(actionTiddler)$]]
+\define batch-edit-tag-filter() [all[tiddlers]tag[$(actionTiddler)$]]
 
 <style>
 .batch-edit-input {line-height:19px;}

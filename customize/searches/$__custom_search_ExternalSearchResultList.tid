@@ -1,7 +1,7 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20240930075810008
+modified: 20241105124958750
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 <$reveal default=<<link-dropdown>> type="match" text="yes" tag="div" style="font-size:small;margin:0 -14px;">
 
-<$transclude $variable="tabs" tabsList="[tag[AI]!has[draft.of]sort[order]]" default={{{ [tag[AI]!has[draft.of]sort[order]first[]] }}} state="$:/state/ai/session" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+<$transclude $variable="tabs" tabsList="[all[tiddlers]tag[AI]!has[draft.of]sort[order]]" default={{{ [all[tiddlers]tag[AI]!has[draft.of]sort[order]first[]] }}} state="$:/state/ai/session" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 
 </$reveal>
 <$reveal default=<<link-dropdown>> type="nomatch" text="yes" tag="div">
@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 //<small>Search for ''“{{$:/temp/menubarsearch/input}}”'' in:</small>//
 
 <$let search={{$:/temp/menubarsearch/input}}>
-<$list filter="[prefix[$:/custom/search/ExternalLink/]sort[caption]]">{{!!text}}</$list>
+<$list filter="[all[tiddlers]prefix[$:/custom/search/ExternalLink/]sort[caption]]">{{!!text}}</$list>
 </$let>
 
 </$reveal>

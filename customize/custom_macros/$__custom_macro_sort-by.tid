@@ -1,6 +1,6 @@
 created: 20220327171009495
 creator: yuzijie
-modified: 20241103093239588
+modified: 20241105125208495
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/sort-by
@@ -50,11 +50,11 @@ type: text/vnd.tiddlywiki
 \define categories(tags-filter, cat-prefix, filter, cat-filter, tag-caption, search-title:"Search here")
 <div class="categories">
 <div class="categories-caption">
-<$list filter="[prefix[$:/temp/search/sort-by/$(currentTiddler)$]limit[1]]" emptyMessage="""<$button class="tc-btn-invisible">
+<$list filter="[all[tiddlers]prefix[$:/temp/search/sort-by/$(currentTiddler)$]limit[1]]" emptyMessage="""<$button class="tc-btn-invisible">
 {{$:/core/images/advanced-search-button}} $search-title$<$action-setfield $tiddler="$:/temp/search/sort-by/$(currentTiddler)$/draft" text=""/>
 </$button>""" variable="NONE">
 <$button class="tc-btn-invisible">{{$:/core/images/close-button}}
-<$action-deletetiddler $filter="[prefix[$:/temp/search/sort-by/$(currentTiddler)$]] [prefix[$:/state/sort/$(currentTiddler)$/]]"/>
+<$action-deletetiddler $filter="[all[tiddlers]prefix[$:/temp/search/sort-by/$(currentTiddler)$]] [all[tiddlers]prefix[$:/state/sort/$(currentTiddler)$/]]"/>
 </$button>
 <$list filter="[<is-data-table>match[yes]]" emptyMessage="""<$edit-text tiddler="$:/temp/search/sort-by/$(currentTiddler)$" tag="input" default="" focus="yes"/>""" variable="NONE">
 <$edit-text tiddler="$:/temp/search/sort-by/$(currentTiddler)$/draft" tag="input" default="" focus="yes"/>
@@ -67,7 +67,7 @@ type: text/vnd.tiddlywiki
 <$set name="tags" filter=<<__tags-filter__>>><$transclude $variable="tags-tower"/></$set>
 <$reveal type="nomatch" state="$(tagsearch)$" text="" tag="div" class="categories-clear">
 <$button class="tc-btn-invisible" style="color:#d73737;">Clear Filter
-<$action-deletetiddler $filter="[[$(tagsearch)$]]"/><$action-deletetiddler $filter="[prefix[$:/state/sort/$(currentTiddler)$/]]"/>
+<$action-deletetiddler $filter="[[$(tagsearch)$]]"/><$action-deletetiddler $filter="[all[tiddlers]prefix[$:/state/sort/$(currentTiddler)$/]]"/>
 <$list filter="[<__cat-prefix__>suffix[/]]"><$vars tagging="[tagging[]]"><$action-deletetiddler $filter="[prefix<__cat-prefix__>!filter<tagging>]"/></$vars></$list>
 </$button>
 </$reveal>
@@ -91,7 +91,7 @@ type: text/vnd.tiddlywiki
 <$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
 <$list filter="[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 <$list filter="[<belongs-display-state>get[text]match[collapse]]" variable=NONE><$button style="font-size:smaller;color:unset;" class="tc-btn-invisible">
-<$list filter="[prefix[$:/state/sort/$(currentTiddler)$/$title$/]text[open]limit[1]]" emptyMessage="<$list filter=<<filter-build '$filter$ +[!has[draft.of]]' '+[get[belongs.to]each:value[]]'>> variable='sbb'><$action-setfield $tiddler=<<belongs-sort-state '$title$'>> text='open'/></$list>"><$action-deletetiddler $filter="[prefix[$:/state/sort/$(currentTiddler)$/$title$/]]"/></$list>
+<$list filter="[all[tiddlers]prefix[$:/state/sort/$(currentTiddler)$/$title$/]text[open]limit[1]]" emptyMessage="<$list filter=<<filter-build '$filter$ +[!has[draft.of]]' '+[get[belongs.to]each:value[]]'>> variable='sbb'><$action-setfield $tiddler=<<belongs-sort-state '$title$'>> text='open'/></$list>"><$action-deletetiddler $filter="[all[tiddlers]prefix[$:/state/sort/$(currentTiddler)$/$title$/]]"/></$list>
 (<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[get[belongs.to]each:value[]]">>/>)
 </$button></$list>
 <$list filter="[<belongs-display-state>!is[tiddler]]" variable=NONE>

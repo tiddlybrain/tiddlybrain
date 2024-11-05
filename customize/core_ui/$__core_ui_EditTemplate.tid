@@ -1,13 +1,13 @@
-modified: 20230326194805458
+code-body: yes
+modified: 20241105125306989
 modifier: yuzijie
 tags: customized
-code-body: yes
 title: $:/core/ui/EditTemplate
 type: text/vnd.tiddlywiki
 
 \define delete-edittemplate-state-tiddlers()
 <$set name="safeNewFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
-	<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix[$:/temp/NewFieldValue]prefix<safeNewFieldValueTiddlerPrefix>] [<newFieldNameInputTiddler>] [<newFieldNameSelectionTiddler>] [<newTagNameTiddler>] [<newTagNameInputTiddler>] [<newTagNameSelectionTiddler>] [<typeInputTiddler>] [<typeSelectionTiddler>]"/>
+	<$action-deletetiddler $filter="[<newFieldNameTiddler>] [all[tiddlers]prefix[$:/temp/NewFieldValue]prefix<safeNewFieldValueTiddlerPrefix>] [<newFieldNameInputTiddler>] [<newFieldNameSelectionTiddler>] [<newTagNameTiddler>] [<newTagNameInputTiddler>] [<newTagNameSelectionTiddler>] [<typeInputTiddler>] [<typeSelectionTiddler>]"/>
 </$set>
 \end
 

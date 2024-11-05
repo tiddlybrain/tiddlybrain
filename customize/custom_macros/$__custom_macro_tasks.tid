@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20241105095556518
+modified: 20241105125136380
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -101,13 +101,13 @@ type: text/vnd.tiddlywiki
 <$checkbox tiddler="$:/temp/task/deadline" field="text" checked="yes" unchecked="no" default="yes"> Deadline</$checkbox>
 <$checkbox tiddler="$:/temp/task/open" field="text" checked="yes" unchecked="no" default="yes"> Open</$checkbox>
 <$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>><dl class="task-list">
-<$list filter="[prefix[$:/task-state/]!text[waiting]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]!text[waiting]search:title:literal{$:/temp/task-list}get[plan]enlist-input[]each:value[]] [<today>] +[sort[]]" variable="dt">
 <$set name="journal-title" filter="[<dt>format:date[YYYY-0MM-0DD]]" select="0">
 <$droppable actions=<<droppable-task-list-actions>> tag="dt">
 <$set name="date-title" filter="[<dt>format:date[YYYY-0MM-0DD DDD]]" select="0">
 <$set name="date-style" filter="[<dt>match<today>]" value="color:#3473e9;font-size:large;" emptyValue="color:#333;">
 <$button set="$:/temp/plan/date" setTo=<<dt>> class="tc-btn-invisible" style=<<date-style>>>
-<<date-title>> (<$count filter="[prefix[$:/task-state/]contains:plan<dt>]"/>)
+<<date-title>> (<$count filter="[all[tiddlers]prefix[$:/task-state/]contains:plan<dt>]"/>)
 <$list filter="[<dt>match<today>]"><$action-setfield $tiddler="$:/state/tasks-1742033064" text="Tasks/Actions"/></$list>
 </$button>
 </$set>
@@ -122,17 +122,17 @@ TBC: <<tbc>>
 </$button></$list>
 </$droppable>
 <$list filter="[[$:/temp/task/open]!text[no]]" variable="NONE">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[open]contains:plan<dt>sortan[title]]">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[open]contains:plan<dt>sortan[title]]">
 <dd><<task-list-open>></dd>
 </$list>
 </$list>
 <$list filter="[[$:/temp/task/doing]!text[no]]" variable="NONE">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[doing]contains:plan<dt>sortan[title]]">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[doing]contains:plan<dt>sortan[title]]">
 <dd><<task-list-doing>></dd>
 </$list>
 </$list>
 <$list filter="[[$:/temp/task/deadline]!text[no]]" variable="NONE">
-<$list filter="[prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[deadline]contains:plan<dt>sortan[title]]">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]search:title:literal{$:/temp/task-list}text[deadline]contains:plan<dt>sortan[title]]">
 <dd><<task-list-deadline>></dd>
 </$list>
 </$list>
@@ -153,16 +153,16 @@ TBC: <<tbc>>
 
 \define task-pill(color:"#c9fffe")
 <div style="white-space:nowrap;margin:7px 0 0 -3px;">
-<$list filter="[prefix[$:/task-state/]text[waiting]search:title:literal<currentTiddler>limit[1]]">🔵</$list>
-<$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>limit[1]]">🟣</$list>
-<$list filter="[prefix[$:/task-state/]text[doing]search:title:literal<currentTiddler>limit[1]]">🟢</$list>
-<$list filter="[prefix[$:/task-state/]text[open]search:title:literal<currentTiddler>limit[1]]">🔴</$list>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[waiting]search:title:literal<currentTiddler>limit[1]]">🔵</$list>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>limit[1]]">🟣</$list>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]search:title:literal<currentTiddler>limit[1]]">🟢</$list>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]search:title:literal<currentTiddler>limit[1]]">🔴</$list>
 <$button set="$:/temp/task-list" setTo={{!!title}} class="tc-btn-invisible">
 <span class="dot" style="background-color:$color$;padding:2px 8px 3px;"><$transclude field="status"><$view field="title"/></$transclude></span>
 </$button>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">
-<$list filter="[prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>sort[date]first[]get[date]]">
 ☠️ ''<$transclude $variable="days-left" deadline=<<currentTiddler>>/>'' -
 </$list> {{!!caption}}
 </$button>
@@ -194,7 +194,7 @@ TBC: <<tbc>>
 <$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
 </$list>
 </$droppable></h2>
-<$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$list filter="[all[tiddlers]tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><div><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
 <$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
@@ -203,18 +203,18 @@ TBC: <<tbc>>
 </$list></$list>
 </$set>
 </$set>
-<$list filter="[tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
-<$list filter="[tag[Task]status[Urgent]sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
-<$set name="summary" filter="[tag[Task]status[Progressing]count[]addprefix[Progressing: ]]" select="0">
-<$details summary=<<summary>>><$list filter="[tag[Task]status[Progressing]sort[modified]]"><<task-pill color:"#8aff49">></$list></$details>
+<$list filter="[all[tiddlers]tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
+<$list filter="[all[tiddlers]tag[Task]status[Urgent]sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
+<$set name="summary" filter="[all[tiddlers]tag[Task]status[Progressing]count[]addprefix[Progressing: ]]" select="0">
+<$details summary=<<summary>>><$list filter="[all[tiddlers]tag[Task]status[Progressing]sort[modified]]"><<task-pill color:"#8aff49">></$list></$details>
 </$set>
-<$set name="summary" filter="[tag[Task]status[LowPriority]count[]addprefix[Low Priority: ]]" select="0">
-<$details summary=<<summary>>><$list filter="[tag[Task]status[LowPriority]sort[modified]]"><<task-pill color:"#e3ffed">></$list></$details>
+<$set name="summary" filter="[all[tiddlers]tag[Task]status[LowPriority]count[]addprefix[Low Priority: ]]" select="0">
+<$details summary=<<summary>>><$list filter="[all[tiddlers]tag[Task]status[LowPriority]sort[modified]]"><<task-pill color:"#e3ffed">></$list></$details>
 </$set>
 <$details summary="Review, Onhold, Todo">
-<$list filter="[tag[Task]status[Review]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
-<$list filter="[tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
-<$list filter="[tag[Task]status[Todo]sort[modified]]"><<task-pill>></$list>
+<$list filter="[all[tiddlers]tag[Task]status[Review]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
+<$list filter="[all[tiddlers]tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
+<$list filter="[all[tiddlers]tag[Task]status[Todo]sort[modified]]"><<task-pill>></$list>
 </$details>
 <div style="margin-top:11px;"><<task-list>></div>
 \end
@@ -237,7 +237,7 @@ TBC: <<tbc>>
 <$set name="pattern" value="<<[a]\s.+>>">⚔️ <$count filter="[{!!text}matches<pattern>]"/></$set>
 </$list></td>
 <td>
-<$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible">📅 <$count filter="[tag[Tasks/Journal]has:index<currentTiddler>]"/></$button>
+<$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible">📅 <$count filter="[all[tiddlers]tag[Tasks/Journal]has:index<currentTiddler>]"/></$button>
 </td>
 <td><$view field="finish" format="date" template="YYYY-0MM-0DD">
 <$button set="!!finish" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">

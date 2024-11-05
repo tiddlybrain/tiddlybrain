@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20241105112042858
+modified: 20241105124836236
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -52,34 +52,34 @@ TBC: <<tbc>>
 </$set></tr></$list>
 </tbody></table></$list>
 <ol style="color:#333;line-height:24px;">
-<$list filter="[tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$list filter="[all[tiddlers]tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
 <$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
 </$button></li></$list>
 </$set>
 </$list></$list>
-<$list filter="[prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li style="white-space:nowrap;"><<task-list-open>></li></$list>
-<$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]"><li style="white-space:nowrap;"><<task-list-doing>></li></$list>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li style="white-space:nowrap;"><<task-list-open>></li></$list>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]"><li style="white-space:nowrap;"><<task-list-doing>></li></$list>
 <hr style="margin-left:-1em;">
-<$list filter="[tag[Task]status[Urgent]]" variable="task"><$let task-state={{{ [<task>addprefix[$:/task-state/]addsuffix[/]] }}}>
+<$list filter="[all[tiddlers]tag[Task]status[Urgent]]" variable="task"><$let task-state={{{ [<task>addprefix[$:/task-state/]addsuffix[/]] }}}>
 <$list filter="[prefix<task-state>count[]compare:number:eq[0]]"><li>
 <span class="tc-tag-label" style="background-color:#75cbc7;">To be checked</span> <$transclude $variable="l" title=<<task>>/>
 </li></$list>
 </$let></$list>
-<$list filter="[prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li style="white-space:nowrap;">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li style="white-space:nowrap;">
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><$list filter="[<task-id>has[status]]">
 <span class="tc-tag-label" style="background-color:#cd23d8;"><$view field="status"/></span>
 </$list></$set>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button><<task-list-deadline>>
 </li></$list>
-<$list filter="[prefix[$:/task-state/]text[waiting]!pause<curDate>!sort[date]]"><li style="white-space:nowrap;">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[waiting]!pause<curDate>!sort[date]]"><li style="white-space:nowrap;">
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><$list filter="[<task-id>has[status]]">
 <span class="tc-tag-label" style="background-color:#b366aa;"><$view field="status"/></span>
 </$list></$set>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button><<task-list-waiting>>
 </li></$list>
-<$list filter="[prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li style="white-space:nowrap;">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li style="white-space:nowrap;">
 <$list filter="[all[current]text[doing]]" emptyMessage="""
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
 {{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
@@ -98,7 +98,7 @@ TBC: <<tbc>>
 <$list filter="[has[interval]!has[draft.of]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
 <$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
 </$set></$list>
-<$vars comparefilter="[get[date]compare:date:lteq<today>]"><$list filter="[tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
+<$vars comparefilter="[get[date]compare:date:lteq<today>]"><$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
 <li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
 </$list></$vars>
 </ol>

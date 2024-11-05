@@ -3,12 +3,12 @@ created: 20200321191916029
 creator: yuzijie
 keywords: 
 list-before: Index
-modified: 20240703080210783
+modified: 20241105112753292
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Tasks
 type: text/vnd.tiddlywiki
 
 <div style="font-size:small;margin-top:-5px;"><$set name="direct-open" value="yes">
-<$transclude $variable="tabs" tabsList="[tag[Tasks]!has[draft.of]sort[order]]" default="Tasks/Actions" state="$:/state/tasks" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+<$transclude $variable="tabs" tabsList="[all[tiddlers]tag[Tasks]!has[draft.of]sort[order]]" default="Tasks/Actions" state="$:/state/tasks" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </$set></div>

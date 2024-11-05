@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20241015140210230
+modified: 20241105113418731
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -21,8 +21,8 @@ type: text/vnd.tiddlywiki
 
 \define date-dropdown(step)
 <$reveal class="date-dropdown" type="popup" state=<<date-dropdown-state "$step$">>><div class="record-drop-down tc-popup-keep"><div class="record-content">
-<$set name="key" value=<<currentTiddler>>><$vars date-filter="[tag[Tasks/Journal]getindex<key>splitregexp[\s*;;\s*]match[$step$]]"><ol style="padding-left:20px;">
-<$list filter="[tag[Tasks/Journal]filter<date-filter>]" emptyMessage="NOT AVAILABLE"><li><$transclude $variable="l" title=<<currentTiddler>>/></li></$list>
+<$set name="key" value=<<currentTiddler>>><$vars date-filter="[all[tiddlers]tag[Tasks/Journal]getindex<key>splitregexp[\s*;;\s*]match[$step$]]"><ol style="padding-left:20px;">
+<$list filter="[all[tiddlers]tag[Tasks/Journal]filter<date-filter>]" emptyMessage="NOT AVAILABLE"><li><$transclude $variable="l" title=<<currentTiddler>>/></li></$list>
 </ol></$vars></$set>
 </div></div></$reveal>
 \end
@@ -78,7 +78,7 @@ type: text/vnd.tiddlywiki
 \define step-done(step,comments,t,d)
 <<linkIfExists "$step$" "$comments$" "green">>
 <$button class="tc-btn-invisible" popup=<<date-dropdown-state "$step$">>>@@color:green;&#10003;@@
-<$set name="numdays" filter="[tag[Tasks/Journal]getindex<currentTiddler>splitregexp[\s*;;\s*]match[$step$]count[]]" select="0" emptyValue="0">
+<$set name="numdays" filter="[all[tiddlers]tag[Tasks/Journal]getindex<currentTiddler>splitregexp[\s*;;\s*]match[$step$]count[]]" select="0" emptyValue="0">
 <$list filter="[<numdays>compare:number:ne[1]]" emptyMessage="1 day"><<numdays>> days</$list>
 </$set>
 </$button><<date-dropdown "$step$">>
@@ -107,7 +107,7 @@ type: text/vnd.tiddlywiki
 <span style="color:#aaa;"><<linkIfExists "$step$" "$comments$">></span>
 <$vars currTask={{!!title}} currStep="$step$">
 <$button class="tc-btn-invisible" style="color:#aaa;" popup=<<date-dropdown-state "$step$">>>@@color:red;&#10005;@@
-<$set name="numdays" filter="[tag[Tasks/Journal]getindex<currentTiddler>splitregexp[\s*;;\s*]match[$step$]count[]]" select="0" emptyValue="0">
+<$set name="numdays" filter="[all[tiddlers]tag[Tasks/Journal]getindex<currentTiddler>splitregexp[\s*;;\s*]match[$step$]count[]]" select="0" emptyValue="0">
 <$list filter="[<numdays>compare:number:ne[1]]" emptyMessage="1 day"><<numdays>> days</$list>
 </$set>
 </$button><<date-dropdown "$step$">>

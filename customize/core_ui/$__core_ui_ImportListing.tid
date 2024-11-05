@@ -1,4 +1,4 @@
-modified: 20241028152224529
+modified: 20241105124719534
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ImportListing
@@ -56,7 +56,7 @@ type: text/vnd.tiddlywiki
 
 \define askAI()
 \whitespace trim
-<$list filter="[tag[AI]search:text:literal,casesensitive[$:/custom/ai/Image]limit[1]]" variable="NONE">
+<$list filter="[all[tiddlers]tag[AI]search:text:literal,casesensitive[$:/custom/ai/Image]limit[1]]" variable="NONE">
 <$list filter="[<payloadTiddler>suffix[.png]]"><$button style="margin-left:5px;">Ask AI
 <$let type={{{ [{$:/Import}jsonget[tiddlers],<payloadTiddler>,[type]] }}} text={{{ [{$:/Import}jsonget[tiddlers],<payloadTiddler>,[text]] }}} id="image">
 <$action-setfield $tiddler="$:/temp/ai/image" type=<<type>> text=<<text>>/>
@@ -69,7 +69,7 @@ type: text/vnd.tiddlywiki
 </$let>
 <$transclude $variable="tiddler-close" tiddler="$:/Import"/><$action-setfield $tiddler="$:/Import" $index="tiddlers" $value=""/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
-<$action-setfield $tiddler="$:/state/ai/session-254911044" text={{{ [tag[AI]search:text:literal,casesensitive[$:/custom/ai/Image]first[]] }}}/>
+<$action-setfield $tiddler="$:/state/ai/session-254911044" text={{{ [all[tiddlers]tag[AI]search:text:literal,casesensitive[$:/custom/ai/Image]first[]] }}}/>
 <$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 </$button></$list>
 </$list>

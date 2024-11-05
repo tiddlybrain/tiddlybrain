@@ -1,6 +1,6 @@
 created: 20220625191032461
 creator: yuzijie
-modified: 20240824134258054
+modified: 20241105124636258
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/flashcards
@@ -28,11 +28,11 @@ type: text/vnd.tiddlywiki
 \end
 
 \define flashcards(level)
-<div class="flashcards"><$list filter="[tag[Flashcard]level[$level$]days:date{Flashcard Level $level$!!interval}]" emptyMessage="✔️"><<flashcard>></$list></div>
+<div class="flashcards"><$list filter="[all[tiddlers]tag[Flashcard]level[$level$]days:date{Flashcard Level $level$!!interval}]" emptyMessage="✔️"><<flashcard>></$list></div>
 \end
 
 \define flashcards-count(level)
-<$count filter="[tag[Flashcard]level[$level$]days:date{Flashcard Level $level$!!interval}]"/>/<$count filter="[tag[Flashcard]level[$level$]]"/>
+<$count filter="[all[tiddlers]tag[Flashcard]level[$level$]days:date{Flashcard Level $level$!!interval}]"/>/<$count filter="[all[tiddlers]tag[Flashcard]level[$level$]]"/>
 \end
 
 # ''显示单个 Flashcard''

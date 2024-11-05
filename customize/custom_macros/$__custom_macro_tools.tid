@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241103155713012
+modified: 20241105125058632
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -298,9 +298,9 @@ type: text/vnd.tiddlywiki
 \define tbc-notice()
 \whitespace trim
 <$vars today=<<now "YYYY0MM0DD">> comparefilter="[get[date]compare:date:lteq<today>]">
-<$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>get[date]compare:date:lteq<today>limit[1]]" variable="NONE">
+<$list filter="[all[tiddlers]tag[Tasks/Journal]contains:tbc<currentTiddler>get[date]compare:date:lteq<today>limit[1]]" variable="NONE">
 <$button class="tc-btn-invisible tc-tag-label verification-notice">To be checked
-<$list filter="[tag[Tasks/Journal]contains:tbc<currentTiddler>filter<comparefilter>!sortan[]]">
+<$list filter="[all[tiddlers]tag[Tasks/Journal]contains:tbc<currentTiddler>filter<comparefilter>!sortan[]]">
 <$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>
 </$list>
 <$list filter="[<modal>match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
@@ -319,14 +319,14 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-close-tiddler" $param=<<__tiddler__>>/>
 <$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$list>
-<$action-deletetiddler $filter="[prefix[$:/state/data-table/$tiddler$/]] [prefix[$:/state/sort/$tiddler$/]]"/>
+<$action-deletetiddler $filter="[all[tiddlers]prefix[$:/state/data-table/$tiddler$/]] [all[tiddlers]prefix[$:/state/sort/$tiddler$/]]"/>
 \end
 
 \define tiddler-open(tiddler)
 <$action-navigate $to=<<__tiddler__>>/>
 <$list filter="[<__tiddler__>is[tiddler]]">
 <$action-deletetiddler $filter="[<__tiddler__>addprefix[$:/state/folded/]is[tiddler]]"/>
-<$action-deletetiddler $filter="[prefix[$:/state/snippet-limit/]] [prefix[$:/state/bl-limit/]]"/>
+<$action-deletetiddler $filter="[all[tiddlers]prefix[$:/state/snippet-limit/]] [all[tiddlers]prefix[$:/state/bl-limit/]]"/>
 <$list filter="[<link-dropdown>!match[yes]]">
 <$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<__tiddler__>] +[putfirst[]]"/>

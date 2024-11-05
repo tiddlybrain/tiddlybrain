@@ -2,12 +2,12 @@ created: 20240705234330956
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/SideBar/More
-modified: 20240929120524900
+modified: 20241105112922183
 modifier: yuzijie
 tags: customized $:/tags/SideBar Ignore
 title: AI
 type: text/vnd.tiddlywiki
 
 <div style="font-size:small;margin-top:-5px;"><$let sidebar="yes">
-<$transclude $variable="tabs" tabsList="[tag[AI]!has[draft.of]sort[order]]" default={{{ [tag[AI]!has[draft.of]sort[order]first[]] }}} state="$:/state/ai/session" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
+<$transclude $variable="tabs" tabsList="[all[tiddlers]tag[AI]!has[draft.of]sort[order]]" default={{{ [all[tiddlers]tag[AI]!has[draft.of]sort[order]first[]] }}} state="$:/state/ai/session" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 </$let></div>

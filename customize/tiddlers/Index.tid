@@ -3,11 +3,11 @@ created: 20160817211338221
 creator: yuzijie
 keywords: 
 list-before: Editor
-modified: 20241013071218105
+modified: 20241105112815717
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Index
 type: text/vnd.tiddlywiki
 
 <<index-tree>>
-<$list filter="[tag[Index]tag[Ignore]]"><$transclude mode="block"/></$list>
+<$list filter="[all[tiddlers]tag[Index]tag[Ignore]]"><$transclude mode="block"/></$list>

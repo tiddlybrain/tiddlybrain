@@ -1,9 +1,9 @@
 caption: Tasks
 created: 20231210205748987
 creator: yuzijie
-first-search-filter: [tag[Task]!has[finish]!has[draft.of]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!sort[date]]
+first-search-filter: [all[tiddlers]tag[Task]!has[finish]!has[draft.of]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>!sort[date]]
 list-after: $:/custom/search/MultipleSearchResultList
-modified: 20240629222124759
+modified: 20241105113204714
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/TaskSearchResultList

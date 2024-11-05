@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20241008160815372
+modified: 20241105125244152
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -93,8 +93,8 @@ $button$
 </span>
 </div></$list>
 <$button class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">
-<$list filter="[prefix[$:/state/folded/]text[hide]limit[1]]" emptyMessage="<$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/>fold all">
-<$action-deletetiddler $filter="[prefix[$:/state/folded/]]"/>unfold all (<$count filter="[prefix[$:/state/folded/]text[hide]]"/>)
+<$list filter="[all[tiddlers]prefix[$:/state/folded/]text[hide]limit[1]]" emptyMessage="<$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/>fold all">
+<$action-deletetiddler $filter="[all[tiddlers]prefix[$:/state/folded/]]"/>unfold all (<$count filter="[all[tiddlers]prefix[$:/state/folded/]text[hide]]"/>)
 </$list>
 </$button>
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;"><<lingo Button>></$button>
