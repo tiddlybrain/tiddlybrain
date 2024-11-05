@@ -3,9 +3,9 @@ created: 20231125050253383
 creator: yuzijie
 first-search-filter: [{$:/temp/index-tree}getAllTiddlers[]search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] [{$:/temp/index-tree}blsearch:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[!tag[Ignore]!is[system]subfilter<note-subfilter>sortsub<topic-level>]
 list-after: $:/custom/search/CurrentSearchResultList
-modified: 20240709114359374
+modified: 20241105140134176
 modifier: yuzijie
-second-search-filter: [!tag[Ignore]contains:parents{$:/temp/index-tree}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortsub<topic-level>limit[100]]
+second-search-filter: [all[tiddlers]!tag[Ignore]contains:parents{$:/temp/index-tree}search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>subfilter<note-subfilter>sortsub<topic-level>limit[100]]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/SidebarSearchResultList
 type: text/vnd.tiddlywiki
