@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20241030084957866
+modified: 20241105112042858
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -62,6 +62,11 @@ TBC: <<tbc>>
 <$list filter="[prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li style="white-space:nowrap;"><<task-list-open>></li></$list>
 <$list filter="[prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]"><li style="white-space:nowrap;"><<task-list-doing>></li></$list>
 <hr style="margin-left:-1em;">
+<$list filter="[tag[Task]status[Urgent]]" variable="task"><$let task-state={{{ [<task>addprefix[$:/task-state/]addsuffix[/]] }}}>
+<$list filter="[prefix<task-state>count[]compare:number:eq[0]]"><li>
+<span class="tc-tag-label" style="background-color:#75cbc7;">To be checked</span> <$transclude $variable="l" title=<<task>>/>
+</li></$list>
+</$let></$list>
 <$list filter="[prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li style="white-space:nowrap;">
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><$list filter="[<task-id>has[status]]">
 <span class="tc-tag-label" style="background-color:#cd23d8;"><$view field="status"/></span>
