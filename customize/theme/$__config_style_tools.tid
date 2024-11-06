@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241102214918828
+modified: 20241106224615641
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -95,13 +95,7 @@ dl.task-list dd {white-space: nowrap;}
 .tc-sidebar-lists .tc-editor-toolbar {margin: 4px 0;}
 input.tc-edit-texteditor, textarea.tc-edit-texteditor {padding: 0 5px; margin: 5px 0; white-space: pre-wrap;}
 div.tc-edit-texteditor {width: 100%;}
-.editor-display {margin: 5px 0; background: white; padding: 10px 20px; line-height: 26px; border: 1px solid #ccc; max-height: 480px; overflow: auto;}
-.tc-sidebar-header .editor-display {color: #333;}
-.edit-area-container {display: flex; align-content: space-between; gap: 5px; align-items: flex-end;}
-.edit-area-container .editor-edit {flex: 1 1 60%;}
-.edit-area-container .editor-display {height: 450px;}
-@media (min-width: 1400px) {.editor-preview-closed {display: none;}}
-@media (max-width: 600px) {.editor-preview-closed {display: none;}}
+.editor-display {margin: 5px 0; background: white; padding: 10px 20px; line-height: 26px; border: 1px solid #ccc; max-height: 480px; overflow: auto; color: #333;}
 
 /* For Editor Toolbar Buttons */
 table.embed textarea {width: 100%;}
@@ -340,7 +334,7 @@ details {padding: 0 0.5em 0 1em;}
 details[open] {border-bottom: 1px solid #eee; border-radius: 3px;}
 details[open] > *:last-child {margin-bottom: 0 !important;}
 details details[open] {border: none;}
-details > summary {padding: 0 0 0 1.1em; background: white; margin: 0 -0.5em 0 -1em; font-weight: bold; color: #444;}
+details > summary {padding: 0 0 0 1.2em; background: white; margin: 0 -0.5em 0 -1em; font-weight: bold; color: #444;}
 details > summary:hover {text-decoration: underline;}
 .tc-sidebar-lists .editor-display details > summary, .tc-sidebar-lists .tc-tiddler-body details > summary, .tc-sidebar-lists .snippet-content details > summary, details .snippet-accordion details > summary {background: white;}
 .tc-sidebar-lists details > summary, details details > summary, .tc-sidebar-lists .editor-display details details > summary, .tc-more-sidebar details > summary, .tc-sidebar-lists .tc-tiddler-body details details > summary {background: #f4f4f4;}
