@@ -22,6 +22,18 @@ function addDays(date, days) {
 	return result;
 }
 
+function addMonths(date, months) {
+	var result = new Date(date.valueOf());
+	result.setMonth(result.getMonth() + months);
+	return result;
+}
+
+function addYears(date, years) {
+	var result = new Date(date.valueOf());
+	result.setFullYear(result.getFullYear() + years);
+	return result;
+}
+
 /*
 Export our filter function
 */
@@ -45,6 +57,26 @@ exports.getSunday = function(source,operator,options) {
 			var diff = -1 * value.getDay() + 7 * numDays;
 			var newDate = addDays(value, diff);
 			results.push($tw.utils.formatDateString(newDate, "YYYY0MM0DD"));
+		}
+	});
+	return results;
+};
+
+exports.nextNotice = function(source,operator,options) {
+	var results = [];
+	const [iMonth, iDay] = operator.operand.split("-").map(Number);
+	if (Number.isInteger(iDay)) source(function(tiddler,title) {
+		var value = $tw.utils.parseDate(title);
+		if (value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
+			if (Number.isNaN(iMonth) || iMonth < 1 || iMonth > 12) {
+				var newDate = new Date(value.getFullYear(), value.getMonth(), iDay);
+				if (value > newDate) newDate = addMonths(newDate, 1);
+				results.push($tw.utils.formatDateString(newDate, "YYYY0MM0DD"));
+			} else {
+				var newDate = new Date(value.getFullYear(), iMonth - 1, iDay);
+				if (value > newDate) newDate = addYears(newDate, 1);
+				results.push($tw.utils.formatDateString(newDate, "YYYY0MM0DD"));
+			}
 		}
 	});
 	return results;
