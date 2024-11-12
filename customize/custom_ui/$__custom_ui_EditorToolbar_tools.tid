@@ -1,8 +1,8 @@
 caption: Other Custom Tools
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20241112155811156
+modified: 20241112170452377
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
