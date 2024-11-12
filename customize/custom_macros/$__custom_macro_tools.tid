@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241112082606186
+modified: 20241112110548682
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -320,7 +320,7 @@ type: text/vnd.tiddlywiki
 
 \define tiddler-close(tiddler)
 <$list filter="[<modal>!match[yes]]" emptyMessage="<$action-sendmessage $message='tm-close-tiddler'/><$action-deletetiddler $filter='[[$:/state/modal/history]] [[$:/state/modal/editor]]'/>">
-<$list filter="[{$:/HistoryList!!current-tiddler}match<__tiddler__>]">
+<$list filter="[{$:/HistoryList!!current-tiddler}match<__tiddler__>]" emptyMessage="<$action-navigate $to={{$:/HistoryList!!current-tiddler}}/>">
 <$list filter="[<__tiddler__>previous[$:/StoryList]] :else[<__tiddler__>next[$:/StoryList]]">
 <$action-navigate $to=<<currentTiddler>>/><$action-deletetiddler $filter="[<currentTiddler>addprefix[$:/state/folded/]is[tiddler]]"/>
 </$list>
