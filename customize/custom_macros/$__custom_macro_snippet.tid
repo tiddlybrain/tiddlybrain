@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20241105125227703
+modified: 20241112153454850
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -76,7 +76,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> checkbox=<<__checkbox__>>/>""" variable="NONE">
 <$parent-tag$ class={{{ [<single-column>match[yes]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
 <$list filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]" "+[$sort$limit<limit>]">> emptyMessage="""<$list filter="[<__no-drop__>!match[yes]]" variable="NONE">
-<$button class="tc-btn-invisible" style="color:red;">Drop Tiddlers Here
+<$button class="tc-btn-invisible">No Children Tiddlers
 <$action-sendmessage $message="tm-new-tiddler" $param={{$:/config/defaultTemplate}} belongs.to=<<currentTiddler>> note=<<key>> tags="Snippet" caption={{!!caption}} type="text/vnd.tiddlywiki" date=<<now 'YYYY0MM0DD'>>/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
@@ -178,7 +178,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
   limit:"一次最多列出的 Snippets 的数量"
   caption:"自定义显示条目的内容"
   cfilter:"如果填写自动切换到 Table 模式"
-  no-drop:"没有 snippet 情况下, 不显示 Drop Tiddlers Here"
+  no-drop:"没有 snippet 情况下, 不显示 No Children Tiddlers"
   has-filter:"是否显示 filter"
   checkbox:"table 模式下是否显示复选框"
   parent-tag:"snippet 元素的父级 HTML tag"
@@ -193,7 +193,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
   cfilter:"如果填写自动切换到 Table 模式"
   actions:"Tiddler 被放置时的额外动作"
   tags:"为 ActionTiddler 添加的额外标签"
-  no-drop:"没有 snippet 情况下, 不显示 Drop Tiddlers Here"
+  no-drop:"没有 snippet 情况下, 不显示 No Children Tiddlers"
   cat-prefix:"Category 的前缀"
   cat-filter:"如何生成 tag 的 filter"
   tag-caption:"tag 的 caption"

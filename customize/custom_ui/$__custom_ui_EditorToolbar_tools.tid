@@ -1,0 +1,35 @@
+caption: Other Custom Tools
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+created: 20241112154422498
+creator: yuzijie
+modified: 20241112155811156
+modifier: yuzijie
+tags: $:/tags/EditorTools customized
+title: $:/custom/ui/EditorToolbar/tools
+type: text/vnd.tiddlywiki
+
+<span class="tc-text-editor-toolbar-item-wrapper">
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">D</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">A</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">W</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">S</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "t:YYYY0MM0DD">>/>""">t</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "d:YYYY0MM0DD">>/>""">d</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY0MM0DD>>/>""">Today</$button>
+<$list filter="[<targetTiddler>type[application/x-tiddler-dictionary]]">
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Name: {{!!caption}}
+Description: {{!!description}}
+"/>""">Name&Desc</$button>
+</$list>
+<$list filter="[<targetTiddler>type[text/vnd.tiddlywiki]]">
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="!!! Related Topics
+
+*
+
+!!! References
+
+*"/>""">Related</$button>
+</$list>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="{{||custom-template-date}}"/>""">Date</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
+</span>

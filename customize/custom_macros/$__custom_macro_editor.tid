@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20241106232246107
+modified: 20241112160119703
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -18,7 +18,8 @@ type: text/vnd.tiddlywiki
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list><$action-navigate $to=<<currentTiddler>>/>
 </$button>""">
 <$button class="tc-btn-invisible" style="text-align:center;color:brown;width:100%;">
-{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;&nbsp;<$action-deletetiddler $tiddler="$:/temp/Draft"/>
+{{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;
+<$action-deletetiddler $tiddler="$:/temp/Draft"/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
 <$button style="color:brown;">copy<$action-sendmessage $message="tm-copy-to-clipboard" $param={{$:/temp/Draft!!draft}}/></$button>
 <$button style="color:brown;">open<$transclude $variable="tiddler-open" tiddler={{$:/temp/Draft!!draft}}/></$button>
 <$button style="color:brown;">sidebar<<open-in-sidebar close:"no">><$action-deletetiddler $tiddler="$:/temp/Draft"/></$button>
@@ -159,34 +160,10 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/details"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/div"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/today"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="false"><$button set="$:/config/codemirror/lineWrapping" setTo="true" style="border:none;">WRAP</$button></$reveal>
+<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="true"><$button set="$:/config/codemirror/lineWrapping" setTo="false" style="border:none;">NO WRAP</$button></$reveal>
 </div>
-<div style="margin-bottom:3px;">
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">D</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">A</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">W</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">S</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "t:YYYY0MM0DD">>/>""">t</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "d:YYYY0MM0DD">>/>""">d</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY0MM0DD>>/>""">Today</$button>
-<$list filter="[<targetTiddler>type[application/x-tiddler-dictionary]]">
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Name: {{!!caption}}
-Description: {{!!description}}
-"/>""">Name&Desc</$button>
-</$list>
-<$list filter="[<targetTiddler>type[text/vnd.tiddlywiki]]">
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="!!! Related Topics
-
-*
-
-!!! References
-
-*"/>""">Related</$button>
-</$list>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="{{||custom-template-date}}"/>""">Date</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
-<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="false"><$button set="$:/config/codemirror/lineWrapping" setTo="true">Wrap</$button></$reveal>
-<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="true"><$button set="$:/config/codemirror/lineWrapping" setTo="false">NoWrap</$button></$reveal>
-</div>
+<div style="margin-bottom:3px;">{{$:/custom/ui/EditorToolbar/tools}}</div>
 </$set></$edit>
 </$set>
 \end

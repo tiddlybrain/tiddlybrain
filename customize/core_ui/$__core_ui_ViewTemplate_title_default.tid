@@ -1,12 +1,10 @@
-modified: 20240808102220400
+modified: 20241112142843673
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ViewTemplate/title/default
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-<$let draft={{{ [[$:/temp/Draft]get[draft]else{$:/HistoryList!!current-tiddler}] }}}>
-<$set name="class" filter="[all[current]match<draft>]" value="tc-title tc-title-draft" emptyValue="tc-title">
+<$set name="class" filter="[all[current]match{$:/HistoryList!!current-tiddler}]" value="tc-title tc-title-current" emptyValue="tc-title">
 <h2 class=<<class>>><$view field="title"/></h2>
 </$set>
-</$let>
