@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20241101063409861
+modified: 20241112070511755
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -91,9 +91,9 @@ type: text/vnd.tiddlywiki
 
 \define core-ui-edit-actions()
 <$list filter="[<modifier>!match[ctrl]]" variable="NONE">
-<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[draft.title<currentTiddler>] +[putfirst[]]"/>
-<$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$list filter="[[$:/state/tab/sidebar--595412856]is[missing]] [[$:/state/tab/sidebar--595412856]text[Index]]"><$action-setfield text="Editor"/></$list>
 </$list>
 <$list filter="[<modifier>match[ctrl]]" variable="NONE">
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>

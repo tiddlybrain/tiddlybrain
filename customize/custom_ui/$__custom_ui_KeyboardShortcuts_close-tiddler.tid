@@ -1,7 +1,7 @@
 created: 20241019125359955
 creator: yuzijie
 key: ((close-tiddler))
-modified: 20241019140416497
+modified: 20241112082233420
 modifier: yuzijie
 tags: $:/tags/KeyboardShortcut customized
 title: $:/custom/ui/KeyboardShortcuts/close-tiddler
@@ -12,5 +12,6 @@ type: text/vnd.tiddlywiki
 <$let current={{$:/HistoryList!!current-tiddler}} next={{{ [<current>previous[$:/StoryList]] :else[<current>next[$:/StoryList]] }}}>
 <$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$action-navigate $to=<<next>> $scroll="yes"/><$action-deletetiddler $filter="[<next>addprefix[$:/state/folded/]is[tiddler]]"/>
+<$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text="Index"/></$list>
 </$let>
 </$list></$navigator>
