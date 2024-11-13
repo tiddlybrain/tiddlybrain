@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241112163214621
+modified: 20241112224020378
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -180,8 +180,17 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
 <$button class="tc-btn-invisible"><<mTitle>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mTitle>>/></$button> &middot;
-<$list filter="[all[current]!code-body[yes]]"><$button class="tc-btn-invisible" actions=<<step-action>>>new step</$button></$list>
-<$list filter="[all[current]code-body[yes]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>copy content</$button></$list>
+<$list filter="[all[current]!code-body[yes]]"><$button class="tc-btn-invisible" actions=<<step-action>>>step</$button> &middot;</$list>
+<$list filter="[all[current]code-body[yes]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>content</$button> &middot;</$list>
+<$button class="tc-btn-invisible">search
+<$action-setfield $tiddler="$:/temp/menubarsearch" text={{!!caption}}/>
+<$action-setfield $tiddler="$:/temp/menubarsearch/input" text={{!!caption}}/>
+<$action-setfield $tiddler="$:/temp/menubarsearch/refresh" text="yes"/>
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
+<$transclude $variable="tiddler-close"/>
+</$button>
 </div>
 </$let></$list>
 \end
