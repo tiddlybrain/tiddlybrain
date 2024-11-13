@@ -2,26 +2,36 @@ caption: Other Custom Tools
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20241112170452377
+modified: 20241113134042806
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
 type: text/vnd.tiddlywiki
 
-<span class="tc-text-editor-toolbar-item-wrapper">
+<span class="tc-text-editor-toolbar-item-wrapper"><$tiddler tiddler=<<targetTiddler>>>
+<$list filter="[all[current]!type[text/x-markdown]]" emptyMessage="<$md-to-tid-button title={{!!title}} type={{!!type}}/>">
+<span style="padding:1px 3px 0px 3px;display:inline-block;font-size:smaller;vertical-align:middle;">
+<$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>
+<$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
+</span>
+</$list>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">Step</$button>
+<$list filter="[all[current]type[text/vnd.tiddlywiki]tag[Task]]">
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<d "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">D</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<a "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">A</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<w "' suffix=<<now '" "" t:YYYY0MM0DD>>'>>/>""">W</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">S</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "t:YYYY0MM0DD">>/>""">t</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now "d:YYYY0MM0DD">>/>""">d</$button>
+</$list>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=<<now YYYY0MM0DD>>/>""">Today</$button>
-<$list filter="[<targetTiddler>type[application/x-tiddler-dictionary]]">
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]">
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Name: {{!!caption}}
 Description: {{!!description}}
 "/>""">Name&Desc</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="{{||custom-template-date}}"/>""">Date snip</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task snip</$button>
 </$list>
-<$list filter="[<targetTiddler>type[text/vnd.tiddlywiki]]">
+<$list filter="[all[current]type[text/vnd.tiddlywiki]]">
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="!!! Related Topics
 
 *
@@ -30,6 +40,22 @@ Description: {{!!description}}
 
 *"/>""">Related</$button>
 </$list>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="{{||custom-template-date}}"/>""">Date</$button>
-<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task</$button>
-</span>
+<$list filter="[all[current]type[text/vnd.tiddlywiki]!tag[Task]]"><$fieldmangler>
+<$button set="!!celltpl" setTo="custom-template-task" message="tm-add-tag" param="Task" tooltip="Make it a task">Task</$button>
+</$fieldmangler></$list>
+<$list filter="[all[current]is[tiddler]!code-body[yes]]"><$fieldmangler>
+<$button tooltip="Make it a Code Snippet"><$action-setfield code-body="yes" type="text/vnd.tiddlywiki"/>Code</$button>
+</$fieldmangler></$list>
+<$list filter="[all[current]is[tiddler]!tag[Flashcard]]"><$fieldmangler>
+<$button message="tm-add-tag" param="Flashcard" tooltip="Make it a Flashcard">Flashcard</$button>
+</$fieldmangler></$list>
+<$tiddler tiddler={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}}><$list filter="[all[current]blsearch[]has[note]limit[1]]" variable="NONE">
+<$button style="font-weight:bold;" popup="$:/state/popup/editor/backlinks">Backlinks</$button>
+<$reveal type="popup" state="$:/state/popup/editor/backlinks" tag="div"><div class="record-drop-down" style="padding:6px 15px 10px 15px;line-height:2em;min-width:auto;">
+<$list filter="[all[current]blsearch[]get[note]unique[]]" variable="key"><<editor-backlink-button>><br></$list>
+</div></$reveal>
+</$list></$tiddler>
+<$set name="today" value=<<now YYYY0MM0DD>>><$list filter="[all[current]!tag[Task]has[date]!date<today>]">
+<$button style="font-weight:bold;">Update Date<<date-update-actions>><$list filter="[<modal>match[yes]]"><$action-deletetiddler $tiddler="$:/state/modal/editor"/></$list></$button>
+</$list></$set>
+</$tiddler></span>
