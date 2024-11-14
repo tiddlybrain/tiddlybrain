@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20241113134328082
+modified: 20241113234138692
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -35,23 +35,6 @@ type: text/vnd.tiddlywiki
 </$let>
 </$vars></$set>
 </$list></$list>
-\end
-
-\define snippet-modal-actions()
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$action-navigate/>" variable="NONE">
-<$list filter="[<direct-open>!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
-<$list filter="[all[current]!type[application/vnd.drawio]!type[application/x-drawio]!type[text/x-drawio]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>">
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
-</$list>
-<$action-setfield $tiddler="$:/state/modal/history" text=""/>
-</$list>
-<$list filter="[<modal>match[yes]]" variable="NONE">
-<$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<mTitle>]"/>
-<$action-sendmessage $message="tm-close-tiddler" $param=<<current>>/>
-</$list>
-</$list>
-</$list>
 \end
 
 \define snippet-accordion-actions()
@@ -88,7 +71,7 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
 </$button>
 </$set>
 <<links>>
-<$button actions=<<snippet-modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
+<$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[<__caption__>!is[blank]]" variable="NONE" emptyMessage="<$transclude field='caption'><$view field='title'/></$transclude>"><<__caption__>></$list>
 <$reveal default="$date$" type="match" text="yes" style="color:#666;">
@@ -169,8 +152,6 @@ filter <$transclude $variable="list-filters" title=<<key>> filter=<<filter-build
   actions:"Tiddler 被放置时的额外动作"
   tags:"为 ActionTiddler 添加的额外标签"
   celltpl:"Snippet 的模板">>`
-# ''点击 snippet 条目以后, 出发的动作''
-#> `<<snippet-modal-actions>>`
 # ''Snippet 的条目''
 #> `<<snippet-content
   date:"日期 yes/no"
