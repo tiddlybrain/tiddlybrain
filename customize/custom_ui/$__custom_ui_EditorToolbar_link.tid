@@ -1,10 +1,10 @@
 caption: Link
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
 created: 20221101141524058
 creator: yuzijie
 description: Turn title into a link
 icon: $:/core/images/import-button
-modified: 20240803072425281
+modified: 20241117095321812
 modifier: yuzijie
 shortcuts: ctrl-H
 tags: $:/tags/EditorToolbar customized

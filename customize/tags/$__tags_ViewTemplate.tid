@@ -1,6 +1,6 @@
 created: 20211009094212695
 creator: yuzijie
-list: $:/core/ui/ViewTemplate/title $:/core/ui/ViewTemplate/unfold $:/core/ui/ViewTemplate/tags $:/core/ui/ViewTemplate/classic $:/core/ui/ViewTemplate/body $:/core/ui/ViewTemplate/subtitle
+list: $:/core/ui/ViewTemplate/title $:/core/ui/ViewTemplate/unfold $:/core/ui/ViewTemplate/tags $:/core/ui/ViewTemplate/classic $:/core/ui/ViewTemplate/body $:/core/ui/ViewTemplate/subtitle $:/core/ui/ViewTemplate/lazy-loading
 modified: 20211009095611948
 modifier: yuzijie
 tags: customized

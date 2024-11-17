@@ -4,11 +4,15 @@ tags: customized
 title: $:/core/ui/ViewTemplate/body/code
 type: text/vnd.tiddlywiki
 
-<$let mTitle={{!!title}} code={{{ [<currentTiddler>get[text]] }}} language={{{ [<currentTiddler>get[language]else[text]] }}}>
-<$list filter="[belongs.to<currentTiddler>note[Comment]]" emptyMessage="""<$codeblock code=<<code>> language=<<language>>/>""">
-<$button tag="div" class="code-viewer-button">
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mTitle=<<mTitle>>/>
-<$codeblock code=<<code>> language=<<language>>/>
-</$button>
-</$list>
-</$let>
+<%if [<currentTiddler>is[missing]] :and[!is[shadow]] %>
+	<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+<%else%>
+	<$let mTitle={{!!title}} code={{{ [<currentTiddler>get[text]] }}} language={{{ [<currentTiddler>get[language]else[text]] }}}>
+	<$list filter="[belongs.to<currentTiddler>note[Comment]]" emptyMessage="""<$codeblock code=<<code>> language=<<language>>/>""">
+		<$button tag="div" class="code-viewer-button">
+			<$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mTitle=<<mTitle>>/>
+			<$codeblock code=<<code>> language=<<language>>/>
+		</$button>
+	</$list>
+	</$let>
+<%endif%>

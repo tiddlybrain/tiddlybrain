@@ -1,10 +1,10 @@
 caption: Steps
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 created: 20220924050636047
 creator: yuzijie
 description: Steps
 icon: $:/core/images/save-button
-modified: 20240510083442052
+modified: 20241117095259976
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/steps

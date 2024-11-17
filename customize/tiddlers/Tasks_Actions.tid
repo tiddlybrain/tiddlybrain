@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20241114083640816
+modified: 20241115165155986
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -112,5 +112,5 @@ TBC: <<tbc>>
 <hr>
 
 <$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
-<div class="tc-droppable-placeholder" style="display:block;"><<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]">></div>
+<div class="tc-droppable-placeholder" style="display:block;"><<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]" style:"table-layout:auto;">></div>
 </$droppable></$list>

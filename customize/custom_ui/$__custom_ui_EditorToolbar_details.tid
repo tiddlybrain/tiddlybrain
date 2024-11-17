@@ -1,10 +1,10 @@
 caption: Details
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 created: 20220226055106060
 creator: yuzijie
 description: Details Macro
 icon: $:/core/images/info-button
-modified: 20240731074759348
+modified: 20241117095349019
 modifier: yuzijie
 shortcuts: ctrl-shift-D
 tags: $:/tags/EditorToolbar customized

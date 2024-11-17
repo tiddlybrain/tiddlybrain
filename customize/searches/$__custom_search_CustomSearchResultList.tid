@@ -3,7 +3,7 @@ created: 20201225180152364
 creator: yuzijie
 first-search-filter: [all[tiddlers]prefix[$:/custom]search:title,caption<userInput>] [all[tiddlers]tag[customized]search:title,caption<userInput>] +[sortan[title]]
 list-after: $:/custom/search/FilterSearchResultList
-modified: 20241105125032016
+modified: 20241117091130276
 modifier: yuzijie
 second-search-filter: [all[tiddlers]prefix[$:/custom]search:*<userInput>] [all[tiddlers]tag[customized]search:*<userInput>] +[sortan[title]]
 tags: $:/tags/SearchResults customized
@@ -16,8 +16,8 @@ type: text/vnd.tiddlywiki
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
 </$button></$reveal>
 
-<$list filter="[<userInput>minlength[1]]" variable="ignore">
-<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<$list filter="[<userInput>minlength[2]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}} emptyMessage={{$:/language/Search/Matches/NoResult}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
@@ -29,8 +29,8 @@ type: text/vnd.tiddlywiki
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
 </$button></$reveal>
 
-<$list filter="[<userInput>minlength[1]]" variable="ignore">
-<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<$list filter="[<userInput>minlength[2]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}} emptyMessage={{$:/language/Search/Matches/NoResult}}>
 <span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>

@@ -3,7 +3,7 @@ created: 20221017175243378
 creator: yuzijie
 first-search-filter: [all[tiddlers]!is[system]!tag[Ignore]search:title,tags,caption,keywords,text,note,status,description,belongs.to,shortcap:some<userInput>sortan[title]limit[500]]
 list-after: $:/custom/search/RelatedSearchResultList
-modified: 20241105140154052
+modified: 20241117090718449
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/MultipleSearchResultList
@@ -15,8 +15,8 @@ type: text/vnd.tiddlywiki
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
 </$button></$reveal>
 
-<$list filter="[<userInput>minlength[1]]" variable="ignore">
-<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<$list filter="[<userInput>minlength[2]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}} emptyMessage={{$:/language/Search/Matches/NoResult}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>

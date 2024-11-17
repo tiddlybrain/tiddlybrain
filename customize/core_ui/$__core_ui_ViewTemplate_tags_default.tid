@@ -1,7 +1,7 @@
-modified: 20240112092223557
+modified: 20241117203518080
 modifier: yuzijie
-tags: $:/tags/ViewTemplate customized
-title: $:/core/ui/ViewTemplate/tags
+tags: customized
+title: $:/core/ui/ViewTemplate/tags/default
 type: text/vnd.tiddlywiki
 
 \whitespace trim
@@ -14,6 +14,7 @@ type: text/vnd.tiddlywiki
 </$button>
 </$vars></span></$list>
 <$list filter="[all[current]tags[]sortan[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate/Tags]!has[draft.of]]"><$transclude mode="inline"/></$list>
 <<verification-notice>><<tbc-notice>>
 </div>
 </$droppable></$fieldmangler>

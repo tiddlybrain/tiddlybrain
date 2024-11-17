@@ -1,10 +1,10 @@
 caption: Code Highlighted
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 created: 20210530134637560
 creator: yuzijie
 description: Show Texts as Code with Highlighting
 icon: $:/core/images/mono-line
-modified: 20231227005237588
+modified: 20241117095357010
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/code-highlighted

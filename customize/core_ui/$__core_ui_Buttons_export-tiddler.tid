@@ -6,7 +6,6 @@ tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/export-tiddler
 type: text/vnd.tiddlywiki
 
-\define makeExportFilter()
-[[$(currentTiddler)$]] [all[tiddlers]contains:parents[$(currentTiddler)$]]
-\end
+\define makeExportFilter() [[$(currentTiddler)$]] [all[tiddlers]contains:parents[$(currentTiddler)$]]
+
 <$transclude $variable="exportButton" exportFilter=<<makeExportFilter>> lingoBase="$:/language/Buttons/ExportTiddler/" baseFilename=<<currentTiddler>>/>

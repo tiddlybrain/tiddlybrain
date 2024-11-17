@@ -1,6 +1,6 @@
 caption: All
 first-search-filter: [!is[system]search:-bag,created,modified,type<userInput>sortan[title]limit[500]]
-modified: 20240920142811907
+modified: 20241117091228408
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/core/ui/DefaultSearchResultList
@@ -12,8 +12,8 @@ type: text/vnd.tiddlywiki
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
 </$button></$reveal>
 
-<$list filter="[<userInput>minlength[1]]" variable="ignore">
-<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<$list filter="[<userInput>minlength[2]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}} emptyMessage={{$:/language/Search/Matches/NoResult}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>

@@ -1,23 +1,25 @@
 caption: Search
+created: 20241117215954271
+creator: yuzijie
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20240728090625810
+modified: 20241117220244272
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
 type: text/vnd.tiddlywiki
 
-\define cancel-search-actions()
-<$set name="userInput" value={{{ [<__storeTitle__>get[text]] }}}>
-<$list filter="[<__tiddler__>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>] $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter $:/state/search/showParents"/><$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]limit[20]]"/>""">
-<$action-setfield $tiddler=<<__tiddler__>> text=<<userInput>>/><$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
+\procedure cancel-search-actions()
+<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
+<$list filter="[<tiddler>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<storeTitle>] [<tiddler>] [<selectionStateTitle>] $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter $:/state/search/showParents"/><$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]limit[20]]"/>""">
+<$action-setfield $tiddler=<<tiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$list>
 </$set>
 \end
 
-\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
+\procedure input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<tiddler>get[text]!is[missing]] ~[<tiddler>get[text]is[shadow]]"><$action-navigate $to={{{ [<tiddler>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<tiddler>get[text]] }}}/></$list>
 
-\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
+\procedure input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<tiddler>get[text]!is[missing]] ~[<tiddler>get[text]is[shadow]]"><$list filter="[<tiddler>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<tiddler>get[text]] }}}/></$list></$list>"""><$list filter="[<tiddler>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<tiddler>get[text]] }}}/></$list></$list>
 
 \define set-next-input-tab(beforeafter:"after") <$transclude $variable="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 

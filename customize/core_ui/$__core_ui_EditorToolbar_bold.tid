@@ -1,8 +1,8 @@
 caption: {{$:/language/Buttons/Bold/Caption}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
 description: {{$:/language/Buttons/Bold/Hint}}
 icon: $:/core/images/bold
-modified: 20211205194329426
+modified: 20241117095444717
 modifier: yuzijie
 shortcuts: ((bold))
 tags: $:/tags/EditorToolbar customized
@@ -14,4 +14,5 @@ type: text/vnd.tiddlywiki
 	$param="wrap-selection"
 	prefix="''"
 	suffix="''"
+	trimSelection="yes"
 />

@@ -1,9 +1,9 @@
 caption: {{$:/language/Buttons/Linkify/Caption}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
 description: {{$:/language/Buttons/Linkify/Hint}}
 icon: $:/core/images/linkify
 list-before: $:/core/ui/EditorToolbar/mono-block
-modified: 20240313121110332
+modified: 20241117095433250
 modifier: yuzijie
 shortcuts: ((linkify))
 tags: $:/tags/EditorToolbar customized
@@ -15,4 +15,5 @@ type: text/vnd.tiddlywiki
 	$param="wrap-selection"
 	prefix="[["
 	suffix="]]"
+	trimSelection="yes"
 />

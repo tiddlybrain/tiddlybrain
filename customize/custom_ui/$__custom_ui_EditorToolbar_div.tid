@@ -1,10 +1,10 @@
 caption: Div Tag
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 created: 20240730114922124
 creator: yuzijie
 description: Adding div tag
 icon: $:/core/images/new-here-button
-modified: 20240810074903494
+modified: 20241117095339948
 modifier: yuzijie
 shortcuts: ctrl-D
 tags: $:/tags/EditorToolbar customized

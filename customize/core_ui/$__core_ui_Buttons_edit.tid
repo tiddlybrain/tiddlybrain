@@ -7,17 +7,15 @@ title: $:/core/ui/Buttons/edit
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-\define edit-tiddler-button()
-\whitespace trim
-<span><$button actions=<<core-ui-edit-actions>> tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/core/images/edit-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Edit/Caption}}/>
-</span>
-</$list>
+<span><$button actions=<<core-ui-edit-actions>>
+	tooltip={{$:/language/Buttons/Edit/Hint}}
+	aria-label={{$:/language/Buttons/Edit/Hint}}
+	class=<<tv-config-toolbar-class>>
+>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/core/images/edit-button}}
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text"><$text text={{$:/language/Buttons/Edit/Caption}}/></span>
+	<%endif%>
 </$button></span>
-\end
-<<edit-tiddler-button>>

@@ -1,10 +1,10 @@
 caption: Tips
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
 created: 20200108235724304
 creator: yuzijie
 description: Show Content as Tips
 icon: $:/core/images/tip
-modified: 20231201154953029
+modified: 20241117095227029
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/tips

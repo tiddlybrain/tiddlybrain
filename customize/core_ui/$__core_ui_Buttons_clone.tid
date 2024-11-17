@@ -7,14 +7,18 @@ title: $:/core/ui/Buttons/clone
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}} class=<<tv-config-toolbar-class>>>
-<$set name="actionTiddler" value=<<currentTiddler>>><<droppable-clone-action>></$set>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/core/images/clone-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Clone/Caption}}/>
-</span>
-</$list>
+<$button
+	tooltip={{$:/language/Buttons/Clone/Hint}}
+	aria-label={{$:/language/Buttons/Clone/Hint}}
+	class=<<tv-config-toolbar-class>>
+>
+	<$set name="actionTiddler" value=<<currentTiddler>>><<droppable-clone-action>></$set>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/core/images/clone-button}}
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text={{$:/language/Buttons/Clone/Caption}}/>
+		</span>
+	<%endif%>
 </$button>
