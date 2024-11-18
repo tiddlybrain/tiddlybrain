@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241116152749415
+modified: 20241118174156390
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -307,7 +307,7 @@ type: text/vnd.tiddlywiki
 <$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
 <$list filter="[enlist{!!tbc}]" variable="tbc" emptyMessage="@@color:#ccc;nothing to be checked today.@@">
 <div style="white-space:nowrap;overflow:hidden;">
-<$button to=<<tbc>>><$action-listops $field="tbc" $subfilter="-[<tbc>]"/>&#10005;</$button>
+<$button to=<<tbc>>><$action-sendmessage $message="tm-close-tiddler"/><$action-listops $field="tbc" $subfilter="-[<tbc>]"/>&#10005;</$button>
 <$transclude $variable="l" title=<<tbc>> status="no"/>
 </div>
 </$list>
