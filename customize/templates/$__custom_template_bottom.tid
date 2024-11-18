@@ -1,14 +1,14 @@
 created: 20181118150240560
 creator: yuzijie
 list-after: $:/core/ui/ViewTemplate/body
-modified: 20241102215919039
+modified: 20241118213452226
 modifier: yuzijie
 tags: $:/tags/ViewTemplate customized
 title: $:/custom/template/bottom
 type: text/vnd.tiddlywiki
 
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes" class="tc-tiddler-body">
-<$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
+<$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
 </$list>
 <$list filter="[all[current]!search:title:literal[/]]">

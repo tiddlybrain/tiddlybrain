@@ -1,6 +1,6 @@
 created: 20210405111238526
 creator: yuzijie
-modified: 20241102214630355
+modified: 20241118213621756
 modifier: yuzijie
 tags: customized
 title: $:/custom/template/tab-content
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 <$tiddler tiddler=<<currentTab>>>
 <$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude mode=block/>"><<data-table>></$list>
-<$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
+<$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
 </$list>
 </$tiddler>

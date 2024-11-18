@@ -1,14 +1,14 @@
 created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20241105112653170
+modified: 20241118214809451
 modifier: yuzijie
 order: 4
 tags: customized Tasks
 title: Tracking
 type: text/vnd.tiddlywiki
 
-<h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">Notification List</h2>
+<h2 style="margin:20px 0 10px 0;color:#666;font-weight:500;">Notification List</h2>
 
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[-1]limit[1]]"><$details summary="OVERDUE"><ul>
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[-1]]"><li><$link to={{!!title}}>{{!!title}}</$link>
@@ -41,4 +41,7 @@ type: text/vnd.tiddlywiki
 </li></$list>
 </ul></$details></$list>
 
-<h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">Tracking List</h2>
+<$list filter="[all[current]tagging[]]">
+<h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">{{!!caption}}</h2>
+<$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude mode=block/>"><<data-table>></$list>
+</$list>

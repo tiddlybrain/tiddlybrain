@@ -1,7 +1,7 @@
 created: 20210516172453585
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20241105113130142
+modified: 20241118213645310
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
@@ -23,7 +23,7 @@ Done: <<currentTiddler>><$transclude $variable="add-to-cell-action" title=<<jour
 </$set>
 </$list></$list>
 </$set></$list>
-<$list filter="[all[current]!tag[Ignore]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
+<$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
 </$list>
 <$list filter="[all[current]!search:title:literal[/]]">
