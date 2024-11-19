@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20241105125244152
+modified: 20241119101954781
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -61,15 +61,13 @@ $button$
 </$let>
 </$button>
 <span class="sidebar-open-tools">
-<$button class="tc-btn-invisible sidebar-tab-open-btn tc-popup-keep">close
-<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
-</$button> &middot;
+<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button> &middot;
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 <$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
 </$button> &middot;</$list>
-<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button>
+<$button class="tc-btn-invisible sidebar-tab-open-btn tc-popup-keep">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/></$button>
 </span>"""/>
 </div>
 </$list>
@@ -84,12 +82,12 @@ $button$
 </$let>
 </$button>
 <span class="sidebar-open-tools">
+<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button> &middot;
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
 <$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 <$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
-</$button> &middot;</$list>
-<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button>
+</$button></$list>
 </span>
 </div></$list>
 <$button class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">
