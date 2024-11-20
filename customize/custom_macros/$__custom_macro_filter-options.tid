@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20240909134417645
+modified: 20241120145121941
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -47,11 +47,11 @@ type: text/vnd.tiddlywiki
 <option value=<<filter-by-status-value>> style="color:#ff5a5a;">Status: {{!!title}}</option>
 <option value=<<filter-by-not-status-value>> style="color:#a33434;">Not status: {{!!title}}</option>
 </$list>
-<$list filter="$filter$ +[get[type]!match[application/x-tiddler-dictionary]limit[1]]" emptyMessage="""<$list filter="$cfilter$" variable="index">
+<$list filter="$cfilter$" variable="index">
 <option value=<<filter-by-index-value>> style="color:#762597;">
 Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
 </option>
-</$list>"""/>
+</$list>
 <$list filter="$filter$ +[get[belongs.to]unique[]]">
 <option value=<<filter-by-belongs-value>> style="color:#205bc7;">Belongs to: <$transclude field=caption><$view field=title/></$transclude></option>
 </$list>

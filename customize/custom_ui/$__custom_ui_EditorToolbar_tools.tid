@@ -2,7 +2,7 @@ caption: Other Custom Tools
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20241113134042806
+modified: 20241120104840746
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -34,11 +34,11 @@ Description: {{!!description}}
 <$list filter="[all[current]type[text/vnd.tiddlywiki]]">
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="!!! Related Topics
 
-*
+*N/A
 
 !!! References
 
-*"/>""">Related</$button>
+*N/A"/>""">Related</$button>
 </$list>
 <$list filter="[all[current]type[text/vnd.tiddlywiki]!tag[Task]]"><$fieldmangler>
 <$button set="!!celltpl" setTo="custom-template-task" message="tm-add-tag" param="Task" tooltip="Make it a task">Task</$button>
