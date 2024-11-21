@@ -2,10 +2,10 @@ caption: Link Template for Tiddlers
 created: 20240118164717946
 creator: yuzijie
 keywords: 
-modified: 20240118194506658
+modified: 20241120164140164
 modifier: yuzijie
 tags: customized
 title: custom-template-link
 type: text/vnd.tiddlywiki
 
-<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink" style="white-space:nowrap;">{{!!caption}}</$button><br>
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink" style="white-space:nowrap;text-decoration:underline;text-decoration-color:#78bb4e;">{{!!caption}}</$button> 
