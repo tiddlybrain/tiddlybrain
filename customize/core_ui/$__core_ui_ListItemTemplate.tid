@@ -1,4 +1,4 @@
-modified: 20241123102225742
+modified: 20241123172538162
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 <div class="tc-menu-list-item"><$button tag="a" class="tc-tiddlylink tc-tiddlylink-resolves">
 <%if [<link-dropdown>match[yes]] %><$action-navigate $to=<<currentTiddler>>/><%else%><<modal-actions>><%endif%>
 <$let tv-wikilinks="no">
-<$list filter="[all[current]has[note]]">@@color:#5fa35f;[{{!!note}}]@@</$list>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 @@color:#666;<$view field="title"/>@@
 <$list filter="[<searchTiddler>get[text]trim[]!is[blank]]" variable="search">
 <$list filter="[all[current]search:caption,keywords,text,description:literal<search>]">@@color:#ffbda3;Exact@@</$list>
