@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20241115081121462
+modified: 20241123092152536
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -16,6 +16,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$(modal)$]!match[yes]]" variable="NONE"><tr><td colspan="3" style="line-height:26px;"><$set name="tv-wikilinks" value="no">
 <$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button class="tc-btn-invisible" style="color:green;text-align:center;width:100%;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list><$action-navigate $to=<<currentTiddler>>/>
+<$button style="color:green;">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/></$button>
 </$button>""">
 <$button class="tc-btn-invisible" style="text-align:center;color:brown;width:100%;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$action-deletetiddler $tiddler="$:/temp/Draft"/>
