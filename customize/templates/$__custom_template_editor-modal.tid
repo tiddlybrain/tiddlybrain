@@ -1,12 +1,12 @@
 created: 20231119105825349
 creator: yuzijie
-modified: 20241001155545033
+modified: 20241125144804011
 modifier: yuzijie
 tags: customized
 title: $:/custom/template/editor-modal
 type: text/vnd.tiddlywiki
 
-<$let modal="yes"><$tiddler tiddler=<<mTitle>>>
+<$let modal="yes"><$tiddler tiddler=<<mTitle>>><$keyboard key="((input-accept-variant))" actions="""<$set name="parents" filter="[{!!belongs.to}getAllParents[]]"><$let keywords={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}><$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/><$action-deletetiddler $tiddler="$:/state/modal/editor"/></$let></$set>""" tag="div">
 <$let draft=<<mTitle>>><<editor-title style:"width:100%;margin:0.5em 0;">></$let>
 <<tiddler-editor>>
 <table style="width:100%;margin:0.3em 0;"><tbody>
@@ -17,4 +17,4 @@ type: text/vnd.tiddlywiki
 </$list></td>
 </tr></$list>
 </tbody></table>
-</$tiddler></$let>
+</$keyboard></$tiddler></$let>
