@@ -1,4 +1,4 @@
-modified: 20241126094434390
+modified: 20241126103637289
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -69,10 +69,11 @@ type: text/vnd.tiddlywiki
 </$button>
 &#32;
 <$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0;transform:translateY(-2px);">
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
+<$let current={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}}>
+<$action-setfield $tiddler="$:/temp/index/filter" text=<<current>>/>{{$:/core/images/advanced-search-button}}<<current>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
-<$let current={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}}><$action-setfield $tiddler="$:/temp/note/filter" text=<<current>>/></$let>
-{{$:/core/images/close-others-button}}
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
+</$let>
 </$button>
 </$reveal>
 </$vars>
@@ -90,6 +91,24 @@ type: text/vnd.tiddlywiki
 </$linkcatcher>
 
 </$reveal>
+
+<$reveal tag="div" state=<<storeTitle>> type="match" text=""><$list filter="[<targetTiddler>is[tiddler]]">
+
+//Backlinks of the current tiddler//
+
+<$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
+
+<$let search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}}>
+
+<$list filter="[all[tiddlers]!is[system]!is[current]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sortan[belongs.to]]">
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</$list>
+
+</$let>
+
+</$linkcatcher>
+
+</$list></$reveal>
 
 </$vars>
 
