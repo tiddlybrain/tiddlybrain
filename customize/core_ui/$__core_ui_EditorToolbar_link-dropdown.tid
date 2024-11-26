@@ -1,4 +1,4 @@
-modified: 20241105124731140
+modified: 20241126094434390
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -66,6 +66,13 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0;transform:translateY(-2px);">
 <<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
 {{$:/core/images/close-button}}
+</$button>
+&#32;
+<$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0;transform:translateY(-2px);">
+<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
+<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
+<$let current={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}}><$action-setfield $tiddler="$:/temp/note/filter" text=<<current>>/></$let>
+{{$:/core/images/close-others-button}}
 </$button>
 </$reveal>
 </$vars>
