@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241126092602118
+modified: 20241127093358178
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -292,6 +292,7 @@ a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
 .filter-options {font-variant: small-caps; line-height: 23px; margin: -5px 0;}
 .filter-options .select-filter {font-size: small;}
 input.filter-options-search {font-size: small; background: none; border: 1px dotted #ccc;}
+.filter-options + ul, .filter-options + ol {margin-top: 0.5em;}
 
 /* For Macro: list-filters */
 .calculator select {border-style: dotted; font-size: small; background: transparent;}
