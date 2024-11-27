@@ -1,4 +1,4 @@
-modified: 20241126103637289
+modified: 20241126114815534
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -98,7 +98,7 @@ type: text/vnd.tiddlywiki
 
 <$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
 
-<$let search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}}>
+<$let search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}} link-dropdown="yes">
 
 <$list filter="[all[tiddlers]!is[system]!is[current]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sortan[belongs.to]]">
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
