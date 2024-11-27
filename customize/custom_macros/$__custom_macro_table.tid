@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20241103144522247
+modified: 20241127234746465
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -142,10 +142,10 @@ type: text/vnd.tiddlywiki
 \end
 
 \define tables(cfilter, rfilter:"[tag<currentTiddler>]", title:"tables", first-col, checkbox)
-<$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
+<$vars f2={{$:/state/select/$(currentTiddler)$/table/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/table/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/table/$title$/3}}>
 <div class="filter-options">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<filter-build "$rfilter$ +[!has[draft.of]]">>>(<$count filter=<<filter-build "$rfilter$ +[!has[draft.of]]">>/>)</$button>
-filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$rfilter$ +[!has[draft.of]]">> cfilter=<<__cfilter__>>/>
+filter <$transclude $variable="list-filters" title="table/$title$" filter=<<filter-build "$rfilter$ +[!has[draft.of]]">> cfilter=<<__cfilter__>>/>
 </div>
 <div style="margin-top:1em;">
 <$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "$rfilter$ +[!has[draft.of]]">> title=<<__title__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>>/>

@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20240721102650805
+modified: 20241127234028451
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -31,10 +31,10 @@ type: text/vnd.tiddlywiki
 \end
 
 \define records(filter:"[tag<currentTiddler>]", title:"records", sort:"sortan[caption]")
-<$vars f2={{$:/state/select/$(currentTiddler)$/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/$title$/3}}>
+<$vars f2={{$:/state/select/$(currentTiddler)$/record/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/record/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/record/$title$/3}}>
 <div class="filter-options">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>>(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>)</$button>
-filter <$transclude $variable="list-filters" title=<<__title__>> filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
+filter <$transclude $variable="list-filters" title="record/$title$" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
 </div>
 <div style="margin-top:1em;">
 <$transclude $variable="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
