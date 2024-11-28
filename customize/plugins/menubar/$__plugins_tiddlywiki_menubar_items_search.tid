@@ -1,9 +1,7 @@
 caption: Search
-created: 20241117215954271
-creator: yuzijie
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20241117220244272
+modified: 20241128152940486
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -11,9 +9,13 @@ type: text/vnd.tiddlywiki
 
 \procedure cancel-search-actions()
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
-<$list filter="[<tiddler>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<storeTitle>] [<tiddler>] [<selectionStateTitle>] $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter $:/state/search/showParents"/><$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]limit[20]]"/>""">
+<%if [<tiddler>get[text]!match<userInput>] %>
 <$action-setfield $tiddler=<<tiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
-</$list>
+<%else%>
+<$action-deletetiddler $filter="[<storeTitle>] [<tiddler>] [<selectionStateTitle>] $:/temp/current/filter $:/state/tab/search-results/sidebar $:/state/search/currentTab $:/temp/note/filter $:/state/search/showParents"/>
+<$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]limit[20]]"/>
+<$action-listops $tiddler="$:/config/recent-search" $filter="[list[$:/config/recent-search]is[tiddler]!is[system]!tag[customized]limit[10]]"/>
+<%endif%>
 </$set>
 \end
 
