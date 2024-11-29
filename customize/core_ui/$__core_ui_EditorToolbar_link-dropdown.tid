@@ -1,4 +1,4 @@
-modified: 20241126114815534
+modified: 20241129162831726
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -10,6 +10,10 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$action-sendmessage $message="tm-edit-text-operation" $param="insert-link" title={{$(linkTiddler)$}}/>
 <$action-deletetiddler $filter="[<dropdown-state>] [<linkTiddler>] [<searchListState>]"/>
+\end
+
+\define add-backlink-actions()
+<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text='<<bl-note param:"$(key)$" date:"no" group-by-parents:yes>>'/>
 \end
 
 \define get-focus-selector() [data-tiddler-title="$(cssEscapedTitle)$"] .tc-create-wikitext-link input
@@ -99,6 +103,10 @@ type: text/vnd.tiddlywiki
 <$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
 
 <$let search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}} link-dropdown="yes">
+
+<$list filter="[<search>blsearch[]get[note]unique[]]" variable="key">
+<$button actions=<<add-backlink-actions>> class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;margin-right:5px;" tag="span"><<key>></$button>
+</$list>
 
 <$list filter="[all[tiddlers]!is[system]!is[current]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sortan[belongs.to]]">
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
