@@ -1,4 +1,4 @@
-modified: 20241128150901760
+modified: 20241129092513573
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -11,13 +11,8 @@ type: text/vnd.tiddlywiki
 <<modal-actions>><$action-listops $tiddler="$:/config/recent-search" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
 <%endif%>
 <$let tv-wikilinks="no">
-<$list filter="[all[current]get[belongs.to]]"><$button tag="span" style="color:brown;">
-<$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
-[<$transclude field=caption><$view field=title/></$transclude>]
-</$button></$list>
-<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[all[current]get[note]]">@@color:green;[{{!!title}}]@@</$list>
+<$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 @@color:#666;<$view field="title"/>@@
 <$list filter="[<searchTiddler>get[text]trim[]!is[blank]]" variable="search">
 <$list filter="[all[current]search:caption,keywords,text,description:literal<search>]">@@color:#ffbda3;Exact@@</$list>
