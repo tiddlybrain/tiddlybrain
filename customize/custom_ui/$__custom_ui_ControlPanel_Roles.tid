@@ -1,7 +1,7 @@
 caption: Roles
 created: 20240708161609441
 creator: yuzijie
-modified: 20240820183821930
+modified: 20241130101824148
 modifier: yuzijie
 order: 1
 shortcap: Roles Manager
@@ -20,6 +20,5 @@ Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""/>
 <$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 \end
 
-<$button actions=<<newRole>>>Add New Role</$button>
-
 <$tiddler tiddler="$:/custom/ui/ControlPanel/Roles"><<snippet key:"Roles" limit:100>></$tiddler>
+<$button actions=<<newRole>> style="margin:1em 0;">Add New Role</$button>
