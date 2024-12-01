@@ -1,4 +1,4 @@
-modified: 20241129162831726
+modified: 20241201121649524
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -104,11 +104,13 @@ type: text/vnd.tiddlywiki
 
 <$let search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}} link-dropdown="yes">
 
-<$list filter="[<search>blsearch[]get[note]unique[]]" variable="key">
-<$button actions=<<add-backlink-actions>> class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;color:#333;margin-right:5px;" tag="span"><<key>></$button>
+<$list filter="[<search>blsearch[]get[note]unique[]sortsub<topic-level>]" variable="key">
+<$let style={{{ [<key>is[tiddler]get[belongs.to]get[color]else[#ffe96b]addprefix[background:]addsuffix[;color:#444;margin-right:5px;]] }}}>
+<$button actions=<<add-backlink-actions>> class="tc-btn-invisible tc-tag-label" style=<<style>> tag="span"><<key>></$button>
+</$let>
 </$list>
 
-<$list filter="[all[tiddlers]!is[system]!is[current]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sortan[belongs.to]]">
+<$list filter="[all[tiddlers]!is[system]!is[current]!is[image]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sortan[note]]">
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </$list>
 

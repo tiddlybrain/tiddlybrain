@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20241123101627370
+modified: 20241201121526855
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -22,18 +22,18 @@ type: text/vnd.tiddlywiki
 \end
 
 \define note-filter() [note[$(note)$]]
-\define note-style() font-size:small;background:$(background-color)$;font-weight:bold;color:#4b4b4b;
+\define note-style() background:$(background-color)$;
 
 \define note-filters()
 \whitespace trim
 <div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[get[note]unique[]sortsub<topic-level>]" variable="note">
-<$list filter="[<note>is[tiddler]]"><$set name="background-color" filter="[<note>get[belongs.to]get[color]]" emptyValue="#a7ffb4" select="0">
+<$list filter="[<note>is[tiddler]]"><$set name="background-color" filter="[<note>get[belongs.to]get[color]]" emptyValue="#ffe96b" select="0">
 <$button class="tc-btn-invisible tc-tag-label" style=<<note-style>> tooltip={{{ [<note>get[description]] }}}><<note>>
 <$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption=<<note>>/><<searchbar-focus-action>>
 </$button>
 </$set></$list>
 <$list filter="[<note>!is[tiddler]]">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:small;background:#a7ffb4;"><<note>>
+<$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;"><<note>>
 <$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption=<<note>>/><<searchbar-focus-action>>
 </$button>
 </$list>
