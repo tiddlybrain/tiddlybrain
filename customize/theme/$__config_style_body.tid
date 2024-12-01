@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20241201134126018
+modified: 20241201152321630
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -214,4 +214,6 @@ label.tc-check-btn input:checked ~ span, button.tc-checked-btn {box-shadow: inse
 
 /* $:/core/ui/ListItemTemplate */
 button.list-item-template {display: block; padding: 2px 10px; color: #5778d8;}
+.tc-editor-toolbar button.list-item-template {background-color: transparent;}
+.tc-drop-down .tc-menu-list-item button.list-item-template {padding: 0 10px;}
 button.list-item-template:hover {color: #ffffff; background-color: #5778d8; font-weight: 500;}
