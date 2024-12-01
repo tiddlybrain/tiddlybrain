@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241201174718710
+modified: 20241201184811025
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -201,9 +201,9 @@ type: text/vnd.tiddlywiki
 </$button>
 <$list filter="[{$:/status/IsReadOnly}!match[yes]]"><$list filter="[<mTitle>!has[_canonical_uri]!is[image]]">
 <$list filter="[[$:/state/modal/editor]!is[tiddler]]">
-<$button set="$:/state/modal/editor" setTo="yes">EDIT</$button>
-<$list filter="[<mTitle>code-body[yes]]"><$transclude $variable="modal-edit-comment" template={{$:/config/defaultTemplate}}/></$list>
 <$button actions=<<modal-clone-actions>>>CLONE</$button>
+<$button set="$:/state/modal/editor" setTo="yes">''EDIT''</$button>
+<$list filter="[<mTitle>code-body[yes]]"><$transclude $variable="modal-edit-comment" template={{$:/config/defaultTemplate}}/></$list>
 </$list>
 <$list filter="[[$:/state/modal/editor]is[tiddler]]">
 <$button>''GO BACK''

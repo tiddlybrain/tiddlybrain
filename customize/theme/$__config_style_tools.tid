@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241201120350561
+modified: 20241201211317150
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -105,7 +105,7 @@ table.embed textarea, table.embed select {border: none;}
 
 /* For $:/custom/ui/SideBarSegments/open */
 .sidebar-item-hover {display: none;}
-.tc-sidebar-tab-open-item:hover .sidebar-item-hover, .toc-item:hover > a > .sidebar-item-hover, .toc-item:hover > .sidebar-item-hover, .tc-menu-list-item:hover > a > .sidebar-item-hover {display: inline-block;}
+.tc-sidebar-tab-open-item:hover .sidebar-item-hover, .toc-item:hover > a > .sidebar-item-hover, .toc-item:hover > .sidebar-item-hover, .tc-menu-list-item:hover > a > .sidebar-item-hover, .toc-item:hover > button > .sidebar-item-hover, .tc-menu-list-item:hover > button > .sidebar-item-hover {display: inline-block;}
 .tc-sidebar-tab-open-item code {white-space: nowrap;}
 .sidebar-item-hover > button:hover {text-decoration: underline;}
 
