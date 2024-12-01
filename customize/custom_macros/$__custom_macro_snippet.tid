@@ -1,14 +1,14 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20241127234401735
+modified: 20241201182336204
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
 type: text/vnd.tiddlywiki
 
 \define snippet-drop-ctrl-actions(tags, celltpl)
-<$action-createtiddler $basetitle=<<unusedtitle $(template)$>> $template=<<actionTiddler>> date=<<now YYYY0MM0DD>> belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>> caption="$(caption)$✱">
+<$action-createtiddler $basetitle=<<unusedtitle $(template)$>> $template=<<actionTiddler>> date=<<now YYYY0MM0DD>> belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>> status="clone">
 <$action-listops $tiddler=<<createTiddler-title>> $field="tags" $subfilter="Snippet $tags$"/>
 <$list filter="[<__celltpl__>is[tiddler]]"><$set name="actionTiddler" value=<<createTiddler-title>>>
 <$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>> $timestamp="no"/>

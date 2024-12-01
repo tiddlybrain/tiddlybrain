@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241118213708331
+modified: 20241201174718710
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -149,29 +149,6 @@ type: text/vnd.tiddlywiki
 
 \define brcap(levels:"2", new:" - ", old:"/") <$text text={{{ [all[current]split<__old__>butfirst<__levels__>join<__new__>] }}}/>
 
-\define modal-actions()
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[<direct-open>match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
-<$list filter="[<modal>match[yes]]" variable="NONE">
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
-</$list>
-<$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<mTitle>]"/>
-<$action-sendmessage $message="tm-close-tiddler" $param=<<mTitle>>/>
-</$list>
-<$list filter="[<modal>!match[yes]]" variable="NONE">
-<$list filter="[<direct-open>!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
-<$list filter="[all[current]!type[application/vnd.drawio]!type[application/x-drawio]!type[text/x-drawio]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>">
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
-</$list>
-<$action-setfield $tiddler="$:/state/modal/history" text=""/>
-<$list filter="[{$:/HistoryList!!current-tiddler}!has[draft.of]]"><$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text="Index"/></$list></$list>
-</$list>
-</$list>
-</$list>
-</$list>
-\end
-
 \define modal-subtitle()
 <$list filter="[<mTitle>!is[missing]]"><$let modal="yes" current=<<mTitle>>>
 <$transclude field="caption"><$view field="title"/></$transclude>
@@ -226,6 +203,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/state/modal/editor]!is[tiddler]]">
 <$button set="$:/state/modal/editor" setTo="yes">EDIT</$button>
 <$list filter="[<mTitle>code-body[yes]]"><$transclude $variable="modal-edit-comment" template={{$:/config/defaultTemplate}}/></$list>
+<$button actions=<<modal-clone-actions>>>CLONE</$button>
 </$list>
 <$list filter="[[$:/state/modal/editor]is[tiddler]]">
 <$button>''GO BACK''
@@ -488,8 +466,6 @@ type: text/vnd.tiddlywiki
   levels:"从某级之后开始计算标题"
   new:"新分隔符"
   old:"原分隔符">>`
-# ''点击链接以后弹出 Modal 的动作''
-#> `<<modal-actions>>`
 # ''Modal 的 Subtitle''
 #> `<<modal-subtitle>>`
 # ''Modal 的 Footer''

@@ -1,20 +1,56 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20241112070511755
+modified: 20241201182124930
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
 type: text/vnd.tiddlywiki
 
-\define droppable-new-tiddler-action() <$action-sendmessage $message="tm-new-tiddler" $param=<<actionTiddler>> title=<<unusedtitle $(template)$>> date=<<now YYYY0MM0DD>>/>
+\define droppable-new-tiddler-action() <$action-sendmessage $message="tm-new-tiddler" $param=<<actionTiddler>> title=<<unusedtitle $(template)$>> date=<<now YYYY0MM0DD>> status="clone"/>
 
 \define droppable-clone-action()
 <$set name="template" filter="[<actionTiddler>split[ ]first[]]" select="0">
 <$list filter="[<actionTiddler>search:title:literal[/]]" emptyMessage=<<droppable-new-tiddler-action>>>
-<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} date=<<now YYYY0MM0DD>>/>
+<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} date=<<now YYYY0MM0DD>> status="clone"/>
 </$list>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
 <$action-deletetiddler $tiddler="$:/temp/Draft"/>
+</$set>
+\end
+
+\define modal-actions()
+<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[<direct-open>match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
+<$list filter="[<modal>match[yes]]" variable="NONE">
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
+</$list>
+<$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<mTitle>]"/>
+<$action-sendmessage $message="tm-close-tiddler" $param=<<mTitle>>/>
+</$list>
+<$list filter="[<modal>!match[yes]]" variable="NONE">
+<$list filter="[<direct-open>!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
+<$list filter="[all[current]!type[application/vnd.drawio]!type[application/x-drawio]!type[text/x-drawio]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>">
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
+</$list>
+<$action-setfield $tiddler="$:/state/modal/history" text=""/>
+<$list filter="[{$:/HistoryList!!current-tiddler}!has[draft.of]]"><$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text="Index"/></$list></$list>
+</$list>
+</$list>
+</$list>
+</$list>
+\end
+
+\define modal-clone-actions()
+<$set name="template" filter="[<mTitle>split[ ]first[]]" select="0">
+<$action-createtiddler $basetitle=<<template>> $template=<<mTitle>> date=<<now YYYY0MM0DD>> status="clone"><$tiddler tiddler=<<createTiddler-title>>>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
+<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
+<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
+</$list>
+<$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<mTitle>]"/>
+<$action-sendmessage $message="tm-close-tiddler" $param=<<mTitle>>/>
+</$tiddler></$action-createtiddler>
 </$set>
 \end
 
@@ -122,6 +158,10 @@ type: text/vnd.tiddlywiki
 
 # ''复制 Tiddler 的 action''
 #> `<<droppable-clone-action>>`
+# ''点击链接以后弹出 Modal 的动作''
+#> `<<modal-actions>>`
+# ''复制当前 Tiddler 并弹出 Modal''
+#> `<<modal-clone-actions>>`
 # ''修改 index tree 列表 action''
 #> `<<droppable-index-tree>>`
 # ''删除 Tiddler 的 action''
