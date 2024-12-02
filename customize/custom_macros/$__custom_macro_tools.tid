@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241201184811025
+modified: 20241202101144955
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -128,7 +128,12 @@ type: text/vnd.tiddlywiki
 \end
 
 \define open-in-sidebar(close:"yes")
-<$list filter="[<__close__>match[yes]]" variable="NONE"><$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/></$list>
+<%if [<modal>match[yes]] %>
+<$action-sendmessage $message='tm-close-tiddler'/><$action-deletetiddler $filter='[[$:/state/modal/history]] [[$:/state/modal/editor]]'/>
+<%elseif [<__close__>match[yes]] %>
+<$action-sendmessage $message="tm-close-tiddler" $param=<<currentTiddler>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text="Index"/></$list>
+<%endif%>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
 <$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
