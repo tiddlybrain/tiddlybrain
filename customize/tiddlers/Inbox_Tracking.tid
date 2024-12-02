@@ -2,7 +2,7 @@ caption: Tracking
 created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20241124224900185
+modified: 20241202084028124
 modifier: yuzijie
 order: 1
 tags: customized Inbox
@@ -11,36 +11,38 @@ type: text/vnd.tiddlywiki
 
 <h2 style="margin:20px 0 10px 0;color:#666;font-weight:500;">Notification List</h2>
 
-<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[-1]limit[1]]"><$details summary="OVERDUE"><ul>
+<ul>
+<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[-1]limit[1]]"><li><$details summary="OVERDUE"><ul>
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[-1]]"><li><$link to={{!!title}}>{{!!title}}</$link>
 @@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list>
-</ul></$details></$list>
-<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[]]"><$details summary="TODAY" class="success"><ul>
+</ul></$details></li></$list>
+<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[]]"><li><$details summary="TODAY" class="success"><ul>
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[]]"><li><$link to={{!!title}}>{{!!title}}</$link>
 @@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list>
-</ul></$details></$list>
-<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]limit[1]]"><$details summary="IN 3 MONTH" class="success"><ul>
+</ul></$details></li></$list>
+<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]limit[1]]"><li>''IN 3 MONTH''<ul style="margin:1em 0;">
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]"><li><$link to={{!!title}}>{{!!title}}</$link>
 @@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list>
-</ul></$details></$list>
-<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]limit[1]]"><$details summary="IN 1 YEAR" class="success"><ul>
+</ul></li></$list>
+<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]limit[1]]"><li><$details summary="IN 1 YEAR" class="success"><ul>
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]]"><li><$link to={{!!title}}>{{!!title}}</$link>
 @@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list>
-</ul></$details></$list>
-<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[360]limit[1]]"><$details summary="FUTURE"><ul>
+</ul></$details></li></$list>
+<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[360]limit[1]]"><li><$details summary="FUTURE"><ul>
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[360]]"><li><$link to={{!!title}}>{{!!title}}</$link>
 @@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list>
-</ul></$details></$list>
+</ul></$details></li></$list>
+</ul>
 
 <$list filter="[all[current]tagging[]]">
 <h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">{{!!caption}}</h2>
