@@ -1,7 +1,7 @@
 caption: General Instructions
 created: 20240629135931002
 creator: yuzijie
-modified: 20240722214344415
+modified: 20241202135552306
 modifier: yuzijie
 order: 2
 shortcap: Custom Instructions
@@ -12,14 +12,13 @@ type: text/vnd.tiddlywiki
 \define newInstructions()
 <$action-sendmessage $message="tm-new-tiddler"
   title=<<unusedtitle "$(template)$">>
-  type="text/vnd.tiddlywiki"
+  type="application/x-tiddler-dictionary"
   tags="Snippet"
   note="Instruction"
+  shortcap=""
   belongs.to="$:/custom/ui/ControlPanel/CustomInstructions"
   caption="New Instructions Title"
-  text="Input your instructions here."
-  date=<<now YYYY0MM0DD>>
-  code-body="yes"
+  text="Default: Input your instructions here."
   keywords="Custom Instructions"
   parents="$:/custom/ui/ControlPanel/CustomInstructions"
 />
