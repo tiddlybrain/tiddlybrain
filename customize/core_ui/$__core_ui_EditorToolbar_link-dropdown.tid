@@ -1,4 +1,4 @@
-modified: 20241202135205496
+modified: 20241203200003957
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -27,8 +27,8 @@ type: text/vnd.tiddlywiki
 \define set-next-input-tab(beforeafter:"after") <$transclude $variable="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<nextTab>>/>"/>
 
 \define new-link-actions(template)
-<$let title=<<unusedtitle "$template$">> caption={{{ [<searchTiddler>get[text]] }}} parent={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}} note={{{ [<targetTiddler>get[note]] }}}>
-<$action-createtiddler $basetitle=<<title>> date=<<now YYYY0MM0DD>> caption=<<caption>> type="text/vnd.tiddlywiki" belongs.to=<<parent>> note=<<note>> tags="Snippet"/>
+<$let title=<<unusedtitle "$template$">> caption={{{ [<searchTiddler>get[text]] }}}>
+<$action-createtiddler $basetitle=<<title>> date=<<now YYYY0MM0DD>> caption=<<caption>> type="text/vnd.tiddlywiki"/>
 <$action-sendmessage $message="tm-edit-text-operation" $param="insert-link" title=<<title>>/>
 <$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>] $:/temp/note/filter $:/state/search/showParents"/>
 </$let>
