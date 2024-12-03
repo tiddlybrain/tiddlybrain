@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241202092126475
+modified: 20241203094554794
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -14,6 +14,7 @@ type: text/vnd.tiddlywiki
 .description {color: #aaa;}
 .font-red {color: red;}
 .font-bold {font-weight: bold;}
+.space {display: inline-block; width: 17px;}
 
 /* For Dropdown */
 .record-drop-down {display: block; min-width: 600px; max-width: 1000px; background-color: white; border: 1px solid #bbb; border-radius: 4px; margin: -18px 0 0 0; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);}
@@ -63,7 +64,7 @@ button.snippet-title:hover {text-decoration: underline;}
 .snippet-accordion > table.data-table {margin-bottom: 1em;}
 .snippet .data-table {white-space: normal;}
 .snippet button code {white-space: nowrap;}
-.fold-text {font-size: small; color: #999; font-variant: small-caps;}
+.fold-text {font-size: small; color: #999; font-variant: small-caps; vertical-align: text-top;}
 .data-table + .filter-options {padding-top: 0.3em;}
 button.links.accordion {fill: #999; font-size: small;}
 .tc-tiddler-body .snippet-container .snippet + .tc-menu-list-item, .tc-tiddler-body .snippet-container .macro-table + .tc-menu-list-item {margin-top: -2px;}
