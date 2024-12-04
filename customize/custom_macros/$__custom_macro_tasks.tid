@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20241105125136380
+modified: 20241204154333680
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -205,9 +205,7 @@ TBC: <<tbc>>
 </$set>
 <$list filter="[all[tiddlers]tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
 <$list filter="[all[tiddlers]tag[Task]status[Urgent]sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
-<$set name="summary" filter="[all[tiddlers]tag[Task]status[Progressing]count[]addprefix[Progressing: ]]" select="0">
-<$details summary=<<summary>>><$list filter="[all[tiddlers]tag[Task]status[Progressing]sort[modified]]"><<task-pill color:"#8aff49">></$list></$details>
-</$set>
+<$list filter="[all[tiddlers]tag[Task]status[Progressing]sort[modified]]"><<task-pill color:"#8aff49">></$list>
 <$set name="summary" filter="[all[tiddlers]tag[Task]status[LowPriority]count[]addprefix[Low Priority: ]]" select="0">
 <$details summary=<<summary>>><$list filter="[all[tiddlers]tag[Task]status[LowPriority]sort[modified]]"><<task-pill color:"#e3ffed">></$list></$details>
 </$set>
