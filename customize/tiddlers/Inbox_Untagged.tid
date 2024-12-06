@@ -1,11 +1,13 @@
+belongs.to: Inbox
 caption: Untagged <$count filter="[!is[system]untagged[]] -[{$:/config/defaultTemplate}]"/>
 created: 20240302144634136
 creator: yuzijie
-keywords: 
-modified: 20240603084619244
+keywords: Inbox
+modified: 20241206225154530
 modifier: yuzijie
-order: 2
-tags: customized Inbox
+note: Inbox
+parents: Inbox
+tags: customized Snippet
 title: Inbox/Untagged
 type: text/vnd.tiddlywiki
 

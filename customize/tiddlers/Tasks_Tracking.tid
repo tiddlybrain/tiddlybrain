@@ -2,11 +2,11 @@ caption: Tracking
 created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20241204210923222
+modified: 20241206224545639
 modifier: yuzijie
-order: 1
-tags: customized Inbox
-title: Inbox/Tracking
+order: 3
+tags: customized Tasks
+title: Tasks/Tracking
 type: text/vnd.tiddlywiki
 
 \procedure tracking-items(filter)
@@ -35,7 +35,7 @@ type: text/vnd.tiddlywiki
 </li></$list>
 </ul>
 
-<$list filter="[all[current]tagging[]]">
+<$list filter="[all[current]tagging[]!sort[order]]">
 <h2 style="margin:20px 0 18px 0;"><$transclude $variable="l" title={{!!title}} note="no" style="font-weight:500;"/></h2>
 <$list filter="[all[current]type[application/x-tiddler-dictionary]]" emptyMessage="<$transclude mode=block/>"><<data-table>></$list>
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
