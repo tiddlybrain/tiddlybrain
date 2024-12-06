@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20241203095452189
+modified: 20241206143251965
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -30,7 +30,7 @@ type: text/vnd.tiddlywiki
 \define linkIfExists(text,comments,color:"inherit")
 <$reveal default="$comments$" type="match" text=""><$button class="tc-btn-invisible" style="color:$color$;" message="tm-copy-to-clipboard" param="$text$">$text$</$button></$reveal>
 <$reveal default="$comments$" type="nomatch" text="" style="position:relative;">
-<$button popup=<<qualify "$:/state/popup/$text$">> message="tm-copy-to-clipboard" param="$text$" class="tc-btn-invisible" style="text-decoration:underline;text-decoration-color:#ffcb41;text-decoration-thickness:3px;color:$color$;">$text$</$button>
+<$button popup=<<qualify "$:/state/popup/$text$">> message="tm-copy-to-clipboard" param="$text$" class="tc-btn-invisible" style="text-decoration:underline;text-decoration-color:#ffcb41;text-decoration-thickness:2px;color:$color$;">$text$</$button>
 <$reveal type="popup" state=<<qualify "$:/state/popup/$text$">>>
 <span class="link-drop-down tc-popup-keep link-content"><$set name="value" value=<<__comments__>>><<cell-value-normal description:"yes">></$set></span>
 </$reveal>

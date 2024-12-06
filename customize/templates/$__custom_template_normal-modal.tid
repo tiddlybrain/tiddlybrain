@@ -1,7 +1,7 @@
 created: 20210516172453585
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20241118213645310
+modified: 20241206144132961
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]tag[Task]]"><<task-top>></$list>
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
 <$list filter="[all[current]tag[Tasks/Journal]]" variable="journal-title"><$set name="curDate" filter="[<journal-title>split[-]join[]]" select="0">
-<$list filter="[all[tiddlers]tag[Task]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$list filter="[all[tiddlers]tag[Task]!has[draft.of]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><div><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">
 Done: <<currentTiddler>><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/>
