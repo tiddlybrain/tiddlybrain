@@ -2,8 +2,7 @@ caption: {{$:/language/Buttons/Linkify/Caption}}
 condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
 description: {{$:/language/Buttons/Linkify/Hint}}
 icon: $:/core/images/linkify
-list-before: $:/core/ui/EditorToolbar/mono-block
-modified: 20241117095433250
+modified: 20241206152118163
 modifier: yuzijie
 shortcuts: ((linkify))
 tags: $:/tags/EditorToolbar customized

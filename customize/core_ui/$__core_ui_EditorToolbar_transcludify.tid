@@ -1,0 +1,18 @@
+caption: {{$:/language/Buttons/Transcludify/Caption}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
+description: {{$:/language/Buttons/Transcludify/Hint}}
+icon: $:/core/images/transcludify
+modified: 20241206152118163
+modifier: yuzijie
+shortcuts: ((transcludify))
+tags: $:/tags/EditorToolbar
+title: $:/core/ui/EditorToolbar/transcludify
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="{{"
+	suffix="}}"
+	trimSelection="yes"
+/>

@@ -1,10 +1,9 @@
-button-classes: tc-text-editor-toolbar-item-start-group
 caption: {{$:/language/Buttons/Link/Caption}}
 condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
 description: {{$:/language/Buttons/Link/Hint}}
 dropdown: $:/core/ui/EditorToolbar/link-dropdown
 icon: $:/core/images/link
-modified: 20241203212526467
+modified: 20241206152445649
 modifier: yuzijie
 shortcuts: ((link))
 tags: $:/tags/EditorToolbar customized
