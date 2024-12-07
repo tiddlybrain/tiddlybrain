@@ -2,7 +2,7 @@ caption: Other Custom Tools
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20241203094734570
+modified: 20241207101946930
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -34,7 +34,7 @@ Description: {{!!description}}
 <$list filter="[all[current]type[text/vnd.tiddlywiki]]">
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="!!! Appendix
 
-<<snippet date:'no' parent-tag:ul tag:li>>
+*N/A
 
 !!! Related Topics
 
