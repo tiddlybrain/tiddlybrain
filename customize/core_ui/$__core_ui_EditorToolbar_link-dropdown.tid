@@ -1,4 +1,4 @@
-modified: 20241203200003957
+modified: 20241208210932120
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -70,15 +70,14 @@ type: text/vnd.tiddlywiki
 <<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
 {{$:/core/images/close-button}}
 </$button>
-&#32;
-<$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0;transform:translateY(-2px);">
-<$let current={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}}>
-<$action-setfield $tiddler="$:/temp/index/filter" text=<<current>>/>{{$:/core/images/advanced-search-button}}<<current>>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
-</$let>
-</$button>
 </$reveal>
+<$reveal tag="span" state=<<storeTitle>> type="match" text=""><%if [[$:/temp/link-search/search]get[text]!is[blank]] %>
+<$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0 2px 0 0;transform:translateY(-2px);">
+<$action-setfield $tiddler="$:/state/link-search/search" text={{$:/temp/link-search/search}}/>
+<$action-setfield $tiddler="$:/temp/link-search/input" text={{$:/temp/link-search/search}}/>
+{{$:/core/images/advanced-search-button}}{{$:/temp/link-search/search}}
+</$button>
+<%endif%></$reveal>
 </$vars>
 
 <$reveal tag="div" state=<<storeTitle>> type="nomatch" text="">

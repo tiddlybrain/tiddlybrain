@@ -3,7 +3,7 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.
 description: {{$:/language/Buttons/Link/Hint}}
 dropdown: $:/core/ui/EditorToolbar/link-dropdown
 icon: $:/core/images/link
-modified: 20241206152445649
+modified: 20241208205339889
 modifier: yuzijie
 shortcuts: ((link))
 tags: $:/tags/EditorToolbar customized
@@ -11,5 +11,6 @@ title: $:/core/ui/EditorToolbar/link
 type: text/vnd.tiddlywiki
 
 <$action-deletetiddler $filter="[[$:/state/search/currentTab]] [[$:/state/tab/search-results/sidebar]]"/>
+<$action-setfield $tiddler="$:/temp/link-search/search" text={{$:/temp/link-search/input}}/>
 <$action-sendmessage $message="tm-edit-text-operation" $param="save-selection" tiddler="$:/state/link-search/search"/>
 <$action-sendmessage $message="tm-edit-text-operation" $param="save-selection" tiddler="$:/temp/link-search/input"/>
