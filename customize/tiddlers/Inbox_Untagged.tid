@@ -6,10 +6,10 @@ description: (<$count filter="[!is[system]untagged[]] -[{$:/config/defaultTempla
 keywords: Inbox
 modified: 20241208134959972
 modifier: yuzijie
-note: Inbox
+note: TODO
 order: Z
 parents: Inbox
-tags: customized Snippet Inbox
+tags: customized Inbox Snippet
 title: Inbox/Untagged
 type: text/vnd.tiddlywiki
 

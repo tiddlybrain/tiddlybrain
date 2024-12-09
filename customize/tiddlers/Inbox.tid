@@ -2,10 +2,12 @@ created: 20220217150254473
 creator: yuzijie
 keywords: 
 list-before: AI
-modified: 20241206225235446
+modified: 20241209144617171
 modifier: yuzijie
 tags: customized $:/tags/SideBar Ignore
 title: Inbox
 type: text/vnd.tiddlywiki
 
-<$tiddler tiddler="Inbox"><<snippet key:"Inbox" limit:100 sort:"!sort[order]">></$tiddler>
+<$tiddler tiddler="Inbox"><div style="line-height:28px;">
+<<snippet key:"TODO" limit:100 sort:"!sort[order]">>
+</div></$tiddler>
