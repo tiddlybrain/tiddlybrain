@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20241015081533332
+modified: 20241210135827214
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -17,41 +17,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler="$:/temp/newTiddler"/>{{$:/core/images/close-button}}</$button>
 </$list>
 </$keyboard></p>
-<p style="margin-top:-5px;">
-<$select tiddler="$:/temp/newTiddler" field="note" default="" class="new-tiddler-input-box" tabindex="-1" actions="""<$action-setfield $tiddler="$:/temp/newTiddler" belongs.to=""/>""">
-<option value="">Choose a Role</option>
-<$list filter='[all[tiddlers]note[Role]belongs.to[$:/custom/ui/ControlPanel/Roles]]'><option value={{!!title}}>{{!!title}}</option></$list>
-<$list filter="[all[tiddlers]note[Role]get[belongs.to]note[Roles]unique[]sortan[caption]]"><optgroup label={{!!caption}}>
-<$list filter='[all[tiddlers]note[Role]belongs.to{!!title}]'><option value={{!!title}}>{{!!title}}</option></$list>
-</optgroup></$list>
-<$list filter="[all[tiddlers]note[Role]get[belongs.to]note[Role]unique[]sortan[caption]]"><optgroup label={{!!title}}>
-<$list filter='[all[tiddlers]note[Role]belongs.to{!!title}]'><option value={{!!title}}>{{!!title}}</option></$list>
-</optgroup></$list>
-</$select>
-<$button class="tc-btn-invisible" tabindex="-1">{{$:/core/images/options-button}}
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="$:/custom/ui/ControlPanel/Roles"/>
-</$button>
-<$list filter="[[$:/temp/newTiddler]get[note]]" variable="note">
-<$select tiddler="$:/temp/newTiddler" field="belongs.to" default="" class="new-tiddler-input-box" tabindex="-1">
-<option value="">Choose a Parent</option>
-<optgroup label="Open">
-<$list filter="[list[$:/StoryList]!is[system]!has[draft.of]sortan[note]]"><option value={{!!title}}>
-<$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
-<$transclude field="caption"><$view field="title"/></$transclude>
-</option></$list>
-</optgroup>
-<optgroup label="Sidebar">
-<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[10]]"><option value={{!!title}}>
-<$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
-<$transclude field="caption"><$view field="title"/></$transclude>
-</option></$list>
-</optgroup>
-</$select>
-<em style="font-size:small;display:block;">Only tiddlers that are open or in the sidebar can be selected as parents.</em>
-</$list>
-</p>
-<$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}}>
-<p style="margin-top:-5px;">
+<$vars template={{$:/config/defaultTemplate}} caption={{$:/temp/newTiddler}}><p style="margin-top:-4px;">
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="text/vnd.tiddlywiki" popup="close" scroll="yes"/>New</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}
 Description: {{!!description}}" edit="yes"/>Data</$button>
@@ -59,10 +25,8 @@ Description: {{!!description}}" edit="yes"/>Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/vnd.drawio" fields="tags='Snippet' belongs.to='Attachments' note='Diagram'" edit="yes"/>Diagram</$button>
 <$button tooltip="Markdown"><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="text/x-markdown" edit="yes"/>Md</$button>
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" tooltip="Edit Configurations">{{$:/core/images/edit-button}}</$button>
-</p>
-</$vars>
-<hr style="margin:-3px 0 0 0;">
-<p style="margin:5px 0;">
+</p></$vars>
+<p style="margin:-10px 0 0 0;">
 <$button to="$:/custom/ui/path-prefix" class="tc-btn-invisible" style="font-variant:all-petite-caps;color:#acacac;">File Path Prefix</$button>
 </p>
 <$select tiddler='$:/config/index-tree' field='path' class='new-tiddler-input-box'>{{$:/custom/ui/path-prefix}}</$select>

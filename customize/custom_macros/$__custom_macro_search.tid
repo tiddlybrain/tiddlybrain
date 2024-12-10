@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20241201121526855
+modified: 20241210135036894
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -11,9 +11,11 @@ type: text/vnd.tiddlywiki
 \define parents-cloud()
 \whitespace trim
 <div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[subfilter<note-subfilter>get[belongs.to]unique[]sortsub<parents-reverse>]">
-<$button class="tc-btn-invisible tc-tag-label" style="font-size:unset;background:#378ae2;color:white;">
-<$list filter="[all[current]get[belongs.to]getAllParents[]reverse[]]"><$transclude field="caption"><$view field="title"/></$transclude>/</$list>
-@@color:#ffd600;<$transclude field="caption"><$view field="title"/></$transclude><$list filter="[all[current]has[note]]">&#32;[{{!!note}}]</$list>@@
+<$button class="tc-btn-invisible tc-tag-label" style="background:#4192e7;color:white;white-space:nowrap;">
+<$list filter="[all[current]get[belongs.to]getAllParents[]reverse[]]">
+<$transclude field="caption"><$view field="title"/></$transclude><span style="color:#87c1ff;padding:5px;">|</span>
+</$list>
+@@color:#ffd600;<$transclude field="caption"><$view field="title"/></$transclude>@@
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
 <$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/RelatedSearchResultList"/>
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
