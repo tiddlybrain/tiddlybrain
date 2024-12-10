@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241210145750305
+modified: 20241210154041699
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -49,7 +49,7 @@ button.img {border: 1px solid #ddd; box-shadow: 0px 0px 2px 1px #f5f5f5;}
 button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis; line-height: 28px; color: #5778d8;}
 button.snippet-title:hover {text-decoration: underline;}
 .snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; overflow: auto;}
-.snippet-content > h4, .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table, .tc-sidebar-lists .snippet-content p {margin: 10px 20px;}
+.snippet-content > h4, .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table, .tc-sidebar-lists .snippet-content p, .tc-sidebar-lists .index-tree-view .snippet-content p {margin: 10px 20px;}
 .snippet-content > blockquote {margin-left: 35px;}
 .snippet-content > h2, .snippet-content > h3, .snippet-content > details {margin-left: 20px;}
 .snippet-content > h3 {margin-top: 15px; margin-bottom: 15px;}
@@ -150,7 +150,7 @@ label.checkbox input[type=checkbox]:checked + span {color: brown;}
 .link-content {color: initial; font-weight: initial; padding: 10px 15px; border-radius: 3px;}
 
 /* For Macro: record */
-blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #b6b6b6; border-style: solid; border-radius: 6px; padding: 2px 12px 3px 12px; margin: 0 0 5px 0; background: #fdfdfd;}
+blockquote.record {border-width: 1px 1px 1px 4px; border-color: #eee #eee #ddd #b3b7cf; border-style: solid; border-radius: 6px; padding: 2px 8px 3px 8px; margin: 0 0 5px 0; background: #fdfdfd;}
 .single-line-record {display: flex; white-space: nowrap; position: relative;}
 .single-line-record .left span:last-child {margin-right: 0.3em;}
 .single-line-record .middle {min-width: 0;}

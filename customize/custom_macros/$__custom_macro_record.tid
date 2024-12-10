@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20241127234028451
+modified: 20241210152730464
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
 </$button></span>
-<span class="right"><$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#aaa;">
+<span class="right"><$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#b3b7cf;">
 <$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 <$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>
 </$button></span>
