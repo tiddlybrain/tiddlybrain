@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20241209153022423
+modified: 20241210144918746
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -115,7 +115,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   status:"是否显示 status"
   external-links:"是否显示 external-links"
   belongs-to:"是否显示 external-links 里面的 belongs.to"
-  tag:"link 模式下, button 的 tag 类型; tr 模式下, 标题的 tag 类型;	cl 模式下, collapse-title 的 tag 类型">>`
+  tag:"link 模式下, 是 button 的 tag 类型; tr 模式下, 是标题的 tag 类型; cl 模式下, 是 collapse-title 的 tag 类型">>`
 # ''按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filter
   item-filter:"主要筛选条件, 在 bl-pattern 之前"
@@ -178,7 +178,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 1">>`
+  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 1"
   children:"是否显示来自 Children 的 Backlinks">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers 里面具有特定 note 的 Tiddlers''
 #> `<<bl-sub-note
