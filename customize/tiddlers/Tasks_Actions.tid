@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20241206144116494
+modified: 20241211023925365
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -100,12 +100,6 @@ TBC: <<tbc>>
 </$list>
 </$list>
 </li></$set></$list>
-<$list filter="[has[interval]!has[draft.of]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
-<$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
-</$set></$list>
-<$vars comparefilter="[get[date]compare:date:lteq<today>]"><$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
-<li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
-</$list></$vars>
 </ol>
 </$droppable>
 
