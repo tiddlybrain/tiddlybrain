@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241207214723799
+modified: 20241210171508097
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -305,7 +305,10 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[tiddlers]tag[Tasks/Journal]contains:tbc<currentTiddler>filter<comparefilter>!sortan[]]">
 <$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>
 </$list>
-<$list filter="[<modal>match[yes]]"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+<$list filter="[<modal>match[yes]]">
+<$action-sendmessage $message="tm-close-tiddler"/>
+<$action-deletetiddler $filter='[[$:/state/modal/history]] [[$:/state/modal/editor]]'/>
+</$list>
 </$button>
 </$list>
 </$vars>
