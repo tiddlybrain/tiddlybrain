@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241211092912547
+modified: 20241212111950444
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -50,6 +50,7 @@ button.snippet-title {overflow: hidden; max-width: 90%; text-overflow: ellipsis;
 button.snippet-title:hover {text-decoration: underline;}
 .snippet-content {border-bottom: 1px solid #ccc; border-top: 3px solid #ccc; background: white; white-space: normal; margin: 1em 0; padding: 0.5em 0; overflow: auto;}
 .snippet-content > h4, .snippet-content > p, .snippet-content > ul, .snippet-content > ol, .snippet-content > dl, .snippet-content > pre, .snippet-content > blockquote, .snippet-content > table, .tc-sidebar-lists .snippet-content p, .tc-sidebar-lists .index-tree-view .snippet-content p {margin: 10px 20px;}
+.tc-sidebar-lists .index-tree-view .snippet-content p.collapse-content {margin: 10px 0;}
 .snippet-content > blockquote {margin-left: 35px;}
 .snippet-content > h2, .snippet-content > h3, .snippet-content > details {margin-left: 20px;}
 .snippet-content > h3 {margin-top: 15px; margin-bottom: 15px;}
@@ -268,6 +269,8 @@ button.l {line-height: inherit;}
 .snippet-content .l > button.collapse-title > svg {font-size: smaller;}
 .tc-tiddler-frame .tc-tiddler-body button.l {overflow-x: clip; max-width: 100%;}
 .bl-container div.tc-menu-list-item {overflow: hidden;}
+.tr > h3, .cl > .collapse-content > h3 {margin: 0.5em 0; font-size: 1.05em; border: none;}
+.cl > .collapse-content > .external-links:first-of-type {margin-top: 0;}
 
 /* For Macro: links */
 a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
@@ -318,8 +321,6 @@ button.collapse-close {background: #f4f4f4; font-weight: normal;}
 .collapse-content > .external-links:last-of-type {margin-bottom: 1em;}
 .collapse-content > iframe {margin-bottom: 0.5em;}
 h1 + .collapse-content, h2 + .collapse-content, h3 + .collapse-content, h4 + .collapse-content {border: none; width: 100%; box-shadow: none; padding: 0;}
-.collapse-content > h3 {margin: 0.5em 0; font-size: 1.05em;}
-h1 + .collapse-content > .external-links:first-of-type, h2 + .collapse-content > .external-links:first-of-type, h3 + .collapse-content > .external-links:first-of-type, h4 + .collapse-content > .external-links:first-of-type {margin-top: 0;}
 
 /* For Macro: task-pill */
 .dot {color: #333; border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7; text-shadow: 0 1px 0 rgb(255 255 255 / 80%);}
