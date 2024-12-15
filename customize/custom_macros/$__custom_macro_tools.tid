@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241210171508097
+modified: 20241215230012276
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -409,6 +409,12 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
+\procedure more(topic)
+<$let count={{{ [all[tiddlers]belongs.to<currentTiddler>count[]] }}}>
+<$details summary=`$(topic)$ ($(count)$)`><$transclude $variable="snippet" key=<<topic>>/></$details>
+</$let>
+\end
+
 # ''将树形结构进行展开''
 #> `<<tree-opener
   tiddler:"branch tiddler"
@@ -520,3 +526,6 @@ type: text/vnd.tiddlywiki
 # ''列出当前 Tiddler 内属于指定角色的所有链接''
 #> `<<list-of
   note:"Tiddler 的角色">>`
+# ''使用 Details 包裹的 Snippets, 主要用于显示附录内容''
+#> `<<more
+  topic:"note 角色">>`
