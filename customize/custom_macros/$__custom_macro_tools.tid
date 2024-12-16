@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241215230012276
+modified: 20241216110454838
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -410,7 +410,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \procedure more(topic)
-<$let count={{{ [all[tiddlers]belongs.to<currentTiddler>count[]] }}}>
+<$let topic={{{ [<topic>!is[blank]else<key>!is[blank]else{!!note}] }}} count={{{ [all[tiddlers]belongs.to<currentTiddler>note<topic>count[]] }}}>
 <$details summary=`$(topic)$ ($(count)$)`><$transclude $variable="snippet" key=<<topic>>/></$details>
 </$let>
 \end
