@@ -1,4 +1,4 @@
-modified: 20241201134907486
+modified: 20241216224127506
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -11,12 +11,11 @@ type: text/vnd.tiddlywiki
 <%endif%>""">
 <$let tv-wikilinks="no">
 <$list filter="[all[current]get[note]]">@@color:green;[{{!!title}}]@@</$list>
+<$list filter="[all[current]has[caption]]">@@font-weight:500;{{!!caption}}@@ &middot; </$list><$view field="title"/>
 <$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
-@@color:#999;<$view field="title"/>@@
 <$list filter="[<searchTiddler>get[text]trim[]!is[blank]]" variable="search">
 <$list filter="[all[current]search:caption,keywords,text,description:literal<search>]">@@color:#ffbda3;Exact@@</$list>
 </$list>
-<$list filter="[all[current]has[caption]]">{{!!caption}}</$list>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 </$let>
 <div class="sidebar-item-hover">
