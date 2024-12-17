@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20241210135036894
+modified: 20241217110340539
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -23,23 +23,27 @@ type: text/vnd.tiddlywiki
 </$list></$let></div>
 \end
 
-\define note-filter() [note[$(note)$]]
+\define note-filter() [note[$(currentTiddler)$]]
 \define note-style() background:$(background-color)$;
 
 \define note-filters()
 \whitespace trim
-<div class="search-filters"><$let tv-wikilinks="no"><$list filter="$(search-filter)$ +[get[note]unique[]sortsub<topic-level>]" variable="note">
-<$list filter="[<note>is[tiddler]]"><$set name="background-color" filter="[<note>get[belongs.to]get[color]]" emptyValue="#ffe96b" select="0">
-<$button class="tc-btn-invisible tc-tag-label" style=<<note-style>> tooltip={{{ [<note>get[description]] }}}><<note>>
-<$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption=<<note>>/><<searchbar-focus-action>>
+<$let tv-wikilinks="no"><$set name="roles" filter="$(search-filter)$ +[get[note]unique[]]">
+<$list filter="[all[tiddlers]belongs.to[$:/custom/ui/ControlPanel/Roles]]">
+<div class="search-filters"><$list filter="[enlist<roles>contains:parents<currentTiddler>sortsub<topic-level>]">
+<$set name="background-color" filter="[all[current]get[belongs.to]get[color]]" emptyValue="#ffe96b" select="0">
+<$button class="tc-btn-invisible tc-tag-label" style=<<note-style>>>{{!!title}}
+<$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption={{!!title}}/><<searchbar-focus-action>>
 </$button>
-</$set></$list>
-<$list filter="[<note>!is[tiddler]]">
-<$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;"><<note>>
-<$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption=<<note>>/><<searchbar-focus-action>>
-</$button>
+</$set>
+</$list></div>
 </$list>
-</$list></$let></div>
+<div class="search-filters"><$list filter="[enlist<roles>!is[tiddler]]">
+<$button class="tc-btn-invisible tc-tag-label" style="background:#ffe96b;">{{!!title}}
+<$action-setfield $tiddler="$:/temp/note/filter" text=<<note-filter>> caption={{!!title}}/><<searchbar-focus-action>>
+</$button>
+</$list></div>
+</$set></$let>
 \end
 
 \define topic-level() [get[parents]enlist-input[]count[]]
