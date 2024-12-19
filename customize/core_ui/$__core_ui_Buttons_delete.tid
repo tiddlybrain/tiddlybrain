@@ -1,6 +1,6 @@
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
-modified: 20241112071021507
+modified: 20241219155227693
 modifier: yuzijie
 tags: $:/tags/EditToolbar $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/delete
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 	class=<<tv-config-toolbar-class>>
 >
 	<$list filter="[{$:/temp/Draft!!draft}match<currentTiddler>]"><$action-deletetiddler $tiddler="$:/temp/Draft"/></$list>
-	<$list filter="[<currentTiddler>previous[$:/StoryList]] :else[<currentTiddler>next[$:/StoryList]]">
+	<$list filter="[<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]]">
 		<$action-navigate $to=<<currentTiddler>>/><$action-deletetiddler $filter="[<currentTiddler>addprefix[$:/state/folded/]is[tiddler]]"/>
 	</$list>
 	<$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text="Index"/></$list>

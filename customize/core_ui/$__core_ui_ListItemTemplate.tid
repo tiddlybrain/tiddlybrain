@@ -1,4 +1,4 @@
-modified: 20241216224127506
+modified: 20241219161414333
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -10,6 +10,7 @@ type: text/vnd.tiddlywiki
 <<modal-actions>><$action-listops $tiddler="$:/config/recent-search" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
 <%endif%>""">
 <$let tv-wikilinks="no">
+<$list filter="[<targetTiddler>hasTiddler<currentTiddler>]">🔗</$list>
 <$list filter="[all[current]get[note]]">@@color:green;[{{!!title}}]@@</$list>
 <$list filter="[all[current]has[caption]]">@@font-weight:500;{{!!caption}}@@ &middot; </$list><$view field="title"/>
 <$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
