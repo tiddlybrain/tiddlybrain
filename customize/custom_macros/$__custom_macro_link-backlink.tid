@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20241218150948135
+modified: 20241221072452661
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -58,7 +58,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define bl-filter(item-filter, item-filter-2, uid:"default", sort:"sortan[caption]", cfilter, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag:"div", tag:"div", list-parents:"1")
-<$tiddler tiddler={{{ [<currentTiddler>get[draft.of]else<currentTiddler>] }}}>
+<$tiddler tiddler={{{ [all[current]get[draft.of]else<currentTiddler>] }}}>
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/backlink/]addsuffix<__uid__>]" select="0">

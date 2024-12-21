@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20241220034626678
+modified: 20241221072428115
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -104,7 +104,7 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter=<<fi
 \end
 
 \define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, actions, tags, no-drop, cat-prefix, cat-filter, tag-caption, has-filter, celltpl, checkbox, parent-tag, tag)
-<$tiddler tiddler={{{ [<currentTiddler>get[draft.of]else<currentTiddler>] }}}>
+<$tiddler tiddler={{{ [all[current]get[draft.of]else<currentTiddler>] }}}>
 <$vars key={{{ [[$key$]!is[blank]else<key>!is[blank]else{!!note}] }}} current=<<currentTiddler>>>
 <$droppable actions=<<snippet-drop-actions """$actions$""" """$tags$""" "$celltpl$">> tag="div" class="snippet-container">
 <div class="tc-droppable-placeholder" style="display:block;">
