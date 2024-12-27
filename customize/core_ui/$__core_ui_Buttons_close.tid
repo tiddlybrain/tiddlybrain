@@ -1,6 +1,6 @@
 caption: {{$:/core/images/close-button}} {{$:/language/Buttons/Close/Caption}}
 description: {{$:/language/Buttons/Close/Hint}}
-modified: 20241219154754123
+modified: 20241227003419128
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized
 title: $:/core/ui/Buttons/close
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 	aria-label={{$:/language/Buttons/Close/Hint}}
 	class=<<tv-config-toolbar-class>>
 >
-	<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/>
+	<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 	<%if [<tv-config-toolbar-icons>match[yes]] %>
 		{{$:/core/images/close-button}}
 	<%endif%>
