@@ -2,7 +2,7 @@ caption: Tracking
 created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20241211030021610
+modified: 20241230190443157
 modifier: yuzijie
 order: 3
 tags: customized Tasks
@@ -16,14 +16,43 @@ type: text/vnd.tiddlywiki
 </li></$list></ul>
 \end
 
-<h2 style="margin:20px 0 10px 0;color:#666;font-weight:500;">Notifications</h2>
+<h2 style="margin:20px 0;font-weight:500;">
+<$let curDate={{{ [[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>] }}} journal-title={{{ [<curDate>format:date[YYYY-0MM-0DD]] }}}>
+<$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-left}}</$button>
+</$set>
+<$set name="right" filter="[<curDate>nextDay[1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-right}}</$button>
+</$set>
+<$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]"><$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button></$list>
+<$tiddler tiddler=<<journal-title>>><$button to={{!!title}} class="tc-btn-invisible tc-tiddlylink l">
+<$transclude $variable="format-date" date={{!!date}} template="YYYY-0MM-0DD DDD"/>
+</$button></$tiddler>
+<$edit-text tiddler="$:/temp/plan/date/draft" default=<<curDate>> tag="input" size="5"/>
+<$list filter="[[$:/temp/plan/date/draft]get[text]]" emptyMessage="""<$list filter="[<journal-title>is[missing]]"><$button>Create Date
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals: <$let single-column=yes><<bl>></$let>
+TBC: <<tbc>>
+--: Tasks Review" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
+</$button></$list>""">
+<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
+</$list>
+</$let>
+</h2>
+
 <div style="padding-left:1em;"><ul style="line-height:24px;">
 <$vars comparefilter="[get[date]compare:date:lteq<today>]"><$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
 <li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
 </$list></$vars>
-<$list filter="[has[interval]!has[draft.of]sort[date]]"><$set name="interval" filter="[all[current]get[interval]negate[]]" select="0">
-<$list filter="[all[current]!days:date<interval>]"><li><$transclude $variable="l" title={{!!title}} links="yes"/></li></$list>
-</$set></$list>
+<$list filter="[all[tiddlers]has[date]has[interval]!note[Level]]"><$let interval={{{ [all[current]get[interval]] }}}>
+<$list filter="[<interval>search:title:literal[-]]" variable="NONE"><$setmultiplevariables $names="[[month]] [[day]]" $values="[<interval>split[-]]">
+<$let rule={{{ [{!!date}nextNotice<interval>] }}} today=<<now "YYYY0MM0DD">>><$list filter="[<rule>compare:date:lteq<today>]" variable="NONE">
+<li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
+</$list></$let>
+</$setmultiplevariables></$list>
+<$list filter="[<interval>!search:title:literal[-]negate[]]" variable="negate"><$list filter="[all[current]!days:date<negate>]">
+<li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
+</$list></$list>
+</$let></$list>
 </ul></div>
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]limit[1]]">''IN 3 MONTH''
 <div style="padding-left:1em;"><$transclude $variable="tracking-items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]"/></div>

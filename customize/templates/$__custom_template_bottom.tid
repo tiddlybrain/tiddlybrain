@@ -1,7 +1,7 @@
 created: 20181118150240560
 creator: yuzijie
 list-after: $:/core/ui/ViewTemplate/body
-modified: 20241118213452226
+modified: 20241230191434876
 modifier: yuzijie
 tags: $:/tags/ViewTemplate customized
 title: $:/custom/template/bottom
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
 </$list>
 <$list filter="[all[current]!search:title:literal[/]]">
-<$set name="twins" filter="[has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]">
+<$set name="twins" filter="[all[tiddlers]has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]">
 <$set name="mode" filter="[<twins>enlist-input[]count[]compare:number:lt[4]]" value="list" emptyValue="collapse">
 <$transclude $variable="relationships" name="Twins" filter="[<twins>enlist-input[]]" mode=<<mode>>/>
 </$set>
