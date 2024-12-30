@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20241218152055319
+modified: 20241230130357674
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -215,6 +215,7 @@ pre.CodeMirror-line {padding-top: 0 !important; padding-bottom: 0 !important;}
 .macro-table > table th, .macro-table > table td, table.data-table .macro-table > table th, table.data-table .macro-table > table td, .macro-table > table td code {white-space: nowrap;}
 .macro-table > table td input {width: 100%; border: 1px dashed #ccc;}
 table.data-table .macro-table {margin: 0; font-size: small; line-height: 26px;}
+table.data-table .bl-container .macro-table {margin: 1em 0;}
 .table-links button svg {max-width: none;}
 td span a.tc-tiddlylink-resolves {font-weight: 400;}
 
