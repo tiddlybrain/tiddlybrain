@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20241221071646295
+modified: 20250103115632162
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -48,14 +48,7 @@ type: text/vnd.tiddlywiki
 \procedure ai-gui(id)
 <$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[text]] }}}/>""" tag="section" class="ai">
 <div class="tc-droppable-placeholder" style="display:block;">
-<h3>Instructions
-<$list filter="[<ai-request>get[text]!is[blank]]" variable="content"><$button style="font-size:small;">Set to Searchbar
-<$action-setfield $tiddler="$:/temp/menubarsearch" text=<<content>>/>
-<$action-setfield $tiddler="$:/temp/menubarsearch/input" text=<<content>>/>
-<$action-setfield $tiddler="$:/temp/menubarsearch/refresh" text="yes"/>
-</$button></$list>
-<$list filter="[<ai-request>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list>
-</h3>
+<h3>Instructions</h3>
 <$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin:0;"><tbody>
 <tr><th>Choose Model</th><th>Custom Prompts</th></tr>
@@ -119,7 +112,7 @@ type: text/vnd.tiddlywiki
 
 <section class="ai">
 <h3>Results
-<$list filter="[<ai-response>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list>
+<$list filter="[<ai-response>type[text/x-markdown]]"><$button style="font-size:small;" actions="<$action-sendmessage $message='tm-md-tiddler-to-tid' $param={{!!title}}/>">Markdown to Wikitext</$button></$list>
 <$list filter="[<ai-response>has[text]]"><$button style="font-size:small;"><$action-deletetiddler $filter="[<ai-response>]"/>Clear Results</$button></$list>
 </h3>
 <$edit-text tiddler=<<ai-response>> tag="textarea" class="edit-area tc-edit-texteditor"/>

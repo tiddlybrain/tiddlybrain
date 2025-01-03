@@ -2,14 +2,14 @@ caption: Other Custom Tools
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20241221071521423
+modified: 20250103114755676
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
 type: text/vnd.tiddlywiki
 
 <span class="tc-text-editor-toolbar-item-wrapper"><$tiddler tiddler=<<targetTiddler>>>
-<$list filter="[all[current]!type[text/x-markdown]]" emptyMessage="<$md-to-tid-button title={{!!title}} type={{!!type}}/>">
+<$list filter="[all[current]!type[text/x-markdown]]" emptyMessage="""<$button actions="<$action-sendmessage $message='tm-md-tiddler-to-tid' $param={{!!title}}/>">Markdown to Wikitext</$button>""">
 <span style="padding:1px 3px 0px 3px;display:inline-block;font-size:smaller;vertical-align:middle;">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>

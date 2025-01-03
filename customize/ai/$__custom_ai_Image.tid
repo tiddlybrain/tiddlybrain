@@ -1,7 +1,7 @@
 caption: Image Recognition
 created: 20241025211824739
 creator: yuzijie
-modified: 20241204213815658
+modified: 20250103115041487
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Image
@@ -96,7 +96,7 @@ type: text/vnd.tiddlywiki
 
 <section class="ai">
 <h3>Results
-<$list filter="[<ai-response>type[text/x-markdown]]"><$md-to-tid-button title={{!!title}} type={{!!type}}/></$list>
+<$list filter="[<ai-response>type[text/x-markdown]]"><$button style="font-size:small;" actions="<$action-sendmessage $message='tm-md-tiddler-to-tid' $param={{!!title}}/>">Markdown to Wikitext</$button></$list>
 <$list filter="[<ai-response>has[text]]"><$button style="font-size:small;"><$action-deletetiddler $filter="[<ai-response>]"/>Clear Results</$button></$list>
 </h3>
 <$edit-text tiddler=<<ai-response>> tag="textarea" class="edit-area tc-edit-texteditor"/>
