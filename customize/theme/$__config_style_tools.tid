@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250103114211974
+modified: 20250104181040443
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -87,7 +87,7 @@ dl.task-list dd {white-space: nowrap;}
 .flashcards {display: flex; flex-wrap: wrap; gap: 20px 10px; margin: 2em 0;}
 
 /* For Sidebar: Index & Editor & Daily & Inbox */
-.tc-sidebar-header .tc-sidebar-lists .tc-drop-down p {margin-top: 1em; margin-bottom: 1em;}
+.tc-sidebar-header .tc-sidebar-lists .tc-drop-down p, .tc-sidebar-header .tc-sidebar-lists .collapse-content > p {margin-top: 1em; margin-bottom: 1em;}
 .tc-sidebar-lists .tc-editor-toolbar button {margin: 0; border: 1px solid #ccc;}
 .tc-sidebar-lists .tc-editor-toolbar button.tc-btn-invisible {border: none;}
 .tc-sidebar-tabs .tc-editor-toolbar .tc-drop-down {max-width: 760px; overflow: hidden;}
@@ -263,7 +263,7 @@ button.l {line-height: inherit;}
 .modal-buttons button.l svg {vertical-align: middle; font-size: smaller; fill:#5778d8;}
 .l > button.collapse-title {padding: 0; background: transparent; border: none;}
 .l > button.collapse-title:hover {text-decoration: underline;}
-.l > button.collapse-title > svg {font-size: small; transform: translateY(-2px);}
+.l > button.collapse-title > svg {font-size: small;}
 .l > h1.collapse-title > svg {width: 16pt; height: 16pt; fill: #999; transform: translateY(2px);}
 .l > h2.collapse-title > svg {width: 14pt; height: 14pt; fill: #999; transform: translateY(2px);}
 .l > h3.collapse-title > svg {width: 12pt; height: 12pt; fill: #999; transform: translateY(2px);}

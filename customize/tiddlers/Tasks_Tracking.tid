@@ -2,15 +2,15 @@ caption: Tracking
 created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20241230190443157
+modified: 20250104181724263
 modifier: yuzijie
 order: 3
 tags: customized Tasks
 title: Tasks/Tracking
 type: text/vnd.tiddlywiki
 
-\procedure tracking-items(filter)
-<ul style="line-height:24px;"><$list filter=<<filter>>><li>
+\procedure tracking-items()
+<ul style="line-height:24px;"><$list filter="[<items>enlist-input[]]"><li>
 <$link to={{!!title}}>{{!!title}}</$link> @@color:brown;<$transclude $variable="days-left" deadline={{!!date}}/>@@
 <ol><$list filter="[all[current]get[tbc]enlist-input[]]"><li><$transclude $variable="l" title={{!!title}}/></li></$list></ol>
 </li></$list></ul>
@@ -39,27 +39,36 @@ TBC: <<tbc>>
 </$let>
 </h2>
 
-<div style="padding-left:1em;"><ul style="line-height:24px;">
-<$vars comparefilter="[get[date]compare:date:lteq<today>]"><$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
-<li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
-</$list></$vars>
+<div style="line-height:24px;">
+<$vars comparefilter="[get[date]compare:date:lteq<today>]">
+<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
+<div><$transclude $variable="l" title={{!!title}} links="yes"/></div>
+</$list>
+</$vars>
 <$list filter="[all[tiddlers]has[date]has[interval]!note[Level]]"><$let interval={{{ [all[current]get[interval]] }}}>
 <$list filter="[<interval>search:title:literal[-]]" variable="NONE"><$setmultiplevariables $names="[[month]] [[day]]" $values="[<interval>split[-]]">
 <$let rule={{{ [{!!date}nextNotice<interval>] }}} today=<<now "YYYY0MM0DD">>><$list filter="[<rule>compare:date:lteq<today>]" variable="NONE">
-<li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
+<div><$transclude $variable="l" title={{!!title}} links="yes"/></div>
 </$list></$let>
 </$setmultiplevariables></$list>
 <$list filter="[<interval>!search:title:literal[-]negate[]]" variable="negate"><$list filter="[all[current]!days:date<negate>]">
-<li><$transclude $variable="l" title={{!!title}} links="yes"/></li>
+<div><$transclude $variable="l" title={{!!title}} links="yes"/></div>
 </$list></$list>
 </$let></$list>
-</ul></div>
-<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]limit[1]]">''IN 3 MONTH''
-<div style="padding-left:1em;"><$transclude $variable="tracking-items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]"/></div>
-</$list>
-<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]limit[1]]">
-<$details summary="IN 1 YEAR"><$transclude $variable="tracking-items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]]"/></$details>
-</$list>
-<$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[360]limit[1]]">
-<$details summary="FUTURE"><$transclude $variable="tracking-items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[360]limit[1]]"/></$details>
-</$list>
+<$list filter="[all[tiddlers]tag[Tasks/Tracking]]"><div><$transclude $variable="l" title={{!!title}} mode="cl" belongs-to="no" description="yes"/></div></$list>
+<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]">
+<$let count={{{ [<items>enlist-input[]count[]] }}} summary={{{ [<count>addsuffix[)]addprefix[OVERDUE IN 3 MONTH (]] }}}>
+<%if [<count>compare:number:gteq[1]] %><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details><%endif%>
+</$let>
+</$set>
+<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]]">
+<$let count={{{ [<items>enlist-input[]count[]] }}} summary={{{ [<count>addsuffix[)]addprefix[OVERDUE IN 1 YEAR (]] }}}>
+<%if [<count>compare:number:gteq[1]] %><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details><%endif%>
+</$let>
+</$set>
+<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[360]]">
+<$let count={{{ [<items>enlist-input[]count[]] }}} summary="OVERDUE IN THE FUTURE">
+<%if [<count>compare:number:gteq[1]] %><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details><%endif%>
+</$let>
+</$set>
+</div>
