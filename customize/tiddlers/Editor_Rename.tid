@@ -2,16 +2,17 @@ caption: Rename
 created: 20200425130326854
 creator: yuzijie
 keywords: 
-modified: 20240211114108395
+modified: 20250104130349026
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Rename
 type: text/vnd.tiddlywiki
 
-\define droppable-action() <$transclude $variable="droppable-rename-set-caption-action" template={{{[[$:/temp/editor/rename]get[text]else{$:/config/defaultTemplate}]}}}/>
+\define droppable-action() <$transclude $variable="droppable-rename-set-caption-action" template={{{ [[$:/temp/editor/rename]get[text]else{$:/config/defaultTemplate}] }}} caption={{$:/temp/editor/rename!!caption}}/>
 
 <div style="margin-bottom:20px;">
-Title Template: <$edit-text tiddler="$:/temp/editor/rename" field="text" default={{$:/config/defaultTemplate}} tag="input"/>
+Template: <$edit-text tiddler="$:/temp/editor/rename" field="text" default={{$:/config/defaultTemplate}} tag="input" size="10"/>
+Caption: <$edit-text tiddler="$:/temp/editor/rename" field="caption" tag="input"/>
 </div>
 <$droppable actions=<<droppable-action>> tag="div">
 <div class="tc-droppable-placeholder" style="display:inline-block;padding:10px 0;border-radius:15px;">Drag Tiddler Here to Rename Tiddler and Set Caption</div>

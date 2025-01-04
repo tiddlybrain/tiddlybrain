@@ -1,4 +1,4 @@
-modified: 20241105124719534
+modified: 20250104124334185
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ImportListing
@@ -46,13 +46,6 @@ type: text/vnd.tiddlywiki
 \define previewPopupState() $(currentTiddler)$!!popup-$(payloadTiddler)$
 
 \define renameFieldState() $(currentTiddler)$!!state-rename-$(payloadTiddler)$
-
-\define newTitle(template)
-\whitespace trim
-<$button style="margin-left:5px;" tooltip="Rename title automatically">Auto Rename
-<$action-setfield $field=<<renameField>> $value=<<unusedtitle $template$>>/>
-</$button>
-\end
 
 \define askAI()
 \whitespace trim
@@ -112,7 +105,7 @@ type: text/vnd.tiddlywiki
 </$button>
 <$list filter="[<currentTiddler>!has<suppressedField>]">
 <$button class="tc-btn-invisible" set=<<renameFieldState>> setTo="yes" tooltip={{{[<lingo-base>addsuffix[Listing/Rename/Tooltip]get[text]]}}}>{{$:/core/images/edit-button}}</$button>
-<$transclude $variable="newTitle" template={{$:/config/defaultTemplate}}/><$transclude $variable="askAI"/>
+<$transclude $variable="askAI"/>
 </$list>
 </$reveal>
 <$reveal type="match" state=<<previewPopupState>> text="yes" tag="div">

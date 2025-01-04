@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20241226132339306
+modified: 20250104104637370
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -76,16 +76,13 @@ type: text/vnd.tiddlywiki
 </$action-createtiddler>
 \end
 
-\define droppable-rename-set-caption-action(template)
+\define droppable-rename-set-caption-action(template, caption)
 <$tiddler tiddler=<<actionTiddler>>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<actionTiddler>>/>
 <$set name="date" filter="[all[current]get[created]format:date[YYYY0MM0DD]]" select="0" emptyValue=<<now YYYY0MM0DD>>>
 <$set name="newTitle" value=<<unusedtitle $template$>>>
-<$list filter="[all[current]!has[caption]] [all[current]has[caption]search:caption:literal[{{!!title}}]]">
-<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} caption={{!!title}} title=<<newTitle>> date=<<date>>/>
-</$list>
-<$list filter="[all[current]has[caption]!search:caption:literal[{{!!title}}]]">
-<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} title=<<newTitle>> date=<<date>>/>
-</$list>
+<$let oldCap={{{ [all[current]get[caption]else{!!title}] }}} newCap={{{ [<__caption__>!is[blank]else<oldCap>] }}}>
+<$action-sendmessage $message="tm-new-tiddler" $param={{!!title}} caption=<<newCap>> title=<<newTitle>> date=<<date>>/>
+</$let>
 <$list filter="[all[tiddlers]belongs.to<actionTiddler>]"><$action-setfield belongs.to=<<newTitle>> $timestamp="no"/></$list>
 <$list filter="[all[tiddlers]tag<actionTiddler>]"><$action-listops $field="tags" $subfilter="-[<actionTiddler>] [<newTitle>]" $timestamp="no"/></$list>
 <$list filter="[all[tiddlers]contains<actionTiddler>]"><$action-listops $field="list" $subfilter="-[<actionTiddler>] [<newTitle>]" $timestamp="no"/></$list>
@@ -172,7 +169,8 @@ type: text/vnd.tiddlywiki
 #> `<<droppable-attms-action>>`
 # ''将旧 Tiddler 按照标准重命名''
 #> `<<droppable-rename-set-caption-action
-  template:"新 Tiddler 模板">>`
+  template:"新 Tiddler 模板"
+  caption:"设置新 Tiddler 的 Caption">>`
 # ''将内容写入表格内, 用 `;;` 分隔''
 #> `<<add-to-cell-action
   title:"data tiddler 标题"
