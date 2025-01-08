@@ -51,7 +51,7 @@ var getResult = function(data,options,currTiddlerTitle) {
 }
 
 var getBacklinksParsed = function(data,options,currTiddlerTitle) {
-	var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|/#|^)" + currTiddlerTitle + "(\\]\\]|;;|\"|\'|:|\\s|\\n|$)", re = new RegExp(pattern);
+	var pattern = "(\\[\\[|\\||;;|\"|\'|:|\\s|#|^)" + currTiddlerTitle + "(\\]\\]|;;|\"|\'|:|\\s|\\n|$)", re = new RegExp(pattern);
 	var re_filter = /<<bl-(.+?)\s+param:["'](.+?)["']/, filter = data.match(re_filter), tester = null, results = [];
 	if(filter !== null && filter[1] in backlinkTester) {
 		tester = backlinkTester[filter[1]];
