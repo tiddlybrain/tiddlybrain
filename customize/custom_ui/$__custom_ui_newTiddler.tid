@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20241210135827214
+modified: 20250108105532628
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/x-tiddler-dictionary" text="Name: {{!!caption}}
 Description: {{!!description}}" edit="yes"/>Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> edit="yes"/>Record</$button>
-<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/vnd.drawio" fields="tags='Snippet' belongs.to='Attachments' note='Diagram'" edit="yes"/>Diagram</$button>
+<$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/vnd.drawio" edit="yes"/>Diagram</$button>
 <$button tooltip="Markdown"><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="text/x-markdown" edit="yes"/>Md</$button>
 <$button message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" tooltip="Edit Configurations">{{$:/core/images/edit-button}}</$button>
 </p></$vars>

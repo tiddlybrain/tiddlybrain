@@ -2,7 +2,7 @@ caption: Tracking
 created: 20240312140902299
 creator: yuzijie
 keywords: 
-modified: 20250104181724263
+modified: 20250108092846339
 modifier: yuzijie
 order: 3
 tags: customized Tasks
@@ -55,7 +55,7 @@ TBC: <<tbc>>
 <div><$transclude $variable="l" title={{!!title}} links="yes"/></div>
 </$list></$list>
 </$let></$list>
-<$list filter="[all[tiddlers]tag[Tasks/Tracking]]"><div><$transclude $variable="l" title={{!!title}} mode="cl" belongs-to="no" description="yes"/></div></$list>
+<$list filter="[all[tiddlers]tag[Tasks/Tracking]]"><div><$transclude $variable="l" title={{!!title}} mode="cl" description="yes"/></div></$list>
 <$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]">
 <$let count={{{ [<items>enlist-input[]count[]] }}} summary={{{ [<count>addsuffix[)]addprefix[OVERDUE IN 3 MONTH (]] }}}>
 <%if [<count>compare:number:gteq[1]] %><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details><%endif%>
