@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20241119101954781
+modified: 20250114154722951
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -47,7 +47,7 @@ $button$
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
 <$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 </$button>
-<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox tc-popup-keep">sort by note</$checkbox>
+<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox tc-popup-keep">sort by role</$checkbox>
 </div>
 <$set name="sidebar-list" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="[list<tv-story-list>sortan[note]]" emptyValue="[list<tv-story-list>]">
 <$set name="tv-allow-drag-and-drop" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="no" emptyValue="yes">
