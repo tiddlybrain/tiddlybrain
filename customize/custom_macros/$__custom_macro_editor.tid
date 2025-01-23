@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20250123094333137
+modified: 20250123134407046
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" state="$:/state/editor/caption" text="textarea">
 <$edit-text field="caption" class="edit-area tc-edit-texteditor" inputActions=<<editor-caption-inputActions>>/>
 </$reveal>
-<$list filter="[all[current]has[caption]]"><$set name="tags" filter="[caption{!!caption}!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]">
+<$list filter="[all[current]has[caption]]"><$set name="tags" filter="[caption{!!caption}!is[current]!title{!!draft.of}!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]">
 <$list filter="[<tags>enlist-input[]limit[1]]" variable="NONE"><$details summary={{{ [<tags>enlist-input[]count[]addprefix[Twins ]] }}}>
 <$list filter="[<tags>enlist-input[]]" variable="tag"><div style="white-space:nowrap;overflow:auto;width:290px;font-size:small;">
 <$checkbox tiddler=<<editor-caption-status>> listField="list" checked=<<tag>>>
