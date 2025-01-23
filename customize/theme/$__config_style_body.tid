@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20241217142512052
+modified: 20250116103711180
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -128,6 +128,7 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 
 .tc-more-sidebar {margin-top: -5px;}
 
+.tc-sidebar-header {border-bottom: 3px inset #eee;}
 .tc-sidebar-header .tc-sidebar-lists button.borderless {fill: #777; border: none; background-color: transparent; padding: 3px 15px 3px 0;}
 .tc-sidebar-header .tc-sidebar-lists li > div > p {margin: 1em 0;}
 

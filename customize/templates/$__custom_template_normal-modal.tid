@@ -1,7 +1,7 @@
 created: 20210516172453585
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20241230191426606
+modified: 20250123094031160
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
@@ -27,7 +27,7 @@ Done: <<currentTiddler>><$transclude $variable="add-to-cell-action" title=<<jour
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
 </$list>
 <$list filter="[all[current]!search:title:literal[/]]">
-<$set name="twins" filter="[all[tiddlers]has[caption]caption{!!caption}!note{!!note}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]">
+<$set name="twins" filter="[all[tiddlers]has[caption]caption{!!caption}!is[system]!is[current]!has[draft.of]!search:title:literal[/]!search:caption:regexp[^{{|^<<|^<\$]]">
 <$set name="mode" filter="[<twins>enlist-input[]count[]compare:number:lt[4]]" value="list" emptyValue="collapse">
 <$transclude $variable="relationships" name="Twins" filter="[<twins>enlist-input[]]" mode=<<mode>>/>
 </$set>
