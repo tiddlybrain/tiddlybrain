@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20241206144143753
+modified: 20250127095259452
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 <$button set=<<currentTiddler>> setTo="doing" class="tc-btn-invisible" tooltip="Start doing it">{{$:/core/images/close-others-button}}</$button>
 <$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>'' <$transclude $variable="days-left" deadline={{!!date}}/>
+{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__ <$transclude $variable="days-left" deadline={{!!date}}/>
 </$button>
 </$set>
 \end
@@ -53,7 +53,7 @@ type: text/vnd.tiddlywiki
 </$button>
 <$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:green;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>'' <$transclude $variable="days-passed" start={{!!date}}/>
+{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__ <$transclude $variable="days-passed" start={{!!date}}/>
 </$button>
 </$set>
 \end
@@ -65,7 +65,7 @@ type: text/vnd.tiddlywiki
 <$let direct-open="no"><$tiddler tiddler=<<task-id>>><<modal-actions>></$tiddler></$let>
 </$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#009dd9;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>'' <$transclude $variable="days-passed" start={{!!date}}/>
+{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__ <$transclude $variable="days-passed" start={{!!date}}/>
 </$button>
 </$set>
 \end
@@ -78,7 +78,7 @@ type: text/vnd.tiddlywiki
 <$let direct-open="no"><$tiddler tiddler=<<task-id>>><<modal-actions>></$tiddler></$let>
 </$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#cd23d8;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>'' <$transclude $variable="days-left" deadline={{!!date}}/>
+{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__ <$transclude $variable="days-left" deadline={{!!date}}/>
 </$button>
 </$set>
 \end

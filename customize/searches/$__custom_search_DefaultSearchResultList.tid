@@ -3,9 +3,9 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [all[tiddlers]field:title<userInput>!tag[Ignore]] [all[tiddlers]!has[draft.of]!is[system]!tag[Ignore]!tag[customized]fieldInsensitive:caption<userInput>sortan[title]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20241216223615416
+modified: 20250127100329313
 modifier: yuzijie
-second-search-filter: [all[tiddlers]!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[subfilter<note-subfilter>limit[100]sortan[belongs.to]]
+second-search-filter: [all[tiddlers]!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[subfilter<note-subfilter>limit[100]sortsub<topic-level>]
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/DefaultSearchResultList
 type: text/vnd.tiddlywiki
