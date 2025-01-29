@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20241230185241303
+modified: 20250129051801888
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -107,8 +107,9 @@ type: text/vnd.tiddlywiki
 \end
 
 \define shortcut-linked()
-<li class="toc-item"><$button dragTiddler={{!!title}} tag="a" class="tc-tiddlylink">
-<<open-in-sidebar close:"no">><$transclude field=caption><$view field=title/></$transclude>
+<li class="toc-item"><$button actions=<<modal-actions>> dragTiddler={{!!title}} tag="a" class="tc-tiddlylink">
+<$action-listops $tiddler="$:/config/recent-search" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
+<$transclude field=caption><$view field=title/></$transclude>
 </$button></li>
 \end
 
