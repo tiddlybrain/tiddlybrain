@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250127095032258
+modified: 20250129090602439
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -36,9 +36,14 @@ TBC: <<tbc>>
 </$list>
 </$droppable></h2>
 
-<ul style="color:#333;line-height:24px;"><$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]">
+<ul style="color:#333;line-height:24px;">
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]contains:plan<curDate>]">
+<li style="white-space:nowrap;"><<task-list-open>></li>
+</$list>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]">
 <li style="white-space:nowrap;"><<task-list-doing>></li>
-</$list></ul>
+</$list>
+</ul>
 <$droppable actions=<<droppable-task-list-actions>> tag="div">
 <$list filter="[<journal-title>is[tiddler]]"><table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
@@ -62,7 +67,6 @@ TBC: <<tbc>>
 </$button></li></$list>
 </$set>
 </$list></$list>
-<$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]contains:plan<curDate>]"><li style="white-space:nowrap;"><<task-list-open>></li></$list>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li style="white-space:nowrap;">
 <$list filter="[all[current]text[doing]]" emptyMessage="""
 <$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
