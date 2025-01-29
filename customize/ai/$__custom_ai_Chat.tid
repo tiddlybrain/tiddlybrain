@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250103115632162
+modified: 20250129134249259
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -48,7 +48,9 @@ type: text/vnd.tiddlywiki
 \procedure ai-gui(id)
 <$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[text]] }}}/>""" tag="section" class="ai">
 <div class="tc-droppable-placeholder" style="display:block;">
-<h3>Instructions</h3>
+<h3>Instructions
+<$list filter="[<ai-request>get[text]]" variable="Q"><$button style="font-size:small;" actions="<$list filter='[all[tiddlers]tag[AI]get[order]]' variable='id'><$action-setfield $tiddler=<<ai-request>> text=<<Q>>/></$list>">Copy to Other Tabs</$button></$list>
+</h3>
 <$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin:0;"><tbody>
 <tr><th>Choose Model</th><th>Custom Prompts</th></tr>

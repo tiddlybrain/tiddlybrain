@@ -1,0 +1,26 @@
+caption: {{$:/core/images/advanced-search-button}} ask AI
+created: 20240924170102981
+creator: yuzijie
+description: Ask AI
+modified: 20250129131424106
+modifier: yuzijie
+tags: $:/tags/ViewToolbar customized $:/tags/EditToolbar
+title: $:/custom/ui/Buttons/ai-search
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$list filter="[all[current]get[caption]!match[{{!!text}}]]" variable="NONE">
+<$button tooltip="Ask AI" aria-label="Ask AI" class=<<tv-config-toolbar-class>>>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
+<$list filter="[all[tiddlers]tag[AI]get[order]]" variable="id">
+<$action-setfield $tiddler=<<ai-request>> text={{!!caption}} type="text/vnd.tiddlywiki"/>
+</$list>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/advanced-search-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="ask AI"/></span>
+</$list>
+</$button>
+</$list>
