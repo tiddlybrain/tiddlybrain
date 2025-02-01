@@ -1,11 +1,22 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
-modified: 20241129111023371
+modified: 20250201111826586
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/SideBar/Recent
 type: text/vnd.tiddlywiki
 
-<h2 style="color:#5778d8;margin-top:0;">Sidebar</h2>
+<h2 style="color:#5778d8;margin-top:0;">Open</h2>
+<$list filter="[list<tv-story-list>sortan[note]]">
+<div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$button>
+</div>
+</$list>
+
+<h2 style="color:#5778d8;">Sidebar</h2>
 <$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[10]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink"><<open-in-sidebar close:"no">>

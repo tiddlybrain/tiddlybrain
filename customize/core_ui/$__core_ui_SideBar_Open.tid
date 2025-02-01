@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20250114154722951
+modified: 20250201110734521
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -40,14 +40,19 @@ $button$
 </$droppable>
 \end
 
-<div class="tc-sidebar-tab-open">
-<div style="font-variant:all-small-caps;color:#bbb;">
-<$button class="tc-btn-invisible" style="display:inline-block;width:auto;font-variant:all-small-caps;">index
+\procedure tab-switch(title, tab)
+\whitespace trim
+<$button class="tc-btn-invisible" style="display:inline-block;width:auto;font-variant:all-small-caps;"><<title>>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text=<<tab>>/>
 <$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 </$button>
-<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox tc-popup-keep">sort by role</$checkbox>
+\end
+
+<div class="tc-sidebar-tab-open">
+<div style="font-variant:all-small-caps;color:#bbb;">
+<<tab-switch "daily" "Tasks">><<tab-switch "index" "Index">><<tab-switch "inbox" "Inbox">><<tab-switch "ask ai" "AI">>
+<span style="float:right;padding:0 3px;"><$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox tc-popup-keep">sort by role</$checkbox></span>
 </div>
 <$set name="sidebar-list" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="[list<tv-story-list>sortan[note]]" emptyValue="[list<tv-story-list>]">
 <$set name="tv-allow-drag-and-drop" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="no" emptyValue="yes">
@@ -61,12 +66,6 @@ $button$
 </$let>
 </$button>
 <span class="sidebar-open-tools">
-<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button> &middot;
-<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
-<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-<$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
-<$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
-</$button> &middot;</$list>
 <$button class="tc-btn-invisible sidebar-tab-open-btn tc-popup-keep">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/></$button>
 </span>"""/>
 </div>
@@ -81,14 +80,6 @@ $button$
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
 </$let>
 </$button>
-<span class="sidebar-open-tools">
-<$button actions=<<modal-actions>> class="tc-btn-invisible sidebar-tab-open-btn">popup</$button> &middot;
-<$list filter="[{$:/status/IsReadOnly}!match[yes]]" variable="NONE"><$button class="tc-btn-invisible sidebar-tab-open-btn">edit
-<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-<$action-setfield $tiddler="$:/state/sidebar" text="yes"/><$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
-<$action-setfield $tiddler="$:/temp/index-tree" text=<<currentTiddler>>/>
-</$button></$list>
-</span>
 </div></$list>
 <$button class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">
 <$list filter="[all[tiddlers]prefix[$:/state/folded/]text[hide]limit[1]]" emptyMessage="<$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/>fold all">

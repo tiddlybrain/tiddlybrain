@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20250129085133984
+modified: 20250201103856045
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -117,9 +117,9 @@ table.tc-edit-fields > tbody > tr:last-child > td, table.tc-edit-fields > tbody 
 .tc-sidebar-tab-open-item {position: relative; font-size: 1em; margin: 5px 0; white-space: nowrap;}
 .tc-sidebar-tab-open-item .tc-btn-text {margin: 0; color: #999;}
 .tc-sidebar-tab-open-item a.tc-tiddlylink-external {display: inline; padding: 0;}
-.tc-sidebar-tab-open-item .sidebar-tab-open-btn {display: inline-block; width: auto; overflow: hidden; text-overflow: ellipsis; max-width: 52vw; padding-right: 4px;}
-@media (max-width: 950px) {.tc-sidebar-tab-open-item .sidebar-tab-open-btn {max-width: 41vw;}}
-@media (max-width: 600px) {.tc-sidebar-tab-open-item .sidebar-tab-open-btn {max-width: 205px;}}
+.tc-sidebar-tab-open-item .sidebar-tab-open-btn {display: inline-block; width: auto; overflow: hidden; text-overflow: ellipsis; max-width: 62vw; padding-right: 4px;}
+@media (max-width: 950px) {.tc-sidebar-tab-open-item .sidebar-tab-open-btn {max-width: 55vw;}}
+@media (max-width: 600px) {.tc-sidebar-tab-open-item .sidebar-tab-open-btn {max-width: 300px;}}
 
 .sidebar-open-tools {color: #bbb; float: right; margin-right: 3px;}
 .sidebar-open-tools .sidebar-tab-open-btn {padding: 0; font-variant: all-small-caps; color: #bbb;}
