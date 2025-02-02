@@ -18,7 +18,7 @@ module-type: filteroperator
 Export our filter function
 */
 exports.getAllTiddlers = function(source,operator,options) {
-	var results = [], matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g, re = /\s*(?:;;)\s*/;
+	var results = [], matches, pattern = /<<l\s+["'](.+?)["'].*?>>|\[\[.+?\|(.+?)\]\]|\[\[(.+?)\]\]/g, re = /\s*(?:;;)\s*/;
 	var suffixes = operator.suffixes || [], field = (suffixes[0] || [])[0], value = operator.operand || null;
 	source(function(tiddler,title) {
 		if(tiddler) {
@@ -61,7 +61,7 @@ exports.getAllTiddlers = function(source,operator,options) {
 };
 
 exports.hasTiddler = function(source,operator,options) {
-	var results = [], matches, pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g, value = operator.operand;
+	var results = [], matches, pattern = /<<l\s+["'](.+?)["'].*?>>|\[\[.+?\|(.+?)\]\]|\[\[(.+?)\]\]/g, value = operator.operand;
 	source(function(tiddler,title) {
 		if(tiddler) {
 			if(options.wiki.tiddlerExists(value)) {

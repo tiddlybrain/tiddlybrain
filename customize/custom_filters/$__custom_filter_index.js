@@ -242,7 +242,7 @@ exports.slash = function(source,operator,options) {
 			});
 			break;
 		case "links":
-			let pattern = /<<l\s+'(.+?)'.*>>|<<l\s+"(.+?)".*>>|\[\[.+\|(.+)\]\]|\[\[(.+)\]\]/g, matches, hasResults = 0;
+			let pattern = /<<l\s+["'](.+?)["'].*?>>|\[\[.+?\|(.+?)\]\]|\[\[(.+?)\]\]/g, matches, hasResults = 0;
 			currTiddler = options.wiki.getTiddler(currTiddlerTitle);
 			data = currTiddler.getFieldString("text");
 			while(matches = pattern.exec(data)) {
