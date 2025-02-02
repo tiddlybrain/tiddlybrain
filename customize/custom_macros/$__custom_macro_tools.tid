@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250129051801888
+modified: 20250202045430244
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -167,13 +167,12 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!code-body[yes]]"><$button class="tc-btn-invisible" actions=<<step-action>>>step</$button> &middot;</$list>
 <$list filter="[all[current]code-body[yes]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>content</$button> &middot;</$list>
 <$button class="tc-btn-invisible">search
-<$action-setfield $tiddler="$:/temp/menubarsearch" text={{!!caption}}/>
-<$action-setfield $tiddler="$:/temp/menubarsearch/input" text={{!!caption}}/>
-<$action-setfield $tiddler="$:/temp/menubarsearch/refresh" text="yes"/>
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
 <$transclude $variable="tiddler-close"/>
+<$list filter="[all[tiddlers]tag[AI]get[order]]" variable="id">
+<$action-setfield $tiddler=<<ai-request>> text={{!!caption}} type="text/vnd.tiddlywiki"/>
+</$list>
 </$button>
 </div>
 </$let></$list>
