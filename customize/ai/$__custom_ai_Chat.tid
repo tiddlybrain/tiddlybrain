@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250129134249259
+modified: 20250202191003946
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
   oncompletion=<<completion-get-json>>
   header-Content-Type='application/json'
   header-Authorization=`Bearer $(api-key)$`
-  body=`{"model":"$(model)$","messages":[{"role":"system","content":"$(instructions)$\n\n$(default)$"},$(chatHistory)${"role":"user","content":"$(userInput)$"}]}`
+  body=`{"model":"$(model)$","messages":[{"role":"user","content":"$(instructions)$\n\n$(default)$"},$(chatHistory)${"role":"user","content":"$(userInput)$"}]}`
 />
 </$set>
 </$let>
