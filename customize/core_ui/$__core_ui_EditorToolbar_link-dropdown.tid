@@ -1,4 +1,4 @@
-modified: 20250116095700045
+modified: 20250203212319409
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -82,26 +82,26 @@ type: text/vnd.tiddlywiki
 </$vars>
 
 <$reveal tag="div" state=<<storeTitle>> type="nomatch" text="">
-
 <$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
-
 <$vars userInput={{{ [<storeTitle>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} link-dropdown="yes">
 
 {{$:/core/ui/SearchResults}}
 
 </$vars>
-
 </$linkcatcher>
-
 </$reveal>
 
 <$reveal tag="div" state=<<storeTitle>> type="match" text=""><$list filter="[<targetTiddler>is[tiddler]]">
+<$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
+<$vars search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}} link-dropdown="yes">
+
+//Children of the current tiddler//
+
+<$list filter="[all[tiddlers]tag[Snippet]belongs.to<search>sort[note]]">
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</$list>
 
 //Backlinks of the current tiddler//
-
-<$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
-
-<$let search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}} link-dropdown="yes">
 
 <$list filter="[<search>blsearch[]get[note]unique[]sortsub<topic-level>]" variable="key">
 <$let style={{{ [<key>is[tiddler]get[belongs.to]get[color]else[#ffe96b]addprefix[background:]addsuffix[;color:#444;margin-right:5px;]] }}}>
@@ -113,16 +113,8 @@ type: text/vnd.tiddlywiki
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </$list>
 
-//Children of the current tiddler//
-
-<$list filter="[all[tiddlers]tag[Snippet]belongs.to<search>sort[note]]">
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-</$list>
-
-</$let>
-
+</$vars>
 </$linkcatcher>
-
 </$list></$reveal>
 
 </$vars>
