@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250202045430244
+modified: 20250205100837968
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -64,7 +64,7 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define collapse(title, text, class, tag:"button", style, external-links, belongs-to:"no", more-text)
+\define collapse(title, text, class, tag:"button", style, external-links, current-title, belongs-to:"no", more-text)
 <$set name="state" value=<<collapse-state "$title$">>>
 <$reveal type="nomatch" state=<<state>> text="open" tag="div" class=<<__class__>>>
 <$button actions=<<collapse-title-actions "$title$">> dragTiddler="$title$" tag=<<__tag__>> class="tc-btn-invisible collapse-title collapse-close" tooltip=<<__title__>>>
@@ -84,7 +84,7 @@ type: text/vnd.tiddlywiki
 </$tiddler>
 </$button>
 <$tiddler tiddler="$title$"><$set name="sty" filter="[all[current]is[image]]" value="width:fit-content;$style$" emptyValue="$style$"><p class="collapse-content" style=<<sty>>>
-<$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links belongs-to:"$belongs-to$">></$list>
+<$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links current-title:"$current-title$" belongs-to:"$belongs-to$">></$list>
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>><$transclude mode="block"/></$list>
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
@@ -440,6 +440,7 @@ type: text/vnd.tiddlywiki
   tag:"自定义 collapse-title 的 tag 的类型"
   style:"自定义 DOM 元素的样式"
   external-links:"是否显示 external-links"
+  current-title:"是否在内容中显示当前标题的链接"
   belongs-to:"是否显示 external-links 里面的 belongs.to"
   more-text:"在 title 里面显示额外的文字">>`
 # ''用父 Tiddler 的名字组成 tree 的 prefix''

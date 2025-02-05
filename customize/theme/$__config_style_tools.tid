@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250204173118389
+modified: 20250205095334011
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -273,6 +273,7 @@ button.l {line-height: inherit;}
 .tc-tiddler-frame .tc-tiddler-body button.l {overflow-x: clip; max-width: 100%;}
 .bl-container div.tc-menu-list-item {overflow: hidden;}
 .tr > h3, .cl > .collapse-content > h3 {font-size: 1.05em; border: none; padding: 0;}
+.cl > .collapse-content > .external-links {margin: 0 calc(-1em - 2px);}
 .cl > .collapse-content > .external-links:first-of-type {margin-top: 0;}
 
 /* For Macro: links */
