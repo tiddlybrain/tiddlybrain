@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250205095334011
+modified: 20250205173928605
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -272,9 +272,7 @@ button.l {line-height: inherit;}
 .snippet-content .l > button.collapse-title > svg {font-size: smaller;}
 .tc-tiddler-frame .tc-tiddler-body button.l {overflow-x: clip; max-width: 100%;}
 .bl-container div.tc-menu-list-item {overflow: hidden;}
-.tr > h3, .cl > .collapse-content > h3 {font-size: 1.05em; border: none; padding: 0;}
-.cl > .collapse-content > .external-links {margin: 0 calc(-1em - 2px);}
-.cl > .collapse-content > .external-links:first-of-type {margin-top: 0;}
+.tr > h3 {font-size: 1.05em; border: none; padding: 0;}
 
 /* For Macro: links */
 a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
@@ -318,12 +316,13 @@ li .code-macro {margin: 4px 0;}
 /* For Macro: collapse */
 button.collapse-title {width: 100%; fill: #999; white-space: nowrap; overflow: hidden; padding: .7em 0 .7em .8em; background: #eee; border-bottom: 1px solid #ddd; border-radius: 0; text-overflow: ellipsis;}
 button.collapse-close {background: #f4f4f4; font-weight: normal;}
-.collapse-content {max-width: 100%; margin: 0.5em 0; border-radius: 3px; padding: 0 1em; border: 1px solid #efefef; border-bottom-color: #ccc; background: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; overflow: auto;}
+.collapse-content {max-width: 100%; margin: 0.5em 0; border-radius: 3px; border: 1px solid #efefef; border-bottom-color: #ccc; background: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; overflow: auto;}
 .collapse-content > ul, .collapse-content > ol, .collapse-content > table {margin: 1em 0;}
-.collapse-content > .external-links:first-of-type {margin-top: 1em;}
-.collapse-content > .external-links:last-of-type {margin-bottom: 1em;}
 .collapse-content > iframe {margin-bottom: 0.5em;}
 h1 + .collapse-content, h2 + .collapse-content, h3 + .collapse-content, h4 + .collapse-content {border: none; width: 100%; box-shadow: none; padding: 0;}
+.collapse-content > table.data-table {margin: 0;}
+.collapse-content > table.data-table > tr:last-child > th, .collapse-content > table.data-table > tr:last-child > td {border-bottom: none;}
+.collapse-content > pre {border: none; margin: 0;}
 
 /* For Macro: task-pill */
 .dot {color: #333; border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7; text-shadow: 0 1px 0 rgb(255 255 255 / 80%);}

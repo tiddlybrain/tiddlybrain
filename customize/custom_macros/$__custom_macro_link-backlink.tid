@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250205100919588
+modified: 20250205110800451
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 <$let parent=<<currentTiddler>>><$tiddler tiddler="$title$">
 <$list filter="[<__mode__>match[link]]" variable="link-mode"><span style="white-space:nowrap;$style$"><$set name="current" value=<<mTitle>>>
 <$list filter="[<__links__>match[yes]]" variable="NONE"><<links>></$list>
-<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink $class$" tag=<<__tag__>> style={{{ [all[current]note[TODO]then[color:red;]] }}}>
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink $class$" tag=<<__tag__>> style={{{ [all[current]note[TODO]then[color:red;font-weight:bold;]] }}}>
 <$list filter="[<__status__>match[yes]]" variable="NONE">
 <$list filter="[all[current]has[status]]">@@color:brown;[{{!!status}}]@@&#32;</$list>
 </$list>

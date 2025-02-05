@@ -1,7 +1,7 @@
 created: 20190216164326004
 creator: yuzijie
 footer: <<modal-footer>>
-modified: 20241017093535535
+modified: 20250205170610834
 modifier: yuzijie
 subtitle: <<modal-subtitle>>
 tags: customized
@@ -16,6 +16,6 @@ type: text/vnd.tiddlywiki
 <div class="comment"><$codeblock code={{!!text}} language="text"/></div>
 </$list>
 </$list>
-<$set name="lang" filter="[<mTitle>get[language]else[text]]"><$codeblock code={{{ [<mTitle>get[text]] }}} language=<<lang>>/></$set>
+<$codeblock code={{{ [<mTitle>get[text]] }}} language={{{ [<mTitle>get[language]else[text]] }}}/>
 </section>
 </$list>
