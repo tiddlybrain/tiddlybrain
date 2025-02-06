@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250205173757150
+modified: 20250206104753224
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -100,15 +100,7 @@ type: text/vnd.tiddlywiki
 
 \define tree-prefix-builder(separator:"/") $(currentTiddler)$$separator$
 
-\define display(content, mode:"code", state:"$:/state/display", language)
-<$list filter="[<__mode__>match[code]]" variable="NONE" emptyMessage="<span class=<<__mode__>>><<__content__>></span>">
-<$set name="highlight" filter="[<__state__>text[yes]]" value="highlight" emptyValue="">
-<$set name="lang" filter="[<__language__>is[blank]]" value=<<language>> emptyValue=<<__language__>>>
-<span class=<<highlight>>><$codeblock code=<<__content__>> language=<<lang>>/></span>
-</$set>
-</$set>
-</$list>
-\end
+\define display(content, mode) <span class=<<__mode__>>><<__content__>></span>
 
 \define shortcut-linked()
 <li class="toc-item"><$button actions=<<modal-actions>> dragTiddler={{!!title}} tag="a" class="tc-tiddlylink">
@@ -453,9 +445,7 @@ type: text/vnd.tiddlywiki
 # ''使用各种模式来展示内容''
 #> `<<display
   content:"要展示的内容"
-  mode:"tips/code"
-  state:"name of state tiddler, e.g. $:/state/display/XXX"
-  language:"编程语言">>`
+  mode:"显示样式, 包括: tips/warning/danger/question">>`
 # ''点击后, 在 Sidebar 打开该链接''
 #> `<<shortcut-linked>>`
 # ''toc-link 是 no 的 Tiddler, 列出其下 tiddlers''
