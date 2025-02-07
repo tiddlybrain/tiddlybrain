@@ -1,0 +1,25 @@
+caption: {{$:/core/images/preview-open}} preview
+created: 20250207090322995
+creator: yuzijie
+description: Preview
+list-before: $:/core/ui/Buttons/delete
+modified: 20250207091635451
+modifier: yuzijie
+tags: customized $:/tags/EditToolbar
+title: $:/custom/ui/Buttons/preview
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$list filter="[all[current]get[caption]!match[{{!!text}}]]" variable="NONE">
+<$button tooltip="Preview" aria-label="Preview" class=<<tv-config-toolbar-class>>>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
+<$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<span class="hide-wide">{{$:/core/images/preview-open}}</span>
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="preview"/></span>
+</$list>
+</$button>
+</$list>

@@ -2,7 +2,7 @@ caption: {{$:/core/images/advanced-search-button}} ask AI
 created: 20240924170102981
 creator: yuzijie
 description: Ask AI
-modified: 20250129131424106
+modified: 20250207091647402
 modifier: yuzijie
 tags: $:/tags/ViewToolbar customized $:/tags/EditToolbar
 title: $:/custom/ui/Buttons/ai-search
@@ -16,6 +16,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[tiddlers]tag[AI]get[order]]" variable="id">
 <$action-setfield $tiddler=<<ai-request>> text={{!!caption}} type="text/vnd.tiddlywiki"/>
 </$list>
+<$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/advanced-search-button}}
 </$list>
