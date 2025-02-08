@@ -57,14 +57,25 @@ var getParents = function(tiddler,title,results,options) {
 }
 
 var getParentTitles = function(tiddler,title,results,options) {
-	var result = title, caption = tiddler.fields.caption;
-	if (caption) result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",caption,{
-		parseAsInline: true,
-		variables: {
-			currentTiddler: title
-		}
-	});
-	results.push(result);
+	var caption = tiddler.fields.caption, description = tiddler.fields.description;
+	if (caption) {
+		let result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",caption,{
+			parseAsInline: true,
+			variables: {
+				currentTiddler: title
+			}
+		});
+		results.push(result);
+	}
+	if (description) {
+		let result = options.wiki.renderText("text/plain","text/vnd.tiddlywiki",description,{
+			parseAsInline: true,
+			variables: {
+				currentTiddler: title
+			}
+		});
+		results.push(result);
+	}
 	var parentTitle = tiddler.getFieldString("belongs.to");
 	if (parentTitle) {
 		var parentTiddler = options.wiki.getTiddler(parentTitle);
