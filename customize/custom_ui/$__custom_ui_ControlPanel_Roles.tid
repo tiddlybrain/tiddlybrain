@@ -1,10 +1,12 @@
 caption: Roles
 created: 20240708161609441
 creator: yuzijie
+keywords: 
 list-before: Attachments
-modified: 20250104125848733
+modified: 20250209124001412
 modifier: yuzijie
 order: 1
+parents: 
 shortcap: Roles Manager
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain $:/tags/MoreSideBar
 title: $:/custom/ui/ControlPanel/Roles
@@ -21,5 +23,5 @@ Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""/>
 <$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 \end
 
-<$tiddler tiddler="$:/custom/ui/ControlPanel/Roles"><<snippet key:"Roles" limit:100>></$tiddler>
+<$tiddler tiddler="$:/custom/ui/ControlPanel/Roles"><<snippet key:"Roles" sort:"sort[order]" limit:100>></$tiddler>
 <$button actions=<<newRole>> style="margin:1em 0;">Add New Role</$button>

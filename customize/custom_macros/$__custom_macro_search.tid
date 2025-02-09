@@ -1,6 +1,6 @@
 created: 20220921232610151
 creator: yuzijie
-modified: 20241217110340539
+modified: 20250209123404869
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/search
@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 \define note-filters()
 \whitespace trim
 <$let tv-wikilinks="no"><$set name="roles" filter="$(search-filter)$ +[get[note]unique[]]">
-<$list filter="[all[tiddlers]belongs.to[$:/custom/ui/ControlPanel/Roles]]">
+<$list filter="[all[tiddlers]belongs.to[$:/custom/ui/ControlPanel/Roles]sort[order]]">
 <div class="search-filters"><$list filter="[enlist<roles>contains:parents<currentTiddler>sortsub<topic-level>]">
 <$set name="background-color" filter="[all[current]get[belongs.to]get[color]]" emptyValue="#ffe96b" select="0">
 <$button class="tc-btn-invisible tc-tag-label" style=<<note-style>>>{{!!title}}
