@@ -1,15 +1,12 @@
-belongs.to: Inbox
 caption: Untagged
 created: 20240302144634136
 creator: yuzijie
 description: (<$count filter="[!is[system]untagged[]] -[{$:/config/defaultTemplate}]"/>)
-keywords: Inbox
-modified: 20241208134959972
+keywords: 
+modified: 20250210091230486
 modifier: yuzijie
-note: TODO
 order: Z
-parents: Inbox
-tags: customized Inbox Snippet
+tags: customized Inbox
 title: Inbox/Untagged
 type: text/vnd.tiddlywiki
 
