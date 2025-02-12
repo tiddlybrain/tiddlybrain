@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20250202142043603
+modified: 20250212155448848
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -23,11 +23,11 @@ type: text/vnd.tiddlywiki
 Description: {{!!description}}" edit="yes"/>Data</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="text/vnd.tiddlywiki" text="
 
-!!! Appendix
+!!! Subtopics
 
 *<<more>>
 
-!!! Related Topics
+!!! Related
 
 *N/A
 

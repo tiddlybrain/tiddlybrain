@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250212141604482
+modified: 20250212161519776
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -405,7 +405,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \procedure more(topic)
-<$let current={{{ [all[current]get[draft.of]else<currentTiddler>] }}} topic={{{ [<topic>!is[blank]else<key>!is[blank]else{!!note}] }}} count={{{ [all[tiddlers]belongs.to<current>note<topic>count[]] }}}>
+<$let current={{{ [all[current]get[draft.of]else<currentTiddler>] }}} topic={{{ [<topic>!is[blank]else<key>!is[blank]else{!!note}] }}} count={{{ [all[tiddlers]belongs.to<current>note<topic>count[]] }}} key=<<topic>>>
 <$droppable actions=<<snippet-drop-actions>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
 <$details summary=`$(topic)$ ($(count)$)`><$transclude $variable="snippet" key=<<topic>>/></$details>
 </div></$droppable>
