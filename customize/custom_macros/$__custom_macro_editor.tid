@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20250123134407046
+modified: 20250213103953561
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -53,13 +53,7 @@ type: text/vnd.tiddlywiki
 </$set></$list>
 </td>
 <td style="width:10px;"><$list filter="[all[current]has:field[caption]]">
-<$button class="tc-btn-invisible" tooltip="Set to Searchbar">{{$:/core/images/advanced-search-button}}
-<$action-setfield $tiddler="$:/temp/menubarsearch" text={{!!caption}}/>
-<$action-setfield $tiddler="$:/temp/menubarsearch/input" text={{!!caption}}/>
-<$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-setfield $tiddler="$:/state/tab/search-results/sidebar" text="$:/custom/search/ExternalSearchResultList"/>
-<$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
-</$button>
+<$button class="tc-btn-invisible"><$action-deletefield $field="caption"/>{{$:/core/images/delete-button}}</$button>
 </$list></td>
 </tr>
 <tr>
