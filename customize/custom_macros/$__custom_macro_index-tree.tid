@@ -1,6 +1,6 @@
 created: 20191113100736132
 creator: yuzijie
-modified: 20241216082158731
+modified: 20250213091853839
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/index-tree
@@ -20,13 +20,9 @@ type: text/vnd.tiddlywiki
 <div class="index-tree tc-droppable-placeholder" style="display:block;"><$list filter="[[$:/temp/index-tree]get[text]]">
 <span class="index-tree-tab"><$button set="$:/temp/index-tree" setTo="" dragTiddler="Index">{{$:/core/images/home-button}} Home</$button></span>
 <$list filter=<<index-tree-breadcrumb-filter>>><<index-tree-pill>> </$list>
-<span class="index-tree-tab" style="background:#fafafa;"><$button tooltip={{!!title}} dragTiddler={{!!title}}>
-<$transclude $variable="tiddler-open" tiddler={{!!title}}/><$action-deletetiddler $filter="[[$:/temp/index-tree]]"/>
+<span class="index-tree-tab" style="background:#fafafa;"><$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}}>
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">&middot; @@color:#44ad44;{{!!note}}@@</$list>
-<$button class="tc-btn-invisible button-hover" style="fill:#5778d8;">{{$:/core/images/edit-button}}
-<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-</$button>
 </$button></span>
 </$list></div>
 <$reveal type="match" state="$:/temp/index-tree" text="" default="" tag="div" class="tc-table-of-contents" style="margin-top:20px;">
