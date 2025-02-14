@@ -2,7 +2,7 @@ caption: Other Custom Tools
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20250212155439464
+modified: 20250214152745174
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -13,6 +13,7 @@ type: text/vnd.tiddlywiki
 <span style="padding:1px 3px 0px 3px;display:inline-block;font-size:smaller;vertical-align:middle;">
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
+<$radio field="type" value="text/plain"> Code</$radio>
 </span>
 </$list>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix='<<s "' suffix='">>'/>""">Step</$button>
@@ -46,9 +47,6 @@ Description: {{!!description}}
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<span class='space'/>"/>""">Space</$button>
 <$list filter="[all[current]type[text/vnd.tiddlywiki]!tag[Task]]"><$fieldmangler>
 <$button set="!!celltpl" setTo="custom-template-task" message="tm-add-tag" param="Task" tooltip="Make it a task">Task</$button>
-</$fieldmangler></$list>
-<$list filter="[all[current]is[tiddler]!code-body[yes]]"><$fieldmangler>
-<$button tooltip="Make it a Code Snippet"><$action-setfield code-body="yes" type="text/vnd.tiddlywiki"/>Code</$button>
 </$fieldmangler></$list>
 <$list filter="[all[current]is[tiddler]!tag[Flashcard]]"><$fieldmangler>
 <$button message="tm-add-tag" param="Flashcard" tooltip="Make it a Flashcard">Flashcard</$button>

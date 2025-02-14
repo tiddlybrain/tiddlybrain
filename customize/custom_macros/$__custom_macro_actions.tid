@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20250108110106722
+modified: 20250214153258580
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 \define modal-actions()
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[<direct-open>match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
 <$list filter="[<modal>match[yes]]" variable="NONE">
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
+<$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
 <$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<mTitle>]"/>
@@ -30,7 +30,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<modal>!match[yes]]" variable="NONE">
 <$list filter="[<direct-open>!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
 <$list filter="[all[current]!is[system]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>">
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
+<$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
 <$action-setfield $tiddler="$:/state/modal/history" text=""/>
@@ -45,7 +45,7 @@ type: text/vnd.tiddlywiki
 <$set name="template" filter="[<mTitle>split[ ]first[]]" select="0">
 <$action-createtiddler $basetitle=<<template>> $template=<<mTitle>> date=<<now YYYY0MM0DD>> status="clone"><$tiddler tiddler=<<createTiddler-title>>>
 <$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
+<$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
 <$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<mTitle>]"/>

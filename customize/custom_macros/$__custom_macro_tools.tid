@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250213101033913
+modified: 20250214153217847
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -51,7 +51,7 @@ type: text/vnd.tiddlywiki
 \define collapse-title-actions(title)
 <$list filter="[<modifier>!match[ctrl]]" emptyMessage="""<$tiddler tiddler=<<__title__>>>
 <$list filter="[<modal>match[yes]]" emptyMessage="<$action-navigate $to=<<currentTiddler>> $scroll=yes/>" variable="NONE">
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
+<$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
 <$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="[<mTitle>]"/>
@@ -86,7 +86,7 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$title$"><$set name="sty" filter="[all[current]is[image]]" value="width:fit-content;$style$" emptyValue="$style$"><p class="collapse-content" style=<<sty>>>
 <$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links current-title:"$current-title$" belongs-to:"$belongs-to$">></$list>
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>>
-<$list filter="[all[current]code-body[yes]]" emptyMessage="<div style='margin:1em;'><$transclude mode='block'/></div>">
+<$list filter="[all[current]type[text/plain]]" emptyMessage="<div style='margin:1em;'><$transclude mode='block'/></div>">
 <$codeblock code={{{ [all[current]get[text]] }}} language={{{ [all[current]get[language]else[text]] }}}/>
 </$list>
 </$list>
@@ -160,8 +160,8 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
 <$button class="tc-btn-invisible"><<mTitle>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mTitle>>/></$button> &middot;
-<$list filter="[all[current]!code-body[yes]]"><$button class="tc-btn-invisible" actions=<<step-action>>>step</$button> &middot;</$list>
-<$list filter="[all[current]code-body[yes]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>content</$button> &middot;</$list>
+<$list filter="[all[current]!type[text/plain]]"><$button class="tc-btn-invisible" actions=<<step-action>>>step</$button> &middot;</$list>
+<$list filter="[all[current]type[text/plain]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>content</$button> &middot;</$list>
 <$button class="tc-btn-invisible">search
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
@@ -178,7 +178,7 @@ type: text/vnd.tiddlywiki
 <$let modal="yes">
 <$list filter="[[$:/state/modal/editor]!is[tiddler]]"><$list filter="[enlist{$:/state/modal/history!!list}last[]]"><span style="float:left;" class="modal-buttons">
 <$button dragTiddler={{!!title}} tooltip={{!!title}} class="l tc-btn-invisible tc-tiddlylink">
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
+<$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
 <$action-listops $tiddler="$:/state/modal/history" $field="list" $subfilter="-[<currentTiddler>]"/><$action-sendmessage $message="tm-close-tiddler"/>
@@ -204,7 +204,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/state/modal/editor]!is[tiddler]]">
 <$button actions=<<modal-clone-actions>>>CLONE</$button>
 <$button set="$:/state/modal/editor" setTo="yes">''EDIT''</$button>
-<$list filter="[<mTitle>code-body[yes]]"><$transclude $variable="modal-edit-comment" template={{$:/config/defaultTemplate}}/></$list>
+<$list filter="[<mTitle>type[text/plain]]"><$transclude $variable="modal-edit-comment" template={{$:/config/defaultTemplate}}/></$list>
 </$list>
 <$list filter="[[$:/state/modal/editor]is[tiddler]]">
 <$button>''GO BACK''
@@ -238,7 +238,7 @@ type: text/vnd.tiddlywiki
 
 \define modal-edit-comment(template)
 <$list filter="[belongs.to<mTitle>note[Comment]]" emptyMessage="""<$button>Create Comment
-<$action-setfield $tiddler=<<unusedtitle "$template$">> tags="Snippet" note="Comment" code-body="yes" type="text/vnd.tiddlywiki" belongs.to="$(mTitle)$" text="#"/>
+<$action-setfield $tiddler=<<unusedtitle "$template$">> tags="Snippet" note="Comment" type="text/plain" belongs.to="$(mTitle)$" text="#"/>
 <$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/></$button>""">
 <$button message="tm-close-tiddler">Open Comment
 <$transclude $variable="tiddler-open" tiddler={{!!title}}/><$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>

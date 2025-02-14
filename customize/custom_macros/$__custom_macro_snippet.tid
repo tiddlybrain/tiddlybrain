@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20241221072428115
+modified: 20250214153051644
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -81,7 +81,7 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter=<<fi
 <<tag-list>> <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$button>
 <$reveal type="match" state=<<snippet-accordion-state>> text="open" tag="div" class="snippet-accordion"><$set name="key" value="">
-<$list filter="[all[current]!code-body[yes]]" emptyMessage="<<external-links belongs-to:'no'>><$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
+<$list filter="[all[current]!type[text/plain]]" emptyMessage="<<external-links belongs-to:'no'>><$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>>
 <$set name="class" filter="[all[current]has[_canonical_uri]] [all[current]is[image]]" value="snippet-external" emptyValue="snippet-content"><div class=<<class>>><$transclude mode="block"/>
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE"><div style="margin:10px 20px;">
