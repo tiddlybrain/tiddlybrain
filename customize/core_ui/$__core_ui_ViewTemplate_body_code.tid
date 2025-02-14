@@ -1,18 +1,20 @@
-modified: 20241017094853084
+modified: 20250214141725412
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ViewTemplate/body/code
 type: text/vnd.tiddlywiki
 
 <%if [<currentTiddler>is[missing]] :and[!is[shadow]] %>
-	<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+  <$transclude tiddler="$:/language/MissingTiddler/Hint"/>
 <%else%>
-	<$let mTitle={{!!title}} code={{{ [<currentTiddler>get[text]] }}} language={{{ [<currentTiddler>get[language]else[text]] }}}>
-	<$list filter="[belongs.to<currentTiddler>note[Comment]]" emptyMessage="""<$codeblock code=<<code>> language=<<language>>/>""">
-		<$button tag="div" class="code-viewer-button">
-			<$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mTitle=<<mTitle>>/>
-			<$codeblock code=<<code>> language=<<language>>/>
-		</$button>
-	</$list>
-	</$let>
+  <section class="code-viewer"><$let mTitle={{!!title}}>
+    <$list filter="[belongs.to<mTitle>note[Comment]]">
+    <%if [{$:/status/IsReadOnly}match[yes]] %>
+      <div class="comment"><$codeblock code={{!!text}} language="text"/></div>
+    <%else%>
+      <$edit-text class='tc-edit-texteditor heightless'/>
+    <%endif%>
+    </$list>
+    <$codeblock code={{{ [<mTitle>get[text]] }}} language={{{ [<mTitle>get[language]else[text]] }}}/>
+  </$let></section>
 <%endif%>

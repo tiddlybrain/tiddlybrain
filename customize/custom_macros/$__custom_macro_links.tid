@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20250207161122215
+modified: 20250214153244157
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -20,12 +20,14 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]get[dir]]" variable="path"><$set name="path-prefix" value={{$:/config/index-tree!!path}}>
 <$button class="tc-btn-invisible links" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>{{$:/core/images/folder}}</$button>
 </$set></$list>
-<$list filter="[all[current]code-body[yes]]">
+<$list filter="[all[current]type[text/plain]]">
 <$button actions=<<modal-actions>> tooltip="View Code" class="tc-btn-invisible links">{{$:/core/images/permalink-button}}</$button>
 </$list>
 \end
 
 \define icons(style:"font-weight:normal;") <span style=<<__style__>>><$list filter="[all[current]is[missing]!is[system]]">☹️</$list><$list filter="[all[current]!is[system]search:title:literal[/]]">🌿</$list><$list filter="[all[current]has[url]]">🔗</$list><$list filter="[all[current]has[path]]">📄</$list><$list filter="[all[current]tag[Task]]">🏆</$list></span>
+
+\define create-comment-button(template) <$action-setfield $tiddler=<<unusedtitle "$template$">> tags="Snippet" note="Comment" type="text/plain" belongs.to=<<currentTiddler>> text="#"/>
 
 \define external-links(current-title, belongs-to:"yes")
 <$vars path-prefix={{$:/config/index-tree!!path}} current=<<currentTiddler>>>
@@ -53,10 +55,11 @@ type: text/vnd.tiddlywiki
 <a href=<<uri>> target="_blank" title=<<uri>> class="light-color" rel="noopener noreferrer">Open in a New Window</a>
 </div></$list>
 <$list filter="[<modal>!match[yes]]" variable="NONE">
-<$list filter="[all[current]code-body[yes]]"><div class="external-links" style="background:#c9ffee;">
-<$button class="tc-btn-invisible light-color"><$list filter="[belongs.to{!!title}note[Comment]]" emptyMessage="Show code viewer">@@color:red;Show comments@@</$list>
-<$action-sendmessage $message="tm-modal" $param="$:/custom/template/code-modal" mTitle={{!!title}}/>
-</$button> &middot; <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param={{!!text}}>Copy content</$button>
+<$list filter="[all[current]type[text/plain]!note[Comment]]"><div class="external-links" style="background:#c9ffee;">
+<%if [{$:/status/IsReadOnly}!match[yes]] %><$button class="tc-btn-invisible light-color">
+<$list filter="[belongs.to<currentTiddler>note[Comment]]" emptyMessage="""Create Comment<$transclude $variable="create-comment-button" template={{$:/config/defaultTemplate}}/>""">Open Comment<$transclude $variable="tiddler-open" tiddler={{!!title}}/></$list>
+</$button> &middot;<%endif%>
+<$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param={{!!text}}>Copy content</$button>
 </div></$list>
 </$list>
 <$list filter="[<__belongs-to__>match[yes]]" variable="NONE">
