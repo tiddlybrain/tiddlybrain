@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250216205228170
+modified: 20250216213449611
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -91,7 +91,7 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list>
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
+<div style="margin:0 1em;"><$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/></div>
 </$list>
 </p></$set></$tiddler>
 </$reveal>
@@ -386,7 +386,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$list filter="[all[current]tags[]!match<current>type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]">
 <$set name="style" filter="[all[current]get[color]] :else[all[current]colorize[]] +[addprefix[background:]]" select="0">
-<$button tooltip={{!!caption}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tag-label tag-list" style=<<style>>>
+<$button actions=<<modal-actions>> tooltip={{!!caption}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tag-label tag-list" style=<<style>>>
 <$transclude field="caption"><$view field="title"/></$transclude>
 </$button>
 </$set>
