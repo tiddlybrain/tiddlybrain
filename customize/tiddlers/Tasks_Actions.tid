@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250205083058489
+modified: 20250217092031449
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -36,6 +36,7 @@ TBC: <<tbc>>
 </$list>
 </$droppable></h2>
 
+<$droppable actions=<<droppable-task-list-actions>> tag="div">
 <ol style="color:#333;line-height:24px;">
 <$list filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li style="white-space:nowrap;">
 <$list filter="[all[current]text[doing]]" emptyMessage="""
@@ -72,7 +73,6 @@ TBC: <<tbc>>
 <li style="white-space:nowrap;"><<task-list-doing>></li>
 </$list>
 </ol>
-<$droppable actions=<<droppable-task-list-actions>> tag="div">
 <$list filter="[<journal-title>is[tiddler]]"><table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr><$set name="currTask" value=<<task>>>
@@ -87,7 +87,7 @@ TBC: <<tbc>>
 </$list></td>
 </$set></tr></$list>
 </tbody></table></$list>
-<ul style="color:#333;line-height:24px;">
+<ol style="color:#333;line-height:24px;">
 <$list filter="[all[tiddlers]tag[Task]!has[draft.of]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
@@ -105,7 +105,7 @@ TBC: <<tbc>>
 <span class="tc-tag-label" style="background-color:#75cbc7;">To be checked</span> <$transclude $variable="l" title=<<task>>/>
 </li></$list>
 </$let></$list>
-</ul>
+</ol>
 </$droppable>
 
 <hr>

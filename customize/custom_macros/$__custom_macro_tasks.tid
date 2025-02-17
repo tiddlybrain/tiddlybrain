@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20250127095259452
+modified: 20250217092244481
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -11,14 +11,14 @@ type: text/vnd.tiddlywiki
 
 \define tasks-today(style:"font-size:smaller;font-weight:500;color:#333;")
 <span style="$style$"><$list filter="[prefix<task-state-prefix>limit[1]]" variable="NONE">
+<$list filter="[prefix<task-state-prefix>text[waiting]limit[1]]" variable="NONE">
+⌛<$count filter="[prefix<task-state-prefix>text[waiting]]"/>
+</$list>
 <$list filter="[prefix<task-state-prefix>text[deadline]limit[1]]" variable="NONE">
 🚩<$count filter="[prefix<task-state-prefix>text[deadline]]"/>
 </$list>
 <$list filter="[prefix<task-state-prefix>!text[waiting]!text[deadline]limit[1]]" variable="NONE">
 ⚔️<$count filter="[prefix<task-state-prefix>!text[waiting]!text[deadline]]"/>
-</$list>
-<$list filter="[prefix<task-state-prefix>text[waiting]limit[1]]" variable="NONE">
-⌛<$count filter="[prefix<task-state-prefix>text[waiting]]"/>
 </$list>
 </$list></span>
 \end
