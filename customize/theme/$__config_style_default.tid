@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20250215202936393
+modified: 20250218032018516
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -20,7 +20,7 @@ td > ul, td > ol {margin: 0;}
 
 hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 0.5em 0; padding: 0;}
 
-button {border: 1px solid #ccc; cursor: pointer; text-align: left; border-radius: 3px;}
+button {border: 1px solid #ccc; cursor: pointer; text-align: left; border-radius: 3px; background-color: whitesmoke;}
 
 button.tc-btn-invisible {font-weight: inherit;}
 
@@ -60,7 +60,7 @@ iframe {border: 1px solid #ccc;}
 
 embed, iframe {width: 100%;}
 
-select, textarea, input[type=text], input[type=search], input[type=""], input:not([type]) {border: 1px solid #ccc; background: white;}
+select, textarea, input[type=text], input[type=search], input[type=""], input:not([type]) {border: 1px solid #ccc; background: white; -webkit-appearance: none;}
 
 img {max-width: 100%;}
 
