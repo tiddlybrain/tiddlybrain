@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20250218032018516
+modified: 20250218080539809
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -60,7 +60,7 @@ iframe {border: 1px solid #ccc;}
 
 embed, iframe {width: 100%;}
 
-select, textarea, input[type=text], input[type=search], input[type=""], input:not([type]) {border: 1px solid #ccc; background: white; -webkit-appearance: none;}
+select, textarea, input[type=text], input[type=search], input[type=""], input:not([type]) {border: 1px solid #ccc; background: white;}
 
 img {max-width: 100%;}
 
