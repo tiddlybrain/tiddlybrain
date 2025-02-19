@@ -2,7 +2,7 @@ created: 20240312140902299
 creator: yuzijie
 keywords: 
 list-before: AI
-modified: 20250210093104540
+modified: 20250219102611691
 modifier: yuzijie
 tags: customized $:/tags/SideBar Ignore
 title: Inbox
@@ -16,11 +16,11 @@ type: text/vnd.tiddlywiki
 \end
 
 <div style="line-height:28px;padding-top:5px;">
-<$vars comparefilter="[get[date]compare:date:lteq<today>]">
+<$let today=<<now "YYYY0MM0DD">> comparefilter="[get[date]compare:date:lteq<today>]">
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
 <div><$transclude $variable="l" title={{!!title}} links="yes"/></div>
 </$list>
-</$vars>
+</$let>
 <$list filter="[all[tiddlers]has[date]has[interval]!note[Level]]"><$let interval={{{ [all[current]get[interval]] }}}>
 <$list filter="[<interval>search:title:literal[-]]" variable="NONE"><$setmultiplevariables $names="[[month]] [[day]]" $values="[<interval>split[-]]">
 <$let rule={{{ [{!!date}nextNotice<interval>] }}} today=<<now "YYYY0MM0DD">>><$list filter="[<rule>compare:date:lteq<today>]" variable="NONE">
