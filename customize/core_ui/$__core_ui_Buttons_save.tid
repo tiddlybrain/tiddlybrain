@@ -1,6 +1,6 @@
 caption: {{$:/core/images/done-button}} {{$:/language/Buttons/Save/Caption}}
 description: {{$:/language/Buttons/Save/Hint}}
-modified: 20241017212345695
+modified: 20250219141454149
 modifier: yuzijie
 tags: $:/tags/EditToolbar customized
 title: $:/core/ui/Buttons/save
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 		aria-label={{$:/language/Buttons/Save/Hint}}
 		class=<<tv-config-toolbar-class>>
 	>
-		<<save-tiddler-actions>><$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text="Index"/></$list>
+		<<save-tiddler-actions>><$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text={{{ [[$:/state/tab/pre-sidebar]get[text]else[Index]] }}}/></$list>
 		<%if [<tv-config-toolbar-icons>match[yes]] %>
 			{{$:/core/images/done-button}}
 		<%endif%>

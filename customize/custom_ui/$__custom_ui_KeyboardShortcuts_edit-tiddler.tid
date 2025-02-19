@@ -1,7 +1,7 @@
 created: 20241114000203003
 creator: yuzijie
 key: ((edit-tiddler))
-modified: 20241216081704622
+modified: 20250219140837374
 modifier: yuzijie
 tags: $:/tags/KeyboardShortcut customized
 title: $:/custom/ui/KeyboardShortcuts/edit-tiddler
@@ -11,7 +11,8 @@ type: text/vnd.tiddlywiki
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}><$tiddler tiddler={{$:/HistoryList!!current-tiddler}}>
 <$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[draft.title<currentTiddler>] +[putfirst[]]"/>
-<$list filter="[[$:/state/tab/sidebar--595412856]is[missing]] [[$:/state/tab/sidebar--595412856]text[Index]]">
+<$list filter="[[$:/state/tab/sidebar--595412856]!text[AI]]">
+<$action-setfield $tiddler="$:/state/tab/pre-sidebar" text={{$:/state/tab/sidebar--595412856}}/>
 <$action-setfield text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 </$list>
 </$tiddler></$navigator>
