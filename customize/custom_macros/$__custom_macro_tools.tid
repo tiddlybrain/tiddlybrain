@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250219141401948
+modified: 20250219145551844
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -160,9 +160,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
 <$button class="tc-btn-invisible"><<mTitle>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mTitle>>/></$button> &middot;
-<$list filter="[all[current]!type[text/plain]]"><$button class="tc-btn-invisible" actions=<<step-action>>>step</$button> &middot;</$list>
-<$list filter="[all[current]type[text/plain]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>content</$button> &middot;</$list>
-<$button class="tc-btn-invisible">search
+<$list filter="[all[current]!type[text/plain]]"><$button class="tc-btn-invisible" actions=<<step-action>>>Step</$button> &middot;</$list>
+<$list filter="[all[current]type[text/plain]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>Content</$button> &middot;</$list>
+<$button class="tc-btn-invisible">AI
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
 <$transclude $variable="tiddler-close"/>
