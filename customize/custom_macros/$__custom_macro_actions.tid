@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20250219141434599
+modified: 20250221073852759
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -19,7 +19,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define modal-actions()
-<$list filter="[<modifier>!match[ctrl]]" emptyMessage="<$list filter='[<direct-open>match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
+<$list filter="[<modifier>!match[ctrl]!match[shift]]" emptyMessage="<$list filter='[<direct-open>match[yes]]' emptyMessage='<$action-navigate/>' variable='NONE'><<open-in-sidebar close:'no'>></$list>" variable="NONE">
 <$list filter="[<modal>match[yes]]" variable="NONE">
 <$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
@@ -123,20 +123,11 @@ type: text/vnd.tiddlywiki
 \end
 
 \define core-ui-edit-actions()
-<$list filter="[<modifier>!match[ctrl]]" variable="NONE">
 <$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[draft.title<currentTiddler>] +[putfirst[]]"/>
 <$list filter="[[$:/state/tab/sidebar--595412856]!text[AI]]">
 <$action-setfield $tiddler="$:/state/tab/pre-sidebar" text={{$:/state/tab/sidebar--595412856}}/>
 <$action-setfield text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
-</$list>
-</$list>
-<$list filter="[<modifier>match[ctrl]]" variable="NONE">
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/>
-<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/temp/Draft" draft=<<currentTiddler>>/>
-<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
-<$action-sendmessage $message="tm-scroll" $name="selector" $value=".tc-site-title"/>
 </$list>
 \end
 
