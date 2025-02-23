@@ -2,16 +2,16 @@ caption: Rename
 created: 20200425130326854
 creator: yuzijie
 keywords: 
-modified: 20250104130349026
+modified: 20250223150517119
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Rename
 type: text/vnd.tiddlywiki
 
-\define droppable-action() <$transclude $variable="droppable-rename-set-caption-action" template={{{ [[$:/temp/editor/rename]get[text]else{$:/config/defaultTemplate}] }}} caption={{$:/temp/editor/rename!!caption}}/>
+\define droppable-action() <$transclude $variable="droppable-rename-set-caption-action" template={{{ [[$:/temp/editor/rename]get[text]else{$:/language/DefaultNewTiddlerTitle}] }}} caption={{$:/temp/editor/rename!!caption}}/>
 
 <div style="margin-bottom:20px;">
-Template: <$edit-text tiddler="$:/temp/editor/rename" field="text" default={{$:/config/defaultTemplate}} tag="input" size="10"/>
+Template: <$edit-text tiddler="$:/temp/editor/rename" field="text" default={{$:/language/DefaultNewTiddlerTitle}} tag="input" size="10"/>
 Caption: <$edit-text tiddler="$:/temp/editor/rename" field="caption" tag="input"/>
 </div>
 <$droppable actions=<<droppable-action>> tag="div">

@@ -14,7 +14,7 @@ Text editor operation to embed an external file to a tiddler
 "use strict";
 
 exports["embed"] = function(event,operation) {
-	var defaultTemplateTiddler = this.wiki.getTiddler("$:/config/defaultTemplate"),
+	var defaultTemplateTiddler = this.wiki.getTiddler("$:/language/DefaultNewTiddlerTitle"),
 		defaultTemplate = defaultTemplateTiddler.fields.text || "New Tiddler",
 		embedTitle = this.wiki.generateNewTitle(defaultTemplate),
 		tiddlerParams = {

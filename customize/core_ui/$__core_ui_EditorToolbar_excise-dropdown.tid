@@ -1,4 +1,4 @@
-modified: 20250213095557572
+modified: 20250223151253698
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/excise-dropdown
@@ -21,4 +21,4 @@ type: text/vnd.tiddlywiki
 </$let></$button>
 \end
 
-<$macrocall $name="body" config-title="$:/state/Excise" template={{$:/config/defaultTemplate}}/>
+<$macrocall $name="body" config-title="$:/state/Excise" template={{$:/language/DefaultNewTiddlerTitle}}/>

@@ -1,14 +1,13 @@
 caption: TiddlyBrain
 created: 20240626144905524
 creator: yuzijie
-modified: 20240725103422460
+modified: 20250223151029532
 modifier: yuzijie
 tags: $:/tags/ControlPanel/Info customized
 title: $:/custom/ui/ControlPanel/TiddlyBrain
 type: text/vnd.tiddlywiki
 
 |tc-max-width tc-edit-max-width|k
-|<$link to="$:/config/defaultTemplate">Default Tiddler Template</$link> |<$edit-text tiddler="$:/config/defaultTemplate" default="" tag="input"/> |
 |<$link to="$:/config/AIApiKey">AI Service API</$link> |<$edit-text tiddler="$:/config/AIApiKey" field="url" default="" tag="input"/> |
 |<$link to="$:/config/AIApiKey">AI Service API Key</$link> |<$edit-text tiddler="$:/config/AIApiKey" default="" tag="input"/> |
 |<$link to="$:/config/AIApiKey">AI Models</$link> |<$edit-text tiddler="$:/config/AIApiKey" field="list" default="" tag="input"/> |

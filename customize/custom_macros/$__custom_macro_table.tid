@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20241218150855711
+modified: 20250223151201399
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -99,7 +99,7 @@ type: text/vnd.tiddlywiki
 
 \define tableE(cfilter, ffilter, rfilter:"[tag<currentTiddler>]", title:"default", fields, tag)
 <$set name="current" value=<<currentTiddler>>>
-<h2><$button class="tc-btn-invisible"><$transclude $variable="table-edit-new-action" template={{$:/config/defaultTemplate}} tag="$tag$" fields="$fields$"/>Add New Row</$button></h2>
+<h2><$button class="tc-btn-invisible"><$transclude $variable="table-edit-new-action" template={{$:/language/DefaultNewTiddlerTitle}} tag="$tag$" fields="$fields$"/>Add New Row</$button></h2>
 <div class="macro-table"><table><tbody><$set name="tableTitle" value="$title$">
 <tr class="heading">
 <th>Title</th><$list filter="$ffilter$"><th><<currentTiddler>></th></$list>

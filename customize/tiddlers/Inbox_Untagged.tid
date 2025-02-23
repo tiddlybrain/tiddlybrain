@@ -1,13 +1,13 @@
 caption: Untagged
 created: 20240302144634136
 creator: yuzijie
-description: (<$count filter="[!is[system]untagged[]] -[{$:/config/defaultTemplate}]"/>)
+description: (<$count filter="[!is[system]untagged[]] -[{$:/language/DefaultNewTiddlerTitle}]"/>)
 keywords: 
-modified: 20250210091230486
+modified: 20250223152509820
 modifier: yuzijie
 order: Z
 tags: customized Inbox
 title: Inbox/Untagged
 type: text/vnd.tiddlywiki
 
-<<list-links "[!is[system]untagged[]!sort[modified]limit[200]] -[{$:/config/defaultTemplate}] -A -R -H -I">>
+<<list-links "[!is[system]untagged[]!sort[modified]limit[200]] -[{$:/language/DefaultNewTiddlerTitle}] -A -R -H -I">>

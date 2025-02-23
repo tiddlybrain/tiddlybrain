@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250202191003946
+modified: 20250223151359972
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -31,7 +31,7 @@ type: text/vnd.tiddlywiki
 </$let>
 \end completion-get-json
 
-<$let api={{$:/config/AIApiKey!!url}} api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [prefix<ai-instructions content>sort[title]get[text]join[ ]jsonstringify[]] }}} userInput={{{ [<ai-request>get[text]jsonstringify[]] }}} default={{{ [[$:/config/defaultInstructions]get[text]jsonstringify[]] }}}>
+<$let api={{$:/config/AIApiKey!!url}} api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [prefix<ai-instructions content>sort[title]get[text]join[ ]jsonstringify[]] }}} userInput={{{ [<ai-request>get[text]jsonstringify[]] }}} default={{{ [[$:/config/DefaultInstructions]get[text]jsonstringify[]] }}}>
 <$set name="chatHistory" filter="[<ai-history-state>get[text]match[yes]]" value={{{ [prefix<ai-history>get[text]] +[join[,]addsuffix[,]] }}} emptyValue="">
 <$action-setfield $tiddler=<<ai-response>> text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url=<<api>> method="POST"
@@ -100,10 +100,10 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
 <$list filter="[<sidebar>!match[yes]]" variable="NONE">
 <$button actions=<<insert-as-text "$(ai-response)$">>>Insert as Text</$button>
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
+<$let template={{$:/language/DefaultNewTiddlerTitle}}><$button actions=<<insert-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
 </$list>
 <$list filter="[<sidebar>match[yes]]" variable="NONE">
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Save as New Tiddler</$button></$let>
+<$let template={{$:/language/DefaultNewTiddlerTitle}}><$button actions=<<save-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Save as New Tiddler</$button></$let>
 </$list>
 </$reveal>
 <$button message="tm-copy-to-clipboard" param={{{ [<ai-response>get[text]] }}}>Copy to Clipboard</$button>

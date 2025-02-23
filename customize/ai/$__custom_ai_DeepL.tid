@@ -1,7 +1,7 @@
 caption: DeepL
 created: 20240724195946616
 creator: yuzijie
-modified: 20240929121245685
+modified: 20250223151327914
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/DeepL
@@ -100,10 +100,10 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
 <$list filter="[<sidebar>!match[yes]]" variable="NONE">
 <$button actions=<<insert-as-text "$(ai-response)$">>>Insert as Text</$button>
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
+<$let template={{$:/language/DefaultNewTiddlerTitle}}><$button actions=<<insert-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
 </$list>
 <$list filter="[<sidebar>match[yes]]" variable="NONE">
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<save-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Save as New Tiddler</$button></$let>
+<$let template={{$:/language/DefaultNewTiddlerTitle}}><$button actions=<<save-as-tiddler "$(ai-request)$" "$(ai-response)$">>>Save as New Tiddler</$button></$let>
 </$list>
 </$reveal>
 <$button message="tm-copy-to-clipboard" param={{{ [<ai-response>get[text]] }}}>Copy to Clipboard</$button>

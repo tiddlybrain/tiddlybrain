@@ -1,7 +1,7 @@
 caption: Image Recognition
 created: 20241025211824739
 creator: yuzijie
-modified: 20250103115041487
+modified: 20250223151313597
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Image
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 </$let>
 \end completion-get-json
 
-<$let api={{$:/config/AIApiKey!!url}} api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [prefix<ai-instructions content>sort[title]get[text]join[ ]jsonstringify[]] }}} image={{$:/temp/ai/image}} default={{{ [[$:/config/defaultInstructions]get[text]jsonstringify[]] }}}>
+<$let api={{$:/config/AIApiKey!!url}} api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [prefix<ai-instructions content>sort[title]get[text]join[ ]jsonstringify[]] }}} image={{$:/temp/ai/image}} default={{{ [[$:/config/DefaultInstructions]get[text]jsonstringify[]] }}}>
 <$action-setfield $tiddler=<<ai-response>> text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url=<<api>> method="POST"
   oncompletion=<<completion-get-json>>
@@ -89,7 +89,7 @@ type: text/vnd.tiddlywiki
 <$reveal type="nomatch" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
 <$list filter="[<ai-response>get[text]!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask AI</$button>">
 <$button message="tm-copy-to-clipboard" param={{{ [<ai-response>get[text]] }}}>Copy to Clipboard</$button>
-<$let template={{$:/config/defaultTemplate}}><$button actions=<<insert-as-tiddler "" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
+<$let template={{$:/language/DefaultNewTiddlerTitle}}><$button actions=<<insert-as-tiddler "" "$(ai-response)$">>>Insert as New Tiddler</$button></$let>
 <$button actions=<<call-api>> style="color:green;">Ask Again</$button>
 </$list>
 </$reveal>

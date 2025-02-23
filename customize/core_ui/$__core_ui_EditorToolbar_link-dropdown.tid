@@ -1,4 +1,4 @@
-modified: 20250203212319409
+modified: 20250223151414029
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -54,7 +54,7 @@ type: text/vnd.tiddlywiki
 &#32;
 <$reveal tag="span" state=<<storeTitle>> type="nomatch" text="">
 <$button class="tc-btn-invisible" style="width:auto;display:inline-block;padding:0;transform:translateY(-2px);">
-<$transclude $variable="new-link-actions" template={{$:/config/defaultTemplate}}/>
+<$transclude $variable="new-link-actions" template={{$:/language/DefaultNewTiddlerTitle}}/>
 {{$:/core/images/new-button}}
 </$button>
 &#32;

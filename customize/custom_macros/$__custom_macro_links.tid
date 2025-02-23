@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20250214153244157
+modified: 20250223151240530
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -57,7 +57,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<modal>!match[yes]]" variable="NONE">
 <$list filter="[all[current]type[text/plain]!note[Comment]]"><div class="external-links" style="background:#c9ffee;">
 <%if [{$:/status/IsReadOnly}!match[yes]] %><$button class="tc-btn-invisible light-color">
-<$list filter="[belongs.to<currentTiddler>note[Comment]]" emptyMessage="""Create Comment<$transclude $variable="create-comment-button" template={{$:/config/defaultTemplate}}/>""">Open Comment<$transclude $variable="tiddler-open" tiddler={{!!title}}/></$list>
+<$list filter="[belongs.to<currentTiddler>note[Comment]]" emptyMessage="""Create Comment<$transclude $variable="create-comment-button" template={{$:/language/DefaultNewTiddlerTitle}}/>""">Open Comment<$transclude $variable="tiddler-open" tiddler={{!!title}}/></$list>
 </$button> &middot;<%endif%>
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param={{!!text}}>Copy content</$button>
 </div></$list>

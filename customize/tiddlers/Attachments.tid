@@ -3,7 +3,7 @@ created: 20211222002004723
 creator: yuzijie
 keywords: 
 list-before: $:/core/ui/MoreSideBar/Recent
-modified: 20250108110810986
+modified: 20250223150545483
 modifier: yuzijie
 tags: customized $:/tags/MoreSideBar $:/custom/ui/ControlPanel/TiddlyBrain
 title: Attachments
@@ -19,6 +19,6 @@ type: text/vnd.tiddlywiki
 </div></$droppable>
 \end
 
-<$tiddler tiddler="Attachments"><$let template={{$:/config/defaultTemplate}}>
+<$tiddler tiddler="Attachments"><$let template={{$:/language/DefaultNewTiddlerTitle}}>
 <$list filter="JPG PNG GIF SVG HTML PDF MP3 MP4" variable="key"><<attachments-item>></$list>
 </$let></$tiddler>
