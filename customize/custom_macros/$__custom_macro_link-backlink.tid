@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250214153124656
+modified: 20250222151744772
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 \define l(title, text, class:"l", mode:"link", links, style, description, note:"yes", date, parent, status:"yes", tag)
 \whitespace trim
-<$let parent=<<currentTiddler>>><$tiddler tiddler="$title$">
+<$let parent=<<currentTiddler>>><$tiddler tiddler=<<__title__>>>
 <$list filter="[<__mode__>match[link]]" variable="link-mode"><span style="white-space:nowrap;$style$"><$set name="current" value=<<mTitle>>>
 <$list filter="[<__links__>match[yes]]" variable="NONE"><<links>></$list>
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink $class$" tag=<<__tag__>> style={{{ [all[current]note[TODO]then[color:red;font-weight:bold;]] }}}>
@@ -45,9 +45,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[<__mode__>match[cl]]" variable="link-mode">
 <$transclude $variable="collapse" title=<<currentTiddler>> text=<<__text__>> class="$class$ cl" tag=<<__tag__>> style=<<__style__>> more-text="""<$list filter="[<__date__>match[yes]]" variable="NONE">@@color:#666;(<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)@@</$list><$list filter="[all[current]untagged[]]"> ⚠️ </$list><$list filter="[<__description__>match[yes]]" variable="NONE"><$list filter="[all[current]has[description]]">@@color:#aaa; - {{!!description}}@@</$list></$list>""" external-links="yes" current-title="yes"/>
 </$list>
-<$list filter="[<__mode__>match[s]]" variable="link-mode">
-<$let step-name={{{ [<__text__>is[blank]then{!!caption}else<__text__>] }}}><$transclude $variable="s" step=<<step-name>> comments=<<currentTiddler>>/></$let>
-</$list>
+<$list filter="[<__mode__>match[s]]" variable="link-mode"><$tiddler tiddler=<<parent>>>
+<$let step-name={{{ [<__text__>is[blank]then{!!caption}else<__text__>] }}}><$transclude $variable="s" step=<<step-name>> comments=<<__title__>>/></$let>
+</$tiddler></$list>
 </$tiddler></$let>
 \end
 
