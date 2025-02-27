@@ -1,7 +1,9 @@
-modified: 20250218033734285
+created: 20250227093543374
+creator: yuzijie
+modified: 20250227093543374
 modifier: yuzijie
 tags: customized
 title: $:/themes/tiddlywiki/vanilla/settings/fontfamily
 type: text/vnd.tiddlywiki
 
-"Segoe UI", Helvetica, Arial, "PingFang SC", "Heiti SC", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+system-ui, 'Segoe UI', Helvetica, 'PingFang SC', 'Heiti SC', 'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei UI', 'Microsoft YaHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'

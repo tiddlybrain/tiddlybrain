@@ -1,9 +1,9 @@
 created: 20190612185803049
 creator: yuzijie
-modified: 20211210214711279
+modified: 20250227093723149
 modifier: yuzijie
 tags: customized
 title: $:/themes/tiddlywiki/vanilla/settings/editorfontfamily
 type: text/vnd.tiddlywiki
 
-"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, "PingFang SC", "Microsoft YaHei UI", "WenQuanYi Micro Hei", monospace
+'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, 'PingFang SC', 'Microsoft YaHei UI', 'WenQuanYi Micro Hei', monospace
