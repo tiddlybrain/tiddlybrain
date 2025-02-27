@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20250207150747950
+modified: 20250226143340628
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 
 \define s(step,comments,field:"steps")
 <$tiddler tiddler={{{ [all[current]get[draft.of]else<currentTiddler>] }}}>
-<$list filter="[all[current]contains:$field$[$step$]]" emptyMessage="""<span style="display:inline-flex;gap:4px;font-weight:bold;">
+<$list filter="[all[current]contains:$field$[$step$]]" emptyMessage="""<span style="display:inline-flex;gap:5px;font-weight:bold;">
 <$button class="tc-btn-invisible" style="color:red;"><$action-listops $field="$field$" $subfilter="[[$step$]]"/>&#9744;</$button>
 <<linkIfExists "$step$" "$comments$">>
 </span>"""><span style="display:inline-flex;gap:4px;">

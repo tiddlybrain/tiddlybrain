@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20241128152940486
+modified: 20250226160551545
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -42,13 +42,13 @@ type: text/vnd.tiddlywiki
 <span style="margin: 0 0.8em;" class="menubarsearch">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
-<form class="tc-form-inline">
+<form class="tc-form-inline"><$let current={{$:/HistoryList!!current-tiddler}} caption={{{ [<current>get[caption]else<current>] }}}>
 <$transclude $variable="keyboard-driven-input" tiddler="$:/temp/menubarsearch" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> 
 		refreshTitle="$:/temp/menubarsearch/refresh" tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" 
-		class="tc-popup-handle tc-menu-show-when-wide menubar-search-input" placeholder="Search..." default="" cancelPopups="yes"
+		class="tc-popup-handle tc-menu-show-when-wide menubar-search-input" placeholder={{{ [[$:/StoryList]contains<current>then<caption>else[Search...]] }}} default="" cancelPopups="yes"
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> inputCancelActions=<<cancel-search-actions>> 
 		filterMinLength={{$:/config/Search/MinLength}} configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
-</form>
+</$let></form>
 </$keyboard>
 </$keyboard>
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
