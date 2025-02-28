@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20250221144730001
+modified: 20250228111345830
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -28,15 +28,16 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-close-tiddler" $param=<<mTitle>>/>
 </$list>
 <$list filter="[<modal>!match[yes]]" variable="NONE">
-<$list filter="[<direct-open>!match[yes]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>" variable="NONE">
-<$list filter="[all[current]!is[system]]" emptyMessage="<$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>">
+<%if [<direct-open>match[yes]] %><$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>
+<%elseif [all[current]is[system]] %><$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>
+<%elseif [list[$:/StoryList]count[]match[0]] %><$transclude $variable='tiddler-open' tiddler=<<currentTiddler>>/>
+<%else%>
 <$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
 <$action-setfield $tiddler="$:/state/modal/history" text=""/>
 <$list filter="[{$:/HistoryList!!current-tiddler}!has[draft.of]]"><$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text={{{ [[$:/state/tab/pre-sidebar]get[text]else[Index]] }}}/></$list></$list>
-</$list>
-</$list>
+<%endif%>
 </$list>
 </$list>
 \end
