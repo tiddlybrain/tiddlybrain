@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20250201110734521
+modified: 20250228104729779
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -59,7 +59,7 @@ $button$
 <$list filter=<<sidebar-list>> history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
 <$transclude $variable="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn">
-<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
+<%if [<folded-state>text[hide]] %><<modal-actions>><%else%><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/><%endif%>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
@@ -73,8 +73,7 @@ $button$
 <$tiddler tiddler="">
 <div class="tc-sidebar-tab-open-item" style="margin-bottom:5px;">
 <$transclude $variable="droppable-item" button="""<$list filter="[recentlyClosed[]!is[missing]limit[1]]"><div style="margin-bottom:5px;">
-<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:gray;">
-<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
+<$button to=<<currentTiddler>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn" style="color:gray;">
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">[{{!!note}}]</$list>
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
