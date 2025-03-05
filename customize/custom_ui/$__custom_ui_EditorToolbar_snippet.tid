@@ -4,8 +4,9 @@ created: 20220303150757173
 creator: yuzijie
 description: Snippet Macro
 icon: $:/core/images/list
-modified: 20241117095309725
+modified: 20250304175605050
 modifier: yuzijie
+shortcuts: cmd-P
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/snippet
 type: text/vnd.tiddlywiki

@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250223151140465
+modified: 20250304114948971
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -49,7 +49,7 @@ type: text/vnd.tiddlywiki
 \define collapse-state(title) $:/state/collapse/$title$
 
 \define collapse-title-actions(title)
-<$list filter="[<modifier>!match[ctrl]!match[shift]]" emptyMessage="""<$tiddler tiddler=<<__title__>>>
+<$list filter="[<modifier>!match[ctrl]!match[alt]]" emptyMessage="""<$tiddler tiddler=<<__title__>>>
 <$list filter="[<modal>match[yes]]" emptyMessage="<$action-navigate $to=<<currentTiddler>> $scroll=yes/>" variable="NONE">
 <$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>

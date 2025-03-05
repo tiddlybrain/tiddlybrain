@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20250228111345830
+modified: 20250304115021613
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -19,7 +19,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define modal-actions()
-<$list filter="[<modifier>!match[ctrl]!match[shift]]" emptyMessage="<$action-navigate $scroll=no/>" variable="NONE">
+<$list filter="[<modifier>!match[ctrl]!match[alt]]" emptyMessage="<$action-navigate $scroll=no/>" variable="NONE">
 <$list filter="[<modal>match[yes]]" variable="NONE">
 <$list filter="[all[current]!type[text/plain]]" emptyMessage="<$action-sendmessage $message=tm-modal $param='$:/custom/template/code-modal' mTitle={{!!title}}/>">
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>

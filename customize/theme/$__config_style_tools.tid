@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250227060531949
+modified: 20250304085234385
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -184,6 +184,7 @@ button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; text-overfl
 
 /* For Menubar Plugin */
 .tc-menubar .tc-drop-down {padding: 10px 20px;}
+.tc-menubar .tc-drop-down a, .tc-menubar .tc-drop-down button {line-height: 1.3;}
 .tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini .open svg {fill: green;}
 nav.tc-menubar li.tc-menubar-item .tc-menubar-dropdown-arrow svg {width: 1em; height: 0.7em; transform: translateY(-1px);}
 nav.tc-menubar .tc-menu-list-item .tc-menu-list-subitem {padding-left: 0px;}

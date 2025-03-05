@@ -1,11 +1,11 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
-modified: 20250201111826586
+modified: 20250304164423964
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/SideBar/Recent
 type: text/vnd.tiddlywiki
 
-<h2 style="color:#5778d8;margin-top:0;">Open</h2>
+<h2 style="color:#666;margin-top:0;">Open (<$count filter="[list<tv-story-list>]"/>)</h2>
 <$list filter="[list<tv-story-list>sortan[note]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 </div>
 </$list>
 
-<h2 style="color:#5778d8;">Sidebar</h2>
+<h2 style="color:#666;">Sidebar</h2>
 <$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[10]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink"><<open-in-sidebar close:"no">>
@@ -27,7 +27,7 @@ type: text/vnd.tiddlywiki
 </div>
 </$list>
 
-<h2 style="color:#5778d8;">Searched Recently</h2>
+<h2 style="color:#666;">Searched Recently</h2>
 <$list filter="[enlist{$:/config/recent-search!!list}is[tiddler]!is[system]!tag[customized]limit[10]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
@@ -39,7 +39,7 @@ type: text/vnd.tiddlywiki
 </div>
 </$list>
 
-<h2 style="color:#5778d8;">Closed Recently</h2>
+<h2 style="color:#666;">Closed Recently</h2>
 <$list filter="[recentlyClosed[]!is[missing]sortan[note]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
