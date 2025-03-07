@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20241218150818989
+modified: 20250306220248332
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 <$set name="border-color" filter="[<tv-story-list>contains<currentTiddler>]" value="border-left-color:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[border-left-color:]addsuffix[;]] }}}>
 <blockquote class="tc-quote record" style=<<border-color>>><div class="single-line-record">
 <span class="left">
-<span><<links>> <<tag-list>></span>
+<span><<tag-list>><<links>></span>
 <$list filter="[all[current]has[status]]">@@color:brown;[{{!!status}}]@@</$list>
 </span>
 <span class="middle"><$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink normal-weight">

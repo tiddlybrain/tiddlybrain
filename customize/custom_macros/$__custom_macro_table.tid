@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20250223151201399
+modified: 20250306220214242
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -79,7 +79,7 @@ type: text/vnd.tiddlywiki
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">{{!!title}}</$button>
 <$list filter="[all[current]has[status]]">@@color:brown;[{{!!status}}]@@</$list>
 <$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
-<<links>> <<tag-list>>
+<<tag-list>><<links>>
 </div></$droppable>
 </$fieldmangler></$reveal>
 <$set name="current" value={{!!title}}><$list filter="$(cfilter)$" variable="key">
