@@ -2,7 +2,7 @@ caption: Calculator
 created: 20241102130128457
 creator: yuzijie
 keywords: 
-modified: 20241103115818402
+modified: 20250308173950679
 modifier: yuzijie
 tags: Editor customized
 title: Editor/Calculator
@@ -25,4 +25,4 @@ type: text/vnd.tiddlywiki
 </$let>
 </tbody></table>
 
-''Percentage'': <$edit-text tiddler="$:/temp/calc" index="Numerator" tag="input" size="5"/>/<$edit-text tiddler="$:/temp/calc" index="Denominator" tag="input" size="5"/>=<$let result={{{ [{$:/temp/calc##Numerator}divide{$:/temp/calc##Denominator}multiply[100]trunc[]] }}}>''<<result>>%''</$let>
+''Percentage'': <$edit-text tiddler="$:/temp/calc" index="Numerator" tag="input" size="9"/>/<$edit-text tiddler="$:/temp/calc" index="Denominator" tag="input" size="9"/>=<$let result={{{ [{$:/temp/calc##Numerator}divide{$:/temp/calc##Denominator}multiply[100]trunc[]] }}}>''<<result>>%''</$let>
