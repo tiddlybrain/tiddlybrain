@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250225135212812
+modified: 20250313150702422
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -74,7 +74,7 @@ type: text/vnd.tiddlywiki
 filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">> cfilter=<<__cfilter__>>/>
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$limit<limit>]">> checkbox=<<__checkbox__>>/>""" variable="NONE">
-<$parent-tag$ class={{{ [<single-column>match[yes]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
+<$parent-tag$ class={{{ [<single-column>match[yes]then[single-column]] :else[<bl-qty>compare:number:lt[6]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
 <$list filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$limit<limit>]">> emptyMessage="No Backlinks">
 <$transclude $variable="bl-item" note=<<__note__>> date=<<__date__>> caption=<<__caption__>> description=<<__description__>> parent=<<__parent__>> mode=<<__mode__>> tag=<<__tag__>>/>
 </$list>
