@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250304114948971
+modified: 20250312151405359
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -253,7 +253,7 @@ type: text/vnd.tiddlywiki
 </$let></$list>
 <$list filter="[<__view__>match[tags]]" variable="NONE"><$let current=<<currentTiddler>>><$list filter="$filter$">
 <$set name="style" filter="[all[current]get[color]] :else[all[current]colorize[]] +[addprefix[margin-right:7px;background:]]" select="0">
-<$button actions=<<modal-actions>> tooltip={{!!title}} class="tc-btn-invisible tc-tag-label" style=<<style>>>
+<$button actions=<<modal-actions>> tooltip={{!!description}} class="tc-btn-invisible tc-tag-label" style=<<style>>>
 <$fieldmangler tiddler=<<current>>><$button style="fill:white;font-size:smaller;" class="tc-btn-invisible" message="tm-remove-tag" param={{!!title}}>{{$:/core/images/close-button}}</$button></$fieldmangler>
 <$transclude field="caption"><$view field="title"/></$transclude>
 </$button>
