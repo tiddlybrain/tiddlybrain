@@ -1,10 +1,10 @@
 caption: Google Web Search
 created: 20230708230817434
 creator: yuzijie
-modified: 20230708233251093
+modified: 20250315111434045
 modifier: yuzijie
 tags: customized
 title: $:/custom/search/ExternalLink/Google
 type: text/vnd.tiddlywiki
 
-<a href=`https://www.google.com/search?q=$(search)$` target="_blank" rel="noopener noreferrer" style="display:block;margin-bottom:5px;">{{!!caption}}</a>
+<a href=`https://www.google.com/search?q=$(search)$` target="_blank" rel="noopener noreferrer" style=<<style>>><<caption>></a>
