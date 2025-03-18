@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250318122330055
+modified: 20250318124632922
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -69,9 +69,6 @@ TBC: <<tbc>>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]contains:plan<curDate>]">
 <li style="white-space:nowrap;"><<task-list-open>></li>
 </$list>
-<$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]">
-<li style="white-space:nowrap;"><<task-list-doing>></li>
-</$list>
 </ol>
 <$list filter="[<journal-title>is[tiddler]]"><table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
@@ -95,6 +92,9 @@ TBC: <<tbc>>
 </$button></li></$list>
 </$set>
 </$list></$list>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]">
+<li style="white-space:nowrap;"><<task-list-doing>></li>
+</$list>
 <$list filter="[all[tiddlers]tag[Task]status[Urgent]]" variable="task"><$let task-state={{{ [<task>addprefix[$:/task-state/]addsuffix[/]] }}}>
 <$list filter="[prefix<task-state>!text[waiting]!text[deadline]count[]compare:number:eq[0]]"><li>
 <span class="tc-tag-label" style="background-color:#75cbc7;">To be checked</span> <$transclude $variable="l" title=<<task>>/>
