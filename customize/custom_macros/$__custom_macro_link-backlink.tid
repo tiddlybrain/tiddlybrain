@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250315110525054
+modified: 20250315120109436
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -105,7 +105,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
 
 \define bl-filters(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, list-parents) <$let filters=<<__param__>>><$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[current]subfilter<filters>" uid="filters" sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> list-parents=<<__list-parents__>>/></$let>
 
-\procedure el(param, search) <$let caption=<<search>> search-link=`$:/custom/search/ExternalLink/$(param)$`><$transclude $tiddler=<<search-link>>/></$let>
+\procedure el(param, search) <$let caption=<<search>> search-link=`$:/custom/search/ExternalLink/$(param)$`>🔍 <$transclude $tiddler=<<search-link>>/></$let>
 
 # ''一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title''
 #> `<<l

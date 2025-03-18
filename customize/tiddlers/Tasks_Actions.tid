@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250308173930800
+modified: 20250318122330055
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -96,12 +96,7 @@ TBC: <<tbc>>
 </$set>
 </$list></$list>
 <$list filter="[all[tiddlers]tag[Task]status[Urgent]]" variable="task"><$let task-state={{{ [<task>addprefix[$:/task-state/]addsuffix[/]] }}}>
-<$list filter="[prefix<task-state>!text[waiting]count[]compare:number:eq[0]]"><li>
-<span class="tc-tag-label" style="background-color:#75cbc7;">To be checked</span> <$transclude $variable="l" title=<<task>>/>
-</li></$list>
-</$let></$list>
-<$list filter="[all[tiddlers]tag[Task]status[Progressing]]" variable="task"><$let task-state={{{ [<task>addprefix[$:/task-state/]addsuffix[/]] }}}>
-<$list filter="[prefix<task-state>count[]compare:number:eq[0]]"><li>
+<$list filter="[prefix<task-state>!text[waiting]!text[deadline]count[]compare:number:eq[0]]"><li>
 <span class="tc-tag-label" style="background-color:#75cbc7;">To be checked</span> <$transclude $variable="l" title=<<task>>/>
 </li></$list>
 </$let></$list>
