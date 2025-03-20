@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20250223151240530
+modified: 20250320075122545
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -31,7 +31,7 @@ type: text/vnd.tiddlywiki
 
 \define external-links(current-title, belongs-to:"yes")
 <$vars path-prefix={{$:/config/index-tree!!path}} current=<<currentTiddler>>>
-<$list filter="[<__current-title__>match[yes]]" variable="NONE"><div class="external-links" style="background:#dcefff;">
+<$list filter="[<__current-title__>match[yes]]" variable="NONE"><div class="external-links" style="background:#e7f4ff;">
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$transclude field="caption"><$view field="title"/></$transclude>
 </$button>
