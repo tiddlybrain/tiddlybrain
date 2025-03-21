@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250318232951892
+modified: 20250320192828481
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -347,7 +347,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<current>has[celltpl]]" emptyMessage="multi-selector"><$list filter="[<value>is[blank]] ~[<value>!match<__disable-value__>]" emptyMessage=<<value>> variable="NONE">
 <$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{ [<value>splitregexp[\s*;;\s*]!is[blank]] [<actionTiddler>] +[join[;;]] }}}/>" tag="div">
 <div class="tc-droppable-placeholder" style="display:block;">
-<$list filter="[<value>!is[blank]]"><$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]]" variable="datum">
+<$list filter="[<value>!is[blank]]"><$list filter="[<value>splitregexp[\s*;;\s*]!is[blank]sortan[]]" variable="datum">
 <span style="border-bottom:1px solid #78bb4e;margin-right:5px;">
 <$list filter="[<datum>is[tiddler]]" emptyMessage=<<datum>>><$transclude $variable="l" title=<<datum>> class="normal-weight" note="no"/></$list>
 </span>

@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20250213103953561
+modified: 20250321074210619
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 </$list>
 </$set></td></tr></$list>
 <tr>
-<td style="width:80px;">caption
+<td style="width:81px;">caption
 <$button class="tc-btn-invisible">{{$:/core/images/fixed-height}}
 <$list filter="[[$:/state/editor/caption]!is[tiddler]]" emptyMessage="<$action-deletetiddler $tiddler='$:/state/editor/caption'/>"><$action-setfield $tiddler="$:/state/editor/caption" text="textarea"/></$list>
 </$button>
