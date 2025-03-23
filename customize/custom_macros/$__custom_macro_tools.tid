@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250320192828481
+modified: 20250323152104005
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -86,12 +86,12 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$title$"><$set name="sty" filter="[all[current]is[image]]" value="width:fit-content;$style$" emptyValue="$style$"><p class="collapse-content" style=<<sty>>>
 <$list filter="[<__external-links__>match[yes]]" variable="NONE"><<external-links current-title:"$current-title$" belongs-to:"$belongs-to$">></$list>
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>>
-<$list filter="[all[current]type[text/plain]]" emptyMessage="<div style='margin:1em;'><$transclude mode='block'/></div>">
+<$list filter="[all[current]type[text/plain]]" emptyMessage="<section><$transclude mode=block/></section>">
 <$codeblock code={{{ [all[current]get[text]] }}} language={{{ [all[current]get[language]else[text]] }}}/>
 </$list>
 </$list>
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<div style="margin:1em;"><$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/></div>
+<section><$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/></section>
 </$list>
 </p></$set></$tiddler>
 </$reveal>

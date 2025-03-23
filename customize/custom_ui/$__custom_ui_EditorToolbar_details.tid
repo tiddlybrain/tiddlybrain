@@ -4,7 +4,7 @@ created: 20220226055106060
 creator: yuzijie
 description: Details Macro
 icon: $:/core/images/info-button
-modified: 20241117095349019
+modified: 20250323140134633
 modifier: yuzijie
 shortcuts: ctrl-shift-D
 tags: $:/tags/EditorToolbar customized
@@ -19,5 +19,5 @@ type: text/vnd.tiddlywiki
 '
 	suffix='
 
-</$details>'
+  </$details>'
 />
