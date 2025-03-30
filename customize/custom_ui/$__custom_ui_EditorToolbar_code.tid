@@ -3,8 +3,8 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.
 created: 20171211204042433
 creator: yuzijie
 description: Show Texts as Code Snippets
-icon: $:/core/images/mono-block
-modified: 20241117095406621
+icon: $:/core/images/permalink-button
+modified: 20250330001433568
 modifier: yuzijie
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/code
