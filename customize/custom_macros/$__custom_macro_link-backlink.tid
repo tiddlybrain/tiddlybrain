@@ -1,15 +1,16 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250315120109436
+modified: 20250331215333924
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
 type: text/vnd.tiddlywiki
 
-\define l(title, text, class:"l", mode:"link", links, style, description, note:"yes", date, parent, status:"yes", tag)
+\define l(title, text, class:"l", mode:"link", links, style, description, note:"yes", date, parent, status:"yes", tag-list, tag)
 \whitespace trim
 <$let parent=<<currentTiddler>>><$tiddler tiddler=<<__title__>>>
 <$list filter="[<__mode__>match[link]]" variable="link-mode"><span style="white-space:nowrap;$style$"><$set name="current" value=<<mTitle>>>
+<$list filter="[<__tag-list__>match[yes]]" variable="NONE"><<tag-list>></$list>
 <$list filter="[<__links__>match[yes]]" variable="NONE"><<links>></$list>
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink $class$" tag=<<__tag__>> style={{{ [all[current]note[TODO]then[color:red;font-weight:bold;]] }}}>
 <$list filter="[<__status__>match[yes]]" variable="NONE">
@@ -56,7 +57,7 @@ type: text/vnd.tiddlywiki
 
 \define bl-item(note, date, caption, description, parent, mode, tag)
 <$set name="class" filter="[<collapse-state '$(currentTiddler)$'>is[missing]]" value="tc-menu-list-item" emptyValue="tc-menu-list-item col-span">
-<$tag$ class=<<class>>><$transclude $variable="l" title={{!!title}} text=<<__caption__>> class="bl-title l" links="yes" description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status="yes" mode=<<__mode__>>/></$tag$>
+<$tag$ class=<<class>>><$transclude $variable="l" title={{!!title}} text=<<__caption__>> class="bl-title l" links="yes" description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status="yes" mode=<<__mode__>> tag-list="yes"/></$tag$>
 </$set>
 \end
 
@@ -120,6 +121,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   date:"是否显示 date"
   parent:"是否显示 belongs.to"
   status:"是否显示 status"
+  tag-list: "是否显示 tag-list"
   tag:"link 模式下, 是 button 的 tag 类型; tr 模式下, 是标题的 tag 类型; cl 模式下, 是 collapse-title 的 tag 类型">>`
 # ''按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filter

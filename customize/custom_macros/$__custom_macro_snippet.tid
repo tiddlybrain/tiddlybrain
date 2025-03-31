@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20250313150206520
+modified: 20250331214751446
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -71,14 +71,14 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter=<<fi
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}">{{$:/core/images/right-arrow}}</$list>
 </$button>
 </$set>
-<<links>>
+<<tag-list>><<links>>
 <$button actions=<<modal-actions>> dragTiddler=<<currentTiddler>> class="tc-btn-invisible snippet-title" tooltip=<<currentTiddler>>>
 <$list filter="[all[current]has[status]]">@@color:brown;[{{!!status}}]@@</$list>
 <$list filter="[<__caption__>!is[blank]]" variable="NONE" emptyMessage="<$transclude field='caption'><$view field='title'/></$transclude>"><<__caption__>></$list>
 <$reveal default="$date$" type="match" text="yes" style="color:#666;">
 (<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)
 </$reveal>
-<<tag-list>> <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
 </$button>
 <$reveal type="match" state=<<snippet-accordion-state>> text="open" tag="div" class="snippet-accordion"><$set name="key" value="">
 <$list filter="[all[current]!type[text/plain]]" emptyMessage="<<external-links belongs-to:'no'>><$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">

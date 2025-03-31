@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20250307171307777
+modified: 20250330002628496
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -178,6 +178,7 @@ select.new-tiddler-input-box {border: 1px dotted #aaa; font-size: 14px; color: #
 .tc-drop-down .tc-tab-set .tc-tab-divider {border: none;}
 
 .tc-block-dropdown {border: none; border-radius: 3px;}
+.tc-block-dropdown .list-item-template {white-space: normal;}
 .tc-block-dropdown.tc-search-drop-down {margin-left: -5px; padding-top: 5px;}
 .tc-block-dropdown.tc-search-drop-down a a {display: inline; padding: 0;}
 .tc-drop-down.recent a, .tc-drop-down.recent button {display: inline-block; width: auto; padding: 0 0 0 5px;}
