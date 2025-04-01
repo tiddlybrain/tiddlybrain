@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20250321074210619
+modified: 20250401100240697
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -111,6 +111,7 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/embedding"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/tips"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/code"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/core/ui/EditorToolbar/mono-block"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/snippet"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/link"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/core/ui/EditorToolbar/bold"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
@@ -121,8 +122,12 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/details"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/div"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/today"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
-<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="false"><$button set="$:/config/codemirror/lineWrapping" setTo="true" style="border:none;">WRAP</$button></$reveal>
-<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="true"><$button set="$:/config/codemirror/lineWrapping" setTo="false" style="border:none;">NO WRAP</$button></$reveal>
+<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="false">
+<$button set="$:/config/codemirror/lineWrapping" setTo="true" style="border:none;font-weight:bold;" tooltip="Line Wrap On">WON</$button>
+</$reveal>
+<$reveal type="match" state="$:/config/codemirror/lineWrapping" text="true">
+<$button set="$:/config/codemirror/lineWrapping" setTo="false" style="border:none;" tooltip="Line Wrap Off">WOFF</$button>
+</$reveal>
 </div>
 <div style="margin-bottom:3px;line-height:23px;">{{$:/custom/ui/EditorToolbar/tools}}</div>
 </$set></$edit>

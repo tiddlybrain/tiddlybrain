@@ -2,7 +2,7 @@ caption: Other Custom Tools
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20250312220346889
+modified: 20250401100736927
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -14,6 +14,7 @@ type: text/vnd.tiddlywiki
 <$radio field="type" value="application/x-tiddler-dictionary"> Data</$radio>
 <$radio field="type" value="text/vnd.tiddlywiki"> Record</$radio>
 <$radio field="type" value="text/plain"> Code</$radio>
+<$radio field="type" value="text/x-markdown"> MD</$radio>
 </span>
 </$list>
 <$list filter="[all[current]type[text/vnd.tiddlywiki]tag[Task]]">
@@ -44,7 +45,7 @@ Description: {{!!description}}
 
 *N/A"/>""">Related</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<span class='space'/>"/>""">Space</$button>
-<$button tooltip="Cleanup errors after markdown to wikitext translation">MD
+<$button tooltip="Cleanup errors after markdown to wikitext translation">MD Fix
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-all" text={{{ [all[current]get[text]splitregexp[# \*]join[#*]] }}}/>
 </$button>
 </$list>

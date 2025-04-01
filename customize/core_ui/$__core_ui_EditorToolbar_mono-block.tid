@@ -1,0 +1,19 @@
+button-classes: tc-text-editor-toolbar-item-start-group
+caption: {{$:/language/Buttons/MonoBlock/Caption}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
+description: {{$:/language/Buttons/MonoBlock/Hint}}
+icon: $:/core/images/mono-block
+modified: 20250401094419941
+modifier: yuzijie
+shortcuts: ((mono-block))
+tags: $:/tags/EditorToolbar customized
+title: $:/core/ui/EditorToolbar/mono-block
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-lines"
+	prefix="
+```sh"
+	suffix="```"
+/>
