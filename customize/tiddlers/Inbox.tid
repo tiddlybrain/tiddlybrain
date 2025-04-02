@@ -2,7 +2,7 @@ created: 20240312140902299
 creator: yuzijie
 keywords: 
 list-before: Index
-modified: 20250227091359187
+modified: 20250402214555027
 modifier: yuzijie
 tags: customized $:/tags/SideBar Ignore
 title: Inbox
@@ -15,7 +15,25 @@ type: text/vnd.tiddlywiki
 </li></$list></ul>
 \end
 
-<div style="line-height:28px;padding-top:5px;">
+<div style="line-height:28px;">
+<$list filter="[all[tiddlers]tag[Inbox]!sort[order]]"><$transclude $variable="l" title={{!!title}} mode="cl" description="yes"/></$list>
+<ul style="list-style:none;padding:0;margin:5px 0;">
+<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]">
+<$let count={{{ [<items>enlist-input[]count[]] }}} summary={{{ [<count>addsuffix[)]addprefix[OVERDUE IN 3 MONTH (]] }}}>
+<%if [<count>compare:number:gteq[1]] %><li><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details></li><%endif%>
+</$let>
+</$set>
+<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]]">
+<$let count={{{ [<items>enlist-input[]count[]] }}} summary={{{ [<count>addsuffix[)]addprefix[OVERDUE IN 1 YEAR (]] }}}>
+<%if [<count>compare:number:gteq[1]] %><li><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details></li><%endif%>
+</$let>
+</$set>
+<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[360]]">
+<$let count={{{ [<items>enlist-input[]count[]] }}} summary="OVERDUE IN THE FUTURE">
+<%if [<count>compare:number:gteq[1]] %><li><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details></li><%endif%>
+</$let>
+</$set>
+</ul>
 <$let today=<<now "YYYY0MM0DD">> comparefilter="[get[date]compare:date:lteq<today>]">
 <$list filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]filter<comparefilter>get[tbc]enlist-input[]unique[]]">
 <div><$transclude $variable="l" title={{!!title}} links="yes"/></div>
@@ -31,21 +49,4 @@ type: text/vnd.tiddlywiki
 <div><$transclude $variable="l" title={{!!title}} links="yes"/></div>
 </$list></$list>
 </$let></$list>
-<$list filter="[all[tiddlers]tag[Inbox]]"><div><$transclude $variable="l" title={{!!title}} mode="cl" description="yes"/></div></$list>
-<$tiddler tiddler="Inbox"><blockquote style="margin:1em 0;">''TODO''<<snippet key:"TODO" limit:"20" sort:"!sort[order]">></blockquote></$tiddler>
-<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]">
-<$let count={{{ [<items>enlist-input[]count[]] }}} summary={{{ [<count>addsuffix[)]addprefix[OVERDUE IN 3 MONTH (]] }}}>
-<%if [<count>compare:number:gteq[1]] %><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details><%endif%>
-</$let>
-</$set>
-<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[360]!days:date[90]]">
-<$let count={{{ [<items>enlist-input[]count[]] }}} summary={{{ [<count>addsuffix[)]addprefix[OVERDUE IN 1 YEAR (]] }}}>
-<%if [<count>compare:number:gteq[1]] %><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details><%endif%>
-</$let>
-</$set>
-<$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]!days:date[360]]">
-<$let count={{{ [<items>enlist-input[]count[]] }}} summary="OVERDUE IN THE FUTURE">
-<%if [<count>compare:number:gteq[1]] %><$details summary=<<summary>>><$transclude $variable="tracking-items"/></$details><%endif%>
-</$let>
-</$set>
 </div>
