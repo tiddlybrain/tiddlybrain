@@ -1,9 +1,9 @@
 caption: External Link Manager
 created: 20240629132223346
 creator: yuzijie
-modified: 20241105124948989
+modified: 20250406092503546
 modifier: yuzijie
-order: 3
+order: 4
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
 title: $:/custom/ui/ControlPanel/ExternalLink
 type: text/vnd.tiddlywiki
@@ -19,6 +19,6 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-<$button actions=<<newExternalSearch>>>Add New External Search</$button>
+<div style="margin:1em 0;">''Search Links'' | <$button actions=<<newExternalSearch>>>Add New Search Link</$button></div>
 
-<<records filter:"[all[tiddlers]prefix[$:/custom/search/ExternalLink/]]">>
+<<record filter:"[all[tiddlers]prefix[$:/custom/search/ExternalLink/]]">>

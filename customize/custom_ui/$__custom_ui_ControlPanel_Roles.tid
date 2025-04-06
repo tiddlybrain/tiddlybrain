@@ -3,7 +3,7 @@ created: 20240708161609441
 creator: yuzijie
 keywords: 
 list-before: Attachments
-modified: 20250209124001412
+modified: 20250406091813166
 modifier: yuzijie
 order: 1
 parents: 
@@ -23,5 +23,10 @@ Notes: <<sort-by-filter item-filter:"note<currentTiddler>">>"""/>
 <$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 \end
 
-<$tiddler tiddler="$:/custom/ui/ControlPanel/Roles"><<snippet key:"Roles" sort:"sort[order]" limit:100>></$tiddler>
-<$button actions=<<newRole>> style="margin:1em 0;">Add New Role</$button>
+<$tiddler tiddler="$:/custom/ui/ControlPanel/Roles">
+
+<div style="margin:1em 0;">''Categories'' | <$button actions=<<newRole>>>Add New Role</$button></div>
+
+<<snippet key:"Roles" sort:"sort[order]">>
+
+</$tiddler>

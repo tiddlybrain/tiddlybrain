@@ -1,12 +1,12 @@
-caption: Chat Instructions
-created: 20240629135931002
+caption: Image Instructions
+created: 20250406075239969
 creator: yuzijie
-modified: 20250406092043583
+modified: 20250406092259416
 modifier: yuzijie
-order: 2
-shortcap: Chat Instructions
+order: 3
+shortcap: Image Instructions
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
-title: $:/custom/ui/ControlPanel/CustomInstructions
+title: $:/custom/ui/ControlPanel/ImageInstructions
 type: text/vnd.tiddlywiki
 
 \define newInstructions()
@@ -16,23 +16,21 @@ type: text/vnd.tiddlywiki
   tags="Snippet"
   note="Instruction"
   shortcap=""
-  belongs.to="$:/custom/ui/ControlPanel/CustomInstructions"
+  belongs.to="$:/custom/ui/ControlPanel/ImageInstructions"
   caption="New Instructions Title"
   text="Default: Input your instructions here."
-  keywords="Chat Instructions"
-  parents="$:/custom/ui/ControlPanel/CustomInstructions"
+  keywords="Image Instructions"
+  parents="$:/custom/ui/ControlPanel/ImageInstructions"
 />
 <$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
 \end
 
-<$tiddler tiddler="$:/custom/ui/ControlPanel/CustomInstructions">
-
-<<snippet key:"Instruction" empty-message:"no">>
+<$tiddler tiddler="$:/custom/ui/ControlPanel/ImageInstructions">
 
 <$vars template={{$:/language/DefaultNewTiddlerTitle}}>
-<div style="margin:1em 0;">''Categories'' | <$button actions=<<newInstructions>>>Add New Instruction</$button></div>
+<div style="margin:1em 0;">''Instructions'' | <$button actions=<<newInstructions>>>Add New Instruction</$button></div>
 </$vars>
 
-<<snippet key:"List">>
+<<snippet key:"Instruction">>
 
 </$tiddler>
