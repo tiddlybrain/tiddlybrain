@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250406171322613
+modified: 20250406222454817
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -264,6 +264,7 @@ button.l {line-height: inherit;}
 .tc-tiddler-frame .tc-tiddler-body button.l {overflow-x: clip; max-width: 100%;}
 .bl-container div.tc-menu-list-item {overflow: hidden;}
 .tr > h3 {font-size: 1.05em; border: none; padding: 0;}
+.cl {position: relative;}
 
 /* For Macro: links */
 a.links svg {height: 1em; width: 1em; vertical-align: middle; max-width: none;}
@@ -315,9 +316,12 @@ h1 + .collapse-content, h2 + .collapse-content, h3 + .collapse-content, h4 + .co
 .collapse-content > table.data-table > tr:last-child > th, .collapse-content > table.data-table > tr:last-child > td {border-bottom: none;}
 .collapse-content > pre {border: none; margin: 0;}
 .collapse-content iframe {width: 100%; height: 80vh;}
-h3 + .collapse-content > .external-links {border-radius: 3px; margin: 0 0 1.35em 0;}
+h3 + .collapse-content > .external-links {position: absolute; right: 0; top: -3px;}
+h3 + .collapse-content > .external-links button {max-width: 3em; overflow: hidden; text-overflow: ellipsis;}
 h3 + .collapse-content h3 {padding-bottom: 0; border-bottom: none; font-size: 1em;}
 h3 + .collapse-content > table.data-table, h3 + .collapse-content > section {margin: 1em 0;}
+.tc-tiddler-body h3.collapse-close {margin-bottom: 1.5em;}
+.tc-tiddler-body h3.collapse-open {margin-bottom: 0;}
 
 /* For Macro: task-pill */
 .dot {color: #333; border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7; text-shadow: 0 1px 0 rgb(255 255 255 / 80%);}
