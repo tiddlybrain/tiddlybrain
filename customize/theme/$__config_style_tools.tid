@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250323155205064
+modified: 20250406171322613
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -353,19 +353,14 @@ section.ai h3 {font-weight: bold; margin-bottom: 5px;}
 section.ai button {display: inline-block; width: unset;}
 section.ai.center {text-align: center;}
 section.ai.center button {font-weight: bold;}
-section.ai details summary {overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-section.ai details .history pre {max-width: 50vw; margin: 0.5em 0 0 0;}
 section.ai select {border: none; background: transparent;}
-section.ai details summary {background-color: #f4f4f4;}
-.tc-drop-down section.ai details summary {background-color: white;}
 section.ai table td {white-space: nowrap;}
 section.ai table td input {padding: 3px; width: 100%; margin: 3px 0;}
 section.ai table td div textarea {display: grid; width: 100%; margin-top: 3px;}
 section.ai table td label input {padding: 0; margin: 0 3px; width: unset;}
 section.ai table td label span {color: #000;}
-details.user > summary {color: brown;}
-details.assistant > summary {color: green;}
-.ai-img > img, .history > img {max-height: 30em; padding-top: 0.5em;}
+section.ai .history {line-height: 28px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.ai-img > img {max-height: 30em; border: 1px solid #ccc;}
 
 /* For editor-modal, normal-modal */
 .tc-modal-footer {padding: 10px 15px 11px;}
