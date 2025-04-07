@@ -1,4 +1,4 @@
-modified: 20250319005251837
+modified: 20250407212531112
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -109,7 +109,7 @@ type: text/vnd.tiddlywiki
 </$let>
 </$list>
 
-<$list filter="[all[tiddlers]!is[system]!is[current]!is[binary]search:text,caption,description:regexp,casesensitive<bl-pattern>sortan[note]]">
+<$list filter="[all[tiddlers]!is[system]!is[current]!is[binary]!{!!belongs.to}search:text,caption,description:regexp,casesensitive<bl-pattern>sortan[note]]">
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </$list>
 

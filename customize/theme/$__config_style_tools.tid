@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250407195401142
+modified: 20250407210549794
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -319,7 +319,8 @@ h1 + .collapse-content, h2 + .collapse-content, h3 + .collapse-content, h4 + .co
 h3 + .collapse-content > .external-links {position: absolute; right: 0; top: -3px;}
 h3 + .collapse-content > .external-links button {max-width: 3em; overflow: hidden; text-overflow: ellipsis;}
 h3 + .collapse-content h3 {padding-bottom: 0; border-bottom: none; font-size: 1em;}
-h3 + .collapse-content > table.data-table, h3 + .collapse-content > section {margin: 0.5em 0; border-bottom: 1px solid #ccc;}
+h3 + .collapse-content > section {margin: 0.5em 0; border-bottom: 1px dashed #ccc;}
+h3 + .collapse-content > table.data-table {margin: 1em 0 0.5em 0;}
 .tc-tiddler-body h3.collapse-close {margin-bottom: 1.2em;}
 .tc-tiddler-body h3.collapse-open {margin-bottom: 0;}
 
