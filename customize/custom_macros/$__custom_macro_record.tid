@@ -1,12 +1,12 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20250313152030483
+modified: 20250414191553034
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
 type: text/vnd.tiddlywiki
 
-\define record(filter:"[tag<currentTiddler>!sort[date]]")
+\define record(filter:"[tag<currentTiddler>!sort[date]]", parent)
 <div class={{{ [<single-column>match[yes]then[single-column]] :else[subfilter<__filter__>count[]compare:number:lt[4]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
 <$set name="current" value=<<currentTiddler>>><$list filter="$filter$ +[!has[draft.of]]">
 <$set name="border-color" filter="[<tv-story-list>contains<currentTiddler>]" value="border-left-color:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[border-left-color:]addsuffix[;]] }}}>
@@ -18,6 +18,9 @@ type: text/vnd.tiddlywiki
 <span class="middle"><$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink normal-weight">
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$list filter="[<__parent__>match[yes]]" variable="NONE">
+<$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+</$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
 </$button></span>
 <span class="right"><$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#b3b7cf;">
@@ -30,23 +33,25 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-\define records(filter:"[tag<currentTiddler>]", title:"records", sort:"sortan[caption]")
+\define records(filter:"[tag<currentTiddler>]", title:"records", sort:"sortan[caption]", parent)
 <$vars f2={{$:/state/select/$(currentTiddler)$/record/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/record/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/record/$title$/3}}>
 <div class="filter-options">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>>(<$count filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>)</$button>
 filter <$transclude $variable="list-filters" title="record/$title$" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
 </div>
 <div style="margin-top:1em;">
-<$transclude $variable="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>/>
+<$transclude $variable="record" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">> parent=<<__parent__>>/>
 </div>
 </$vars>
 \end
 
 # ''使用列表方式显示 Tiddlers''
 #> `<<record
-  filter:"[tag<currentTiddler>!sort[date]]">>`
+  filter:"[tag<currentTiddler>!sort[date]]"
+  parent:"是否显示父级 Tiddler">>`
 # ''带 filters 的 record''
 #> `<<records
   filter:"列表筛选规则"
   title:"list-filters 的 title"
-  sort:"结果排序">>`
+  sort:"结果排序"
+  parent:"是否显示父级 Tiddler">>`
