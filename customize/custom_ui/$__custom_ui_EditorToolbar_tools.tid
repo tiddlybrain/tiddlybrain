@@ -2,7 +2,7 @@ caption: Other Custom Tools
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20250401100736927
+modified: 20250417105502704
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -29,6 +29,7 @@ type: text/vnd.tiddlywiki
 Description: {{!!description}}
 "/>""">Name&Desc</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="{{||custom-template-date}}"/>""">Date snip</$button>
+<$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="Related: <<bl group-by-parents:yes>>"/>""">Related snip</$button>
 <$button actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text="<<snippet cfilter:'Name Start Finish' sort:'!sort[date]' tags:'Task' celltpl:'custom-template-task' has-filter:'yes'>>"/>""">Task snip</$button>
 </$list>
 <$list filter="[all[current]type[text/vnd.tiddlywiki]]">

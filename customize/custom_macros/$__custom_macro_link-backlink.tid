@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250331215333924
+modified: 20250417171117209
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -61,7 +61,7 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define bl-filter(item-filter, item-filter-2, uid:"default", sort:"sortan[caption]", cfilter, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag:"div", tag:"div", list-parents:"1")
+\define bl-filter(item-filter, item-filter-2, uid:"default", sort:"sortan[caption]", cfilter, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag:"div", tag:"div", list-parents:"0")
 <$tiddler tiddler={{{ [all[current]get[draft.of]else<currentTiddler>] }}}>
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
@@ -145,7 +145,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 1">>`
+  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 0">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl
   sort:"结果排序"
@@ -165,7 +165,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 1">>`
+  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
 # ''反查指向当前 Tiddler 且相同 note 的所有 Tiddlers''
 #> `<<bl-note
   param:"角色"
@@ -185,7 +185,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 1"
+  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..."
   children:"是否显示来自 Children 的 Backlinks">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers 里面具有特定 note 的 Tiddlers''
 #> `<<bl-sub-note
@@ -206,7 +206,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 1">>`
+  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
 # ''按照多个 Filter 反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filters
   param:"多个 Filter Expressions"
@@ -226,7 +226,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 1">>`
+  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
 # ''External link, 创建一个外部搜索链接 ''
 #> `<<el
   param:"选择一个外部搜索链接, 链接在 External Link Manager 里面配置"
