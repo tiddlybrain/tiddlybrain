@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250417171117209
+modified: 20250502095932148
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -39,7 +39,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage="<<data-table>>"><$transclude mode="block"/></$list>
 </$list>
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
+<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} init={{!!init}}/>
 </$list>
 </div>
 </$set></$list>
@@ -61,14 +61,14 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-\define bl-filter(item-filter, item-filter-2, uid:"default", sort:"sortan[caption]", cfilter, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag:"div", tag:"div", list-parents:"0")
+\define bl-filter(item-filter, item-filter-2, uid:"default", sort:"sortan[caption]", cfilter, limit:"8", note:"yes", description:"yes", parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag:"div", tag:"div", init:"0")
 <$tiddler tiddler={{{ [all[current]get[draft.of]else<currentTiddler>] }}}>
 <$set name="current" value=<<currentTiddler>>><$set name="limit" filter="[<bl-limit-state '$uid$'>get[text]]" emptyValue=<<__limit__>> select="0">
 <$set name="search" filter="[<currentTiddler>trim[]split[ ]join[\s]split[/]join[\/]]" select="0">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/backlink/]addsuffix<__uid__>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
-<section class="bl-container"><$list filter="[<__group-by-parents__>!match[yes]]" emptyMessage="""<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" sort="$sort$" cfilter="$cfilter$" title="$uid$" list-parents="$list-parents$" mode="collapse" has-filter="$has-filter$" checkbox="$checkbox$"/>""" variable="NONE">
-<$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$transclude $variable="sort-by-filter" item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$" sort="$sort$" cfilter="$cfilter$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$" checkbox="$checkbox$" list-parents="$list-parents$"/>""" variable="NONE">
+<section class="bl-container"><$list filter="[<__group-by-parents__>!match[yes]]" emptyMessage="""<$transclude $variable="sort-by-belongs" filter="[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" sort="$sort$" cfilter="$cfilter$" title="$uid$" init="$init$" mode="collapse" has-filter="$has-filter$" checkbox="$checkbox$"/>""" variable="NONE">
+<$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$transclude $variable="sort-by-filter" item-filter="$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$" sort="$sort$" cfilter="$cfilter$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$" checkbox="$checkbox$" init="$init$"/>""" variable="NONE">
 <$set name="bl-qty" filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$count[]]">> select="0">
 <$list filter="[<bl-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">>>(<$count filter=<<filter-build "[$item-filter$search:text,caption,description:regexp,casesensitive<bl-pattern>$item-filter-2$]" "+[$sort$]">>/>)</$button>
@@ -98,13 +98,13 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
 </$tiddler>
 \end
 
-\define bl(sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, list-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> list-parents=<<__list-parents__>>/>
+\define bl(sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, init) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" uid="all" sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> init=<<__init__>>/>
 
-\define bl-note(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, list-parents, children) <$let filter2="!contains:parents<currentTiddler>"><$transclude $variable="bl-filter" item-filter="all[tiddlers]note[$param$]!is[current]!{!!belongs.to}" item-filter-2={{{ [<__children__>match[no]then<filter2>] }}} uid=<<__param__>> sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> list-parents=<<__list-parents__>>/></$let>
+\define bl-note(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, init, children) <$let filter2="!contains:parents<currentTiddler>"><$transclude $variable="bl-filter" item-filter="all[tiddlers]note[$param$]!is[current]!{!!belongs.to}" item-filter-2={{{ [<__children__>match[no]then<filter2>] }}} uid=<<__param__>> sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> init=<<__init__>>/></$let>
 
-\define bl-sub-note(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, list-parents) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" item-filter-2="getAllTiddlers:note[$param$]" uid=<<__param__>> sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> list-parents=<<__list-parents__>>/>
+\define bl-sub-note(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, init) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" item-filter-2="getAllTiddlers:note[$param$]" uid=<<__param__>> sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> init=<<__init__>>/>
 
-\define bl-filters(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, list-parents) <$let filters=<<__param__>>><$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[current]subfilter<filters>" uid="filters" sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> list-parents=<<__list-parents__>>/></$let>
+\define bl-filters(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, init) <$let filters=<<__param__>>><$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[current]subfilter<filters>" uid="filters" sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> init=<<__init__>>/></$let>
 
 \procedure el(param, search) <$let caption=<<search>> search-link=`$:/custom/search/ExternalLink/$(param)$`>🔍 <$transclude $tiddler=<<search-link>>/></$let>
 
@@ -145,7 +145,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 0">>`
+  init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 0">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl
   sort:"结果排序"
@@ -165,7 +165,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
+  init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
 # ''反查指向当前 Tiddler 且相同 note 的所有 Tiddlers''
 #> `<<bl-note
   param:"角色"
@@ -185,7 +185,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..."
+  init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..."
   children:"是否显示来自 Children 的 Backlinks">>`
 # ''反查指向当前 Tiddler 的所有 Tiddlers 里面具有特定 note 的 Tiddlers''
 #> `<<bl-sub-note
@@ -206,7 +206,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
+  init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
 # ''按照多个 Filter 反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filters
   param:"多个 Filter Expressions"
@@ -226,7 +226,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<fil
   mode:"l 的 mode"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
-  list-parents:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
+  init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,...">>`
 # ''External link, 创建一个外部搜索链接 ''
 #> `<<el
   param:"选择一个外部搜索链接, 链接在 External Link Manager 里面配置"

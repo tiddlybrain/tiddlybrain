@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250323152104005
+modified: 20250502095714371
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -91,7 +91,7 @@ type: text/vnd.tiddlywiki
 </$list>
 </$list>
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
-<section><$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/></section>
+<section><$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} init={{!!init}}/></section>
 </$list>
 </p></$set></$tiddler>
 </$reveal>
@@ -248,7 +248,7 @@ type: text/vnd.tiddlywiki
 <$list filter="$filter$ +[limit[1]]" variable="NONE">
 <div style="text-align:center;margin:1em;font-variant:small-caps;">''$name$''</div>
 <$list filter="[<__view__>match[list]]" variable="NONE"><$let direct-open=<<__direct-open__>> single-column="yes">
-<<sort-by-belongs filter:"$filter$" title:"$name$" list-parents:"0" has-filter:"no" mode:"$mode$">>
+<<sort-by-belongs filter:"$filter$" title:"$name$" init:"0" has-filter:"no" mode:"$mode$">>
 </$let></$list>
 <$list filter="[<__view__>match[tags]]" variable="NONE"><$let current=<<currentTiddler>>><$list filter="$filter$">
 <$set name="style" filter="[all[current]get[color]] :else[all[current]colorize[]] +[addprefix[margin-right:7px;background:]]" select="0">

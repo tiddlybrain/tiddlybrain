@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20250406081642371
+modified: 20250502095734071
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -85,7 +85,7 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter=<<fi
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage=<<data-table>>>
 <$set name="class" filter="[all[current]has[_canonical_uri]] [all[current]is[image]]" value="snippet-external" emptyValue="snippet-content"><div class=<<class>>><$transclude mode="block"/>
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE"><div style="margin:10px 20px;">
-<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} list-parents={{!!list-parents}}/>
+<$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} init={{!!init}}/>
 </div></$list>
 </div></$set>
 </$list>
