@@ -25,7 +25,15 @@ exports.indexes = function(source,operator,options) {
 				if (opt === "non-empty") {
 					var k = [], celltpl = tiddler.getFieldString("celltpl");
 					if(options.wiki.tiddlerExists(celltpl)) {
-						k = Object.keys(options.wiki.getTiddlerDataCached(celltpl) || {});
+						let celltpltid = options.wiki.getTiddler(celltpl);
+						let tpltype = celltpltid.getFieldString("type");
+						if (tpltype === "application/x-tiddler-dictionary") {
+							k = Object.keys(options.wiki.getTiddlerDataCached(celltpl) || {});
+						} else {
+							const regex = /\[<key>match\[(.*?)\]\]/g;
+							let tplcontent = celltpltid.getFieldString("text");
+							k = [...tplcontent.matchAll(regex)].map(m => m[1]);
+						}
 					}
 					Object.keys(data).forEach(key => {
 						if (data[key].length !== 0 || k.indexOf(key) !== -1) results.push(key);

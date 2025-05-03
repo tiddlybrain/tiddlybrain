@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20240713172140789
+modified: 20250503223215866
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[<folding-state>!match[fold]]" emptyMessage='<td class="data-value">
 <$button set=<<data-table-folding-state>> setTo="unfold" class="tc-btn-invisible fold-text">-- folded --</$button>
 </td>'>
-<$list filter="[<current>getindex<key>] :else[<current>get[celltpl]is[tiddler]has:index<key>]" emptyMessage="<td></td>">
+<$list filter="[<current>getindex<key>] :else[<current>get[celltpl]has:index<key>] :else[<current>get[celltpl]type[text/vnd.tiddlywiki]]" emptyMessage="<td></td>">
 <$tiddler tiddler=<<current>>><$list filter="[<value>suffix[;;]]" emptyMessage="""<td class="data-value"><$transclude $variable="cell-value" description="yes"/></td>""" variable="NONE">
 <$droppable actions="<$action-setfield $tiddler=<<current>> $index=<<key>> $value={{{[<value>removeprefix[;;]else<value>addsuffix<actionTiddler>addsuffix[;;]]}}}/>" tag="td" class="data-value"><div class="tc-droppable-placeholder" style="display:block;"><$transclude $variable="cell-value" description="yes"/></div></$droppable>
 </$list></$tiddler>
