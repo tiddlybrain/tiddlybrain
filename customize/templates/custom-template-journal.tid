@@ -2,13 +2,19 @@ caption: Template for Journal
 created: 20230910211155631
 creator: yuzijie
 keywords: 
-modified: 20240118201658471
+modified: 20250503135109539
 modifier: yuzijie
 tags: customized
 title: custom-template-journal
 type: text/vnd.tiddlywiki
 
-<$list filter="[<key>match[Day]]" variable="NONE"><$transclude $variable=format-date date={{!!date}} template='DDD'/></$list>
-<$list filter="[<key>is[tiddler]]" emptyMessage=<<cell-value-normal>>><$list filter="[<value>split[;;]]" variable="step">
-<$set name="style" filter="[<key>getTypeStep<step>match[Deadline]]" value="color:#cd23d8" emptyValue=""><div style=<<style>>><<step>></div></$set>
-</$list></$list>
+<%if [<key>match[Journals]] %><$let single-column=yes><<bl>></$let>
+<%elseif [<key>match[TBC]] %><<tbc>>
+<%elseif [<key>is[tiddler]] %>
+<$list filter="[<value>split[;;]]" variable="step">
+<$set name="style" filter="[<key>getTypeStep<step>match[Deadline]]" value="color:#cd23d8" emptyValue="">
+<div style=<<style>>><<step>></div>
+</$set>
+</$list>
+<%else%><<cell-value-normal>>
+<%endif%>
