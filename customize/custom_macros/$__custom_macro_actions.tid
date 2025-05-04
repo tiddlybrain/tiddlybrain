@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20250304115021613
+modified: 20250504180536783
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -148,6 +148,17 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
+\define droppable-journal-actions()
+<%if [<journal-title>is[missing]] %>
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals:
+TBC:" date=<<today>> celltpl="custom-template-journal" kw="unset" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>">
+<$action-listops $tiddler=<<createTiddler-title>> $field=tbc $subfilter='[<actionTiddler>]'/>
+</$action-createtiddler>
+<%else%>
+<$action-listops $tiddler=<<journal-title>> $field=tbc $subfilter='[<actionTiddler>]'/>
+<%endif%>
+\end
+
 # ''复制 Tiddler 的 action''
 #> `<<droppable-clone-action>>`
 # ''点击链接以后弹出 Modal 的动作''
@@ -186,3 +197,5 @@ type: text/vnd.tiddlywiki
 #> `<<core-ui-edit-actions>>`
 # ''更新 date field 的 action''
 #> `<<date-update-actions>>`
+# ''拖动 Tiddler 到某日期上, 可以将其添加到 TBC 字段里面, 如果没有该日期则创建一个''
+#> `<<droppable-journal-actions>>`

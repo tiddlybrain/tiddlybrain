@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250503231658490
+modified: 20250504191617406
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -13,9 +13,8 @@ type: text/vnd.tiddlywiki
 <$vars today=<<curDate>> dt=<<curDate>>><$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
 <$set name="tasks" filter="[<journal-title>indexes[]tag[Task]format:titlelist[]join[ ]]" select="0">
 
-<h2 style="margin:20px 0;font-weight:500;"><$droppable actions="<$list filter='[<actionTiddler>tag[Tasks/Journal]]'>
-<$action-setfield $tiddler='$:/temp/plan/date' text={{{[<actionTiddler>split[-]join[]]}}}/>
-</$list>" tag="div">
+<h2 style="margin:20px 0;font-weight:500;">
+<$droppable actions=<<droppable-journal-actions>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
 <$set name="left" filter="[<curDate>nextDay[-1]]" select="0">
 <$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-left}}</$button>
 </$set>
@@ -33,7 +32,8 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 </$button></$list>""">
 <$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
 </$list>
-</$droppable></h2>
+</div></$droppable>
+</h2>
 
 <$droppable actions=<<droppable-task-list-actions>> tag="div">
 <ol style="color:#333;line-height:24px;">
@@ -104,6 +104,6 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 
 <hr>
 
-<$list filter="[<journal-title>is[tiddler]]"><$droppable actions="<$action-listops $field=tbc $subfilter='[<actionTiddler>]'/>" tag="div">
-<div class="tc-droppable-placeholder" style="display:block;"><<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]] -[[TBC]]" style:"table-layout:auto;">></div>
-</$droppable></$list>
+<$list filter="[<journal-title>is[tiddler]]">
+<<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]]" style:"table-layout:auto;">>
+</$list>
