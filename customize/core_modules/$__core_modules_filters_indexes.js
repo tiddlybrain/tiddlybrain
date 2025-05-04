@@ -25,13 +25,12 @@ exports.indexes = function(source,operator,options) {
 				if (opt === "non-empty") {
 					var k = [], celltpl = tiddler.getFieldString("celltpl");
 					if(options.wiki.tiddlerExists(celltpl)) {
-						let celltpltid = options.wiki.getTiddler(celltpl);
-						let tpltype = celltpltid.getFieldString("type");
-						if (tpltype === "application/x-tiddler-dictionary") {
+						let tpltid = options.wiki.getTiddler(celltpl);
+						if (tpltid.getFieldString("type") === "application/x-tiddler-dictionary") {
 							k = Object.keys(options.wiki.getTiddlerDataCached(celltpl) || {});
 						} else {
 							const regex = /\[<key>match\[(.*?)\]\]/g;
-							let tplcontent = celltpltid.getFieldString("text");
+							let tplcontent = tpltid.getFieldString("text");
 							k = [...tplcontent.matchAll(regex)].map(m => m[1]);
 						}
 					}

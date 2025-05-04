@@ -2,13 +2,61 @@ caption: Planner
 created: 20210112195245238
 creator: yuzijie
 keywords: 
-modified: 20240822150621398
+modified: 20250504191413372
 modifier: yuzijie
 order: 1
 tags: Tasks customized
 title: Tasks/Planner
 type: text/vnd.tiddlywiki
 
-<$set name="date" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>>
-<$transclude $variable="planner" date=<<date>>/>
+\define weekly-link(date)
+<$set name="year" filter="[[$date$]format:date[YYYY]]" select="0">
+<$set name="week" filter="[[$date$]format:date[Week0WW]]" select="0">
+<$set name="BR" filter="[[BR/Journals]] [<year>] [<week>] +[join[/]]" select="0">
+<$transclude $variable="l" title=<<BR>> text=<<format-date "$date$" "Week-WW (DDD)">>/>
 </$set>
+</$set>
+</$set>
+\end
+
+<$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
+<$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
+<h2 style="margin:20px 0 18px 0;color:#666;font-weight:500;">
+<$set name="left" filter="[<curDate>]nextDay[-1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<left>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-left}}</$button>
+</$set>
+<$set name="right" filter="[<curDate>nextDay[1]]" select="0">
+<$button set="$:/temp/plan/date" setTo=<<right>> class="tc-btn-invisible" style="font-size:medium;transform:translateY(-2px);">{{$:/core/images/chevron-right}}</$button>
+</$set>
+<$list filter="[[$:/temp/plan/date]is[tiddler]get[text]!match<now YYYY0MM0DD>]">
+<$button set="$:/temp/plan/date" setTo=<<now YYYY0MM0DD>>>Today</$button>
+</$list>
+<$transclude $variable="weekly-link" date=<<curDate>>/>
+<$edit-text tiddler="$:/temp/plan/date/draft" default=<<curDate>> tag="input" size="9"/>
+<$list filter="[[$:/temp/plan/date/draft]get[text]]" emptyMessage="""<$list filter="[<journal-title>is[missing]]"><$button>Create Date
+<$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals:
+TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
+</$button></$list>""">
+<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
+</$list>
+</h2>
+<$list filter="[all[tiddlers]tag[Task]!has[draft.of]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
+<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><div><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
+<$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
+</$button></div></$list>
+</$set>
+</$list></$list>
+</$set>
+</$set>
+<$list filter="[all[tiddlers]tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
+<$list filter="[all[tiddlers]tag[Task]status[Urgent]sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
+<$set name="summary" filter="[all[tiddlers]tag[Task]status[LowPriority]count[]addprefix[Low Priority: ]]" select="0">
+<$details summary=<<summary>>><$list filter="[all[tiddlers]tag[Task]status[LowPriority]sort[modified]]"><<task-pill color:"#e3ffed">></$list></$details>
+</$set>
+<$details summary="Review, Onhold, Todo">
+<$list filter="[all[tiddlers]tag[Task]status[Review]sort[modified]]"><<task-pill color:"#c3ffa2">></$list>
+<$list filter="[all[tiddlers]tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
+<$list filter="[all[tiddlers]tag[Task]status[Todo]sort[modified]]"><<task-pill>></$list>
+</$details>
+<div style="margin-top:11px;"><<task-list>></div>
