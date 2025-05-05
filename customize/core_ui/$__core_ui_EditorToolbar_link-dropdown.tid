@@ -1,4 +1,4 @@
-modified: 20250417171402436
+modified: 20250505151930237
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -95,12 +95,6 @@ type: text/vnd.tiddlywiki
 <$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
 <$vars search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}} link-dropdown="yes">
 
-//Children of the current tiddler//
-
-<$list filter="[all[tiddlers]tag[Snippet]belongs.to<search>sort[note]]">
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-</$list>
-
 //Backlinks of the current tiddler//
 
 <$list filter="[<search>blsearch[]get[note]unique[]sortsub<topic-level>]" variable="key">
@@ -113,15 +107,17 @@ type: text/vnd.tiddlywiki
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </$list>
 
-<%if [all[current]has[caption]] %>
+//Children of the current tiddler//
 
-//All related tiddlers//
-
-<$list filter="[all[tiddlers]!is[system]!tag[Ignore]!title{!!draft.of}!is[current]search:caption,keywords,text,description:some{!!caption}limit[300]]">
+<$list filter="[all[tiddlers]tag[Snippet]belongs.to<search>sort[note]]">
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </$list>
 
-<%endif%>
+//Recently modified tiddlers//
+
+<$list filter="[all[tiddlers]!is[system]!title{!!draft.of}!has[draft.of]!sort[modified]limit[15]]">
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</$list>
 
 </$vars>
 </$linkcatcher>
