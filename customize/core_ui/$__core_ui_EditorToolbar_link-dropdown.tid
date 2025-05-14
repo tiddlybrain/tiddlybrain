@@ -1,4 +1,4 @@
-modified: 20250505151930237
+modified: 20250514210032914
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -97,7 +97,7 @@ type: text/vnd.tiddlywiki
 
 //Backlinks of the current tiddler//
 
-<$list filter="[<search>blsearch[]get[note]unique[]sortsub<topic-level>]" variable="key">
+<$list filter="[<search>blsearch[]!is[system]!is[current]!{!!belongs.to}!tag[Ignore]get[note]unique[]sortsub<topic-level>]" variable="key">
 <$let style={{{ [<key>is[tiddler]get[belongs.to]get[color]else[#ffe96b]addprefix[background:]addsuffix[;color:#444;margin-right:5px;]] }}}>
 <$button actions=<<add-backlink-actions>> class="tc-btn-invisible tc-tag-label" style=<<style>> tag="span"><<key>></$button>
 </$let>
