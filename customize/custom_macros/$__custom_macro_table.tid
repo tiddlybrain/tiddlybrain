@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20250414192755385
+modified: 20250514014124882
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -145,15 +145,15 @@ type: text/vnd.tiddlywiki
 \end
 
 \define tables(cfilter, rfilter:"[tag<currentTiddler>]", title:"tables", first-col, checkbox, parent)
-<$vars f2={{$:/state/select/$(currentTiddler)$/table/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/table/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/table/$title$/3}}>
+<$vars f2={{$:/state/select/$(currentTiddler)$/table/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/table/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/table/$title$/3}}><$set name="list" filter=<<filter-build "$rfilter$ +[!has[draft.of]]">>>
 <div class="filter-options">
-<$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<filter-build "$rfilter$ +[!has[draft.of]]">>>(<$count filter=<<filter-build "$rfilter$ +[!has[draft.of]]">>/>)</$button>
-filter <$transclude $variable="list-filters" title="table/$title$" filter=<<filter-build "$rfilter$ +[!has[draft.of]]">> cfilter=<<__cfilter__>>/>
+<$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<list>>>(<$count filter=<<list>>/>)</$button>
+filter <$transclude $variable="list-filters" title="table/$title$" filter=<<list>> cfilter=<<__cfilter__>>/>
 </div>
 <div style="margin-top:1em;">
-<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<filter-build "$rfilter$ +[!has[draft.of]]">> title=<<__title__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>> parent=<<__parent__>>/>
+<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter=<<list>> title=<<__title__>> first-col=<<__first-col__>> checkbox=<<__checkbox__>> parent=<<__parent__>>/>
 </div>
-</$vars>
+</$set></$vars>
 \end
 
 # ''显示单元格内容, 环境变量: `current` - data Tiddler, `key` - data index, `value` - data value''
