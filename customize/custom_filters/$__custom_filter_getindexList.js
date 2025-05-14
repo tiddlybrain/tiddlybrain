@@ -35,7 +35,7 @@ var getResult = function(data,options,currTiddlerTitle) {
 			variables: {
 				currentTiddler: currTiddlerTitle
 			}
-		});
+		}).trim();
 	}
 }
 
