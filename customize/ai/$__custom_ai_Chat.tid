@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250406171431600
+modified: 20250517120257861
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 \define completion-get-json()
 <$let ai-request=`$(ai-request)$` ai-response=`$(ai-response)$` ai-history=`$(ai-history)$`>
 <$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="NONE" emptyMessage="""<$set name="message" filter="[<data>jsonget[error],[message]]" emptyValue="check your network" select="0"><$action-setfield $tiddler=<<ai-response>> text={{{ [<error>] [<message>] +[join[, ]] }}}/></$set>""">
-<$set name="message" filter="[<data>jsonget[output],[0],[content],[0],[text]]" select="0">
+<$set name="message" filter="[<data>jsonget[output],[-1],[content],[0],[text]]" select="0">
 <$action-setfield $tiddler=<<ai-response>> text=<<message>> type="text/x-markdown"/>
 <$let timestamp=<<now "0hh:0mm:0ss">>>
 <$action-createtiddler $basetitle=<<ai-history>> type="application/json" caption=<<timestamp>> note="text/vnd.tiddlywiki">
