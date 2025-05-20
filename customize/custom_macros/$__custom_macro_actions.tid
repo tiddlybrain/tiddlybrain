@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20250504180536783
+modified: 20250520140555028
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -111,7 +111,7 @@ type: text/vnd.tiddlywiki
 
 \define droppable-add-empty-indexes(indexes)
 <$list filter="[<actionTiddler>type[application/x-tiddler-dictionary]]"><$list filter="[<__indexes__>enlist-input[]]" variable="index">
-<$list filter="[all[current]!has:index<index>]"><$action-setfield $index=<<index>> $value="" $timestamp="no"/></$list>
+<$list filter="[all[current]!has:index<index>]"><$action-setfield $index=<<index>> $value=""/></$list>
 </$list></$list>
 \end
 
@@ -136,9 +136,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!tag[Task]]">
 <$let today=<<now YYYY0MM0DD>> last-day={{{ [all[current]get[date]] }}}>
 <$list filter="[<last-day>!is[blank]!match<today>]" variable="NONE">
-<$action-setfield $field="last-date" $value=<<last-day>> $timestamp="no"/>
+<$action-setfield $field="last-date" $value=<<last-day>>/>
 </$list>
-<$action-setfield $field="date" $value=<<today>> $timestamp="no"/>
+<$action-setfield $field="date" $value=<<today>>/>
 </$let>
 <$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
 <$let keywords={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}>

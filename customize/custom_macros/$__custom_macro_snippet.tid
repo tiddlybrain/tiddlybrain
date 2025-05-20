@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20250520002446778
+modified: 20250520140247281
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 <$action-createtiddler $basetitle=<<unusedtitle $(template)$>> $template=<<actionTiddler>> date=<<now YYYY0MM0DD>> belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>> status="clone">
 <$action-listops $tiddler=<<createTiddler-title>> $field="tags" $subfilter="Snippet $tags$"/>
 <$list filter="[<__celltpl__>is[tiddler]]"><$set name="actionTiddler" value=<<createTiddler-title>>>
-<$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>> $timestamp="no"/>
+<$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>>/>
 <$list filter="[<__celltpl__>get[required]]"><$transclude $variable="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
 </$set></$list>
 <$action-navigate $to=<<createTiddler-title>> $scroll="no"/><$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
@@ -24,10 +24,10 @@ type: text/vnd.tiddlywiki
 <$set name="parents" filter="[<currentTiddler>getAllParents[]]"><$vars template={{{ [<actionTiddler>split[ ]first[]] }}} caption={{{ [<actionTiddler>get[caption]] }}}>
 <$let keywords={{{ [<currentTiddler>getAllParentTitles[]] [<actionTiddler>getAllTitles[]] [<actionTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}>
 <$list filter="[<modifier>!match[ctrl]!match[alt]]" emptyMessage=<<snippet-drop-ctrl-actions "$tags$" "$celltpl$">> variable="NONE">
-<$action-setfield $tiddler=<<actionTiddler>> $timestamp="no" belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>>/>
-<$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="Snippet $tags$" $timestamp="no"/>
+<$action-setfield $tiddler=<<actionTiddler>> belongs.to=<<currentTiddler>> note=<<key>> keywords=<<keywords>> parents=<<parents>>/>
+<$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="Snippet $tags$"/>
 <$list filter="[<__celltpl__>is[tiddler]]">
-<$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>> $timestamp="no"/>
+<$action-setfield $tiddler=<<actionTiddler>> celltpl=<<__celltpl__>>/>
 <$list filter="[<__celltpl__>get[required]]"><$transclude $variable="droppable-add-empty-indexes" indexes=<<currentTiddler>>/></$list>
 </$list>
 <%if [<modal>!match[yes]] %><$macrocall $name="tiddler-close" tiddler=<<actionTiddler>>/><%endif%>
@@ -114,7 +114,7 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter='[su
 <$list filter="[belongs.to<current>tag[Snippet]note<key>!celltpl<__celltpl__>limit[1]]">
 <$button>Set template for all snippets!
 <$list filter="[belongs.to<current>tag[Snippet]note<key>]">
-<$action-setfield celltpl=<<__celltpl__>> $timestamp="no"/>
+<$action-setfield celltpl=<<__celltpl__>>/>
 <$set name="actionTiddler" value=<<currentTiddler>>><$list filter="[<__celltpl__>get[required]]">
 <$transclude $variable="droppable-add-empty-indexes" indexes=<<currentTiddler>>/>
 </$list></$set>
@@ -126,7 +126,7 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter='[su
 <$list filter="[belongs.to<current>tag[Snippet]note<key>!tagged<__tags__>limit[1]]">
 <$button>Add tags to all snippets!
 <$list filter="[belongs.to<current>tag[Snippet]note<key>]">
-<$action-listops $field="tags" $subfilter="$tags$" $timestamp="no"/>
+<$action-listops $field="tags" $subfilter="$tags$"/>
 </$list>
 </$button>
 </$list>

@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20250514014124882
+modified: 20250520135939433
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -140,7 +140,7 @@ type: text/vnd.tiddlywiki
 
 \define fill-empty-cell(content, button:"Fill the cell", class, style, description)
 <$list filter="[<current>has[celltpl]]"><$list filter="[<value>is[blank]]" emptyMessage=<<cell-value-normal description:"$description$">> variable="NONE">
-<$button class="$class$" style="$style$"><<__button__>><$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<__content__>> $timestamp="no"/></$button>
+<$button class="$class$" style="$style$"><<__button__>><$action-setfield $tiddler=<<current>> $index=<<key>> $value=<<__content__>>/></$button>
 </$list></$list>
 \end
 
