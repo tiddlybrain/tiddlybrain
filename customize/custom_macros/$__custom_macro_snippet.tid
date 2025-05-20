@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20250516141107417
+modified: 20250520002446778
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -46,10 +46,18 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
+\define new-snippet-button(cfilter, celltpl)
+<$button class="tc-btn-invisible">No Snippets
+<$action-sendmessage $message="tm-new-tiddler" $param={{$:/language/DefaultNewTiddlerTitle}} belongs.to=<<currentTiddler>> note=<<key>> tags="Snippet" caption={{!!caption}} type={{{ [<__cfilter__>is[blank]then[text/vnd.tiddlywiki]else[application/x-tiddler-dictionary]] }}} text={{{ [<__celltpl__>is[tiddler]get[text]] }}} date=<<now 'YYYY0MM0DD'>>/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
+<%if [<modal>match[yes]] %><$action-sendmessage $message="tm-close-tiddler"/><%endif%>
+</$button>
+\end
+
 \define snippet-limit-state() $:/state/snippet-limit/$(current)$/$(key)$
 \define snippet-accordion-state() $:/state/snippet-accordion/$(current)$/$(key)$/$(currentTiddler)$
 
-\define snippet-content(date, sort, limit, caption, cfilter, empty-message:"yes", has-filter, checkbox, parent-tag:"div", tag:"div")
+\define snippet-content(date, sort, limit, caption, cfilter, has-filter, checkbox, parent-tag:"div", tag:"div")
 <$list filter="[<snippet-qty>compare:number:gt<__limit__>] :else[prefix<f>limit[1]] :else[<__has-filter__>match[yes]]" variable="NONE"><div class="filter-options" style="margin:3px 0;">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter='[subfilter<snippet-list>$sort$]'>
 <$list filter="[all[tiddlers]prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]text[open]limit[1]]" emptyMessage="<$list filter='[belongs.to<current>tag[Snippet]note<key>]'><$action-setfield $tiddler=<<snippet-accordion-state>> text='open'/></$list>"><$action-deletetiddler $filter="[all[tiddlers]prefix[$:/state/snippet-accordion/$(current)$/$(key)$/]]"/></$list>
@@ -59,13 +67,7 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter='[su
 </div></$list>
 <$list filter="[<__cfilter__>is[blank]]" emptyMessage="""<$transclude $variable="table" cfilter=<<__cfilter__>> rfilter='[subfilter<snippet-list>$sort$limit<limit>]' checkbox=<<__checkbox__>>/>""" variable="NONE">
 <$parent-tag$ class={{{ [<single-column>match[yes]then[single-column]] :else[<snippet-qty>compare:number:lt[6]then[single-column]] :else[<modal>match[yes]then[multi-column]] :else[{$:/state/sidebar}match[no]then[multi-column]] }}}>
-<$list filter='[subfilter<snippet-list>$sort$limit<limit>]' emptyMessage="""<$list filter="[<__empty-message__>match[yes]]" variable="NONE">
-<$button class="tc-btn-invisible">No Snippets
-<$action-sendmessage $message="tm-new-tiddler" $param={{$:/language/DefaultNewTiddlerTitle}} belongs.to=<<currentTiddler>> note=<<key>> tags="Snippet" caption={{!!caption}} type="text/vnd.tiddlywiki" date=<<now 'YYYY0MM0DD'>>/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
-<%if [<modal>match[yes]] %><$action-sendmessage $message="tm-close-tiddler"/><%endif%>
-</$button>
-</$list>"""><$set name="class" filter="[<snippet-accordion-state>is[missing]]" value="snippet" emptyValue="snippet col-span"><$tag$ class=<<class>>>
+<$list filter='[subfilter<snippet-list>$sort$limit<limit>]'><$set name="class" filter="[<snippet-accordion-state>is[missing]]" value="snippet" emptyValue="snippet col-span"><$tag$ class=<<class>>>
 <$set name="style" filter="[<tv-story-list>contains<currentTiddler>]" value="fill:#efc83d;" emptyValue={{{ [all[current]get[color]addprefix[fill:]addsuffix[;]] }}}>
 <$button actions=<<snippet-accordion-actions>> class="tc-btn-invisible links accordion" style=<<style>>>
 <$list filter="[<snippet-accordion-state>is[missing]]" emptyMessage="{{$:/core/images/down-arrow}}">{{$:/core/images/right-arrow}}</$list>
@@ -103,7 +105,7 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter='[su
 </div></$list>
 \end
 
-\define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, actions, tags, empty-message, cat-prefix, cat-filter, tag-caption, has-filter, celltpl, checkbox, parent-tag, tag)
+\define snippet(key, date:"no", sort:"sortan[caption]", limit:"8", caption, cfilter, actions, tags, empty-message:"yes", cat-prefix, cat-filter, tag-caption, has-filter, celltpl, checkbox, parent-tag, tag)
 <$tiddler tiddler={{{ [all[current]get[draft.of]else<currentTiddler>] }}}>
 <$vars key={{{ [[$key$]!is[blank]else<key>!is[blank]else{!!note}] }}} current=<<currentTiddler>>>
 <$droppable actions=<<snippet-drop-actions """$actions$""" """$tags$""" "$celltpl$">> tag="div" class="snippet-container">
@@ -132,11 +134,13 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter='[su
 <$list filter="[<__cat-filter__>is[blank]]" emptyMessage="""<$transclude $variable="sort-by-filter" item-filter="belongs.to<current>tag[Snippet]note<key>" sort="$sort$" cfilter="$cfilter$" cat-prefix="$cat-prefix$" cat-filter="$cat-filter$" tag-caption="$tag-caption$"/>""" variable="NONE">
 <$set name="f" filter="[[$:/state/select/]addsuffix<currentTiddler>addsuffix[/snippet/]addsuffix<key>]" select="0">
 <$vars f2={{{ [<f>addsuffix[/1]get[text]] }}} f3={{{ [<f>addsuffix[/2]get[text]] }}} f4={{{ [<f>addsuffix[/3]get[text]] }}}>
-<$set name="snippet-list" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]">>><$set name="snippet-qty" filter='[subfilter<snippet-list>$sort$count[]]' select="0">
-<$set name="limit" filter="[<snippet-limit-state>get[text]]" emptyValue=<<__limit__>> select="0">
-<$transclude $variable="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> empty-message=<<__empty-message__>> has-filter=<<__has-filter__>> checkbox=<<__checkbox__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>>/>
+<$set name="snippet-list" filter=<<filter-build "[belongs.to<currentTiddler>tag[Snippet]note<key>!has[draft.of]]">>>
+<$list filter="[subfilter<snippet-list>limit[1]]" emptyMessage="<%if [<__empty-message__>match[yes]] %><<new-snippet-button '$cfilter$' '$celltpl$'>><%endif%>" variable="NONE">
+<$let snippet-qty={{{ [subfilter<snippet-list>$sort$count[]] }}} limit={{{ [<snippet-limit-state>get[text]else[$limit$]] }}}>
+<$transclude $variable="snippet-content" date=<<__date__>> sort=<<__sort__>> limit=<<__limit__>> caption=<<__caption__>> cfilter=<<__cfilter__>> has-filter=<<__has-filter__>> checkbox=<<__checkbox__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>>/>
+</$let>
+</$list>
 </$set>
-</$set></$set>
 </$vars>
 </$set>
 </$list>
@@ -162,7 +166,6 @@ filter <$transclude $variable="list-filters" title="snippet/$(key)$" filter='[su
   limit:"一次最多列出的 Snippets 的数量"
   caption:"自定义显示条目的内容"
   cfilter:"如果填写自动切换到 Table 模式"
-  empty-message:"没有 snippets 情况下, 是否显示 No Snippets"
   has-filter:"是否显示 filter"
   checkbox:"table 模式下是否显示复选框"
   parent-tag:"snippet 元素的父级 HTML tag"
