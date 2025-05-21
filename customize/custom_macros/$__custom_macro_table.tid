@@ -1,6 +1,6 @@
 created: 20191013140545554
 creator: yuzijie
-modified: 20250520135939433
+modified: 20250521213145430
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/table
@@ -77,7 +77,7 @@ type: text/vnd.tiddlywiki
 <$droppable actions=<<table-row-add-tag-actions>> tag="div"><div class="table-links tc-droppable-placeholder" style="display:block;">
 <$list filter="[<__checkbox__>match[yes]]" variable="NONE"><$checkbox tiddler=<<table-row-selection>> listField="list" checked=<<currentTiddler>>/></$list>
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink">{{!!title}}</$button>
-<$list filter="[all[current]has[status]]">@@color:brown;[{{!!status}}]@@</$list>
+<$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
 <$list filter="[all[current]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[<__parent__>match[yes]]" variable="NONE">
 <$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>

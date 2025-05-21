@@ -1,4 +1,4 @@
-modified: 20231227005608492
+modified: 20250521212520654
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/TagTemplate
@@ -17,7 +17,11 @@ type: text/vnd.tiddlywiki
 	/>
 	<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes" class="tc-drop-down">
 		<$set name="tv-show-missing-links" value="yes">
-			<div style="margin-right:100px;"><$transclude tiddler="$:/core/ui/ListItemTemplate"/></div>
+			<div class="tc-menu-list-item" style="margin-right:100px;">
+				<$button dragTiddler={{!!title}} style="font-weight:500;" class="tc-btn-invisible list-item-template" actions=<<modal-actions>>>
+					<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
+				</$button>
+			</div>
 			<$button class="tc-btn-invisible copy" message="tm-copy-to-clipboard" param={{!!title}}>copy</$button>
 			<$button class="tc-btn-invisible remove" message="tm-remove-tag" param={{!!title}}>remove</$button>
 		</$set>
