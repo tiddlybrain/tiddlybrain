@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250516140404215
+modified: 20250521160616395
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -193,6 +193,7 @@ nav.tc-menubar .tc-sidebar-tab-open {max-height: 32vh; overflow: auto;}
 nav.tc-menubar .tc-drop-down .tc-table-of-contents button.unlink:hover {color: #aaa; background: transparent; cursor: default;}
 nav.tc-menubar .tc-drop-down, nav.tc-menubar .tc-block-dropdown {min-width: 390px;}
 nav.tc-menubar li.tc-menubar-item .tc-block-dropdown svg {fill: #aaa;}
+.tc-menubar input[type=search] {border-radius: 1em; padding: 0 5px;}
 @media (min-width: 950px) {.menubar-search-input {width: 330px;}}
 @media (max-width: 950px) {.menubar-search-input {width: 35vw;}}
 @media (max-width: 600px) {.menubar-search-input {width: 30vw;}}
