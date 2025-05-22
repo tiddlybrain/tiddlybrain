@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20250521160212665
+modified: 20250522125605901
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -39,7 +39,7 @@ type: text/vnd.tiddlywiki
 
 \whitespace trim
 <$vars searchTiddler="$:/temp/menubarsearch/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
-<span style="margin: 0 0.5em;" class="menubarsearch">
+<span style="margin: 0 0.55em;" class="menubarsearch">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <form class="tc-form-inline"><$let current={{$:/HistoryList!!current-tiddler}} caption={{{ [<current>get[caption]else<current>] }}}>
