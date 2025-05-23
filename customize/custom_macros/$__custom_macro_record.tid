@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20250521213247648
+modified: 20250523123427150
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -33,9 +33,9 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-\define records(filter:"[tag<currentTiddler>]", title:"records", sort:"sortan[caption]", parent)
-<$vars f2={{$:/state/select/$(currentTiddler)$/record/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/record/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/record/$title$/3}}><$set name="list" filter=<<filter-build "$filter$ +[!has[draft.of]]" "+[$sort$]">>>
-<div class="filter-options">
+\define records(filter:"[tag<currentTiddler>]", title:"records", parent)
+<$vars f2={{$:/state/select/$(currentTiddler)$/record/$title$/1}} f3={{$:/state/select/$(currentTiddler)$/record/$title$/2}} f4={{$:/state/select/$(currentTiddler)$/record/$title$/3}}><$set name="list" filter=<<filter-build "$filter$ +[!has[draft.of]]">>>
+<div class="filter-options" style="margin-top:3px;">
 <$button style="font-size:small;" class="tc-btn-invisible" dragFilter=<<list>>>(<$count filter=<<list>>/>)</$button>
 filter <$transclude $variable="list-filters" title="record/$title$" filter=<<list>>/>
 </div>
@@ -53,5 +53,4 @@ filter <$transclude $variable="list-filters" title="record/$title$" filter=<<lis
 #> `<<records
   filter:"列表筛选规则"
   title:"list-filters 的 title"
-  sort:"结果排序"
   parent:"是否显示父级 Tiddler">>`
