@@ -1,4 +1,4 @@
-modified: 20250521205646396
+modified: 20250522223520026
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -18,8 +18,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[<searchTiddler>get[text]trim[]!is[blank]]" variable="search">
 <$list filter="[all[current]search:caption,keywords,text,description:literal<search>]">@@color:#ffbda3;Exact@@</$list>
 </$list>
-<$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
-</$let>
 <div class="sidebar-item-hover">
 <$button class="tc-btn-invisible search-dropdown-button">{{$:/core/images/advanced-search-button}}
 <$action-setfield $tiddler="$:/temp/index/filter" text=<<currentTiddler>>/><<searchbar-focus-action>>
@@ -27,4 +25,6 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/state/search/currentTab" text="$:/custom/search/RelatedSearchResultList"/>
 </$button>
 </div>
+<$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
+</$let>
 </$button></div>

@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250521160616395
+modified: 20250523001505223
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -238,7 +238,7 @@ table.data-table .data-splitter {text-align: center; font-weight: bold; backgrou
 
 /* For Macro: index-tree */
 .index-tree {margin-bottom: -7px;}
-.index-tree button {padding: 0; margin: 0; background: none; border: none; color: #999; fill: #999;}
+.index-tree button {padding: 0; margin: 0; background: none; border: none; color: #666; fill: #999;}
 .index-tree-tab {display: inline-block; font-size: 11px; border: 1px solid #ccc; border-radius: 1em; margin: 3px 0 5px 0; padding: 0 8px 1px 8px; background: #efefef;}
 .tc-sidebar-lists .index-tree-view {color: #333;}
 .tc-sidebar-lists .index-tree-view p {margin: 16px 0;}
