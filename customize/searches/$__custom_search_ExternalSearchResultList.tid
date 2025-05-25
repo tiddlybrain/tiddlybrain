@@ -1,13 +1,13 @@
 caption: External
 created: 20220812175101904
 creator: yuzijie
-modified: 20250315111605346
+modified: 20250525194027200
 modifier: yuzijie
 tags: $:/tags/SearchResults customized
 title: $:/custom/search/ExternalSearchResultList
 type: text/vnd.tiddlywiki
 
-<$reveal default=<<link-dropdown>> type="match" text="yes" tag="div" style="font-size:small;margin:0 -14px;">
+<$reveal default=<<link-dropdown>> type="match" text="yes" tag="div">
 
 <$transclude $variable="tabs" tabsList="[all[tiddlers]tag[AI]!has[draft.of]sort[order]]" default={{{ [all[tiddlers]tag[AI]!has[draft.of]sort[order]first[]] }}} state="$:/state/ai/session" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
 
