@@ -1,4 +1,4 @@
-modified: 20250514210032914
+modified: 20250526125010437
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditorToolbar/link-dropdown
@@ -91,7 +91,7 @@ type: text/vnd.tiddlywiki
 </$linkcatcher>
 </$reveal>
 
-<$reveal tag="div" state=<<storeTitle>> type="match" text=""><$list filter="[<targetTiddler>is[tiddler]]">
+<$reveal tag="div" state=<<storeTitle>> type="match" text="" class="tc-search-results"><$list filter="[<targetTiddler>is[tiddler]]">
 <$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
 <$vars search={{{ [<targetTiddler>get[draft.of]else<targetTiddler>] }}} link-dropdown="yes">
 

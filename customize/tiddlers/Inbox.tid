@@ -2,7 +2,7 @@ created: 20240312140902299
 creator: yuzijie
 keywords: 
 list-before: Index
-modified: 20250402214555027
+modified: 20250526095542620
 modifier: yuzijie
 tags: customized $:/tags/SideBar Ignore
 title: Inbox
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 </li></$list></ul>
 \end
 
-<div style="line-height:28px;">
+<div style="color:#333;line-height:28px;">
 <$list filter="[all[tiddlers]tag[Inbox]!sort[order]]"><$transclude $variable="l" title={{!!title}} mode="cl" description="yes"/></$list>
 <ul style="list-style:none;padding:0;margin:5px 0;">
 <$set name="items" filter="[all[tiddlers]tag[Tasks/Journal]has[tbc]days:date[90]days:date[-1]]">
