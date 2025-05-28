@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250523001505223
+modified: 20250526181428781
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -314,7 +314,7 @@ button.collapse-close {background: #f4f4f4; font-weight: normal;}
 .collapse-content > section {margin: 1em;}
 .collapse-content > iframe {margin-bottom: 0.5em;}
 h1 + .collapse-content, h2 + .collapse-content, h3 + .collapse-content, h4 + .collapse-content {border: none; width: 100%; box-shadow: none; padding: 0;}
-.collapse-content > table.data-table {margin: 0; border-bottom: 1px solid #ccc;}
+.collapse-content > table.data-table {margin: 0;}
 .collapse-content > table.data-table > tr:last-child > th, .collapse-content > table.data-table > tr:last-child > td {border-bottom: none;}
 .collapse-content > pre {border: none; margin: 0;}
 .collapse-content iframe {width: 100%; height: 80vh;}
