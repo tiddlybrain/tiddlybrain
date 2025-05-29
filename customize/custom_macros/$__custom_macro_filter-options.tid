@@ -1,6 +1,6 @@
 created: 20220906205100237
 creator: yuzijie
-modified: 20241208102532712
+modified: 20250529115621429
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/filter-options
@@ -67,7 +67,7 @@ Index: <$list filter="[<index>is[tiddler]]" emptyMessage=<<index>>><$let tv-wiki
 <$action-deletetiddler $filter="[<select-value>]"/><<select-value-content>> &#10005;
 </$button>""" variable="NONE">
 <$select tiddler=<<select-value>> tooltip="Pickup a value"><option value="*">Has Value</option><option value="#">No Value</option>
-<$set name="results" filter="$filter$ +[getindexList<index>each:value[]!is[blank]]">
+<$set name="results" filter="$filter$ +[getindexList<index>each:value[]!is[blank]sortan[]]">
 <$list filter="[<results>enlist-input[]!has[belongs.to]]">
 <$set name="value" filter="[all[current]has[caption]]" value={{!!caption}} emptyValue={{!!title}}><option value=<<value>>><<value>></option></$set>
 </$list>

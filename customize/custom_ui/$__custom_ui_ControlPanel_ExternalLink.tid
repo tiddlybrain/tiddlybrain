@@ -1,7 +1,7 @@
 caption: External Link Manager
 created: 20240629132223346
 creator: yuzijie
-modified: 20250406092503546
+modified: 20250529122012232
 modifier: yuzijie
 order: 4
 tags: customized $:/custom/ui/ControlPanel/TiddlyBrain
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
   type="text/vnd.tiddlywiki"
   tags="customized"
   caption="New Search Title"
-  text="""<a href=`https://www.example.com/search?q=$(search)$` target="_blank" rel="noopener noreferrer" style="display:block;margin-bottom:5px;">{{!!caption}}</a>"""
+  text="""<a href=`https://www.example.com/search?q=$(search)$` target="_blank" rel="noopener noreferrer" style=<<style>>><<caption>></a>"""
 />
 </$set>
 \end
