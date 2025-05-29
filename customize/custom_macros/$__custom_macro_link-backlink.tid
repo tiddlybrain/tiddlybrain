@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250529122744862
+modified: 20250529131320472
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -64,6 +64,9 @@ type: text/vnd.tiddlywiki
 \define bl-empty(tiddler)
 <$list filter="[[$tiddler$]is[tiddler]]" emptyMessage="No Backlinks">
 <$button actions=<<modal-actions>> class="tc-btn-invisible tc-tiddlylink">No Backlinks</$button>
+</$list>
+<$list filter="[prefix<f>limit[1]]" variable="NONE">
+<$button class="tc-btn-invisible" style="color:red;" actions="<$action-deletetiddler $filter='[prefix<f>] [prefix[$:/temp/select/]]'/>">Remove Filters!</$button>
 </$list>
 \end
 

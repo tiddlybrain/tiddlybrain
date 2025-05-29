@@ -1,7 +1,7 @@
 created: 20211127060449171
 creator: yuzijie
 keywords: snippets
-modified: 20250521213230332
+modified: 20250529130636262
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/snippet
@@ -52,6 +52,9 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Editor"/><$action-deletetiddler $tiddler="$:/temp/Draft"/>
 <%if [<modal>match[yes]] %><$action-sendmessage $message="tm-close-tiddler"/><%endif%>
 </$button>
+<$list filter="[prefix<f>limit[1]]" variable="NONE">
+<$button class="tc-btn-invisible" style="color:red;" actions="<$action-deletetiddler $filter='[prefix<f>] [prefix[$:/temp/select/]]'/>">Remove Filters!</$button>
+</$list>
 \end
 
 \define snippet-limit-state() $:/state/snippet-limit/$(current)$/$(key)$
