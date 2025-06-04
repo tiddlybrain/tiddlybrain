@@ -1,6 +1,6 @@
 created: 20220327115933435
 creator: yuzijie
-modified: 20250503223215866
+modified: 20250604070845670
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/data-table
@@ -50,7 +50,7 @@ type: text/vnd.tiddlywiki
 </tr>
 <$set name="current" value=<<currentTiddler>>>
 <$list filter="$filter$ :except[enlist{!!hide}]" variable="key" counter="rowid"><$set name="value" tiddler=<<current>> index=<<key>>>
-<$set name="folding-state" filter="[<data-table-folding-state>get[text]] :else[<current>contains:fold<key>then[fold]]" select="0">
+<$set name="folding-state" filter="[<data-table-folding-state>get[text]] :else[<current>contains:fold<key>then[fold]] :else[<current>get[celltpl]contains:fold<key>then[fold]]" select="0">
 <$set name="tr-class" filter="[<rowid>remainder[2]match[0]]" value="evenRow" emptyValue="oddRow"><tr class=<<tr-class>>>
 <$list filter="[<key>prefix[--]]" emptyMessage=<<data-key-cell>> variable="NONE"><$set name="other" filter="[[$copy$]match[yes]]" value="3" emptyValue="2">
 <$set name="colspan" filter="$columns$ [<current>get[columns]enlist-input[]] +[count[]add<other>]" select="0">

@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250517120257861
+modified: 20250601075832999
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -121,7 +121,7 @@ type: text/vnd.tiddlywiki
 <h3>History
 <$button style="font-size:small;"><$action-deletetiddler $filter="[prefix<ai-history>]"/>Clear History</$button>
 </h3>
-<$list filter="[prefix<ai-history>get[caption]unique[]sort[]]" variable="caption"><div class="history">
+<$list filter="[prefix<ai-history>get[caption]unique[]!sort[]]" variable="caption"><div class="history">
 <$set name="summary" filter="[<caption>] [prefix<ai-history>caption<caption>index:role[user]getindex[content]] +[join[ - ]]" select="0">
 <$button><$action-deletetiddler $filter="[prefix<ai-history>caption<caption>]"/>Delete</$button>
 <$button>Restore
