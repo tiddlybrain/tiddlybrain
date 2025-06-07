@@ -2,7 +2,7 @@ caption: {{$:/language/Buttons/Linkify/Caption}}
 condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]] [<targetTiddler>type[application/x-tiddler-dictionary]]
 description: {{$:/language/Buttons/Linkify/Hint}}
 icon: $:/core/images/linkify
-modified: 20241206152118163
+modified: 20250607201315347
 modifier: yuzijie
 shortcuts: ((linkify))
 tags: $:/tags/EditorToolbar customized
@@ -13,6 +13,6 @@ type: text/vnd.tiddlywiki
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix="[["
-	suffix="]]"
+	suffix="|]]"
 	trimSelection="yes"
 />
