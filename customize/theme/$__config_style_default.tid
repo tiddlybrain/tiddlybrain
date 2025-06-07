@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20250320151917585
+modified: 20250607122123493
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -30,6 +30,9 @@ button:disabled, button[disabled] {color: #ccc; cursor: not-allowed;}
 a.light-color, button.light-color {color: #666;}
 
 a.inline, button.inline {display: inline-block !important; padding: 0 !important;}
+
+a.tc-tiddlylink-external {text-decoration: none;}
+a.tc-tiddlylink-external:hover {color: rgb(0, 0, 238); text-decoration: underline;}
 
 input[type="search"] {-webkit-appearance: none;}
 
