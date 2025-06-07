@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250524114359961
+modified: 20250607123002650
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -158,6 +158,7 @@ type: text/vnd.tiddlywiki
 </$list></$list> <<status-selector>> <<verification-notice>> <<tbc-notice>>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
+<$list filter="[<mTitle>has[interval]]"><$transclude $variable=days-passed start={{!!date}}/> &middot;</$list>
 <$button class="tc-btn-invisible"><<mTitle>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<mTitle>>/></$button> &middot;
 <$list filter="[all[current]!type[text/plain]]"><$button class="tc-btn-invisible" actions=<<step-action>>>Step</$button> &middot;</$list>
 <$list filter="[all[current]type[text/plain]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>Content</$button> &middot;</$list>
