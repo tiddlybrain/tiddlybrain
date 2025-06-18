@@ -2,13 +2,13 @@ caption: Journals
 created: 20211225141402428
 creator: yuzijie
 keywords: 
-modified: 20241206224525501
+modified: 20250618085650622
 modifier: yuzijie
 order: 4
 tags: customized Tasks
 title: Tasks/Journal
 type: text/vnd.tiddlywiki
 
-<$tiddler tiddler="Tasks/Journal">
+<$tiddler tiddler="Tasks/Journal"><div style="margin-top:20px;">
 <<sort-by-tags sort:"sort[date]" sort-tags:"!sortan[title]limit[52]" cat-prefix:"BR/Journals/" cat-filter:"slash:date[YYYY]slash:date[Week0WW]" tag-caption:"<$text text={{{ [all[current]split[/]nth[3]] [tag<currentTiddler>get[date]format:date[MMM]unique[]join[, ]] [all[current]split[/]nth[4]] +[join[ ]] }}}/>">>
-</$tiddler>
+</div></$tiddler>

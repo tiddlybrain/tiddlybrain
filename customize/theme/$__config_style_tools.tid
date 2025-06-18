@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250616112710668
+modified: 20250618085436621
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -161,7 +161,7 @@ button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; text-overfl
 .parent-title {white-space: nowrap; overflow: hidden;}
 
 /* For Macro: sort-by-tags */
-.categories {display: block; margin: 1em 0 5px 0; background: #ccc; padding: 2px 10px 0; border: 1px solid #ddd; border-radius: 1.2em; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); line-height: 1.5em; position: relative; max-height: 30px; overflow: hidden; font-size: small; transition: max-height 1s ease-in-out;}
+.categories {display: block; margin: 1em 0; background: #ccc; padding: 2px 10px 0; border: 1px solid #ddd; border-radius: 1.2em; color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%); line-height: 1.5em; position: relative; max-height: 30px; overflow: hidden; font-size: small; transition: max-height 1s ease-in-out;}
 .categories:hover {max-height: 1000px;}
 .categories-clear {position: absolute; top: 2px; right: 76px;}
 .categories-update {position: absolute; top: 2px; right: 28px;}
@@ -172,6 +172,7 @@ button.sort-by-belongs-title {overflow: hidden; white-space: nowrap; text-overfl
 .categories-caption button, .categories-clear button, .categories-update button, .categories-display button {color: white; text-shadow: 0 1px 1px rgb(150 150 150 / 50%);}
 .categories-update button:disabled {color: #ddd; cursor: not-allowed;}
 .data-value .categories {margin: 2px 0;}
+.record-drop-down .categories {margin-top: 0;}
 
 /* For Macro: tree */
 .tc-tree button {color: #ccc;}
