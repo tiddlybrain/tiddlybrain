@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20250226143340628
+modified: 20250619092959877
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -54,7 +54,7 @@ type: text/vnd.tiddlywiki
 
 \define step-open(step,comments,t)
 @@font-weight:bold;color:orange;<<linkIfExists "$step$" "$comments$">>@@
-<$button class="tc-btn-invisible">@@color:orange;&#11044;@@
+<$button class="tc-btn-invisible">@@color:orange;&#11096;@@
 <$list filter="[<__t__>is[blank]]" variable="NONE" emptyMessage="<$action-setfield $tiddler=<<task-state>> text=doing/>">
 <$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
 <$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
