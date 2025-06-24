@@ -28,7 +28,7 @@ exports["make-link"] = function(event,operation) {
 			operation.replacement = title;
 		} else {
 			let caption = tiddler.fields.caption;
-			operation.replacement = `<<l "${title}" "${caption}">>`;
+			operation.replacement = caption === undefined ? `<<l "${title}">>` : `<<l "${title}" "${caption}">>`
 		}
 		operation.cutStart = operation.selStart;
 		operation.cutEnd = operation.selEnd;
