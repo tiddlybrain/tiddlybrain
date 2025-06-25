@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20250619092959877
+modified: 20250625141507890
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -67,7 +67,6 @@ type: text/vnd.tiddlywiki
 \end
 
 \define step-doing(step,comments,t)
-<$list filter="[<task-state>!has[plan]]">⚠️</$list>
 @@font-weight:bold;color:green;<<linkIfExists "$step$" "$comments$">>@@
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:green;&#10148;@@
 <$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
@@ -91,6 +90,9 @@ type: text/vnd.tiddlywiki
 \define a(step,comments,t,d)
 <$reveal default="$t$" type="nomatch" text=""><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$t$" style="color:green;"><<format-date "$t$" "YYYY-0MM-0DD -">></$button></$reveal>
 <$tiddler tiddler={{{ [all[current]get[draft.of]else<currentTiddler>] }}}><$vars currTask={{!!title}} currStep="$step$">
+<$set name="today" value={{$:/temp/plan/date}} emptyValue=<<now YYYY0MM0DD>>>
+<$list filter="[<today>format:date[YYYY-0MM-0DD]getindex<currTask>split[;;]match<currStep>limit[1]]">✅</$list>
+</$set>
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage="<<step-done '$step$' '$comments$' '$t$' '$d$'>>" variable="NONE">
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="""''<<linkIfExists "$step$" "$comments$">>''
 <$button class="tc-btn-invisible" set=<<task-state>> setTo="open"><$set name="journal-title" filter="[[$t$]format:date[YYYY-0MM-0DD]]" select="0">@@color:orange;&#11096;@@
