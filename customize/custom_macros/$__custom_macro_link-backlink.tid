@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250529131320472
+modified: 20250627104305721
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -56,9 +56,13 @@ type: text/vnd.tiddlywiki
 \define bl-limit-state(uid) $:/state/bl-limit/$(current)$/$uid$
 
 \define bl-item(note, date, caption, description, parent, mode, tag)
+<%if [<__mode__>match[inline]] %>
+<span style="border-bottom:1px solid #78bb4e;margin-right:5px;"><$transclude $variable="l" title={{!!title}} class="normal-weight" note="no"/></span>
+<%else%>
 <$set name="class" filter="[<collapse-state '$(currentTiddler)$'>is[missing]]" value="tc-menu-list-item" emptyValue="tc-menu-list-item col-span">
 <$tag$ class=<<class>>><$transclude $variable="l" title={{!!title}} text=<<__caption__>> class="bl-title l" links="yes" description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status="yes" mode=<<__mode__>> tag-list="yes"/></$tag$>
 </$set>
+<%endif%>
 \end
 
 \define bl-empty(tiddler)
@@ -124,7 +128,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
   title:"tiddler title"
   text:"alternative text"
   class:"custom class"
-  mode:"link - default, tr - transclution, cl - collapse"
+  mode:"link - default, tr - transclution, cl - collapse, s - step"
   links:"是否显示 links macro"
   style:"自定义样式"
   description:"是否显示 Description"
@@ -153,7 +157,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
   tag-caption:"tag 的 caption"
   checkbox:"table 模式下是否显示复选框"
   group-by-parents:"按照 belongs.to 分类排序"
-  mode:"l 的 mode"
+  mode:"l 的 mode + 额外的 inline 模式"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
   init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..., 默认是 0"
@@ -174,7 +178,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
   tag-caption:"tag 的 caption"
   checkbox:"table 模式下是否显示复选框"
   group-by-parents:"按照 belongs.to 分类排序"
-  mode:"l 的 mode"
+  mode:"l 的 mode + 额外的 inline 模式"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
   init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..."
@@ -195,7 +199,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
   tag-caption:"tag 的 caption"
   checkbox:"table 模式下是否显示复选框"
   group-by-parents:"按照 belongs.to 分类排序"
-  mode:"l 的 mode"
+  mode:"l 的 mode + 额外的 inline 模式"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
   init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..."
@@ -216,7 +220,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
   tag-caption:"tag 的 caption"
   checkbox:"table 模式下是否显示复选框"
   group-by-parents:"按照 belongs.to 分类排序"
-  mode:"l 的 mode"
+  mode:"l 的 mode + 额外的 inline 模式"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
   init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..."
@@ -237,7 +241,7 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
   tag-caption:"tag 的 caption"
   checkbox:"table 模式下是否显示复选框"
   group-by-parents:"按照 belongs.to 分类排序"
-  mode:"l 的 mode"
+  mode:"l 的 mode + 额外的 inline 模式"
   parent-tag:"list 模式下父级的 HTML tag"
   tag:"list 模式下子级条目的 HTML tag"
   init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..."
