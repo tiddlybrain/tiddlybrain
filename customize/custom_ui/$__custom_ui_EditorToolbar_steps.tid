@@ -4,8 +4,9 @@ created: 20220924050636047
 creator: yuzijie
 description: Steps
 icon: $:/core/images/save-button
-modified: 20241117095259976
+modified: 20250704154027958
 modifier: yuzijie
+shortcuts: ctrl-shift-S
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/steps
 type: text/vnd.tiddlywiki
@@ -14,5 +15,5 @@ type: text/vnd.tiddlywiki
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix='<<s "'
-	suffix='" "">>'
+	suffix='">>'
 />
