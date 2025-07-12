@@ -1,4 +1,4 @@
-modified: 20241013205920223
+modified: 20250712214153422
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/EditTemplate/body/editor
@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 \whitespace trim
 
-<$edit
+<$set name="wrap-state" value={{$:/config/codemirror/lineWrapping}}><$edit
 
   field="text"
   class="tc-edit-texteditor tc-edit-texteditor-body"
@@ -49,4 +49,4 @@ type: text/vnd.tiddlywiki
 	filter={{!!condition}}
 	variable="list-condition"
 ><$transclude/>
-</$list></$list></$list></$set></$edit>
+</$list></$list></$list></$set></$edit></$set>
