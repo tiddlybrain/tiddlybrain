@@ -11,10 +11,6 @@ module-type: filteroperator
 5. Branch Tiddler Constructor Filter, e.g. [slash:index[a]slash:field[b]]
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -311,5 +307,3 @@ exports.slash = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

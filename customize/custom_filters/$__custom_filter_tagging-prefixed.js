@@ -7,10 +7,6 @@ module-type: filteroperator
 Return tiddlers that either tag the current tiddler or prefixed with the current tiddler
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -30,5 +26,3 @@ exports.taggingOrPrefixed = function(source,operator,options) {
 	});
 	return results.toArray();
 };
-
-})();

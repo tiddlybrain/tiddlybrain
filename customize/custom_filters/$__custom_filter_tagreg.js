@@ -7,10 +7,6 @@ module-type: filteroperator
 Check if a tiddler has tags that match the regex pattern
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -70,5 +66,3 @@ exports.tagreg = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

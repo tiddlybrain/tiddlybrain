@@ -1,77 +1,68 @@
-modified: 20231227005450042
+modified: 20250712182533968
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/core/macros/tree
 type: text/vnd.tiddlywiki
 
-\define leaf-link(full-title,chunk,separator:"/")
-<$button to=<<__full-title__>> dragTiddler=<<__full-title__>> class="tc-btn-invisible">
-<$list filter="[[$(modal)$]match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
-<$list filter="[<tv-story-list>contains<__full-title__>]" emptyMessage="@@color:#5778d8;<$text text=<<__chunk__>>/>@@">@@color:#ec9951;<$text text=<<__chunk__>>/>@@</$list>
+\procedure leaf-link(full-title,chunk,separator:"/")
+<$button to=<<full-title>> dragTiddler=<<full-title>> class="tc-btn-invisible">
+<$list filter="[<modal>match[yes]]" variable="NONE"><$action-sendmessage $message="tm-close-tiddler"/></$list>
+<$list filter="[<tv-story-list>contains<full-title>]" emptyMessage="@@color:#5778d8;<$text text=<<chunk>>/>@@">@@color:#ec9951;<$text text=<<chunk>>/>@@</$list>
 </$button>
 \end
 
-\define leaf-node(prefix,chunk)
 \whitespace trim
+\procedure leaf-node(prefix,chunk)
 <li>
-<$list filter="[<__prefix__>addsuffix<__chunk__>is[shadow]] [<__prefix__>addsuffix<__chunk__>is[tiddler]]" variable="full-title">
-<$list filter="[<full-title>removeprefix<__prefix__>]" variable="chunk">
+<$list filter="[<prefix>addsuffix<chunk>is[shadow]] [<prefix>addsuffix<chunk>is[tiddler]]" variable="full-title">
+<$list filter="[<full-title>removeprefix<prefix>]" variable="chunk">
 <span>{{$:/core/images/list}}</span>&#32;<$transclude $variable="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
-<$tiddler tiddler=<<full-title>>>
-<$list filter="[all[current]has[note]]"><span>({{!!note}})</span></$list>
-</$tiddler>
+<$tiddler tiddler=<<full-title>>><$list filter="[all[current]has[note]]"><span>({{!!note}})</span></$list></$tiddler>
 </$list>
 </$list>
 </li>
 \end
 
-\define branch-node(prefix,chunk,separator:"/",sort:"sortan[]")
-\whitespace trim
+\procedure branch-node(prefix,chunk,separator:"/",sort:"[sortan[]]")
 <li>
-<$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<__prefix__>addsuffix<__chunk__>] }}}>
-<$set name="link-color" filter="[<__prefix__>addsuffix<__chunk__>removesuffix<__separator__>is[tiddler]]" value="" emptyValue="color:#5778d8;">
+<$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<prefix>addsuffix<chunk>] }}}>
+<$set name="link-color" filter="[<prefix>addsuffix<chunk>removesuffix<separator>is[tiddler]]" value="" emptyValue="color:#5778d8;">
 <$reveal type="nomatch" stateTitle=<<reveal-state>> text="show">
 <$button setTitle=<<reveal-state>> setTo="show" class="tc-btn-invisible" style=<<link-color>>>
-{{$:/core/images/folder}}&#32;<$text text=<<__chunk__>>/>
+{{$:/core/images/folder}}&#32;<$text text=<<chunk>>/>
 </$button>
 </$reveal>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
 <$button setTitle=<<reveal-state>> setTo="hide" class="tc-btn-invisible">
-{{$:/core/images/folder}}&#32;<$text text=<<__chunk__>>/>
+{{$:/core/images/folder}}&#32;<$text text=<<chunk>>/>
 </$button>
 </$reveal>
 &#32;
-<span>(<$count filter="[all[shadows+tiddlers]removeprefix<__prefix__>removeprefix<__chunk__>] -[<__prefix__>addsuffix<__chunk__>]"/>)</span>
+<span>(<$count filter="[all[shadows+tiddlers]removeprefix<prefix>removeprefix<chunk>] -[<prefix>addsuffix<chunk>]"/>)</span>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
-<$transclude $variable="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>> sort="$sort$"/>
+<$transclude $variable="tree-node" prefix={{{ [<prefix>addsuffix<chunk>] }}} separator=<<separator>> sort=<<sort>>/>
 </$reveal>
 </$set>
 </$set>
 </li>
 \end
 
-\define tree-node(prefix,separator:"/",sort:"sortan[]")
-\whitespace trim
+\procedure tree-node(prefix,separator:"/",sort:"[sortan[]]")
 <ol>
-<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>$sort$!suffix<__separator__>]" variable="chunk">
-<$transclude $variable="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
+<$list filter="[all[shadows+tiddlers]removeprefix<prefix>splitbefore<separator>subfilter<sort>!suffix<separator>]" variable="chunk">
+<$transclude $variable="leaf-node" prefix=<<prefix>> chunk=<<chunk>> separator=<<separator>>/>
 </$list>
-<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>$sort$suffix<__separator__>]" variable="chunk">
-<$transclude $variable="branch-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>> sort="$sort$"/>
+<$list filter="[all[shadows+tiddlers]removeprefix<prefix>splitbefore<separator>subfilter<sort>suffix<separator>]" variable="chunk">
+<$transclude $variable="branch-node" prefix=<<prefix>> chunk=<<chunk>> separator=<<separator>> sort=<<sort>>/>
 </$list>
 </ol>
 \end
 
 \define tree(prefix,separator:"/",sort:"sortan[]")
-\whitespace trim
+<$let prefixTiddler={{{ [<__prefix__>removesuffix[/]else<currentTiddler>] }}} prefix={{{ [<prefixTiddler>addsuffix<__separator__>] }}}>
 <div class="tc-tree">
-<$reveal default="$prefix$" type="nomatch" text=""><$link to={{{[[$prefix$]removesuffix[/]]}}} class="tree-root"><$text text=<<__prefix__>>/></$link></$reveal>
-<$reveal default="$prefix$" type="match" text=""><$link to={{!!title}} class="tree-root"><$text text=<<tree-prefix-builder "$separator$">>/></$link></$reveal>
-<div>
-<$set name="tree-parent" value={{!!title}}>
-<$reveal default="$prefix$" type="nomatch" text=""><$transclude $variable="tree-node" prefix=<<__prefix__>> separator=<<__separator__>> sort="$sort$"/></$reveal>
-<$reveal default="$prefix$" type="match" text=""><$transclude $variable="tree-node" prefix=<<tree-prefix-builder "$separator$">> separator=<<__separator__>> sort="$sort$"/></$reveal>
-</$set>
+<$link to=<<prefixTiddler>> class="tree-root"><$text text=<<prefix>>/></$link>
+<div><$transclude $variable="tree-node" prefix=<<prefix>> separator=<<__separator__>> sort="[$sort$]"/></div>
 </div>
-</div>
+</$let>
 \end

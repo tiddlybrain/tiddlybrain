@@ -7,10 +7,6 @@ module-type: texteditoroperation
 Text editor operation to embed an external file to a tiddler
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["embed"] = function(event,operation) {
@@ -63,5 +59,3 @@ exports["embed"] = function(event,operation) {
 	operation.newSelStart = operation.selStart;
 	operation.newSelEnd = operation.selStart + operation.replacement.length;
 };
-
-})();

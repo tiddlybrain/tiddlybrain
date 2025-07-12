@@ -7,10 +7,6 @@ module-type: filteroperator
 Get a list of recently closed tiddlers from $:/HistoryList
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -29,5 +25,3 @@ exports.recentlyClosed = function(source,operator,options) {
 	});
 	return listOfClosed;
 };
-
-})();

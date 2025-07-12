@@ -7,10 +7,6 @@ module-type: filteroperator
 Tranform input titles to another form defined by operand filters
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -37,5 +33,3 @@ exports.transform = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

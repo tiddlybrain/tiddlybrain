@@ -8,10 +8,6 @@ module-type: filteroperator
 2. Return tiddlers that have specific tiddler in its content, e.g. [[tiddlers]hasTiddler[abc]]
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -89,5 +85,3 @@ exports.hasTiddler = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

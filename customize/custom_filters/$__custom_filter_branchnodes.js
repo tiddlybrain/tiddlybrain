@@ -7,10 +7,6 @@ module-type: filteroperator
 Get all brance nodes from tiddler titles
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -30,5 +26,3 @@ exports.branchnodes = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

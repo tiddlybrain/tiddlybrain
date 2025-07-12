@@ -14,10 +14,6 @@ Find the valid parent tiddler of the current branch tiddler
 [<path>parentPath[valid]]
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -49,5 +45,3 @@ exports.parentPath = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

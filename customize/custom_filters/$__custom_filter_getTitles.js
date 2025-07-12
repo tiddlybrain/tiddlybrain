@@ -10,10 +10,6 @@ module-type: filteroperator
 4. Find all backlink titles of the current tiddler, e.g. [[tiddlers]getBacklinkTitles[]]
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -114,5 +110,3 @@ exports.getBacklinkTitles = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

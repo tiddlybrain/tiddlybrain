@@ -7,10 +7,6 @@ module-type: filteroperator
 Return the values of an index, value unparsed, e.g. [[tiddlers]getindexList[key]]
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -103,5 +99,3 @@ exports.getindexList = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

@@ -10,10 +10,6 @@ getAllParents: Find all parent snippets of the current tiddler
 getAllParentTitles: Find all parent snippets of the current tiddler, and return their captions
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -126,5 +122,3 @@ exports.getAllParentTitles = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

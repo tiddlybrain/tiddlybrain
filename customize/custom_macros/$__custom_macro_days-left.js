@@ -7,11 +7,6 @@ module-type: macro
 Calculate the days left between today and deadline.
 
 \*/
-
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -68,5 +63,3 @@ exports.run = function(begin, deadline) {
         return "@@color:red;font-weight:bold;OVERDUE@@";
     }
 };
-
-})();

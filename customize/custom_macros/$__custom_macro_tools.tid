@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250607123002650
+modified: 20250712120540970
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -97,8 +97,6 @@ type: text/vnd.tiddlywiki
 </$reveal>
 </$set>
 \end
-
-\define tree-prefix-builder(separator:"/") $(currentTiddler)$$separator$
 
 \define display(content, mode) <span class=<<__mode__>>><<__content__>></span>
 
@@ -453,9 +451,6 @@ type: text/vnd.tiddlywiki
   current-title:"是否在内容中显示当前标题的链接"
   belongs-to:"是否显示 external-links 里面的 belongs.to"
   more-text:"在 title 里面显示额外的文字">>`
-# ''用父 Tiddler 的名字组成 tree 的 prefix''
-#> `<<tree-prefix-builder
-  separator:"/">>`
 # ''使用各种模式来展示内容''
 #> `<<display
   content:"要展示的内容"

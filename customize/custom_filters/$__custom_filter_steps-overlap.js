@@ -11,10 +11,6 @@ getTypeStep: 获取步骤的类型
 finishedStepNames: 获取某天完成的 Steps 的名称
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -190,5 +186,3 @@ exports.finishedStepNames = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

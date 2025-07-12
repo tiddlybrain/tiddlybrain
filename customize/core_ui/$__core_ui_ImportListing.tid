@@ -1,4 +1,4 @@
-modified: 20250213155934810
+modified: 20250712083315362
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ImportListing
@@ -77,6 +77,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \whitespace trim
+<div class="tc-table-wrapper">
 <table class="tc-import-table">
 <tbody>
 <tr>
@@ -158,3 +159,4 @@ type: text/vnd.tiddlywiki
 </$list>
 </tbody>
 </table>
+</div>

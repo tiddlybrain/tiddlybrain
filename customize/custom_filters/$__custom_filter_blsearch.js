@@ -7,10 +7,6 @@ module-type: filteroperator
 Search all backlinks of the input tiddlers
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -74,5 +70,3 @@ exports.blsearch = function(source,operator,options) {
 		});
 	}
 };
-
-})();

@@ -7,10 +7,6 @@ module-type: filteroperator
 Calculate a new date based on date difference
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -81,5 +77,3 @@ exports.nextNotice = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

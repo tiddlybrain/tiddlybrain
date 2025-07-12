@@ -9,10 +9,6 @@ Filter input tiddlers by a list of strings instead of a single string.
 options: 1.full; 2.partial
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -37,5 +33,3 @@ exports.searchlist = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

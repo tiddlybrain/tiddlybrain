@@ -1,7 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
 list-before: $:/custom/ui/menubar/toc
-modified: 20250228104729779
+modified: 20250706221734576
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -81,7 +81,7 @@ $button$
 </$button>
 </div></$list>
 <$button class="tc-btn-invisible tc-btn-mini" style="font-variant:all-small-caps;">
-<$list filter="[all[tiddlers]prefix[$:/state/folded/]text[hide]limit[1]]" emptyMessage="<$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/>fold all">
+<$list filter="[all[tiddlers]prefix[$:/state/folded/]text[hide]limit[1]]" emptyMessage="<$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/><$action-setfield $tiddler='$:/state/sidebar' text='no'/>fold all">
 <$action-deletetiddler $filter="[all[tiddlers]prefix[$:/state/folded/]]"/>unfold all (<$count filter="[all[tiddlers]prefix[$:/state/folded/]text[hide]]"/>)
 </$list>
 </$button>

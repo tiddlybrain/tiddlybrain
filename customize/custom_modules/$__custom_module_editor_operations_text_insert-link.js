@@ -7,10 +7,6 @@ module-type: texteditoroperation
 Text editor operation to insert a link
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["insert-link"] = function(event,operation) {
@@ -31,5 +27,3 @@ exports["insert-link"] = function(event,operation) {
 	operation.newSelStart = operation.selStart;
 	operation.newSelEnd = operation.selStart + operation.replacement.length;
 };
-
-})();

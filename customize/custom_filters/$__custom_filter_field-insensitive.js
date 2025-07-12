@@ -7,10 +7,6 @@ module-type: filteroperator
 Filter operator for comparing fields for equality (case insensitive version)
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -41,5 +37,3 @@ exports.fieldInsensitive = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

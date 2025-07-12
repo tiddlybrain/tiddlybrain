@@ -7,10 +7,6 @@ module-type: filteroperator
 Filter input tiddlers in which all tags specified in the operand are tagged.
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -33,5 +29,3 @@ exports.tagged = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

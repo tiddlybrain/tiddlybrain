@@ -7,10 +7,6 @@ module-type: filteroperator
 Turn tiddler titles into Hex colors
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -42,5 +38,3 @@ exports.colorize = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

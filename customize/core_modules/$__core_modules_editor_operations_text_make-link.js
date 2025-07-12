@@ -7,10 +7,6 @@ module-type: texteditoroperation
 Text editor operation to make a link
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["make-link"] = function(event,operation) {
@@ -36,5 +32,3 @@ exports["make-link"] = function(event,operation) {
 		operation.newSelEnd = operation.selStart + operation.replacement.length;
 	}
 };
-
-})();

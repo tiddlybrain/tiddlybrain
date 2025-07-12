@@ -7,11 +7,6 @@ module-type: macro
 Calculate the number of days passed since the start date.
 
 \*/
-
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -66,5 +61,3 @@ exports.run = function(start, end) {
 	return "@@color:red;" + diff + " days@@";
     }
 };
-
-})();

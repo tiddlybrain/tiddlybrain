@@ -7,10 +7,6 @@ module-type: filteroperator
 Return all regex pattern matches of a given string
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -34,5 +30,3 @@ exports.matches = function(source,operator,options) {
 
     return results;
 };
-
-})();
