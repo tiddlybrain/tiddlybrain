@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20250625141507890
+modified: 20250716145420162
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -53,8 +53,8 @@ type: text/vnd.tiddlywiki
 \end
 
 \define step-open(step,comments,t)
-@@font-weight:bold;color:orange;<<linkIfExists "$step$" "$comments$">>@@
-<$button class="tc-btn-invisible">@@color:orange;&#11096;@@
+@@font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
+<$button class="tc-btn-invisible">@@color:brown;&#11096;@@
 <$list filter="[<__t__>is[blank]]" variable="NONE" emptyMessage="<$action-setfield $tiddler=<<task-state>> text=doing/>">
 <$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
 <$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
@@ -67,7 +67,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define step-doing(step,comments,t)
-@@font-weight:bold;color:green;<<linkIfExists "$step$" "$comments$">>@@
+@@font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:green;&#10148;@@
 <$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
 <$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
@@ -95,7 +95,7 @@ type: text/vnd.tiddlywiki
 </$set>
 <$list filter="[[$d$]!regexp<date-pattern>]" emptyMessage="<<step-done '$step$' '$comments$' '$t$' '$d$'>>" variable="NONE">
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="""''<<linkIfExists "$step$" "$comments$">>''
-<$button class="tc-btn-invisible" set=<<task-state>> setTo="open"><$set name="journal-title" filter="[[$t$]format:date[YYYY-0MM-0DD]]" select="0">@@color:orange;&#11096;@@
+<$button class="tc-btn-invisible" set=<<task-state>> setTo="open"><$set name="journal-title" filter="[[$t$]format:date[YYYY-0MM-0DD]]" select="0">@@color:#ffcb41;&#11096;@@
 <$list filter="[<journal-title>is[tiddler]!has:index<currTask>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currTask>> $value=""/></$list>
 <$let today=<<now "YYYY0MM0DD">> plan={{{ [<__t__>compare:number:gteq<today>then<__t__>else<today>] }}}><$action-setfield $tiddler=<<task-state>> date="$t$" plan=<<plan>> caption="$step$"/></$let>
 </$set></$button>""" variable="NONE">
@@ -122,7 +122,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define waiting-undone(step,comments,t,symbol,days,color:"#009dd9",type:"waiting")
-@@font-weight:bold;<<linkIfExists "$step$" "$comments$" "$color$">>@@
+@@font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">@@color:$color$;&#11096;@@
 <$action-setfield $tiddler=<<task-state>> text="$type$" date="$t$" plan="$t$" caption="$step$"/>
 </$button>""" variable="NONE">
