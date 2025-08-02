@@ -1,6 +1,6 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250627104305721
+modified: 20250802112435032
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
@@ -120,8 +120,6 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
 \define bl-sub-note(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, init, empty) <$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[system]!is[current]!is[image]!is[binary]" item-filter-2="getAllTiddlers:note[$param$]" uid=<<__param__>> sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> init=<<__init__>> empty=<<__empty__>>/>
 
 \define bl-filters(param, sort, cfilter, limit, note, description, parent, date, caption, has-filter, cat-prefix, cat-filter, tag-caption, checkbox, group-by-parents, mode, parent-tag, tag, init, empty) <$let filters=<<__param__>>><$transclude $variable="bl-filter" item-filter="all[tiddlers]!is[current]subfilter<filters>" uid="filters" sort=<<__sort__>> cfilter=<<__cfilter__>> limit=<<__limit__>> note=<<__note__>> description=<<__description__>> parent=<<__parent__>> date=<<__date__>> caption=<<__caption__>> has-filter=<<__has-filter__>> cat-prefix=<<__cat-prefix__>> cat-filter=<<__cat-filter__>> tag-caption=<<__tag-caption__>> checkbox=<<__checkbox__>> group-by-parents=<<__group-by-parents__>> mode=<<__mode__>> parent-tag=<<__parent-tag__>> tag=<<__tag__>> init=<<__init__>> empty=<<__empty__>>/></$let>
-
-\procedure el(param, search, style) <$let caption=<<search>> search-link=`$:/custom/search/ExternalLink/$(param)$`>🔍 <$transclude $tiddler=<<search-link>>/></$let>
 
 # ''一个 Tiddler 的链接, 如果该 Tiddler 有 Caption 则显示 Caption, 否则显示 Title''
 #> `<<l
@@ -246,8 +244,3 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
   tag:"list 模式下子级条目的 HTML tag"
   init:"sort-by-belongs 的标题显示所有 parents, 参数中的数字代表去掉的 parents 的个数, 0, 1, 2,..."
   empty:"当不存在 Backlinks 的时候, 指向某个 Tiddler">>`
-# ''External link, 创建一个外部搜索链接 ''
-#> `<<el
-  param:"选择一个外部搜索链接, 链接在 External Link Manager 里面配置"
-  search:"搜索内容"
-  style:"链接样式">>`

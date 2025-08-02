@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20250613134753797
+modified: 20250802112637242
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -83,6 +83,8 @@ type: text/vnd.tiddlywiki
 </$vars>
 \end
 
+\procedure el(param, search, style) <$let caption=<<search>> search-link=`$:/custom/search/ExternalLink/$(param)$`>🔍 <$transclude $tiddler=<<search-link>>/></$let>
+
 # ''在列表的结尾根据 Tiddler 的不同添加 5 种图标 (Tasks, External Links, External Files, External Dirs, Code Snippets)''
 #> `<<links>>`
 # ''用于给 Tiddlers 分类并显示相应的图标''
@@ -92,3 +94,8 @@ type: text/vnd.tiddlywiki
 #> `<<external-links
   current-title:"是否显示当前标题的链接"
   belongs-to:"是否显示 belongs.to">>`
+# ''External link, 创建一个外部搜索链接''
+#> `<<el
+  param:"选择一个外部搜索链接, 链接在 External Link Manager 里面配置"
+  search:"搜索内容"
+  style:"链接样式">>`
