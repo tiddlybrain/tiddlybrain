@@ -1,6 +1,6 @@
 created: 20240707103210561
 creator: yuzijie
-modified: 20240927091659423
+modified: 20250802124635971
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/ai
@@ -40,6 +40,25 @@ type: text/vnd.tiddlywiki
 <$list filter="[prefix<ai-history>limit[1]]">*</$list>
 \end
 
+\procedure ai(text)
+<blockquote class="tc-quote">
+
+<<text>>
+
+<cite><$button>Ask AI
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
+<$list filter="[all[tiddlers]tag[AI]get[order]]" variable="id">
+<$action-setfield $tiddler=<<ai-request>> text=<<text>> type="text/vnd.tiddlywiki"/>
+</$list>
+<%if [<modal>match[yes]] %>
+<$action-listops $tiddler="$:/StoryList" $field="list" $subfilter="[<mTitle>] +[putbefore{$:/HistoryList!!current-tiddler}]"/>
+<$transclude $variable="tiddler-close"/>
+<%endif%>
+</$button></cite>
+</blockquote>
+\end
+
 # ''将 response 内容直接以文字的形式插入编辑框''
 #> `<<insert-as-text
   response:"API 的回复所保存的 Tiddler">>`
@@ -55,3 +74,6 @@ type: text/vnd.tiddlywiki
 #> `<<chat-title
   id:"聊天窗口的 ID"
   default:"默认文字">>`
+# ''Ask AI, 点击文字后, 自动将文字显示到''
+#> `<<ai
+  text:"提示词">>`
