@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250601075832999
+modified: 20250802105533433
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -47,7 +47,7 @@ type: text/vnd.tiddlywiki
 <$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[text]] }}}/>""" tag="section" class="ai">
 <div class="tc-droppable-placeholder" style="display:block;">
 <h3>Instructions
-<$list filter="[<ai-request>get[text]]" variable="Q"><$button style="font-size:small;" actions="<$list filter='[all[tiddlers]tag[AI]get[order]]' variable='id'><$action-setfield $tiddler=<<ai-request>> text=<<Q>>/></$list>">Copy to Other Tabs</$button></$list>
+<$button style="font-size:small;" actions="<$action-deletetiddler $filter='[<ai-request>] [<ai-response>]'/>">Clear All</$button>
 </h3>
 <$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin:0;"><tbody>
@@ -112,7 +112,6 @@ type: text/vnd.tiddlywiki
 <section class="ai">
 <h3>Results
 <$list filter="[<ai-response>type[text/x-markdown]]"><$button style="font-size:small;" actions="<$action-sendmessage $message='tm-md-tiddler-to-tid' $param={{!!title}}/>">Markdown to Wikitext</$button></$list>
-<$list filter="[<ai-response>has[text]]"><$button style="font-size:small;"><$action-deletetiddler $filter="[<ai-response>]"/>Clear Results</$button></$list>
 </h3>
 <$edit-text tiddler=<<ai-response>> tag="textarea" class="edit-area tc-edit-texteditor"/>
 </section>
