@@ -2,7 +2,7 @@ created: 20181212172024243
 creator: yuzijie
 keywords: 
 list-before: AI
-modified: 20250802103028280
+modified: 20250803220451743
 modifier: yuzijie
 tags: $:/tags/SideBar customized Ignore
 title: Editor
@@ -13,7 +13,15 @@ type: text/vnd.tiddlywiki
 <$set name="draft" filter="[[$:/temp/Draft]get[draft]]" emptyValue={{$:/HistoryList!!current-tiddler}} select="0">
 <$reveal type="match" state="$:/state/editor-toolbar" text="" tag="div">
 <$droppable actions="""<$action-setfield $tiddler="$:/temp/Draft" draft=<<actionTiddler>>/>""" tag="div">
-<div class="tc-droppable-placeholder" style="display:block;"><$keyboard key="((input-accept-variant))" actions="<$tiddler tiddler=<<draft>>><<open-in-sidebar close:'no'>><$action-deletetiddler $tiddler='$:/temp/Draft'/></$tiddler>" tag="div">
+<div class="tc-droppable-placeholder" style="display:block;"><$keyboard key="((input-accept-variant))" actions="""<$list filter="[<draft>is[tiddler]]">
+<$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
+<$let keywords={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}>
+<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
+</$let>
+</$set>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Index"/>
+<$action-deletetiddler $tiddler='$:/temp/Draft'/>
+</$list>""" tag="div">
 <div style="margin-bottom:4px;">
 <$list filter="[{$:/temp/Draft!!draft}match[$:/Draft]]">
 <$button style="color:red;"><$action-deletetiddler $tiddler="$:/temp/Draft"/>Draft &#10005;</$button>

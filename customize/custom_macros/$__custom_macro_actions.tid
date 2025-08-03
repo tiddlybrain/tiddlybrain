@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20250520140555028
+modified: 20250803195737114
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -115,12 +115,11 @@ type: text/vnd.tiddlywiki
 </$list></$list>
 \end
 
-\define step-action-template() <<a "$(content)$" "$(currentTiddler)$" t:$(date)$>>
+\define step-action-template() <<a "" "$(currentTiddler)$" t:$(date)$>>
 
 \define step-action()
-<$set name="content" filter="[all[current]search:caption:literal[{{!!text}}]]" value={{!!text}} emptyValue={{!!caption}}>
 <$let date=<<now YYYY0MM0DD>>><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<step-action-template>>/></$let>
-</$set>
+<%if [<modal>match[yes]] %><$transclude $variable="tiddler-close"/><%endif%>
 \end
 
 \define core-ui-edit-actions()

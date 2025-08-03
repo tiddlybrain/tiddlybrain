@@ -1,12 +1,12 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
-modified: 20250508141453832
+modified: 20250803215233486
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/SideBar/Recent
 type: text/vnd.tiddlywiki
 
 <h2 style="color:#666;">Closed</h2>
-<$list filter="[recentlyClosed[]!is[missing]!is[system]limit[5]sortan[note]]">
+<$list filter="[recentlyClosed[]!is[missing]!is[system]limit[6]sortan[note]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 </$list>
 
 <h2 style="color:#666;">Sidebar</h2>
-<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[10]]">
+<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[6]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink"><<open-in-sidebar close:"no">>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
@@ -29,10 +29,21 @@ type: text/vnd.tiddlywiki
 </$list>
 
 <h2 style="color:#666;">Searched</h2>
-<$list filter="[enlist{$:/config/recent-search!!list}is[tiddler]!is[system]!tag[customized]limit[10]]">
+<$list filter="[enlist{$:/config/recent-search!!list}is[tiddler]!is[system]!tag[customized]limit[6]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$action-listops $tiddler="$:/config/recent-search" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$button>
+</div>
+</$list>
+
+<h2 style="color:#666;">Modified</h2>
+<$list filter="[all[tiddlers]!is[system]!has[draft.of]!sort[modified]limit[6]]">
+<div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
+<$button actions=<<modal-actions>> dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
