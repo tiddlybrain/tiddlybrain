@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20250716145420162
+modified: 20250809202408867
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -42,8 +42,8 @@ type: text/vnd.tiddlywiki
 
 \define days-button(value,days,step)
 <$button class="tc-btn-invisible" dragTiddler=<<task-state>> popup=<<date-dropdown-state "$step$">>><<__days__>></$button><<date-dropdown "$step$">>
-<$list filter="[<task-state>is[tiddler]!date[$value$]]">
-<$button class="tc-btn-invisible">Update Date<$action-setfield $tiddler=<<task-state>> text="open" date="$value$" plan="$value$" caption="$step$"/></$button>
+<$list filter="[<task-state>!date<__value__>]">
+<$button>Update Date<$action-setfield $tiddler=<<task-state>> text="open" date=<<__value__>> plan=<<__value__>>/></$button>
 </$list>
 \end
 
@@ -64,6 +64,9 @@ type: text/vnd.tiddlywiki
 <$reveal default="$t$" type="nomatch" text="">
 <$transclude $variable="days-button" value="$t$" days="""<$transclude $variable="days-left" deadline="$t$"/>""" step="$step$"/>
 </$reveal>
+<$list filter="[<task-state>!description<__comments__>]">
+<$button>Update Comments<$action-setfield $tiddler=<<task-state>> description=<<__comments__>>/></$button>
+</$list>
 \end
 
 \define step-doing(step,comments,t)
@@ -75,6 +78,9 @@ type: text/vnd.tiddlywiki
 <$reveal default="$t$" type="nomatch" text="">
 <$transclude $variable="days-button" value="$t$" days="""<$transclude $variable="days-passed" start="$t$"/>""" step="$step$"/>
 </$reveal>
+<$list filter="[<task-state>!description<__comments__>]">
+<$button>Update Comments<$action-setfield $tiddler=<<task-state>> description=<<__comments__>>/></$button>
+</$list>
 \end
 
 \define step-done(step,comments,t,d)
@@ -97,7 +103,9 @@ type: text/vnd.tiddlywiki
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="""''<<linkIfExists "$step$" "$comments$">>''
 <$button class="tc-btn-invisible" set=<<task-state>> setTo="open"><$set name="journal-title" filter="[[$t$]format:date[YYYY-0MM-0DD]]" select="0">@@color:#ffcb41;&#11096;@@
 <$list filter="[<journal-title>is[tiddler]!has:index<currTask>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currTask>> $value=""/></$list>
-<$let today=<<now "YYYY0MM0DD">> plan={{{ [<__t__>compare:number:gteq<today>then<__t__>else<today>] }}}><$action-setfield $tiddler=<<task-state>> date="$t$" plan=<<plan>> caption="$step$"/></$let>
+<$let today=<<now "YYYY0MM0DD">> plan={{{ [<__t__>compare:number:gteq<today>then<__t__>else<today>] }}}>
+<$action-setfield $tiddler=<<task-state>> date=<<__t__>> plan=<<plan>> caption=<<__step__>> description=<<__comments__>>/>
+</$let>
 </$set></$button>""" variable="NONE">
 <$reveal state=<<task-state>> type="match" text="open"><<step-open "$step$" "$comments$" "$t$">></$reveal>
 <$reveal state=<<task-state>> type="nomatch" text="open"><<step-doing "$step$" "$comments$" "$t$">></$reveal>
@@ -124,15 +132,18 @@ type: text/vnd.tiddlywiki
 \define waiting-undone(step,comments,t,symbol,days,color:"#009dd9",type:"waiting")
 @@font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
 <$list filter="[<task-state>is[tiddler]]" emptyMessage="""<$button class="tc-btn-invisible">@@color:$color$;&#11096;@@
-<$action-setfield $tiddler=<<task-state>> text="$type$" date="$t$" plan="$t$" caption="$step$"/>
+<$action-setfield $tiddler=<<task-state>> text=<<__type__>> date=<<__t__>> plan=<<__t__>> caption=<<__step__>> description=<<__comments__>>/>
 </$button>""" variable="NONE">
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:$color$;$symbol$@@
 <$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
 <$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
 </$button>
 <$button class="tc-btn-invisible" dragTiddler=<<task-state>> popup=<<date-dropdown-state "$step$">>><<__days__>></$button><<date-dropdown "$step$">>
-<$list filter="[<task-state>!date[$t$]]">
-<$button class="tc-btn-invisible">Update Date<$action-setfield $tiddler=<<task-state>> text="$type$" date="$t$" plan="$t$" caption="$step$"/></$button>
+<$list filter="[<task-state>!date<__t__>]">
+<$button>Update Date<$action-setfield $tiddler=<<task-state>> date=<<__t__>> plan=<<__t__>>/></$button>
+</$list>
+<$list filter="[<task-state>!description<__comments__>]">
+<$button>Update Comments<$action-setfield $tiddler=<<task-state>> description=<<__comments__>>/></$button>
 </$list>
 </$list>
 \end
