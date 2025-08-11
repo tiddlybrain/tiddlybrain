@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250504191617406
+modified: 20250811115541138
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -83,7 +83,9 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <td style="padding:5px;"><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
 <$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div style="white-space:nowrap;overflow:hidden;">
 <$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&#10005;</$button>
-<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>></$button>
+<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>>
+<$list filter="[<task-state>get[description]splitregexp[\s*;;\s*]is[tiddler]]"><$action-navigate/></$list>
+</$button>
 </div></$set>
 </$list></td>
 </$set></tr></$list>
