@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250811115541138
+modified: 20250814204223077
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -37,22 +37,19 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 
 <$droppable actions=<<droppable-task-list-actions>> tag="div">
 <ol style="color:#333;line-height:24px;">
-<$list filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><li style="white-space:nowrap;">
-<$list filter="[all[current]text[doing]]" emptyMessage="""
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]!pause<curDate>]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
+<$list filter="[all[current]text[doing]]" emptyMessage="""<li style="white-space:nowrap;">
+<$button to=<<task-id>> class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__</$button>
+</li>"""><$list filter="[<journal-title>getindex<task-id>split[;;]match{!!caption}]" emptyMessage="""<li style="white-space:nowrap;">
+<$button set="!!plan" setTo=<<today>>>Plan
+<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list>
+</$button>
+<$button set="!!pause" setTo=<<curDate>>>Pause</$button>
+<$button to=<<task-id>> class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
 {{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__
-</$button>""">
-<$list filter="[<journal-title>getindex<task-id>regexp{!!caption}]" emptyMessage="""
-<$button set="!!plan" setTo=<<today>>>Plan Today<$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list></$button>
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__
-</$button>""" variable="NONE">
-<$button dragTiddler=<<currentTiddler>> to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__
-</$button> @@color:green;&#10132;@@
-</$list>
-</$list>
-</li></$set></$list>
+</$button>
+</li>"""> </$list></$list>
+</$set></$list>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li style="white-space:nowrap;">
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><$list filter="[<task-id>has[status]]">
 <span class="tc-tag-label" style="background-color:#cd23d8;"><$view field="status"/></span>
@@ -77,10 +74,10 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$list filter="[<journal-title>is[tiddler]]"><table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
 <$list filter="[all[current]indexes[]tag[Task]]" variable="task"><tr><$set name="currTask" value=<<task>>>
-<td style="vertical-align:baseline;white-space:nowrap;overflow:hidden;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:7px 0;">
+<td style="vertical-align:baseline;white-space:nowrap;overflow:hidden;padding:4px 8px;"><$button to=<<task>> class="tc-btn-invisible" style="display:block;margin:7px 0;">
 @@color:#d300cc;<$transclude tiddler=<<task>> field="title"/>@@ <$transclude tiddler=<<task>> field="caption"/>
 </$button></td>
-<td style="padding:5px;"><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
+<td style="line-height:28px;padding:4px 8px;"><$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
 <$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div style="white-space:nowrap;overflow:hidden;">
 <$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&#10005;</$button>
 <$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>>
