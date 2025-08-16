@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250815213202766
+modified: 20250815222053002
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -87,7 +87,7 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 </$list></td>
 </$set></tr></$list>
 </tbody></table></$list>
-<ol style="color:#333;line-height:24px;overflow:hidden;">
+<ol style="color:#333;line-height:24px;">
 <$list filter="[all[tiddlers]tag[Task]!has[draft.of]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
 <$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
 <$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><li><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
