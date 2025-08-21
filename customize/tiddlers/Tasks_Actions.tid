@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250819050514176
+modified: 20250821152828173
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -50,21 +50,11 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 </li>"""> </$list></$list>
 </$set></$list>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li style="white-space:nowrap;">
-<$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><$list filter="[<task-id>has[status]]">
-<span class="tc-tag-label" style="background-color:#cd23d8;"><$view field="status"/></span>
-</$list></$set>
+<span class="tc-tag-label" style="background-color:#cd23d8;">Deadline</span>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button><<task-list-deadline>>
 </li></$list>
-<$list filter="[all[tiddlers]prefix[$:/task-state/]text[waiting]!pause<curDate>!sort[date]]"><li style="white-space:nowrap;">
-<$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0"><$list filter="[<task-id>has[status]]">
-<span class="tc-tag-label" style="background-color:#b366aa;"><$view field="status"/></span>
-</$list></$set>
-<$button set="!!pause" setTo=<<curDate>>>Pause</$button><<task-list-waiting>>
-</li></$list>
 <$list filter="[all[tiddlers]tag[Task]status[Urgent]]" variable="task"><$let task-state={{{ [<task>addprefix[$:/task-state/]addsuffix[/]] }}}>
-<$list filter="[prefix<task-state>!text[open]!text[doing]count[]compare:number:eq[0]]"><li>
-<span class="tc-tag-label" style="background-color:#75cbc7;">To be checked</span> <$transclude $variable="l" title=<<task>>/>
-</li></$list>
+<$list filter="[prefix<task-state>!text[open]!text[doing]count[]compare:number:eq[0]]"><li><$transclude $variable="l" title=<<task>> status=no/></li></$list>
 </$let></$list>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]contains:plan<curDate>]">
 <li style="white-space:nowrap;"><<task-list-open>></li>
