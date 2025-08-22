@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20250819043209089
+modified: 20250822230847462
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -24,11 +24,11 @@ type: text/vnd.tiddlywiki
 
 \define date-dropdown(step)
 <$reveal class="date-dropdown" type="popup" state=<<date-dropdown-state "$step$">>><div class="record-drop-down tc-popup-keep"><div class="record-content">
-<$set name="key" value=<<currentTiddler>>><$vars date-filter="[tag[Tasks/Journal]getindex<key>splitregexp[\s*;;\s*]match[$step$]]"><ol style="padding-left:20px;">
-<$list filter="[all[tiddlers]tag[Tasks/Journal]filter<date-filter>]" emptyMessage="NOT AVAILABLE">
-<li><$transclude $variable="l" title=<<currentTiddler>> description=yes/></li>
-</$list>
-</ol></$vars></$set>
+<$set name="key" value=<<currentTiddler>>><$vars date-filter="[tag[Tasks/Journal]getindex<key>splitregexp[\s*;;\s*]match[$step$]]">
+<ol style="padding-left:20px;"><$list filter="[all[tiddlers]tag[Tasks/Journal]filter<date-filter>]" emptyMessage="NOT AVAILABLE">
+<li>{{!!title}} @@color:#888;({{!!description}})@@</li>
+</$list></ol>
+</$vars></$set>
 </div></div></$reveal>
 \end
 
