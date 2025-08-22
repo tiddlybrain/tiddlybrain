@@ -4,8 +4,9 @@ created: 20230808192547808
 creator: yuzijie
 description: Today's date in YYYY-0MM-0DD format
 icon: $:/core/images/new-journal-button
-modified: 20241117095207615
+modified: 20250821154359746
 modifier: yuzijie
+shortcuts: ctrl-shift-T
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/today
 type: text/vnd.tiddlywiki

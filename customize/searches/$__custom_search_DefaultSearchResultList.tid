@@ -1,9 +1,9 @@
 caption: General
 created: 20201226091951349
 creator: yuzijie
-first-search-filter: [all[tiddlers]field:title<userInput>] [all[tiddlers]fieldInsensitive:caption<userInput>] [all[tiddlers]tagreg[^BR/]!tag[Snippet]search:caption,shortcap,keywords,description<userInput>] +[!tag[Ignore]!tag[customized]!is[system]!has[draft.of]unique[]sortan[note]]
+first-search-filter: [all[tiddlers]field:title<userInput>] [all[tiddlers]fieldInsensitive:caption<userInput>] [all[tiddlers]fieldInsensitive:shortcap<userInput>] [all[tiddlers]tagreg[^BR/]!tag[Snippet]search:caption,shortcap,keywords,description<userInput>] +[!tag[Ignore]!tag[customized]!is[system]!has[draft.of]unique[]sortan[note]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20250528185055784
+modified: 20250822070924052
 modifier: yuzijie
 second-search-filter: [all[tiddlers]!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[subfilter<note-subfilter>limit[100]sortsub<topic-level>]
 tags: $:/tags/SearchResults customized
