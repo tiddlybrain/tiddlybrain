@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250821152828173
+modified: 20250823101332685
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -69,10 +69,11 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$droppable actions="<$transclude $variable=add-to-cell-action title=<<journal-title>> index=<<task>> content=<<actionTiddler>>/>" tag="td">
 <$list filter="[all[current]getindex<task>splitregexp[\s*;;\s*]!is[blank]]" variable="currStep">
 <$set name="style" filter="[<task-state>is[tiddler]]" value="color:brown;" emptyValue="color:#444;"><div style="white-space:nowrap;overflow:hidden;margin:7px 0;">
-<$button class="tc-btn-invisible"><$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>&#10005;</$button>
-<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>>
-<$list filter="[<task-state>get[description]splitregexp[\s*;;\s*]is[tiddler]]"><$action-navigate/></$list>
+<$button class="tc-btn-invisible">&#10005;
+<$transclude $variable="remove-from-cell-action" title=<<journal-title>> index=<<task>> content=<<currStep>>/>
+<$list filter="[<task-state>is[tiddler]]"><$action-listops $tiddler=<<currentTiddler>> $field="plan" $subfilter="[<dt>]"/></$list>
 </$button>
+<$button message="tm-copy-to-clipboard" param=<<currStep>> style=<<style>> class="tc-btn-invisible"><<currStep>></$button>
 </div></$set>
 </$list>
 </$droppable>
