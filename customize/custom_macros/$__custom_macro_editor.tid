@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20250715104350551
+modified: 20250825192111587
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -15,7 +15,11 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$(modal)$]!match[yes]]" variable="NONE"><tr><td colspan="3" style="line-height:26px;"><$set name="tv-wikilinks" value="no">
 <$list filter="[[$:/temp/Draft]get[draft]]" emptyMessage="""<$button class="tc-btn-invisible" style="color:green;text-align:center;width:100%;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list><$action-navigate $to=<<currentTiddler>>/>
+<%if [all[current]has[draft.of]] %>
+<$action-setfield $tiddler="$:/state/sidebar" text="no"/>
+<%else%>
 <$button style="color:green;">close<$action-setfield $tiddler="$:/HistoryList" current-tiddler={{{ [all[current]next[$:/StoryList]] :else[all[current]previous[$:/StoryList]] }}}/><$action-sendmessage $message="tm-close-tiddler" $param=<<currentTiddler>>/></$button>
+<%endif%>
 </$button>""">
 <$button class="tc-btn-invisible" style="text-align:center;color:brown;width:100%;">
 {{!!title}}<$list filter="[all[current]has[caption]]"> - {{!!caption}}</$list> &#10005;<$action-deletetiddler $tiddler="$:/temp/Draft"/>

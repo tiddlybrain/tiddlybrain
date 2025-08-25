@@ -2,7 +2,7 @@ caption: Other Custom Toolbar Buttons
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20250823104036787
+modified: 20250825190954516
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -71,9 +71,9 @@ Description: {{!!description}}
 </$list></$set>
 <$reveal state=`$:/state/step-popup/$(currentTiddler)$` type="popup" position="below" animate="yes" tag="div"><div class="tc-drop-down tc-popup-keep">
 <div style="margin:3px 0 10px 14px;">Select Type:
-<$radio tiddler="$:/temp/step-popup/type" value="a" default="a"> A</$radio>
-<$radio tiddler="$:/temp/step-popup/type" value="w"> W</$radio>
-<$radio tiddler="$:/temp/step-popup/type" value="d"> D</$radio>
+<$radio tiddler="$:/temp/step-popup/type" value="a" default="a" actions="<$action-deletetiddler $tiddler='$:/temp/step-popup/tiddlers'/>"> A</$radio>
+<$radio tiddler="$:/temp/step-popup/type" value="w" actions="<$action-deletetiddler $tiddler='$:/temp/step-popup/tiddlers'/>"> W</$radio>
+<$radio tiddler="$:/temp/step-popup/type" value="d" actions="<$action-deletetiddler $tiddler='$:/temp/step-popup/tiddlers'/>"> D</$radio>
 </div>
 <hr>
 <$list filter="[all[current]getAllTiddlers[]sortan[note]]"><div style="margin:0 14px;">
