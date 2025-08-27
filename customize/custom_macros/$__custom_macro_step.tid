@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20250822230847462
+modified: 20250827113707256
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -32,12 +32,21 @@ type: text/vnd.tiddlywiki
 </div></div></$reveal>
 \end
 
-\define linkIfExists(text,comments,color:"inherit")
+\define linkIfExists(text,comments,color:"inherit",edit)
 <$reveal default="$comments$" type="match" text=""><$button class="tc-btn-invisible" style="color:$color$;" message="tm-copy-to-clipboard" param="$text$">$text$</$button></$reveal>
 <$reveal default="$comments$" type="nomatch" text="" style="position:relative;">
 <$button dragTiddler=<<__text__>> popup=<<qualify "$:/state/popup/$text$">> message="tm-copy-to-clipboard" param="$text$" class="tc-btn-invisible" style="text-decoration:underline;text-decoration-color:#ffcb41;text-decoration-thickness:2px;color:$color$;">$text$</$button>
 <$reveal type="popup" state=<<qualify "$:/state/popup/$text$">>>
-<span class="link-drop-down tc-popup-keep link-content"><$set name="value" value=<<__comments__>>><<cell-value-normal description:"yes">></$set></span>
+<span class="link-drop-down tc-popup-keep link-content"><$set name="value" value=<<__comments__>>>
+<%if [<__edit__>match[yes]] %><$list filter="[<value>splitregexp[\s*;;\s*]is[tiddler]]">
+<$button message="tm-edit-tiddler" class="tc-btn-invisible tc-tiddlylink">
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+</$button>
+</$list><%else%>
+<<cell-value-normal description:"yes">>
+<%endif%>
+</$set></span>
 </$reveal>
 </$reveal>
 \end
