@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250823101332685
+modified: 20250828112721872
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -38,14 +38,16 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:24px;overflow:hidden;">
 <$list filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]!pause<curDate>]"><$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$list filter="[all[current]text[doing]]" emptyMessage="""<li style="white-space:nowrap;">
-<$button to=<<task-id>> class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__</$button>
+<$button to=<<task-id>> class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
+{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
+</$button>
 </li>"""><$list filter="[<journal-title>getindex<task-id>split[;;]match{!!caption}]" emptyMessage="""<li style="white-space:nowrap;">
 <$button set="!!plan" setTo=<<today>>>Plan
 <$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$list>
 </$button>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>
-{{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__
+{{!!caption}} ''<$transclude tiddler=<<task-id>> field="caption"/>''
 </$button>
 </li>"""> </$list></$list>
 </$set></$list>
