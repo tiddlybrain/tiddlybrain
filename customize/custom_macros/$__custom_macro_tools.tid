@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250805141514094
+modified: 20250829131517165
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -64,14 +64,19 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define collapse(title, text, class, tag:"button", style, external-links, current-title, belongs-to:"no", more-text)
+\define collapse(title, text, class, tag:"button", style, external-links, current-title, belongs-to:"no", note:"yes", more-text)
 <$set name="state" value=<<collapse-state "$title$">>>
 <$reveal type="nomatch" state=<<state>> text="open" tag="div" class=<<__class__>>>
 <$button actions=<<collapse-title-actions "$title$">> dragTiddler="$title$" tag=<<__tag__>> class="tc-btn-invisible collapse-title collapse-close" tooltip=<<__title__>>>
 <$tiddler tiddler="$title$">{{$:/core/images/right-arrow}}
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-<$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
-<$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list> <<__more-text__>>
+<$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>>
+<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
+</$list>
+<%if [<__note__>match[yes]] %>
+<$list filter="[all[current]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
+<%endif%>
+<<__more-text__>>
 </$tiddler>
 </$button>
 </$reveal>
@@ -79,8 +84,13 @@ type: text/vnd.tiddlywiki
 <$button actions=<<collapse-title-actions "$title$">> dragTiddler="$title$" tag=<<__tag__>> class="tc-btn-invisible collapse-title collapse-open" tooltip=<<__title__>>>
 <$tiddler tiddler="$title$">{{$:/core/images/down-arrow}}
 <$list filter="[all[current]has[status]]">@@color:red;[{{!!status}}]@@</$list>
-<$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>><$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let></$list>
-<$list filter="[all[current]has[note]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list> <<__more-text__>>
+<$list filter="[<__text__>is[blank]]" variable="NONE" emptyMessage=<<__text__>>>
+<$let tv-wikilinks="no"><$transclude field="caption"><$view field="title"/></$transclude></$let>
+</$list>
+<%if [<__note__>match[yes]] %>
+<$list filter="[all[current]get[note]!match<key>]" variable="NONE">@@color:green;[{{!!note}}]@@</$list>
+<%endif%>
+<<__more-text__>>
 </$tiddler>
 </$button>
 <$tiddler tiddler="$title$"><$set name="sty" filter="[all[current]is[image]]" value="width:fit-content;$style$" emptyValue="$style$"><p class="collapse-content" style=<<sty>>>
@@ -450,6 +460,7 @@ type: text/vnd.tiddlywiki
   external-links:"是否显示 external-links"
   current-title:"是否在内容中显示当前标题的链接"
   belongs-to:"是否显示 external-links 里面的 belongs.to"
+  note:"是否显示 note 字段, 默认 yes"
   more-text:"在 title 里面显示额外的文字">>`
 # ''使用各种模式来展示内容''
 #> `<<display
