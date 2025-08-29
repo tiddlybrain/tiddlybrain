@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250802105533433
+modified: 20250829213143574
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -48,6 +48,9 @@ type: text/vnd.tiddlywiki
 <div class="tc-droppable-placeholder" style="display:block;">
 <h3>Instructions
 <$button style="font-size:small;" actions="<$action-deletetiddler $filter='[<ai-request>] [<ai-response>]'/>">Clear All</$button>
+<$list filter="[{$:/HistoryList!!current-tiddler}has[text]]"><$button style="font-size:small;">Content of Current Tiddler
+<$action-setfield $tiddler=<<ai-request>> text={{{ [all[current]get[text]] }}} type={{{ [all[current]get[type]] }}}/>
+</$button></$list>
 </h3>
 <$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
 <table style="width:100%;margin:0;"><tbody>
