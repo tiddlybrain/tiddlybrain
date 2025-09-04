@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20250827113800938
+modified: 20250904005203963
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -26,8 +26,13 @@ type: text/vnd.tiddlywiki
 \define task-list-open()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Change Date" message="tm-copy-to-clipboard" param={{!!caption}}>{{$:/core/images/cancel-button}}
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+<%if [list[$:/StoryList]count[]match[0]] %>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>
+<%else%>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
 <$tiddler tiddler=<<task-id>>><<modal-actions>></$tiddler>
+<%endif%>
 </$button>
 <$button set=<<currentTiddler>> setTo="doing" class="tc-btn-invisible" tooltip="Start doing it">{{$:/core/images/close-others-button}}</$button>
 <$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
@@ -44,8 +49,13 @@ type: text/vnd.tiddlywiki
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>{{$:/core/images/save-button}}
 <$list filter="[<dt>match<today>]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/></$list>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+<%if [list[$:/StoryList]count[]match[0]] %>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>
+<%else%>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
 <$tiddler tiddler=<<task-id>>><<modal-actions>></$tiddler>
+<%endif%>
 </$button>
 <$button class="tc-btn-invisible" tooltip="Done for today">
 <$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/>
@@ -67,8 +77,13 @@ type: text/vnd.tiddlywiki
 \define task-list-waiting()
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>{{$:/core/images/save-button}}
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+<%if [list[$:/StoryList]count[]match[0]] %>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>
+<%else%>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
 <$tiddler tiddler=<<task-id>>><<modal-actions>></$tiddler>
+<%endif%>
 </$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#009dd9;" message="tm-copy-to-clipboard" param={{!!caption}}>
 {{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__ <$transclude $variable="days-passed" start={{!!date}}/>
@@ -80,8 +95,13 @@ type: text/vnd.tiddlywiki
 <$set name="task-id" filter="[all[current]split[/]nth[3]]" select="0">
 <$button class="tc-btn-invisible" tooltip="Done" message="tm-copy-to-clipboard" param={{!!caption}}>{{$:/core/images/save-button}}
 <$list filter="[<dt>match<today>]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task-id>> content={{!!caption}}/></$list>
-<$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+<%if [list[$:/StoryList]count[]match[0]] %>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<task-id>>/>
+<%else%>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
 <$tiddler tiddler=<<task-id>>><<modal-actions>></$tiddler>
+<%endif%>
 </$button>
 <$button to=<<task-id>> class="tc-btn-invisible" style="white-space:nowrap;color:#cd23d8;" message="tm-copy-to-clipboard" param={{!!caption}}>
 {{!!caption}} __<$transclude tiddler=<<task-id>> field="caption"/>__ <$transclude $variable="days-left" deadline={{!!date}}/>

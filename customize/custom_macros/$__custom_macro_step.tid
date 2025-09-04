@@ -1,6 +1,6 @@
 created: 20170723171032526
 creator: yuzijie
-modified: 20250827113707256
+modified: 20250904005856543
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/step
@@ -67,9 +67,13 @@ type: text/vnd.tiddlywiki
 @@font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
 <$button class="tc-btn-invisible">@@color:brown;&#11096;@@
 <$list filter="[<__t__>is[blank]]" variable="NONE" emptyMessage="<$action-setfield $tiddler=<<task-state>> text=doing/>">
-<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
+<$action-deletetiddler $tiddler=<<task-state>>/><$action-sendmessage $message="tm-copy-to-clipboard" $param=<<__step__>>/>
+<%if [list[$:/StoryList]count[]match[0]] %>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<currTask>>/>
+<%else%>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
 <$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
-<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<__step__>>/>
+<%endif%>
 </$list>
 </$button>
 <$reveal default="$t$" type="nomatch" text="">
@@ -83,8 +87,13 @@ type: text/vnd.tiddlywiki
 \define step-doing(step,comments,t)
 @@font-weight:bold;<<linkIfExists "$step$" "$comments$">>@@
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:green;&#10148;@@
-<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
+<$action-deletetiddler $tiddler=<<task-state>>/>
+<%if [list[$:/StoryList]count[]match[0]] %>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<currTask>>/>
+<%else%>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
 <$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
+<%endif%>
 </$button>
 <$reveal default="$t$" type="nomatch" text="">
 <$transclude $variable="days-button" value="$t$" days="""<$transclude $variable="days-passed" start="$t$"/>""" step="$step$"/>
@@ -146,8 +155,13 @@ type: text/vnd.tiddlywiki
 <$action-setfield $tiddler=<<task-state>> text=<<__type__>> date=<<__t__>> plan=<<__t__>> caption=<<__step__>> description=<<__comments__>>/>
 </$button>""" variable="NONE">
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param="$step$">@@color:$color$;$symbol$@@
-<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/><$action-deletetiddler $tiddler=<<task-state>>/>
+<$action-deletetiddler $tiddler=<<task-state>>/>
+<%if [list[$:/StoryList]count[]match[0]] %>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<currTask>>/>
+<%else%>
+<$action-setfield $tiddler="$:/state/modal/editor" text="yes"/>
 <$tiddler tiddler=<<currTask>>><<modal-actions>></$tiddler>
+<%endif%>
 </$button>
 <$button class="tc-btn-invisible" dragTiddler=<<task-state>> popup=<<date-dropdown-state "$step$">>><<__days__>></$button><<date-dropdown "$step$">>
 <$list filter="[<task-state>!date<__t__>]">
