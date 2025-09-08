@@ -2,9 +2,9 @@ caption: {{$:/core/images/advanced-search-button}} ask AI
 created: 20240924170102981
 creator: yuzijie
 description: Ask AI
-modified: 20250519063435193
+modified: 20250908071910879
 modifier: yuzijie
-tags: $:/tags/ViewToolbar customized $:/tags/EditToolbar
+tags: customized $:/tags/EditToolbar
 title: $:/custom/ui/Buttons/ai-search
 type: text/vnd.tiddlywiki
 
