@@ -2,7 +2,7 @@ caption: Planner
 created: 20210112195245238
 creator: yuzijie
 keywords: 
-modified: 20250504191413372
+modified: 20250908090253626
 modifier: yuzijie
 order: 1
 tags: Tasks customized
@@ -59,4 +59,4 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$list filter="[all[tiddlers]tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
 <$list filter="[all[tiddlers]tag[Task]status[Todo]sort[modified]]"><<task-pill>></$list>
 </$details>
-<div style="margin-top:11px;"><<task-list>></div>
+<div style="margin:11px 0 3em;"><<task-list>></div>
