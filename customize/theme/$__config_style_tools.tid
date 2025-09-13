@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20250829210900937
+modified: 20250911200506374
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -322,8 +322,8 @@ h3 + .collapse-content > .external-links button {max-width: 3em; overflow: hidde
 h3 + .collapse-content h3 {padding-bottom: 0; border-bottom: none; font-size: 1em;}
 h3 + .collapse-content > section {margin: 0.5em 0; border-bottom: 1px dashed #ccc;}
 h3 + .collapse-content > table.data-table {margin: 1em 0 0.5em 0; border-bottom: 1px solid #ccc;}
-.tc-tiddler-body h3.collapse-close {margin-bottom: 1.2em;}
-.tc-tiddler-body h3.collapse-open {margin-bottom: 0;}
+.tc-tiddler-body h3.collapse-close {margin: 1.2em 0;}
+.tc-tiddler-body h3.collapse-open {margin: 1.2em 0 0 0;}
 
 /* For Macro: task-pill */
 .dot {color: #333; border-radius: 1em; display: inline-block; min-height: 0.6em; min-width: 0.6em; box-shadow: inset 0 1px 2px #a7a7a7; text-shadow: 0 1px 0 rgb(255 255 255 / 80%);}

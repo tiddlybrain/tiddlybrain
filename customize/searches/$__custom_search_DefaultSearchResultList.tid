@@ -3,7 +3,7 @@ created: 20201226091951349
 creator: yuzijie
 first-search-filter: [all[tiddlers]field:title<userInput>] [all[tiddlers]fieldInsensitive:caption<userInput>] [all[tiddlers]fieldInsensitive:shortcap<userInput>] [all[tiddlers]tagreg[^BR/]!tag[Snippet]search:caption,shortcap,keywords,description<userInput>] +[!tag[Ignore]!tag[customized]!is[system]!has[draft.of]unique[]sortan[note]]
 list-after: $:/core/ui/DefaultSearchResultList
-modified: 20250822070924052
+modified: 20250912045059898
 modifier: yuzijie
 second-search-filter: [all[tiddlers]!has[draft.of]!is[system]!tag[Ignore]!tag[customized]!fieldInsensitive:caption<userInput>search:title,tags,caption,shortcap,keywords,text,note,status,description<userInput>] +[subfilter<note-subfilter>limit[100]sortsub<topic-level>]
 tags: $:/tags/SearchResults customized
@@ -32,10 +32,10 @@ type: text/vnd.tiddlywiki
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}}><$action-navigate $to=<<currentTiddler>> $scroll="no"/></$list>
 </$button></$reveal>
 <$reveal type="match" state="$:/state/search/showParents" text="show"><small><$button class="search-tool">
-<$action-deletetiddler $tiddler="$:/state/search/showParents"/><<searchbar-focus-action>>Hide Parents Cloud
+<$action-deletetiddler $tiddler="$:/state/search/showParents"/><<searchbar-focus-action>>List View
 </$button></small></$reveal>
 <$reveal type="nomatch" state="$:/state/search/showParents" text="show"><small><$button class="search-tool">
-<$action-setfield $tiddler="$:/state/search/showParents" text="show"/><<searchbar-focus-action>>Show Parents Cloud
+<$action-setfield $tiddler="$:/state/search/showParents" text="show"/><<searchbar-focus-action>>Hierarchy View
 </$button></small></$reveal>
 <$reveal type="nomatch" state="$:/temp/note/filter" text=""><small><$button class="search-tool">
 <$action-deletetiddler $tiddler="$:/temp/note/filter"/><<searchbar-focus-action>>
