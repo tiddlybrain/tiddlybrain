@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250908073820716
+modified: 20250913124018987
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -31,13 +31,15 @@ type: text/vnd.tiddlywiki
 
 <$let api="https://api.openai.com/v1/responses" api-key={{$:/config/AIApiKey}} model={{{ [<ai-model>get[text]] }}} instructions={{{ [prefix<ai-instructions content>sort[title]get[text]join[ ]jsonstringify[]] }}} userInput={{{ [<ai-request>get[text]jsonstringify[]] }}}>
 <$set name="chatHistory" filter="[<ai-history-state>get[text]match[yes]]" value={{{ [prefix<ai-history>get[text]] +[join[,]addsuffix[,]] }}} emptyValue="">
+<$set name="webSearch" filter="[<ai-web-state>get[text]match[yes]]" value="""{"type":"web_search"}""" emptyValue="">
 <$action-setfield $tiddler=<<ai-response>> text="Waiting for response..."/>
 <$action-sendmessage $message="tm-http-request" url=<<api>> method="POST"
   oncompletion=<<completion-get-json>>
   header-Content-Type='application/json'
   header-Authorization=`Bearer $(api-key)$`
-  body=`{"model":"$(model)$","instructions":"$(instructions)$","input":[$(chatHistory)${"role":"user","content":"$(userInput)$"}]}`
+  body=`{"model":"$(model)$","tools":[$(webSearch)$],"instructions":"$(instructions)$","input":[$(chatHistory)${"role":"user","content":"$(userInput)$"}]}`
 />
+</$set>
 </$set>
 </$let>
 
@@ -97,13 +99,12 @@ type: text/vnd.tiddlywiki
 </div>
 </$droppable>
 
-<$reveal type="match" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
+<$reveal type="match" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0 1em 0;">
 <$button actions="""<$action-deletetiddler $filter="[<ai-response>]"/>""">Cancel Request</$button>
 </$reveal>
 
-<$reveal type="nomatch" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0;">
-<$list filter="[<ai-response>get[text]!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask AI</$button>
-<$checkbox tiddler=<<ai-history-state>> field='text' checked='yes' unchecked='no' default='no'> Chat History</$checkbox>">
+<$reveal type="nomatch" state=<<ai-response>> text="Waiting for response..." tag="section" class="ai center" style="margin:1.5em 0 1em 0;">
+<$list filter="[<ai-response>get[text]!is[blank]]" emptyMessage="<$button actions=<<call-api>>>Ask AI</$button>">
 <$reveal type="nomatch" state="$:/status/IsReadOnly" text="yes">
 <$list filter="[<sidebar>!match[yes]]" variable="NONE">
 <$button actions=<<insert-as-text "$(ai-response)$">>>Insert as Text</$button>
@@ -115,8 +116,11 @@ type: text/vnd.tiddlywiki
 </$reveal>
 <$button message="tm-copy-to-clipboard" param={{{ [<ai-response>get[text]] }}}>Copy to Clipboard</$button>
 <$button actions=<<call-api>> style="color:green;">Ask Again</$button>
-<$checkbox tiddler=<<ai-history-state>> field="text" checked="yes" unchecked="no" default="no"> Chat History</$checkbox>
 </$list>
+<div style="margin-top:5px;">
+<$checkbox tiddler=<<ai-history-state>> field='text' checked='yes' unchecked='no' default='no' class='checkbox'> Chat History</$checkbox> &middot;
+<$checkbox tiddler=<<ai-web-state>> field='text' checked='yes' unchecked='no' default='no' class='checkbox'> Web Search</$checkbox>
+</div>
 </$reveal>
 
 <section class="ai">
