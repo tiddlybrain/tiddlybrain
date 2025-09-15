@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250829131517165
+modified: 20250915104508666
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -415,15 +415,6 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define list-of(note)
-\whitespace trim
-<$set name="role" filter="[<__note__>is[blank]]" value=<<key>> emptyValue=<<__note__>>>
-<$list filter="[all[current]getAllTiddlers:note<role>]" variable="item"><span style="border-bottom:1px solid #78bb4e;margin-right:5px;">
-<$list filter="[<item>is[tiddler]]" emptyMessage=<<item>>><$transclude $variable="l" title=<<item>> class="normal-weight" note="no"/></$list>
-</span></$list>
-</$set>
-\end
-
 \procedure more(topic)
 <$let current={{{ [all[current]get[draft.of]else<currentTiddler>] }}} topic={{{ [<topic>!is[blank]else<key>!is[blank]else{!!note}] }}} count={{{ [all[tiddlers]belongs.to<current>note<topic>count[]] }}} key=<<topic>> currentTiddler=<<current>>>
 <$droppable actions=<<snippet-drop-actions>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
@@ -537,9 +528,6 @@ type: text/vnd.tiddlywiki
 #> `<<status-selector>>`
 # ''展示当前 Tiddler 的所有非 Branch tiddler 的 Tags''
 #> `<<tag-list>>`
-# ''列出当前 Tiddler 内属于指定角色的所有链接''
-#> `<<list-of
-  note:"Tiddler 的角色">>`
 # ''使用 Details 包裹的 Snippets, 主要用于显示附录内容''
 #> `<<more
   topic:"note 角色">>`
