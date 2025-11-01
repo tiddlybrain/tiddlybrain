@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20250915104508666
+modified: 20250923212325005
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -248,6 +248,7 @@ type: text/vnd.tiddlywiki
 <$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
 </$let>
 </$set></$tiddler></$list>
+<$action-listops $tiddler="$:/config/recent-search" $field="list" $subfilter="[<mTitle>] +[putfirst[]]"/>
 <$transclude $variable="tiddler-close" tiddler=<<mTitle>>/>
 </$button>
 </div>

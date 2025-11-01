@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20250906071953584
+modified: 20251026172812486
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -20,11 +20,11 @@ type: text/vnd.tiddlywiki
 <$set name="current" filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]" value="fill:green;" emptyValue=<<current>>>
 <$button class="tc-btn-invisible" style=<<current>>>
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
-<$list filter="[{$:/HistoryList!!current-tiddler}match<currentTiddler>]">
+<%if [<folded-state>!text[hide]] %><%if [{$:/HistoryList!!current-tiddler}match<currentTiddler>] %>
 <$list filter="[<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]]">
 <$action-navigate $to=<<currentTiddler>>/><$action-deletetiddler $filter="[<currentTiddler>addprefix[$:/state/folded/]is[tiddler]]"/>
 </$list>
-</$list>
+<%endif%><%endif%>
 <$list filter="[<folded-state>!text[hide]]" variable="NONE" emptyMessage={{$:/core/images/chevron-right}}>
 <$action-listops $tiddler=<<tv-story-list>> $subfilter="[<currentTiddler>]"/>{{$:/core/images/chevron-left}}
 </$list>
@@ -39,9 +39,13 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <%if [all[current]!has[draft.of]] %><div class="sidebar-item-hover">
-<%if [<folded-state>!text[hide]] %>&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#999;">popup</$button><%endif%>
+<%if [<folded-state>!text[hide]] %>
+&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#999;">popup</$button>
 &middot; <$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar close:"no">>sidebar</$button>
 &middot; <$button class="tc-btn-invisible" style="color:#999;">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/></$button>
+<%else%>
+&middot; <$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar close:"no">>sidebar</$button>
+<%endif%>
 </div><%endif%>
 </div>
 </$droppable>
@@ -66,11 +70,7 @@ type: text/vnd.tiddlywiki
 <div class="tc-sidebar-tab-open-item"><$let tv-config-toolbar-text="yes" tv-config-toolbar-icons="no">
 <$button message="tm-close-other-tiddlers" param={{$:/HistoryList!!current-tiddler}} class="tc-btn-invisible" style="color:#999;">Close others</$button> &middot;
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible" style="color:#999;">Close all</$button> &middot;
-<$button class="tc-btn-invisible" dragFilter="[is[system]text[hide]removeprefix[$:/state/folded/]]" style="color:#999;">
-<$list filter="[all[tiddlers]prefix[$:/state/folded/]text[hide]limit[1]]" emptyMessage="<$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/>Fold all">
-<$action-deletetiddler $filter="[all[tiddlers]prefix[$:/state/folded/]]"/>Unfold all (<$count filter="[all[tiddlers]prefix[$:/state/folded/]text[hide]]"/>)
-</$list>
-</$button> &middot;
+<$button class="tc-btn-invisible" style="color:#999;"><$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/>Fold all</$button> &middot;
 <$transclude $variable="exportButton" exportFilter="[[$:/StoryList]get[list]enlist-input[]]" lingoBase="$:/custom/language/Buttons/ExportTiddler/"/> &middot;
 <$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">Sort by role</$checkbox>
 </$let></div>
