@@ -1,0 +1,22 @@
+created: 20251103114141857
+creator: yuzijie
+keywords: 
+modified: 20251103114235190
+modifier: yuzijie
+tags: $:/tags/Global customized
+title: $:/custom/widget/details
+type: text/vnd.tiddlywiki
+
+\widget $details(summary, open, class)
+<%if [<open>match[yes]] %>
+<details open class=`$(class)$`><summary><<summary>></summary><$slot $name="ts-raw"/></details>
+<%else%>
+<details class=`$(class)$`><summary><<summary>></summary><$slot $name="ts-raw"/></details>
+<%endif%>
+\end
+
+# ''创建 HTML5 的 details 标签, 用来隐藏和展示部分文字''
+#> `<$details
+  summary="details 的标题内容"
+  open="是否默认展开"
+  class="自定义标题样式"/>`

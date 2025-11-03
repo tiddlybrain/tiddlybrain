@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20251011183929235
+modified: 20251103105646620
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -338,7 +338,7 @@ button.tc-tag-label.tag-list {margin: 0 1px; white-space: nowrap; overflow: hidd
 cite button.tc-tag-label.tag-list {vertical-align: middle;}
 td button.tc-tag-label.tag-list, button button.tc-tag-label.tag-list {vertical-align: baseline;}
 
-/* For Plugin: Details */
+/* For Widget: Details */
 details {padding: 0 0.5em 0 1em; overflow: auto;}
 details[open] {border-bottom: 1px solid #eee; border-radius: 3px;}
 details[open] > *:last-child {margin-bottom: 0 !important;}

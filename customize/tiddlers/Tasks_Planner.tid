@@ -2,7 +2,7 @@ caption: Planner
 created: 20210112195245238
 creator: yuzijie
 keywords: 
-modified: 20251101071806122
+modified: 20251103082650960
 modifier: yuzijie
 order: 1
 tags: Tasks customized
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 <$set name="year" filter="[[$date$]format:date[YYYY]]" select="0">
 <$set name="week" filter="[[$date$]format:date[Week0WW]]" select="0">
 <$set name="BR" filter="[[BR/Journals]] [<year>] [<week>] +[join[/]]" select="0">
-<$transclude $variable="l" title=<<BR>> text=<<format-date "$date$" "Week WW, mmm. DDD">>/>
+<$transclude $variable="l" title=<<BR>> text=<<format-date "$date$" "Week WW, DDD mmm">>/>
 </$set>
 </$set>
 </$set>
