@@ -2,7 +2,7 @@ caption: Other Custom Toolbar Buttons
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20250908110453230
+modified: 20251111110722699
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -17,6 +17,18 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=`<<$(type)$ "$(selection)$" "$(tiddlers)$" t:$(today)$>>`/>
 </$let>
 <$action-deletetiddler $tiddler='$:/temp/step-popup/tiddlers'/>
+\end
+
+\procedure today-details-button(today)
+<$button><$action-sendmessage
+ $message="tm-edit-text-operation"
+ $param="wrap-selection"
+ prefix=`<$details summary="$(today)$">
+
+`
+ suffix='
+
+</$details>'/>Today-Details</$button>
 \end
 
 <span class="tc-text-editor-toolbar-item-wrapper"><$tiddler tiddler=<<targetTiddler>>>
@@ -61,6 +73,7 @@ Description: {{!!description}}
 <$list filter="[all[current]is[tiddler]!tag[Flashcard]]"><$fieldmangler>
 <$button message="tm-add-tag" param="Flashcard" tooltip="Make it a Flashcard">Flashcard</$button>
 </$fieldmangler></$list>
+<$transclude $variable="today-details-button" today=<<now YYYY-0MM-0DD>>/>
 <$reveal type="match" state="$:/config/codemirror/lineWrapping" text="false">
 <$button set="$:/config/codemirror/lineWrapping" setTo="true" tooltip="Line Wrap On">WON</$button>
 </$reveal>
