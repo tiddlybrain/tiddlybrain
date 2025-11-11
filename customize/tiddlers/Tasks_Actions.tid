@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20250902094507592
+modified: 20251111095158998
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -58,9 +58,6 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[waiting]!pause<curDate>sort[date]]"><li style="white-space:nowrap;">
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button><<task-list-waiting>>
 </li></$list>
-<$list filter="[all[tiddlers]tag[Task]status[Urgent]]" variable="task"><$let task-state={{{ [<task>addprefix[$:/task-state/]addsuffix[/]] }}}>
-<$list filter="[prefix<task-state>!text[waiting]!text[deadline]count[]compare:number:eq[0]]"><li><$transclude $variable="l" title=<<task>> status=no/></li></$list>
-</$let></$list>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]contains:plan<curDate>]">
 <li style="white-space:nowrap;"><<task-list-open>></li>
 </$list>

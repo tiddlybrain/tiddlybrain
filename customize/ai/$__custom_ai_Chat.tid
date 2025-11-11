@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20250913124018987
+modified: 20251107162251366
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -46,7 +46,7 @@ type: text/vnd.tiddlywiki
 \end call-api
 
 \procedure ai-gui(id)
-<$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[text]] }}}/>""" tag="section" class="ai">
+<$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[caption]] }}}/>""" tag="section" class="ai">
 <div class="tc-droppable-placeholder" style="display:block;">
 <h3>Instructions
 <$button style="font-size:small;"><$let search={{{ [<ai-request>get[text]] }}}>{{$:/core/images/advanced-search-button}}
