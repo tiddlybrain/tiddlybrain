@@ -2,7 +2,7 @@ caption: Other Custom Toolbar Buttons
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20251111110722699
+modified: 20251112085709810
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -23,12 +23,12 @@ type: text/vnd.tiddlywiki
 <$button><$action-sendmessage
  $message="tm-edit-text-operation"
  $param="wrap-selection"
- prefix=`<$details summary="$(today)$">
+ prefix=`#<$details summary="$(today)$" open=yes>
 
 `
  suffix='
 
-</$details>'/>Today-Details</$button>
+  </$details>'/>Today-Details</$button>
 \end
 
 <span class="tc-text-editor-toolbar-item-wrapper"><$tiddler tiddler=<<targetTiddler>>>
