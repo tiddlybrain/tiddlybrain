@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20251103105646620
+modified: 20251120123428900
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -61,7 +61,7 @@ button.snippet-title:hover {text-decoration: underline;}
 .data-table + .filter-options {padding-top: 0.3em;}
 button.links.accordion {fill: #999; font-size: small;}
 .tc-tiddler-body .snippet-container .snippet + .tc-menu-list-item, .tc-tiddler-body .snippet-container .macro-table + .tc-menu-list-item {margin-top: -2px;}
-.snippet-container > .tc-droppable-placeholder > .macro-table {margin: 0;}
+.snippet-container > .tc-droppable-placeholder > .macro-table, .bl-container .snippet-container > .tc-droppable-placeholder > .macro-table  {margin: 0;}
 
 /* For Macro: task-list */
 dl.task-list dt {border-bottom: 1px solid #ccc; margin: 10px 0;}
@@ -339,7 +339,7 @@ cite button.tc-tag-label.tag-list {vertical-align: middle;}
 td button.tc-tag-label.tag-list, button button.tc-tag-label.tag-list {vertical-align: baseline;}
 
 /* For Widget: Details */
-details {padding: 0 0.5em 0 1em; overflow: auto;}
+details {padding: 0 0.5em 0 1em;}
 details[open] {border-bottom: 1px solid #eee; border-radius: 3px;}
 details[open] > *:last-child {margin-bottom: 0 !important;}
 details details[open] {border: none;}

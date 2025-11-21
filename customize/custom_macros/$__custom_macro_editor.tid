@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20250925111508165
+modified: 20251114143113526
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -96,7 +96,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]type[application/x-tiddler-dictionary]!is[system]]"><<data-table>></$list>
 <$transclude tiddler="$:/core/ui/ViewTemplate/body"/>
 </div>
-<table style="$style$" class="hide-narrow"><tbody>
+<table style="$style$"><tbody>
 <$list filter="[all[current]fields:exclude[caption description text type title tags modified list created creator modifier revision bag keywords parents status draft.title draft.of]] date path url dir interval fold order kw question shortcap" variable="fieldName"><tr>
 <td style="width:102px;"><<fieldName>></td><td><$edit-text field=<<fieldName>> class="edit-area tc-edit-texteditor"/></td>
 <td style="width:10px;"><$list filter="[all[current]has:field<fieldName>]">
