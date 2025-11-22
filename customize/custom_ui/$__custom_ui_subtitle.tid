@@ -1,10 +1,14 @@
 created: 20221218162626472
 creator: yuzijie
 list-after: $:/core/ui/ViewTemplate/subtitle/modified
-modified: 20241121171327467
+modified: 20251122195320292
 modifier: yuzijie
 tags: $:/tags/ViewTemplate/Subtitle customized
 title: $:/custom/ui/subtitle
 type: text/vnd.tiddlywiki
 
-<$list filter="[all[current]has[interval]]"> <$transclude $variable=days-passed start={{!!date}}/></$list>
+<span style="color:brown;font-weight:500;"><%if [all[current]has[interval]] %>
+<$transclude $variable=days-passed start={{!!date}}/> / {{!!interval}} days
+<%else%>
+<$let year={{{ [all[current]get[date]else{!!modified}format:date[YYYY]] }}}>#<<year>></$let>
+<%endif%></span>

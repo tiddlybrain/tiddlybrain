@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20251121070941559
+modified: 20251122195245095
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -170,16 +170,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<mTitle>>><<mTitle>><$transclude $variable="tiddler-close"/></$button> &middot;
 <$list filter="[all[current]!type[text/plain]]"><$button class="tc-btn-invisible" actions=<<step-action>>>Step</$button> &middot;</$list>
 <$list filter="[all[current]type[text/plain]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>Content</$button> &middot;</$list>
-<$button class="tc-btn-invisible">AI
-<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="AI"/>
-<$action-setfield $tiddler="$:/temp/menubarsearch" text={{!!caption}}/>
-<$action-setfield $tiddler="$:/temp/menubarsearch/input" text={{!!caption}}/>
-<$transclude $variable="tiddler-close"/>
-<$list filter="[all[tiddlers]tag[AI]get[order]]" variable="id">
-<$action-setfield $tiddler=<<ai-request>> text={{!!caption}} type="text/vnd.tiddlywiki"/>
-</$list>
-</$button>
+<$let year={{{ [all[current]get[date]else{!!modified}format:date[YYYY]] }}}>@@color:brown;font-weight:500;#<<year>>@@</$let>
 </div>
 </$let></$list>
 \end
