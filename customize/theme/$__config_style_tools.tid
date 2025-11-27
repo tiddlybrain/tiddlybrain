@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20251127033326007
+modified: 20251127050811703
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -145,7 +145,7 @@ label.checkbox input[type=checkbox]:checked + span {color: brown;}
 /* For Macro: record */
 blockquote.record {border-width: 1px 1px 1px 3px; border-color: #eee #eee #ddd #b3b7cf; border-style: solid; border-radius: 9px; padding: 0 8px; margin: 0 0 5px 0; background: #fdfdfd;}
 .single-line-record {display: flex; white-space: nowrap; position: relative;}
-.single-line-record .left span:last-child {margin-right: 0.3em;}
+.single-line-record .left > span:last-child {margin-right: 0.3em;}
 .single-line-record .middle {min-width: 0;}
 .single-line-record .middle button.tc-tiddlylink {width: 100%; overflow: hidden; text-overflow: ellipsis; line-height: 26px;}
 .single-line-record .middle .data-value button.tc-tiddlylink {width: auto; display: inline-block;}
