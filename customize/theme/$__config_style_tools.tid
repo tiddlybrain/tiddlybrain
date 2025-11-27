@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20251122191705516
+modified: 20251127033326007
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -335,10 +335,8 @@ button.verification-notice {background: red; white-space: nowrap;}
 .tc-tags-wrapper button.verification-notice {margin-right: 7px;}
 
 /* For Macro: tag-list */
-button.tc-tag-label.tag-list {margin: 0 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; width: 19px; padding: 0 3px;}
-.left button.tc-tag-label.tag-list {vertical-align: baseline;}
-cite button.tc-tag-label.tag-list {vertical-align: middle;}
-td button.tc-tag-label.tag-list, button button.tc-tag-label.tag-list {vertical-align: baseline;}
+.tag-list > .tc-tag-list-item {margin: 0}
+.tag-list > .tc-tag-list-item > .tc-tag-label {white-space: nowrap; overflow: hidden; text-overflow: ellipsis; vertical-align: text-bottom; width: 1.4em; padding: 0 3px;}
 
 /* For Widget: Details */
 details {padding: 0 0.5em 0 1em;}
