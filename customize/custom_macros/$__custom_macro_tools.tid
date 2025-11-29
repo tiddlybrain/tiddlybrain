@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20251127052754359
+modified: 20251128231233228
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -165,7 +165,7 @@ type: text/vnd.tiddlywiki
 <$button actions=<<modal-actions>> tag="span" style="color:green;cursor:pointer;">[{{!!title}}]</$button>
 </$list></$list> <<status-selector>> <<verification-notice>> <<tbc-notice>>
 <$list filter="[all[current]tags[]type[text/vnd.tiddlywiki]!search:title:literal[/]is[tiddler]!tag[Ignore]]">
-<$let style={{{ [all[current]get[color]else[gray]addprefix[cursor:pointer;color:]] }}}><span style=<<style>>>
+<$let style={{{ [all[current]get[color]else[darkorange]addprefix[cursor:pointer;color:]] }}}><span style=<<style>>>
 [<$button actions=<<modal-actions>> tag="span"><$transclude field="caption"><$view field="title"/></$transclude></$button>
 <$fieldmangler tiddler=<<current>>><$button tag="span" message="tm-remove-tag" param={{!!title}}>&times;</$button></$fieldmangler>]
 </span></$let>
