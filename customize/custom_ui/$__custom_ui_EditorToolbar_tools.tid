@@ -2,7 +2,7 @@ caption: Other Custom Toolbar Buttons
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20251129082955708
+modified: 20251130195931755
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -63,11 +63,14 @@ Description: {{!!description}}
 !!! Subtopics
 
 *<<more>>"/>""">Related</$button>
+<$let pattern1="\\\[\d\]">
 <$button tooltip="Cleanup errors after markdown to wikitext translation">MD Fix
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-all" text={{{ [all[current]get[text]splitregexp[# \*]join[#*]] }}}/>
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-all" text={{{ [all[current]get[text]splitregexp[\\_]join[_]] }}}/>
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-all" text={{{ [all[current]get[text]splitregexp[\\\*]join[*]] }}}/>
+<$action-sendmessage $message="tm-edit-text-operation" $param="replace-all" text={{{ [all[current]get[text]splitregexp<pattern1>join[]] }}}/>
 </$button>
+</$let>
 </$list>
 <$list filter="[all[current]type[text/vnd.tiddlywiki]!tag[Task]]"><$fieldmangler>
 <$button set="!!celltpl" setTo="custom-template-task" message="tm-add-tag" param="Task" tooltip="Make it a task">Task</$button>
