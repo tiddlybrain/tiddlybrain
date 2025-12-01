@@ -1,7 +1,6 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
-list-before: $:/custom/ui/menubar/toc
-modified: 20251026172917048
+modified: 20251201161713518
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open

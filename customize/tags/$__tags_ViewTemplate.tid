@@ -1,8 +1,7 @@
 created: 20211009094212695
 creator: yuzijie
 list: $:/core/ui/ViewTemplate/title $:/core/ui/ViewTemplate/unfold $:/core/ui/ViewTemplate/tags $:/core/ui/ViewTemplate/classic $:/core/ui/ViewTemplate/body $:/core/ui/ViewTemplate/subtitle $:/core/ui/ViewTemplate/lazy-loading
-modified: 20211009095611948
+modified: 20251201162338991
 modifier: yuzijie
-tags: customized
 title: $:/tags/ViewTemplate
 type: text/vnd.tiddlywiki

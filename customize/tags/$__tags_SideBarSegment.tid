@@ -1,8 +1,7 @@
 created: 20211009094156336
 creator: yuzijie
 list: $:/core/ui/SideBarSegments/site-title $:/core/ui/SideBarSegments/site-subtitle $:/core/ui/SideBarSegments/page-controls $:/custom/ui/SideBarSegments/open $:/core/ui/SideBarSegments/tabs
-modified: 20211009100121528
+modified: 20251201162341274
 modifier: yuzijie
-tags: customized
 title: $:/tags/SideBarSegment
 type: text/vnd.tiddlywiki
