@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20251026172812486
+modified: 20251201171210551
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -72,7 +72,7 @@ type: text/vnd.tiddlywiki
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible" style="color:#999;">Close all</$button> &middot;
 <$button class="tc-btn-invisible" style="color:#999;"><$action-sendmessage $message='tm-fold-all-tiddlers' foldedStatePrefix='$:/state/folded/'/>Fold all</$button> &middot;
 <$transclude $variable="exportButton" exportFilter="[[$:/StoryList]get[list]enlist-input[]]" lingoBase="$:/custom/language/Buttons/ExportTiddler/"/> &middot;
-<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">Sort by role</$checkbox>
+<$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox">Sort by Role</$checkbox>
 </$let></div>
 </$droppable>
 </$set>

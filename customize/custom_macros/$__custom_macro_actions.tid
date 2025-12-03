@@ -1,6 +1,6 @@
 created: 20200229173911430
 creator: yuzijie
-modified: 20251129232735365
+modified: 20251203075835489
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/actions
@@ -36,7 +36,6 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle=<<currentTiddler>>/>
 </$list>
 <$action-setfield $tiddler="$:/state/modal/history" text=""/>
-<$list filter="[{$:/HistoryList!!current-tiddler}!has[draft.of]]"><$list filter="[[$:/state/tab/sidebar--595412856]text[Editor]]"><$action-setfield text={{{ [[$:/state/tab/pre-sidebar]get[text]else[Index]] }}}/></$list></$list>
 <%endif%>
 </$list>
 </$list>
