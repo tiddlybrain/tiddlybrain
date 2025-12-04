@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20251128231233228
+modified: 20251204091442327
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -172,7 +172,7 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
-<$list filter="[<mTitle>has[interval]]"><$transclude $variable=days-passed start={{!!date}}/> &middot;</$list>
+<$list filter="[<mTitle>has[interval]]"><$transclude $variable=days-passed start={{!!date}}/>/{{!!interval}} &middot;</$list>
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<mTitle>>><<mTitle>><$transclude $variable="tiddler-close"/></$button> &middot;
 <$list filter="[all[current]!type[text/plain]]"><$button class="tc-btn-invisible" actions=<<step-action>>>Step</$button> &middot;</$list>
 <$list filter="[all[current]type[text/plain]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>Content</$button> &middot;</$list>
@@ -265,8 +265,8 @@ type: text/vnd.tiddlywiki
 \define relationships(name, filter, direct-open, mode)
 \whitespace trim
 <$list filter="$filter$ +[limit[1]]" variable="NONE">
-<div style="text-align:center;margin:1em;font-variant:small-caps;">''$name$''</div>
-<$let direct-open=<<__direct-open__>> single-column="yes">
+<div style="text-align:center;margin-bottom:1em;font-variant:small-caps;">''$name$''</div>
+<$let direct-open=<<__direct-open__>> single-column="yes" show-parents="yes">
 <<sort-by-belongs filter:"$filter$" title:"$name$" init:"0" has-filter:"no" mode:"$mode$">>
 </$let>
 </$list>

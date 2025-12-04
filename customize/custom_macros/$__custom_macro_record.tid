@@ -1,6 +1,6 @@
 created: 20190110073141540
 creator: yuzijie
-modified: 20250523123427150
+modified: 20251204092733208
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/record
@@ -18,9 +18,11 @@ type: text/vnd.tiddlywiki
 <span class="middle"><$button actions=<<modal-actions>> tooltip={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink normal-weight">
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$list filter="[<__parent__>match[yes]]" variable="NONE">
+<$list filter="[<__parent__>match[yes]]" variable="NONE"><%if [<show-parents>match[yes]] %>
+<$list filter="[all[current]get[parents]enlist-input[]]" join="&nbsp;">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
+<%else%>
 <$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
-</$list>
+<%endif%></$list>
 <$list filter="[all[current]has[description]]"><span class="description">- {{!!description}}</span></$list>
 </$button></span>
 <span class="right"><$button message="tm-edit-tiddler" class="tc-btn-invisible" style="font-size:small;color:#b3b7cf;">
