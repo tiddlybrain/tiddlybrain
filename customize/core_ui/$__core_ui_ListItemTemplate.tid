@@ -1,4 +1,4 @@
-modified: 20250915000755335
+modified: 20251205101950361
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/ListItemTemplate
@@ -8,11 +8,10 @@ type: text/vnd.tiddlywiki
 <$action-navigate $to=<<currentTiddler>>/>
 <%else%>
 <<modal-actions>><$action-listops $tiddler="$:/config/recent-search" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
-<%endif%>""" tooltip={{{ [all[current]get[belongs.to]get[belongs.to]get[caption]] }}}>
+<%endif%>""">
 <$let tv-wikilinks="no">
 <$list filter="[<targetTiddler>hasTiddler<currentTiddler>]">📍</$list>
 <$list filter="[all[current]get[note]]">@@color:green;[{{!!title}}]@@</$list>
-<$list filter="[all[current]get[belongs.to]]">@@color:brown;[<$transclude field=caption><$view field=title/></$transclude>]@@</$list>
 <$list filter="[all[current]has[caption]]">@@font-weight:500;{{!!caption}}@@ &middot; </$list><$view field="title"/>
 <$list filter="[all[current]get[status]]">@@color:red;{{!!title}}@@</$list>
 <$list filter="[<searchTiddler>get[text]trim[]!is[blank]]" variable="search">
