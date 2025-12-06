@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20250607122123493
+modified: 20251206163336471
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -67,8 +67,6 @@ select, textarea, input[type=text], input[type=search], input[type=""], input:no
 img {max-width: 100%;}
 
 label {display: inline-block;}
-
-button svg, button img, label svg, label img {vertical-align: bottom;}
 
 table {border-color: #ccc;}
 table td {overflow-wrap: anywhere;}
