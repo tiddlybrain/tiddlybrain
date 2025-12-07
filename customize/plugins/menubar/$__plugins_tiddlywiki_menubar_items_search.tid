@@ -1,7 +1,7 @@
 caption: Search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
 description: Search
-modified: 20251201170012737
+modified: 20251207191441736
 modifier: yuzijie
 tags: $:/tags/MenuBar customized
 title: $:/plugins/tiddlywiki/menubar/items/search
@@ -57,9 +57,14 @@ type: text/vnd.tiddlywiki
 <$action-listops $tiddler="$:/config/index-tree" $filter="[list[$:/config/index-tree]is[tiddler]limit[20]]"/>
 <$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input"/>{{$:/core/images/close-button}}
 </$button>
-<$button class="tc-btn-invisible" style="margin-left:7px;" popup="$:/state/popup/menubar/NewTiddler">
-<$action-setfield $tiddler="$:/temp/newTiddler" text={{$:/temp/menubarsearch/input}}/>{{$:/core/images/new-button}}
+<$let template={{$:/language/DefaultNewTiddlerTitle}} caption={{$:/temp/menubarsearch/input}}>
+<$button class="tc-btn-invisible hide-narrow" style="margin-left:7px;" popup="$:/state/popup/menubar/NewTiddler">
+<$action-setfield $tiddler="$:/temp/newTiddler" text=<<caption>>/>{{$:/core/images/new-button}}
 </$button>
+<$button class="tc-btn-invisible hide-wide" style="margin-left:7px;">{{$:/core/images/new-button}}
+<$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="text/vnd.tiddlywiki" popup="close"/>
+</$button>
+</$let>
 </$reveal>
 <$button class="tc-btn-invisible" style="margin-left:7px;font-size:1.1em;">{{$:/core/images/advanced-search-button}}<<advanced-search-actions>></$button>
 </span>
