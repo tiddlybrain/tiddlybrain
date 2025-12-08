@@ -1,7 +1,7 @@
 caption: AI Chat
 created: 20240707102007118
 creator: yuzijie
-modified: 20251107162251366
+modified: 20251208085439260
 modifier: yuzijie
 tags: customized
 title: $:/custom/ai/Chat
@@ -46,7 +46,7 @@ type: text/vnd.tiddlywiki
 \end call-api
 
 \procedure ai-gui(id)
-<$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[caption]] }}}/>""" tag="section" class="ai">
+<$droppable actions="""<$action-setfield $tiddler=<<ai-request>> text={{{ [<actionTiddler>get[text]] }}}/>""" tag="section" class="ai">
 <div class="tc-droppable-placeholder" style="display:block;">
 <h3>Instructions
 <$button style="font-size:small;"><$let search={{{ [<ai-request>get[text]] }}}>{{$:/core/images/advanced-search-button}}
@@ -57,8 +57,8 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-focus-selector" $param=".menubarsearch input" preventScroll="true"/>
 </$let></$button>
 <$button style="font-size:small;" actions="<$action-deletetiddler $filter='[<ai-request>] [<ai-response>]'/>">Clear All</$button>
-<$list filter="[{$:/HistoryList!!current-tiddler}has[text]]"><$button style="font-size:small;">Content of Current Tiddler
-<$action-setfield $tiddler=<<ai-request>> text={{{ [all[current]get[text]] }}} type={{{ [all[current]get[type]] }}}/>
+<$list filter="[{$:/HistoryList!!current-tiddler}has[caption]]"><$button style="font-size:small;">Current Tiddler
+<$action-setfield $tiddler=<<ai-request>> text={{{ [all[current]get[caption]] }}}/>
 </$button></$list>
 </h3>
 <$edit-text tiddler=<<ai-request>> tag="textarea" focus="yes" class="edit-area tc-edit-texteditor"/>
