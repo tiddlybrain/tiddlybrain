@@ -1,16 +1,15 @@
 caption: TiddlyBrain
 created: 20240626144905524
 creator: yuzijie
-modified: 20250406054727762
+modified: 20251209134724594
 modifier: yuzijie
 tags: $:/tags/ControlPanel/Info customized
 title: $:/custom/ui/ControlPanel/TiddlyBrain
 type: text/vnd.tiddlywiki
 
 |tc-max-width tc-edit-max-width|k
-|<$link to="$:/config/AIApiKey">OpenAI API Key</$link> |<$edit-text tiddler="$:/config/AIApiKey" default="" tag="input"/> |
-|<$link to="$:/config/AIApiKey">AI Models</$link> |<$edit-text tiddler="$:/config/AIApiKey" field="list" default="" tag="input"/> |
-|<$link to="$:/config/DeepLApiKey">DeepL API</$link> |<$edit-text tiddler="$:/config/DeepLApiKey" field="url" default="" tag="input"/> |
+|<$link to="$:/config/AIApiKey">OpenAI - API Key</$link> |<$edit-text tiddler="$:/config/AIApiKey" default="" tag="input"/> |
+|<$link to="$:/config/AIApiKey">OpenAI - Models</$link> |<$edit-text tiddler="$:/config/AIApiKey" field="list" default="" tag="input"/> |
 
 <div class="tc-control-panel">
 <$transclude $variable="tabs" tabsList="[all[tiddlers]tag[$:/custom/ui/ControlPanel/TiddlyBrain]!has[draft.of]sort[order]]" default="$:/custom/ui/ControlPanel/Roles" state="$:/state/controlPanel/tiddlyBrain" template="$:/custom/template/tab-content" buttonTemplate="$:/custom/template/tab-button"/>
