@@ -1,0 +1,17 @@
+created: 20251210124906361
+creator: yuzijie
+modified: 20251210141913166
+modifier: yuzijie
+tags: customized
+title: $:/custom/ui/EditorToolbar/md2tid-dropdown
+type: text/vnd.tiddlywiki
+
+\define body()
+\whitespace trim
+<$edit tiddler="$:/temp/markdown" autoHeight="no" class="tc-edit-texteditor"/>
+<$button style="text-align:center;">Replace Selection
+<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text={{$:/temp/markdown}}/>
+</$button>
+\end
+
+<$macrocall $name="body"/>

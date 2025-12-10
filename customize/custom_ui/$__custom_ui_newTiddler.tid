@@ -1,6 +1,6 @@
 created: 20180106174755084
 creator: yuzijie
-modified: 20250725084035163
+modified: 20251210095548868
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/newTiddler
@@ -29,7 +29,6 @@ Description: {{!!description}}" edit="yes"/>Data</$button>
 
 *<<more>>" edit="yes"/>Record</$button>
 <$button><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="application/vnd.drawio" edit="yes"/>Diagram</$button>
-<$button tooltip="Markdown"><$transclude $variable="newTiddlerAction" template=<<template>> caption=<<caption>> type="text/x-markdown" edit="yes"/>MD</$button>
 <$button class="tc-btn-invisible" message="tm-edit-tiddler" param="$:/custom/ui/newTiddler" tooltip="Edit Configurations">{{$:/core/images/edit-button}}</$button>
 </p></$vars>
 <p style="margin:-10px 0 0 0;">
