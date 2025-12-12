@@ -1,6 +1,6 @@
 created: 20231119121650748
 creator: yuzijie
-modified: 20251127005715658
+modified: 20251212051201633
 modifier: yuzijie
 tags: customized $:/tags/Macro
 title: $:/custom/macro/editor
@@ -128,6 +128,7 @@ type: text/vnd.tiddlywiki
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/div"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/today"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 <$tiddler tiddler="$:/custom/ui/EditorToolbar/steps"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
+<$tiddler tiddler="$:/custom/ui/EditorToolbar/md2tid"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$tiddler>
 </div>
 <div style="margin-bottom:3px;line-height:23px;">{{$:/custom/ui/EditorToolbar/tools}}</div>
 </$set></$edit>
