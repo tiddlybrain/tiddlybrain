@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20251212051628985
+modified: 20251212154604182
 modifier: yuzijie
 tags: $:/tags/SideBarSegment customized
 title: $:/custom/ui/SideBarSegments/open
@@ -39,10 +39,10 @@ type: text/vnd.tiddlywiki
 </$let>
 </$button>
 <%if [all[current]!has[draft.of]] %><div class="sidebar-item-hover">
-&middot; <$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar close:"no">>sidebar</$button>
 <%if [<folded-state>!text[hide]] %>
 &middot; <$button class="tc-btn-invisible" style="color:#999;">close<$transclude $variable="tiddler-close" tiddler=<<currentTiddler>>/></$button>
 <%endif%>
+&middot; <$button class="tc-btn-invisible" style="color:#999;"><<open-in-sidebar close:"no">>sidebar</$button>
 </div><%endif%>
 </div>
 </$droppable>
