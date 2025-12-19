@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20250904005203963
+modified: 20251218214405967
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -167,7 +167,7 @@ TBC:" date=<<dt>> celltpl="custom-template-journal" kw="unset" description="<$te
 \end
 
 \define task-pill(color:"#c9fffe")
-<div style="white-space:nowrap;margin:7px 0 0 -3px;">
+<div style="white-space:nowrap;margin:7px 0 0 2px;">
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[waiting]search:title:literal<currentTiddler>limit[1]]">🔵</$list>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[deadline]search:title:literal<currentTiddler>limit[1]]">🟣</$list>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]search:title:literal<currentTiddler>limit[1]]">🟢</$list>
