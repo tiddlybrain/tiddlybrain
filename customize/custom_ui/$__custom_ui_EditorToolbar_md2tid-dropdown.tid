@@ -1,6 +1,6 @@
 created: 20251210124906361
 creator: yuzijie
-modified: 20251224172835126
+modified: 20251227083233938
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/EditorToolbar/md2tid-dropdown
@@ -22,6 +22,7 @@ type: text/vnd.tiddlywiki
 </$let>
 <$button style="text-align:center;">Replace Selection
 <$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text={{$:/temp/markdown}}/>
+<$action-deletetiddler $tiddler="$:/temp/markdown"/>
 </$button>
 \end
 

@@ -5,13 +5,15 @@ creator: yuzijie
 description: Convert Markdown to WikiText
 dropdown: $:/custom/ui/EditorToolbar/md2tid-dropdown
 icon: $:/plugins/linonetwo/markdown-transformer/md-to-tid-button-icon
-modified: 20251210132633228
+modified: 20251227083410938
 modifier: yuzijie
 shortcuts: ctrl-shift-K
 tags: $:/tags/EditorToolbar customized
 title: $:/custom/ui/EditorToolbar/md2tid
 type: text/vnd.tiddlywiki
 
+<%if [[$:/temp/markdown]!has[text]] %>
 <$action-sendmessage $message="tm-edit-text-operation" $param="save-selection" tiddler="$:/temp/markdown"/>
 <$action-setfield $tiddler="$:/temp/markdown" type="text/x-markdown"/>
 <$action-sendmessage $message="tm-md-tiddler-to-tid" $param="$:/temp/markdown"/>
+<%endif%>
