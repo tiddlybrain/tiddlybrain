@@ -16,7 +16,7 @@ exports["excise"] = function(event,operation) {
 	if(editTiddlerType === "application/x-tiddler-dictionary") {
 		operation.replacement = excisionTitle;
 	} else {
-		operation.replacement = `<<l "${excisionTitle}" "${caption}" mode:cl tag:h3>>`;
+		operation.replacement = `<<l "${excisionTitle}" "${caption}">>`;
 	}
 	operation.cutStart = operation.selStart;
 	operation.cutEnd = operation.selEnd;
