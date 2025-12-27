@@ -1,6 +1,6 @@
 created: 20251210124906361
 creator: yuzijie
-modified: 20251227083233938
+modified: 20251227090831675
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/EditorToolbar/md2tid-dropdown
@@ -9,6 +9,10 @@ type: text/vnd.tiddlywiki
 \define body()
 \whitespace trim
 <$edit tiddler="$:/temp/markdown" autoHeight="no" class="tc-edit-texteditor"/>
+<$button style="text-align:center;margin-bottom:2px;">Clear Content
+<$action-deletetiddler $tiddler="$:/temp/markdown"/>
+<$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>
+</$button>
 <$let p1="\\?\[\d+\]" p2="\\\[" p3="[" currentTiddler="$:/temp/markdown">
 <$button style="text-align:center;margin-bottom:2px;">Fix formating errors
 <$action-setfield text={{{ [all[current]get[text]splitregexp[# \*]join[#*]] }}}/>
