@@ -1,0 +1,12 @@
+title: $:/plugins/yuz/details/readme
+type: text/vnd.tiddlywiki
+
+! ~DetailsWidget
+
+<mark>This is a pseudo wdiget, only to hold the widget name, checkout <<l "$:/custom/widget/details">></mark>
+
+Create HTML 5 `<details>` elements including a `<summary>` using this widget.
+
+This project is inspired by and modified from DetailsWidget by Thomas Elmiger.
+
+Original project can be found at http://tid.li/tw5/plugins.html#DetailsWidget

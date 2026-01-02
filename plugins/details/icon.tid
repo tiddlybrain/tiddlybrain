@@ -1,7 +1,4 @@
-created: 20170205205314072
-modified: 20240101145348360
-tags: 
-title: $:/plugins/telmiger/details/icon
+title: $:/plugins/yuz/details/icon
 type: text/vnd.tiddlywiki
 
 <svg class="tc-image-button telmiger-icon" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" width="22pt" height="22pt">

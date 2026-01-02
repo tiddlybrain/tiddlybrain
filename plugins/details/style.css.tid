@@ -1,9 +1,5 @@
-created: 20170122140815442
-creator: Thomas Elmiger
-modified: 20180929131615369
-modifier: Thomas Elmiger
 tags: $:/tags/Stylesheet
-title: $:/plugins/telmiger/details/details.css
+title: $:/plugins/yuz/details/style.css
 type: text/vnd.tiddlywiki
 
 /* details and summary */
@@ -42,4 +38,31 @@ details[open] > summary {
 
 details[open] > *:first-child:not(summary) {
    margin-top: 1em;
+}
+
+/* details and summary colours */
+
+details {
+   background-color: <<colour sidebar-tab-background-selected>>;
+   color: <<colour sidebar-tab-foreground-selected>>;
+}
+
+details summary {
+   background-color: <<colour sidebar-tab-background>>;
+   color: <<colour sidebar-tab-foreground>>;
+}
+
+details.notification summary {
+    background-color: <<colour notification-background>>;
+   color: <<colour notification-foreground>>;
+}
+
+.details-warning summary {
+    background-color: #ffbbaf;
+    color: #000;
+}
+
+.details-success summary {
+    background-color: #88edc5;
+    color: #000;
 }

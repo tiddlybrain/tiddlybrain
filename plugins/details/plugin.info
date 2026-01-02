@@ -1,11 +1,11 @@
 {
-	"title": "$:/plugins/telmiger/details",
-	"author": "Thomas Elmiger",
+	"title": "$:/plugins/yuz/details",
+	"author": "YU Zijie",
 	"core-version": ">=5.1.13",
-	"description": "DetailsWidget",
-	"list": "readme license",
-	"name": "Disclosure HTML element",
+	"name": "DetailsWidget",
+	"list": "readme",
+	"description": "Disclosure HTML element",
 	"plugin-type": "plugin",
 	"source": "https://tid.li/tw5/plugins.html",
-	"version": "0.8.0"
+	"version": "0.0.1"
 }
