@@ -1,0 +1,39 @@
+tags: $:/tags/Stylesheet
+title: $:/plugins/yuz/hlc/style.css
+type: text/vnd.tiddlywiki
+
+.hlc {
+  background: #f8f8f8;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+.hlc pre {
+  border: none;
+  margin: 0;
+  border-radius: 0;
+}
+.hlc p {
+  margin: -7px 0;
+}
+.hlc-content {
+  position: relative;
+}
+.hlc-content > .hlc-comments {
+  position: absolute;
+  top: -1.5em;
+  display: none;
+  color: #666;
+  padding: 0 15px;
+}
+.hlc-content:hover > .hlc-comments {
+  display: block;
+}
+
+/* HLC Colors */
+
+.hlc-content.hlc-warning .hljs {
+  background-color: #fff4c9;
+}
+.hlc-content.hlc-warning .hlc-comments {
+  background-color: #f6e59f;
+}

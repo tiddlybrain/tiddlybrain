@@ -1,0 +1,16 @@
+caption: Highlight Code Snippet
+created: 20200413152129406
+creator: yuzijie
+modified: 20260102195426406
+modifier: yuzijie
+tags: $:/tags/TextEditor/Snippet customized
+title: $:/custom/snippet/hlc
+type: text/vnd.tiddlywiki
+
+<div class="hlc">
+
+```txt
+Code...
+```
+
+</div>

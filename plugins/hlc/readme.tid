@@ -1,0 +1,32 @@
+title: $:/plugins/yuz/hlc/readme
+type: text/vnd.tiddlywiki
+
+! Highlight Code Widget
+
+Highlight Code within code blocks
+
+! Example
+
+<div class="hlc">
+
+```js
+function* fun() {
+```
+
+<$hlc class="hlc-warning" comments="These are comments for the code block">
+
+```js
+  yield 1;
+  yield 2;
+```
+
+</$hlc>
+
+```js
+}
+
+const gen = generateSequence();
+console.log(gen.next()); // { value: 1, done: false }
+```
+
+</div>

@@ -1,0 +1,22 @@
+created: 20260102102945454
+creator: yuzijie
+date: 20260102
+modified: 20260102125358576
+modifier: yuzijie
+tags: $:/tags/Global customized
+title: $:/custom/widget/hlc
+type: text/vnd.tiddlywiki
+
+\widget $hlc(class:"hlc-warning", comments)
+<div class=`$(class)$ hlc-content`>
+<%if [<comments>!is[blank]] %>
+<div class="hlc-comments"><<comments>></div>
+<%endif%>
+<$slot $name="ts-raw"/>
+</div>
+\end
+
+# ''需要高亮的代码块''
+#> `<$hlc
+  class="高亮样式"
+  comments="自定义注释"/>`

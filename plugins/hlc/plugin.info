@@ -1,0 +1,10 @@
+{
+	"title": "$:/plugins/yuz/hlc",
+	"author": "YU Zijie",
+	"core-version": ">=5.1.13",
+	"description": "Highlight Code Widget",
+	"list": "readme",
+	"name": "HLC",
+	"plugin-type": "plugin",
+	"version": "0.0.1"
+}
