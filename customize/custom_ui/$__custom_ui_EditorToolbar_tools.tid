@@ -2,7 +2,7 @@ caption: Other Custom Toolbar Buttons
 condition: [<targetTiddler>is[tiddler]]
 created: 20241112154422498
 creator: yuzijie
-modified: 20251212211519396
+modified: 20260104105808325
 modifier: yuzijie
 tags: $:/tags/EditorTools customized
 title: $:/custom/ui/EditorToolbar/tools
@@ -91,7 +91,7 @@ Description: {{!!description}}
 <$button set="$:/config/codemirror/lineWrapping" setTo="false" tooltip="Line Wrap Off">WOFF</$button>
 </$reveal>
 <$set name="today" value=<<now YYYY0MM0DD>>><$list filter="[all[current]!tag[Task]has[date]!date<today>]">
-<$button style="font-weight:bold;">Update Date<<date-update-actions>><$list filter="[<modal>match[yes]]"><$action-deletetiddler $tiddler="$:/state/modal/editor"/></$list></$button>
+<$button style="font-weight:bold;color:brown;">Update Date<<date-update-actions>><$list filter="[<modal>match[yes]]"><$action-deletetiddler $tiddler="$:/state/modal/editor"/></$list></$button>
 </$list></$set>
 <$reveal state=`$:/state/step-popup/$(currentTiddler)$` type="popup" position="below" animate="yes" tag="div"><div class="tc-drop-down tc-popup-keep">
 <div style="margin:3px 0 10px 14px;">Select Type:
