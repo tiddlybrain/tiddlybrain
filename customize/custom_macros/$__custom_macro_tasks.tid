@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20251218214405967
+modified: 20260106140521184
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -66,7 +66,7 @@ type: text/vnd.tiddlywiki
 </$button>
 <$list filter="[<journal-title>is[tiddler]!has:index<task-id>]"><$button>Set Task<$action-setfield $tiddler=<<journal-title>> $index=<<task-id>> $value=""/></$button></$list>
 <$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible" style="white-space:nowrap;color:green;">
-<$transclude $variable="linkIfExists" text={{!!caption}} comments={{!!description}} edit="yes"/>
+<$transclude $variable="linkIfExists" text={{!!caption}} comments={{!!description}}/>
 <$button to=<<task-id>> class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{!!caption}}>
 <$transclude tiddler=<<task-id>> field="caption"/> <$transclude $variable="days-passed" start={{!!date}}/>
 </$button>
