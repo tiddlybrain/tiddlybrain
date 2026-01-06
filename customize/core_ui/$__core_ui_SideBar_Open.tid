@@ -1,6 +1,6 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
-modified: 20251201171155931
+modified: 20260105151927952
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -51,7 +51,7 @@ $button$
 <div class="tc-sidebar-tab-open">
 <div style="font-variant:all-small-caps;color:#bbb;">
 <<tab-switch "daily" "Tasks">><<tab-switch "index" "Index">><<tab-switch "inbox" "Inbox">><<tab-switch "ask ai" "AI">>
-<span style="float:right;padding:0 3px;"><$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox tc-popup-keep">Sort Role</$checkbox></span>
+<span style="float:right;padding:0 3px;"><$checkbox tiddler="$:/config/index-tree" field="status" checked="sort-by-note" unchecked="" default="" class="checkbox tc-popup-keep">Sort Roles</$checkbox></span>
 </div>
 <$set name="sidebar-list" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="[list<tv-story-list>sortan[note]]" emptyValue="[list<tv-story-list>]">
 <$set name="tv-allow-drag-and-drop" filter="[[$:/config/index-tree]get[status]match[sort-by-note]]" value="no" emptyValue="yes">
