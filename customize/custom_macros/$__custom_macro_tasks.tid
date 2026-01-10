@@ -1,6 +1,6 @@
 created: 20191031101112843
 creator: yuzijie
-modified: 20260106140521184
+modified: 20260110150127574
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tasks
@@ -186,9 +186,14 @@ TBC:" date=<<dt>> celltpl="custom-template-journal" kw="unset" description="<$te
 
 \define task-top()
 <div style="position:relative;">
-<$reveal type="popup" state="$:/state/popup/task/$(currentTiddler)$" position="aboveleft" tag="div" style="transform:translateX(50%);">
-<div class="record-drop-down tc-popup-keep" style="line-height:26px;padding:8px;margin:auto;">
+<$reveal type="popup" state="$:/state/popup/task/cal/$(currentTiddler)$" position="belowleft" tag="div" style="width:100%">
+<div class="record-drop-down tc-popup-keep" style="line-height:26px;padding:8px;margin:0 3em;">
 <$transclude $variable="sort-by-filter" item-filter="tag[Tasks/Journal]has:index<currentTiddler>" sort="sort[date]" cat-prefix="BR/Journals/" cfilter="Day [[$(currentTiddler)$]]"/>
+</div>
+</$reveal>
+<$reveal type="popup" state="$:/state/popup/task/a/$(currentTiddler)$" position="belowleft" tag="div" style="width:100%">
+<div class="record-drop-down tc-popup-keep" style="line-height:26px;padding:8px;margin:0 3em;">
+<ul><$list filter="[prefix<task-state-prefix>]"><li><$link to={{!!title}}/></li></$list></ul>
 </div>
 </$reveal>
 <table class="task-info"><tbody>
@@ -198,11 +203,13 @@ TBC:" date=<<dt>> celltpl="custom-template-journal" kw="unset" description="<$te
 <$button set="!!date" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">N.A.</$button>
 </$view></td>
 <td><$transclude $variable="days-passed" start={{!!date}} end={{!!finish}}/></td>
-<td><$list filter="[all[current]has[finish]]" emptyMessage=<<tasks-today>>>
+<td><%if [all[current]has[finish]] %>
 <$set name="pattern" value="<<[a]\s.+>>">⚔️ <$count filter="[{!!text}matches<pattern>]"/></$set>
-</$list></td>
+<%else%>
+<$button popup="$:/state/popup/task/a/$(currentTiddler)$" class="tc-btn-invisible"><<tasks-today>></$button>
+<%endif%></td>
 <td>
-<$button popup="$:/state/popup/task/$(currentTiddler)$" class="tc-btn-invisible">📅 <$count filter="[all[tiddlers]tag[Tasks/Journal]has:index<currentTiddler>]"/></$button>
+<$button popup="$:/state/popup/task/cal/$(currentTiddler)$" class="tc-btn-invisible">📅 <$count filter="[all[tiddlers]tag[Tasks/Journal]has:index<currentTiddler>]"/></$button>
 </td>
 <td><$view field="finish" format="date" template="YYYY-0MM-0DD">
 <$button set="!!finish" setTo=<<now "YYYY0MM0DD">> class="tc-btn-invisible">
