@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20251218174530704
+modified: 20260118075015007
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -24,7 +24,7 @@ pre > code.hljs.md {white-space: break-spaces;}
 
 /* For Macro: display */
 .tips, .warning, .danger, .question {display: inline-block; border-radius: 0.2rem; padding: 0 0.75rem 0 0.55rem;}
-.tips {color: #828500; background-color: #eaff6a; border-color: #667700;}
+.tips {color: #828500; background-color: #f7fb4b; border-color: #667700;}
 .tips::before {content: '💡 ';}
 .warning {color: #8a6d3b; background-color: #ffef9b; border-color: #faebcc;}
 .warning::before {content: '⚠️ ';}

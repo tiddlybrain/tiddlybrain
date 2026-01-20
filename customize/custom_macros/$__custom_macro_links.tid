@@ -1,6 +1,6 @@
 created: 20190202180006460
 creator: yuzijie
-modified: 20250802112637242
+modified: 20260115154112394
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/links
@@ -44,7 +44,9 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>Copy File Path</$button> &middot;
 <$set name="filename" filter="[<path>split[/]last[]]" select="0"><$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<filename>> tooltip=<<filename>>>Copy File Name</$button></$set> &middot;
 <$set name="path" filter="[<path>parentPath[]]" select="0"><$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>Copy File Dir</$button></$set> &middot;
-<$set name="url" filter="[<path>addprefix[./files/ext/]]" select="0"><a href=<<url>> target="_blank" title=<<url>> class="light-color" rel="noopener noreferrer">Download</a></$set>
+<$let ext={{{ [[$:/config/index-tree]get[path]splitregexp[/|\\|:]!is[blank]join[-]addprefix[./files/]] }}} url={{{ [<ext>] [<path>] +[join[/]] }}}>
+<a href=<<url>> target="_blank" title=<<url>> class="light-color" rel="noopener noreferrer">Download</a>
+</$let>
 </div></$list>
 <$list filter="[all[current]get[dir]]" variable="path"><div class="external-links" style="background:#e4ffda;">
 <$button class="tc-btn-invisible light-color" message="tm-copy-to-clipboard" param=<<whole-path>> tooltip=<<whole-path>>>Copy Directory Path</$button>

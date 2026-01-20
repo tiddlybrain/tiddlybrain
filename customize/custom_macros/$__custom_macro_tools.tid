@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20260104105324755
+modified: 20260116152700992
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -394,10 +394,10 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\procedure more(topic)
+\procedure more(topic, open)
 <$let current={{{ [all[current]get[draft.of]else<currentTiddler>] }}} topic={{{ [<topic>!is[blank]else<key>!is[blank]else{!!note}] }}} count={{{ [all[tiddlers]belongs.to<current>note<topic>count[]] }}} key=<<topic>> currentTiddler=<<current>>>
 <$droppable actions=<<snippet-drop-actions>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
-<$details summary=`$(topic)$ ($(count)$)`><$transclude $variable="snippet" key=<<topic>>/></$details>
+<$details summary=`$(topic)$ ($(count)$)` open=<<open>>><$transclude $variable="snippet" key=<<topic>>/></$details>
 </div></$droppable>
 </$let>
 \end
@@ -508,4 +508,5 @@ type: text/vnd.tiddlywiki
 #> `<<tag-list>>`
 # ''使用 Details 包裹的 Snippets, 主要用于显示附录内容''
 #> `<<more
-  topic:"note 角色">>`
+  topic:"note 角色"
+  open:"details widget 是否默认打开">>`

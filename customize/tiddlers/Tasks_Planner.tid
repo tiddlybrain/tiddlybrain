@@ -2,7 +2,7 @@ caption: Planner
 created: 20210112195245238
 creator: yuzijie
 keywords: 
-modified: 20260102215309994
+modified: 20260115155558498
 modifier: yuzijie
 order: 1
 tags: Tasks customized
@@ -44,15 +44,6 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
 </$list>
 </h2>
-<$list filter="[all[tiddlers]tag[Task]!has[draft.of]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
-<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
-<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><div><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
-<$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
-</$button></div></$list>
-</$set>
-</$list></$list>
-</$set>
-</$set>
 <$list filter="[all[tiddlers]tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
 <$list filter="[all[tiddlers]tag[Task]status[Urgent]sort[modified]]"><<task-pill color:"#ffc1ed">></$list>
 <$set name="summary" filter="[all[tiddlers]tag[Task]status[LowPriority]count[]addprefix[Low Priority: ]]" select="0">
@@ -63,4 +54,13 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$list filter="[all[tiddlers]tag[Task]status[Onhold]sort[modified]]"><<task-pill color:"#fff38a">></$list>
 <$list filter="[all[tiddlers]tag[Task]status[Todo]sort[modified]]"><<task-pill>></$list>
 </$details>
+<$list filter="[all[tiddlers]tag[Task]!has[draft.of]]" variable="task"><$list filter="[<task>finishedStepNames<curDate>]">
+<$set name="journal-cell-list" filter="[<journal-title>getindex<task>splitregexp[\s*;;\s*]!is[blank]format:titlelist[]join[ ]]" select="0">
+<$list filter="[<currentTiddler>!enlist<journal-cell-list>]"><div><$button class="tc-btn-invisible tc-tiddlylink" style="color:red;">Done: <<currentTiddler>>
+<$list filter="[<journal-title>is[tiddler]]" variable="NONE"><$transclude $variable="add-to-cell-action" title=<<journal-title>> index=<<task>> content=<<currentTiddler>>/></$list>
+</$button></div></$list>
+</$set>
+</$list></$list>
+</$set>
+</$set>
 <div style="margin:11px 0 3em;"><<task-list>></div>
