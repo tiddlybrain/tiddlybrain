@@ -1,0 +1,10 @@
+modified: 20260127155734146
+modifier: yuzijie
+tags: $:/tags/SideBarSegment customized
+title: $:/core/ui/SideBarSegments/page-controls
+type: text/vnd.tiddlywiki
+
+<div class="page-controls-hover">
+{{||$:/core/ui/PageTemplate/pagecontrols}}
+{{$:/custom/ui/SideBarSegments/open}}
+</div>

@@ -1,6 +1,6 @@
 created: 20240804100058458
 creator: yuzijie
-modified: 20240805015119613
+modified: 20260127101741198
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/EditorToolbar/embedding-dropdown
@@ -13,12 +13,13 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-modal" $param="$:/custom/template/normal-modal" mTitle="Attachments"/>
 </$button>
 
-''Embedding new images, pdfs, mp3, etc.''
+''Embedding external images, pdfs, mp3, etc.''
 
 <table style="width:100%" class="embed"><tbody>
 <tr>
 <th>File Path</th>
-<td><$edit-text tag="textarea" tiddler="$:/state/embedding" field="_canonical_uri" default="./files/" focus="true" inputActions=<<caption-input-action>>/></td>
+<td><$edit-text tag="textarea" tiddler="$:/state/embedding" field="_canonical_uri" default="./files/
+" focus="true" inputActions=<<caption-input-action>>/></td>
 </tr>
 <tr>
 <th>File Caption</th>

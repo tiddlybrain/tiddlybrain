@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20260125190010113
+modified: 20260127163838152
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -13,6 +13,11 @@ type: text/vnd.tiddlywiki
 .underline {border: none; border-bottom: 1px solid #ccc;}
 .description {color: #aaa;}
 .font-bold {font-weight: bold;}
+
+/* Sidebar Segments */
+.page-controls-hover .sidebar-open {max-height: 0; overflow: hidden; transition: max-height 0.6s ease;}
+.page-controls-hover .sidebar-open > div:first-child {margin-top: 1.3em;}
+.page-controls-hover:hover .sidebar-open {max-height: 100vh;}
 
 /* For Highlight.js */
 pre > code.hljs.md {white-space: break-spaces;}
