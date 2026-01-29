@@ -1,15 +1,23 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20250829131644738
+modified: 20260129155849671
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
 type: text/vnd.tiddlywiki
 
-\define l(title, text, class:"l", mode:"link", links, style, description, note:"yes", date, parent, status:"yes", tag-list, tag)
+\define link-helper(sync-title, text)
+<$list filter="[all[current]untagged[]]"> ⚠️ </$list>
+<%if [<__sync-title__>match[yes]] %><%if [{!!caption}!match<__text__>] %>
+<$button set="!!caption" setTo=<<__text__>>>Sync Title</$button>
+<%endif%><%endif%>
+\end
+
+\define l(title, text, class:"l", mode:"link", links, style, description, note:"yes", date, parent, status:"yes", tag-list, tag, sync-title)
 \whitespace trim
 <$let parent=<<currentTiddler>>><$tiddler tiddler=<<__title__>>>
-<$list filter="[<__mode__>match[link]]" variable="link-mode"><span style="white-space:nowrap;$style$"><$set name="current" value=<<mTitle>>>
+<$list filter="[<__mode__>match[link]]" variable="link-mode">
+<span style="white-space:nowrap;$style$"><$set name="current" value=<<mTitle>>>
 <$list filter="[<__tag-list__>match[yes]]" variable="NONE"><<tag-list>></$list>
 <$list filter="[<__links__>match[yes]]" variable="NONE"><<links>></$list>
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} tooltip={{!!title}} class="tc-btn-invisible tc-tiddlylink $class$" tag=<<__tag__>> style={{{ [all[current]note[TODO]then[color:red;font-weight:bold;]] }}}>
@@ -30,10 +38,11 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#aaa;-&#32;{{!!description}}@@</$list>
 </$list>
 </$button>
-<$list filter="[all[current]untagged[]]"> ⚠️ </$list>
-</$set></span></$list>
-<$list filter="[<__mode__>match[tr]]" variable="link-mode"><$set name="sty" filter="[all[current]is[image]]" value="width:fit-content;$style$" emptyValue="$style$">
-<div class="$class$ tr" style=<<sty>>>
+<$transclude $variable="link-helper" sync-title=<<__sync-title__>> text=<<__text__>>/>
+</$set></span>
+</$list>
+<$list filter="[<__mode__>match[tr]]" variable="link-mode">
+<$set name="sty" filter="[all[current]is[image]]" value="width:fit-content;$style$" emptyValue="$style$"><div class="$class$ tr" style=<<sty>>>
 <$transclude $variable="l" links="yes" title=<<currentTiddler>> text=<<__text__>> description=<<__description__>> note=<<__note__>> date=<<__date__>> parent=<<__parent__>> status=<<__status__>> tag=<<__tag__>> style="display:block;"/>
 <$list filter="[all[current]!type[text/plain]]" emptyMessage="<$codeblock code={{!!text}} language={{{ [all[current]get[language]else[text]] }}}/>">
 <$list filter="[all[current]!type[application/x-tiddler-dictionary]]" emptyMessage="<<data-table>>"><$transclude mode="block"/></$list>
@@ -41,14 +50,17 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]!tag[Ignore]!tag[customized]type[text/vnd.tiddlywiki]!search:title:literal[/]tagging[]limit[1]]" variable="NONE">
 <$transclude $variable="sort-by-tags" cat-prefix={{!!cat-prefix}} cat-filter={{!!cat-filter}} cfilter={{!!cfilter}} tag-caption={{!!tag-caption}} init={{!!init}}/>
 </$list>
-</div>
-</$set></$list>
-<$list filter="[<__mode__>match[cl]]" variable="link-mode">
-<$transclude $variable="collapse" title=<<currentTiddler>> text=<<__text__>> class="$class$ cl" tag=<<__tag__>> style=<<__style__>> more-text="""<$list filter="[<__date__>match[yes]]" variable="NONE">@@color:#666;(<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)@@</$list><$list filter="[all[current]untagged[]]"> ⚠️ </$list><$list filter="[<__description__>match[yes]]" variable="NONE"><$list filter="[all[current]has[description]]">@@color:#aaa; - {{!!description}}@@</$list></$list>""" external-links="yes" current-title="yes" note=<<__note__>>/>
+</div></$set>
 </$list>
-<$list filter="[<__mode__>match[s]]" variable="link-mode"><$let caption={{!!caption}}><$tiddler tiddler=<<parent>>>
-<$let step-name={{{ [<__text__>is[blank]then<caption>else<__text__>] }}}><$transclude $variable="s" step=<<step-name>> comments=<<__title__>>/></$let>
-</$tiddler></$let></$list>
+<$list filter="[<__mode__>match[cl]]" variable="link-mode">
+<$transclude $variable="collapse" title=<<currentTiddler>> text=<<__text__>> class="$class$ cl" tag=<<__tag__>> style=<<__style__>> more-text="""<$list filter="[<__date__>match[yes]]" variable="NONE">@@color:#666;(<$view field="date" format="date" template="YYYY-0MM-0DD"><$view field="modified" format="date" template="YYYY-0MM-0DD"/></$view>)@@</$list><$transclude $variable="link-helper" sync-title=<<__sync-title__>> text=<<__text__>>/><$list filter="[<__description__>match[yes]]" variable="NONE"><$list filter="[all[current]has[description]]">@@color:#aaa; - {{!!description}}@@</$list></$list>""" external-links="yes" current-title="yes" note=<<__note__>>/>
+</$list>
+<$list filter="[<__mode__>match[s]]" variable="link-mode">
+<$let caption={{!!caption}} step-name={{{ [<__text__>is[blank]then<caption>else<__text__>] }}}>
+<$tiddler tiddler=<<parent>>><$transclude $variable="s" step=<<step-name>> comments=<<__title__>>/></$tiddler>
+<$transclude $variable="link-helper" sync-title=<<__sync-title__>> text=<<__text__>>/>
+</$let>
+</$list>
 </$tiddler></$let>
 \end
 
@@ -135,7 +147,8 @@ filter <$transclude $variable="list-filters" title="backlink/$uid$" filter=<<bl-
   parent:"是否显示 belongs.to"
   status:"是否显示 status"
   tag-list: "是否显示 tag-list"
-  tag:"link 模式下, 是 button 的 tag 类型; tr 模式下, 是标题的 tag 类型; cl 模式下, 是 collapse-title 的 tag 类型">>`
+  tag:"link 模式下, 是 button 的 tag 类型; tr 模式下, 是标题的 tag 类型; cl 模式下, 是 collapse-title 的 tag 类型"
+  sync-title:"是否将 text 的内容和 tiddler 的 caption 同步">>`
 # ''按照 filter 来反查指向当前 Tiddler 的所有 Tiddlers''
 #> `<<bl-filter
   item-filter:"主要筛选条件, 在 bl-pattern 之前"
