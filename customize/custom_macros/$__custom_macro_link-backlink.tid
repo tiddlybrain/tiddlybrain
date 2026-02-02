@@ -1,13 +1,14 @@
 created: 20220901004104753
 creator: yuzijie
-modified: 20260129155849671
+modified: 20260202093415371
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/link-backlink
 type: text/vnd.tiddlywiki
 
 \define link-helper(sync-title, text)
-<$list filter="[all[current]untagged[]]"> ⚠️ </$list>
+\whitespace trim
+<$list filter="[all[current]untagged[]]">⚠️</$list>
 <%if [<__sync-title__>match[yes]] %><%if [{!!caption}!match<__text__>] %>
 <$button set="!!caption" setTo=<<__text__>>>Sync Title</$button>
 <%endif%><%endif%>
