@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20260129212633187
+modified: 20260202091956833
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -36,19 +36,6 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 </h2>
 
 <$droppable actions=<<droppable-task-list-actions>> tag="div"><ol style="color:#333;line-height:24px;overflow:hidden;">
-<$set name="list-steps" filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]!pause<curDate>]">
-<$list filter="[<list-steps>enlist-input[]] :map[split[/]nth[3]] +[unique[]]"><li>
-<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">{{!!caption}}</$button>
-<ul><$let p={{{ [{!!title}addsuffix[/]] }}}><$list filter="[<list-steps>enlist-input[]search:title:literal<p>text[doing]]">
-<$list filter="[<journal-title>getindex<currentTiddler>split[;;]match{!!caption}]" emptyMessage="""<li style="white-space:nowrap;">
-<$button set="!!plan" setTo=<<today>>>Plan<$list filter="[<journal-title>is[tiddler]!has:index<currentTiddler>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currentTiddler>> $value=""/></$list></$button>
-<$button set="!!pause" setTo=<<curDate>>>Pause</$button>
-<$button class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
-</li>"""> </$list>
-</$list></$let></ul>
-</li></$list>
-</$set>
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[deadline]!pause<curDate>sort[date]]"><li style="white-space:nowrap;">
 <span class="tc-tag-label" style="background-color:#cd23d8;">Deadline</span>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button><<task-list-deadline>>
@@ -59,6 +46,19 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]contains:plan<curDate>]">
 <li style="white-space:nowrap;"><<task-list-open>></li>
 </$list>
+<$set name="list-steps" filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]!pause<curDate>]">
+<$list filter="[<list-steps>enlist-input[]] :map[split[/]nth[3]] +[unique[]]"><li>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">''{{!!caption}}''</$button>
+<ul><$let p={{{ [{!!title}addsuffix[/]] }}}><$list filter="[<list-steps>enlist-input[]search:title:literal<p>text[doing]]">
+<$list filter="[<journal-title>getindex<currentTiddler>split[;;]match{!!caption}]" emptyMessage="""<li style="white-space:nowrap;">
+<$button set="!!plan" setTo=<<today>>>Plan<$list filter="[<journal-title>is[tiddler]!has:index<currentTiddler>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currentTiddler>> $value=""/></$list></$button>
+<$button set="!!pause" setTo=<<curDate>>>Pause</$button>
+<$button class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
+</li>"""> </$list>
+</$list></$let></ul>
+</li></$list>
+</$set>
 </ol></$droppable>
 <$list filter="[<journal-title>is[tiddler]]"><table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>

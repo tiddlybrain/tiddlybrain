@@ -2,7 +2,7 @@ caption: Planner
 created: 20210112195245238
 creator: yuzijie
 keywords: 
-modified: 20260115155558498
+modified: 20260202092333202
 modifier: yuzijie
 order: 1
 tags: Tasks customized
@@ -41,7 +41,10 @@ type: text/vnd.tiddlywiki
 <$action-createtiddler $basetitle=<<journal-title>> tags="Tasks/Journal Ignore" type="application/x-tiddler-dictionary" text="Journals:
 TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description="<$text text={{{ [{!!date}format:date[DDD, Week WW]] }}}/>"/>
 </$button></$list>""">
-<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}><$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>Go</$button>
+<$button set="$:/temp/plan/date" setTo={{{ [all[current]split[-]join[]] }}}>Go
+<$action-setfield $tiddler="$:/state/tasks-1742033064" text="Tasks/Actions"/>
+<$action-deletetiddler $tiddler="$:/temp/plan/date/draft"/>
+</$button>
 </$list>
 </h2>
 <$list filter="[all[tiddlers]tag[Task]!has[status]sort[modified]]"><<task-pill>></$list>
