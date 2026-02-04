@@ -1,6 +1,6 @@
 created: 20160605213910575
 creator: yuzijie
-modified: 20260128064048906
+modified: 20260204082204097
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/body
@@ -218,7 +218,7 @@ label.tc-check-btn input:checked ~ span, button.tc-checked-btn {box-shadow: inse
 button.list-item-template {display: block; padding: 4px 10px; color: #5778d8;}
 .tc-editor-toolbar button.list-item-template {background-color: transparent;}
 button.list-item-template:hover {color: #ffffff; background-color: #5778d8; font-weight: 500;}
-nav.tc-menubar li.tc-menubar-item .tc-block-dropdown .tc-menu-list-item:hover svg {fill: white;}
+nav.tc-menubar li.tc-menubar-item .tc-block-dropdown button.list-item-template:hover svg {fill: white;}
 
 /* Highlight Current Tiddler */
 [data-tiddler-title="{{$:/HistoryList!!current-tiddler}}"] {border: 1px solid #7d95d9;}
