@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20260202094136215
+modified: 20260205094654117
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -52,6 +52,9 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 </$list></$let></ul>
 </li></$list>
 </$set>
+<$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]">
+<li style="white-space:nowrap;"><<task-list-doing>></li>
+</$list>
 </ol></$droppable>
 <$list filter="[<journal-title>is[tiddler]]"><table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
@@ -80,9 +83,6 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 </$button></li></$list>
 </$set>
 </$list></$list>
-<$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]">
-<li style="white-space:nowrap;"><<task-list-doing>></li>
-</$list>
 </ol>
 
 <hr>
