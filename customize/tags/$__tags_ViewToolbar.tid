@@ -1,7 +1,0 @@
-created: 20251005134007684
-creator: yuzijie
-list: $:/core/ui/Buttons/more-tiddler-actions $:/core/ui/Buttons/info $:/core/ui/Buttons/fold $:/core/ui/Buttons/clone $:/core/ui/Buttons/export-tiddler $:/core/ui/Buttons/edit $:/core/ui/Buttons/delete $:/core/ui/Buttons/permalink $:/core/ui/Buttons/permaview $:/core/ui/Buttons/open-window $:/core/ui/Buttons/close-others $:/core/ui/Buttons/close $:/core/ui/Buttons/fold-others $:/core/ui/Buttons/fold-bar $:/custom/ui/Buttons/copy-step $:/custom/ui/Buttons/edit-cell-template $:/custom/ui/Buttons/edit-template $:/custom/ui/Buttons/open-in-sidebar
-modified: 20251005134007684
-modifier: yuzijie
-title: $:/tags/ViewToolbar
-type: text/vnd.tiddlywiki
