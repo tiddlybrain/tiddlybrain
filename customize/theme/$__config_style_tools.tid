@@ -1,6 +1,6 @@
 created: 20160708093003717
 creator: yuzijie
-modified: 20260127163838152
+modified: 20260210082506059
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/tools
@@ -261,7 +261,7 @@ button.l {line-height: inherit;}
 .modal-buttons button.l svg {vertical-align: middle; font-size: smaller; fill:#5778d8;}
 .l > button.collapse-title {padding: 0; background: transparent; border: none;}
 .l > button.collapse-title:hover {text-decoration: underline;}
-.l > button.collapse-title > svg {font-size: small;}
+.l > button.collapse-title > svg {font-size: small; height: 1.1em; width: 1.1em;}
 .l > h1.collapse-title > svg {width: 16pt; height: 16pt; fill: #999; transform: translateY(2px);}
 .l > h2.collapse-title > svg {width: 14pt; height: 14pt; fill: #999; transform: translateY(2px);}
 .l > h3.collapse-title > svg {width: 12pt; height: 12pt; fill: #999; transform: translateY(2px);}
