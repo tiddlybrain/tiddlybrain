@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20260206095657207
+modified: 20260211103206417
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -173,7 +173,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
 <$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<mTitle>>>
-&#10005; <<mTitle>><$transclude $variable="tiddler-close"/>
+<<mTitle>><$transclude $variable="tiddler-close"/>
 </$button> &middot;
 <$list filter="[all[current]!type[text/plain]]"><$button class="tc-btn-invisible" actions=<<step-action>>>Step</$button> &middot;</$list>
 <$list filter="[all[current]type[text/plain]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>Content</$button> &middot;</$list>
@@ -396,11 +396,13 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\procedure more(topic, open)
+\procedure more(topic, open, actions, tags, celltpl)
 <$let current={{{ [all[current]get[draft.of]else<currentTiddler>] }}} topic={{{ [<topic>!is[blank]else<key>!is[blank]else{!!note}] }}} count={{{ [all[tiddlers]belongs.to<current>note<topic>count[]] }}} key=<<topic>> currentTiddler=<<current>>>
-<$droppable actions=<<snippet-drop-actions>> tag="div"><div class="tc-droppable-placeholder" style="display:block;">
+<$droppable actions="<$transclude $variable=snippet-drop-actions actions=<<actions>> tags=<<tags>> celltpl=<<celltpl>>/>" tag="div">
+<div class="tc-droppable-placeholder" style="display:block;">
 <$details summary=`$(topic)$ ($(count)$)` open=<<open>>><$transclude $variable="snippet" key=<<topic>>/></$details>
-</div></$droppable>
+</div>
+</$droppable>
 </$let>
 \end
 
@@ -511,4 +513,7 @@ type: text/vnd.tiddlywiki
 # ''使用 Details 包裹的 Snippets, 主要用于显示附录内容''
 #> `<<more
   topic:"note 角色"
-  open:"details widget 是否默认打开">>`
+  open:"details widget 是否默认打开"
+  actions:"snippet-drop-actions 的 actions 选项"
+  tags:"snippet-drop-actions 的 tags 选项"
+  celltpl:"snippet-drop-actions 的 celltpl 选项">>`

@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20260127155031138
+modified: 20260211104800792
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/SideBarSegments/open
@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 </$set>
 </$set>
 <$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible tc-tiddlylink" tooltip={{!!description}}>
-<%if [<folded-state>text[hide]] %><<modal-actions>><%else%><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/><%endif%>
+<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]">@@color:#555;<$transclude field="caption"/>@@ &middot; </$list><$view field="title"/>
@@ -58,10 +58,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
 </$let>
 </$button>
-<%if [all[current]!has[draft.of]] %><div class="sidebar-item-hover">
-&middot; <$button actions=<<modal-actions>> class="tc-btn-invisible" style="color:#bbb;">popup</$button>
-&middot; <$button class="tc-btn-invisible" style="color:#bbb;"><<open-in-sidebar close:"no">>sidebar</$button>
-</div><%endif%>
 </div>
 </$list>
 <div class="tc-sidebar-tab-open-item"><$let tv-config-toolbar-text="yes" tv-config-toolbar-icons="no">

@@ -1,6 +1,6 @@
 caption: {{$:/language/SideBar/Open/Caption}} <$count filter="[list<tv-story-list>]"/>
 is-dropdown: yes
-modified: 20260129214155837
+modified: 20260211105135076
 modifier: yuzijie
 tags: customized $:/tags/MenuBar
 title: $:/core/ui/SideBar/Open
@@ -58,7 +58,7 @@ $button$
 <$list filter=<<sidebar-list>> history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
 <$transclude $variable="droppable-item" button="""<$button dragTiddler=<<currentTiddler>> class="tc-btn-invisible sidebar-tab-open-btn">
-<%if [<folded-state>text[hide]] %><<modal-actions>><%else%><$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/><%endif%>
+<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
 <$let tv-wikilinks="no">
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$list filter="[all[current]has[caption]]"><$transclude field="caption"/> &middot; </$list><$view field="title"/>
