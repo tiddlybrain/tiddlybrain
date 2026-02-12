@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20260205094654117
+modified: 20260211122630586
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -42,7 +42,7 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$set name="list-steps" filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]!pause<curDate>]">
 <$list filter="[<list-steps>enlist-input[]] :map[split[/]nth[3]] +[unique[]]"><li>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
-<$button to={{!!title}} dragTiddler={{!!title}} class="tc-btn-invisible">''{{!!caption}}''</$button>
+<$button actions="<$transclude $variable=tiddler-open tiddler=<<currentTiddler>>/>" dragTiddler={{!!title}} class="tc-btn-invisible">''{{!!caption}}''</$button>
 <ul><$let p={{{ [{!!title}addsuffix[/]] }}}><$list filter="[<list-steps>enlist-input[]search:title:literal<p>text[doing]]">
 <$list filter="[<journal-title>getindex<currentTiddler>split[;;]match{!!caption}]" emptyMessage="""<li style="white-space:nowrap;">
 <$button set="!!plan" setTo=<<today>>>Plan<$list filter="[<journal-title>is[tiddler]!has:index<currentTiddler>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currentTiddler>> $value=""/></$list></$button>
