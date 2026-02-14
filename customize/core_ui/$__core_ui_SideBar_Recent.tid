@@ -1,12 +1,12 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
-modified: 20251205102305457
+modified: 20260214072945489
 modifier: yuzijie
 tags: customized
 title: $:/core/ui/SideBar/Recent
 type: text/vnd.tiddlywiki
 
 <h2 style="color:#666;margin-top:-5px;">Searched</h2>
-<$list filter="[enlist{$:/config/recent-search!!list}is[tiddler]!is[system]!tag[customized]limit[8]]">
+<$list filter="[enlist{$:/config/recent-search!!list}is[tiddler]!is[system]!tag[customized]limit[6]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button actions=<<modal-actions>> dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$action-listops $tiddler="$:/config/recent-search" $field="list" $subfilter="[<currentTiddler>] +[putfirst[]]"/>
@@ -18,9 +18,10 @@ type: text/vnd.tiddlywiki
 </$list>
 
 <h2 style="color:#666;">Sidebar</h2>
-<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[8]]">
+<$list filter="[enlist{$:/config/index-tree!!list}is[tiddler]limit[6]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
-<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink"><<open-in-sidebar close:"no">>
+<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<<open-in-sidebar close:"no">>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$transclude field="caption"><$view field="title"/></$transclude>
 <$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
@@ -29,7 +30,19 @@ type: text/vnd.tiddlywiki
 </$list>
 
 <h2 style="color:#666;">Closed</h2>
-<$list filter="[recentlyClosed[]!is[missing]!is[system]limit[5]]">
+<$list filter="[recentlyClosed[]!is[missing]!is[system]limit[4]]">
+<div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
+<$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
+<$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
+<$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
+<$transclude field="caption"><$view field="title"/></$transclude>
+<$list filter="[all[current]has[description]]">@@color:#aaa;- {{!!description}}@@</$list>
+</$button>
+</div>
+</$list>
+
+<h2 style="color:#666;">Folded</h2>
+<$list filter="[all[tiddlers]prefix[$:/state/folded/]] :map[split[/]nth[4]]">
 <div class="tc-sidebar-tab-open-item" style="padding:0 10px;">
 <$button dragTiddler={{!!title}} class="tc-btn-invisible tc-tiddlylink">
 <$transclude $variable="tiddler-open" tiddler=<<currentTiddler>>/>
