@@ -2,12 +2,14 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20260211122630586
+modified: 20260218110214718
 modifier: yuzijie
 order: 2
 tags: Tasks customized
 title: Tasks/Actions
 type: text/vnd.tiddlywiki
+
+\define done-today() [[$(journal-title)$]getindex<..currentTiddler>split[;;]match{!!caption}]
 
 <$set name="curDate" filter="[[$:/temp/plan/date]get[text]regexp<date-pattern>else<now YYYY0MM0DD>]" select="0">
 <$vars today=<<curDate>> dt=<<curDate>>><$set name="journal-title" filter="[<curDate>format:date[YYYY-0MM-0DD]]" select="0">
@@ -39,22 +41,23 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$list filter="[all[tiddlers]prefix[$:/task-state/]text[open]contains:plan<curDate>]">
 <li style="white-space:nowrap;"><<task-list-open>></li>
 </$list>
-<$set name="list-steps" filter="[all[tiddlers]prefix[$:/task-state/]!has[plan]!pause<curDate>]">
+<$set name="list-steps" filter="[all[tiddlers]prefix[$:/task-state/]text[doing]!pause<curDate>]">
 <$list filter="[<list-steps>enlist-input[]] :map[split[/]nth[3]] +[unique[]]"><li>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$button actions="<$transclude $variable=tiddler-open tiddler=<<currentTiddler>>/>" dragTiddler={{!!title}} class="tc-btn-invisible">''{{!!caption}}''</$button>
-<ul><$let p={{{ [{!!title}addsuffix[/]] }}}><$list filter="[<list-steps>enlist-input[]search:title:literal<p>text[doing]]">
-<$list filter="[<journal-title>getindex<currentTiddler>split[;;]match{!!caption}]" emptyMessage="""<li style="white-space:nowrap;">
+<ul><$let p={{{ [{!!title}addsuffix[/]] }}}><$list filter="[<list-steps>enlist-input[]search:title:literal<p>!filter<done-today>]" emptyMessage="<li><$count filter='[<list-steps>enlist-input[]search:title:literal<p>]'/> unfinished steps remaining.</li>">
+<%if [all[current]contains:plan<curDate>] %>
+<li style="white-space:nowrap;"><<task-list-doing>></li>
+<%else%>
+<li style="white-space:nowrap;">
 <$button set="!!plan" setTo=<<today>>>Plan<$list filter="[<journal-title>is[tiddler]!has:index<currentTiddler>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currentTiddler>> $value=""/></$list></$button>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button>
 <$button class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
-</li>"""> </$list>
+</li>
+<%endif%>
 </$list></$let></ul>
 </li></$list>
 </$set>
-<$list filter="[all[tiddlers]prefix[$:/task-state/]text[doing]contains:plan<curDate>!sort[modified]]">
-<li style="white-space:nowrap;"><<task-list-doing>></li>
-</$list>
 </ol></$droppable>
 <$list filter="[<journal-title>is[tiddler]]"><table style="width:100%;background:white;table-layout:fixed;"><tbody>
 <tr><th>Tasks</th><th>Progress</th></tr>
