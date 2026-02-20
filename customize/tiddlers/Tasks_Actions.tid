@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20260218110214718
+modified: 20260218224941158
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -45,7 +45,7 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <$list filter="[<list-steps>enlist-input[]] :map[split[/]nth[3]] +[unique[]]"><li>
 <$list filter="[all[current]has[note]]">@@color:green;[{{!!note}}]@@</$list>
 <$button actions="<$transclude $variable=tiddler-open tiddler=<<currentTiddler>>/>" dragTiddler={{!!title}} class="tc-btn-invisible">''{{!!caption}}''</$button>
-<ul><$let p={{{ [{!!title}addsuffix[/]] }}}><$list filter="[<list-steps>enlist-input[]search:title:literal<p>!filter<done-today>]" emptyMessage="<li><$count filter='[<list-steps>enlist-input[]search:title:literal<p>]'/> unfinished steps remaining.</li>">
+<ul><$let p={{{ [{!!title}addsuffix[/]] }}}><$list filter="[<list-steps>enlist-input[]search:title:literal<p>!filter<done-today>]" emptyMessage="<li><$count filter='[all[tiddlers]prefix[$:/task-state/]text[doing]search:title:literal<p>]'/> unfinished steps remaining.</li>">
 <%if [all[current]contains:plan<curDate>] %>
 <li style="white-space:nowrap;"><<task-list-doing>></li>
 <%else%>

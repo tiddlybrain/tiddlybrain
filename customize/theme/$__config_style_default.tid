@@ -1,6 +1,6 @@
 created: 20161004083139252
 creator: yuzijie
-modified: 20251206163336471
+modified: 20260220094819724
 modifier: yuzijie
 tags: $:/tags/Stylesheet customized
 title: $:/config/style/default
@@ -26,6 +26,8 @@ button.tc-btn-invisible {font-weight: inherit;}
 button.normal-weight, a.normal-weight {font-weight: 400;}
 
 button:disabled, button[disabled] {color: #ccc; cursor: not-allowed;}
+
+strike > span > button.tc-tiddlylink {text-decoration-line: line-through;}
 
 a.light-color, button.light-color {color: #666;}
 
