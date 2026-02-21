@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20260218224941158
+modified: 20260220095929839
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -91,5 +91,5 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <hr>
 
 <$list filter="[<journal-title>is[tiddler]]">
-<<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]]" style:"table-layout:auto;">>
+<<data-table filter:"[all[current]indexes[]!prefix[--]!tag[Task]!tag[Ignore]]" style:"table-layout:auto;">>
 </$list>
