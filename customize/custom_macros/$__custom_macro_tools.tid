@@ -1,6 +1,6 @@
 created: 20190928115034446
 creator: yuzijie
-modified: 20260211103206417
+modified: 20260227042553241
 modifier: yuzijie
 tags: $:/tags/Macro customized
 title: $:/custom/macro/tools
@@ -160,7 +160,11 @@ type: text/vnd.tiddlywiki
 
 \define modal-subtitle()
 <$list filter="[<mTitle>!is[missing]]"><$let modal="yes" current=<<mTitle>>>
+<$button tag="span" message="tm-close-tiddler" style="cursor:pointer;">
+<$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
+<$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
 <$transclude field="caption"><$view field="title"/></$transclude>
+</$button>
 <$list filter="[all[current]has[note]]"><$list filter="[{!!note}is[tiddler]]" emptyMessage="@@color:green;[{{!!note}}]@@">
 <$button actions=<<modal-actions>> tag="span" style="color:green;cursor:pointer;">[{{!!title}}]</$button>
 </$list></$list> <<status-selector>> <<verification-notice>> <<tbc-notice>>
@@ -172,16 +176,16 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[all[current]has[description]]">@@color:#999;- {{!!description}}@@</$list>
 <div style="float:right;font-size:smaller;">
-<$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<mTitle>>>
-<<mTitle>><$transclude $variable="tiddler-close"/>
-</$button> &middot;
+<$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param=<<mTitle>>><$transclude $variable="tiddler-close"/><<mTitle>></$button> &middot;
 <$list filter="[all[current]!type[text/plain]]"><$button class="tc-btn-invisible" actions=<<step-action>>>Step</$button> &middot;</$list>
 <$list filter="[all[current]type[text/plain]]"><$button class="tc-btn-invisible" message="tm-copy-to-clipboard" param={{{ [<mTitle>get[text]] }}}>Content</$button> &middot;</$list>
-<span style="color:brown;font-weight:500;"><$let ym={{{ [all[current]get[date]else{!!modified}format:date[YYYY-0MM]] }}}>
+<$button tag="span" message="tm-close-tiddler" style="cursor:pointer;color:brown;font-weight:500;"><$transclude $variable="tiddler-close"/>
+<$let ym={{{ [all[current]get[date]else{!!modified}format:date[YYYY-0MM]] }}}>
 <$list filter="[<mTitle>get[interval]]" emptyMessage=<<ym>> variable="interval">
 <%if [<interval>search:title:literal[-]] %>Next {{!!interval}}<%else%><$transclude $variable=days-passed start={{!!date}}/><%endif%>
 </$list>
-</$let></span>
+</$let>
+</$button>
 </div>
 </$let></$list>
 \end
@@ -200,11 +204,6 @@ type: text/vnd.tiddlywiki
 <div style="display:inline-block;vertical-align:middle;">
 <$list filter="[<mTitle>!is[missing]]">
 <$button message="tm-close-tiddler">OPEN
-<$list filter="[[$:/state/modal/editor]is[tiddler]]" variable="NONE"><$tiddler tiddler=<<mTitle>>><$set name="parents" filter="[{!!belongs.to}getAllParents[]]">
-<$let keywords={{{ [{!!belongs.to}getAllParentTitles[]] [<currentTiddler>getAllTitles[]] [<currentTiddler>type[application/x-tiddler-dictionary]getAllIndexTitles[]] +[unique[]sortan[]join[, ]] }}}>
-<$action-setfield $timestamp="no" keywords=<<keywords>> parents=<<parents>>/>
-</$let>
-</$set></$tiddler></$list>
 <$transclude $variable="tiddler-open" tiddler=<<mTitle>>/>
 <$action-deletetiddler $filter="[[$:/state/modal/history]] [[$:/state/modal/editor]]"/>
 </$button>
