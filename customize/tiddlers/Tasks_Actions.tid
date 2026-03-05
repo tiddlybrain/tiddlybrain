@@ -2,7 +2,7 @@ caption: Actions
 created: 20211009174453738
 creator: yuzijie
 keywords: 
-modified: 20260226100024034
+modified: 20260227124421106
 modifier: yuzijie
 order: 2
 tags: Tasks customized
@@ -50,7 +50,7 @@ TBC:" date=<<curDate>> celltpl="custom-template-journal" kw="unset" description=
 <li style="white-space:nowrap;"><<task-list-doing>></li>
 <%else%>
 <li style="white-space:nowrap;">
-<$button set="!!plan" setTo=<<today>>>Plan<$list filter="[<journal-title>is[tiddler]!has:index<currentTiddler>]"><$action-setfield $tiddler=<<journal-title>> $index=<<currentTiddler>> $value=""/></$list></$button>
+<$button set="!!plan" setTo=<<today>>>Plan</$button>
 <$button set="!!pause" setTo=<<curDate>>>Pause</$button>
 <$button class="tc-btn-invisible" style="color:brown;" message="tm-copy-to-clipboard" param={{!!caption}}>{{!!caption}}</$button>
 </li>
