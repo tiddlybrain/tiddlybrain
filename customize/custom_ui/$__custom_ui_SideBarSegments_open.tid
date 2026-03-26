@@ -1,6 +1,6 @@
 created: 20210709074458680
 creator: yuzijie
-modified: 20260211104800792
+modified: 20260326142305754
 modifier: yuzijie
 tags: customized
 title: $:/custom/ui/SideBarSegments/open
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
 <%if [<folded-state>!text[hide]] %><%if [{$:/HistoryList!!current-tiddler}match<currentTiddler>] %>
 <$list filter="[<currentTiddler>next[$:/StoryList]] :else[<currentTiddler>previous[$:/StoryList]]">
-<$action-navigate $to=<<currentTiddler>>/><$action-deletetiddler $filter="[<currentTiddler>addprefix[$:/state/folded/]is[tiddler]]"/>
+<$action-navigate $to=<<currentTiddler>>/>
 </$list>
 <%endif%><%endif%>
 <$list filter="[<folded-state>!text[hide]]" variable="NONE" emptyMessage={{$:/core/images/chevron-right}}>
